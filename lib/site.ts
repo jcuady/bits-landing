@@ -256,6 +256,7 @@ export const footerColumns = [
     links: [
       { label: "Product Experience", href: "#product" },
       { label: "Delivery Process", href: "#process" },
+      { label: "CRM Sign in", href: "/login" },
       { label: "Privacy", href: "/legal#privacy" },
       { label: "Terms", href: "/legal#terms" },
     ],

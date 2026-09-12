@@ -66,6 +66,11 @@ export function Footer() {
                 Contact
               </a>
             </li>
+            <li>
+              <Link href="/login" className="transition-colors hover:text-white">
+                CRM Sign in
+              </Link>
+            </li>
           </ul>
         </div>
       </Container>

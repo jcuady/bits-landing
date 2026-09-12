@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/site";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -33,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#06162f",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -72,9 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );
