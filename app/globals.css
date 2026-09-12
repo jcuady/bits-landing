@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/*
+  BITS design tokens.
+  Shape system: interactive elements rounded-xl (12px), surfaces rounded-2xl/3xl,
+  badges and status pills full radius. One accent family: electric blue -> signal cyan.
+*/
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Layered navy surfaces */
+  --color-navy-950: #030d1c;
+  --color-navy-900: #06162f;
+  --color-navy-850: #071a36;
+  --color-navy-800: #081f4d;
+  --color-navy-700: #0a2b6f;
+  --color-navy-600: #0e3a8f;
+  --color-navy-500: #1450c4;
+
+  /* Electric blue + signal cyan */
+  --color-electric-600: #0063db;
+  --color-electric-500: #007bff;
+  --color-electric-400: #2f93ff;
+  --color-signal-500: #00a6ff;
+  --color-signal-300: #5cc8ff;
+
+  /* Neutrals */
+  --color-cloud: #f6f9fc;
+  --color-skywash: #eaf4ff;
+  --color-ink: #0d1b2a;
+  --color-slateblue: #40536d;
+  --color-mist: #93a9c4;
+  --color-linelight: #dce8f6;
+
+  --shadow-card: 0 1px 2px rgb(6 22 47 / 0.05), 0 16px 40px -16px rgb(6 22 47 / 0.16);
+  --shadow-lift: 0 2px 6px rgb(6 22 47 / 0.06), 0 28px 56px -20px rgb(6 22 47 / 0.28);
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 24px 64px -24px rgb(3 13 28 / 0.65);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cloud text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-electric-500);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-electric-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Fluid type scale */
+  .text-display {
+    font-size: clamp(2.625rem, 6vw, 4.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.032em;
+    font-weight: 700;
+  }
+  .text-h2 {
+    font-size: clamp(1.9375rem, 3.6vw, 3.125rem);
+    line-height: 1.06;
+    letter-spacing: -0.026em;
+    font-weight: 700;
+  }
+  .text-h3 {
+    font-size: clamp(1.25rem, 1.9vw, 1.5625rem);
+    line-height: 1.2;
+    letter-spacing: -0.016em;
+    font-weight: 650;
+  }
+  .text-lede {
+    font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+    line-height: 1.62;
+  }
+  .text-overline {
+    font-size: 0.75rem;
+    line-height: 1;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+    font-weight: 650;
+  }
+
+  /* Thin technical gridwork */
+  .bg-grid-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 54px 54px;
+  }
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(10 43 111 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(10 43 111 / 0.05) 1px, transparent 1px);
+    background-size: 54px 54px;
+  }
+
+  /* Controlled blue illumination */
+  .glow-electric {
+    background: radial-gradient(closest-side, rgb(0 123 255 / 0.22), transparent 72%);
+  }
+  .glow-signal {
+    background: radial-gradient(closest-side, rgb(0 166 255 / 0.16), transparent 70%);
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(100deg, var(--color-electric-400) 0%, var(--color-signal-500) 55%, var(--color-signal-300) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
