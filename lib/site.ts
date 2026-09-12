@@ -2,8 +2,8 @@ export const site = {
   name: "BITS",
   legalName: "BITS - Boundless IT Solutions",
   tagline: "Technology Without Limits.",
-  // Update to the production domain before launch.
-  url: "https://boundlessitsolutions.com",
+  // Production Vercel alias. Point this to the custom domain when connected.
+  url: "https://bits-landing.vercel.app",
   description:
     "BITS builds secure, scalable technology solutions for BPOs, financial organizations and modern enterprises: from custom CRM platforms to intelligent automation and AI-powered workflows.",
 } as const;
