@@ -41,3 +41,5 @@ navy only.png
 Branding/
 logo/
 master prompt.md
+.vercel
+.env*
