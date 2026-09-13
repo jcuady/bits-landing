@@ -2,7 +2,7 @@
 
 Last Updated: 2026-09-13  
 Current Branch: main  
-Current Commit: `fa69422` (main tip)  
+Current Commit: `03f277d` (QA/UI harden; docs tip on `main`)  
 Overall Status: **MOCK CRM UI READY** — pre-database; soft RBAC; session-only mutations
 
 ## Executive Summary
