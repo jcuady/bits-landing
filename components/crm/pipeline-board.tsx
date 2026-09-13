@@ -4,15 +4,10 @@ import Link from "next/link";
 import { useCrm } from "@/lib/crm/store";
 import { companyName, formatMoney } from "@/lib/crm/selectors";
 import type { Opportunity, OpportunityStage } from "@/lib/crm/types";
-import { cn } from "@/lib/utils";
+import { CrmButton } from "@/components/crm/crm-controls";
 
-const stageOrder: OpportunityStage[] = [
-  "discovery",
-  "proposal",
-  "negotiation",
-  "closed_won",
-  "closed_lost",
-];
+/** Open path only — won/lost are terminal outcomes, not linear “next”. */
+const openStages: OpportunityStage[] = ["discovery", "proposal", "negotiation"];
 
 export function PipelineBoard() {
   const { state, moveOpportunity } = useCrm();
@@ -42,7 +37,6 @@ export function PipelineBoard() {
                   opp={opp}
                   company={companyName(state, opp.companyId)}
                   onMove={moveOpportunity}
-                  stages={stageOrder}
                 />
               ))}
               {cards.length === 0 ? (
@@ -62,17 +56,18 @@ function PipelineCard({
   opp,
   company,
   onMove,
-  stages,
 }: {
   opp: Opportunity;
   company: string;
   onMove: (id: string, stage: OpportunityStage) => void;
-  stages: OpportunityStage[];
 }) {
-  const idx = stages.indexOf(opp.stage);
+  const openIdx = openStages.indexOf(opp.stage as (typeof openStages)[number]);
+  const isOpen = openIdx >= 0;
+  const isTerminal = opp.stage === "closed_won" || opp.stage === "closed_lost";
+
   return (
     <li className="rounded-lg border border-linelight bg-white p-3 shadow-[0_1px_2px_rgb(6_22_47/0.04)] transition active:scale-[0.99]">
-      <Link href={`/app/opportunities/${opp.id}`} className="block">
+      <Link href={`/app/opportunities/${opp.id}`} className="block cursor-pointer">
         <p className="text-[0.84rem] font-semibold leading-snug text-ink">{opp.name}</p>
         <p className="mt-1 text-[0.75rem] text-slateblue">{company}</p>
         <div className="mt-2 flex items-center justify-between gap-2">
@@ -83,33 +78,64 @@ function PipelineCard({
           <p className="mt-1.5 text-[0.7rem] font-medium text-amber-700">Stalled {opp.stalledDays}d</p>
         ) : null}
       </Link>
-      <div className="mt-2 flex gap-1 border-t border-linelight pt-2">
-        <button
-          type="button"
-          disabled={idx <= 0}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onMove(opp.id, stages[idx - 1]!);
-          }}
-          className={cn(
-            "flex-1 rounded-md border border-linelight py-1 text-[0.7rem] font-semibold text-slateblue transition hover:bg-cloud disabled:opacity-40"
-          )}
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          disabled={idx >= stages.length - 1}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onMove(opp.id, stages[idx + 1]!);
-          }}
-          className="flex-1 rounded-md border border-linelight py-1 text-[0.7rem] font-semibold text-electric-700 transition hover:bg-electric-600/10 disabled:opacity-40"
-        >
-          Move
-        </button>
+      <div className="mt-2 flex flex-wrap gap-1 border-t border-linelight pt-2">
+        {isOpen ? (
+          <>
+            <CrmButton
+              className="flex-1"
+              disabled={openIdx <= 0}
+              onClick={(e) => {
+                e.preventDefault();
+                onMove(opp.id, openStages[openIdx - 1]!);
+              }}
+            >
+              Back
+            </CrmButton>
+            {opp.stage === "negotiation" ? (
+              <>
+                <CrmButton
+                  className="flex-1 border-emerald-200 text-emerald-800 hover:bg-emerald-50"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onMove(opp.id, "closed_won");
+                  }}
+                >
+                  Won
+                </CrmButton>
+                <CrmButton
+                  className="flex-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onMove(opp.id, "closed_lost");
+                  }}
+                >
+                  Lost
+                </CrmButton>
+              </>
+            ) : (
+              <CrmButton
+                className="flex-1 border-electric-600/30 text-electric-700 hover:bg-electric-600/10"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onMove(opp.id, openStages[openIdx + 1]!);
+                }}
+              >
+                Move
+              </CrmButton>
+            )}
+          </>
+        ) : null}
+        {isTerminal ? (
+          <CrmButton
+            className="w-full"
+            onClick={(e) => {
+              e.preventDefault();
+              onMove(opp.id, "negotiation");
+            }}
+          >
+            Reopen
+          </CrmButton>
+        ) : null}
       </div>
     </li>
   );

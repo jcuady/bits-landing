@@ -29,14 +29,14 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="CRM navigation">
-      <button type="button" className="absolute inset-0 bg-navy-900/40" aria-label="Close menu" onClick={onClose} />
+      <button type="button" className="absolute inset-0 cursor-pointer bg-navy-900/40" aria-label="Close menu" onClick={onClose} />
       <div className="absolute inset-y-0 left-0 flex w-[min(100%,280px)] flex-col bg-white shadow-xl">
         <div className="flex h-14 items-center justify-between border-b border-linelight px-4">
           <Logo variant="horizontal" className="h-7" />
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex size-9 items-center justify-center rounded-lg text-ink hover:bg-cloud"
+            className="inline-flex size-10 min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-lg text-ink hover:bg-cloud"
             aria-label="Close navigation"
           >
             <X className="size-4" />
@@ -58,7 +58,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                         href={item.href}
                         onClick={onClose}
                         className={cn(
-                          "flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[0.88rem] font-medium",
+                          "flex min-h-11 cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[0.88rem] font-medium",
                           active ? "bg-electric-600/10 text-electric-700" : "text-slateblue hover:bg-cloud hover:text-ink"
                         )}
                       >

@@ -9,7 +9,9 @@ export function middleware(request: NextRequest) {
     if (!session) {
       const url = request.nextUrl.clone();
       url.pathname = "/login";
-      url.searchParams.set("next", `${pathname}${search}`);
+      const nextPath = `${pathname}${search}`;
+      url.search = "";
+      url.searchParams.set("next", nextPath.startsWith("/app") ? nextPath.slice(0, 512) : "/app/dashboard");
       return NextResponse.redirect(url);
     }
     return NextResponse.next();

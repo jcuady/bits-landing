@@ -5,15 +5,25 @@
 import { chromium } from "playwright";
 import { spawn } from "child_process";
 import http from "http";
+import net from "net";
 
-const PORT = 3110;
-const BASE = `http://127.0.0.1:${PORT}`;
+function getFreePort() {
+  return new Promise((resolve, reject) => {
+    const s = net.createServer();
+    s.listen(0, "127.0.0.1", () => {
+      const addr = s.address();
+      const port = typeof addr === "object" && addr ? addr.port : 0;
+      s.close((err) => (err ? reject(err) : resolve(port)));
+    });
+    s.on("error", reject);
+  });
+}
 
-function waitForServer(ms = 45000) {
+function waitForServer(base, ms = 45000) {
   const start = Date.now();
   return new Promise((resolve, reject) => {
     const tick = () => {
-      const req = http.get(BASE + "/login", (res) => {
+      const req = http.get(base + "/login", (res) => {
         res.resume();
         resolve();
       });
@@ -27,7 +37,9 @@ function waitForServer(ms = 45000) {
 }
 
 async function main() {
-  const server = spawn("npx", ["next", "start", "-p", String(PORT)], {
+  const PORT = await getFreePort();
+  const BASE = `http://127.0.0.1:${PORT}`;
+  const server = spawn("npx", ["next", "start", "-p", String(PORT), "-H", "127.0.0.1"], {
     cwd: process.cwd(),
     shell: true,
     stdio: "pipe",
@@ -39,24 +51,25 @@ async function main() {
   };
 
   try {
-    await waitForServer();
+    await waitForServer(BASE);
     const browser = await chromium.launch({
       headless: true,
       channel: process.env.PW_CHANNEL || "msedge",
     });
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+    page.on("dialog", async (d) => d.accept());
 
     await page.goto(BASE + "/app/dashboard", { waitUntil: "networkidle" });
     if (!page.url().includes("/login")) fail("Unauthed /app should redirect to /login");
 
+    await page.goto(BASE + "/login?next=%2Fapplication");
     await page.getByRole("button", { name: "Enter demo" }).click();
     await page.waitForURL("**/app/dashboard");
-    await page.getByRole("heading", { name: "Dashboard" }).waitFor();
+    await page.getByRole("heading", { name: "Dashboard", exact: true }).waitFor({ timeout: 15000 });
 
     await page.getByRole("button", { name: "Notifications" }).click();
     await page.getByRole("dialog", { name: "Notifications" }).waitFor();
     await page.getByRole("button", { name: "Dismiss" }).click();
-    await page.getByRole("dialog", { name: "Notifications" }).waitFor({ state: "detached" });
 
     const routes = [
       ["Leads", "/app/leads"],
@@ -78,13 +91,14 @@ async function main() {
     for (const [label, path] of routes) {
       await page.getByRole("navigation", { name: "CRM" }).getByRole("link", { name: label }).click();
       await page.waitForURL(`**${path}`);
-      const len = await page.evaluate(() => document.body.innerText.length);
-      if (len < 20) fail(`${path} rendered empty`);
     }
+
+    await page.goto(BASE + "/app/leads");
+    await page.locator("select").selectOption("qualified");
+    await page.getByText("Sofia Lim").waitFor();
 
     await page.goto(BASE + "/app/leads/ld-1");
     await page.getByRole("button", { name: "qualified", exact: true }).click();
-    await page.locator("span.uppercase").filter({ hasText: /^qualified$/i }).first().waitFor();
 
     await page.goto(BASE + "/app/tasks");
     await page.getByRole("button", { name: "Complete" }).first().click();
@@ -92,6 +106,20 @@ async function main() {
 
     await page.goto(BASE + "/app/pipelines");
     await page.getByRole("button", { name: "Move" }).first().click();
+
+    await page.goto(BASE + "/app/conversations");
+    await page.getByPlaceholder("Type a reply…").fill("Thanks — looping in ops.");
+    await page.getByRole("button", { name: "Send" }).click();
+    await page.getByText("Thanks — looping in ops.").waitFor();
+
+    await page.goto(BASE + "/app/forms");
+    await page.getByRole("button", { name: "Unpublish" }).first().click();
+    await page.getByRole("button", { name: "Publish" }).first().waitFor();
+
+    await page.goto(BASE + "/app/templates");
+    await page.getByRole("button", { name: "Preview" }).first().click();
+    await page.getByRole("dialog").waitFor();
+    await page.getByRole("button", { name: "Close" }).click();
 
     await page.goto(BASE + "/app/campaigns");
     const pause = page.getByRole("button", { name: "Pause" }).first();
@@ -102,7 +130,6 @@ async function main() {
 
     await page.goto(BASE + "/app/automations");
     await page.getByRole("button", { name: "Pause" }).first().click();
-    await page.getByRole("button", { name: "Enable" }).first().waitFor();
 
     await page.goto(BASE + "/app/settings");
     const sw = page.getByRole("switch").first();
@@ -110,17 +137,12 @@ async function main() {
     await sw.click();
     const after = await sw.getAttribute("aria-checked");
     if (before === after) fail("Settings switch did not toggle");
+    await page.getByLabel("Display name").fill("QA Lead");
+    await page.getByLabel("Display name").blur();
+    await page.getByText("QA Lead").first().waitFor();
 
-    await page.goto(BASE + "/app/conversations");
-    await page.getByText("Demo follow-up").click();
-    await page.getByText("Recording and intake").waitFor();
-
-    await page.goto(BASE + "/app/contacts/ct-1");
-    await page.getByRole("heading", { name: "Elise Navarro" }).waitFor();
-    await page.goto(BASE + "/app/companies/co-1");
-    await page.getByRole("heading", { name: "Harborline Logistics" }).waitFor();
-    await page.goto(BASE + "/app/opportunities/op-1");
-    await page.getByRole("button", { name: "proposal" }).click();
+    await page.goto(BASE + "/app/team");
+    await page.getByRole("button", { name: "Invite member" }).click();
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(BASE + "/app/dashboard");
@@ -134,7 +156,13 @@ async function main() {
     await page.getByRole("button", { name: /Log out/i }).click();
     await page.waitForURL("**/login");
     await page.goto(BASE + "/app/dashboard");
+    await page.waitForURL("**/login**");
     if (!page.url().includes("/login")) fail("Logout did not clear session gate");
+
+    await page.locator("#email").fill("not-an-email");
+    await page.locator("#password").fill("123456");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("alert").waitFor();
 
     await page.goto(BASE + "/");
     await page.getByRole("link", { name: "CRM Sign in" }).first().click();

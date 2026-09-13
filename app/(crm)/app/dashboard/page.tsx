@@ -82,12 +82,17 @@ export default function DashboardPage() {
               </p>
               <ul className="space-y-2">
                 {overdue.map((t) => (
-                  <li key={t.id} className="flex items-start justify-between gap-2 rounded-lg border border-linelight px-3 py-2">
-                    <div>
-                      <p className="text-[0.84rem] font-medium text-ink">{t.title}</p>
-                      <p className="text-[0.75rem] text-slateblue">{t.relatedLabel}</p>
-                    </div>
-                    <StatusBadge status={t.priority} />
+                  <li key={t.id}>
+                    <Link
+                      href="/app/tasks"
+                      className="flex cursor-pointer items-start justify-between gap-2 rounded-lg border border-linelight px-3 py-2 transition hover:bg-cloud"
+                    >
+                      <div>
+                        <p className="text-[0.84rem] font-medium text-ink">{t.title}</p>
+                        <p className="text-[0.75rem] text-slateblue">{t.relatedLabel}</p>
+                      </div>
+                      <StatusBadge status={t.priority} />
+                    </Link>
                   </li>
                 ))}
               </ul>

@@ -10,7 +10,7 @@ export default async function CrmAppLayout({ children }: { children: React.React
   if (!session) redirect("/login");
 
   return (
-    <CrmProvider>
+    <CrmProvider initialName={session.name} userEmail={session.email}>
       <AppShellClient userName={session.name} userEmail={session.email}>
         {children}
       </AppShellClient>

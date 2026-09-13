@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import type { ReactNode } from "react";
 import { PageHeader } from "@/components/crm/page-header";
 import { StatusBadge } from "@/components/crm/status-badge";
 import { EmptyState } from "@/components/crm/empty-state";
 import { Button } from "@/components/ui/button";
+import { CrmButton } from "@/components/crm/crm-controls";
 import { useCrm } from "@/lib/crm/store";
 import { companyName, contactName, formatMoney } from "@/lib/crm/selectors";
 import type { OpportunityStage } from "@/lib/crm/types";
@@ -42,8 +44,28 @@ export default function OpportunityDetailPage() {
             <Field label="Probability" value={`${opp.probability}%`} />
             <Field label="Close date" value={opp.closeDate} />
             <Field label="Owner" value={opp.owner} />
-            <Field label="Contact" value={contactName(state, opp.contactId)} />
-            <Field label="Company" value={companyName(state, opp.companyId)} />
+            <Field
+              label="Contact"
+              value={
+                <Link
+                  href={`/app/contacts/${opp.contactId}`}
+                  className="cursor-pointer font-medium text-electric-600 hover:text-navy-700"
+                >
+                  {contactName(state, opp.contactId)}
+                </Link>
+              }
+            />
+            <Field
+              label="Company"
+              value={
+                <Link
+                  href={`/app/companies/${opp.companyId}`}
+                  className="cursor-pointer font-medium text-electric-600 hover:text-navy-700"
+                >
+                  {companyName(state, opp.companyId)}
+                </Link>
+              }
+            />
           </dl>
         </section>
         <section className="rounded-xl border border-linelight bg-white p-5">
@@ -53,17 +75,20 @@ export default function OpportunityDetailPage() {
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {stages.map((s) => (
-              <button
+              <CrmButton
                 key={s}
-                type="button"
+                pressed={opp.stage === s}
                 onClick={() => moveOpportunity(opp.id, s)}
-                className="rounded-lg border border-linelight px-3 py-1.5 text-[0.78rem] font-semibold capitalize text-ink transition hover:bg-cloud active:scale-[0.98]"
+                className="capitalize"
               >
                 {s.replace(/_/g, " ")}
-              </button>
+              </CrmButton>
             ))}
           </div>
-          <Link href="/app/pipelines" className="mt-5 inline-block text-[0.85rem] font-semibold text-electric-600">
+          <Link
+            href="/app/pipelines"
+            className="mt-5 inline-block cursor-pointer text-[0.85rem] font-semibold text-electric-600"
+          >
             Open pipeline board →
           </Link>
         </section>
@@ -72,7 +97,7 @@ export default function OpportunityDetailPage() {
   );
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function Field({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div>
       <dt className="text-[0.72rem] font-semibold tracking-wide text-slateblue uppercase">{label}</dt>

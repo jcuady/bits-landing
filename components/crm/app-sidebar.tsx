@@ -36,7 +36,7 @@ export function AppSidebar({ className }: { className?: string }) {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[0.84rem] font-medium transition-colors active:scale-[0.99]",
+                        "flex min-h-10 cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-[0.84rem] font-medium transition-colors active:scale-[0.99]",
                         active
                           ? "bg-electric-600/10 text-electric-700"
                           : "text-slateblue hover:bg-navy-700/[0.04] hover:text-ink"

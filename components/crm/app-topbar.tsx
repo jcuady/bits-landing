@@ -1,14 +1,15 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Menu, LogOut, Bell } from "lucide-react";
 import { logoutAction } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
 
 const DEMO_ALERTS = [
-  { id: "1", text: "Voltgrid deal stalled 12 days", meta: "2h ago" },
-  { id: "2", text: "Elise Navarro replied on SLA draft", meta: "4h ago" },
-  { id: "3", text: "Q3 nurture campaign hit 38 conversions", meta: "1d ago" },
+  { id: "1", text: "Voltgrid deal stalled 12 days", meta: "2h ago", href: "/app/opportunities/op-3" },
+  { id: "2", text: "Elise Navarro replied on SLA draft", meta: "4h ago", href: "/app/conversations" },
+  { id: "3", text: "Q3 nurture campaign hit 38 conversions", meta: "1d ago", href: "/app/campaigns" },
 ];
 
 export function AppTopbar({
@@ -44,7 +45,7 @@ export function AppTopbar({
       <button
         type="button"
         onClick={onMenuClick}
-        className="inline-flex size-9 items-center justify-center rounded-lg border border-linelight text-ink transition hover:bg-cloud lg:hidden"
+        className="inline-flex size-10 min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-lg border border-linelight text-ink transition hover:bg-cloud lg:hidden"
         aria-label="Open navigation"
       >
         <Menu className="size-4" />
@@ -58,7 +59,7 @@ export function AppTopbar({
         <button
           type="button"
           onClick={() => setAlertsOpen((v) => !v)}
-          className="relative inline-flex size-9 items-center justify-center rounded-lg text-slateblue transition hover:bg-cloud hover:text-ink"
+          className="relative inline-flex size-10 min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-lg text-slateblue transition hover:bg-cloud hover:text-ink"
           aria-label="Notifications"
           aria-expanded={alertsOpen}
           aria-controls="crm-alerts"
@@ -78,16 +79,22 @@ export function AppTopbar({
             </p>
             <ul>
               {DEMO_ALERTS.map((a) => (
-                <li key={a.id} className="rounded-lg px-2.5 py-2 hover:bg-cloud">
-                  <p className="text-[0.84rem] font-medium text-ink">{a.text}</p>
-                  <p className="text-[0.72rem] text-slateblue">{a.meta}</p>
+                <li key={a.id}>
+                  <Link
+                    href={a.href}
+                    onClick={() => setAlertsOpen(false)}
+                    className="block cursor-pointer rounded-lg px-2.5 py-2 transition hover:bg-cloud"
+                  >
+                    <p className="text-[0.84rem] font-medium text-ink">{a.text}</p>
+                    <p className="text-[0.72rem] text-slateblue">{a.meta}</p>
+                  </Link>
                 </li>
               ))}
             </ul>
             <button
               type="button"
               onClick={() => setAlertsOpen(false)}
-              className="mt-1 w-full rounded-lg border border-linelight py-2 text-[0.78rem] font-semibold text-ink transition hover:bg-cloud"
+              className="mt-1 min-h-10 w-full cursor-pointer rounded-lg border border-linelight py-2 text-[0.78rem] font-semibold text-ink transition hover:bg-cloud"
             >
               Dismiss
             </button>
@@ -101,7 +108,7 @@ export function AppTopbar({
       </div>
 
       <form action={logoutAction}>
-        <Button type="submit" variant="ghostLight" size="sm" className="gap-1.5 px-2.5">
+        <Button type="submit" variant="ghostLight" size="sm" className="cursor-pointer gap-1.5 px-2.5">
           <LogOut className="size-3.5" aria-hidden />
           <span className="hidden sm:inline">Log out</span>
         </Button>

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { seedCrmState } from "./mock-data";
+import { MOCK_NOW } from "./selectors";
 import type {
   AutomationStatus,
   CampaignStatus,
@@ -10,15 +11,32 @@ import type {
   OpportunityStage,
   TaskStatus,
 } from "./types";
+import {
+  automationStatusSchema,
+  campaignStatusSchema,
+  displayNameSchema,
+  formStatusSchema,
+  leadStatusSchema,
+  opportunityStageSchema,
+  replyBodySchema,
+  taskStatusSchema,
+} from "./validation";
+
+export type CrmRole = "Admin" | "Manager" | "Rep" | "Marketing";
 
 type CrmStore = {
   state: CrmState;
-  updateLeadStatus: (id: string, status: LeadStatus) => void;
-  moveOpportunity: (id: string, stage: OpportunityStage) => void;
-  setTaskStatus: (id: string, status: TaskStatus) => void;
-  setCampaignStatus: (id: string, status: CampaignStatus) => void;
-  setAutomationStatus: (id: string, status: AutomationStatus) => void;
+  userEmail: string;
+  displayName: string;
+  setDisplayName: (name: string) => { ok: true } | { ok: false; error: string };
+  updateLeadStatus: (id: string, status: LeadStatus) => boolean;
+  moveOpportunity: (id: string, stage: OpportunityStage) => boolean;
+  setTaskStatus: (id: string, status: TaskStatus) => boolean;
+  setCampaignStatus: (id: string, status: CampaignStatus) => boolean;
+  setAutomationStatus: (id: string, status: AutomationStatus) => boolean;
+  setFormStatus: (id: string, status: "published" | "draft") => boolean;
   markConversationRead: (id: string) => void;
+  replyToConversation: (id: string, body: string) => { ok: true } | { ok: false; error: string };
 };
 
 const CrmContext = React.createContext<CrmStore | null>(null);
@@ -27,72 +45,139 @@ function cloneSeed(): CrmState {
   return structuredClone(seedCrmState());
 }
 
-export function CrmProvider({ children }: { children: React.ReactNode }) {
+function mockIso() {
+  return MOCK_NOW.toISOString();
+}
+
+function activityId() {
+  return `ac-${MOCK_NOW.getTime()}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+export function CrmProvider({
+  children,
+  initialName,
+  userEmail,
+}: {
+  children: React.ReactNode;
+  initialName: string;
+  userEmail: string;
+}) {
   const [state, setState] = React.useState<CrmState>(cloneSeed);
+  const [displayName, setDisplayNameState] = React.useState(initialName);
+
+  const setDisplayName = React.useCallback((name: string) => {
+    const parsed = displayNameSchema.safeParse(name);
+    if (!parsed.success) {
+      return { ok: false as const, error: parsed.error.issues[0]?.message ?? "Invalid name." };
+    }
+    setDisplayNameState(parsed.data);
+    return { ok: true as const };
+  }, []);
 
   const updateLeadStatus = React.useCallback((id: string, status: LeadStatus) => {
-    setState((s) => ({
-      ...s,
-      leads: s.leads.map((l) => (l.id === id ? { ...l, status, lastActivityAt: new Date().toISOString() } : l)),
-      activities: [
-        {
-          id: `ac-${Date.now()}`,
-          type: "stage",
-          summary: `Lead ${id} status → ${status}`,
-          actor: "You",
-          at: new Date().toISOString(),
-        },
-        ...s.activities,
-      ],
-    }));
+    if (!leadStatusSchema.safeParse(status).success) return false;
+    let applied = false;
+    const at = mockIso();
+    setState((s) => {
+      const lead = s.leads.find((l) => l.id === id);
+      if (!lead) return s;
+      applied = true;
+      return {
+        ...s,
+        leads: s.leads.map((l) => (l.id === id ? { ...l, status, lastActivityAt: at } : l)),
+        activities: [
+          {
+            id: activityId(),
+            type: "stage" as const,
+            summary: `${lead.name} status → ${status}`,
+            actor: "You",
+            at,
+          },
+          ...s.activities,
+        ],
+      };
+    });
+    return applied;
   }, []);
 
   const moveOpportunity = React.useCallback((id: string, stage: OpportunityStage) => {
-    setState((s) => ({
-      ...s,
-      opportunities: s.opportunities.map((o) =>
-        o.id === id
-          ? {
-              ...o,
-              stage,
-              probability:
-                stage === "closed_won" ? 100 : stage === "closed_lost" ? 0 : o.probability,
-              stalledDays: undefined,
-            }
-          : o
-      ),
-      activities: [
-        {
-          id: `ac-${Date.now()}`,
-          type: "stage",
-          summary: `Opportunity moved to ${stage.replace("_", " ")}`,
-          actor: "You",
-          at: new Date().toISOString(),
-        },
-        ...s.activities,
-      ],
-    }));
+    if (!opportunityStageSchema.safeParse(stage).success) return false;
+    let applied = false;
+    const at = mockIso();
+    setState((s) => {
+      const opp = s.opportunities.find((o) => o.id === id);
+      if (!opp) return s;
+      applied = true;
+      return {
+        ...s,
+        opportunities: s.opportunities.map((o) =>
+          o.id === id
+            ? {
+                ...o,
+                stage,
+                probability:
+                  stage === "closed_won" ? 100 : stage === "closed_lost" ? 0 : o.probability,
+                stalledDays: undefined,
+              }
+            : o
+        ),
+        activities: [
+          {
+            id: activityId(),
+            type: "stage" as const,
+            summary: `${opp.name} → ${stage.replaceAll("_", " ")}`,
+            actor: "You",
+            at,
+          },
+          ...s.activities,
+        ],
+      };
+    });
+    return applied;
   }, []);
 
   const setTaskStatus = React.useCallback((id: string, status: TaskStatus) => {
-    setState((s) => ({
-      ...s,
-      tasks: s.tasks.map((t) => (t.id === id ? { ...t, status } : t)),
-    }));
+    if (!taskStatusSchema.safeParse(status).success) return false;
+    let applied = false;
+    setState((s) => {
+      if (!s.tasks.some((t) => t.id === id)) return s;
+      applied = true;
+      return { ...s, tasks: s.tasks.map((t) => (t.id === id ? { ...t, status } : t)) };
+    });
+    return applied;
   }, []);
 
   const setCampaignStatus = React.useCallback((id: string, status: CampaignStatus) => {
-    setState((s) => ({
-      ...s,
-      campaigns: s.campaigns.map((c) => (c.id === id ? { ...c, status } : c)),
-    }));
+    if (!campaignStatusSchema.safeParse(status).success) return false;
+    let applied = false;
+    setState((s) => {
+      if (!s.campaigns.some((c) => c.id === id)) return s;
+      applied = true;
+      return { ...s, campaigns: s.campaigns.map((c) => (c.id === id ? { ...c, status } : c)) };
+    });
+    return applied;
   }, []);
 
   const setAutomationStatus = React.useCallback((id: string, status: AutomationStatus) => {
-    setState((s) => ({
-      ...s,
-      automations: s.automations.map((a) => (a.id === id ? { ...a, status } : a)),
-    }));
+    if (!automationStatusSchema.safeParse(status).success) return false;
+    let applied = false;
+    setState((s) => {
+      if (!s.automations.some((a) => a.id === id)) return s;
+      applied = true;
+      return { ...s, automations: s.automations.map((a) => (a.id === id ? { ...a, status } : a)) };
+    });
+    return applied;
+  }, []);
+
+  const setFormStatus = React.useCallback((id: string, status: "published" | "draft") => {
+    if (!formStatusSchema.safeParse(status).success) return false;
+    let applied = false;
+    setState((s) => {
+      if (!s.forms.some((f) => f.id === id)) return s;
+      applied = true;
+      return { ...s, forms: s.forms.map((f) => (f.id === id ? { ...f, status } : f)) };
+    });
+    return applied;
   }, []);
 
   const markConversationRead = React.useCallback((id: string) => {
@@ -102,24 +187,81 @@ export function CrmProvider({ children }: { children: React.ReactNode }) {
     }));
   }, []);
 
+  const replyToConversation = React.useCallback((id: string, body: string) => {
+    const parsed = replyBodySchema.safeParse(body);
+    if (!parsed.success) {
+      return { ok: false as const, error: parsed.error.issues[0]?.message ?? "Invalid message." };
+    }
+    const at = mockIso();
+    let applied = false;
+    setState((s) => {
+      if (!s.conversations.some((c) => c.id === id)) return s;
+      applied = true;
+      return {
+        ...s,
+        conversations: s.conversations.map((c) =>
+          c.id === id
+            ? {
+                ...c,
+                unread: false,
+                updatedAt: at,
+                messages: [
+                  ...c.messages,
+                  {
+                    id: `m-${MOCK_NOW.getTime()}-${Math.random().toString(36).slice(2, 7)}`,
+                    channel: c.channel,
+                    direction: "outbound" as const,
+                    body: parsed.data,
+                    at,
+                  },
+                ],
+              }
+            : c
+        ),
+        activities: [
+          {
+            id: activityId(),
+            type: "email" as const,
+            summary: `Reply sent on conversation ${id}`,
+            actor: "You",
+            at,
+          },
+          ...s.activities,
+        ],
+      };
+    });
+    if (!applied) return { ok: false as const, error: "Conversation not found." };
+    return { ok: true as const };
+  }, []);
+
   const value = React.useMemo(
     () => ({
       state,
+      userEmail,
+      displayName,
+      setDisplayName,
       updateLeadStatus,
       moveOpportunity,
       setTaskStatus,
       setCampaignStatus,
       setAutomationStatus,
+      setFormStatus,
       markConversationRead,
+      replyToConversation,
     }),
     [
       state,
+      userEmail,
+      displayName,
+      setDisplayName,
       updateLeadStatus,
       moveOpportunity,
       setTaskStatus,
       setCampaignStatus,
       setAutomationStatus,
+      setFormStatus,
       markConversationRead,
+      replyToConversation,
     ]
   );
 
@@ -130,4 +272,9 @@ export function useCrm() {
   const ctx = React.useContext(CrmContext);
   if (!ctx) throw new Error("useCrm must be used within CrmProvider");
   return ctx;
+}
+
+export function roleForEmail(email: string, state: CrmState): CrmRole {
+  const member = state.team.find((t) => t.email.toLowerCase() === email.toLowerCase());
+  return member?.role ?? "Rep";
 }

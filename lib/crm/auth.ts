@@ -27,11 +27,18 @@ export function encodeSession(session: CrmSession): string {
 }
 
 export function decodeSession(value: string | undefined | null): CrmSession | null {
-  if (!value) return null;
+  if (!value || value.length > 4096) return null;
   try {
     const parsed = JSON.parse(fromBase64Url(value)) as CrmSession;
     if (!parsed?.email || !parsed?.name) return null;
-    return parsed;
+    if (typeof parsed.email !== "string" || typeof parsed.name !== "string") return null;
+    if (parsed.email.length > 254 || parsed.name.length > 80) return null;
+    if (!parsed.email.includes("@")) return null;
+    return {
+      email: parsed.email.trim().toLowerCase(),
+      name: parsed.name.trim(),
+      signedInAt: typeof parsed.signedInAt === "string" ? parsed.signedInAt : new Date(0).toISOString(),
+    };
   } catch {
     return null;
   }

@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/crm/page-header";
 import { StatusBadge } from "@/components/crm/status-badge";
 import { EmptyState } from "@/components/crm/empty-state";
 import { Button } from "@/components/ui/button";
+import { CrmButton } from "@/components/crm/crm-controls";
 import { useCrm } from "@/lib/crm/store";
 import { formatDate } from "@/lib/crm/selectors";
 import type { LeadStatus } from "@/lib/crm/types";
@@ -51,14 +52,13 @@ export default function LeadDetailPage() {
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {statuses.map((s) => (
-              <button
+              <CrmButton
                 key={s}
-                type="button"
+                pressed={lead.status === s}
                 onClick={() => updateLeadStatus(lead.id, s)}
-                className="rounded-lg border border-linelight px-3 py-1.5 text-[0.78rem] font-semibold text-ink transition hover:bg-cloud active:scale-[0.98]"
               >
                 {s}
-              </button>
+              </CrmButton>
             ))}
           </div>
         </section>

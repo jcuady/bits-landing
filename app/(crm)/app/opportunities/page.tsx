@@ -6,21 +6,37 @@ import { FilterBar } from "@/components/crm/filter-bar";
 import { DataTable } from "@/components/crm/data-table";
 import { StatusBadge } from "@/components/crm/status-badge";
 import { EmptyState } from "@/components/crm/empty-state";
+import { StatusFilter } from "@/components/crm/crm-controls";
 import { useCrm } from "@/lib/crm/store";
 import { companyName, formatMoney } from "@/lib/crm/selectors";
 
 export default function OpportunitiesPage() {
   const { state } = useCrm();
   const [q, setQ] = React.useState("");
+  const [stage, setStage] = React.useState("all");
   const rows = state.opportunities.filter((o) => {
     const hay = `${o.name} ${companyName(state, o.companyId)} ${o.owner} ${o.stage}`.toLowerCase();
-    return hay.includes(q.toLowerCase());
+    return hay.includes(q.toLowerCase()) && (stage === "all" || o.stage === stage);
   });
 
   return (
     <div>
       <PageHeader title="Opportunities" description={`${state.opportunities.length} deals in pipeline.`} />
-      <FilterBar value={q} onChange={setQ} placeholder="Search opportunities…" />
+      <FilterBar value={q} onChange={setQ} placeholder="Search opportunities…">
+        <StatusFilter
+          value={stage}
+          onChange={setStage}
+          label="Stage"
+          options={[
+            { value: "all", label: "All stages" },
+            { value: "discovery", label: "Discovery" },
+            { value: "proposal", label: "Proposal" },
+            { value: "negotiation", label: "Negotiation" },
+            { value: "closed_won", label: "Closed won" },
+            { value: "closed_lost", label: "Closed lost" },
+          ]}
+        />
+      </FilterBar>
       {rows.length === 0 ? (
         <EmptyState title="No opportunities match" />
       ) : (

@@ -5,20 +5,34 @@ import { PageHeader } from "@/components/crm/page-header";
 import { FilterBar } from "@/components/crm/filter-bar";
 import { StatusBadge } from "@/components/crm/status-badge";
 import { EmptyState } from "@/components/crm/empty-state";
+import { CrmButton, StatusFilter } from "@/components/crm/crm-controls";
 import { useCrm } from "@/lib/crm/store";
-import { formatDate } from "@/lib/crm/selectors";
+import { formatDate, relatedHref } from "@/lib/crm/selectors";
+import Link from "next/link";
 
 export default function TasksPage() {
   const { state, setTaskStatus } = useCrm();
   const [q, setQ] = React.useState("");
-  const rows = state.tasks.filter((t) =>
-    `${t.title} ${t.relatedLabel} ${t.owner}`.toLowerCase().includes(q.toLowerCase())
-  );
+  const [status, setStatus] = React.useState("all");
+  const rows = state.tasks.filter((t) => {
+    const hay = `${t.title} ${t.relatedLabel} ${t.owner}`.toLowerCase();
+    return hay.includes(q.toLowerCase()) && (status === "all" || t.status === status);
+  });
 
   return (
     <div>
       <PageHeader title="Tasks" description="Complete or reopen tasks for this session." />
-      <FilterBar value={q} onChange={setQ} placeholder="Search tasks…" />
+      <FilterBar value={q} onChange={setQ} placeholder="Search tasks…">
+        <StatusFilter
+          value={status}
+          onChange={setStatus}
+          options={[
+            { value: "all", label: "All" },
+            { value: "open", label: "Open" },
+            { value: "done", label: "Done" },
+          ]}
+        />
+      </FilterBar>
       {rows.length === 0 ? (
         <EmptyState title="No tasks match" />
       ) : (
@@ -29,23 +43,27 @@ export default function TasksPage() {
               className="flex flex-col gap-3 border-b border-linelight px-4 py-3 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="min-w-0">
-                <p className={`text-[0.9rem] font-semibold text-ink ${t.status === "done" ? "line-through opacity-60" : ""}`}>
+                <p
+                  className={`text-[0.9rem] font-semibold text-ink ${t.status === "done" ? "line-through opacity-60" : ""}`}
+                >
                   {t.title}
                 </p>
                 <p className="mt-0.5 text-[0.78rem] text-slateblue">
-                  {t.relatedLabel} · Due {formatDate(t.dueAt)} · {t.owner}
+                  <Link
+                    href={relatedHref(t.relatedType, t.relatedId)}
+                    className="cursor-pointer font-medium text-electric-600 hover:text-navy-700"
+                  >
+                    {t.relatedLabel}
+                  </Link>
+                  {" · "}Due {formatDate(t.dueAt)} · {t.owner}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <StatusBadge status={t.priority} />
                 <StatusBadge status={t.status} />
-                <button
-                  type="button"
-                  onClick={() => setTaskStatus(t.id, t.status === "done" ? "open" : "done")}
-                  className="rounded-lg border border-linelight px-3 py-1.5 text-[0.78rem] font-semibold text-ink transition hover:bg-cloud active:scale-[0.98]"
-                >
+                <CrmButton onClick={() => setTaskStatus(t.id, t.status === "done" ? "open" : "done")}>
                   {t.status === "done" ? "Reopen" : "Complete"}
-                </button>
+                </CrmButton>
               </div>
             </li>
           ))}
