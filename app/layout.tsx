@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { site } from "@/lib/site";
+import { site, solutions } from "@/lib/site";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -11,20 +11,20 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: "BITS - Boundless IT Solutions | Enterprise Software, CRM & AI Automation",
+  title: "BITS | BPO CRM, Finance Operations & AI Automation",
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.legalName,
-    title: "BITS - Boundless IT Solutions",
+    title: "BITS | BPO CRM, Finance Operations & AI Automation",
     description: site.description,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS - Boundless IT Solutions" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS BPO CRM and operations platforms" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITS - Boundless IT Solutions",
+    title: "BITS | BPO CRM, Finance Operations & AI Automation",
     description: site.description,
     images: ["/og.png"],
   },
@@ -52,6 +52,22 @@ const jsonLd = {
       "@type": "WebSite",
       name: site.legalName,
       url: site.url,
+    },
+    {
+      "@type": "ItemList",
+      name: "BITS solutions for BPO CRM, finance operations, and AI automation",
+      itemListElement: solutions.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Service",
+          name: s.name,
+          description: s.summary,
+          url: `${site.url}/#${s.id}`,
+          provider: { "@type": "Organization", name: site.legalName },
+          serviceType: s.name,
+        },
+      })),
     },
   ],
 };

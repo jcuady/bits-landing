@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { CRM_SESSION_COOKIE, decodeSession } from "@/lib/crm/auth";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const session = decodeSession(request.cookies.get(CRM_SESSION_COOKIE)?.value);
 

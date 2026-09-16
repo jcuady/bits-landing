@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 
-const BASE = "http://localhost:3100";
+const BASE = "http://localhost:3847";
 const OUT = new URL("../qa/", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 mkdirSync(OUT, { recursive: true });
 
@@ -55,7 +55,7 @@ for (const vp of viewports) {
   await page.locator("#contact").scrollIntoViewIfNeeded();
   await page.waitForTimeout(900);
 
-  await page.getByRole("button", { name: "Start a Conversation" }).click();
+  await page.getByRole("button", { name: "Book a consultation" }).click();
   await page.waitForTimeout(800);
   const errorCount = await page.locator("text=Please").count();
   await page.screenshot({ path: `${OUT}form-errors.png` });
@@ -64,7 +64,7 @@ for (const vp of viewports) {
   await page.locator("#email").fill("qa@example.com");
   await page.locator("#company").fill("QA Co");
   await page.locator("#interest").selectOption("BPO CRM");
-  await page.getByRole("button", { name: "Start a Conversation" }).click();
+  await page.getByRole("button", { name: "Book a consultation" }).click();
   await page.waitForTimeout(1500);
   const success = await page.locator("text=Message received.").count();
   await page.screenshot({ path: `${OUT}form-success.png` });

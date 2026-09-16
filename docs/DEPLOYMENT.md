@@ -8,7 +8,8 @@ npm run build
 npm run start
 ```
 
-Dev: `npm run dev` (default port 3000).
+Dev: `npm run dev` → http://localhost:3847 (BITS-dedicated port; avoids 3000 conflicts).
+Prod local: `npm run build && npm start` → same port 3847.
 
 ## Environment
 

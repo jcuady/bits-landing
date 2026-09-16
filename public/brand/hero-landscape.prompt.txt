@@ -1,0 +1,22 @@
+BITS HERO LANDSCAPE — placeholder installed
+===========================================
+Live placeholder: public/brand/hero-landscape.svg (vector, ships now)
+Target photograph: public/brand/hero-landscape.png (1920×1080, 16:9)
+Wired in: components/sections/hero.tsx → HERO_LANDSCAPE
+
+When the PNG is ready, set HERO_LANDSCAPE to "/brand/hero-landscape.png"
+and drop unoptimized on the Next Image.
+
+Composition (must match the live layout):
+- Mountains and mist occupy LEFT, RIGHT, and FAR background.
+- CENTER and LOWER-CENTER stay empty, pale, and soft — a white CRM
+  dashboard will sit there. Do not put peaks, trees, or figures in
+  the middle 50% width × lower 55% height.
+- Sky is brightest in the upper third so dark headline type can sit
+  over it at WCAG AA.
+
+--- COPY INTO CHATGPT (GPT Image / DALL·E) ---
+
+Photoreal wide landscape for a premium B2B SaaS website hero, 16:9, 1920×1080. Soft alpine valley at first light, shot like high-end travel editorial (not stock, not fantasy). Layered mountain ranges recede left and right in cool slate-blue and misted navy (#06162F, #0A2B6F, #93A9C4). Center of the frame is a pale, empty wash of fog and sky — almost white-blue (#F6F9FC to #EAF4FF) — with no peaks, no trees, no buildings, no people. Gentle morning haze, low clouds pooling in the valleys, a quiet sun glow (not a hard disc) behind thin cloud. Electric blue (#0063DB) only as a barely-there cool rim on distant ridges. Shallow atmospheric perspective, 35mm, f/8, calm, expensive, airy. Grain like Kodak Portra 160. Horizontal 16:9 with safe crop to 4:5 for mobile (keep the empty center). Photoreal photograph, not illustration, not 3D render, not isometric.
+
+Negative: text, watermarks, logos, UI, dashboards, people, animals, roads, houses, neon, purple, teal tropical water, oversaturated sunset orange, lens flare, dramatic storm, snow-capped cliché Matterhorn postcard, cyberpunk, CGI glow, centered mountain peak blocking the middle of the frame.

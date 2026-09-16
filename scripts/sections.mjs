@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 
-const BASE = "http://localhost:3100";
+const BASE = "http://localhost:3847";
 const OUT = new URL("../qa/sections/", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 mkdirSync(OUT, { recursive: true });
 

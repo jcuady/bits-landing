@@ -1,58 +1,64 @@
 import Image from "next/image";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Magnetic } from "@/components/ui/magnetic";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
+
+const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
 export function Cta() {
   return (
-    <section className="relative overflow-hidden bg-navy-950">
-      <div className="bg-grid-dark pointer-events-none absolute inset-0 opacity-70" aria-hidden />
-      <div
-        className="glow-electric pointer-events-none absolute left-1/2 top-1/2 h-[36rem] w-[54rem] -translate-x-1/2 -translate-y-1/2"
-        aria-hidden
-      />
-      <Image
-        src="/brand/mark.png"
-        alt=""
-        aria-hidden
-        width={640}
-        height={553}
-        className="pointer-events-none absolute -left-28 top-1/2 w-[30rem] -translate-y-1/2 opacity-[0.07]"
-      />
+    <Section id="cta" className="overflow-x-hidden bg-white">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src={HERO_LANDSCAPE}
+          alt=""
+          fill
+          unoptimized
+          sizes="100vw"
+          className="object-cover object-[center_40%] opacity-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/78 via-white/70 to-white" />
+      </div>
 
       <Container className="relative">
-        <div className="mx-auto max-w-3xl py-24 text-center md:py-32">
+        <div className="mx-auto max-w-5xl text-center">
           <Reveal>
-            <h2 className="text-h2 text-balance text-white">
-              What could your business do{" "}
-              <span className="text-gradient-brand">without limits?</span>
+            <p className="text-overline text-electric-600">BPO · Finance · Custom software</p>
+            <h2 className="text-h2 mt-4 max-w-5xl text-balance leading-[1.08] text-ink">
+              Book a consultation for BPO CRM and operations software.
             </h2>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="text-lede mx-auto mt-6 max-w-[52ch] text-pretty text-mist">
-              Tell us where your operation is slowing down. We will help determine what
-              technology should do next.
+            <p className="text-lede mx-auto mt-5 max-w-[46ch] text-pretty text-slateblue">
+              Harborline-scale tickets, Voltgrid approvals, or a custom build. Tell us
+              where the floor slows down. We will say what to build first.
             </p>
           </Reveal>
-          <Reveal delay={0.16}>
-            <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-              <Button asChild size="lg">
-                <a href="#contact">
-                  Book a Consultation
-                  <ArrowRight aria-hidden />
-                </a>
-              </Button>
-              <Button asChild variant="ghostDark" size="lg">
-                <a href="#contact">
-                  <MessageSquare aria-hidden />
-                  Tell Us About Your Project
-                </a>
-              </Button>
+
+          <Reveal delay={0.08}>
+            <div className="mt-8 flex justify-center sm:mt-9">
+              <Magnetic className="w-full sm:w-auto">
+                <Button
+                  asChild
+                  size="lg"
+                  className="group h-12 min-h-12 w-full rounded-full pr-2 pl-6 sm:h-[3.25rem] sm:min-h-[3.25rem] sm:w-auto"
+                >
+                  <a href="#contact">
+                    Book a consultation
+                    <span
+                      className="flex size-9 items-center justify-center rounded-full bg-white/20 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
+                      aria-hidden
+                    >
+                      <ArrowRight className="size-4" />
+                    </span>
+                  </a>
+                </Button>
+              </Magnetic>
             </div>
           </Reveal>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

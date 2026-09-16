@@ -20,20 +20,20 @@ export function Footer() {
             {footerColumns.map((col) => (
               <div key={col.title}>
                 <h3 className="text-overline text-signal-300/90">{col.title}</h3>
-                <ul className="mt-5 space-y-3">
+                <ul className="mt-3">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       {link.href.startsWith("/") ? (
                         <Link
                           href={link.href}
-                          className="text-[0.9rem] text-white/65 transition-colors hover:text-white"
+                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] text-white/65 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
                         >
                           {link.label}
                         </Link>
                       ) : (
                         <a
                           href={link.href}
-                          className="text-[0.9rem] text-white/65 transition-colors hover:text-white"
+                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] text-white/65 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
                         >
                           {link.label}
                         </a>
@@ -50,24 +50,36 @@ export function Footer() {
           <p className="text-[0.82rem] tracking-[0.14em] text-white/50 uppercase">
             People × Technology × Possibilities
           </p>
-          <ul className="flex items-center gap-6 text-[0.85rem] text-white/55">
+          <ul className="flex flex-wrap items-center gap-x-6 text-[0.85rem] text-white/55">
             <li>
-              <Link href="/legal#privacy" className="transition-colors hover:text-white">
+              <Link
+                href="/legal#privacy"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+              >
                 Privacy
               </Link>
             </li>
             <li>
-              <Link href="/legal#terms" className="transition-colors hover:text-white">
+              <Link
+                href="/legal#terms"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+              >
                 Terms
               </Link>
             </li>
             <li>
-              <a href="#contact" className="transition-colors hover:text-white">
+              <a
+                href="#contact"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+              >
                 Contact
               </a>
             </li>
             <li>
-              <Link href="/login" className="transition-colors hover:text-white">
+              <Link
+                href="/login"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+              >
                 CRM Sign in
               </Link>
             </li>

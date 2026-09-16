@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+  <title>Placeholder atmosphere — replace with hero-landscape.png</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4f8fc"/>
+      <stop offset="38%" stop-color="#e4eef8"/>
+      <stop offset="72%" stop-color="#d3e4f4"/>
+      <stop offset="100%" stop-color="#c5d7ea"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="48%" cy="28%" r="42%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#d7ebff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#d7ebff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9bb4cc"/>
+      <stop offset="100%" stop-color="#b7c9db"/>
+    </linearGradient>
+    <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6f8eab"/>
+      <stop offset="100%" stop-color="#8aa6c0"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d5d7a"/>
+      <stop offset="100%" stop-color="#5a7a98"/>
+    </linearGradient>
+    <linearGradient id="closest" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c3a58"/>
+      <stop offset="100%" stop-color="#2f5273"/>
+    </linearGradient>
+    <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6f9fc" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#f6f9fc" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f6f9fc" stop-opacity="0.82"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <circle cx="920" cy="300" r="420" fill="url(#sun)"/>
+  <path fill="url(#far)" d="M0 520 C 180 470 310 430 480 455 C 650 480 760 410 920 430 C 1100 454 1220 390 1400 430 C 1580 470 1740 440 1920 490 L 1920 1080 L 0 1080 Z"/>
+  <path fill="url(#mid)" d="M0 610 C 220 540 360 580 520 560 C 700 536 820 620 1020 580 C 1220 540 1380 600 1560 560 C 1720 528 1840 580 1920 550 L 1920 1080 L 0 1080 Z"/>
+  <path fill="url(#near)" d="M0 760 C 160 700 280 740 420 710 C 600 672 740 780 960 720 C 1180 660 1320 760 1540 710 C 1720 672 1840 730 1920 700 L 1920 1080 L 0 1080 Z"/>
+  <path fill="url(#closest)" d="M0 900 C 200 840 340 880 520 850 C 740 812 900 920 1140 860 C 1360 804 1520 890 1720 850 C 1840 826 1900 860 1920 840 L 1920 1080 L 0 1080 Z"/>
+  <rect width="1920" height="1080" fill="url(#mist)"/>
+</svg>

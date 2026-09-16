@@ -4,8 +4,12 @@
  */
 import { chromium } from "playwright";
 import { spawn } from "child_process";
+import { createRequire } from "module";
 import http from "http";
 import net from "net";
+
+const require = createRequire(import.meta.url);
+const nextBin = require.resolve("next/dist/bin/next");
 
 function getFreePort() {
   return new Promise((resolve, reject) => {
@@ -39,9 +43,8 @@ function waitForServer(base, ms = 45000) {
 async function main() {
   const PORT = await getFreePort();
   const BASE = `http://127.0.0.1:${PORT}`;
-  const server = spawn("npx", ["next", "start", "-p", String(PORT), "-H", "127.0.0.1"], {
+  const server = spawn(process.execPath, [nextBin, "start", "-p", String(PORT), "-H", "127.0.0.1"], {
     cwd: process.cwd(),
-    shell: true,
     stdio: "pipe",
   });
   let failed = false;

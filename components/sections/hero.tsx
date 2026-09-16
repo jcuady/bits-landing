@@ -1,253 +1,111 @@
 import Image from "next/image";
-import { ArrowRight, Bot, Check, CircleCheck, Headset } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { Magnetic } from "@/components/ui/magnetic";
+import { HeroProduct } from "@/components/sections/hero-product";
 
-const overlineItems = ["Secure", "Scalable", "Human-centered"];
+/**
+ * Atmosphere plate. SVG ships as a layout-true placeholder.
+ * Swap to "/brand/hero-landscape.png" after generating from
+ * public/brand/hero-landscape.prompt.txt
+ */
+const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
+
+const proof = ["Human oversight on AI", "Role-based access", "Built for high-volume floors"];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* Soft light atmosphere: restrained grid + tinted glow */}
-      <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-45" aria-hidden />
-      <div
-        className="pointer-events-none absolute -top-32 right-[-8%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(closest-side,rgb(0_123_255/0.12),transparent_72%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute bottom-[-20%] left-[-10%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(closest-side,rgb(0_166_255/0.08),transparent_70%)]"
-        aria-hidden
-      />
-      <Image
-        src="/brand/mark.png"
-        alt=""
-        aria-hidden
-        width={640}
-        height={553}
-        className="pointer-events-none absolute -right-20 top-1/2 hidden w-[30rem] -translate-y-1/2 opacity-[0.04] lg:block"
-      />
+    <section className="relative overflow-x-hidden bg-cloud">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src={HERO_LANDSCAPE}
+          alt=""
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          className="object-cover object-[center_42%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-cloud/55 via-cloud/25 to-cloud" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/70 to-transparent" />
+      </div>
 
       <Container className="relative">
-        <div className="grid items-center gap-12 pb-16 pt-24 md:pt-28 lg:min-h-[100dvh] lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:pb-20 lg:pt-24">
-          {/* Copy - max 4 text elements: overline, headline, lede, CTAs */}
-          <div className="max-w-xl">
-            <Reveal>
-              <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-overline text-electric-600">
-                {overlineItems.map((item, i) => (
-                  <span key={item} className="flex items-center gap-4">
-                    {i > 0 && <span className="h-3 w-px bg-navy-700/20" aria-hidden />}
-                    {item}
-                  </span>
-                ))}
-              </p>
+        <div className="flex min-h-[100dvh] flex-col pb-10 pt-24 sm:pb-14 sm:pt-28 md:pt-[6.5rem] lg:pb-16">
+          <div className="mx-auto max-w-5xl px-1 pt-4 text-center sm:pt-8 lg:pt-10">
+            <Reveal y={16}>
+              <p className="text-overline text-electric-600">BPO · Finance · Enterprise operations</p>
             </Reveal>
 
-            <Reveal delay={0.08}>
-              <h1 className="text-display mt-6 text-balance text-ink">
-                Technology
-                <br />
-                <span className="text-gradient-brand">Without Limits.</span>
+            <Reveal delay={0.06} y={18}>
+              <h1 className="text-display mt-5 max-w-5xl text-balance leading-[1.08] text-ink">
+                Technology without limits
+                <br className="hidden sm:block" />
+                {" "}
+                for teams that run at volume.
               </h1>
             </Reveal>
 
-            <Reveal delay={0.16}>
-              <p className="text-lede mt-6 max-w-[42ch] text-pretty text-slateblue">
-                Secure, scalable systems for BPOs, financial teams, and enterprises ready
-                to operate smarter.
+            <Reveal delay={0.12} y={14}>
+              <p className="text-lede mx-auto mt-5 max-w-[46ch] text-pretty text-slateblue">
+                CRM, automation, and AI designed around contact-center and finance
+                floors — not generic sales software.
               </p>
             </Reveal>
 
-            <Reveal delay={0.24}>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button asChild size="lg">
-                  <a href="#contact">
-                    Book a Consultation
-                    <ArrowRight aria-hidden />
-                  </a>
-                </Button>
-                <Button asChild variant="secondary" size="lg">
-                  <a href="#solutions">Explore Our Solutions</a>
-                </Button>
+            <Reveal delay={0.18} y={12}>
+              <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:mt-9 sm:flex-row sm:items-center">
+                <Magnetic className="w-full sm:w-auto">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="group h-12 min-h-12 w-full rounded-full pr-2 pl-6 sm:h-[3.25rem] sm:min-h-[3.25rem] sm:w-auto"
+                  >
+                    <a href="#contact">
+                      Book a consultation
+                      <span
+                        className="flex size-9 items-center justify-center rounded-full bg-white/20 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
+                        aria-hidden
+                      >
+                        <ArrowRight className="size-4" />
+                      </span>
+                    </a>
+                  </Button>
+                </Magnetic>
+                <Magnetic className="w-full sm:w-auto">
+                  <Button
+                    asChild
+                    variant="secondary"
+                    size="lg"
+                    className="h-12 min-h-12 w-full rounded-full bg-white/80 sm:h-[3.25rem] sm:min-h-[3.25rem] sm:w-auto"
+                  >
+                    <a href="#solutions">Explore solutions</a>
+                  </Button>
+                </Magnetic>
               </div>
+            </Reveal>
+
+            <Reveal delay={0.24} y={10}>
+              <ul className="mx-auto mt-7 flex max-w-xl flex-col items-center gap-2 text-[0.82rem] font-medium text-slateblue sm:mt-8 sm:flex-row sm:justify-center sm:gap-0">
+                {proof.map((item, i) => (
+                  <li key={item} className="flex items-center gap-3">
+                    {i > 0 ? (
+                      <span className="hidden h-3 w-px bg-navy-700/15 sm:mx-4 sm:block" aria-hidden />
+                    ) : null}
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
 
-          {/* Product ecosystem - light Soft UI cards */}
-          <div className="relative lg:h-[540px]">
-            <svg
-              className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-              aria-hidden
-              fill="none"
-            >
-              <path
-                d="M70 390 C 150 350, 190 290, 260 250"
-                stroke="rgb(10 43 111 / 0.14)"
-                strokeWidth="1.5"
-                strokeDasharray="5 6"
-              />
-              <path
-                d="M340 110 C 400 130, 430 170, 450 200"
-                stroke="rgb(0 123 255 / 0.22)"
-                strokeWidth="1.5"
-                strokeDasharray="5 6"
-              />
-            </svg>
-
-            <div className="flex flex-col gap-5 lg:static lg:block">
-              {/* CRM fragment */}
-              <Reveal delay={0.18} amount={0.15} className="lg:absolute lg:left-0 lg:top-14 lg:w-[25.5rem]">
-                <div className="rounded-2xl border border-linelight bg-white shadow-[0_1px_2px_rgb(6_22_47/0.04),0_24px_48px_-20px_rgb(6_22_47/0.18)]">
-                  <div className="flex items-center gap-2 border-b border-linelight bg-cloud/80 px-5 py-3.5">
-                    <span className="size-2 rounded-full bg-navy-700/15" aria-hidden />
-                    <span className="size-2 rounded-full bg-navy-700/15" aria-hidden />
-                    <span className="size-2 rounded-full bg-electric-500/70" aria-hidden />
-                    <span className="ml-3 text-[0.72rem] font-semibold tracking-[0.14em] text-slateblue uppercase">
-                      BITS CRM - Operations
-                    </span>
-                  </div>
-                  <div className="space-y-4 p-5">
-                    <div className="flex items-center gap-3.5">
-                      <span
-                        className="flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-navy-700 to-electric-600 text-[0.8rem] font-bold text-white"
-                        aria-hidden
-                      >
-                        NL
-                      </span>
-                      <div className="min-w-0">
-                        <p className="truncate text-[0.92rem] font-semibold text-ink">
-                          Northgate Logistics
-                        </p>
-                        <p className="text-[0.76rem] text-slateblue">Enterprise - Premium support</p>
-                      </div>
-                      <span className="ml-auto rounded-full border border-electric-600/25 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600">
-                        Active
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-2.5">
-                      {[
-                        { k: "Open tickets", v: "12" },
-                        { k: "Avg. response", v: "1:42" },
-                        { k: "QA score", v: "94" },
-                      ].map((s) => (
-                        <div
-                          key={s.k}
-                          className="rounded-xl border border-linelight bg-cloud/70 px-3 py-2.5"
-                        >
-                          <p className="text-[1.05rem] font-bold tracking-tight text-ink tabular-nums">
-                            {s.v}
-                          </p>
-                          <p className="mt-0.5 text-[0.64rem] font-medium tracking-wide text-slateblue uppercase">
-                            {s.k}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <ul className="space-y-2">
-                      {[
-                        {
-                          t: "Billing dispute review",
-                          s: "In review",
-                          tone: "text-electric-600 border-electric-600/25 bg-electric-600/[0.06]",
-                        },
-                        {
-                          t: "Onboarding call summary",
-                          s: "Open",
-                          tone: "text-navy-700 border-signal-500/30 bg-skywash",
-                        },
-                        {
-                          t: "SLA exception request",
-                          s: "Escalated",
-                          tone: "text-slateblue border-navy-700/15 bg-navy-700/[0.04]",
-                        },
-                      ].map((row) => (
-                        <li
-                          key={row.t}
-                          className="flex items-center justify-between gap-3 rounded-xl border border-linelight bg-white px-3.5 py-2.5"
-                        >
-                          <span className="truncate text-[0.82rem] text-ink/85">{row.t}</span>
-                          <span
-                            className={`shrink-0 rounded-full border px-2 py-0.5 text-[0.64rem] font-semibold ${row.tone}`}
-                          >
-                            {row.s}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </Reveal>
-
-              {/* AI agent fragment */}
-              <Reveal delay={0.3} amount={0.15} className="lg:absolute lg:right-0 lg:top-0 lg:w-[17rem]">
-                <div className="rounded-2xl border border-electric-600/20 bg-white shadow-[0_1px_2px_rgb(6_22_47/0.04),0_20px_40px_-16px_rgb(0_99_219/0.22)]">
-                  <div className="flex items-center gap-2.5 border-b border-linelight px-4 py-3">
-                    <span className="flex size-7 items-center justify-center rounded-lg bg-skywash text-electric-600">
-                      <Bot className="size-4" aria-hidden />
-                    </span>
-                    <span className="text-[0.8rem] font-semibold text-ink">AI Agent</span>
-                    <span className="ml-auto flex items-center gap-1.5 text-[0.66rem] font-medium text-electric-600">
-                      <span className="relative flex size-1.5" aria-hidden>
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric-500 opacity-50" />
-                        <span className="relative inline-flex size-1.5 rounded-full bg-electric-500" />
-                      </span>
-                      Drafting
-                    </span>
-                  </div>
-                  <div className="space-y-2.5 p-4">
-                    <div className="space-y-1.5 rounded-xl border border-linelight bg-cloud/80 p-3">
-                      <span className="block h-1.5 w-11/12 rounded-full bg-navy-700/12" aria-hidden />
-                      <span className="block h-1.5 w-4/5 rounded-full bg-navy-700/12" aria-hidden />
-                      <span className="block h-1.5 w-3/5 rounded-full bg-electric-500/35" aria-hidden />
-                    </div>
-                    <div className="flex gap-2">
-                      <span className="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-lg bg-electric-600 text-[0.72rem] font-semibold text-white">
-                        <Check className="size-3.5" aria-hidden /> Approve
-                      </span>
-                      <span className="flex h-8 flex-1 items-center justify-center gap-1.5 rounded-lg border border-navy-700/15 text-[0.72rem] font-semibold text-navy-700">
-                        <Headset className="size-3.5" aria-hidden /> Escalate
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-
-              {/* Workflow fragment */}
-              <Reveal delay={0.4} amount={0.15} className="lg:absolute lg:bottom-2 lg:right-8 lg:w-[19rem]">
-                <div className="rounded-2xl border border-linelight bg-white p-4 shadow-[0_1px_2px_rgb(6_22_47/0.04),0_18px_36px_-16px_rgb(6_22_47/0.16)]">
-                  <p className="text-[0.68rem] font-semibold tracking-[0.14em] text-slateblue uppercase">
-                    Approval workflow
-                  </p>
-                  <ul className="mt-3 space-y-2.5">
-                    {["Details verified", "Manager review", "Complete"].map((step, i) => (
-                      <li key={step} className="flex items-center gap-2.5">
-                        <CircleCheck
-                          className={`size-4 ${i < 2 ? "text-electric-600" : "text-navy-700/20"}`}
-                          aria-hidden
-                        />
-                        <span
-                          className={`text-[0.8rem] ${i < 2 ? "text-ink/85" : "text-slateblue/60"}`}
-                        >
-                          {step}
-                        </span>
-                        {i === 1 && (
-                          <span className="ml-auto rounded-full bg-skywash px-2 py-0.5 text-[0.62rem] font-semibold text-electric-600">
-                            Current
-                          </span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            </div>
-          </div>
+          <Reveal delay={0.2} y={28} amount={0.15} className="mt-10 flex flex-1 items-end sm:mt-12 lg:mt-14">
+            <HeroProduct />
+          </Reveal>
         </div>
       </Container>
-
-      <div className="absolute inset-x-0 bottom-0 h-px bg-linelight" aria-hidden />
     </section>
   );
 }

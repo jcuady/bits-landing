@@ -5,52 +5,55 @@ import { ContactForm } from "@/components/sections/contact-form";
 
 const nextSteps = [
   {
-    title: "You tell us where operations hurt",
-    copy: "A short conversation about workflows, systems and constraints.",
+    index: "01",
+    title: "You tell us where the floor slows down",
+    copy: "A short conversation about workflows, systems, and constraints.",
   },
   {
-    title: "We map where technology helps most",
-    copy: "We identify the highest-leverage opportunities, honestly and without padding.",
+    index: "02",
+    title: "We map where software helps most",
+    copy: "Highest-leverage work first: BPO CRM, finance approvals, or a custom build.",
   },
   {
+    index: "03",
     title: "You get a clear recommendation",
-    copy: "A concrete proposal for what to build first, and why. Not a sales deck.",
+    copy: "What to build first, and why. Not a sales deck.",
   },
-];
+] as const;
 
 export function Contact() {
   return (
-    <Section id="contact" className="bg-cloud">
+    <Section id="contact" className="overflow-x-hidden bg-cloud">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
           <div>
             <Reveal>
-              <p className="text-overline text-electric-600">Contact</p>
-              <h2 className="text-h2 mt-5 max-w-[16ch] text-balance text-ink">
-                Start a conversation.
+              <p className="text-overline text-electric-600">Consultation request</p>
+              <h2 className="text-h2 mt-4 text-balance leading-[1.08] text-ink lg:max-w-[20ch]">
+                Request a consultation for your operations floor.
               </h2>
-              <p className="text-lede mt-6 max-w-[50ch] text-pretty text-slateblue">
-                Whether you need a CRM built around your contact center, a controlled
-                financial workflow, or an AI agent ecosystem, the first step is the same.
+              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
+                BPO CRM, finance approvals, or a custom Harborline-scale build. Send a
+                brief. A senior teammate will say what to build first.
               </p>
             </Reveal>
 
-            <ol className="mt-10 space-y-0">
+            <ol className="mt-10">
               {nextSteps.map((s, i) => (
-                <li key={s.title}>
-                  <Reveal delay={0.1 + i * 0.06} y={14}>
-                    <div className="flex gap-5 border-l border-navy-700/12 pb-8 pl-6 last:pb-0">
+                <li key={s.index} className="border-t border-navy-700/10">
+                  <Reveal delay={0.04 * i}>
+                    <div className="flex gap-4 py-5">
                       <span
-                        className="-ml-[33px] mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-electric-600 text-[0.7rem] font-bold text-white"
+                        className="w-7 shrink-0 pt-1 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600"
                         aria-hidden
                       >
-                        {i + 1}
+                        {s.index}
                       </span>
-                      <div>
-                        <h3 className="text-[1rem] font-semibold tracking-[-0.01em] text-ink">
+                      <div className="min-w-0">
+                        <h3 className="text-[1.05rem] font-semibold tracking-[-0.015em] text-ink">
                           {s.title}
                         </h3>
-                        <p className="mt-1 text-[0.88rem] leading-relaxed text-slateblue">
+                        <p className="mt-1.5 max-w-[42ch] text-[0.92rem] leading-relaxed text-pretty text-slateblue">
                           {s.copy}
                         </p>
                       </div>
@@ -61,7 +64,7 @@ export function Contact() {
             </ol>
           </div>
 
-          <Reveal delay={0.12} amount={0.15}>
+          <Reveal delay={0.1} amount={0.15}>
             <ContactForm />
           </Reveal>
         </div>

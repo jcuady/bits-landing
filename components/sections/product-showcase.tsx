@@ -2,429 +2,283 @@
 
 import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import {
-  BarChart3,
-  Bot,
-  Check,
-  ClipboardCheck,
-  Headset,
-  LayoutDashboard,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-import { SectionHeading } from "@/components/ui/section-heading";
 
 const tabs = [
-  { id: "crm", label: "CRM Dashboard", icon: LayoutDashboard },
-  { id: "agent", label: "AI Agent", icon: Bot },
-  { id: "qa", label: "QA Review", icon: ClipboardCheck },
-  { id: "analytics", label: "Analytics", icon: BarChart3 },
+  { id: "tickets", label: "Tickets", title: "BITS CRM", kicker: "Tickets · Harborline desk" },
+  { id: "exceptions", label: "Exceptions", title: "Exceptions", kicker: "AI draft · Harborline desk" },
+  { id: "qa", label: "QA", title: "QA", kicker: "Review queue · Harborline desk" },
+  { id: "approvals", label: "Approvals", title: "Approvals", kicker: "Finance ops · Voltgrid desk" },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
 
-/* ---------- shared chrome ---------- */
+const ctaClass =
+  "group mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
 
-function Window({ children }: { children: React.ReactNode }) {
+function TicketsView() {
+  const rows = [
+    { a: "Elise Navarro", b: "Invoice exception", c: "Open" },
+    { a: "Priya Sundaram", b: "KYC follow-up", c: "Waiting" },
+    { a: "Leo Santos", b: "Ticket 4182", c: "QA" },
+    { a: "Hannah Ortiz", b: "Order exception", c: "Open" },
+  ] as const;
   return (
-    <div className="overflow-hidden rounded-2xl border border-linelight bg-white shadow-lift">
-      <div className="flex items-center gap-2 border-b border-linelight bg-cloud px-4 py-3">
-        <span className="size-2.5 rounded-full bg-navy-700/15" aria-hidden />
-        <span className="size-2.5 rounded-full bg-navy-700/15" aria-hidden />
-        <span className="size-2.5 rounded-full bg-electric-500/60" aria-hidden />
-        <span className="mx-auto rounded-md border border-linelight bg-white px-3 py-1 text-[0.68rem] font-medium tracking-wide text-slateblue">
-          app.bitsplatform.com
-        </span>
-      </div>
-      <div className="min-h-[24rem] sm:min-h-[26rem]">{children}</div>
-    </div>
-  );
-}
-
-function Sidebar({ active }: { active: string }) {
-  const items = ["Dashboard", "Customers", "Interactions", "Tickets", "QA", "Reports"];
-  return (
-    <div className="hidden w-44 shrink-0 flex-col gap-1 border-r border-linelight bg-cloud/60 p-3 md:flex">
-      <div className="mb-3 flex items-center gap-2 px-1.5">
-        <span className="size-6 rounded-md bg-gradient-to-br from-navy-700 to-electric-600" aria-hidden />
-        <span className="text-[0.78rem] font-bold tracking-tight text-ink">BITS</span>
-      </div>
-      {items.map((item) => (
-        <span
-          key={item}
-          className={cn(
-            "rounded-lg px-2.5 py-1.5 text-[0.78rem] font-medium",
-            item === active ? "bg-white text-electric-600 shadow-sm" : "text-slateblue"
-          )}
-        >
-          {item}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function Stat({ k, v, delta }: { k: string; v: string; delta?: string }) {
-  return (
-    <div className="rounded-xl border border-linelight bg-white px-3.5 py-3">
-      <p className="text-[1.15rem] font-bold tracking-tight text-ink">{v}</p>
-      <p className="mt-0.5 text-[0.62rem] font-semibold tracking-wide text-slateblue uppercase">
-        {k}
-      </p>
-      {delta && <p className="mt-1 text-[0.66rem] font-semibold text-electric-600">{delta}</p>}
-    </div>
-  );
-}
-
-function Pill({ children, tone = "blue" }: { children: React.ReactNode; tone?: "blue" | "cyan" | "neutral" }) {
-  return (
-    <span
-      className={cn(
-        "shrink-0 rounded-full border px-2 py-0.5 text-[0.62rem] font-semibold",
-        tone === "blue" && "border-electric-600/25 bg-electric-600/[0.07] text-electric-600",
-        tone === "cyan" && "border-signal-500/30 bg-signal-500/10 text-navy-700",
-        tone === "neutral" && "border-navy-700/15 bg-navy-700/[0.04] text-slateblue"
-      )}
-    >
-      {children}
-    </span>
-  );
-}
-
-/* ---------- views ---------- */
-
-function CrmView() {
-  const bars = [38, 55, 47, 70, 62, 84, 76, 66, 90, 58, 72, 81];
-  const queue = [
-    { t: "Billing dispute review", who: "Northgate Logistics", s: "In review", tone: "blue" as const },
-    { t: "Onboarding call summary", who: "Helix Media Group", s: "Open", tone: "cyan" as const },
-    { t: "SLA exception request", who: "Altair Freight Co.", s: "Escalated", tone: "neutral" as const },
-    { t: "Plan renewal discussion", who: "Beacon Retail", s: "Open", tone: "cyan" as const },
-  ];
-  return (
-    <div className="flex">
-      <Sidebar active="Dashboard" />
-      <div className="min-w-0 flex-1 space-y-4 p-4 sm:p-5">
-        <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
-          <Stat k="Interactions" v="1,284" delta="+8% this week" />
-          <Stat k="Open tickets" v="47" />
-          <Stat k="Avg. response" v="1:42" delta="-12s vs. last week" />
-          <Stat k="Resolution" v="91%" />
-        </div>
-        <div className="rounded-xl border border-linelight bg-white p-4">
-          <div className="flex items-end justify-between gap-1.5" style={{ height: 110 }}>
-            {bars.map((h, i) => (
-              <span
-                key={i}
-                className="w-full rounded-t-[4px] bg-gradient-to-t from-electric-600/85 to-signal-500/85"
-                style={{ height: `${h}%` }}
-              />
-            ))}
-          </div>
-          <div className="mt-2.5 flex items-center justify-between">
-            <p className="text-[0.64rem] font-semibold tracking-wide text-slateblue uppercase">
-              Interaction volume · 12 weeks
-            </p>
-            <p className="text-[0.64rem] text-slateblue/70">Sample data</p>
-          </div>
-        </div>
-        <ul className="divide-y divide-linelight rounded-xl border border-linelight bg-white">
-          {queue.map((row) => (
-            <li key={row.t} className="flex items-center gap-3 px-4 py-2.5">
-              <span className="size-1.5 shrink-0 rounded-full bg-electric-500" aria-hidden />
-              <span className="min-w-0 truncate text-[0.8rem] font-medium text-ink">{row.t}</span>
-              <span className="hidden min-w-0 truncate text-[0.72rem] text-slateblue sm:inline">
-                {row.who}
-              </span>
-              <span className="ml-auto">
-                <Pill tone={row.tone}>{row.s}</Pill>
-              </span>
-            </li>
+    <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+      <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
+        <caption className="sr-only">Harborline tickets in BITS CRM</caption>
+        <thead>
+          <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
+            <th scope="col" className="py-2 pr-3 font-semibold">
+              Account
+            </th>
+            <th scope="col" className="py-2 pr-3 font-semibold">
+              Work
+            </th>
+            <th scope="col" className="py-2 font-semibold">
+              State
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.a} className="border-b border-linelight/80 last:border-0">
+              <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.a}</td>
+              <td className="max-w-[10rem] truncate py-2.5 pr-3 text-slateblue sm:max-w-none">{row.b}</td>
+              <td className="py-2.5 whitespace-nowrap text-slateblue">{row.c}</td>
+            </tr>
           ))}
-        </ul>
-      </div>
+        </tbody>
+      </table>
     </div>
   );
 }
 
-function AgentView() {
+function ExceptionsView() {
   return (
-    <div className="flex">
-      <Sidebar active="Interactions" />
-      <div className="grid min-w-0 flex-1 lg:grid-cols-[1fr_15rem]">
-        <div className="space-y-3.5 p-4 sm:p-5">
-          <div className="flex items-center gap-2.5">
-            <span className="flex size-8 items-center justify-center rounded-full bg-navy-700/[0.07] text-navy-700">
-              <Headset className="size-4" aria-hidden />
-            </span>
-            <div>
-              <p className="text-[0.8rem] font-semibold text-ink">Customer chat · #4821</p>
-              <p className="text-[0.66rem] text-slateblue">Northgate Logistics</p>
-            </div>
-            <Pill tone="cyan">AI assisted</Pill>
-          </div>
-
-          <div className="max-w-[85%] rounded-2xl rounded-tl-md border border-linelight bg-cloud px-4 py-3">
-            <p className="text-[0.8rem] leading-relaxed text-ink/85">
-              Hi, our invoice shows a different rate than the contract we signed in March.
-              Can someone check?
-            </p>
-          </div>
-
-          <div className="ml-auto max-w-[92%] rounded-2xl rounded-tr-md border border-electric-600/25 bg-electric-600/[0.05] p-4">
-            <div className="flex items-center gap-2">
-              <Bot className="size-4 text-electric-600" aria-hidden />
-              <p className="text-[0.68rem] font-bold tracking-[0.12em] text-electric-600 uppercase">
-                AI draft · awaiting approval
-              </p>
-            </div>
-            <p className="mt-2.5 text-[0.8rem] leading-relaxed text-ink/85">
-              Thanks for flagging this. I can see the March contract rate on your account.
-              I have opened a billing review and a specialist will confirm the corrected
-              invoice within one business day.
-            </p>
-            <div className="mt-3.5 flex flex-wrap gap-2">
-              <span className="flex h-8 items-center gap-1.5 rounded-lg bg-electric-600 px-3 text-[0.72rem] font-semibold text-white">
-                <Check className="size-3.5" aria-hidden /> Approve & send
-              </span>
-              <span className="flex h-8 items-center rounded-lg border border-navy-700/15 bg-white px-3 text-[0.72rem] font-semibold text-navy-700">
-                Edit
-              </span>
-              <span className="flex h-8 items-center rounded-lg border border-navy-700/15 bg-white px-3 text-[0.72rem] font-semibold text-navy-700">
-                Escalate to specialist
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <aside className="hidden space-y-3 border-l border-linelight bg-cloud/50 p-4 lg:block">
-          <p className="text-[0.64rem] font-bold tracking-[0.14em] text-slateblue uppercase">
-            Agent context
-          </p>
-          {[
-            { k: "Sentiment", v: "Calm · cooperative" },
-            { k: "Contract", v: "Signed Mar 12" },
-            { k: "Source", v: "Billing policy v3" },
-            { k: "Confidence", v: "High" },
-          ].map((r) => (
-            <div key={r.k} className="rounded-lg border border-linelight bg-white px-3 py-2.5">
-              <p className="text-[0.6rem] font-semibold tracking-wide text-slateblue uppercase">{r.k}</p>
-              <p className="mt-0.5 text-[0.78rem] font-medium text-ink">{r.v}</p>
-            </div>
-          ))}
-        </aside>
+    <div className="space-y-4 px-4 py-4 sm:px-5">
+      <div>
+        <p className="text-[0.82rem] font-semibold text-ink">Elise Navarro · Harborline</p>
+        <p className="mt-0.5 text-[0.72rem] text-slateblue">Invoice rate does not match the March contract</p>
+      </div>
+      <div className="rounded-xl border border-linelight bg-cloud/70 px-4 py-3">
+        <p className="text-[0.68rem] font-semibold tracking-[0.08em] text-electric-600 uppercase">
+          AI draft · waiting on a person
+        </p>
+        <p className="mt-2 text-[0.84rem] leading-relaxed text-ink/90">
+          The March contract rate is on the account. A billing review is open. A specialist
+          confirms the corrected invoice.
+        </p>
+        <p className="mt-3 text-[0.75rem] font-medium text-slateblue">
+          Approve & send · Edit · Escalate
+        </p>
       </div>
     </div>
   );
 }
 
 function QaView() {
-  const criteria = [
-    { name: "Greeting & verification", score: 96 },
-    { name: "Accuracy of information", score: 88 },
-    { name: "Tone & empathy", score: 92 },
-    { name: "Process compliance", score: 84 },
-    { name: "Resolution quality", score: 90 },
-  ];
-  const reviews = [
-    { id: "Call #7841", agent: "Team A", score: 94, tone: "blue" as const },
-    { id: "Chat #4821", agent: "AI assisted", score: 91, tone: "cyan" as const },
-    { id: "Call #7836", agent: "Team B", score: 82, tone: "neutral" as const },
-  ];
+  const rows = [
+    { a: "Ticket 4182", b: "Leo Santos", c: "In review" },
+    { a: "Chat 4821", b: "Elise Navarro", c: "Flagged" },
+    { a: "Call 7836", b: "Team B", c: "Passed" },
+  ] as const;
   return (
-    <div className="flex">
-      <Sidebar active="QA" />
-      <div className="grid min-w-0 flex-1 gap-4 p-4 sm:p-5 lg:grid-cols-2">
-        <div className="rounded-xl border border-linelight bg-white p-4 sm:p-5">
-          <div className="flex items-baseline justify-between">
-            <p className="text-[0.8rem] font-semibold text-ink">Scorecard · Customer care</p>
-            <p className="text-[1.4rem] font-bold tracking-tight text-ink">
-              90<span className="text-[0.8rem] font-semibold text-slateblue">/100</span>
-            </p>
-          </div>
-          <ul className="mt-4 space-y-3.5">
-            {criteria.map((c) => (
-              <li key={c.name}>
-                <div className="flex items-center justify-between text-[0.74rem]">
-                  <span className="font-medium text-ink/80">{c.name}</span>
-                  <span className="font-semibold text-navy-700">{c.score}</span>
-                </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-navy-700/[0.08]">
-                  <span
-                    className="block h-full rounded-full bg-gradient-to-r from-electric-600 to-signal-500"
-                    style={{ width: `${c.score}%` }}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="space-y-3">
-          <ul className="divide-y divide-linelight rounded-xl border border-linelight bg-white">
-            {reviews.map((r) => (
-              <li key={r.id} className="flex items-center gap-3 px-4 py-3">
-                <ClipboardCheck className="size-4 shrink-0 text-electric-600" aria-hidden />
-                <div className="min-w-0">
-                  <p className="truncate text-[0.8rem] font-medium text-ink">{r.id}</p>
-                  <p className="text-[0.68rem] text-slateblue">{r.agent}</p>
-                </div>
-                <span className="ml-auto">
-                  <Pill tone={r.tone}>Score {r.score}</Pill>
-                </span>
-              </li>
-            ))}
-          </ul>
-          <div className="rounded-xl border border-signal-500/25 bg-skywash p-4">
-            <p className="text-[0.74rem] font-semibold text-navy-800">QA Agent summary</p>
-            <p className="mt-1.5 text-[0.76rem] leading-relaxed text-slateblue">
-              Two interactions flagged for human review this week. Process compliance dips
-              correlate with new macro rollout on Tuesday.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+      <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
+        <caption className="sr-only">Harborline QA review queue</caption>
+        <thead>
+          <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
+            <th scope="col" className="py-2 pr-3 font-semibold">
+              Work
+            </th>
+            <th scope="col" className="py-2 pr-3 font-semibold">
+              Account
+            </th>
+            <th scope="col" className="py-2 font-semibold">
+              State
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.a} className="border-b border-linelight/80 last:border-0">
+              <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.a}</td>
+              <td className="py-2.5 pr-3 text-slateblue">{row.b}</td>
+              <td className="py-2.5 whitespace-nowrap text-slateblue">{row.c}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
-function AnalyticsView() {
-  const weeks = [30, 44, 38, 56, 49, 63, 58, 72, 66, 78, 84, 91];
-  const channels = [
-    { name: "Voice", pct: 46 },
-    { name: "Chat", pct: 32 },
-    { name: "Email", pct: 16 },
-    { name: "Social", pct: 6 },
-  ];
+function ApprovalsView() {
+  const rows = [
+    { a: "Wire release", b: "Voltgrid", c: "Controller" },
+    { a: "Limit change", b: "Northwind", c: "Pending" },
+    { a: "Vendor setup", b: "Harborline", c: "Approved" },
+  ] as const;
   return (
-    <div className="flex">
-      <Sidebar active="Reports" />
-      <div className="min-w-0 flex-1 space-y-4 p-4 sm:p-5">
-        <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
-          <Stat k="CSAT" v="4.6" delta="+0.2 this quarter" />
-          <Stat k="First-contact resolution" v="78%" />
-          <Stat k="Automation coverage" v="41%" delta="+6% this month" />
-          <Stat k="Escalation rate" v="9%" />
-        </div>
-        <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
-          <div className="rounded-xl border border-linelight bg-white p-4">
-            <div className="flex items-end justify-between gap-1.5" style={{ height: 120 }}>
-              {weeks.map((h, i) => (
-                <span
-                  key={i}
-                  className="w-full rounded-t-[4px] bg-gradient-to-t from-navy-700/85 to-electric-500/85"
-                  style={{ height: `${h}%` }}
-                />
-              ))}
-            </div>
-            <p className="mt-2.5 text-[0.64rem] font-semibold tracking-wide text-slateblue uppercase">
-              Resolved interactions · 12 weeks
-            </p>
-          </div>
-          <div className="rounded-xl border border-linelight bg-white p-4">
-            <p className="text-[0.8rem] font-semibold text-ink">Channel split</p>
-            <ul className="mt-3.5 space-y-3">
-              {channels.map((c) => (
-                <li key={c.name}>
-                  <div className="flex items-center justify-between text-[0.74rem]">
-                    <span className="font-medium text-ink/80">{c.name}</span>
-                    <span className="font-semibold text-navy-700">{c.pct}%</span>
-                  </div>
-                  <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-navy-700/[0.08]">
-                    <span
-                      className="block h-full rounded-full bg-gradient-to-r from-electric-600 to-signal-500"
-                      style={{ width: `${c.pct}%` }}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
+    <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+      <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
+        <caption className="sr-only">Voltgrid finance approval queue</caption>
+        <thead>
+          <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
+            <th scope="col" className="py-2 pr-3 font-semibold">
+              Request
+            </th>
+            <th scope="col" className="py-2 pr-3 font-semibold">
+              Desk
+            </th>
+            <th scope="col" className="py-2 font-semibold">
+              State
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.a} className="border-b border-linelight/80 last:border-0">
+              <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.a}</td>
+              <td className="py-2.5 pr-3 text-slateblue">{row.b}</td>
+              <td className="py-2.5 whitespace-nowrap text-slateblue">{row.c}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
 const views: Record<TabId, React.ComponentType> = {
-  crm: CrmView,
-  agent: AgentView,
+  tickets: TicketsView,
+  exceptions: ExceptionsView,
   qa: QaView,
-  analytics: AnalyticsView,
+  approvals: ApprovalsView,
 };
 
-/* ---------- section ---------- */
-
 export function ProductShowcase() {
-  const [active, setActive] = React.useState<TabId>("crm");
+  const [active, setActive] = React.useState<TabId>("tickets");
   const reduce = useReducedMotion();
+  const tabRefs = React.useRef<Record<TabId, HTMLButtonElement | null>>({
+    tickets: null,
+    exceptions: null,
+    qa: null,
+    approvals: null,
+  });
   const ActiveView = views[active];
+  const meta = tabs.find((t) => t.id === active) ?? tabs[0];
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
+  const move = (dir: 1 | -1) => {
     const idx = tabs.findIndex((t) => t.id === active);
-    if (e.key === "ArrowRight") setActive(tabs[(idx + 1) % tabs.length].id);
-    if (e.key === "ArrowLeft") setActive(tabs[(idx - 1 + tabs.length) % tabs.length].id);
+    const next = tabs[(idx + dir + tabs.length) % tabs.length];
+    setActive(next.id);
+    queueMicrotask(() => tabRefs.current[next.id]?.focus());
   };
 
   return (
-    <Section id="product" className="bg-cloud">
+    <Section id="product" className="overflow-x-hidden bg-cloud">
       <Container>
-        <SectionHeading
-          align="center"
-          title="One ecosystem. Every workflow in view."
-          lede="CRM, AI agents, QA and analytics share one design language and one source of truth. A look at the BITS platform experience."
-        />
+        <Reveal>
+          <p className="text-overline text-electric-600">Tickets · Exceptions · QA · Approvals</p>
+          <h2 className="text-h2 mt-4 max-w-4xl text-balance leading-[1.08] text-ink">
+            Contact-center CRM, QA, and finance approvals in one floor queue.
+          </h2>
+          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
+            The same Harborline and Voltgrid desks as the hero. Switch views. Sample data,
+            not a live tenant.
+          </p>
+          <a href="#contact" className={ctaClass}>
+            Book a consultation
+            <ArrowRight
+              className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
+              aria-hidden
+            />
+          </a>
+        </Reveal>
 
-        <div className="mt-12">
+        <div className="mt-10 lg:mt-12">
           <div
             role="tablist"
             aria-label="Platform views"
-            onKeyDown={onKeyDown}
-            className="mx-auto flex w-fit max-w-full flex-wrap justify-center gap-1 rounded-2xl border border-linelight bg-white p-1.5 shadow-sm"
+            className="flex w-full max-w-full gap-1 overflow-x-auto overscroll-x-contain rounded-2xl border border-linelight bg-white p-1.5"
           >
             {tabs.map((t) => (
               <button
                 key={t.id}
+                ref={(el) => {
+                  tabRefs.current[t.id] = el;
+                }}
+                type="button"
                 role="tab"
                 aria-selected={active === t.id}
                 aria-controls={`panel-${t.id}`}
                 id={`tab-${t.id}`}
+                tabIndex={active === t.id ? 0 : -1}
                 onClick={() => setActive(t.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    move(1);
+                  }
+                  if (e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    move(-1);
+                  }
+                }}
                 className={cn(
-                  "flex h-10 items-center gap-2 rounded-xl px-3.5 text-[0.82rem] font-semibold transition-colors duration-200 sm:px-4",
+                  "min-h-11 shrink-0 cursor-pointer rounded-xl px-3.5 text-[0.82rem] font-semibold whitespace-nowrap transition-[color,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.98] sm:min-w-0 sm:flex-1",
                   active === t.id
-                    ? "bg-navy-800 text-white shadow-sm"
-                    : "text-slateblue hover:bg-cloud hover:text-ink"
+                    ? "bg-navy-800 text-white"
+                    : "text-slateblue [@media(hover:hover)_and_(pointer:fine)]:hover:bg-cloud [@media(hover:hover)_and_(pointer:fine)]:hover:text-ink"
                 )}
               >
-                <t.icon className="size-4" aria-hidden />
                 {t.label}
               </button>
             ))}
           </div>
 
-          <div className="relative mt-6">
+          <div className="relative mt-5 min-h-[16.5rem]">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={active}
                 role="tabpanel"
                 id={`panel-${active}`}
                 aria-labelledby={`tab-${active}`}
-                initial={reduce ? false : { opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -8 }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: reduce === true ? 0 : 0.2, ease: [0.23, 1, 0.32, 1] }}
               >
-                <Window>
-                  <ActiveView />
-                </Window>
+                <figure>
+                  <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
+                    <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
+                      <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
+                        <div className="min-w-0">
+                          <p className="text-[0.82rem] font-semibold text-ink">{meta.title}</p>
+                          <p className="truncate text-[0.72rem] text-slateblue">{meta.kicker}</p>
+                        </div>
+                        <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
+                          Live
+                        </span>
+                      </div>
+                      <div className="min-h-[14.5rem]">
+                        <ActiveView />
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption className="mt-4 text-[0.78rem] text-slateblue">
+                    Interface concepts shown with sample data.
+                  </figcaption>
+                </figure>
               </motion.div>
             </AnimatePresence>
           </div>
-
-          <p className="mt-5 text-center text-[0.78rem] text-slateblue/80">
-            Interface concepts shown with sample data.
-          </p>
         </div>
       </Container>
     </Section>

@@ -6,12 +6,12 @@ mkdirSync(OUT, { recursive: true });
 
 const browser = await chromium.launch({ channel: "chrome" });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-await page.goto("http://localhost:3100", { waitUntil: "networkidle" });
+await page.goto("http://localhost:3847", { waitUntil: "networkidle" });
 await page.locator("#contact").scrollIntoViewIfNeeded();
 await page.waitForTimeout(1200);
 
 // Empty submit -> inline zod errors
-await page.getByRole("button", { name: "Start a Conversation" }).click();
+await page.getByRole("button", { name: "Book a consultation" }).click();
 await page.waitForTimeout(900);
 const errors = await page.locator("text=Please").allTextContents();
 await page.screenshot({ path: `${OUT}form-errors.png` });
@@ -21,7 +21,7 @@ await page.locator("#name").fill("QA Tester");
 await page.locator("#email").fill("not-an-email");
 await page.locator("#company").fill("QA Co");
 await page.locator("#interest").selectOption("BPO CRM");
-await page.getByRole("button", { name: "Start a Conversation" }).click();
+await page.getByRole("button", { name: "Book a consultation" }).click();
 await page.waitForTimeout(900);
 const emailError = await page.locator("#email-error").textContent().catch(() => null);
 
@@ -30,7 +30,7 @@ await page.locator("#name").fill("QA Tester");
 await page.locator("#email").fill("qa@example.com");
 await page.locator("#company").fill("QA Co");
 await page.locator("#interest").selectOption("BPO CRM");
-await page.getByRole("button", { name: "Start a Conversation" }).click();
+await page.getByRole("button", { name: "Book a consultation" }).click();
 await page.waitForTimeout(1500);
 const success = await page.locator("text=Message received.").count();
 await page.screenshot({ path: `${OUT}form-success.png` });

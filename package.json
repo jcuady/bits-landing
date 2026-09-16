@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3847",
     "build": "next build",
-    "start": "next start",
-    "test:crm": "node scripts/crm-e2e.mjs"
+    "start": "next start -p 3847",
+    "test:crm": "node scripts/crm-e2e.mjs",
+    "test:responsive": "node scripts/responsive-validation.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.3",

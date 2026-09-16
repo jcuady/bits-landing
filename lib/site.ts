@@ -5,7 +5,7 @@ export const site = {
   // Production Vercel alias. Point this to the custom domain when connected.
   url: "https://bits-landing.vercel.app",
   description:
-    "BITS builds secure, scalable technology solutions for BPOs, financial organizations and modern enterprises: from custom CRM platforms to intelligent automation and AI-powered workflows.",
+    "BITS builds BPO CRM, finance operations platforms, and AI automation with human oversight for contact-center and enterprise floors. Request a consultation.",
 } as const;
 
 export const navItems = [
@@ -25,7 +25,7 @@ export const solutions = [
     summary:
       "A CRM platform designed around real contact-center operations, not the other way around.",
     description:
-      "Built around the way agents, team leads and QA specialists actually work. Customer history, interactions, tickets and reporting live in one system designed to support high-volume teams.",
+      "Contact-center CRM for agents, team leads, and QA. Customer history, interactions, tickets, and reporting live in one system for high-volume floors.",
     capabilities: [
       "Customer & account management",
       "Agent workflows",
@@ -41,9 +41,9 @@ export const solutions = [
     name: "Financial & Banking Solutions",
     flagship: false,
     summary:
-      "Controlled workflows for operations where precision and visibility matter.",
+      "Approval-led platforms for banking and finance operations that need an audit trail.",
     description:
-      "Operational platforms designed around approval processes, internal controls and audit-friendly records, engineered to integrate with the systems you already run.",
+      "Workflows around approvals, internal controls, and records you can show an auditor, built to sit beside the systems you already run.",
     capabilities: [
       "Approval processes",
       "Internal operational platforms",
@@ -58,7 +58,7 @@ export const solutions = [
     name: "AI & Automation",
     flagship: false,
     summary:
-      "Intelligent automation that augments your team instead of sidelining it.",
+      "Automation that takes repetitive work and routes exceptions to people.",
     description:
       "AI agents and automation designed to handle repetitive work, surface the right information and route exceptions to people. Every workflow ships with human escalation and oversight.",
     capabilities: [
@@ -98,81 +98,79 @@ export const agents = [
 export const industries = [
   {
     index: "01",
+    id: "bpo",
     name: "BPO & Contact Centers",
-    copy: "Give teams better visibility, smarter workflows, and technology built around real contact-center operations.",
+    copy: "Contact-center CRM for agents, team leads, and QA. Tickets, history, and reporting in one floor queue instead of five tools.",
     tags: ["CRM", "Agent workflows", "QA", "Reporting", "Omnichannel"],
+    cta: "Book a contact-center consultation",
   },
   {
     index: "02",
+    id: "banking",
     name: "Banking & Financial Services",
-    copy: "Modernize operational workflows with carefully engineered platforms designed around control, visibility, and scale.",
+    copy: "Approval-led platforms for finance operations that need an audit trail, built to sit beside the systems you already run.",
     tags: ["Approvals", "Audit trails", "Internal platforms", "Integration"],
+    cta: "Book a finance systems consultation",
   },
   {
     index: "03",
+    id: "enterprises",
     name: "Growing Enterprises",
-    copy: "Replace disconnected workflows with systems designed around how your organization actually operates.",
+    copy: "Replace disconnected spreadsheets and chat with systems designed around how your teams already work.",
     tags: ["Custom platforms", "Automation", "Data", "AI agents"],
+    cta: "Book an operations consultation",
   },
 ] as const;
 
 export const principles = [
   {
     name: "Understand",
-    copy: "We begin with the operation, not the technology. Workflows, constraints and people come first.",
+    copy: "Map the floor first: agents, leads, QA, and controllers. Technology comes second.",
   },
   {
     name: "Design",
-    copy: "Workflows and experiences are designed around real users, then validated with your team.",
+    copy: "Sketch the workflow with the people who will use it, then validate it on their desk.",
   },
   {
     name: "Build",
-    copy: "Systems are engineered for maintainability and growth, shipped in increments you can test.",
+    copy: "Ship in increments you can test on live work, not a six-month black box.",
   },
   {
     name: "Evolve",
-    copy: "BITS continues improving the platform as the organization changes.",
+    copy: "Keep the platform current as queues, policies, and headcount change.",
   },
 ] as const;
 
 export const securityPrinciples = [
   {
-    icon: "key",
     name: "Role-based access",
     copy: "People see exactly what their role requires, and nothing more.",
   },
   {
-    icon: "lock",
     name: "Least privilege",
     copy: "Permissions start at zero and expand only when the work demands it.",
   },
   {
-    icon: "shield",
     name: "Secure authentication",
-    copy: "Modern sign-in practices, session controls and credential hygiene.",
+    copy: "Sign-in practices, session controls, and credential hygiene from day one.",
   },
   {
-    icon: "audit",
     name: "Auditability",
-    copy: "Meaningful actions leave a trace your team can review.",
+    copy: "Meaningful actions leave a trail your team can review.",
   },
   {
-    icon: "database",
     name: "Data protection",
     copy: "Encryption in transit and at rest, with disciplined data handling.",
   },
   {
-    icon: "plug",
     name: "Controlled integrations",
     copy: "External systems connect through reviewed, documented interfaces.",
   },
   {
-    icon: "human",
     name: "Human oversight for AI",
-    copy: "Sensitive AI workflows escalate to people by design, not by exception.",
+    copy: "Sensitive AI work escalates to people by design, not as an afterthought.",
   },
   {
-    icon: "resilient",
     name: "Resilient architecture",
     copy: "Backup and recovery planning built into every engagement.",
   },
@@ -181,7 +179,7 @@ export const securityPrinciples = [
 export const capabilities = [
   "Internal platforms",
   "Enterprise applications",
-  "CRM systems",
+  "Contact-center CRM",
   "Workflow systems",
   "Automation",
   "AI agents",
@@ -227,8 +225,8 @@ export const footerColumns = [
   {
     title: "Solutions",
     links: [
-      { label: "BPO CRM", href: "#solutions" },
-      { label: "Financial & Banking", href: "#solutions" },
+      { label: "BPO CRM", href: "#bpo-crm" },
+      { label: "Financial & Banking", href: "#financial" },
       { label: "AI & Automation", href: "#automation" },
       { label: "Custom Software", href: "#custom" },
       { label: "Systems Integration", href: "#custom" },
@@ -237,9 +235,9 @@ export const footerColumns = [
   {
     title: "Industries",
     links: [
-      { label: "BPO & Contact Centers", href: "#industries" },
-      { label: "Banking & Financial Services", href: "#industries" },
-      { label: "Growing Enterprises", href: "#industries" },
+      { label: "BPO & Contact Centers", href: "#bpo" },
+      { label: "Banking & Financial Services", href: "#banking" },
+      { label: "Growing Enterprises", href: "#enterprises" },
     ],
   },
   {
