@@ -1,120 +1,125 @@
-import { ArrowRight } from "lucide-react";
 import { processSteps } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 
 const ctaClass =
-  "group mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
+  "group mt-8 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
 
 const plan = [
-  { phase: "Discover", window: "Week 1–2", focus: "Floor walk, queue map" },
-  { phase: "Design", window: "Week 3–5", focus: "Tickets, QA, exceptions" },
-  { phase: "Build", window: "Week 6–11", focus: "Increments on the floor" },
-  { phase: "Evolve", window: "After go-live", focus: "Improve with the desk" },
+  { phase: "Import", window: "Portfolio", focus: "Validate and match" },
+  { phase: "Configure", window: "Campaign", focus: "Rules and queues" },
+  { phase: "Route", window: "Agent", focus: "Account and next action" },
+  { phase: "Review", window: "Supervisor", focus: "Quality and outcomes" },
 ] as const;
 
 export function Process() {
   return (
-    <Section id="process" className="overflow-x-hidden bg-cloud">
-      <Container>
+    <Section id="process" className="relative overflow-hidden bg-white">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+
+      <Container className="relative z-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
           <div>
             <Reveal>
-              <p className="text-overline text-electric-600">Delivery · Partnership</p>
-              <h2 className="text-h2 mt-4 text-balance leading-[1.08] text-ink lg:max-w-[22ch]">
-                How BITS delivers custom operations software.
+              <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/50 px-4 py-1.5 backdrop-blur-md">
+                <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+                  Import · configure · route · improve
+                </span>
+              </div>
+              <h2 className="text-h2 mt-4 text-balance font-bold leading-[1.08] text-slate-900 lg:max-w-[22ch]">
+                How BITS Works.
               </h2>
-              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
-                Four phases, one engagement. Harborline sees working software on the
-                floor early, then we keep the platform moving after go-live.
+              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
+                Follow one connected operating loop from portfolio import through
+                campaign configuration, agent action, and management review.
               </p>
               <a href="#contact" className={ctaClass}>
-                Book a consultation
-                <ArrowRight
-                  className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                  aria-hidden
-                />
+                <span className="relative">
+                  Request a Demo
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                </span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
             </Reveal>
           </div>
 
           <Reveal delay={0.1}>
             <figure>
-              <div className="rounded-[1.75rem] bg-white/70 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-navy-700/10 sm:rounded-[2rem] sm:p-2">
-                <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-                  <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-                    <div className="min-w-0">
-                      <p className="text-[0.82rem] font-semibold text-ink">Engagement plan</p>
-                      <p className="truncate text-[0.72rem] text-slateblue">
-                        Harborline · sample timeline
-                      </p>
+              <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+                <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 opacity-40">
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
                     </div>
-                    <span className="hidden rounded-full border border-navy-700/10 bg-cloud px-2.5 py-1 text-[0.68rem] font-semibold text-slateblue sm:inline">
-                      Sample
-                    </span>
+                    <div className="h-4 w-px bg-slate-200" />
+                    <div>
+                      <p className="text-[0.75rem] font-semibold text-slate-700">Operations cycle</p>
+                      <p className="truncate text-[0.68rem] font-medium text-slate-500">Enterprise Operations · Standard Cycle</p>
+                    </div>
                   </div>
-                  <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
-                    <table className="w-full table-fixed text-left text-[0.75rem] sm:text-[0.78rem]">
-                      <colgroup>
-                        <col className="w-[28%]" />
-                        <col className="w-[30%]" />
-                        <col />
-                      </colgroup>
-                      <caption className="sr-only">
-                        Sample Harborline delivery timeline across discover, design, build, and evolve
-                      </caption>
-                      <thead>
-                        <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-                          <th scope="col" className="py-2 pr-3 font-semibold">
-                            Phase
+                  <span className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-widest text-slate-500 shadow-sm">
+                    Sample
+                  </span>
+                </div>
+                <div className="overflow-x-auto overscroll-x-contain p-2">
+                  <table className="w-full table-fixed text-left text-[0.75rem] sm:text-[0.78rem]">
+                    <colgroup>
+                      <col className="w-[28%]" />
+                      <col className="w-[30%]" />
+                      <col />
+                    </colgroup>
+                    <caption className="sr-only">
+                      Synthetic collections operations cycle
+                    </caption>
+                    <thead>
+                      <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                        <th scope="col" className="px-4 py-3">Phase</th>
+                        <th scope="col" className="px-4 py-3">Scope</th>
+                        <th scope="col" className="px-4 py-3">Focus</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {plan.map((row) => (
+                        <tr key={row.phase} className="transition-colors hover:bg-slate-50/50">
+                          <th scope="row" className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">
+                            {row.phase}
                           </th>
-                          <th scope="col" className="py-2 pr-3 font-semibold">
-                            Window
-                          </th>
-                          <th scope="col" className="py-2 font-semibold">
-                            Focus
-                          </th>
+                          <td className="px-4 py-3 text-slate-600">{row.window}</td>
+                          <td className="px-4 py-3 text-slate-600">{row.focus}</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {plan.map((row) => (
-                          <tr key={row.phase} className="border-b border-linelight/80 last:border-0">
-                            <th scope="row" className="py-2.5 pr-3 font-medium text-ink">
-                              {row.phase}
-                            </th>
-                            <td className="py-2.5 pr-3 tabular-nums text-slateblue">{row.window}</td>
-                            <td className="py-2.5 text-slateblue">{row.focus}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <figcaption className="mt-3 text-[0.78rem] leading-relaxed text-slateblue">
-                Sample Harborline timeline. Timing is set with your floor.
+              <figcaption className="mt-4 text-[0.78rem] font-medium text-slate-500">
+                Example operating flow. Configuration is set with your team.
               </figcaption>
             </figure>
           </Reveal>
         </div>
 
-        <ol className="mt-14 grid sm:grid-flow-col sm:grid-rows-2 sm:gap-x-12 lg:mt-16">
+        <ol className="mt-14 grid sm:grid-cols-2 sm:gap-x-12 sm:gap-y-4 lg:mt-20">
           {processSteps.map((step, i) => (
-            <li key={step.name} className="border-t border-navy-700/10">
+            <li key={step.name} className={`group rounded-2xl border border-transparent p-5 transition-colors hover:border-slate-200/60 hover:bg-slate-50/50 ${i === 4 ? "sm:col-span-2" : ""}`}>
               <Reveal delay={0.04 * i}>
-                <div className="flex gap-4 py-5">
+                <div className="flex gap-5">
                   <span
-                    className="w-7 shrink-0 pt-1 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600"
+                    className="mt-1 font-mono text-[0.8rem] font-semibold tracking-widest text-blue-400"
                     aria-hidden
                   >
-                    {step.index}
+                    {step.index}.
                   </span>
                   <div className="min-w-0">
-                    <h3 className="text-[1.05rem] font-semibold tracking-[-0.015em] text-ink">
+                    <h3 className="text-[1.1rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">
                       {step.name}
                     </h3>
-                    <p className="mt-1.5 max-w-[42ch] text-[0.92rem] leading-relaxed text-pretty text-slateblue">
+                    <p className="mt-2 max-w-[42ch] text-[0.95rem] leading-relaxed text-pretty text-slate-600">
                       {step.copy}
                     </p>
                   </div>

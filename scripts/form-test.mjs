@@ -11,7 +11,7 @@ await page.locator("#contact").scrollIntoViewIfNeeded();
 await page.waitForTimeout(1200);
 
 // Empty submit -> inline zod errors
-await page.getByRole("button", { name: "Book a consultation" }).click();
+await page.getByRole("button", { name: "Request a Demo" }).click();
 await page.waitForTimeout(900);
 const errors = await page.locator("text=Please").allTextContents();
 await page.screenshot({ path: `${OUT}form-errors.png` });
@@ -20,8 +20,8 @@ await page.screenshot({ path: `${OUT}form-errors.png` });
 await page.locator("#name").fill("QA Tester");
 await page.locator("#email").fill("not-an-email");
 await page.locator("#company").fill("QA Co");
-await page.locator("#interest").selectOption("BPO CRM");
-await page.getByRole("button", { name: "Book a consultation" }).click();
+await page.locator("#interest").selectOption("Core Collections");
+await page.getByRole("button", { name: "Request a Demo" }).click();
 await page.waitForTimeout(900);
 const emailError = await page.locator("#email-error").textContent().catch(() => null);
 
@@ -29,8 +29,8 @@ const emailError = await page.locator("#email-error").textContent().catch(() => 
 await page.locator("#name").fill("QA Tester");
 await page.locator("#email").fill("qa@example.com");
 await page.locator("#company").fill("QA Co");
-await page.locator("#interest").selectOption("BPO CRM");
-await page.getByRole("button", { name: "Book a consultation" }).click();
+await page.locator("#interest").selectOption("Core Collections");
+await page.getByRole("button", { name: "Request a Demo" }).click();
 await page.waitForTimeout(1500);
 const success = await page.locator("text=Message received.").count();
 await page.screenshot({ path: `${OUT}form-success.png` });

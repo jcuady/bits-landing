@@ -1,53 +1,60 @@
-import { ArrowRight } from "lucide-react";
 import { agents } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 
 const steps = [
-  "Customers reach the floor on voice, chat, email, or social",
-  "AI agents resolve Level 1 work and draft context for the rest",
-  "Your team takes nuance and exceptions with that context in hand",
-  "Supervisors review anything sensitive. Escalation is designed in",
+  "Start with Core Collections for portfolios, accounts, queues, PTP, and reporting",
+  "Add Messaging for configured providers, templates, blasts, and history",
+  "Enable Quality Assurance for scorecards, evaluations, and worklists",
+  "Add Dialer + Live Assist when calling and supervision are required",
 ] as const;
 
 const queue = [
-  { item: "Where is my shipment?", route: "L1", state: "Resolved" },
-  { item: "Harborline call 14:22", route: "QA", state: "Human review" },
-  { item: "KYC document list", route: "Knowledge", state: "Sourced" },
-  { item: "Invoice exception", route: "Workflow", state: "Ticket 4182" },
+  { item: "Core Collections", route: "Required", state: "Enabled" },
+  { item: "Messaging", route: "Optional", state: "Configured" },
+  { item: "Quality Assurance", route: "Optional", state: "Enabled" },
+  { item: "Dialer + Live Assist", route: "Optional", state: "Available" },
 ] as const;
 
 const ctaClass =
-  "group mt-8 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
+  "group mt-8 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
 
 export function AiEcosystem() {
   return (
-    <Section id="automation" className="overflow-x-hidden bg-cloud">
-      <Container>
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+    <Section id="modules" className="relative overflow-hidden bg-slate-50">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+
+      <Container className="relative z-10">
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
           <div>
             <Reveal>
-              <p className="text-overline text-electric-600">AI · Human oversight</p>
-              <h2 className="text-h2 mt-4 max-w-4xl text-balance leading-[1.08] text-ink">
-                AI agents for the routine. People on every exception.
+              <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-white/80 px-4 py-1.5 backdrop-blur-md shadow-sm">
+                <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+                  Modular by design
+                </span>
+              </div>
+              <h2 className="text-h2 mt-4 max-w-4xl text-balance font-bold leading-[1.08] text-slate-900">
+                Start with what your operation needs.
               </h2>
-              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
-                Contact-center AI that drafts, routes, and resolves Level 1 work
-                inside BITS CRM. Judgment, approvals, and sensitive cases stay
-                with your team.
+              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
+                Build your operational stack around your team&apos;s workflow,
+                communication requirements, and supervision model. Not every
+                deployment includes every module.
               </p>
             </Reveal>
 
-            <ol className="mt-8 max-w-[46ch]">
+            <ol className="mt-12 max-w-[46ch] space-y-2">
               {steps.map((text, i) => (
-                <li key={text}>
+                <li key={text} className="group rounded-2xl border border-transparent p-4 transition-colors hover:border-slate-200/60 hover:bg-white/60">
                   <Reveal delay={0.08 + i * 0.04} y={10}>
-                    <div className="flex gap-4 border-t border-linelight/90 py-3.5 first:border-t-0">
-                      <span className="w-6 shrink-0 pt-0.5 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600">
-                        {String(i + 1).padStart(2, "0")}
+                    <div className="flex gap-4 items-center">
+                      <span className="font-mono text-[0.75rem] font-semibold tracking-widest text-blue-400">
+                        {String(i + 1).padStart(2, "0")}.
                       </span>
-                      <span className="text-[0.92rem] font-medium leading-snug text-ink/90">
+                      <span className="text-[0.92rem] font-bold leading-snug text-slate-700 transition-colors group-hover:text-blue-600">
                         {text}
                       </span>
                     </div>
@@ -58,76 +65,82 @@ export function AiEcosystem() {
 
             <Reveal delay={0.28} y={8}>
               <a href="#contact" className={ctaClass}>
-                Book an AI consultation
-                <ArrowRight
-                  className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                  aria-hidden
-                />
+                <span className="relative">
+                  Build Your Configuration
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                </span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
             </Reveal>
           </div>
 
           <Reveal delay={0.12} amount={0.2}>
             <figure>
-              <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
-                <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-                  <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-                    <div className="min-w-0">
-                      <p className="text-[0.82rem] font-semibold text-ink">Exceptions</p>
-                      <p className="truncate text-[0.72rem] text-slateblue">
-                        AI + human oversight · Harborline
+              <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+                <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 opacity-40">
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                    </div>
+                    <div className="h-4 w-px bg-slate-200" />
+                    <div>
+                      <p className="text-[0.75rem] font-semibold text-slate-700">Module configuration</p>
+                      <p className="truncate text-[0.68rem] font-medium text-slate-500">
+                        Enterprise Operations · supported deployment
                       </p>
                     </div>
-                    <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
-                      Live
+                  </div>
+                  <span className="relative flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 shadow-sm">
+                    <span className="relative flex size-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500"></span>
                     </span>
-                  </div>
-                  <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
-                    <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-                      <caption className="sr-only">
-                        AI exceptions routed to people on the Harborline desk
-                      </caption>
-                      <thead>
-                        <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-                          <th scope="col" className="py-2 pr-3 font-semibold">
-                            Item
-                          </th>
-                          <th scope="col" className="hidden py-2 pr-3 font-semibold sm:table-cell">
-                            Route
-                          </th>
-                          <th scope="col" className="py-2 font-semibold">
-                            State
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {queue.map((row) => (
-                          <tr key={row.item} className="border-b border-linelight/80 last:border-0">
-                            <td className="max-w-[12rem] truncate py-2.5 pr-3 font-medium text-ink sm:max-w-none">
-                              {row.item}
-                            </td>
-                            <td className="hidden py-2.5 pr-3 text-slateblue sm:table-cell">{row.route}</td>
-                            <td className="py-2.5 whitespace-nowrap text-slateblue">{row.state}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <ul className="border-t border-linelight px-4 py-3 sm:px-5">
-                    {agents.map((a) => (
-                      <li
-                        key={a.name}
-                        className="border-b border-linelight/80 py-2.5 last:border-0"
-                      >
-                        <p className="text-[0.82rem] font-semibold text-ink">{a.name}</p>
-                        <p className="mt-0.5 text-[0.75rem] leading-snug text-slateblue">{a.role}</p>
-                      </li>
-                    ))}
-                  </ul>
+                    <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+                  </span>
                 </div>
+                
+                <div className="overflow-x-auto overscroll-x-contain p-2">
+                  <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
+                    <caption className="sr-only">
+                      Optional BITS modules in a synthetic configuration
+                    </caption>
+                    <thead>
+                      <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                        <th scope="col" className="px-4 py-3">Module</th>
+                        <th scope="col" className="hidden px-4 py-3 sm:table-cell">Inclusion</th>
+                        <th scope="col" className="px-4 py-3">State</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {queue.map((row) => (
+                        <tr key={row.item} className="transition-colors hover:bg-slate-50/50">
+                          <td className="max-w-[12rem] truncate px-4 py-3 font-bold text-slate-900 sm:max-w-none">
+                            {row.item}
+                          </td>
+                          <td className="hidden px-4 py-3 text-slate-600 sm:table-cell">{row.route}</td>
+                          <td className="whitespace-nowrap px-4 py-3 text-slate-600">{row.state}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <ul className="divide-y divide-slate-100 border-t border-slate-100 p-2">
+                  {agents.map((a) => (
+                    <li
+                      key={a.name}
+                      className="px-4 py-3 transition-colors hover:bg-slate-50/50 rounded-xl"
+                    >
+                      <p className="text-[0.85rem] font-bold text-slate-900">{a.name}</p>
+                      <p className="mt-1 text-[0.8rem] leading-snug text-slate-500">{a.role}</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
               <figcaption className="sr-only">
-                BITS AI agents resolve routine Harborline work and send exceptions to people.
+                A synthetic BITS configuration showing optional collections modules.
               </figcaption>
             </figure>
           </Reveal>

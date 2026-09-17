@@ -1,13 +1,12 @@
 # Project Status
 
-Last Updated: 2026-09-13  
+Last Updated: 2026-09-17
 Current Branch: main  
-Current Commit: `03f277d` (QA/UI harden; docs tip on `main`)  
-Overall Status: **MOCK CRM UI READY** — pre-database; soft RBAC; session-only mutations
+Overall Status: **LANDING REDESIGN & COMPLIANCE ARCHITECTURE POLISHED** — Real Philippine regulatory SVGs (BSP, NPC, SEC, CIC, ISO, DICT), zero fake clients, deterministic hydration, transparent favicons, and professional title metadata.
 
 ## Executive Summary
 
-BITS marketing site plus an authenticated Soft-UI CRM shell under `/app`. All `crmprompt.md` routes exist; interactive mock controls, filters, and security hardenings are verified (build + Playwright smoke). Persistence and real auth remain the next major phase.
+BITS marketing site positions the product as a Collections Operations Platform, with an authenticated Soft-UI CRM shell under `/app`. The landing covers portfolios, workflows, communications, QA, reporting, modular packaging, and deployment using synthetic product specimens. The CRM remains a pre-database mock; persistence and real auth remain the next major phase.
 
 ## Latest Test Results
 

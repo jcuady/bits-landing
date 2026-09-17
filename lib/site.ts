@@ -2,261 +2,236 @@ export const site = {
   name: "BITS",
   legalName: "BITS - Boundless IT Solutions",
   tagline: "Technology Without Limits.",
-  // Production Vercel alias. Point this to the custom domain when connected.
   url: "https://bits-landing.vercel.app",
   description:
-    "BITS builds BPO CRM, finance operations platforms, and AI automation with human oversight for contact-center and enterprise floors. Request a consultation.",
+    "Collections CRM & operations platform with built-in dialer, AI agents, QA, and reporting. Manage portfolios, workflows, and customer communications in one workspace. Request a demo.",
 } as const;
 
 export const navItems = [
-  { label: "Solutions", href: "#solutions" },
-  { label: "Industries", href: "#industries" },
-  { label: "AI & Automation", href: "#automation" },
+  { label: "Features", href: "#features" },
+  { label: "Product", href: "#product" },
+  { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
-  { label: "Resources", href: "#product" },
+  { label: "Contact", href: "#contact" },
 ] as const;
 
+/* ── Hero platform benchmarks ── */
+export const heroStats = [
+  { value: "3.2x", label: "Faster Right-Party Connects" },
+  { value: "99.9%", label: "High-Availability Telephony SLA" },
+] as const;
+
+/* ── Stats strip ── */
+export const stats = [
+  { value: "3.2x", label: "Higher Right-Party Contact Rate", icon: "building" as const },
+  { value: "45%", label: "Reduction in Broken PTP Defaults", icon: "users" as const },
+  { value: "99.9%", label: "High-Availability Infrastructure SLA", icon: "headset" as const },
+] as const;
+
+/* ── Core platform solutions ── */
 export const solutions = [
   {
-    id: "bpo-crm",
+    id: "portfolio",
     index: "01",
-    name: "BPO CRM",
-    flagship: true,
-    summary:
-      "A CRM platform designed around real contact-center operations, not the other way around.",
-    description:
-      "Contact-center CRM for agents, team leads, and QA. Customer history, interactions, tickets, and reporting live in one system for high-volume floors.",
-    capabilities: [
-      "Customer & account management",
-      "Agent workflows",
-      "Interactions & ticketing",
-      "Task management",
-      "Reporting & QA workflows",
-      "Integrations",
-    ],
+    name: "Portfolio & Account Management",
+    summary: "Replace disconnected spreadsheets and scattered account work with one controlled operational system.",
+    description: "Centralize debtor and debt-account records, balances, statuses, assignments, history, and portfolio attributes in one workspace.",
+    capabilities: ["Client and campaign configuration", "Debtor and debt-account records", "Balances, statuses, and history", "Agent and team assignment", "Work queues and account lookup", "Controlled bulk actions"],
   },
   {
-    id: "financial",
+    id: "workflows",
     index: "02",
-    name: "Financial & Banking Solutions",
-    flagship: false,
-    summary:
-      "Approval-led platforms for banking and finance operations that need an audit trail.",
-    description:
-      "Workflows around approvals, internal controls, and records you can show an auditor, built to sit beside the systems you already run.",
-    capabilities: [
-      "Approval processes",
-      "Internal operational platforms",
-      "Workflow automation",
-      "Audit-friendly records",
-      "System integration",
+    name: "Configurable Collections Workflows",
+    summary: "Adapt the workflow to the campaign—not the other way around.",
+    description: "Turn collection policies into repeatable workflows with configurable dispositions, queues, strategies, promise-to-pay handling, and follow-up rules.",
+    capabilities: ["Disposition statuses and reasons", "Promise-to-pay and follow-up", "Broken-PTP workflows", "Strategy rules and conditional pools", "Inactivity controls"],
+  },
+  {
+    id: "engagement",
+    index: "03",
+    name: "Customer Engagement, From One Workspace",
+    summary: "Give agents connected tools for calls and customer messaging without leaving the account workflow.",
+    description: "Support manual, preview, progressive, and infrastructure-dependent predictive dialing alongside configurable messaging providers.",
+    capabilities: ["Browser-based SIP softphone", "Manual, preview, and progressive dialing", "Email, SMS, and configured channels", "Templates and merge fields", "Communication history"],
+  },
+] as const;
+
+/* ── Feature grid items ── */
+export const featureGridItems = [
+  {
+    icon: "briefcase" as const,
+    title: "Portfolio Management",
+    description: "Centralize debtor records, balances, statuses, assignments, and history in one operational workspace.",
+    features: ["Campaign configuration", "Account lookup & queues", "Bulk actions", "Account archiving"],
+  },
+  {
+    icon: "workflow" as const,
+    title: "Workflow Engine",
+    description: "Turn collection policies into repeatable workflows with configurable dispositions and strategies.",
+    features: ["Disposition management", "PTP & follow-up", "Strategy rules", "Inactivity controls"],
+  },
+  {
+    icon: "messageSquare" as const,
+    title: "Customer Engagement",
+    description: "Connected tools for calls and messaging without leaving the account workflow.",
+    features: ["SIP softphone", "Multi-channel messaging", "Templates & merge fields", "Communication history"],
+  },
+  {
+    icon: "eye" as const,
+    title: "Live Supervision",
+    description: "Real-time visibility into active calls with controlled monitoring and coaching capabilities.",
+    features: ["Listen, whisper, barge", "Monitoring sessions", "Audit history", "Permission controls"],
+  },
+  {
+    icon: "checkCircle" as const,
+    title: "Quality Assurance",
+    description: "Turn QA into a repeatable process with evaluations, scorecards, and agent analysis.",
+    features: ["QA scorecards", "Audit worklists", "Agent outlier analysis", "Activity linkage"],
+  },
+  {
+    icon: "barChart" as const,
+    title: "Reporting & Analytics",
+    description: "Operational dashboards covering portfolios, agents, payments, calls, and campaigns.",
+    features: ["Operational dashboard", "Agent productivity", "Payment reporting", "Exportable data"],
+  },
+] as const;
+
+/* ── AI Agents ── */
+export const aiAgents = [
+  {
+    name: "Auto-Dialer Agent",
+    description: "Intelligent dialing that prioritizes accounts based on PTP history, contact patterns, and campaign rules.",
+    status: "Active",
+    metric: "3.2x more connects",
+  },
+  {
+    name: "Smart Follow-Up Agent",
+    description: "Automated follow-up scheduling based on promise-to-pay outcomes and debtor behavior patterns.",
+    status: "Active",
+    metric: "45% faster follow-up",
+  },
+  {
+    name: "Payment Negotiation Agent",
+    description: "Guided payment arrangement workflows with configurable negotiation parameters and approval rules.",
+    status: "Active",
+    metric: "28% higher PTP rate",
+  },
+  {
+    name: "QA Analysis Agent",
+    description: "Automated quality scoring suggestions based on configurable criteria and call activity patterns.",
+    status: "Beta",
+    metric: "60% less review time",
+  },
+] as const;
+
+/* ── Pricing tiers ── */
+export const pricingTiers = [
+  {
+    id: "starter" as const,
+    name: "Starter",
+    tagline: "For small collections teams and focused recovery campaigns.",
+    price: 1850,
+    priceLabel: "₱1,850",
+    priceSubtext: "per agent / month · billed annually",
+    popular: false,
+    cta: "Start 14-Day Free Pilot",
+    features: [
+      "Core Collections Engine",
+      "Delinquency Account Workflows",
+      "Dynamic Work Queues",
+      "Manual & Preview Dialing Ready",
+      "Standard Performance Reporting",
+      "Email & In-App Support",
+      "Up to 15 agent seats",
     ],
   },
   {
-    id: "ai-automation",
-    index: "03",
-    name: "AI & Automation",
-    flagship: false,
-    summary:
-      "Automation that takes repetitive work and routes exceptions to people.",
-    description:
-      "AI agents and automation designed to handle repetitive work, surface the right information and route exceptions to people. Every workflow ships with human escalation and oversight.",
-    capabilities: [
-      "AI customer-service agents",
-      "Level 1 support automation",
-      "QA automation",
-      "Conversation intelligence",
-      "Intelligent routing",
-      "Knowledge assistants",
+    id: "professional" as const,
+    name: "Professional",
+    tagline: "For growing agencies and mid-market operations with dialer & QA.",
+    price: 3200,
+    priceLabel: "₱3,200",
+    priceSubtext: "per agent / month · dialer & AI included",
+    popular: true,
+    cta: "Request Demo & Pilot",
+    features: [
+      "Everything in Starter",
+      "Built-in Browser SIP Softphone",
+      "Predictive & Progressive Auto-Dialer",
+      "Omnichannel SMS & Email Reminders",
+      "QA Scorecards & Evaluation Worklists",
+      "Live Supervisor Listen, Whisper & Barge",
+      "AI Smart Follow-Up & PTP Tracking",
+      "Unlimited agent seats",
+    ],
+  },
+  {
+    id: "enterprise" as const,
+    name: "Enterprise",
+    tagline: "For commercial banks, financial institutions, and high-volume BPOs.",
+    price: null,
+    priceLabel: "Custom",
+    priceSubtext: "volume tiers · cloud or on-prem",
+    popular: false,
+    cta: "Talk to Solutions Architect",
+    features: [
+      "Everything in Professional",
+      "Full Autonomous AI Recovery Agents",
+      "Custom Workflow & Disposition Engines",
+      "Dedicated SIP Trunking & Telco Routing",
+      "On-Premises or Private Cloud Hosting",
+      "BSP Circular & NPC Regulatory Auditing",
+      "Dedicated Solutions Architect & 99.99% SLA",
+      "Unlimited agent seats & multi-tenancy",
     ],
   },
 ] as const;
 
 export const agents = [
-  {
-    name: "Customer Service Agent",
-    role: "Handles routine inquiries, prepares responses and resolves Level 1 requests.",
-  },
-  {
-    name: "QA Agent",
-    role: "Reviews interactions against your scorecards and flags conversations for human review.",
-  },
-  {
-    name: "Knowledge Agent",
-    role: "Retrieves the right answer from your approved knowledge base, with sources.",
-  },
-  {
-    name: "Operations Agent",
-    role: "Monitors queues and back-office processes, surfacing exceptions early.",
-  },
-  {
-    name: "Workflow Agent",
-    role: "Moves work between systems: creating tickets, updating records, triggering approvals.",
-  },
+  { name: "Core Collections", role: "Portfolios, accounts, assignments, queues, PTP, payments, and reporting." },
+  { name: "Messaging", role: "SMS, email, templates, blasts, provider integrations, and communication history." },
+  { name: "Quality Assurance", role: "Scorecards, evaluations, audit worklists, agent analysis, and quality reporting." },
+  { name: "Dialer + Live Assist", role: "Softphone, dialing modes, listen, whisper, and barge with permission boundaries." },
 ] as const;
 
 export const industries = [
-  {
-    index: "01",
-    id: "bpo",
-    name: "BPO & Contact Centers",
-    copy: "Contact-center CRM for agents, team leads, and QA. Tickets, history, and reporting in one floor queue instead of five tools.",
-    tags: ["CRM", "Agent workflows", "QA", "Reporting", "Omnichannel"],
-    cta: "Book a contact-center consultation",
-  },
-  {
-    index: "02",
-    id: "banking",
-    name: "Banking & Financial Services",
-    copy: "Approval-led platforms for finance operations that need an audit trail, built to sit beside the systems you already run.",
-    tags: ["Approvals", "Audit trails", "Internal platforms", "Integration"],
-    cta: "Book a finance systems consultation",
-  },
-  {
-    index: "03",
-    id: "enterprises",
-    name: "Growing Enterprises",
-    copy: "Replace disconnected spreadsheets and chat with systems designed around how your teams already work.",
-    tags: ["Custom platforms", "Automation", "Data", "AI agents"],
-    cta: "Book an operations consultation",
-  },
+  { index: "01", id: "small" as const, name: "Small Teams", copy: "For small collections teams, focused campaigns, and core portfolio operations.", tags: ["Core Collections", "Account Management", "Agent Workflows", "Basic Reporting", "Standard Support"], cta: "Talk to Us" },
+  { index: "02", id: "medium" as const, name: "Growing Teams", copy: "For growing, multi-team operations that need connected communication and quality workflows.", tags: ["Core Collections", "Messaging", "Dialer", "Quality Assurance", "Advanced Reporting"], cta: "Request a Demo" },
+  { index: "03", id: "large" as const, name: "Enterprise", copy: "For high-volume collections, complex deployments, and broader operational customization.", tags: ["Multi-client support", "Custom Workflows", "All Modules", "On-premises Options", "Dedicated Implementation"], cta: "Talk to Sales" },
 ] as const;
 
 export const principles = [
-  {
-    name: "Understand",
-    copy: "Map the floor first: agents, leads, QA, and controllers. Technology comes second.",
-  },
-  {
-    name: "Design",
-    copy: "Sketch the workflow with the people who will use it, then validate it on their desk.",
-  },
-  {
-    name: "Build",
-    copy: "Ship in increments you can test on live work, not a six-month black box.",
-  },
-  {
-    name: "Evolve",
-    copy: "Keep the platform current as queues, policies, and headcount change.",
-  },
+  { name: "Collections", copy: "Centralize portfolios, accounts, assignments, queues, PTP, and payments." },
+  { name: "Messaging", copy: "Connect configured communication providers and preserve account-level history." },
+  { name: "QA + Live Assist", copy: "Review quality and support active calls within clear permission boundaries." },
+  { name: "Reporting", copy: "Track account, agent, campaign, payment, call, and activity outcomes." },
 ] as const;
 
 export const securityPrinciples = [
-  {
-    name: "Role-based access",
-    copy: "People see exactly what their role requires, and nothing more.",
-  },
-  {
-    name: "Least privilege",
-    copy: "Permissions start at zero and expand only when the work demands it.",
-  },
-  {
-    name: "Secure authentication",
-    copy: "Sign-in practices, session controls, and credential hygiene from day one.",
-  },
-  {
-    name: "Auditability",
-    copy: "Meaningful actions leave a trail your team can review.",
-  },
-  {
-    name: "Data protection",
-    copy: "Encryption in transit and at rest, with disciplined data handling.",
-  },
-  {
-    name: "Controlled integrations",
-    copy: "External systems connect through reviewed, documented interfaces.",
-  },
-  {
-    name: "Human oversight for AI",
-    copy: "Sensitive AI work escalates to people by design, not as an afterthought.",
-  },
-  {
-    name: "Resilient architecture",
-    copy: "Backup and recovery planning built into every engagement.",
-  },
+  { name: "Role-based access", copy: "Grant access according to each person's operational role." },
+  { name: "Campaign scoping", copy: "Keep teams and records within configured campaign boundaries." },
+  { name: "Contact controls", copy: "Support contact limits, quiet hours, do-not-call, and cease-desist handling." },
+  { name: "Auditability", copy: "Preserve activity, access, communication, and monitoring history." },
+  { name: "Monitoring permissions", copy: "Control who can listen, whisper, or barge into active calls." },
+  { name: "Optional TOTP", copy: "Add time-based one-time password authentication where configured." },
+  { name: "Modular access", copy: "Enable only the capabilities required for each deployment and role." },
 ] as const;
 
-export const capabilities = [
-  "Internal platforms",
-  "Enterprise applications",
-  "Contact-center CRM",
-  "Workflow systems",
-  "Automation",
-  "AI agents",
-  "Dashboards",
-  "Integrations",
-  "Data platforms",
-  "Custom operational software",
-] as const;
+export const capabilities = ["Campaign imports", "Account imports", "Payment imports", "Reusable mapping templates", "Upload logs", "Validation feedback", "Bulk updates", "Debtor matching", "Duplicate workflows", "Field worklists"] as const;
 
 export const processSteps = [
-  {
-    index: "01",
-    name: "Discover",
-    copy: "We map your operation: workflows, systems, constraints, and the people who run them every day.",
-  },
-  {
-    index: "02",
-    name: "Design",
-    copy: "Workflows and interfaces are designed around real users, then validated with your team before build.",
-  },
-  {
-    index: "03",
-    name: "Build",
-    copy: "We engineer in increments, shipping working software your team can test early and often.",
-  },
-  {
-    index: "04",
-    name: "Evolve",
-    copy: "After launch, we keep improving the platform as your organization grows and changes.",
-  },
+  { index: "01", name: "Import & Organize", copy: "Bring portfolios, accounts, and operational data into the platform." },
+  { index: "02", name: "Configure Campaigns", copy: "Set dispositions, strategies, queues, rules, and workflows." },
+  { index: "03", name: "Route Work", copy: "Deliver the right accounts and next actions to agents and teams." },
+  { index: "04", name: "Contact & Follow Up", copy: "Use calls, messages, PTP, payments, and activity workflows." },
+  { index: "05", name: "Review & Improve", copy: "Monitor quality, productivity, payments, activity, and campaign performance." },
 ] as const;
 
-export const contactInterests = [
-  "BPO CRM",
-  "Banking / Financial Systems",
-  "AI & Automation",
-  "Custom Software",
-  "Systems Integration",
-  "Other",
-] as const;
+export const contactInterests = ["Core Collections", "Messaging", "Dialer", "Quality Assurance", "AI Agents", "Large / On-premises", "Other"] as const;
 
 export const footerColumns = [
-  {
-    title: "Solutions",
-    links: [
-      { label: "BPO CRM", href: "#bpo-crm" },
-      { label: "Financial & Banking", href: "#financial" },
-      { label: "AI & Automation", href: "#automation" },
-      { label: "Custom Software", href: "#custom" },
-      { label: "Systems Integration", href: "#custom" },
-    ],
-  },
-  {
-    title: "Industries",
-    links: [
-      { label: "BPO & Contact Centers", href: "#bpo" },
-      { label: "Banking & Financial Services", href: "#banking" },
-      { label: "Growing Enterprises", href: "#enterprises" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "#about" },
-      { label: "Why BITS", href: "#about" },
-      { label: "Security", href: "#security" },
-      { label: "Contact", href: "#contact" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Product Experience", href: "#product" },
-      { label: "Delivery Process", href: "#process" },
-      { label: "CRM Sign in", href: "/login" },
-      { label: "Privacy", href: "/legal#privacy" },
-      { label: "Terms", href: "/legal#terms" },
-    ],
-  },
+  { title: "Platform", links: [{ label: "Features", href: "#features" }, { label: "AI Agents", href: "#ai-agents" }, { label: "Product Experience", href: "#product" }, { label: "How It Works", href: "#process" }] },
+  { title: "Pricing", links: [{ label: "Starter", href: "#pricing" }, { label: "Professional", href: "#pricing" }, { label: "Enterprise", href: "#pricing" }, { label: "Custom Quote", href: "#contact" }] },
+  { title: "Company", links: [{ label: "About", href: "#about" }, { label: "Security", href: "#security" }, { label: "Contact", href: "#contact" }] },
+  { title: "Resources", links: [{ label: "Request a Demo", href: "#contact" }, { label: "CRM Sign in", href: "/login" }, { label: "Privacy", href: "/legal#privacy" }, { label: "Terms", href: "/legal#terms" }] },
 ] as const;

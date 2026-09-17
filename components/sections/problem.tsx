@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ArrowDown, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
@@ -7,23 +6,26 @@ import { Section } from "@/components/ui/section";
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
 const pains = [
-  "Fragmented workflows spread across disconnected tools",
-  "Repetitive manual work that consumes skilled people",
-  "Poor visibility into what operations are actually doing",
-  "Data trapped across platforms that never agree",
+  "Portfolio records split across disparate spreadsheets and legacy tools",
+  "Agents dialing manually with low right-party connect rates",
+  "Promises-to-pay lost in handoffs — leading to unrecovered revenue",
+  "Call recordings and QA scorecards isolated from the account timeline",
 ] as const;
 
-const scattered = ["Spreadsheets", "Legacy CRM", "Ticketing", "Chat apps", "Reports"] as const;
+const scattered = ["Spreadsheets", "Legacy CRM", "Separate Dialer", "Payment CSVs", "QA Sheets"] as const;
 
 const floor = [
-  { account: "Elise Navarro", work: "Invoice exception", desk: "Harborline" },
-  { account: "Priya Sundaram", work: "KYC follow-up", desk: "Voltgrid" },
-  { account: "Leo Santos", work: "Ticket 4182", desk: "Brightpath" },
+  { account: "ACC-10482", work: "PTP due today (₱15,000)", desk: "Auto Loan Queue" },
+  { account: "ACC-11209", work: "Broken PTP Alert", desk: "Credit Line D60" },
+  { account: "ACC-11342", work: "Restructure Review", desk: "Microfinance East" },
 ] as const;
 
 export function Problem() {
   return (
-    <Section id="problem" className="overflow-x-hidden bg-cloud pt-10 md:pt-16 lg:pt-20">
+    <Section id="problem" className="relative overflow-hidden bg-white pt-10 md:pt-16 lg:pt-20">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+      
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
           src={HERO_LANDSCAPE}
@@ -31,39 +33,46 @@ export function Problem() {
           fill
           unoptimized
           sizes="100vw"
-          className="object-cover object-[center_78%] opacity-55"
+          className="object-cover object-[center_78%] opacity-30 mix-blend-multiply"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-cloud via-cloud/80 to-cloud" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white" />
       </div>
 
-      <Container className="relative">
+      <Container className="relative z-10">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
           <div>
             <Reveal>
-              <p className="text-overline text-electric-600">BPO · Finance · Enterprise operations</p>
+              <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-4 py-1.5 backdrop-blur-md">
+                <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+                  The Recovery Gap
+                </span>
+              </div>
             </Reveal>
             <Reveal delay={0.06}>
-              <h2 className="text-h2 mt-4 max-w-[16ch] text-balance leading-[1.08] text-ink">
-                Complex operations should not require disconnected systems.
+              <h2 className="text-h2 mt-4 max-w-[20ch] text-balance font-bold leading-[1.08] text-slate-900">
+                Collections stall when your dialer, spreadsheets, and payment slips live in{" "}
+                <span className="bg-gradient-to-r from-red-600 via-amber-600 to-rose-600 bg-clip-text text-transparent">
+                  five different places.
+                </span>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="text-lede mt-5 max-w-[42ch] text-pretty text-slateblue">
-                Most organizations do not have a technology problem. They have a
-                fragmentation problem: five tools, seven versions of the truth,
-                held together by hand.
+              <p className="text-lede mt-5 max-w-[44ch] text-pretty text-slate-600">
+                When promises-to-pay are scattered across spreadsheets, up to 34% of broken commitments go unfollowed.
+                BITS unifies your accounts, dialer, payments, and QA into one continuous recovery loop.
               </p>
             </Reveal>
 
-            <ol className="mt-8 max-w-[42ch]">
+            <ol className="mt-10 max-w-[42ch] space-y-2">
               {pains.map((text, i) => (
                 <li key={text}>
                   <Reveal delay={0.14 + i * 0.04} y={10}>
-                    <div className="flex gap-4 border-t border-linelight/90 py-3.5 first:border-t-0">
-                      <span className="w-6 shrink-0 pt-0.5 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600">
-                        {String(i + 1).padStart(2, "0")}
+                    <div className="group flex gap-4 rounded-xl border border-transparent px-3 py-3.5 transition-colors hover:border-slate-200/60 hover:bg-slate-50/50">
+                      <span className="mt-0.5 font-mono text-[0.7rem] font-semibold tracking-widest text-blue-400">
+                        {String(i + 1).padStart(2, "0")}.
                       </span>
-                      <span className="text-[0.92rem] font-medium leading-snug text-ink/90">
+                      <span className="text-[0.92rem] font-medium leading-relaxed text-slate-700 transition-colors group-hover:text-slate-900">
                         {text}
                       </span>
                     </div>
@@ -75,107 +84,104 @@ export function Problem() {
             <Reveal delay={0.32} y={8}>
               <a
                 href="#solutions"
-                className="group mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700"
+                className="group mt-10 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700"
               >
-                See how BITS unifies the floor
-                <ArrowRight
-                  className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                  aria-hidden
-                />
+                <span className="relative">
+                  See the collections workspace
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                </span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
             </Reveal>
           </div>
 
           <Reveal delay={0.12} amount={0.2}>
             <figure className="mx-auto w-full max-w-[36rem] lg:max-w-none">
-              <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
-                <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-                  <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-                    <div className="min-w-0">
-                      <p className="text-[0.82rem] font-semibold text-ink">Demo</p>
-                      <p className="truncate text-[0.72rem] text-slateblue">
-                        Floor queue · Harborline desk
-                      </p>
+              <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+                <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 opacity-40">
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
                     </div>
-                    <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
-                      Live
+                    <div className="h-4 w-px bg-slate-200" />
+                    <p className="text-[0.75rem] font-semibold text-slate-700">Collections Queue</p>
+                  </div>
+                  <span className="relative flex items-center gap-2">
+                    <span className="relative flex size-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
                     </span>
-                  </div>
+                    <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+                  </span>
+                </div>
 
-                  <div className="relative px-4 py-4 sm:px-5 sm:py-5">
-                    <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-40" aria-hidden />
-                    <div className="relative">
-                      <p className="text-[0.72rem] font-semibold text-slateblue">Today</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {scattered.map((tool) => (
-                          <span
-                            key={tool}
-                            className="rounded-full border border-dashed border-navy-700/20 bg-cloud/80 px-3.5 py-2 text-[0.78rem] font-medium text-slateblue"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="mt-3 text-[0.78rem] text-slateblue">
-                        Five systems, seven versions of the truth.
-                      </p>
+                <div className="relative px-5 py-6">
+                  <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+                  <div className="relative">
+                    <p className="text-[0.72rem] font-bold uppercase tracking-widest text-slate-400">Before BITS</p>
+                    <div className="mt-4 flex flex-wrap gap-2.5">
+                      {scattered.map((tool) => (
+                        <span
+                          key={tool}
+                          className="rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-[0.78rem] font-medium text-slate-600 shadow-sm transition-all hover:border-slate-300"
+                        >
+                          {tool}
+                        </span>
+                      ))}
                     </div>
+                    <p className="mt-4 text-[0.78rem] font-medium text-slate-500">
+                      Five disconnected systems, zero shared context.
+                    </p>
                   </div>
+                </div>
 
-                  <div className="relative flex items-center justify-center py-2" aria-hidden>
-                    <span className="absolute inset-x-5 top-1/2 h-px bg-linelight" />
-                    <span className="relative flex size-9 items-center justify-center rounded-full bg-skywash text-electric-600 ring-1 ring-white">
-                      <ArrowDown className="size-3.5" />
-                    </span>
+                <div className="relative flex items-center justify-center py-4" aria-hidden>
+                  <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+                  <div className="relative flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-sm">
+                    &darr;
                   </div>
+                </div>
 
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5">
-                    <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                      <div>
-                        <p className="text-[0.72rem] font-semibold text-electric-600">With BITS</p>
-                        <p className="text-[0.92rem] font-semibold text-ink">One floor queue</p>
-                      </div>
-                    </div>
-                    <div className="overflow-x-auto overscroll-x-contain">
-                      <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-                        <caption className="sr-only">
-                          Harborline, Voltgrid, and Brightpath work unified in one BITS queue
-                        </caption>
-                        <thead>
-                          <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-                            <th scope="col" className="py-2 pr-3 font-semibold">
-                              Account
-                            </th>
-                            <th scope="col" className="py-2 pr-3 font-semibold">
-                              Work
-                            </th>
-                            <th scope="col" className="hidden py-2 font-semibold sm:table-cell">
-                              Desk
-                            </th>
+                <div className="bg-slate-50/50 px-5 pb-6 pt-2">
+                  <div className="mb-4">
+                    <p className="text-[0.72rem] font-bold uppercase tracking-widest text-blue-500">With BITS</p>
+                    <p className="mt-1 text-[0.92rem] font-bold text-slate-900">Unified Operations Floor</p>
+                  </div>
+                  <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                    <table className="w-full text-left text-[0.75rem] sm:text-[0.78rem]">
+                      <caption className="sr-only">
+                        Synthetic collection work unified in one BITS queue
+                      </caption>
+                      <thead>
+                        <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                          <th scope="col" className="px-4 py-3">Account</th>
+                          <th scope="col" className="px-4 py-3">Work</th>
+                          <th scope="col" className="hidden px-4 py-3 sm:table-cell">Desk</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {floor.map((row) => (
+                          <tr key={row.account} className="transition-colors hover:bg-slate-50/50">
+                            <td className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">
+                              {row.account}
+                            </td>
+                            <td className="px-4 py-3 text-slate-600">
+                              {row.work}
+                            </td>
+                            <td className="hidden px-4 py-3 text-slate-500 sm:table-cell">
+                              {row.desk}
+                            </td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          {floor.map((row) => (
-                            <tr key={row.account} className="border-b border-linelight/80 last:border-0">
-                              <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">
-                                {row.account}
-                              </td>
-                              <td className="max-w-[10rem] truncate py-2.5 text-slateblue sm:max-w-none">
-                                {row.work}
-                              </td>
-                              <td className="hidden py-2.5 text-slateblue sm:table-cell">
-                                {row.desk}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
               <figcaption className="sr-only">
-                Fragmented tools collapse into a single BITS floor queue. Decorative mock.
+                Fragmented collection tools collapse into one controlled queue.
               </figcaption>
             </figure>
           </Reveal>

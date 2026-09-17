@@ -1,35 +1,110 @@
-import { Building2, HeartHandshake, Layers, TrendingUp } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import {
+  BspLogo,
+  NpcLogo,
+  SecLogo,
+  CicLogo,
+  Iso27001Logo,
+  DictLogo,
+} from "@/components/ui/security-logos";
 
-const statements = [
-  { icon: Layers, label: "Built for complex operations" },
-  { icon: TrendingUp, label: "Designed for scale" },
-  { icon: HeartHandshake, label: "Human-centered automation" },
-  { icon: Building2, label: "Enterprise-focused engineering" },
-] as const;
+const securityStandards = [
+  {
+    logo: BspLogo,
+    name: "BSP Compliant",
+    standard: "Circular 454 & 857",
+    description: "Fair debt collection conduct & audit logging",
+    badge: "Central Bank",
+  },
+  {
+    logo: NpcLogo,
+    name: "NPC Compliant",
+    standard: "RA 10173 (DPA 2012)",
+    description: "Granular PII role-masking & consent controls",
+    badge: "Data Privacy",
+  },
+  {
+    logo: SecLogo,
+    name: "SEC Philippines",
+    standard: "MC No. 18 (2019)",
+    description: "Prohibition on unfair debt collection practices",
+    badge: "Lending Regulator",
+  },
+  {
+    logo: CicLogo,
+    name: "Credit Info Corp",
+    standard: "RA 9510 (CISA)",
+    description: "Standardized credit reporting & data exchange",
+    badge: "Credit Bureau",
+  },
+  {
+    logo: Iso27001Logo,
+    name: "ISO/IEC 27001",
+    standard: "ISMS Framework",
+    description: "Enterprise security policies & risk management",
+    badge: "Global Standard",
+  },
+  {
+    logo: DictLogo,
+    name: "DICT Cybersecurity",
+    standard: "Cloud-First Policy",
+    description: "National cybersecurity & cloud infrastructure",
+    badge: "Cybersecurity",
+  },
+];
 
 export function TrustStrip() {
   return (
-    <section aria-label="Positioning" className="relative z-10 -mt-2 bg-cloud pb-2 sm:-mt-4">
+    <section
+      aria-label="Security standards and regulatory compliance"
+      className="relative z-10 border-y border-slate-200/80 bg-slate-50/80 py-12 sm:py-16"
+    >
       <Container>
         <Reveal y={12}>
-          <div className="rounded-[1.5rem] bg-white/55 p-1.5 shadow-[0_16px_40px_-24px_rgb(6_22_47/0.28)] ring-1 ring-white/80 sm:rounded-[1.75rem]">
-            <ul className="grid grid-cols-1 overflow-hidden rounded-[calc(1.5rem-0.375rem)] bg-white sm:grid-cols-2 lg:grid-cols-4 lg:rounded-[calc(1.75rem-0.375rem)]">
-              {statements.map((s) => (
-                <li
-                  key={s.label}
-                  className="flex min-h-14 items-center gap-3 border-b border-linelight px-4 py-4 last:border-b-0 sm:min-h-16 sm:justify-center sm:border-b-0 sm:px-5 sm:[&:nth-child(odd)]:border-r sm:[&:nth-child(-n+2)]:border-b lg:border-b-0 lg:border-r lg:[&:nth-child(-n+2)]:border-b-0 lg:last:border-r-0"
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-3.5 py-1 backdrop-blur-md">
+              <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+              <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+                Security & Regulatory Architecture
+              </span>
+            </div>
+            <h2 className="text-[1.35rem] font-bold tracking-tight text-slate-900 sm:text-[1.6rem]">
+              Engineered for Philippine Banking & Global Compliance Standards
+            </h2>
+            <p className="mt-2 text-[0.88rem] text-slate-600">
+              BITS enforces verifiable data isolation, encryption, and statutory collection rules across every account.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-6 sm:gap-4">
+            {securityStandards.map((item) => {
+              const LogoComponent = item.logo;
+              return (
+                <div
+                  key={item.name}
+                  className="group flex flex-col items-center justify-between rounded-2xl border border-slate-200/80 bg-white p-4 text-center shadow-xs transition-all duration-300 hover:border-blue-500/30 hover:shadow-md hover:ring-2 hover:ring-blue-500/10"
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-skywash text-electric-600">
-                    <s.icon className="size-[1.05rem]" strokeWidth={1.75} aria-hidden />
-                  </span>
-                  <span className="text-[0.88rem] font-semibold tracking-[-0.01em] text-ink sm:text-[0.9rem]">
-                    {s.label}
-                  </span>
-                </li>
-              ))}
-            </ul>
+                  <div className="flex flex-col items-center">
+                    <div className="relative mb-3 flex size-13 items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                      <LogoComponent size={52} />
+                    </div>
+                    <span className="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-[0.6rem] font-bold uppercase tracking-wider text-slate-600 transition-colors group-hover:bg-blue-100 group-hover:text-blue-700">
+                      {item.badge}
+                    </span>
+                    <h3 className="mt-2 text-[0.85rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-700">
+                      {item.name}
+                    </h3>
+                    <p className="font-mono text-[0.68rem] font-semibold text-slate-500">
+                      {item.standard}
+                    </p>
+                  </div>
+                  <p className="mt-2.5 border-t border-slate-100 pt-2 text-[0.68rem] leading-snug text-slate-400 group-hover:text-slate-500">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </Reveal>
       </Container>

@@ -1,91 +1,124 @@
 import { cn } from "@/lib/utils";
-
-const rows = [
-  { name: "Elise Navarro", company: "Harborline Logistics", phone: "+1 (312) 847-1928", email: "elise@harborline.co", country: "United States" },
-  { name: "Dr. Marcus Chen", company: "Northwind Clinics", phone: "+1 (617) 204-8814", email: "m.chen@northwind.clinic", country: "United States" },
-  { name: "Priya Sundaram", company: "Voltgrid Energy", phone: "+44 20 7946 0318", email: "priya.s@voltgrid.eu", country: "United Kingdom" },
-  { name: "Leo Santos", company: "Brightpath Schools", phone: "+1 (415) 662-0941", email: "leo@brightpath.edu", country: "United States" },
-  { name: "Hannah Ortiz", company: "Cedar & Co Retail", phone: "+1 (206) 918-4470", email: "hortiz@cedar.co", country: "United States" },
-] as const;
+import { collectionAccounts as rows, dashboardStats } from "@/lib/marketing-specimens";
 
 /**
- * Static product preview for the marketing hero.
+ * Rich dashboard product preview for the marketing hero.
+ * Shows stats cards + account table + floating mobile mockup.
  * Decorative — not interactive. Real app lives under /app.
  */
 export function HeroProduct({ className }: { className?: string }) {
   return (
     <figure
       className={cn(
-        "mx-auto w-full max-w-[1080px]",
+        "relative mx-auto w-full max-w-[1080px]",
         className
       )}
     >
-      <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
-        <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-          <div className="flex min-h-[18rem] sm:min-h-[22rem] lg:min-h-[26rem]">
-            <aside className="hidden w-[11.5rem] shrink-0 flex-col gap-0.5 border-r border-linelight bg-cloud/80 p-3 md:flex">
-              <p className="mb-3 px-2 text-[0.72rem] font-bold tracking-tight text-ink">BITS CRM</p>
-              {["Dashboard", "Customers", "Pipeline", "Tickets", "QA"].map((item, i) => (
+      {/* Main dashboard bezel */}
+      <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+        <div className="flex min-h-[18rem] sm:min-h-[22rem] lg:min-h-[26rem]">
+          {/* Sidebar */}
+          <aside className="hidden w-[12.5rem] shrink-0 flex-col border-r border-slate-100 bg-slate-50/50 p-4 md:flex">
+            <div className="mb-6 flex items-center gap-2 px-2">
+              <div className="size-2 rounded-full bg-blue-600" />
+              <p className="text-[0.78rem] font-bold tracking-tight text-slate-900">BITS Collections</p>
+            </div>
+            <nav className="flex flex-col gap-1">
+              {["Dashboard", "Accounts", "Queue", "PTP", "QA", "Reports"].map((item, i) => (
                 <span
                   key={item}
                   className={cn(
-                    "rounded-lg px-2.5 py-2 text-[0.78rem] font-medium",
-                    i === 1 ? "bg-white text-electric-600 shadow-sm" : "text-slateblue"
+                    "rounded-xl px-3 py-2 text-[0.82rem] font-bold transition-colors",
+                    i === 0
+                      ? "bg-white text-blue-600 shadow-sm ring-1 ring-inset ring-slate-200"
+                      : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                   )}
                 >
                   {item}
                 </span>
               ))}
-            </aside>
+            </nav>
+          </aside>
 
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-                <div>
-                  <p className="text-[0.82rem] font-semibold text-ink">Demo</p>
-                  <p className="text-[0.72rem] text-slateblue">Floor queue · Harborline desk</p>
+          {/* Main content */}
+          <div className="min-w-0 flex-1 bg-white">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 lg:px-6">
+              <div className="flex items-center gap-4">
+                <div className="flex gap-1.5 opacity-40">
+                  <div className="size-2.5 rounded-full bg-slate-400" />
+                  <div className="size-2.5 rounded-full bg-slate-400" />
+                  <div className="size-2.5 rounded-full bg-slate-400" />
                 </div>
-                <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
-                  Live
+                <div className="h-4 w-px bg-slate-200" />
+                <div>
+                  <p className="text-[0.85rem] font-bold text-slate-900">Dashboard</p>
+                  <p className="text-[0.75rem] font-medium text-slate-500">Portfolio Operations · Overview</p>
+                </div>
+              </div>
+              <span className="relative flex items-center gap-2">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+                </span>
+                <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+              </span>
+            </div>
+
+            {/* Stats cards row */}
+            <div className="grid grid-cols-2 gap-4 px-5 py-5 lg:grid-cols-4 lg:px-6">
+              {dashboardStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4 transition-colors hover:border-slate-200 hover:bg-slate-50"
+                >
+                  <p className="text-[0.68rem] font-bold uppercase tracking-widest text-slate-500">
+                    {stat.label}
+                  </p>
+                  <p className="mt-2 text-[1.4rem] font-bold tracking-tight text-slate-900 sm:text-[1.6rem]">
+                    {stat.value}
+                  </p>
+                  <div className="mt-2 flex items-center gap-1.5">
+                    {stat.positive ? (
+                      <span className="text-[0.8rem] font-bold text-emerald-500">↑</span>
+                    ) : (
+                      <span className="text-[0.8rem] font-bold text-red-500">↓</span>
+                    )}
+                    <span className={cn("text-[0.72rem] font-bold", stat.positive ? "text-emerald-600" : "text-red-600")}>
+                      {stat.change}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Accounts table */}
+            <div className="px-5 pb-5 lg:px-6 lg:pb-6">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <p className="text-[0.95rem] font-bold text-slate-900">Recent Accounts</p>
+                <span className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-[0.75rem] font-medium text-slate-500 shadow-sm">
+                  Search accounts...
                 </span>
               </div>
-
-              <div className="px-4 py-3 sm:px-5">
-                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                  <p className="text-[0.92rem] font-semibold text-ink">Customers</p>
-                  <span className="rounded-lg border border-linelight bg-cloud px-3 py-1.5 text-[0.72rem] text-slateblue">
-                    Search accounts
-                  </span>
-                </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-100">
                 <div className="overflow-x-auto overscroll-x-contain">
                   <table className="w-full text-left text-[0.75rem] sm:text-[0.78rem]">
-                    <caption className="sr-only">Sample customer accounts in BITS CRM</caption>
+                    <caption className="sr-only">Synthetic collection accounts in BITS</caption>
                     <thead>
-                      <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-                        <th scope="col" className="py-2 pr-3 font-semibold">
-                          Customer
-                        </th>
-                        <th scope="col" className="hidden py-2 pr-3 font-semibold sm:table-cell">
-                          Company
-                        </th>
-                        <th scope="col" className="hidden py-2 pr-3 font-semibold lg:table-cell">
-                          Phone
-                        </th>
-                        <th scope="col" className="py-2 font-semibold">
-                          Email
-                        </th>
+                      <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-bold tracking-widest text-slate-500 uppercase">
+                        <th scope="col" className="px-4 py-3">Account</th>
+                        <th scope="col" className="hidden px-4 py-3 sm:table-cell">Campaign</th>
+                        <th scope="col" className="hidden px-4 py-3 lg:table-cell">Balance</th>
+                        <th scope="col" className="px-4 py-3">Status</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {rows.map((row) => (
-                        <tr key={row.email} className="border-b border-linelight/80 last:border-0">
-                          <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.name}</td>
-                          <td className="hidden py-2.5 pr-3 text-slateblue sm:table-cell">{row.company}</td>
-                          <td className="hidden py-2.5 pr-3 tabular-nums text-slateblue lg:table-cell">
-                            {row.phone}
-                          </td>
-                          <td className="max-w-[9.5rem] truncate py-2.5 text-slateblue sm:max-w-none">
-                            {row.email}
-                          </td>
+                    <tbody className="divide-y divide-slate-100">
+                      {rows.slice(0, 4).map((row) => (
+                        <tr key={row.id} className="transition-colors hover:bg-slate-50/50">
+                          <td className="whitespace-nowrap px-4 py-3 font-bold text-slate-900">{row.id}</td>
+                          <td className="hidden px-4 py-3 text-slate-600 sm:table-cell">{row.campaign}</td>
+                          <td className="hidden whitespace-nowrap px-4 py-3 font-mono font-medium text-slate-600 lg:table-cell">{row.balance}</td>
+                          <td className="max-w-[9.5rem] truncate px-4 py-3 text-slate-600 sm:max-w-none">{row.status}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -96,8 +129,56 @@ export function HeroProduct({ className }: { className?: string }) {
           </div>
         </div>
       </div>
+
+      {/* Floating mobile mockup */}
+      <div className="absolute -bottom-6 -right-4 hidden w-[210px] animate-float sm:block lg:-right-8 lg:bottom-2 lg:w-[250px]" aria-hidden>
+        <div className="rounded-[2rem] bg-slate-900/10 p-2 shadow-2xl shadow-blue-950/25 ring-1 ring-slate-900/10 backdrop-blur-xl">
+          <div className="overflow-hidden rounded-[calc(2rem-8px)] border border-slate-200/80 bg-white shadow-inner">
+            {/* iOS Dynamic Island header */}
+            <div className="bg-slate-900 px-4 pt-3 pb-3.5 text-white">
+              <div className="mx-auto mb-2.5 h-3.5 w-20 rounded-full bg-black/80 ring-1 ring-white/10" />
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[0.62rem] font-bold tracking-widest text-blue-400 uppercase">BITS Dialer</p>
+                  <p className="text-[0.78rem] font-bold text-white">Field & Queue Mode</p>
+                </div>
+                <span className="flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-emerald-300">
+                  <span className="size-1 rounded-full bg-emerald-400 animate-pulse" />
+                  Live
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-2.5 px-3.5 py-3.5">
+              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                <p className="text-[0.62rem] font-bold uppercase tracking-wider text-slate-500">Collected Today</p>
+                <p className="mt-0.5 font-mono text-[1.15rem] font-bold tracking-tight text-emerald-600">₱148,500</p>
+              </div>
+
+              <div className="rounded-xl border border-emerald-500/15 bg-emerald-50/40 p-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.62rem] font-bold uppercase tracking-wider text-emerald-700">Payment Alert</span>
+                  <span className="text-[0.6rem] font-mono text-emerald-600">Just now</span>
+                </div>
+                <p className="mt-0.5 text-[0.78rem] font-bold text-slate-900">₱15,000 via InstaPay</p>
+                <p className="text-[0.68rem] text-slate-500">ACC-10482 · PTP Fulfilled</p>
+              </div>
+
+              <div className="rounded-xl border border-blue-500/15 bg-blue-50/50 p-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.62rem] font-bold uppercase tracking-wider text-blue-700">Next Auto-Dial</span>
+                  <span className="rounded-full bg-blue-600 px-1.5 py-0.2 text-[0.6rem] font-bold text-white">Auto</span>
+                </div>
+                <p className="mt-0.5 font-mono text-[0.78rem] font-bold text-slate-900">ACC-10817</p>
+                <p className="text-[0.68rem] text-slate-600">PTP overdue · Calling now...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <figcaption className="sr-only">
-        Preview of the BITS CRM customers workspace. Decorative mock; sign in to use the live app.
+        Preview of the BITS collections dashboard and mobile app using synthetic data.
       </figcaption>
     </figure>
   );

@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 /*
-  BITS design tokens.
+  BITS design tokens — v2.0.
   Shape system: interactive elements rounded-xl (12px), surfaces rounded-2xl/3xl,
   badges and status pills full radius. One accent family: electric blue -> signal cyan.
+  Added: pricing cards, glass effects, gradient text, stat counters, feature grid.
 */
 @theme {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -32,11 +33,42 @@
   --color-mist: #93a9c4;
   --color-linelight: #dce8f6;
 
+  /* Success / Warning / Accent */
+  --color-emerald-500: #10b981;
+  --color-amber-500: #f59e0b;
+
   --shadow-card: 0 1px 2px rgb(6 22 47 / 0.05), 0 16px 40px -16px rgb(6 22 47 / 0.16);
   --shadow-lift: 0 2px 6px rgb(6 22 47 / 0.06), 0 28px 56px -20px rgb(6 22 47 / 0.28);
   --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 24px 64px -24px rgb(3 13 28 / 0.65);
+  --shadow-pricing: 0 4px 6px -1px rgb(0 99 219 / 0.1), 0 32px 64px -16px rgb(6 22 47 / 0.2);
+  --shadow-glass: 0 8px 32px -8px rgb(6 22 47 / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.2);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 8s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-count-up: count-up 1.5s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 @layer base {
@@ -136,11 +168,74 @@
     color: transparent;
   }
 
+  /* Italic gradient emphasis — for hero headlines */
+  .text-gradient-italic {
+    background: linear-gradient(135deg, var(--color-electric-500) 0%, var(--color-signal-500) 50%, var(--color-electric-400) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+  }
+
   .mask-fade-b {
     mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   }
 
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Glass card effect */
+  .glass-card {
+    background: rgb(255 255 255 / 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(220 232 246 / 0.6);
+  }
+
+  .glass-card-dark {
+    background: rgb(8 31 77 / 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  /* Pricing card popular ring */
+  .pricing-popular {
+    box-shadow:
+      0 0 0 2px var(--color-electric-500),
+      0 4px 6px -1px rgb(0 99 219 / 0.12),
+      0 32px 64px -16px rgb(6 22 47 / 0.22);
+  }
+
+  /* Shimmer loading / decorative */
+  .bg-shimmer {
+    background: linear-gradient(90deg, transparent 25%, rgb(255 255 255 / 0.15) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s infinite;
+  }
+
+  /* Stats counter glow */
+  .stat-glow {
+    position: relative;
+  }
+  .stat-glow::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 24px;
+    background: radial-gradient(closest-side, rgb(0 99 219 / 0.08), transparent);
+    z-index: -1;
+  }
+
+  /* Feature card hover */
+  .feature-card-hover {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .feature-card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px -12px rgb(6 22 47 / 0.22);
+    }
   }
 }

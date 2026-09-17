@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { principles } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -8,18 +7,21 @@ import { Section } from "@/components/ui/section";
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
 const ctaClass =
-  "group mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
+  "group mt-8 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
 
 const brief = [
-  { facet: "Built for", generic: "Sales pipeline", bits: "Contact-center floor" },
-  { facet: "Primary record", generic: "Leads and deals", bits: "Tickets, QA, history" },
-  { facet: "Oversight", generic: "Manager dashboard", bits: "People on exceptions" },
-  { facet: "Change", generic: "You adapt to the product", bits: "Designed around the desk" },
+  { facet: "Core", generic: "Required", bits: "Collections" },
+  { facet: "Engagement", generic: "Optional", bits: "Messaging + Dialer" },
+  { facet: "Oversight", generic: "Optional", bits: "QA + Live Assist" },
+  { facet: "Visibility", generic: "Configured", bits: "Reporting" },
 ] as const;
 
 export function WhyBits() {
   return (
-    <Section id="about" className="overflow-x-hidden bg-cloud">
+    <Section id="about" className="relative overflow-hidden bg-white">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
           src={HERO_LANDSCAPE}
@@ -27,51 +29,53 @@ export function WhyBits() {
           fill
           unoptimized
           sizes="100vw"
-          className="object-cover object-[center_62%] opacity-45"
+          className="object-cover object-[center_62%] opacity-30 mix-blend-multiply"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-cloud via-cloud/82 to-cloud" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white" />
       </div>
 
-      <Container className="relative">
+      <Container className="relative z-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
           <div>
             <Reveal>
-              <p className="text-overline text-electric-600">
-                Understand · Design · Build · Evolve
-              </p>
-              <h2 className="text-h2 mt-4 max-w-4xl text-balance leading-[1.08] text-ink">
-                Custom operations software for BPO and finance floors.
+              <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/50 px-4 py-1.5 backdrop-blur-md">
+                <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+                  Mix · Match · Expand
+                </span>
+              </div>
+              <h2 className="text-h2 mt-4 max-w-4xl text-balance font-bold leading-[1.08] text-slate-900">
+                Build the stack around your operation.
               </h2>
-              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
-                Off-the-shelf CRM assumes a sales pipeline. Harborline, Voltgrid,
-                and desks like yours run tickets, approvals, and exceptions. BITS
-                starts there.
+              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
+                Not every team works the same way. Enable the collections
+                capabilities you need and expand as your operation grows.
               </p>
               <a href="#contact" className={ctaClass}>
-                Book a consultation
-                <ArrowRight
-                  className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                  aria-hidden
-                />
+                <span className="relative">
+                  Build Your Configuration
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                </span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
             </Reveal>
 
-            <ol className="mt-10 max-w-[36rem]">
+            <ol className="mt-12 max-w-[36rem] space-y-4">
               {principles.map((p, i) => (
-                <li key={p.name} className="border-t border-linelight/90 first:border-t-0">
+                <li key={p.name} className="group rounded-2xl border border-transparent p-4 transition-colors hover:border-slate-200/60 hover:bg-slate-50/50">
                   <Reveal delay={0.05 + i * 0.05}>
-                    <div className="flex gap-4 py-4">
+                    <div className="flex gap-5">
                       <span
-                        className="w-7 shrink-0 pt-0.5 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600"
+                        className="mt-1 font-mono text-[0.8rem] font-semibold tracking-widest text-blue-400"
                         aria-hidden
                       >
-                        {String(i + 1).padStart(2, "0")}
+                        {String(i + 1).padStart(2, "0")}.
                       </span>
                       <div className="min-w-0">
-                        <h3 className="text-[1.05rem] font-semibold tracking-[-0.015em] text-ink">
+                        <h3 className="text-[1.1rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">
                           {p.name}
                         </h3>
-                        <p className="mt-1 text-[0.92rem] leading-relaxed text-slateblue">
+                        <p className="mt-2 text-[0.95rem] leading-relaxed text-slate-600">
                           {p.copy}
                         </p>
                       </div>
@@ -84,57 +88,59 @@ export function WhyBits() {
 
           <Reveal delay={0.12} className="lg:sticky lg:top-28">
             <figure>
-              <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
-                <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-                  <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-                    <div className="min-w-0">
-                      <p className="text-[0.82rem] font-semibold text-ink">Engagement brief</p>
-                      <p className="truncate text-[0.72rem] text-slateblue">
-                        Harborline · discovery
-                      </p>
+              <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+                <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 opacity-40">
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
                     </div>
-                    <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
-                      Live
+                    <div className="h-4 w-px bg-slate-200" />
+                    <div>
+                      <p className="text-[0.75rem] font-semibold text-slate-700">Module configuration</p>
+                      <p className="truncate text-[0.68rem] font-medium text-slate-500">Collections Operations · Module View</p>
+                    </div>
+                  </div>
+                  <span className="relative flex items-center gap-2">
+                    <span className="relative flex size-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
                     </span>
-                  </div>
-                  <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
-                    <table className="w-full min-w-[20rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-                      <caption className="sr-only">
-                        Generic sales CRM compared with BITS operations software
-                      </caption>
-                      <thead>
-                        <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-                          <th scope="col" className="py-2 pr-3 font-semibold">
-                            Facet
+                    <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+                  </span>
+                </div>
+                <div className="overflow-x-auto overscroll-x-contain p-2">
+                  <table className="w-full min-w-[20rem] text-left text-[0.75rem] sm:text-[0.78rem]">
+                    <caption className="sr-only">
+                      Example BITS modular configuration
+                    </caption>
+                    <thead>
+                      <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                        <th scope="col" className="px-4 py-3">Facet</th>
+                        <th scope="col" className="px-4 py-3">Inclusion</th>
+                        <th scope="col" className="px-4 py-3">Module</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {brief.map((row) => (
+                        <tr key={row.facet} className="transition-colors hover:bg-slate-50/50">
+                          <th
+                            scope="row"
+                            className="whitespace-nowrap px-4 py-3 font-medium text-slate-900"
+                          >
+                            {row.facet}
                           </th>
-                          <th scope="col" className="py-2 pr-3 font-semibold">
-                            Generic CRM
-                          </th>
-                          <th scope="col" className="py-2 font-semibold">
-                            BITS
-                          </th>
+                          <td className="px-4 py-3 text-slate-600">{row.generic}</td>
+                          <td className="px-4 py-3 font-medium text-slate-900">{row.bits}</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {brief.map((row) => (
-                          <tr key={row.facet} className="border-b border-linelight/80 last:border-0">
-                            <th
-                              scope="row"
-                              className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink"
-                            >
-                              {row.facet}
-                            </th>
-                            <td className="py-2.5 pr-3 text-slateblue">{row.generic}</td>
-                            <td className="py-2.5 font-medium text-ink">{row.bits}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <figcaption className="sr-only">
-                Side-by-side comparison of generic CRM and BITS for Harborline discovery.
+                Example configuration showing required and optional BITS modules.
               </figcaption>
             </figure>
           </Reveal>

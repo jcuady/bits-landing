@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/lib/site";
 import { Button } from "@/components/ui/button";
@@ -37,7 +36,7 @@ export function Header() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
           solid
-            ? "border-b border-linelight/80 bg-white/80 shadow-[0_8px_28px_-18px_rgb(6_22_47/0.18)] backdrop-blur-xl"
+            ? "border-b border-slate-200/60 bg-white/80 shadow-sm backdrop-blur-xl"
             : "border-b border-transparent bg-transparent"
         )}
       >
@@ -58,12 +57,12 @@ export function Header() {
             </span>
           </Link>
 
-          <ul className="hidden items-center gap-0.5 lg:flex">
+          <ul className="hidden items-center gap-1 lg:flex bg-slate-50/50 p-1 rounded-full border border-slate-200/50">
             {navItems.map((item) => (
               <li key={item.label}>
                 <a
                   href={item.href}
-                  className="inline-flex min-h-11 items-center rounded-full px-3.5 text-[0.9rem] font-medium text-slateblue transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-navy-700/[0.05] [@media(hover:hover)_and_(pointer:fine)]:hover:text-ink"
+                  className="inline-flex min-h-9 items-center rounded-full px-4 text-[0.85rem] font-bold text-slate-600 transition-all duration-200 ease-in-out hover:bg-white hover:text-blue-600 hover:shadow-sm"
                 >
                   {item.label}
                 </a>
@@ -71,28 +70,20 @@ export function Header() {
             ))}
           </ul>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <a
-              href="#solutions"
-              className="inline-flex min-h-11 items-center rounded-full px-3.5 text-[0.88rem] font-semibold text-navy-700 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-electric-600"
+              href="#features"
+              className="inline-flex min-h-11 items-center rounded-full px-3.5 text-[0.88rem] font-bold text-slate-700 transition-colors hover:text-blue-600"
             >
-              Explore solutions
+              Explore Platform
             </a>
-            <Button
-              asChild
-              size="sm"
-              className="group h-11 min-h-11 rounded-full pr-1.5 pl-4"
+            <a
+              href="#contact"
+              className="group flex h-10 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.88rem] font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.98]"
             >
-              <a href="#contact">
-                Book a consultation
-                <span
-                  className="flex size-7 items-center justify-center rounded-full bg-white/20 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                  aria-hidden
-                >
-                  <ArrowRight className="size-3.5" />
-                </span>
-              </a>
-            </Button>
+              Request a Demo
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </a>
           </div>
 
           <button
@@ -101,19 +92,19 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full text-ink transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-navy-700/[0.06] lg:hidden"
+            className="relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full text-slate-900 transition-colors hover:bg-slate-100 lg:hidden"
           >
             <span className="relative block h-3.5 w-[18px]" aria-hidden>
               <span
                 className={cn(
-                  "absolute left-0 h-[1.5px] w-full bg-ink transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                  "absolute left-0 h-[2px] rounded-full w-full bg-slate-900 transition-transform duration-200 ease-in-out",
                   open ? "top-[6px] rotate-45" : "top-0"
                 )}
               />
               <span
                 className={cn(
-                  "absolute left-0 h-[1.5px] w-full bg-ink transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-                  open ? "top-[6px] -rotate-45" : "top-[13px]"
+                  "absolute left-0 h-[2px] rounded-full w-full bg-slate-900 transition-transform duration-200 ease-in-out",
+                  open ? "top-[6px] -rotate-45" : "top-[12px]"
                 )}
               />
             </span>
@@ -132,15 +123,15 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed inset-0 z-40 flex flex-col bg-cloud lg:hidden"
+            className="fixed inset-0 z-40 flex flex-col bg-slate-50 lg:hidden"
           >
             <div className="h-16 shrink-0 md:h-[72px]" aria-hidden />
-            <ul className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-5 pt-4 sm:px-8">
+            <ul className="flex flex-1 flex-col gap-2 overflow-y-auto px-6 pt-6 sm:px-8">
               {navItems.map((item, i) => (
                 <motion.li
                   key={item.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{
                     delay: 0.04 + i * 0.04,
                     duration: 0.28,
@@ -150,7 +141,7 @@ export function Header() {
                   <a
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-2xl px-3 py-3.5 text-[1.5rem] font-semibold tracking-[-0.02em] text-ink"
+                    className="block rounded-2xl px-4 py-4 text-[1.5rem] font-bold tracking-tight text-slate-900 transition-colors hover:bg-slate-100"
                   >
                     {item.label}
                   </a>
@@ -165,29 +156,23 @@ export function Header() {
                 duration: 0.28,
                 ease: [0.23, 1, 0.32, 1],
               }}
-              className="pb-safe flex flex-col gap-3 px-6 pb-10 sm:px-8"
+              className="pb-safe flex flex-col gap-4 px-6 pb-10 sm:px-8"
             >
-              <Button asChild size="lg" className="group h-12 min-h-12 rounded-full pr-2 pl-6">
-                <a href="#contact" onClick={() => setOpen(false)}>
-                  Book a consultation
-                  <span
-                    className="flex size-8 items-center justify-center rounded-full bg-white/20"
-                    aria-hidden
-                  >
-                    <ArrowRight className="size-4" />
-                  </span>
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="secondary"
-                size="lg"
-                className="h-12 min-h-12 rounded-full bg-white"
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="group flex h-14 items-center justify-center gap-3 rounded-full bg-blue-600 px-6 text-[1rem] font-bold text-white transition-all hover:bg-blue-700 shadow-lg shadow-blue-900/20 active:scale-[0.98]"
               >
-                <a href="#solutions" onClick={() => setOpen(false)}>
-                  Explore solutions
-                </a>
-              </Button>
+                Request a Demo
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </a>
+              <a
+                href="#pricing"
+                onClick={() => setOpen(false)}
+                className="flex h-14 items-center justify-center rounded-full bg-white border border-slate-200 px-6 text-[1rem] font-bold text-slate-900 shadow-sm transition-colors hover:bg-slate-50"
+              >
+                See Pricing
+              </a>
             </motion.div>
           </motion.div>
         ) : null}

@@ -1,11 +1,10 @@
-import { ArrowRight } from "lucide-react";
 import { solutions } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 
 const ctaClass =
-  "group mt-8 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
+  "group mt-8 inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-blue-700";
 
 function Bezel({
   title,
@@ -17,17 +16,29 @@ function Bezel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
-      <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-        <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-          <div className="min-w-0">
-            <p className="text-[0.82rem] font-semibold text-ink">{title}</p>
-            <p className="truncate text-[0.72rem] text-slateblue">{kicker}</p>
+    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5 opacity-40">
+            <div className="size-2.5 rounded-full bg-slate-400" />
+            <div className="size-2.5 rounded-full bg-slate-400" />
+            <div className="size-2.5 rounded-full bg-slate-400" />
           </div>
-          <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
-            Live
-          </span>
+          <div className="h-4 w-px bg-slate-200" />
+          <div>
+            <p className="text-[0.75rem] font-semibold text-slate-700">{title}</p>
+            <p className="truncate text-[0.68rem] font-medium text-slate-500">{kicker}</p>
+          </div>
         </div>
+        <span className="relative flex items-center gap-2">
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+          </span>
+          <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+        </span>
+      </div>
+      <div className="bg-white">
         {children}
       </div>
     </div>
@@ -36,16 +47,16 @@ function Bezel({
 
 function Caps({ items }: { items: readonly string[] }) {
   return (
-    <ul className="mt-6">
+    <ul className="mt-8 space-y-3 border-t border-slate-100 pt-6">
       {items.map((c, i) => (
         <li
           key={c}
-          className="flex gap-3 border-t border-linelight/90 py-2.5 first:border-t-0"
+          className="group flex items-center gap-4"
         >
-          <span className="w-6 shrink-0 pt-0.5 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600">
-            {String(i + 1).padStart(2, "0")}
+          <span className="font-mono text-[0.7rem] font-semibold tracking-widest text-blue-400">
+            {String(i + 1).padStart(2, "0")}.
           </span>
-          <span className="text-[0.9rem] font-medium leading-snug text-ink/90">{c}</span>
+          <span className="text-[0.9rem] font-medium leading-relaxed text-slate-700 transition-colors group-hover:text-slate-900">{c}</span>
         </li>
       ))}
     </ul>
@@ -54,35 +65,29 @@ function Caps({ items }: { items: readonly string[] }) {
 
 function CrmSpecimen() {
   const rows = [
-    { account: "Elise Navarro", work: "Invoice exception", state: "Open" },
-    { account: "Priya Sundaram", work: "KYC follow-up", state: "Waiting" },
-    { account: "Leo Santos", work: "Ticket 4182", state: "QA" },
+    { account: "ACC-10482", work: "PTP due", state: "Assigned" },
+    { account: "ACC-10817", work: "Follow-up", state: "Queued" },
+    { account: "ACC-11209", work: "Broken PTP", state: "Review" },
   ] as const;
 
   return (
-    <Bezel title="BITS CRM" kicker="Tickets · Harborline desk">
-      <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+    <Bezel title="Accounts" kicker="Portfolio · Active Operations">
+      <div className="overflow-x-auto overscroll-x-contain p-2">
         <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-          <caption className="sr-only">Harborline tickets in BITS CRM</caption>
+          <caption className="sr-only">Synthetic collections account queue</caption>
           <thead>
-            <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-              <th scope="col" className="py-2 pr-3 font-semibold">
-                Account
-              </th>
-              <th scope="col" className="py-2 pr-3 font-semibold">
-                Work
-              </th>
-              <th scope="col" className="py-2 font-semibold">
-                State
-              </th>
+            <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+              <th scope="col" className="px-4 py-3">Account</th>
+              <th scope="col" className="px-4 py-3">Work</th>
+              <th scope="col" className="px-4 py-3">State</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-100">
             {rows.map((row) => (
-              <tr key={row.account} className="border-b border-linelight/80 last:border-0">
-                <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.account}</td>
-                <td className="max-w-[10rem] truncate py-2.5 text-slateblue sm:max-w-none">{row.work}</td>
-                <td className="py-2.5 text-slateblue">{row.state}</td>
+              <tr key={row.account} className="transition-colors hover:bg-slate-50/50">
+                <td className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">{row.account}</td>
+                <td className="max-w-[10rem] truncate px-4 py-3 text-slate-600 sm:max-w-none">{row.work}</td>
+                <td className="px-4 py-3 text-slate-600">{row.state}</td>
               </tr>
             ))}
           </tbody>
@@ -94,35 +99,29 @@ function CrmSpecimen() {
 
 function FinanceSpecimen() {
   const rows = [
-    { item: "Wire release", desk: "Voltgrid", state: "Controller" },
-    { item: "Limit change", desk: "Northwind", state: "Pending" },
-    { item: "Vendor setup", desk: "Harborline", state: "Approved" },
+    { item: "Broken PTP", desk: "Desk Alpha", state: "Follow-up" },
+    { item: "30-day inactive", desk: "Desk Beta", state: "Work pool" },
+    { item: "PTP hold", desk: "Recovery East", state: "Protected" },
   ] as const;
 
   return (
-    <Bezel title="Approvals" kicker="Finance ops · Voltgrid desk">
-      <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+    <Bezel title="Strategy queue" kicker="Rules · dispositions · PTP">
+      <div className="overflow-x-auto overscroll-x-contain p-2">
         <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-          <caption className="sr-only">Sample finance approval queue</caption>
+          <caption className="sr-only">Synthetic collections strategy queue</caption>
           <thead>
-            <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-              <th scope="col" className="py-2 pr-3 font-semibold">
-                Request
-              </th>
-              <th scope="col" className="hidden py-2 pr-3 font-semibold sm:table-cell">
-                Desk
-              </th>
-              <th scope="col" className="py-2 font-semibold">
-                State
-              </th>
+            <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+              <th scope="col" className="px-4 py-3">Request</th>
+              <th scope="col" className="hidden px-4 py-3 sm:table-cell">Desk</th>
+              <th scope="col" className="px-4 py-3">State</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-100">
             {rows.map((row) => (
-              <tr key={row.item} className="border-b border-linelight/80 last:border-0">
-                <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.item}</td>
-                <td className="hidden py-2.5 pr-3 text-slateblue sm:table-cell">{row.desk}</td>
-                <td className="py-2.5 text-slateblue">{row.state}</td>
+              <tr key={row.item} className="transition-colors hover:bg-slate-50/50">
+                <td className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">{row.item}</td>
+                <td className="hidden px-4 py-3 text-slate-600 sm:table-cell">{row.desk}</td>
+                <td className="px-4 py-3 text-slate-600">{row.state}</td>
               </tr>
             ))}
           </tbody>
@@ -134,39 +133,33 @@ function FinanceSpecimen() {
 
 function AiSpecimen() {
   const rows = [
-    { item: "Where is my shipment?", route: "L1", state: "Resolved" },
-    { item: "Harborline call 14:22", route: "QA", state: "Human review" },
-    { item: "KYC document list", route: "Knowledge", state: "Sourced" },
+    { item: "ACC-10482", route: "Preview call", state: "Connected" },
+    { item: "ACC-10817", route: "SMS", state: "Delivered" },
+    { item: "ACC-11209", route: "Email", state: "Scheduled" },
   ] as const;
 
   return (
-    <Bezel title="Exceptions" kicker="AI + human oversight · Harborline">
-      <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+    <Bezel title="Communication history" kicker="Configured providers · Telephony Engine">
+      <div className="overflow-x-auto overscroll-x-contain p-2">
         <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-          <caption className="sr-only">AI exceptions routed to people</caption>
+          <caption className="sr-only">Synthetic collections communication history</caption>
           <thead>
-            <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-              <th scope="col" className="py-2 pr-3 font-semibold">
-                Item
-              </th>
-              <th scope="col" className="hidden py-2 pr-3 font-semibold sm:table-cell">
-                Route
-              </th>
-              <th scope="col" className="py-2 font-semibold">
-                State
-              </th>
+            <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+              <th scope="col" className="px-4 py-3">Item</th>
+              <th scope="col" className="hidden px-4 py-3 sm:table-cell">Route</th>
+              <th scope="col" className="px-4 py-3">State</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-100">
             {rows.map((row) => (
-              <tr key={row.item} className="border-b border-linelight/80 last:border-0">
-                <td className="max-w-[12rem] truncate py-2.5 pr-3 font-medium text-ink sm:max-w-none">
+              <tr key={row.item} className="transition-colors hover:bg-slate-50/50">
+                <td className="max-w-[12rem] truncate whitespace-nowrap px-4 py-3 font-medium text-slate-900 sm:max-w-none">
                   {row.item}
                 </td>
-                <td className="hidden py-2.5 pr-3 tabular-nums text-slateblue sm:table-cell">
+                <td className="hidden tabular-nums px-4 py-3 text-slate-600 sm:table-cell">
                   {row.route}
                 </td>
-                <td className="py-2.5 whitespace-nowrap text-slateblue">{row.state}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-slate-600">{row.state}</td>
               </tr>
             ))}
           </tbody>
@@ -176,48 +169,74 @@ function AiSpecimen() {
   );
 }
 
+const additionalCapabilities = [
+  {
+    index: "04",
+    title: "Visibility When Conversations Matter Most",
+    copy: "Supervisors can listen, whisper, and barge into active calls while clear permissions and monitoring history preserve accountability.",
+  },
+  {
+    index: "05",
+    title: "Make Quality Measurable",
+    copy: "Use configurable scorecards, evaluations, audit worklists, activity linkage, and agent analysis to make QA consistent and reviewable.",
+  },
+  {
+    index: "06",
+    title: "See What Is Happening Across the Operation",
+    copy: "Review portfolios, agents, payments, calls, campaigns, activity, access logs, and exportable operational data without invented forecasts.",
+  },
+] as const;
+
 export function Solutions() {
   const [crm, finance, ai] = solutions;
 
   return (
-    <Section id="solutions" className="overflow-x-hidden bg-cloud">
-      <Container>
+    <Section id="solutions" className="relative overflow-hidden bg-white">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+
+      <Container className="relative z-10">
         <Reveal>
-          <p className="text-overline text-electric-600">BPO CRM · Finance · AI automation</p>
-          <h2 className="text-h2 mt-4 max-w-4xl text-balance leading-[1.08] text-ink">
-            Contact-center CRM, finance operations, and AI with human oversight.
+          <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/50 px-4 py-1.5 backdrop-blur-md">
+            <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              Core collections platform
+            </span>
+          </div>
+          <h2 className="text-h2 mt-4 max-w-4xl text-balance font-bold leading-[1.08] text-slate-900">
+            Everything your collections team needs to operate.
           </h2>
-          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
-            Three practice areas. One engineering standard. Built for BPO floors,
-            banking controls, and high-volume teams that cannot run on generic
-            sales software.
+          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
+            BITS brings account management, agent workflows, customer engagement,
+            quality assurance, reporting, and operational controls into one
+            role-based workspace.
           </p>
         </Reveal>
 
-        <Reveal className="mt-12 lg:mt-16" amount={0.15}>
-          <article id="bpo-crm" className="scroll-mt-24">
+        <Reveal className="mt-12 lg:mt-20" amount={0.15}>
+          <article id="portfolio" className="scroll-mt-24">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
               <div>
-                <h3 className="text-h3 text-ink">{crm.name}</h3>
-                <p className="mt-4 text-[1.05rem] font-medium leading-relaxed text-ink/90">
+                <h3 className="text-h3 font-bold text-slate-900">{crm.name}</h3>
+                <p className="mt-4 text-[1.05rem] font-medium leading-relaxed text-slate-800">
                   {crm.summary}
                 </p>
-                <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-slateblue">
+                <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-slate-600">
                   {crm.description}
                 </p>
                 <Caps items={crm.capabilities} />
                 <a href="#contact" className={ctaClass}>
-                  Book a BPO CRM consultation
-                  <ArrowRight
-                    className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
+                  <span className="relative">
+                    Request a Demo
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                  </span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                 </a>
               </div>
               <figure>
                 <CrmSpecimen />
                 <figcaption className="sr-only">
-                  BITS CRM ticket queue for the Harborline desk. Decorative mock.
+                  BITS collections account queue using synthetic data.
                 </figcaption>
               </figure>
             </div>
@@ -225,29 +244,29 @@ export function Solutions() {
         </Reveal>
 
         <Reveal className="mt-16 lg:mt-24" amount={0.15} delay={0.06}>
-          <article id="financial" className="scroll-mt-24">
+          <article id="workflows" className="scroll-mt-24">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
               <div className="lg:order-2">
-                <h3 className="text-h3 text-ink">{finance.name}</h3>
-                <p className="mt-4 text-[1.05rem] font-medium leading-relaxed text-ink/90">
+                <h3 className="text-h3 font-bold text-slate-900">{finance.name}</h3>
+                <p className="mt-4 text-[1.05rem] font-medium leading-relaxed text-slate-800">
                   {finance.summary}
                 </p>
-                <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-slateblue">
+                <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-slate-600">
                   {finance.description}
                 </p>
                 <Caps items={finance.capabilities} />
                 <a href="#contact" className={ctaClass}>
-                  Book a finance systems consultation
-                  <ArrowRight
-                    className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
+                  <span className="relative">
+                    Explore the workflow
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                  </span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                 </a>
               </div>
               <figure className="lg:order-1">
                 <FinanceSpecimen />
                 <figcaption className="sr-only">
-                  Finance approval queue with controller review. Decorative mock.
+                  BITS collections strategy queue using synthetic data.
                 </figcaption>
               </figure>
             </div>
@@ -255,34 +274,52 @@ export function Solutions() {
         </Reveal>
 
         <Reveal className="mt-16 lg:mt-24" amount={0.15} delay={0.08}>
-          <article id="ai-automation" className="scroll-mt-24">
+          <article id="engagement" className="scroll-mt-24">
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
               <div>
-                <h3 className="text-h3 text-ink">{ai.name}</h3>
-                <p className="mt-4 text-[1.05rem] font-medium leading-relaxed text-ink/90">
+                <h3 className="text-h3 font-bold text-slate-900">{ai.name}</h3>
+                <p className="mt-4 text-[1.05rem] font-medium leading-relaxed text-slate-800">
                   {ai.summary}
                 </p>
-                <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-slateblue">
+                <p className="mt-3 max-w-[46ch] text-[0.95rem] leading-relaxed text-slate-600">
                   {ai.description}
                 </p>
                 <Caps items={ai.capabilities} />
                 <a href="#contact" className={ctaClass}>
-                  Book an AI consultation
-                  <ArrowRight
-                    className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
+                  <span className="relative">
+                    Discuss communication providers
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                  </span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                 </a>
               </div>
               <figure>
                 <AiSpecimen />
                 <figcaption className="sr-only">
-                  AI exceptions with human review on the Harborline floor. Decorative mock.
+                  BITS communication history using synthetic data.
                 </figcaption>
               </figure>
             </div>
           </article>
         </Reveal>
+
+        <div className="mt-20 border-t border-slate-200 lg:mt-28">
+          {additionalCapabilities.map((item, index) => (
+            <Reveal key={item.index} delay={index * 0.05} y={10}>
+              <article className="group grid gap-4 border-b border-slate-100 py-8 transition-colors hover:bg-slate-50/50 sm:grid-cols-[5rem_1fr_1.25fr] sm:gap-8 sm:py-10">
+                <p className="font-mono text-sm font-semibold tracking-widest text-blue-400">
+                  {item.index}.
+                </p>
+                <h3 className="text-[1.1rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">
+                  {item.title}
+                </h3>
+                <p className="max-w-[52ch] text-[0.95rem] leading-relaxed text-slate-600">
+                  {item.copy}
+                </p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </Container>
     </Section>
   );

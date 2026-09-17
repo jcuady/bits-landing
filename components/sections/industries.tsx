@@ -1,11 +1,10 @@
-import { ArrowRight } from "lucide-react";
 import { industries } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 
 const ctaClass =
-  "group mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
+  "group mt-7 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
 
 function Bezel({
   title,
@@ -17,19 +16,29 @@ function Bezel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[1.75rem] bg-white/45 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-white/70 sm:rounded-[2rem] sm:p-2">
-      <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-        <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-          <div className="min-w-0">
-            <p className="text-[0.82rem] font-semibold text-ink">{title}</p>
-            <p className="truncate text-[0.72rem] text-slateblue">{kicker}</p>
+    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5 opacity-40">
+            <div className="size-2.5 rounded-full bg-slate-400" />
+            <div className="size-2.5 rounded-full bg-slate-400" />
+            <div className="size-2.5 rounded-full bg-slate-400" />
           </div>
-          <span className="hidden rounded-full border border-electric-600/20 bg-skywash px-2.5 py-1 text-[0.68rem] font-semibold text-electric-600 sm:inline">
-            Live
-          </span>
+          <div className="h-4 w-px bg-slate-200" />
+          <div>
+            <p className="text-[0.75rem] font-semibold text-slate-700">{title}</p>
+            <p className="truncate text-[0.68rem] font-medium text-slate-500">{kicker}</p>
+          </div>
         </div>
-        {children}
+        <span className="relative flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 shadow-sm">
+          <span className="relative flex size-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500"></span>
+          </span>
+          <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+        </span>
       </div>
+      {children}
     </div>
   );
 }
@@ -44,24 +53,24 @@ function SpecimenTable({
   rows: readonly { a: string; b: string; c: string }[];
 }) {
   return (
-    <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
+    <div className="overflow-x-auto overscroll-x-contain p-2">
       <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
         <caption className="sr-only">{caption}</caption>
         <thead>
-          <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
+          <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
             {columns.map((col) => (
-              <th key={col} scope="col" className="py-2 pr-3 last:pr-0 font-semibold">
+              <th key={col} scope="col" className="px-4 py-3">
                 {col}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-slate-100">
           {rows.map((row) => (
-            <tr key={row.a} className="border-b border-linelight/80 last:border-0">
-              <td className="py-2.5 pr-3 font-medium whitespace-nowrap text-ink">{row.a}</td>
-              <td className="max-w-[10rem] truncate py-2.5 pr-3 text-slateblue sm:max-w-none">{row.b}</td>
-              <td className="py-2.5 whitespace-nowrap text-slateblue">{row.c}</td>
+            <tr key={row.a} className="transition-colors hover:bg-slate-50/50">
+              <td className="whitespace-nowrap px-4 py-3 font-bold text-slate-900">{row.a}</td>
+              <td className="max-w-[10rem] truncate px-4 py-3 text-slate-600 sm:max-w-none">{row.b}</td>
+              <td className="whitespace-nowrap px-4 py-3 text-slate-600">{row.c}</td>
             </tr>
           ))}
         </tbody>
@@ -71,53 +80,61 @@ function SpecimenTable({
 }
 
 const specimens = {
-  bpo: {
-    title: "BITS CRM",
-    kicker: "Tickets · Harborline desk",
-    caption: "Harborline contact-center tickets in BITS CRM",
-    columns: ["Account", "Work", "State"] as const,
+  small: {
+    title: "Focused campaign",
+    kicker: "Core Collections",
+    caption: "Small team collections configuration",
+    columns: ["Module", "Scope", "State"] as const,
     rows: [
-      { a: "Elise Navarro", b: "Invoice exception", c: "Open" },
-      { a: "Priya Sundaram", b: "KYC follow-up", c: "Waiting" },
-      { a: "Leo Santos", b: "Ticket 4182", c: "QA" },
+      { a: "Accounts", b: "One campaign", c: "Enabled" },
+      { a: "Queues", b: "One team", c: "Enabled" },
+      { a: "Reporting", b: "Standard", c: "Enabled" },
     ],
   },
-  banking: {
-    title: "Approvals",
-    kicker: "Finance ops · Voltgrid desk",
-    caption: "Voltgrid finance approval queue",
-    columns: ["Request", "Desk", "State"] as const,
+  medium: {
+    title: "Growing operation",
+    kicker: "Collections + communication + QA",
+    caption: "Medium team collections configuration",
+    columns: ["Module", "Scope", "State"] as const,
     rows: [
-      { a: "Wire release", b: "Voltgrid", c: "Controller" },
-      { a: "Limit change", b: "Northwind", c: "Pending" },
-      { a: "Vendor setup", b: "Harborline", c: "Approved" },
+      { a: "Messaging", b: "Configured", c: "Enabled" },
+      { a: "Dialer", b: "Progressive", c: "Enabled" },
+      { a: "QA", b: "Scorecards", c: "Enabled" },
     ],
   },
-  enterprises: {
-    title: "Operations",
-    kicker: "Floor queue · Brightpath",
-    caption: "Enterprise operations queue for Brightpath",
-    columns: ["Account", "Work", "State"] as const,
+  large: {
+    title: "High-volume operation",
+    kicker: "Modular enterprise configuration",
+    caption: "Large team collections configuration",
+    columns: ["Capability", "Scope", "State"] as const,
     rows: [
-      { a: "Hannah Ortiz", b: "Order exception", c: "Open" },
-      { a: "Dr. Marcus Chen", b: "Roster change", c: "Waiting" },
-      { a: "Leo Santos", b: "Ticket 4182", c: "QA" },
+      { a: "Multi-client", b: "Campaign scoped", c: "Enabled" },
+      { a: "Deployment", b: "On-prem option", c: "Supported" },
+      { a: "Workflows", b: "Custom rules", c: "Configured" },
     ],
   },
 } as const;
 
 export function Industries() {
   return (
-    <Section id="industries" className="overflow-x-hidden bg-cloud">
-      <Container>
+    <Section id="industries" className="relative overflow-hidden bg-slate-50">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+
+      <Container className="relative z-10">
         <Reveal>
-          <p className="text-overline text-electric-600">BPO · Banking · Enterprise</p>
-          <h2 className="text-h2 mt-4 max-w-4xl text-balance leading-[1.08] text-ink">
-            Built for contact-center floors, banking controls, and growing operations.
+          <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-white/80 px-4 py-1.5 backdrop-blur-md shadow-sm">
+            <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              No public prices · scoped configuration
+            </span>
+          </div>
+          <h2 className="text-h2 mt-4 max-w-4xl text-balance font-bold leading-[1.08] text-slate-900">
+            Built Around Your Operation.
           </h2>
-          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
-            BITS goes deep rather than wide. Each engagement starts from how
-            your floor already works, not a generic sales CRM.
+          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
+            Choose a starting configuration that fits your team today, then
+            expand modules as volume, communication, and supervision needs grow.
           </p>
         </Reveal>
 
@@ -130,22 +147,26 @@ export function Industries() {
                 <article id={ind.id} className="scroll-mt-24">
                   <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                     <div className={reverse ? "lg:order-2" : undefined}>
-                      <p className="font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600">
-                        {ind.index}
+                      <p className="font-mono text-[0.75rem] font-semibold tracking-widest text-blue-400">
+                        {ind.index}.
                       </p>
-                      <h3 className="text-h3 mt-3 text-ink">{ind.name}</h3>
-                      <p className="mt-4 max-w-[46ch] text-[1.02rem] font-medium leading-relaxed text-ink/90">
+                      <h3 className="text-h3 mt-3 font-bold text-slate-900">{ind.name}</h3>
+                      <p className="mt-4 max-w-[46ch] text-[1.02rem] font-medium leading-relaxed text-slate-700">
                         {ind.copy}
                       </p>
-                      <p className="mt-3 max-w-[46ch] text-[0.88rem] leading-relaxed text-slateblue">
-                        {ind.tags.join(" · ")}
-                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {ind.tags.map(tag => (
+                          <span key={tag} className="rounded-full border border-slate-200/60 bg-white/60 px-3 py-1 text-[0.75rem] font-semibold text-slate-500">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                       <a href="#contact" className={ctaClass}>
-                        {ind.cta}
-                        <ArrowRight
-                          className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                          aria-hidden
-                        />
+                        <span className="relative">
+                          {ind.cta}
+                          <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                        </span>
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                       </a>
                     </div>
                     <figure className={reverse ? "lg:order-1" : undefined}>

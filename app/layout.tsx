@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { site, solutions } from "@/lib/site";
+import { agents, site } from "@/lib/site";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -11,21 +11,51 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: "BITS | BPO CRM, Finance Operations & AI Automation",
-  description: site.description,
+  title: {
+    default: "BITS — Collections CRM & Dialer Platform",
+    template: "%s | BITS",
+  },
+  description:
+    "BITS is an enterprise collections CRM and operations platform with predictive dialer, autonomous AI agents, compliance guardrails, and operational intelligence.",
+  keywords: [
+    "collections CRM",
+    "debt collection software",
+    "collections operations platform",
+    "debt recovery CRM",
+    "collection agency software",
+    "collections dialer",
+    "predictive dialer",
+    "collections workflow",
+    "QA collections",
+    "BSP compliant collections",
+    "NPC compliant CRM",
+    "AI collections agents",
+  ],
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/icon.png",
+  },
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.legalName,
-    title: "BITS | BPO CRM, Finance Operations & AI Automation",
-    description: site.description,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS BPO CRM and operations platforms" }],
+    title: "BITS — Collections CRM & Dialer Platform",
+    description:
+      "Enterprise collections CRM with predictive auto-dialer, AI recovery agents, compliance rules, and operations intelligence. Accelerate debt recovery while staying fully compliant.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Collections CRM & Dialer Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITS | BPO CRM, Finance Operations & AI Automation",
-    description: site.description,
+    title: "BITS — Collections CRM & Dialer Platform",
+    description:
+      "Enterprise collections CRM with predictive auto-dialer, AI recovery agents, compliance rules, and operations intelligence.",
     images: ["/og.png"],
   },
 };
@@ -54,20 +84,47 @@ const jsonLd = {
       url: site.url,
     },
     {
-      "@type": "ItemList",
-      name: "BITS solutions for BPO CRM, finance operations, and AI automation",
-      itemListElement: solutions.map((s, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        item: {
-          "@type": "Service",
-          name: s.name,
-          description: s.summary,
-          url: `${site.url}/#${s.id}`,
-          provider: { "@type": "Organization", name: site.legalName },
-          serviceType: s.name,
+      "@type": "SoftwareApplication",
+      name: "BITS Collections CRM & Operations Platform",
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Debt Collection Software",
+      operatingSystem: "Web",
+      description: site.description,
+      url: site.url,
+      publisher: { "@type": "Organization", name: site.legalName },
+      offers: {
+        "@type": "OfferCatalog",
+        name: "BITS modules",
+        itemListElement: agents.map((module) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: module.name,
+            description: module.role,
+          },
+        })),
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is BITS?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "BITS is a collections CRM and operations platform that combines portfolio management, agent workflows, customer communications, built-in dialer, quality assurance, AI agents, and operational reporting into one workspace.",
+          },
         },
-      })),
+        {
+          "@type": "Question",
+          name: "Does BITS support on-premises deployment?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. BITS supports cloud, on-premises, and supported hybrid deployment configurations designed around different infrastructure and operational requirements.",
+          },
+        },
+      ],
     },
   ],
 };

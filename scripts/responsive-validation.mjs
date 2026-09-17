@@ -111,6 +111,7 @@ for (const viewport of viewports) {
       sectionCount: document.querySelectorAll("main section").length,
       h1Count: document.querySelectorAll("h1").length,
       contactVisible: visible(document.querySelector("#contact")),
+      contactFormPresent: Boolean(document.querySelector("#contact form")),
     };
   }, { touch: viewport.touch });
 
@@ -148,6 +149,7 @@ const failures = results.filter(
     result.sectionCount !== 13 ||
     result.h1Count !== 1 ||
     !result.contactVisible ||
+    !result.contactFormPresent ||
     (result.mobileMenu &&
       (!result.mobileMenu.bodyLocked ||
         !result.mobileMenu.dialogVisible ||

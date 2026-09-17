@@ -1,120 +1,129 @@
-import { ArrowRight } from "lucide-react";
 import { capabilities } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 
 const ctaClass =
-  "group mt-7 inline-flex min-h-11 cursor-pointer items-center gap-2 text-[0.92rem] font-semibold text-electric-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:hover:text-navy-700";
+  "group mt-8 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
 
 const scope = [
-  { work: "Tickets & QA", origin: "Flagship CRM" },
-  { work: "Contract-rate lookup", origin: "Custom · billing policy" },
-  { work: "Finance export", origin: "Custom · controller desk" },
-  { work: "Slack bridge", origin: "Integration" },
+  { work: "Accounts.csv", origin: "Mapped · validated" },
+  { work: "Payments.csv", origin: "Matched · reviewed" },
+  { work: "Queue Alpha", origin: "Campaign import" },
+  { work: "Recovery East", origin: "Reusable template" },
 ] as const;
 
 export function CustomSolutions() {
   return (
-    <Section id="custom" className="overflow-x-hidden bg-white">
-      <Container>
+    <Section id="custom" className="relative overflow-hidden bg-white">
+      {/* Premium Light Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+
+      <Container className="relative z-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
           <div>
             <Reveal>
-              <p className="text-overline text-electric-600">Custom build · Integration</p>
-              <h2 className="text-h2 mt-4 text-balance leading-[1.08] text-ink lg:max-w-[22ch]">
-                Custom operations software, built around your floor.
+              <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/50 px-4 py-1.5 backdrop-blur-md">
+                <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+                  Import · validate · match
+                </span>
+              </div>
+              <h2 className="text-h2 mt-4 text-balance font-bold leading-[1.08] text-slate-900 lg:max-w-[22ch]">
+                Move Portfolio Data Into Action.
               </h2>
-              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
-                When the flagship CRM is not enough, Harborline may need a contract-rate
-                lookup, and Voltgrid may need a controller export. BITS designs that work
-                around your workflows, data, and constraints — not the other way around.
+              <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
+                Bring campaigns, accounts, payments, and operational data into
+                BITS through controlled import and validation workflows.
               </p>
               <a href="#contact" className={ctaClass}>
-                Describe your project
-                <ArrowRight
-                  className="size-4 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5"
-                  aria-hidden
-                />
+                <span className="relative">
+                  Discuss Your Data
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+                </span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </a>
             </Reveal>
           </div>
 
           <Reveal delay={0.1}>
             <figure>
-              <div className="rounded-[1.75rem] bg-cloud/80 p-1.5 shadow-[0_24px_64px_-28px_rgb(6_22_47/0.38)] ring-1 ring-navy-700/10 sm:rounded-[2rem] sm:p-2">
-                <div className="overflow-hidden rounded-[calc(1.75rem-0.375rem)] border border-linelight bg-white sm:rounded-[calc(2rem-0.5rem)]">
-                  <div className="flex items-center justify-between gap-3 border-b border-linelight px-4 py-3 sm:px-5">
-                    <div className="min-w-0">
-                      <p className="text-[0.82rem] font-semibold text-ink">Build scope</p>
-                      <p className="truncate text-[0.72rem] text-slateblue">
-                        Harborline · custom engagement
-                      </p>
+              <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
+                <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 opacity-40">
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
+                      <div className="size-2.5 rounded-full bg-slate-400" />
                     </div>
-                    <span className="hidden rounded-full border border-navy-700/10 bg-cloud px-2.5 py-1 text-[0.68rem] font-semibold text-slateblue sm:inline">
-                      Scope
-                    </span>
+                    <div className="h-4 w-px bg-slate-200" />
+                    <div>
+                      <p className="text-[0.75rem] font-semibold text-slate-700">Import activity</p>
+                      <p className="truncate text-[0.68rem] font-medium text-slate-500">Operations Queue · synthetic</p>
+                    </div>
                   </div>
-                  <div className="overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-5">
-                    <table className="w-full table-fixed text-left text-[0.75rem] sm:text-[0.78rem]">
-                      <colgroup>
-                        <col className="w-[42%]" />
-                        <col />
-                      </colgroup>
-                      <caption className="sr-only">
-                        Harborline custom build scope beside flagship CRM
-                      </caption>
-                      <thead>
-                        <tr className="border-b border-linelight text-[0.65rem] font-semibold tracking-[0.06em] text-slateblue uppercase">
-                          <th scope="col" className="py-2 pr-3 font-semibold">
-                            Work
+                  <span className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-widest text-slate-500 shadow-sm">
+                    Scope
+                  </span>
+                </div>
+                <div className="overflow-x-auto overscroll-x-contain p-2">
+                  <table className="w-full table-fixed text-left text-[0.75rem] sm:text-[0.78rem]">
+                    <colgroup>
+                      <col className="w-[42%]" />
+                      <col />
+                    </colgroup>
+                    <caption className="sr-only">
+                      Synthetic portfolio import activity
+                    </caption>
+                    <thead>
+                      <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                        <th scope="col" className="px-4 py-3">Source</th>
+                        <th scope="col" className="px-4 py-3">Origin</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {scope.map((row) => (
+                        <tr key={row.work} className="transition-colors hover:bg-slate-50/50">
+                          <th scope="row" className="px-4 py-3 font-medium text-slate-900">
+                            {row.work}
                           </th>
-                          <th scope="col" className="py-2 font-semibold">
-                            Origin
-                          </th>
+                          <td className="px-4 py-3 text-slate-600">{row.origin}</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {scope.map((row) => (
-                          <tr key={row.work} className="border-b border-linelight/80 last:border-0">
-                            <th
-                              scope="row"
-                              className="py-2.5 pr-3 font-medium text-ink"
-                            >
-                              {row.work}
-                            </th>
-                            <td className="py-2.5 text-slateblue">{row.origin}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <figcaption className="sr-only">
-                Custom Harborline work sits beside the flagship CRM, not in a separate stack.
+                Synthetic portfolio data moving through controlled import workflows.
               </figcaption>
             </figure>
           </Reveal>
         </div>
 
-        <ol className="mt-14 grid sm:grid-flow-col sm:grid-rows-5 sm:gap-x-12 lg:mt-16">
+        <ol className="mt-14 grid sm:grid-flow-col sm:grid-rows-5 sm:gap-x-12 sm:gap-y-2 lg:mt-20">
           {capabilities.map((c, i) => (
-            <li key={c} className="border-t border-linelight/90">
+            <li key={c} className="group rounded-2xl border border-transparent p-4 transition-colors hover:border-slate-200/60 hover:bg-slate-50/50">
               <Reveal delay={0.03 * (i % 5)}>
-                <div className="flex gap-4 py-3.5">
+                <div className="flex gap-4 items-center">
                   <span
-                    className="w-7 shrink-0 pt-0.5 font-semibold tabular-nums text-[0.72rem] tracking-[0.14em] text-electric-600"
+                    className="font-mono text-[0.75rem] font-semibold tracking-widest text-blue-400"
                     aria-hidden
                   >
-                    {String(i + 1).padStart(2, "0")}
+                    {String(i + 1).padStart(2, "0")}.
                   </span>
-                  <span className="text-[0.98rem] font-semibold tracking-[-0.01em] text-ink">{c}</span>
+                  <span className="text-[0.98rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">{c}</span>
                 </div>
               </Reveal>
             </li>
           ))}
         </ol>
+        <Reveal>
+          <p className="mt-12 max-w-[62ch] border-l-2 border-blue-500/40 pl-4 text-[0.88rem] leading-relaxed text-slate-500">
+            Assigned skip-trace and field-visit worklists can extend account activity
+            beyond the desk. BITS does not currently claim a complete native mobile or PWA product.
+          </p>
+        </Reveal>
       </Container>
     </Section>
   );

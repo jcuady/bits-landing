@@ -31,6 +31,12 @@ for (const vp of viewports) {
     return { scrollWidth: de.scrollWidth, clientWidth: de.clientWidth, overflow: de.scrollWidth > de.clientWidth };
   });
 
+  for (const section of await page.locator("main section").all()) {
+    await section.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(80);
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(300);
   await page.screenshot({ path: `${OUT}${vp.name}.png`, fullPage: true });
   results.push({ viewport: vp.name, ...overflow, consoleErrors: errors });
   await page.close();
@@ -55,7 +61,7 @@ for (const vp of viewports) {
   await page.locator("#contact").scrollIntoViewIfNeeded();
   await page.waitForTimeout(900);
 
-  await page.getByRole("button", { name: "Book a consultation" }).click();
+  await page.getByRole("button", { name: "Request a Demo" }).click();
   await page.waitForTimeout(800);
   const errorCount = await page.locator("text=Please").count();
   await page.screenshot({ path: `${OUT}form-errors.png` });
@@ -63,8 +69,8 @@ for (const vp of viewports) {
   await page.locator("#name").fill("QA Tester");
   await page.locator("#email").fill("qa@example.com");
   await page.locator("#company").fill("QA Co");
-  await page.locator("#interest").selectOption("BPO CRM");
-  await page.getByRole("button", { name: "Book a consultation" }).click();
+  await page.locator("#interest").selectOption("Core Collections");
+  await page.getByRole("button", { name: "Request a Demo" }).click();
   await page.waitForTimeout(1500);
   const success = await page.locator("text=Message received.").count();
   await page.screenshot({ path: `${OUT}form-success.png` });
