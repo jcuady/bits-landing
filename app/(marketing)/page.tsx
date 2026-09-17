@@ -3,9 +3,7 @@ import { TrustStrip } from "@/components/sections/trust-strip";
 import { StatsStrip } from "@/components/sections/stats-strip";
 import { Problem } from "@/components/sections/problem";
 import { FeaturesGrid } from "@/components/sections/features-grid";
-import { Solutions } from "@/components/sections/solutions";
 import { ProductShowcase } from "@/components/sections/product-showcase";
-import { AiAgentsShowcase } from "@/components/sections/ai-agents-showcase";
 import { BitsAgentShowcase } from "@/components/sections/bits-agent-showcase";
 import { Pricing } from "@/components/sections/pricing";
 import { WhyBits } from "@/components/sections/why-bits";
@@ -22,9 +20,7 @@ export default function Home() {
       <StatsStrip />
       <Problem />
       <FeaturesGrid />
-      <Solutions />
       <ProductShowcase />
-      <AiAgentsShowcase />
       <BitsAgentShowcase />
       <Pricing />
       <WhyBits />

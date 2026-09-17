@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { bitsAgentCapabilities, bitsAgentUseCases } from "@/lib/site";
 import { Container } from "@/components/ui/container";
@@ -22,21 +23,13 @@ const WAVEFORM_HEIGHTS = [12, 28, 20, 36, 16, 44, 24, 32, 20, 40, 28, 16, 36, 24
 type UseCaseId = (typeof bitsAgentUseCases)[number]["id"];
 
 function LiveCallMockup() {
-  const [activeBar, setActiveBar] = React.useState(0);
   const [visibleLines, setVisibleLines] = React.useState(1);
-
-  React.useEffect(() => {
-    const barTimer = setInterval(() => {
-      setActiveBar((p) => (p + 1) % WAVEFORM_HEIGHTS.length);
-    }, 120);
-    return () => clearInterval(barTimer);
-  }, []);
 
   React.useEffect(() => {
     if (visibleLines >= TRANSCRIPT.length) return;
     const timer = setTimeout(() => {
       setVisibleLines((p) => p + 1);
-    }, 2200);
+    }, 2400);
     return () => clearTimeout(timer);
   }, [visibleLines]);
 
@@ -63,22 +56,23 @@ function LiveCallMockup() {
         </div>
       </div>
 
-      {/* Waveform visualizer */}
+      {/* Waveform visualizer - GPU animated */}
       <div className="flex items-center justify-center gap-[3px] border-b border-white/5 bg-[#080E1C] px-6 py-4">
         {WAVEFORM_HEIGHTS.map((h, i) => (
           <motion.div
             key={i}
-            className="w-[3px] rounded-full"
-            style={{
-              backgroundColor:
-                i === activeBar
-                  ? "rgb(96, 165, 250)"
-                  : i === (activeBar - 1 + WAVEFORM_HEIGHTS.length) % WAVEFORM_HEIGHTS.length
-                    ? "rgb(59, 130, 246)"
-                    : "rgb(30, 58, 138)",
+            className="w-[3px] rounded-full bg-blue-400"
+            animate={{
+              height: [h * 0.35, h + 6, h * 0.4],
+              opacity: [0.45, 1, 0.45],
             }}
-            animate={{ height: i === activeBar ? h + 8 : i % 3 === 0 ? h * 0.5 : h * 0.3 }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
+            transition={{
+              duration: 1.1 + (i % 4) * 0.15,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: (i % 5) * 0.12,
+              ease: "easeInOut",
+            }}
           />
         ))}
         <div className="ml-4 font-mono text-[0.65rem] text-blue-300/50">04:12</div>
@@ -150,7 +144,7 @@ export function BitsAgentShowcase() {
   const activeCase = bitsAgentUseCases.find((u) => u.id === activeUseCase) ?? bitsAgentUseCases[0];
 
   return (
-    <Section id="bitsagent" className="relative overflow-hidden bg-[#060C1A]">
+    <Section id="bitsagent" className="relative scroll-mt-24 overflow-hidden bg-[#060C1A]">
       {/* Background layering */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_60%_-10%,rgba(29,78,216,0.18),transparent)]" />
@@ -212,19 +206,25 @@ export function BitsAgentShowcase() {
 
               {/* CTA row */}
               <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href="#contact"
-                  className="group flex h-12 items-center gap-2 rounded-full bg-blue-600 px-7 font-bold text-white transition-all hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-900/30 active:scale-[0.98]"
+                <Link
+                  href="/bitsagent"
+                  className="group flex h-12 items-center gap-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-7 text-[0.92rem] font-bold text-white transition-all hover:from-violet-500 hover:to-indigo-500 hover:shadow-lg hover:shadow-violet-900/40 active:scale-[0.98]"
+                >
+                  Learn More About BITSagent
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="group flex h-12 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 text-[0.92rem] font-bold text-white transition-all hover:bg-white/10 active:scale-[0.98]"
                 >
                   Deploy BITSagent
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </a>
-                <a
-                  href="#pricing"
+                </Link>
+                <Link
+                  href="/#pricing"
                   className="text-[0.9rem] font-semibold text-blue-300/70 underline-offset-4 hover:text-blue-200 hover:underline transition-colors"
                 >
                   View pricing
-                </a>
+                </Link>
               </div>
             </div>
           </Reveal>

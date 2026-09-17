@@ -18,29 +18,47 @@ export function Magnetic({
   strength?: number;
 }) {
   const reduce = useReducedMotion();
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 220, damping: 22, mass: 0.35 });
-  const sy = useSpring(y, { stiffness: 220, damping: 22, mass: 0.35 });
-  const transform = useTransform([sx, sy], ([xv, yv]) => `translate3d(${xv}px, ${yv}px, 0)`);
+  const sx = useSpring(x, { stiffness: 200, damping: 20, mass: 0.3 });
+  const sy = useSpring(y, { stiffness: 200, damping: 20, mass: 0.3 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduce === true || !containerRef.current) return;
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches === false) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const distanceX = e.clientX - centerX;
+    const distanceY = e.clientY - centerY;
+
+    x.set((distanceX / (rect.width / 2)) * (strength / 2));
+    y.set((distanceY / (rect.height / 2)) * (strength / 2));
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
-    <motion.div
-      className={cn("will-change-transform", className)}
-      style={{ transform }}
-      onMouseMove={(e) => {
-        if (reduce === true) return;
-        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches === false) return;
-        const r = e.currentTarget.getBoundingClientRect();
-        x.set(((e.clientX - r.left) / r.width - 0.5) * strength);
-        y.set(((e.clientY - r.top) / r.height - 0.5) * strength);
-      }}
-      onMouseLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
+    <div
+      ref={containerRef}
+      className={cn("inline-block", className)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      {children}
-    </motion.div>
+      <motion.div
+        style={{ x: sx, y: sy }}
+        className="h-full w-full"
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }

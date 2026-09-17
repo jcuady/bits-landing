@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -29,7 +30,7 @@ export function Hero() {
               <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/70 px-4 py-1.5 backdrop-blur-md shadow-xs">
                 <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" aria-hidden />
                 <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                  Enterprise Collections CRM & Dialer
+                  Enterprise Collections CRM & AI Agents
                 </span>
               </div>
             </Reveal>
@@ -54,22 +55,41 @@ export function Hero() {
             <Reveal delay={0.18} y={12}>
               <div className="mt-8 flex flex-col items-stretch justify-center gap-3.5 sm:mt-10 sm:flex-row sm:items-center">
                 <Magnetic className="w-full sm:w-auto">
-                  <a
-                    href="#contact"
+                  <Link
+                    href="/#contact"
                     className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.99] sm:w-auto"
                   >
                     Request Live Walkthrough
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </a>
+                  </Link>
                 </Magnetic>
                 <Magnetic className="w-full sm:w-auto">
-                  <a
-                    href="#pricing"
+                  <Link
+                    href="/#pricing"
                     className="flex h-14 w-full items-center justify-center rounded-full bg-white px-8 font-bold text-slate-900 shadow-xs ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-50 hover:ring-slate-300 active:scale-[0.99] sm:w-auto"
                   >
                     See Pricing & ROI
-                  </a>
+                  </Link>
                 </Magnetic>
+              </div>
+
+              {/* Direct Product Links */}
+              <div className="mt-5 flex items-center justify-center gap-4 text-[0.85rem] font-bold">
+                <Link
+                  href="/bitscrm"
+                  className="group inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
+                >
+                  <span>Explore BITScrm</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                </Link>
+                <span className="text-slate-300">•</span>
+                <Link
+                  href="/bitsagent"
+                  className="group inline-flex items-center gap-1.5 text-violet-600 hover:text-violet-700 transition-colors"
+                >
+                  <span>Explore BITSagent AI</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                </Link>
               </div>
 
               {/* Friction-reducing reassurance row */}

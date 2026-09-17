@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
@@ -167,32 +168,42 @@ export function ProductShowcase() {
   };
 
   return (
-    <Section id="product" className="relative overflow-hidden bg-white">
+    <Section id="bitscrm" className="relative scroll-mt-24 overflow-hidden bg-white">
+      {/* Anchor alias for backwards compatibility */}
+      <div id="product" className="sr-only" />
       {/* Premium Light Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
 
       <Container className="relative z-10">
         <Reveal>
-          <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/50 px-4 py-1.5 backdrop-blur-md">
-            <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
-            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
-              Agent · Supervisor · QA · Administrator
+          <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/70 px-4 py-1.5 backdrop-blur-md">
+            <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+              BITScrm Collections Platform
             </span>
           </div>
           <h2 className="text-h2 mt-4 max-w-4xl text-balance font-bold leading-[1.08] text-slate-900">
-            One platform. Different views for every role.
+            BITScrm: Built for Every Seat on Your Recovery Floor
           </h2>
-          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
-            Give every role the context and controls required for collections
-            work without exposing unrelated administration or campaign data.
+          <p className="text-lede mt-5 max-w-[55ch] text-pretty text-slate-600">
+            Consolidate portfolio queues, predictive voice dialing, automated PTP scheduling,
+            and compliance tracking into one unified, role-based CRM workspace.
           </p>
-          <a href="#contact" className={ctaClass}>
-            <span className="relative">
-              Request a Demo
-              <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-            </span>
-            <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-          </a>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link
+              href="/bitscrm"
+              className="group flex h-12 items-center gap-2.5 rounded-full bg-blue-600 px-7 text-[0.92rem] font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.98]"
+            >
+              Learn More About BITScrm
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+            <Link
+              href="/#contact"
+              className="inline-flex h-12 items-center rounded-full border border-slate-200 bg-white px-6 text-[0.92rem] font-bold text-slate-700 shadow-xs transition-colors hover:bg-slate-50 hover:text-slate-900"
+            >
+              Request a Live Demo
+            </Link>
+          </div>
         </Reveal>
 
         <div className="mt-12 lg:mt-16">

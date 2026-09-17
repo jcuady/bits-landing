@@ -71,11 +71,11 @@ export const bitsAgentUseCases = [
 ] as const;
 
 export const navItems = [
-  { label: "Features", href: "#features" },
-  { label: "BITScrm", href: "#product" },
-  { label: "BITSagent", href: "#bitsagent" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
+  { label: "Features", href: "/#features" },
+  { label: "BITScrm", href: "/bitscrm" },
+  { label: "BITSagent", href: "/bitsagent" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 /* ── Hero platform benchmarks ── */
@@ -362,8 +362,8 @@ export const processSteps = [
 export const contactInterests = ["Core Collections", "Messaging", "Dialer", "Quality Assurance", "BITSagent — Voice AI", "BITSagent — Email AI", "BITS Suite (Bundle)", "Large / On-premises", "Other"] as const;
 
 export const footerColumns = [
-  { title: "Platform", links: [{ label: "BITScrm", href: "#product" }, { label: "BITSagent", href: "#bitsagent" }, { label: "AI Agents", href: "#ai-agents" }, { label: "How It Works", href: "#process" }] },
-  { title: "Pricing", links: [{ label: "BITScrm Plans", href: "#pricing" }, { label: "BITSagent Plans", href: "#pricing" }, { label: "Suite Bundle", href: "#pricing" }, { label: "Custom Quote", href: "#contact" }] },
-  { title: "Company", links: [{ label: "About", href: "#about" }, { label: "Security", href: "#security" }, { label: "Contact", href: "#contact" }] },
-  { title: "Resources", links: [{ label: "Request a Demo", href: "#contact" }, { label: "CRM Sign in", href: "/login" }, { label: "Privacy", href: "/legal#privacy" }, { label: "Terms", href: "/legal#terms" }] },
+  { title: "Platform", links: [{ label: "BITScrm", href: "/bitscrm" }, { label: "BITSagent", href: "/bitsagent" }, { label: "Features", href: "/#features" }, { label: "How It Works", href: "/#process" }] },
+  { title: "Pricing", links: [{ label: "BITScrm Plans", href: "/#pricing" }, { label: "BITSagent Plans", href: "/#pricing" }, { label: "Suite Bundle", href: "/#pricing" }, { label: "Custom Quote", href: "/#contact" }] },
+  { title: "Company", links: [{ label: "About", href: "/#about" }, { label: "Security", href: "/#security" }, { label: "Contact", href: "/#contact" }] },
+  { title: "Resources", links: [{ label: "Request a Demo", href: "/#contact" }, { label: "CRM Sign in", href: "/login" }, { label: "Privacy", href: "/legal#privacy" }, { label: "Terms", href: "/legal#terms" }] },
 ] as const;
