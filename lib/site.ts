@@ -7,11 +7,74 @@ export const site = {
     "Collections CRM & operations platform with built-in dialer, AI agents, QA, and reporting. Manage portfolios, workflows, and customer communications in one workspace. Request a demo.",
 } as const;
 
+/* ── BITSagent product data ── */
+export const bitsAgentCapabilities = [
+  {
+    id: "voice",
+    label: "Human-Quality Voice",
+    copy: "Conversational AI that adapts tone, pacing, and language to each customer — indistinguishable from a live agent.",
+    metric: "< 300ms",
+    metricLabel: "avg. response latency",
+  },
+  {
+    id: "email",
+    label: "Smart Email Agent",
+    copy: "Drafts, sends, and follows up on emails autonomously — handles replies, escalations, and PTP confirmations.",
+    metric: "72%",
+    metricLabel: "reduction in email workload",
+  },
+  {
+    id: "multichannel",
+    label: "Omnichannel Outreach",
+    copy: "Coordinates across voice, email, and SMS in a single campaign flow with unified account history.",
+    metric: "3.8x",
+    metricLabel: "more customer touchpoints",
+  },
+  {
+    id: "compliance",
+    label: "Compliance-First Design",
+    copy: "Built-in quiet hours enforcement, DNC list handling, BSP/NPC-aligned consent management, and full audit trail.",
+    metric: "100%",
+    metricLabel: "policy-controlled execution",
+  },
+] as const;
+
+export const bitsAgentUseCases = [
+  {
+    id: "collections",
+    label: "Debt Collections",
+    headline: "Automated Collections at Scale",
+    copy: "Deploy AI agents that negotiate payment arrangements, handle broken PTPs, and escalate complex cases — 24/7, at a fraction of the cost of a human floor.",
+    outcomes: ["3.2x higher right-party contact", "45% drop in broken PTPs", "60% lower cost per recovery"],
+  },
+  {
+    id: "support",
+    label: "Customer Support",
+    headline: "Always-On Support Coverage",
+    copy: "Handle inbound inquiries, account status requests, and payment confirmations without adding headcount. Seamless handoff to live agents for complex cases.",
+    outcomes: ["80% containment rate", "< 1min average resolution", "Zero hold time"],
+  },
+  {
+    id: "surveys",
+    label: "Surveys & Feedback",
+    headline: "Conversational Data Collection",
+    copy: "Run NPS, CSAT, and compliance surveys at volume with voice agents that feel human — higher completion rates, richer data.",
+    outcomes: ["4.2x higher completion", "Real-time sentiment tagging", "Auto-generated reports"],
+  },
+  {
+    id: "onboarding",
+    label: "Onboarding & Verification",
+    headline: "Instant Client & Debtor Onboarding",
+    copy: "Automate identity verification, document requests, and consent capture over voice and email for faster onboarding without the manual effort.",
+    outcomes: ["70% faster onboarding", "Reduces agent time by 85%", "BSP-compliant consent flows"],
+  },
+] as const;
+
 export const navItems = [
   { label: "Features", href: "#features" },
-  { label: "Product", href: "#product" },
+  { label: "BITScrm", href: "#product" },
+  { label: "BITSagent", href: "#bitsagent" },
   { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -187,6 +250,75 @@ export const pricingTiers = [
   },
 ] as const;
 
+/* ── BITSagent pricing tiers ── */
+export const bitsAgentPricingTiers = [
+  {
+    id: "launch" as const,
+    name: "Launch",
+    tagline: "For teams piloting AI voice agents on a focused use case.",
+    priceLabel: "₱2.80",
+    priceSubtext: "per AI-handled minute · no seat limits",
+    popular: false,
+    cta: "Start Free Pilot",
+    features: [
+      "Up to 5,000 AI minutes / month",
+      "Voice agent — outbound calling",
+      "Email agent — outbound sequences",
+      "Collections & PTP negotiation scripts",
+      "BSP / NPC consent handling",
+      "Standard reporting dashboard",
+      "Email & chat support",
+    ],
+  },
+  {
+    id: "scale" as const,
+    name: "Scale",
+    tagline: "For growing operations replacing or augmenting a human call floor.",
+    priceLabel: "₱2.20",
+    priceSubtext: "per AI-handled minute · volume discounts apply",
+    popular: true,
+    cta: "Get a Custom Quote",
+    features: [
+      "Unlimited AI minutes",
+      "Voice · Email · SMS agents",
+      "Custom negotiation parameters",
+      "Multi-campaign concurrent execution",
+      "Live escalation to human agents",
+      "QA call scoring & sentiment analysis",
+      "Dedicated onboarding engineer",
+    ],
+  },
+  {
+    id: "enterprise-agent" as const,
+    name: "Enterprise",
+    tagline: "For banks, large BPOs, and high-volume multilingual deployments.",
+    priceLabel: "Custom",
+    priceSubtext: "volume + concurrent channel pricing",
+    popular: false,
+    cta: "Talk to Solutions Architect",
+    features: [
+      "Everything in Scale",
+      "Custom voice persona & accent",
+      "Multilingual support (EN/FIL/+)",
+      "On-premises or private cloud",
+      "Custom compliance & audit exports",
+      "99.99% uptime SLA",
+      "Dedicated 24/7 support team",
+    ],
+  },
+] as const;
+
+/* ── Suite bundle ── */
+export const suiteBundleFeatures = [
+  "BITScrm Professional — full CRM, dialer, QA & reporting",
+  "BITSagent Scale — unlimited AI voice, email & SMS agents",
+  "Shared account & portfolio data between CRM and Agent",
+  "Unified compliance dashboard (BSP / NPC / SEC)",
+  "Single vendor, single contract, single support line",
+  "Priority onboarding & implementation engineering",
+  "Volume-based minute pricing + per-seat discount",
+] as const;
+
 export const agents = [
   { name: "Core Collections", role: "Portfolios, accounts, assignments, queues, PTP, payments, and reporting." },
   { name: "Messaging", role: "SMS, email, templates, blasts, provider integrations, and communication history." },
@@ -227,11 +359,11 @@ export const processSteps = [
   { index: "05", name: "Review & Improve", copy: "Monitor quality, productivity, payments, activity, and campaign performance." },
 ] as const;
 
-export const contactInterests = ["Core Collections", "Messaging", "Dialer", "Quality Assurance", "AI Agents", "Large / On-premises", "Other"] as const;
+export const contactInterests = ["Core Collections", "Messaging", "Dialer", "Quality Assurance", "BITSagent — Voice AI", "BITSagent — Email AI", "BITS Suite (Bundle)", "Large / On-premises", "Other"] as const;
 
 export const footerColumns = [
-  { title: "Platform", links: [{ label: "Features", href: "#features" }, { label: "AI Agents", href: "#ai-agents" }, { label: "Product Experience", href: "#product" }, { label: "How It Works", href: "#process" }] },
-  { title: "Pricing", links: [{ label: "Starter", href: "#pricing" }, { label: "Professional", href: "#pricing" }, { label: "Enterprise", href: "#pricing" }, { label: "Custom Quote", href: "#contact" }] },
+  { title: "Platform", links: [{ label: "BITScrm", href: "#product" }, { label: "BITSagent", href: "#bitsagent" }, { label: "AI Agents", href: "#ai-agents" }, { label: "How It Works", href: "#process" }] },
+  { title: "Pricing", links: [{ label: "BITScrm Plans", href: "#pricing" }, { label: "BITSagent Plans", href: "#pricing" }, { label: "Suite Bundle", href: "#pricing" }, { label: "Custom Quote", href: "#contact" }] },
   { title: "Company", links: [{ label: "About", href: "#about" }, { label: "Security", href: "#security" }, { label: "Contact", href: "#contact" }] },
   { title: "Resources", links: [{ label: "Request a Demo", href: "#contact" }, { label: "CRM Sign in", href: "/login" }, { label: "Privacy", href: "/legal#privacy" }, { label: "Terms", href: "/legal#terms" }] },
 ] as const;

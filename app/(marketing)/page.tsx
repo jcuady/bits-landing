@@ -6,6 +6,7 @@ import { FeaturesGrid } from "@/components/sections/features-grid";
 import { Solutions } from "@/components/sections/solutions";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { AiAgentsShowcase } from "@/components/sections/ai-agents-showcase";
+import { BitsAgentShowcase } from "@/components/sections/bits-agent-showcase";
 import { Pricing } from "@/components/sections/pricing";
 import { WhyBits } from "@/components/sections/why-bits";
 import { Security } from "@/components/sections/security";
@@ -24,6 +25,7 @@ export default function Home() {
       <Solutions />
       <ProductShowcase />
       <AiAgentsShowcase />
+      <BitsAgentShowcase />
       <Pricing />
       <WhyBits />
       <Security />
