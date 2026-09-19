@@ -59,7 +59,7 @@ export function Hero() {
                     href="/#contact"
                     className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.99] sm:w-auto"
                   >
-                    Request Live Walkthrough
+                    Contact us
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </Link>
                 </Magnetic>
@@ -99,7 +99,7 @@ export function Hero() {
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> 14-Day Risk-Free Pilot
+                  <span className="font-bold text-emerald-600">✓</span> Contact the team — no free trial
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">

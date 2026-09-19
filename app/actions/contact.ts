@@ -1,24 +1,16 @@
 "use server";
 
 import { z } from "zod";
-import { contactInterests } from "@/lib/site";
-
-const contactSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name."),
-  email: z.email("Please enter a valid work email."),
-  company: z.string().trim().min(2, "Please enter your company."),
-  interest: z.enum(contactInterests, {
-    error: "Please choose what we can help with.",
-  }),
-  message: z.string().trim().max(2000, "Please keep the message under 2000 characters.").optional(),
-  // Honeypot: humans never see or fill this field.
-  website: z.string().max(0).optional().or(z.literal("")),
-});
+import {
+  INQUIRY_INBOX,
+  buildInquiryEmail,
+  contactSchema,
+} from "@/lib/contact";
 
 export type ContactState = {
   ok: boolean;
+  formError?: string;
   errors: Partial<Record<"name" | "email" | "company" | "interest" | "message", string[]>>;
-  // Echoed back so the form can keep the user's input after a failed validation.
   values: Record<string, string>;
 };
 
@@ -36,7 +28,6 @@ export async function submitContact(
 
   const parsed = contactSchema.safeParse({
     ...raw,
-    message: raw.message || undefined,
     website: formData.get("website") || undefined,
   });
 
@@ -44,14 +35,50 @@ export async function submitContact(
     return { ok: false, errors: z.flattenError(parsed.error).fieldErrors, values: raw };
   }
 
-  // Silently accept bot submissions without processing them.
   if (parsed.data.website) {
     return { ok: true, errors: {}, values: {} };
   }
 
-  // TODO: wire to email / CRM at deploy time (e.g. Resend, HubSpot).
-  // Validated payload is ready: parsed.data
-  console.log("[BITS] Contact submission:", parsed.data);
+  const apiKey = process.env.RESEND_API_KEY;
+  const inbox = process.env.CONTACT_INBOX || INQUIRY_INBOX;
+  const from = process.env.CONTACT_FROM || "BITS Inquiries <noreply@optrizo.com>";
 
-  return { ok: true, errors: {}, values: {} };
+  if (!apiKey) {
+    return {
+      ok: false,
+      formError: `We could not send your inquiry. Email ${INQUIRY_INBOX}.`,
+      errors: {},
+      values: raw,
+    };
+  }
+
+  const { subject, text, html } = buildInquiryEmail(parsed.data);
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "Idempotency-Key": crypto.randomUUID(),
+    },
+    body: JSON.stringify({
+      from,
+      to: [inbox],
+      reply_to: parsed.data.email,
+      subject,
+      text,
+      html,
+    }),
+  });
+
+  if (!response.ok) {
+    return {
+      ok: false,
+      formError: `We could not send your inquiry. Email ${INQUIRY_INBOX}.`,
+      errors: {},
+      values: raw,
+    };
+  }
+
+  return { ok: true, errors: {}, values: { email: parsed.data.email } };
 }

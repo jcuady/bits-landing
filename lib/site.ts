@@ -3,8 +3,9 @@ export const site = {
   legalName: "BITS - Boundless IT Solutions",
   tagline: "Technology Without Limits.",
   url: "https://bits-landing.vercel.app",
+  inquiryEmail: "bits_inquiries@boundlessits.com",
   description:
-    "Collections CRM & operations platform with built-in dialer, AI agents, QA, and reporting. Manage portfolios, workflows, and customer communications in one workspace. Request a demo.",
+    "Collections CRM and operations platform with built-in dialer, AI agents, QA, and reporting. Manage portfolios, workflows, and customer communications in one workspace.",
 } as const;
 
 /* ── BITSagent product data ── */
@@ -197,7 +198,7 @@ export const pricingTiers = [
     priceLabel: "₱1,850",
     priceSubtext: "per agent / month · billed annually",
     popular: false,
-    cta: "Start 14-Day Free Pilot",
+    cta: "Request a Demo",
     features: [
       "Core Collections Engine",
       "Delinquency Account Workflows",
@@ -216,7 +217,7 @@ export const pricingTiers = [
     priceLabel: "₱3,200",
     priceSubtext: "per agent / month · dialer & AI included",
     popular: true,
-    cta: "Request Demo & Pilot",
+    cta: "Request a Demo",
     features: [
       "Everything in Starter",
       "Built-in Browser SIP Softphone",
@@ -255,11 +256,11 @@ export const bitsAgentPricingTiers = [
   {
     id: "launch" as const,
     name: "Launch",
-    tagline: "For teams piloting AI voice agents on a focused use case.",
+    tagline: "For teams starting AI voice agents on a focused use case.",
     priceLabel: "₱2.80",
     priceSubtext: "per AI-handled minute · no seat limits",
     popular: false,
-    cta: "Start Free Pilot",
+    cta: "Request a Demo",
     features: [
       "Up to 5,000 AI minutes / month",
       "Voice agent — outbound calling",
@@ -365,5 +366,5 @@ export const footerColumns = [
   { title: "Platform", links: [{ label: "BITScrm", href: "/bitscrm" }, { label: "BITSagent", href: "/bitsagent" }, { label: "Features", href: "/#features" }, { label: "How It Works", href: "/#process" }] },
   { title: "Pricing", links: [{ label: "BITScrm Plans", href: "/#pricing" }, { label: "BITSagent Plans", href: "/#pricing" }, { label: "Suite Bundle", href: "/#pricing" }, { label: "Custom Quote", href: "/#contact" }] },
   { title: "Company", links: [{ label: "About", href: "/#about" }, { label: "Security", href: "/#security" }, { label: "Contact", href: "/#contact" }] },
-  { title: "Resources", links: [{ label: "Request a Demo", href: "/#contact" }, { label: "CRM Sign in", href: "/login" }, { label: "Privacy", href: "/legal#privacy" }, { label: "Terms", href: "/legal#terms" }] },
+  { title: "Resources", links: [{ label: "Contact", href: "/#contact" }, { label: "CRM Sign in", href: "/login" }, { label: "Privacy", href: "/legal#privacy" }, { label: "Terms", href: "/legal#terms" }] },
 ] as const;

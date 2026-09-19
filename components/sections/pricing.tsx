@@ -375,29 +375,25 @@ export function Pricing() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Free trial pilot banner */}
         <Reveal delay={0.3}>
-          <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-[2.5rem] bg-slate-900 shadow-2xl shadow-blue-950/20 lg:mt-20">
+          <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-[1.75rem] border border-linelight bg-cloud lg:mt-20">
             <div className="relative flex flex-col items-center justify-between gap-6 px-8 py-10 sm:flex-row sm:px-12 sm:py-12">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_100%_0%,rgba(59,130,246,0.2),rgba(255,255,255,0))]" />
               <div className="relative z-10 text-center sm:text-left">
-                <span className="rounded-full bg-blue-500/20 px-3 py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-blue-300">
-                  Risk-Free Pilot
-                </span>
-                <p className="mt-3 text-[1.35rem] font-bold text-white">
-                  Try BITS Free for 14 Days
+                <p className="text-overline text-electric-600">Scoped demonstration</p>
+                <p className="mt-3 text-[1.35rem] font-semibold text-ink">
+                  See BITS on your campaign rules
                 </p>
-                <p className="mt-1.5 max-w-md text-[0.92rem] text-slate-400">
-                  Test BITScrm with your portfolio, or deploy BITSagent on a live campaign — zero commitment, full platform access.
+                <p className="mt-1.5 max-w-md text-[0.92rem] text-slateblue">
+                  Request a walkthrough of BITScrm and BITSagent. We do not offer free trials
+                  or unpaid pilots.
                 </p>
               </div>
               <div className="relative z-10 shrink-0">
                 <a
                   href="#contact"
-                  className="group flex h-13 items-center justify-center gap-2 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/30 active:scale-[0.98]"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-electric-600 px-8 font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
                 >
-                  Start Free Pilot
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  Request a Demo
                 </a>
               </div>
             </div>

@@ -131,7 +131,7 @@ export function HeroProduct({ className }: { className?: string }) {
       </div>
 
       {/* Floating mobile mockup */}
-      <div className="absolute -bottom-6 -right-4 hidden w-[210px] animate-float sm:block lg:-right-8 lg:bottom-2 lg:w-[250px]" aria-hidden>
+      <div className="absolute -bottom-6 -right-4 hidden w-[210px] sm:block lg:-right-8 lg:bottom-2 lg:w-[250px]" aria-hidden>
         <div className="rounded-[2rem] bg-slate-900/10 p-2 shadow-2xl shadow-blue-950/25 ring-1 ring-slate-900/10 backdrop-blur-xl">
           <div className="overflow-hidden rounded-[calc(2rem-8px)] border border-slate-200/80 bg-white shadow-inner">
             {/* iOS Dynamic Island header */}

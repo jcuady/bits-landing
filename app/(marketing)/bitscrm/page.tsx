@@ -167,7 +167,7 @@ export default function BitsCrmPage() {
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.8rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> 14-Day Free Pilot
+                  <span className="font-bold text-emerald-600">✓</span> Scoped demo, no free trial
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
                   <span className="font-bold text-emerald-600">✓</span> BSP & NPC DPA Compliant
@@ -279,19 +279,14 @@ export default function BitsCrmPage() {
       </section>
 
       {/* Telephony Infrastructure & Security */}
-      <section className="bg-[#030D1C] py-20 text-white sm:py-28 relative overflow-hidden">
-        <div className="bg-grid-dark pointer-events-none absolute inset-0 opacity-20" aria-hidden />
-        <Container className="relative z-10">
+      <section className="relative overflow-hidden bg-cloud py-20 sm:py-28">
+        <Container className="relative">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-400">
-              Telecom & Telephony Specs
-            </span>
-            <h2 className="text-h2 mt-3 font-bold text-white">
-              Enterprise-Grade Telephony & Data Security
-            </h2>
-            <p className="text-lede mt-4 text-blue-100/70">
-              Built on resilient SIP trunking backbones with automated failover, TLS voice encryption,
-              and strict compliance controls.
+            <p className="text-overline text-electric-600">Telecom and telephony</p>
+            <h2 className="text-h2 mt-3 text-ink">Telephony and access controls for the collections floor.</h2>
+            <p className="text-lede mt-4 text-slateblue">
+              SIP trunking, failover, TLS voice encryption, and operational controls configured
+              around your infrastructure.
             </p>
           </div>
 
@@ -299,38 +294,37 @@ export default function BitsCrmPage() {
             {TELEPHONY_SPECS.map((spec) => (
               <div
                 key={spec.label}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-md"
+                className="rounded-2xl border border-linelight bg-white p-6 text-center"
               >
-                <p className="text-[0.75rem] font-bold uppercase tracking-widest text-blue-300">
+                <p className="text-[0.75rem] font-semibold tracking-widest text-electric-600 uppercase">
                   {spec.label}
                 </p>
-                <p className="mt-2 text-2xl font-bold text-white sm:text-3xl">{spec.value}</p>
-                <p className="mt-1 text-[0.75rem] text-blue-200/60">{spec.detail}</p>
+                <p className="mt-2 text-2xl font-semibold text-ink sm:text-3xl">{spec.value}</p>
+                <p className="mt-1 text-[0.75rem] text-slateblue">{spec.detail}</p>
               </div>
             ))}
           </div>
 
-          <div className="mt-12 rounded-2xl border border-white/10 bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-8 text-center sm:p-10">
-            <h3 className="text-xl font-bold text-white">
-              Need autonomous AI voice dialing alongside human agents?
+          <div className="mt-12 rounded-2xl border border-linelight bg-white p-8 text-center sm:p-10">
+            <h3 className="text-xl font-semibold text-ink">
+              Need configured AI voice contact alongside human agents?
             </h3>
-            <p className="mx-auto mt-2 max-w-2xl text-[0.95rem] text-blue-100/70">
-              Pair BITScrm with <strong>BITSagent</strong> to automate 100,000+ early-stage debt recovery calls
-              with zero human floor overhead.
+            <p className="mx-auto mt-2 max-w-2xl text-[0.95rem] text-slateblue">
+              Pair BITScrm with BITSagent for early-stage recovery outreach under campaign
+              rules and supervisor controls.
             </p>
-            <div className="mt-6 flex justify-center gap-4">
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
                 href="/bitsagent"
-                className="group flex h-11 items-center gap-2 rounded-full bg-violet-600 px-6 text-[0.88rem] font-bold text-white transition-all hover:bg-violet-500"
+                className="inline-flex min-h-11 items-center rounded-full bg-electric-600 px-6 text-[0.88rem] font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
               >
-                Explore BITSagent AI
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                Explore BITSagent
               </Link>
               <Link
                 href="/#pricing"
-                className="flex h-11 items-center rounded-full border border-white/20 bg-white/10 px-6 text-[0.88rem] font-bold text-white transition-all hover:bg-white/20"
+                className="inline-flex min-h-11 items-center rounded-full border border-navy-700/20 bg-white px-6 text-[0.88rem] font-semibold text-navy-700 transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-skywash"
               >
-                View Suite Bundles
+                View suite options
               </Link>
             </div>
           </div>
@@ -405,27 +399,25 @@ export default function BitsCrmPage() {
       </section>
 
       {/* Bottom CTA Banner */}
-      <section className="bg-gradient-to-br from-blue-700 to-indigo-800 py-16 text-white text-center">
+      <section className="bg-cloud py-16 text-center">
         <Container>
           <div className="mx-auto max-w-3xl">
-            <h2 className="text-3xl font-bold sm:text-4xl">
-              Ready to Upgrade Your Collections Floor?
-            </h2>
-            <p className="mt-4 text-blue-100 text-lede">
-              Join leading financial institutions and agencies using BITScrm to recover delinquent debt faster.
+            <h2 className="text-h2 text-ink">Ready to review BITS on your floor?</h2>
+            <p className="text-lede mx-auto mt-4 max-w-[46ch] text-slateblue">
+              Request a scoped demonstration. We do not offer free trials or unpaid pilots.
             </p>
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 href="/#contact"
-                className="flex h-14 items-center justify-center rounded-full bg-white px-8 font-bold text-blue-700 shadow-lg transition-all hover:bg-blue-50 active:scale-[0.98]"
+                className="inline-flex h-14 items-center justify-center rounded-full bg-electric-600 px-8 font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
               >
-                Schedule Your 14-Day Pilot →
+                Request a Demo
               </Link>
               <Link
                 href="/bitsagent"
-                className="flex h-14 items-center justify-center rounded-full border border-white/30 bg-white/10 px-8 font-bold text-white transition-all hover:bg-white/20 active:scale-[0.98]"
+                className="inline-flex h-14 items-center justify-center rounded-full border border-navy-700/20 bg-white px-8 font-semibold text-navy-700 transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-skywash"
               >
-                Learn About BITSagent AI
+                Learn about BITSagent
               </Link>
             </div>
           </div>

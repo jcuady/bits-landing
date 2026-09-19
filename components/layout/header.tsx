@@ -94,7 +94,7 @@ export function Header() {
               href="/#contact"
               className="group flex h-10 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.88rem] font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.98]"
             >
-              Request a Demo
+              Contact us
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
@@ -187,7 +187,7 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className="group flex h-14 items-center justify-center gap-3 rounded-full bg-blue-600 px-6 text-[1rem] font-bold text-white transition-all hover:bg-blue-700 shadow-lg shadow-blue-900/20 active:scale-[0.98]"
               >
-                Request a Demo
+                Contact us
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
               <Link
