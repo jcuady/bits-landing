@@ -44,16 +44,18 @@ import {
   Globe,
   Share2,
   Landmark,
+  Palette,
 } from "lucide-react";
 
 const categoryFilters = [
-  { id: "all", label: "All Products (17)", count: 17, color: "blue" },
+  { id: "all", label: "All Products (18)", count: 18, color: "blue" },
   { id: "flagship", label: "Core Flagships", count: 2, color: "indigo" },
   { id: "crm", label: "CRM Variants", count: 4, color: "emerald" },
   { id: "operations", label: "ERP, Finance & Operations", count: 6, color: "amber" },
   { id: "sports", label: "Sports, Booking & Queuing", count: 4, color: "rose" },
   { id: "identity", label: "Smart NFC & Identity", count: 1, color: "cyan" },
   { id: "ai", label: "AI & Knowledge", count: 2, color: "purple" },
+  { id: "whitelabel", label: "White Label", count: 1, color: "orange" },
 ] as const;
 
 type CategoryFilterId = (typeof categoryFilters)[number]["id"];
@@ -115,6 +117,8 @@ export function ProductsSuite() {
         return Database;
       case "nfc-card":
         return Radio;
+      case "white-label":
+        return Palette;
       default:
         return Layers;
     }
@@ -156,6 +160,8 @@ export function ProductsSuite() {
         return "from-violet-600 to-purple-700 text-violet-700 bg-violet-50 border-violet-200";
       case "nfc-card":
         return "from-cyan-600 to-blue-600 text-cyan-700 bg-cyan-50 border-cyan-200";
+      case "white-label":
+        return "from-orange-500 to-amber-600 text-orange-700 bg-orange-50 border-orange-200";
       default:
         return "from-blue-600 to-indigo-600 text-blue-600 bg-blue-50 border-blue-200";
     }
@@ -506,6 +512,8 @@ function ProductMockupBoard({ productId }: { productId: string }) {
       return <RagBoard />;
     case "nfc-card":
       return <NfcCardBoard />;
+    case "white-label":
+      return <WhiteLabelBoard />;
     default:
       return <ServiceBoard />;
   }
@@ -1883,6 +1891,131 @@ function NfcCardBoard() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+/* 18. BITS White Label Platform Board */
+function WhiteLabelBoard() {
+  const [activeProduct, setActiveProduct] = React.useState<"crm" | "hrms" | "accounting" | "booking">("crm");
+
+  const brandedProducts = [
+    { id: "crm" as const, name: "CRM Suite", status: "Live", color: "emerald" },
+    { id: "hrms" as const, name: "HRMS Cloud", status: "Live", color: "emerald" },
+    { id: "accounting" as const, name: "Accounting ERP", status: "Staging", color: "amber" },
+    { id: "booking" as const, name: "Booking Hub", status: "Pending", color: "blue" },
+  ];
+
+  const brandConfig: Record<typeof activeProduct, { name: string; domain: string; primary: string; logo: string }> = {
+    crm: { name: "NexaCRM", domain: "nexacrm.yourcompany.com", primary: "#2563EB", logo: "NC" },
+    hrms: { name: "PeopleCore", domain: "hr.yourcompany.com", primary: "#7C3AED", logo: "PC" },
+    accounting: { name: "LedgerPro", domain: "finance.yourcompany.com", primary: "#059669", logo: "LP" },
+    booking: { name: "BookEase", domain: "book.yourcompany.com", primary: "#DC2626", logo: "BE" },
+  };
+
+  const cfg = brandConfig[activeProduct];
+
+  return (
+    <div className="space-y-4 font-sans">
+      {/* Header banner */}
+      <div className="flex items-center justify-between rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">White Label Brand Configuration Portal</p>
+          <p className="text-[0.68rem] text-slate-500">
+            4 Products Branded · NDA Active · Zero BITS Attribution
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="rounded-md bg-orange-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+            100% Yours
+          </span>
+        </div>
+      </div>
+
+      {/* Product selector */}
+      <div className="flex flex-wrap gap-2">
+        {brandedProducts.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            onClick={() => setActiveProduct(p.id)}
+            className={cn(
+              "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-[0.68rem] font-bold transition-all cursor-pointer",
+              activeProduct === p.id
+                ? "border-orange-400 bg-orange-100 text-orange-800"
+                : "border-slate-200 bg-white text-slate-600 hover:border-orange-200"
+            )}
+          >
+            <span className={cn(
+              "size-1.5 rounded-full",
+              p.color === "emerald" ? "bg-emerald-500" : p.color === "amber" ? "bg-amber-500" : "bg-blue-500"
+            )} />
+            {p.name}
+            <span className={cn(
+              "rounded-full px-1.5 py-0.5 text-[0.58rem] font-bold",
+              p.color === "emerald" ? "bg-emerald-100 text-emerald-700" : p.color === "amber" ? "bg-amber-100 text-amber-700" : "bg-blue-100 text-blue-700"
+            )}>
+              {p.status}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Brand Preview Card */}
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        {/* Simulated branded header bar */}
+        <div
+          className="flex items-center gap-3 px-4 py-2.5"
+          style={{ backgroundColor: cfg.primary }}
+        >
+          <div
+            className="flex size-7 items-center justify-center rounded-lg bg-white/20 text-[0.65rem] font-black text-white"
+          >
+            {cfg.logo}
+          </div>
+          <span className="text-xs font-bold text-white">{cfg.name}</span>
+          <span className="ml-auto text-[0.65rem] text-white/70 font-mono">{cfg.domain}</span>
+        </div>
+
+        {/* Branding details table */}
+        <div className="divide-y divide-slate-100">
+          {[
+            { label: "Brand Name", value: cfg.name, tag: "Replaced" },
+            { label: "Custom Domain", value: cfg.domain, tag: "SSL Active" },
+            { label: "Primary Color", value: cfg.primary, tag: "Hex Applied" },
+            { label: "BITS Attribution", value: "None — NDA Protected", tag: "Hidden" },
+            { label: "Reseller License", value: "Full Sublicensing Rights", tag: "Active" },
+          ].map((row) => (
+            <div key={row.label} className="flex items-center justify-between px-4 py-2.5 text-xs">
+              <span className="font-medium text-slate-500">{row.label}</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-slate-900">{row.value}</span>
+                <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[0.6rem] font-bold text-emerald-700">
+                  {row.tag}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom info strip */}
+      <div className="grid grid-cols-3 gap-2.5">
+        {[
+          { label: "Reseller Tier", value: "Platinum", color: "orange" },
+          { label: "Clients Onboarded", value: "12 Active", color: "emerald" },
+          { label: "Margin Control", value: "100% Yours", color: "blue" },
+        ].map((item) => (
+          <div key={item.label} className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
+            <p className={cn(
+              "text-[0.6rem] font-mono font-bold uppercase",
+              item.color === "orange" ? "text-orange-600" : item.color === "emerald" ? "text-emerald-600" : "text-blue-600"
+            )}>{item.label}</p>
+            <p className="mt-0.5 text-xs font-bold text-slate-900">{item.value}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

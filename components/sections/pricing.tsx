@@ -21,6 +21,7 @@ import {
   ArrowRight,
   Server,
   Cloud,
+  Palette,
 } from "lucide-react";
 
 const universalGuarantees = [
@@ -153,7 +154,7 @@ export function Pricing() {
 
         {/* 3 Solution Tiers Grid with Strict Alignment & Spacing */}
         <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 items-stretch gap-8 lg:grid-cols-3">
-          {solutionPackages.map((pkg, i) => {
+          {solutionPackages.filter((pkg) => pkg.id !== "whitelabel").map((pkg, i) => {
             const isPopular = pkg.popular;
             const isEnterprise = pkg.id === "enterprise";
             const isDimmed = activeTab !== "all" && activeTab !== pkg.id;
@@ -373,6 +374,61 @@ export function Pricing() {
                 <ChevronDown className="size-3.5" />
               )}
             </button>
+          </div>
+        </Reveal>
+
+        {/* ── WHITE LABEL ADD-ON CALLOUT ── */}
+        <Reveal delay={0.12}>
+          <div className="mx-auto mt-8 max-w-6xl overflow-hidden rounded-3xl border border-orange-200 bg-gradient-to-r from-orange-50/80 via-amber-50/60 to-white shadow-xl shadow-orange-900/5">
+            <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-orange-500 animate-pulse" />
+                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-orange-700">
+                    White Label & Custom Branding Add-On
+                  </span>
+                </div>
+                <h3 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
+                  Launch BITS products under your own brand — logo, domain, and color identity
+                </h3>
+                <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600">
+                  Any BITS product can be deployed as a fully white-labeled platform under your company's branding. Ideal for software resellers, enterprise groups, and businesses that want to own the client relationship. Zero mention of BITS required. NDA-protected.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {[
+                    "Custom Domain & SSL",
+                    "Logo & Brand Colors",
+                    "NDA-Protected",
+                    "Reseller Licensing",
+                    "Full Help Center Rebranding",
+                  ].map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 bg-white px-2.5 py-1 text-[0.68rem] font-semibold text-orange-800"
+                    >
+                      <Palette className="size-2.5 text-orange-500" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex shrink-0 flex-wrap items-center gap-3">
+                <Link
+                  href="/#contact"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-orange-300 bg-white px-5 text-xs font-bold text-orange-700 shadow-2xs transition-all hover:bg-orange-50 active:scale-[0.98]"
+                >
+                  <Palette className="size-3.5 text-orange-600" />
+                  <span>View White Label Branding</span>
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 text-xs font-bold text-white shadow-md shadow-orange-600/25 transition-all hover:bg-orange-700 active:scale-[0.98]"
+                >
+                  <span>Request White Label Proposal</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </Reveal>
 

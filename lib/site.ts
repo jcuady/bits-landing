@@ -733,6 +733,37 @@ export const bitsProducts = [
     ctaText: "Configure Your Smart NFC Card",
     ctaHref: "/#contact",
   },
+  {
+    id: "white-label",
+    name: "BITS White Label Platform",
+    shortName: "White Label",
+    category: "whitelabel",
+    categoryLabel: "White Label & Custom Branding",
+    badge: "Your Brand, Our Engine",
+    isFlagship: false,
+    tagline: "Deploy Any BITS Product Under Your Own Brand Identity",
+    description:
+      "Launch any BITS product suite—CRM, HRMS, Payroll, Booking, Queuing, Accounting, AI Agents, or NFC Cards—completely rebranded under your company's own name, logo, domain, and color identity. Ideal for software resellers, enterprise groups, government agencies, and businesses that require a fully white-labeled operational platform with zero mention of BITS. Maintain full ownership of the client relationship while BITS powers the engine silently behind the scenes.",
+    complianceBadges: [
+      "Custom Domain & SSL Certificate",
+      "Logo & Brand Color System",
+      "NDA-Protected Confidentiality",
+      "Full Reseller Licensing Available",
+    ],
+    capabilities: [
+      "Full Brand Replacement: Logo, Domain, Color Palette & Typography",
+      "White-Label Any BITS Product: CRM, HRMS, Payroll, Booking & More",
+      "Custom Client-Facing Login Portal with Your Brand Identity",
+      "NDA-Protected: Zero BITS Branding or Attribution Required",
+      "Reseller Licensing: Sell to Your Own Clients at Your Own Price",
+      "Custom Email Domain & Notification Templates with Your Brand",
+      "Dedicated Subdomain or Fully Custom Domain (yourbrand.com)",
+      "Priority Engineering Channel for Branded Feature Requests",
+    ],
+    metrics: { label: "Brand Ownership", value: "100% Yours" },
+    ctaText: "Inquire About White Label",
+    ctaHref: "/#contact",
+  },
 ] as const;
 
 /* ── BITS Technology Platform / Ecosystem Pillars ── */
@@ -1343,6 +1374,30 @@ export const solutionPackages = [
     primaryCta: "Book Architecture Consultation",
     popular: false,
   },
+  {
+    id: "whitelabel",
+    tier: "WHITE LABEL",
+    badge: "Custom Branding Add-On",
+    title: "White Label Branding Package",
+    tagline: "Deploy any BITS product under your own brand — logo, domain, and color identity. Ideal for resellers & enterprise groups.",
+    teamScope: "Any Tier",
+    deployment: "Cloud or On-Prem (Any)",
+    pricingModel: "Custom Branding License",
+    pricingSubtext: "Scoped on top of any Starter, Growth, or Enterprise tier",
+    highlights: [
+      "Full Brand Replacement (Logo, Domain, Colors, Typography)",
+      "White-Label Any BITS Product or Suite",
+      "NDA-Protected — Zero BITS Attribution Required",
+      "Custom Client Login Portal with Your Brand",
+      "Reseller License to Sell to Your Own Clients",
+      "Custom Email Domain & Branded Notifications",
+      "Dedicated Subdomain or Full Custom Domain",
+      "Priority Engineering for Branded Feature Requests",
+      "Full Documentation & Help Center Rebranding",
+    ],
+    primaryCta: "Request White Label Proposal",
+    popular: false,
+  },
 ] as const;
 
 export const pricingComparisonMatrix = [
@@ -1390,6 +1445,15 @@ export const pricingComparisonMatrix = [
       { name: "Statutory Alignment Scoping", starter: "Standard NPC DPA", growth: "BSP Circulars 454/857, DPA", enterprise: "Full Security & Compliance Scoping" },
       { name: "Service Level Agreement (SLA)", starter: "99.9% Telephony SLA", growth: "99.9% with Priority Queue", enterprise: "99.99% Bespoke Financial SLA" },
       { name: "Implementation & Engineering", starter: "Assisted Onboarding", growth: "Priority Implementation Eng.", enterprise: "Dedicated Solutions Architect" },
+    ],
+  },
+  {
+    category: "White Label & Custom Branding",
+    features: [
+      { name: "Custom Brand Identity (Logo, Domain, Colors)", starter: "Add-On", growth: "Add-On", enterprise: "Full Custom Branding Suite" },
+      { name: "Reseller License (Sell to Own Clients)", starter: "—", growth: "Available", enterprise: "Multi-Tier Reseller Program" },
+      { name: "NDA-Protected Zero Attribution", starter: "Add-On", growth: "Add-On", enterprise: "Included by Default" },
+      { name: "Client Portal Rebranding", starter: "Basic Logo Swap", growth: "Full UI Rebranding", enterprise: "Bespoke Brand Design System" },
     ],
   },
 ] as const;
@@ -1497,6 +1561,7 @@ export const consultationOptions = {
     "Compliance tracking & audit trail governance",
     "Need to scale operations without hiring linearly",
     "Smart NFC identity card & paperless networking",
+    "White label & custom branding requirements",
     "Custom proprietary workflow requirements",
   ],
   preferredMethods: [
