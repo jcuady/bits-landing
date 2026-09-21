@@ -7,7 +7,7 @@ export function NewsletterForm() {
 
   if (submitted) {
     return (
-      <p className="mt-3 text-[0.85rem] font-medium text-signal-300">
+      <p className="mt-3 text-[0.85rem] font-bold text-emerald-600">
         Thanks for subscribing!
       </p>
     );
@@ -23,13 +23,13 @@ export function NewsletterForm() {
     >
       <input
         type="email"
-        placeholder="Enter your email address"
+        placeholder="Enter your work email"
         aria-label="Email for newsletter"
-        className="h-10 flex-1 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-[0.85rem] text-white placeholder:text-white/30 focus:border-electric-500 focus:outline-none focus:ring-2 focus:ring-electric-500/20"
+        className="h-11 flex-1 rounded-xl border border-slate-200 bg-slate-50/80 px-3.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20"
       />
       <button
         type="submit"
-        className="h-10 shrink-0 cursor-pointer rounded-lg bg-electric-600 px-4 text-[0.82rem] font-semibold text-white transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
+        className="h-11 shrink-0 cursor-pointer rounded-xl bg-blue-600 px-4 text-[0.82rem] font-bold text-white transition-colors duration-200 hover:bg-blue-700"
       >
         Subscribe
       </button>

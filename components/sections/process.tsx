@@ -36,7 +36,7 @@ export function Process() {
                 Follow one connected operating loop from portfolio import through
                 campaign configuration, agent action, and management review.
               </p>
-              <a href="#contact" className={ctaClass}>
+              <a href="#contact" className="group mt-8 inline-flex min-h-[44px] items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700">
                 <span className="relative">
                   Request a Demo
                   <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />

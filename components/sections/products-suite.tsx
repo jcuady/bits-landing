@@ -28,25 +28,25 @@ import {
   CalendarCheck,
   Ticket,
   Database,
-  Lock,
   Layers,
-  Activity,
-  CheckCircle2,
-  Clock,
   Zap,
   MapPin,
-  QrCode,
   Tv,
-  FileCheck,
+  CheckCircle2,
+  Clock,
+  ChevronRight,
+  Filter,
+  Columns3,
+  SlidersHorizontal,
 } from "lucide-react";
 
 const categoryFilters = [
-  { id: "all", label: "All Products (15)" },
-  { id: "flagship", label: "Core Flagships (2)" },
-  { id: "crm", label: "CRM Variants (4)" },
-  { id: "operations", label: "Operations & Supply Chain (5)" },
-  { id: "sports", label: "Sports, Booking & Queuing (4)" },
-  { id: "ai", label: "AI & Knowledge (2)" },
+  { id: "all", label: "All Products (15)", count: 15, color: "blue" },
+  { id: "flagship", label: "Core Flagships", count: 2, color: "indigo" },
+  { id: "crm", label: "CRM Variants", count: 4, color: "emerald" },
+  { id: "operations", label: "Operations & Supply Chain", count: 5, color: "amber" },
+  { id: "sports", label: "Sports, Booking & Queuing", count: 4, color: "rose" },
+  { id: "ai", label: "AI & Knowledge", count: 2, color: "purple" },
 ] as const;
 
 type CategoryFilterId = (typeof categoryFilters)[number]["id"];
@@ -105,41 +105,77 @@ export function ProductsSuite() {
     }
   };
 
+  const getProductColor = (id: string) => {
+    switch (id) {
+      case "service":
+        return "from-blue-600 to-indigo-600 text-blue-600 bg-blue-50 border-blue-200";
+      case "ai-agent":
+        return "from-violet-600 to-purple-600 text-violet-600 bg-violet-50 border-violet-200";
+      case "sales":
+        return "from-emerald-600 to-teal-600 text-emerald-600 bg-emerald-50 border-emerald-200";
+      case "marketing":
+        return "from-pink-600 to-rose-600 text-pink-600 bg-pink-50 border-pink-200";
+      case "commerce":
+        return "from-cyan-600 to-blue-600 text-cyan-600 bg-cyan-50 border-cyan-200";
+      case "hrms":
+        return "from-amber-600 to-orange-600 text-amber-600 bg-amber-50 border-amber-200";
+      case "payroll":
+        return "from-emerald-600 to-green-600 text-emerald-600 bg-emerald-50 border-emerald-200";
+      case "construction":
+        return "from-amber-500 to-yellow-600 text-amber-700 bg-amber-50 border-amber-200";
+      case "inventory":
+        return "from-blue-500 to-cyan-600 text-blue-700 bg-blue-50 border-blue-200";
+      case "logistics":
+        return "from-indigo-600 to-blue-600 text-indigo-700 bg-indigo-50 border-indigo-200";
+      case "sports-ai":
+        return "from-cyan-600 to-teal-600 text-cyan-700 bg-cyan-50 border-cyan-200";
+      case "sports-hub":
+        return "from-emerald-600 to-teal-700 text-emerald-700 bg-emerald-50 border-emerald-200";
+      case "booking":
+        return "from-blue-600 to-indigo-700 text-blue-700 bg-blue-50 border-blue-200";
+      case "queuing":
+        return "from-rose-600 to-pink-600 text-rose-700 bg-rose-50 border-rose-200";
+      case "rag-engine":
+        return "from-violet-600 to-purple-700 text-violet-700 bg-violet-50 border-violet-200";
+      default:
+        return "from-blue-600 to-indigo-600 text-blue-600 bg-blue-50 border-blue-200";
+    }
+  };
+
   return (
-    <Section id="products-suite" className="relative overflow-hidden bg-slate-50 py-20 sm:py-28">
-      {/* Background Architectural Patterns */}
+    <Section id="products-suite" className="relative overflow-hidden bg-[#F8FAFC] py-20 sm:py-28">
+      {/* Light Ambient Background Grid */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(59,130,246,0.07),transparent)]" />
-        <div className="absolute left-1/2 -top-24 size-[650px] -translate-x-1/2 rounded-full bg-blue-500/[0.04] blur-3xl" />
-        <div className="absolute inset-0 bg-grid-light opacity-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(59,130,246,0.06),transparent_80%)]" />
+        <div className="absolute left-1/2 -top-24 size-[700px] -translate-x-1/2 rounded-full bg-blue-500/[0.03] blur-3xl" />
+        <div className="absolute inset-0 bg-grid-light opacity-60" />
       </div>
 
       <Container className="relative z-10">
-        {/* Section Header */}
+        {/* monday.com-Inspired Section Eyebrow & Hero Header */}
         <div className="mx-auto max-w-4xl text-center">
           <Reveal>
-            <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-white/90 px-4 py-1.5 shadow-2xs backdrop-blur-md">
+            <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-white px-4 py-1.5 shadow-xs backdrop-blur-md">
               <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Enterprise Product Ecosystem
+                The BITS Enterprise Work OS
               </span>
             </div>
-            <h2 className="text-h2 font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              One Unified Operational Engine.{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 bg-clip-text text-transparent">
-                Every Department Connected.
+            <h2 className="text-display font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              One unified operational platform.{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+                Every department aligned.
               </span>
             </h2>
-            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
-              Anchored by our flagship <strong className="text-slate-900">BITScrm Customer Service</strong> platform and{" "}
-              <strong className="text-slate-900">BITSagent AI</strong> operations, explore specialized software engines
-              for CRM variants, workforce payroll, construction & logistics, sports video AI, booking, and smart queuing.
+            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
+              Organize projects, automate revenue pipelines, dispatch service queues, and run autonomous voice AI.
+              Select any specialized engine below to explore live interactive boards and workflows in action.
             </p>
           </Reveal>
 
-          {/* Category Filter Pills */}
+          {/* Monday-Style Category Filter Tabs with Color Accents */}
           <Reveal delay={0.08}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
               {categoryFilters.map((tab) => {
                 const isActive = activeCategory === tab.id;
                 return (
@@ -148,7 +184,6 @@ export function ProductsSuite() {
                     type="button"
                     onClick={() => {
                       setActiveCategory(tab.id);
-                      // Auto-select first product in this category if active isn't in it
                       const matching =
                         tab.id === "all"
                           ? bitsProducts
@@ -165,13 +200,23 @@ export function ProductsSuite() {
                       }
                     }}
                     className={cn(
-                      "rounded-full px-4 py-2 text-xs font-bold transition-all sm:text-sm",
+                      "group flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all sm:text-sm",
                       isActive
                         ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 ring-2 ring-blue-600/20"
-                        : "border border-slate-200 bg-white/90 text-slate-600 hover:border-slate-300 hover:bg-white hover:text-slate-900"
+                        : "border border-slate-200/90 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 shadow-2xs"
                     )}
                   >
-                    {tab.label}
+                    <span>{tab.label}</span>
+                    <span
+                      className={cn(
+                        "rounded-full px-1.5 py-0.2 text-[0.68rem] font-extrabold",
+                        isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
+                      )}
+                    >
+                      {tab.count}
+                    </span>
                   </button>
                 );
               })}
@@ -179,12 +224,13 @@ export function ProductsSuite() {
           </Reveal>
         </div>
 
-        {/* Product Selector Horizontal Scroller */}
-        <div className="mt-10 overflow-x-auto pb-4 scrollbar-none">
-          <div className="flex items-center gap-3 min-w-max px-2">
+        {/* Monday.com-Style Horizontal Product Pills Carousel */}
+        <div className="mt-8 overflow-x-auto pb-4 scrollbar-none">
+          <div className="flex items-center gap-2.5 min-w-max px-2">
             {filteredProducts.map((prod) => {
               const isSelected = activeProduct.id === prod.id;
               const Icon = getProductIcon(prod.id);
+              const colorClass = getProductColor(prod.id);
 
               return (
                 <button
@@ -192,32 +238,32 @@ export function ProductsSuite() {
                   type="button"
                   onClick={() => setActiveProductId(prod.id)}
                   className={cn(
-                    "group relative flex items-center gap-3 rounded-2xl border p-3.5 text-left transition-all duration-200",
+                    "group relative flex min-h-[44px] items-center gap-2.5 rounded-xl border px-3.5 py-2.5 text-left transition-all duration-150",
                     isSelected
-                      ? "border-blue-600 bg-white shadow-lg shadow-blue-900/10 ring-2 ring-blue-500/20"
-                      : "border-slate-200/90 bg-white/80 hover:border-slate-300 hover:bg-white text-slate-700"
+                      ? "border-blue-600 bg-white shadow-md shadow-blue-900/10 ring-2 ring-blue-500/20"
+                      : "border-slate-200 bg-white/90 hover:border-slate-300 hover:bg-white text-slate-700 shadow-2xs"
                   )}
                 >
                   <div
                     className={cn(
-                      "flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors",
+                      "flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors",
                       isSelected
                         ? "bg-blue-600 text-white"
                         : "bg-slate-100 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600"
                     )}
                   >
-                    <Icon className="size-5" />
+                    <Icon className="size-4" />
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-xs font-bold text-slate-900 sm:text-sm">{prod.name}</p>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-slate-900">{prod.name}</span>
                       {prod.isFlagship && (
-                        <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[0.62rem] font-bold text-blue-700 uppercase">
+                        <span className="rounded bg-blue-100 px-1.5 py-0.2 text-[0.6rem] font-extrabold text-blue-700 uppercase">
                           Flagship
                         </span>
                       )}
                     </div>
-                    <p className="text-[0.72rem] text-slate-500 line-clamp-1">{prod.tagline}</p>
+                    <p className="text-[0.68rem] text-slate-500 max-w-[180px] truncate">{prod.tagline}</p>
                   </div>
                 </button>
               );
@@ -225,70 +271,79 @@ export function ProductsSuite() {
           </div>
         </div>
 
-        {/* Active Product Detailed Showcase */}
-        <div className="mt-6 rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-10">
-          {/* Flagship Notice Ribbon if Flagship */}
+        {/* Active Product Detailed Card: Clean White Light Mode Showcase */}
+        <div className="mt-4 overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-10">
+          {/* Top Flagship Banner if Flagship */}
           {activeProduct.isFlagship && (
-            <div className="mb-6 flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2.5 border border-blue-200/60">
-              <Zap className="size-4 text-blue-600 fill-blue-600" />
-              <p className="text-xs font-bold text-blue-900">
-                Core Flagship Platform · Mission-Critical Operational Hub
-              </p>
-              <span className="ml-auto font-mono text-[0.68rem] text-blue-600 font-semibold">
+            <div className="mb-6 flex items-center justify-between rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/60 to-white px-4 py-2.5 shadow-2xs">
+              <div className="flex items-center gap-2">
+                <span className="flex size-6 items-center justify-center rounded-lg bg-blue-600 text-white">
+                  <Zap className="size-3.5 fill-white" />
+                </span>
+                <div>
+                  <p className="text-xs font-bold text-slate-900">
+                    Core Operational Flagship Platform
+                  </p>
+                  <p className="text-[0.68rem] text-slate-500">
+                    High-throughput, carrier-grade, mission-critical infrastructure
+                  </p>
+                </div>
+              </div>
+              <span className="font-mono text-xs font-bold text-blue-700">
                 SLA: 99.99% Guaranteed
               </span>
             </div>
           )}
 
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
-            {/* Left Column: Product Information */}
-            <div className="lg:col-span-6 space-y-6">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
+            {/* Left Column: Product Information & Value Props */}
+            <div className="lg:col-span-5 space-y-6">
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-blue-100 px-3 py-1 font-mono text-[0.72rem] font-bold text-blue-800 uppercase tracking-wider">
+                  <span className="rounded-full bg-blue-50 border border-blue-200 px-3 py-1 font-mono text-[0.7rem] font-bold text-blue-700 uppercase tracking-wider">
                     {activeProduct.categoryLabel}
                   </span>
-                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[0.72rem] font-semibold text-slate-600">
+                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[0.7rem] font-semibold text-slate-600">
                     {activeProduct.badge}
                   </span>
                 </div>
 
-                <h3 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
+                <h3 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
                   {activeProduct.name}
                 </h3>
-                <p className="mt-2 text-sm font-semibold text-blue-600 sm:text-base">
+                <p className="mt-1 text-sm font-semibold text-blue-600">
                   {activeProduct.tagline}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   {activeProduct.description}
                 </p>
               </div>
 
-              {/* Performance / ROI Metric Card */}
-              <div className="flex items-center gap-4 rounded-2xl border border-blue-100 bg-blue-50/50 p-4">
-                <div className="text-3xl font-extrabold text-blue-700 font-mono sm:text-4xl">
+              {/* Performance / Value Metric Box */}
+              <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-2xs">
+                <div className="text-3xl font-extrabold text-blue-600 font-mono sm:text-4xl">
                   {activeProduct.metrics.value}
                 </div>
-                <div className="border-l border-blue-200 pl-4">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Performance Benchmark
+                <div className="border-l border-slate-200 pl-4">
+                  <p className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
+                    Operational Benchmark
                   </p>
-                  <p className="text-xs font-semibold text-slate-800">
+                  <p className="text-xs font-bold text-slate-800">
                     {activeProduct.metrics.label}
                   </p>
                 </div>
               </div>
 
-              {/* Compliance & Regulatory Badges */}
+              {/* Compliance Badges */}
               <div>
                 <p className="text-[0.68rem] font-mono uppercase tracking-widest text-slate-400 mb-2">
-                  Compliance & Regulatory Alignment
+                  Statutory & Compliance Alignment
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {activeProduct.complianceBadges.map((badge) => (
                     <span
                       key={badge}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[0.72rem] font-semibold text-slate-700 shadow-2xs"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[0.7rem] font-semibold text-slate-700 shadow-2xs"
                     >
                       <ShieldCheck className="size-3.5 text-blue-600" />
                       {badge}
@@ -297,45 +352,73 @@ export function ProductsSuite() {
                 </div>
               </div>
 
-              {/* Core Feature Capabilities Grid */}
-              <div className="space-y-2 pt-2">
+              {/* Key Capabilities */}
+              <div className="space-y-2 pt-1">
                 <p className="text-[0.68rem] font-mono uppercase tracking-widest text-slate-400">
-                  Key Engineered Capabilities
+                  Engineered Capabilities
                 </p>
-                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                   {activeProduct.capabilities.map((cap) => (
                     <div key={cap} className="flex items-start gap-2 text-xs text-slate-700">
-                      <Check className="size-4 shrink-0 text-blue-600 mt-0.5" />
+                      <Check className="size-4 shrink-0 text-emerald-600 mt-0.5" />
                       <span className="leading-snug">{cap}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
+              {/* CTAs */}
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Magnetic>
                   <Link
                     href={activeProduct.ctaHref}
-                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
+                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                   >
                     <span>{activeProduct.ctaText}</span>
-                    <ArrowRight className="size-4" />
+                    <ArrowRight className="size-3.5" />
                   </Link>
                 </Magnetic>
                 <Link
                   href="/#contact"
-                  className="text-xs font-bold text-slate-600 hover:text-blue-600 transition-colors"
+                  className="inline-flex min-h-[44px] items-center text-xs font-bold text-slate-600 hover:text-blue-600 transition-colors"
                 >
-                  Request Architecture Scoping →
+                  Schedule Solution Walkthrough →
                 </Link>
               </div>
             </div>
 
-            {/* Right Column: High-Fidelity Interactive UI Mockup */}
-            <div className="lg:col-span-6">
-              <div className="relative rounded-2xl border border-slate-800 bg-slate-950 p-2 shadow-2xl">
-                <ProductMockupPreview productId={activeProduct.id} />
+            {/* Right Column: monday.com-Inspired Interactive Light Mode Board Mockup */}
+            <div className="lg:col-span-7">
+              <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
+                {/* monday.com Board Header Bar */}
+                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/80 px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5 opacity-60">
+                      <span className="size-2.5 rounded-full bg-rose-400" />
+                      <span className="size-2.5 rounded-full bg-amber-400" />
+                      <span className="size-2.5 rounded-full bg-emerald-400" />
+                    </div>
+                    <div className="h-4 w-px bg-slate-200" />
+                    <span className="text-xs font-bold text-slate-800">{activeProduct.name}</span>
+                    <span className="rounded bg-slate-200/70 px-2 py-0.5 text-[0.62rem] font-bold text-slate-600">
+                      Live Workspace
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="hidden sm:inline-flex items-center gap-1 text-[0.68rem] text-slate-500 font-medium">
+                      <Filter className="size-3" /> Filter
+                    </span>
+                    <span className="hidden sm:inline-flex items-center gap-1 text-[0.68rem] text-slate-500 font-medium">
+                      <Columns3 className="size-3" /> Columns
+                    </span>
+                    <span className="inline-flex size-2 rounded-full bg-emerald-500 animate-ping" />
+                  </div>
+                </div>
+
+                {/* Monday-Style Board Body Container */}
+                <div className="p-4 sm:p-5">
+                  <ProductMockupBoard productId={activeProduct.id} />
+                </div>
               </div>
             </div>
           </div>
@@ -345,745 +428,842 @@ export function ProductsSuite() {
   );
 }
 
-/* ── Dedicated High-Fidelity UI Mockups for Each Product ── */
-function ProductMockupPreview({ productId }: { productId: string }) {
+/* ── monday.com-Style Signature Light Mode Board Mockups ── */
+function ProductMockupBoard({ productId }: { productId: string }) {
   switch (productId) {
     case "service":
-      return <ServiceCrmMockup />;
+      return <ServiceBoard />;
     case "ai-agent":
-      return <BitsAgentMockup />;
+      return <AiAgentBoard />;
     case "sales":
-      return <SalesCrmMockup />;
+      return <SalesBoard />;
     case "marketing":
-      return <MarketingCrmMockup />;
+      return <MarketingBoard />;
     case "commerce":
-      return <CommerceCrmMockup />;
+      return <CommerceBoard />;
     case "hrms":
-      return <HrmsMockup />;
+      return <HrmsBoard />;
     case "payroll":
-      return <PayrollMockup />;
+      return <PayrollBoard />;
     case "construction":
-      return <ConstructionMockup />;
+      return <ConstructionBoard />;
     case "inventory":
-      return <InventoryMockup />;
+      return <InventoryBoard />;
     case "logistics":
-      return <LogisticsMockup />;
+      return <LogisticsBoard />;
     case "sports-ai":
-      return <SportsAiMockup />;
+      return <SportsAiBoard />;
     case "sports-hub":
-      return <SportsHubMockup />;
+      return <SportsHubBoard />;
     case "booking":
-      return <BookingMockup />;
+      return <BookingBoard />;
     case "queuing":
-      return <QueuingMockup />;
+      return <QueuingBoard />;
     case "rag-engine":
-      return <RagEngineMockup />;
+      return <RagBoard />;
     default:
-      return <ServiceCrmMockup />;
+      return <ServiceBoard />;
   }
 }
 
-/* 1. Flagship Customer Service CRM Mockup */
-function ServiceCrmMockup() {
+/* 1. Flagship Customer Service CRM Board */
+function ServiceBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-mono text-xs font-bold text-white">BITScrm Service Core</span>
-          <span className="rounded bg-blue-900/60 px-2 py-0.5 text-[0.62rem] text-blue-300 border border-blue-500/30">
-            Softphone Connected
-          </span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-slate-400">Queue: Delinquent Tier-1</span>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between rounded-xl bg-gradient-to-r from-blue-900/60 to-slate-900 p-3 border border-blue-500/30">
-        <div className="flex items-center gap-3">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
+    <div className="space-y-4 font-sans">
+      {/* Top softphone banner */}
+      <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/70 p-3">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-blue-600 text-white">
             <PhoneCall className="size-4 animate-bounce" />
           </div>
           <div>
-            <p className="text-xs font-bold text-white">Active Call: Michael Tan (Acc #4920)</p>
-            <p className="text-[0.65rem] text-slate-300">Balance: ₱48,500 · 45 DPD · Disposition: PTP Negotiation</p>
+            <p className="text-xs font-bold text-slate-900">Active Softphone Call: Carlos Mendoza (#4920)</p>
+            <p className="text-[0.68rem] text-slate-500">Balance: ₱48,500 · 45 DPD · Supervisor Barge Ready</p>
           </div>
         </div>
         <div className="text-right">
-          <span className="font-mono text-xs font-bold text-cyan-300">03:42</span>
-          <p className="text-[0.62rem] text-emerald-400">Recording Active</p>
+          <span className="font-mono text-xs font-bold text-blue-700">03:42</span>
+          <p className="text-[0.62rem] font-bold text-emerald-600">Recording Active</p>
         </div>
       </div>
 
-      <div className="mt-3 space-y-2">
-        <div className="flex items-center justify-between rounded-lg bg-slate-900/90 p-2.5 text-xs border border-slate-800">
-          <div>
-            <span className="font-bold text-white">#SRV-1084 · Promise-to-Pay Confirmation</span>
-            <p className="text-[0.68rem] text-slate-400">Debtor agreed to ₱15,000 via GCash · Installment 1/3</p>
-          </div>
-          <span className="rounded-full bg-emerald-950/80 px-2 py-0.5 text-[0.65rem] font-semibold text-emerald-400 border border-emerald-500/30">
-            PTP Logged
-          </span>
-        </div>
-
-        <div className="flex items-center justify-between rounded-lg bg-slate-900/90 p-2.5 text-xs border border-slate-800">
-          <div>
-            <span className="font-bold text-white">#SRV-1085 · Hardship Settlement Review</span>
-            <p className="text-[0.68rem] text-slate-400">Supervisor approval requested · 25% waiver request</p>
-          </div>
-          <span className="rounded-full bg-amber-950/80 px-2 py-0.5 text-[0.65rem] font-semibold text-amber-400 border border-amber-500/30">
-            Pending Escalate
-          </span>
-        </div>
+      {/* monday.com Style Table */}
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Account / Debtor</th>
+              <th className="p-2.5">Assignee</th>
+              <th className="p-2.5">Status</th>
+              <th className="p-2.5">PTP Commitment</th>
+              <th className="p-2.5">SLA Timeline</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Carlos Mendoza (#4920)</td>
+              <td className="p-2.5">
+                <span className="inline-flex size-6 items-center justify-center rounded-full bg-blue-100 text-[0.65rem] font-bold text-blue-700">MT</span>
+              </td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">Active Call</span>
+              </td>
+              <td className="p-2.5 font-mono text-slate-800">₱20,000 via GCash</td>
+              <td className="p-2.5">
+                <span className="rounded bg-emerald-50 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-700 border border-emerald-200">On Track</span>
+              </td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Elena Santos (#4921)</td>
+              <td className="p-2.5">
+                <span className="inline-flex size-6 items-center justify-center rounded-full bg-violet-100 text-[0.65rem] font-bold text-violet-700">AI</span>
+              </td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">PTP Logged</span>
+              </td>
+              <td className="p-2.5 font-mono text-slate-800">₱15,000 (Inst 1/2)</td>
+              <td className="p-2.5">
+                <span className="rounded bg-emerald-50 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-700 border border-emerald-200">Auto SMS Fired</span>
+              </td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Roberto Gomez (#4924)</td>
+              <td className="p-2.5">
+                <span className="inline-flex size-6 items-center justify-center rounded-full bg-amber-100 text-[0.65rem] font-bold text-amber-700">RC</span>
+              </td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#fdab3d] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">Hardship Review</span>
+              </td>
+              <td className="p-2.5 font-mono text-slate-800">25% Waiver Request</td>
+              <td className="p-2.5">
+                <span className="rounded bg-amber-50 px-2 py-0.5 text-[0.65rem] font-bold text-amber-700 border border-amber-200">Supervisor Queue</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800/80 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>SLA Resolution: 98.4%</span>
-        <span>Supervisor Whisper: Available</span>
-        <span>RBAC: Level 2 Agent</span>
+      <div className="flex items-center justify-between text-[0.68rem] text-slate-500 pt-1">
+        <span>BSP 454/857 Quiet Hours: Active (10PM - 6AM Protected)</span>
+        <span>Dual Channel Audio Retention: 7 Years</span>
       </div>
     </div>
   );
 }
 
-/* 2. Flagship BITSagent AI Mockup */
-function BitsAgentMockup() {
+/* 2. Flagship BITSagent AI Board */
+function AiAgentBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-blue-900/40 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Bot className="size-4 text-cyan-400" />
-          <span className="font-mono text-xs font-bold text-white">BITSagent Voice AI</span>
-        </div>
-        <span className="rounded-full bg-blue-500/20 px-2 py-0.5 text-[0.65rem] text-cyan-300 font-mono">
-          Latency: 284ms
-        </span>
-      </div>
-
-      <div className="mt-3 rounded-xl bg-slate-900 p-4 border border-blue-500/20 text-center">
+    <div className="space-y-4 font-sans">
+      {/* Real-time Voice Waveform Banner */}
+      <div className="rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 via-purple-50 to-white p-3.5 text-center">
         <div className="flex justify-center items-center gap-1 h-8">
-          {[40, 75, 95, 60, 85, 100, 70, 90, 45, 80, 60, 30].map((h, i) => (
+          {[35, 70, 90, 55, 80, 100, 65, 85, 40, 75, 55, 30].map((h, i) => (
             <span
               key={i}
               style={{ height: `${h}%` }}
-              className="w-1 rounded-full bg-gradient-to-t from-blue-500 to-cyan-400 animate-pulse"
+              className="w-1.5 rounded-full bg-violet-600 animate-pulse"
             />
           ))}
         </div>
-        <p className="mt-2 text-xs font-bold text-white">
+        <p className="mt-2 text-xs font-bold text-slate-900">
           &ldquo;I understand Mr. Ramos. We can split your balance into two installments of ₱6,000.&rdquo;
         </p>
-        <span className="mt-1 inline-block text-[0.62rem] text-cyan-400">
-          Intent: Settlement Agreement · Sentiment: Cooperative (92%)
+        <span className="mt-1 inline-block text-[0.65rem] font-semibold text-violet-700">
+          Turn Latency: 284ms · Sentiment: Cooperative (92%) · Zero Script Deviation
         </span>
       </div>
 
-      <div className="mt-3 space-y-2 text-[0.72rem]">
-        <div className="rounded-lg bg-blue-950/40 p-2.5 border border-blue-800/40">
-          <span className="font-bold text-cyan-300">Customer:</span> &ldquo;Can you send the payment link via SMS?&rdquo;
-        </div>
-        <div className="rounded-lg bg-slate-900 p-2.5 border border-slate-800">
-          <span className="font-bold text-emerald-400">BITSagent:</span> &ldquo;Link dispatched to 0917-***-4921 with reference PTP-8841.&rdquo;
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>RAG Grounding: BSP Policy Manual v4.2</span>
-        <span className="text-emerald-400">Zero Script Deviation</span>
-      </div>
-    </div>
-  );
-}
-
-/* 3. BITScrm Sales Mockup */
-function SalesCrmMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <TrendingUp className="size-4 text-emerald-400" />
-          <span className="font-mono text-xs font-bold text-white">BITScrm Sales Pipeline</span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-emerald-400">Q3 Weighted: ₱14.8M</span>
-      </div>
-
-      <div className="mt-3 grid grid-cols-3 gap-2">
-        <div className="rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div className="flex justify-between text-[0.65rem] font-bold text-slate-400 border-b border-slate-800 pb-1.5">
-            <span>SCOPING (3)</span>
-          </div>
-          <div className="mt-2 space-y-1.5">
-            <div className="rounded bg-slate-950 p-2 text-[0.7rem] border border-slate-800">
-              <p className="font-bold text-white">Apex Lending Inc</p>
-              <span className="mt-1 inline-block text-[0.6rem] text-blue-400">Prob: 65%</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div className="flex justify-between text-[0.65rem] font-bold text-blue-400 border-b border-slate-800 pb-1.5">
-            <span>PROPOSAL (2)</span>
-          </div>
-          <div className="mt-2">
-            <div className="rounded bg-slate-950 p-2 text-[0.7rem] border border-blue-500/30">
-              <p className="font-bold text-white">Metro Bank Financial</p>
-              <span className="mt-1 inline-block text-[0.6rem] text-emerald-400">CPQ Ready</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div className="flex justify-between text-[0.65rem] font-bold text-emerald-400 border-b border-slate-800 pb-1.5">
-            <span>WON (4)</span>
-          </div>
-          <div className="mt-2">
-            <div className="rounded bg-emerald-950/40 p-2 text-[0.7rem] border border-emerald-500/30">
-              <p className="font-bold text-white">FastRecovery BPO</p>
-              <p className="text-[0.62rem] text-emerald-300">Signed (3 Yr)</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>AI Scoring: Enabled</span>
-        <span>Territory: Automated Routing</span>
+      {/* monday.com Style AI Interaction Table */}
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Interaction Type</th>
+              <th className="p-2.5">AI Engine</th>
+              <th className="p-2.5">Outcome Status</th>
+              <th className="p-2.5">RAG Grounding</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Voice Negotiation (#VC-8821)</td>
+              <td className="p-2.5 text-violet-700 font-semibold">Sub-300ms Conversational</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Settlement Done</span>
+              </td>
+              <td className="p-2.5 text-slate-600">Credit Policy v4.2</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Inbound SMS Portal (#SM-4902)</td>
+              <td className="p-2.5 text-violet-700 font-semibold">Autonomous Text Agent</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Link Dispatched</span>
+              </td>
+              <td className="p-2.5 text-slate-600">GCash/Maya Tokenized</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Live Call QA Audit (#QA-1092)</td>
+              <td className="p-2.5 text-violet-700 font-semibold">Real-Time Transcription</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#a25ddc] px-2.5 py-1 text-[0.65rem] font-bold text-white">100% Compliant</span>
+              </td>
+              <td className="p-2.5 text-slate-600">BSP Script Checklist</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 4. BITScrm Marketing Mockup */
-function MarketingCrmMockup() {
+/* 3. Sales CRM Board */
+function SalesBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Mail className="size-4 text-purple-400" />
-          <span className="font-mono text-xs font-bold text-white">BITScrm Marketing Journey</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Q3 Enterprise Pipeline Kanban</p>
+          <p className="text-[0.68rem] text-slate-500">Weighted Deal Value: ₱14.8M · AI Lead Routing Active</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-purple-300">Re-Engagement 30-DPD</span>
-      </div>
-
-      <div className="mt-3 space-y-2 text-xs">
-        <div className="flex items-center gap-3 rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <span className="flex size-6 items-center justify-center rounded-full bg-blue-600 text-[0.65rem] font-bold">1</span>
-          <div>
-            <p className="font-bold text-white">Trigger: Account Enters 30+ DPD</p>
-            <p className="text-[0.65rem] text-slate-400">Audience: 1,420 Enrolled</p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <span className="flex size-6 items-center justify-center rounded-full bg-indigo-600 text-[0.65rem] font-bold">2</span>
-          <div>
-            <p className="font-bold text-white">Action: Automated SMS Alert with Portal Link</p>
-            <p className="text-[0.65rem] text-emerald-400">Delivered: 99.2%</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Opt-Out Rate: 0.12%</span>
-        <span>NPC DPA Verified</span>
-      </div>
-    </div>
-  );
-}
-
-/* 5. BITScrm Commerce Mockup */
-function CommerceCrmMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <CreditCard className="size-4 text-cyan-400" />
-          <span className="font-mono text-xs font-bold text-white">BITScrm Commerce</span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-500/30">
-          PCI-DSS Level 1 Ready
+        <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          Win Rate: +38%
         </span>
       </div>
 
-      <div className="mt-3 rounded-xl bg-slate-900 p-3 border border-slate-800 text-xs">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-          <p className="font-bold text-white">Recurring Subscription #SUB-9021</p>
-          <span className="font-mono text-emerald-400">Auto-Paid</span>
-        </div>
-        <div className="mt-2 space-y-1 text-[0.7rem] text-slate-300">
-          <div className="flex justify-between">
-            <span>Base Platform Tier (100 Seats):</span>
-            <span className="font-mono text-white">Scoped Retainer</span>
-          </div>
-          <div className="flex justify-between">
-            <span>SIP Minutes (42,500 mins):</span>
-            <span className="font-mono text-white">Usage Metered</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Tokenized TLS Gateways</span>
-        <span>Dunning Recovery: 91.2%</span>
-      </div>
-    </div>
-  );
-}
-
-/* 6. BITS HRMS Mockup */
-function HrmsMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Users className="size-4 text-blue-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS HRMS · Shift Roster</span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-emerald-400">Floor Active: 94/96 Seats</span>
-      </div>
-
-      <div className="mt-3 space-y-2 text-xs">
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div>
-            <p className="font-bold text-white">Shift A: Morning (06:00 – 15:00)</p>
-            <p className="text-[0.65rem] text-slate-400">Team Alpha · Inbound Care (32 Agents)</p>
-          </div>
-          <span className="font-mono text-[0.68rem] text-emerald-300">100% Present</span>
-        </div>
-
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div>
-            <p className="font-bold text-white">Shift C: Graveyard (22:00 – 07:00)</p>
-            <p className="text-[0.65rem] text-slate-400">Night Diff Auto-Computed (24 Agents)</p>
-          </div>
-          <span className="font-mono text-[0.68rem] text-purple-300">Biometric Sync</span>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>DOLE Labor Standards Aligned</span>
-        <span>Biometric Facial Sync: Active</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Deal Account</th>
+              <th className="p-2.5">Stage</th>
+              <th className="p-2.5">Value</th>
+              <th className="p-2.5">Win Probability</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Apex Global BPO (120 Seats)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Proposal / CPQ</span>
+              </td>
+              <td className="p-2.5 font-mono font-bold text-slate-800">₱4.2M</td>
+              <td className="p-2.5">
+                <div className="flex items-center gap-1.5">
+                  <div className="h-2 w-16 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-full w-[75%] rounded-full bg-blue-600" />
+                  </div>
+                  <span className="font-mono text-[0.65rem] font-bold text-blue-700">75%</span>
+                </div>
+              </td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Metro Bank Financial</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Closed-Won (3 Yr)</span>
+              </td>
+              <td className="p-2.5 font-mono font-bold text-slate-800">₱6.8M</td>
+              <td className="p-2.5">
+                <span className="font-mono text-[0.65rem] font-bold text-emerald-600">100% Contracted</span>
+              </td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Pacific Recovery Agency</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#fdab3d] px-2.5 py-1 text-[0.65rem] font-bold text-white">Scoping Audit</span>
+              </td>
+              <td className="p-2.5 font-mono font-bold text-slate-800">₱3.5M</td>
+              <td className="p-2.5">
+                <div className="flex items-center gap-1.5">
+                  <div className="h-2 w-16 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-full w-[60%] rounded-full bg-amber-500" />
+                  </div>
+                  <span className="font-mono text-[0.65rem] font-bold text-amber-700">60%</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 7. BITS Payroll Mockup */
-function PayrollMockup() {
+/* 4. Marketing CRM Board */
+function MarketingBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Calculator className="size-4 text-emerald-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Payroll Engine</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-pink-200 bg-pink-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Customer Journey Automation</p>
+          <p className="text-[0.68rem] text-slate-500">Delinquent 30-DPD Multi-Touch Sequence · NPC DPA Compliant</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/30">
-          TRAIN Law Compliant
+        <span className="rounded-md bg-pink-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          Lift: +4.5x
         </span>
       </div>
 
-      <div className="mt-3 rounded-xl bg-slate-900 p-3 border border-slate-800 text-xs">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-          <p className="font-bold text-white">Batch: Floor Operations (88 Employees)</p>
-          <span className="font-mono text-emerald-400 text-[0.72rem] font-bold">DISBURSED</span>
-        </div>
-        <div className="mt-2 space-y-1 text-[0.7rem] text-slate-300">
-          <div className="flex justify-between">
-            <span>SSS, PhilHealth & Pag-IBIG:</span>
-            <span className="font-mono text-rose-300">Statutory Deducted</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Direct Bank Batch Feed:</span>
-            <span className="text-emerald-400 font-mono">BDO / BPI Exported</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Alphalist Export: BIR 2316 Ready</span>
-        <span>Zero Error Rate</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Sequence Step</th>
+              <th className="p-2.5">Channel</th>
+              <th className="p-2.5">Execution Status</th>
+              <th className="p-2.5">Performance</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">1. Delinquency Trigger</td>
+              <td className="p-2.5">Status Webhook</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">1,840 Enrolled</span>
+              </td>
+              <td className="p-2.5 font-mono text-emerald-600 font-bold">100% Triggered</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">2. Portal Link SMS</td>
+              <td className="p-2.5">SMS Gateway</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Dispatched</span>
+              </td>
+              <td className="p-2.5 font-mono text-blue-600 font-bold">42.1% Click-Through</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">3. AI Voice Escalation</td>
+              <td className="p-2.5">BITSagent Voice</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#a25ddc] px-2.5 py-1 text-[0.65rem] font-bold text-white">Conditional (48h)</span>
+              </td>
+              <td className="p-2.5 font-mono text-violet-600 font-bold">68% Resolution</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 8. BITS Construction & Project Tracker Mockup */
-function ConstructionMockup() {
+/* 5. Commerce CRM Board */
+function CommerceBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-amber-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <HardHat className="size-4 text-amber-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Construction Tracker</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Subscription & Usage Billing Core</p>
+          <p className="text-[0.68rem] text-slate-500">PCI-DSS Level 1 Ready · Automated Dunning Recovery</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30">
-          Project: Skyline Tower Phase 2
+        <span className="rounded-md bg-cyan-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          99.99% Precision
         </span>
       </div>
 
-      {/* Progress & Milestone Gantt */}
-      <div className="mt-3 space-y-2 text-xs">
-        <div className="rounded-xl bg-slate-900 p-3 border border-slate-800">
-          <div className="flex justify-between items-center mb-2">
-            <span className="font-bold text-white">Overall Project Progress</span>
-            <span className="font-mono font-bold text-emerald-400">68% On Schedule</span>
-          </div>
-          <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden">
-            <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-amber-500 to-emerald-400" />
-          </div>
-        </div>
-
-        {/* Interconnected System Feeds */}
-        <div className="grid grid-cols-2 gap-2 text-[0.68rem]">
-          <div className="rounded-lg bg-slate-900/90 p-2 border border-blue-500/30">
-            <p className="font-bold text-blue-300">→ BITS Payroll Sync</p>
-            <p className="text-slate-400">48 Onsite Workers · Hours verified via biometric kiosk</p>
-          </div>
-          <div className="rounded-lg bg-slate-900/90 p-2 border border-emerald-500/30">
-            <p className="font-bold text-emerald-300">→ BITS Inventory Sync</p>
-            <p className="text-slate-400">140MT Rebar & Ready-Mix requisitioned</p>
-          </div>
-        </div>
-
-        <div className="rounded-lg bg-slate-900 p-2 border border-slate-800 text-[0.7rem]">
-          <div className="flex justify-between">
-            <span className="font-bold text-slate-200">#PUNCH-104: Level 8 HVAC Ducting</span>
-            <span className="font-mono text-emerald-400">INSPECTED</span>
-          </div>
-          <p className="text-[0.65rem] text-slate-400">CAD Blueprint: Rev_D_Structural.dwg verified</p>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>OSHA & DOLE Logs: Compliant</span>
-        <span>Earned Value: +12% Margin</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Subscription Item</th>
+              <th className="p-2.5">Billing Model</th>
+              <th className="p-2.5">Payment Status</th>
+              <th className="p-2.5">Dunning Recovery</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">100-Seat Contact Core</td>
+              <td className="p-2.5">Monthly Retainer</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Auto-Debited</span>
+              </td>
+              <td className="p-2.5 font-mono text-emerald-600">Zero Default</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">SIP Minutes (42,500 mins)</td>
+              <td className="p-2.5">Usage Metered</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Billed on 1st</span>
+              </td>
+              <td className="p-2.5 font-mono text-blue-600">Auto-Reconciled</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 9. BITS Inventory Mockup */
-function InventoryMockup() {
+/* 6. BITS HRMS Board */
+function HrmsBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-blue-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Boxes className="size-4 text-cyan-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Inventory Engine</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-amber-200 bg-amber-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">24/7 BPO Multi-Shift Roster</p>
+          <p className="text-[0.68rem] text-slate-500">Biometric Facial Clock-In · 94/96 Seats Active Floor Headcount</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-cyan-300">3 Warehouses Connected</span>
-      </div>
-
-      <div className="mt-3 space-y-2 text-xs">
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div>
-            <p className="font-bold text-white">SKU: MT-RB-32MM (32mm High-Tensile Rebar)</p>
-            <p className="text-[0.65rem] text-slate-400">Warehouse Central · Batch #PH-9821</p>
-          </div>
-          <div className="text-right">
-            <span className="font-mono text-emerald-400 font-bold">840 Units</span>
-            <p className="text-[0.6rem] text-slate-400">Healthy Par</p>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-amber-500/30">
-          <div>
-            <p className="font-bold text-white">SKU: EL-CV-400A (400A Circuit Breakers)</p>
-            <p className="text-[0.65rem] text-slate-400">Stock: 18 Units (Min Par: 50 Units)</p>
-          </div>
-          <span className="rounded bg-amber-950/80 px-2 py-0.5 text-[0.65rem] font-bold text-amber-400 border border-amber-500/30">
-            Auto-PO Fired
-          </span>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>RFID / Barcode Scanner: Connected</span>
-        <span>FIFO Audit Trail: Certified</span>
-      </div>
-    </div>
-  );
-}
-
-/* 10. BITS Logistics Mockup */
-function LogisticsMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-indigo-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Truck className="size-4 text-indigo-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Logistics & Dispatch</span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-emerald-400">14 Active Routes (98% On-Time)</span>
-      </div>
-
-      <div className="mt-3 rounded-xl bg-slate-900 p-3 border border-slate-800 text-xs">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-          <div>
-            <p className="font-bold text-white">Truck #12 (Isuzu Giga 10-Wheeler)</p>
-            <p className="text-[0.65rem] text-slate-400">Driver: R. Santos · Route: Central Hub → Jobsite B</p>
-          </div>
-          <span className="rounded-full bg-blue-950 px-2 py-0.5 text-[0.65rem] font-mono text-cyan-300 border border-blue-500/30">
-            ETA: 14 mins
-          </span>
-        </div>
-
-        <div className="mt-2.5 space-y-1.5 text-[0.68rem] text-slate-300">
-          <div className="flex items-center gap-2">
-            <MapPin className="size-3.5 text-rose-400 shrink-0" />
-            <span>Current GPS: C-5 Highway Northbound (Speed: 52 km/h)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
-            <span>ePOD: Digital Receiver Signature & Geotag Verification</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Route AI: Multi-Stop Optimized</span>
-        <span>DOT / LTO Compliant</span>
-      </div>
-    </div>
-  );
-}
-
-/* 11. BITS AI Sports Scoring & Match Analysis Mockup */
-function SportsAiMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-cyan-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Video className="size-4 text-cyan-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS AI Sports Scoring</span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/30">
-          Source: GoPro 4K 60fps
+        <span className="rounded-md bg-amber-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          DOLE Aligned
         </span>
       </div>
 
-      {/* Match Score & Set Results */}
-      <div className="mt-3 rounded-xl bg-slate-900 p-3 border border-slate-800">
-        <div className="flex justify-between items-center text-xs border-b border-slate-800 pb-2">
-          <div>
-            <p className="font-bold text-white">Player A vs. Player B (Men&apos;s Championship)</p>
-            <p className="text-[0.65rem] text-slate-400">Computer Vision Auto-Scored</p>
-          </div>
-          <span className="font-mono text-xs font-extrabold text-emerald-400">
-            21-18 · 19-21 · 21-16
-          </span>
-        </div>
-
-        {/* Shot & Rally Insights */}
-        <div className="mt-2 grid grid-cols-3 gap-2 text-center text-[0.68rem]">
-          <div className="rounded bg-slate-950 p-1.5 border border-slate-800">
-            <p className="text-slate-400">Smash Speed</p>
-            <p className="font-mono font-bold text-cyan-300">312 km/h</p>
-          </div>
-          <div className="rounded bg-slate-950 p-1.5 border border-slate-800">
-            <p className="text-slate-400">Rallies</p>
-            <p className="font-mono font-bold text-white">48 Analyzed</p>
-          </div>
-          <div className="rounded bg-slate-950 p-1.5 border border-slate-800">
-            <p className="text-slate-400">Highlight Reel</p>
-            <p className="font-mono font-bold text-emerald-400">8 Moments</p>
-          </div>
-        </div>
-      </div>
-
-      {/* AI Coach Chat Snippet */}
-      <div className="mt-2.5 rounded-lg bg-blue-950/30 p-2.5 border border-blue-800/40 text-[0.7rem]">
-        <p className="font-bold text-cyan-300 flex items-center gap-1.5">
-          <Bot className="size-3.5" /> AI Coach Timestamp Insight:
-        </p>
-        <p className="mt-1 text-slate-300 leading-relaxed">
-          &ldquo;At [14:32], your footwork recovery was 0.38s delayed on backhand deep corner. Recommended drill:
-          Split-step reaction drills.&rdquo;
-        </p>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Court Position Heatmaps: Ready</span>
-        <span>Turnaround: &lt; 90s</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Shift Window</th>
+              <th className="p-2.5">Operations Team</th>
+              <th className="p-2.5">Attendance</th>
+              <th className="p-2.5">Differential Rules</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Shift A (06:00 - 15:00)</td>
+              <td className="p-2.5">Team Alpha (32 Agents)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">100% Present</span>
+              </td>
+              <td className="p-2.5 text-slate-600">Standard Rate</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Shift C (22:00 - 07:00)</td>
+              <td className="p-2.5">Team US-East (24 Agents)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#a25ddc] px-2.5 py-1 text-[0.65rem] font-bold text-white">Night Shift Active</span>
+              </td>
+              <td className="p-2.5 font-mono text-purple-700 font-bold">+10% Night Diff Auto</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 12. BITS Sports Hub (Sports360-Style) Mockup */
-function SportsHubMockup() {
+/* 7. BITS Payroll Board */
+function PayrollBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-emerald-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Trophy className="size-4 text-emerald-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Sports Venue HUD</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Statutory Tax & Direct Bank Feeds</p>
+          <p className="text-[0.68rem] text-slate-500">TRAIN Law Tax Tables · SSS, PhilHealth, Pag-IBIG Auto-Deductions</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
-          <Tv className="size-3" /> Overhead TV Active
+        <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          100% Math Certified
         </span>
       </div>
 
-      {/* Live Court Allocation Queuing Board */}
-      <div className="mt-3 space-y-2 text-xs">
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-emerald-500/30">
-          <div>
-            <p className="font-bold text-white">Court 1 (Badminton): In Progress</p>
-            <p className="text-[0.65rem] text-slate-400">Set 2 (14 - 11) · Time Remaining: 18 mins</p>
-          </div>
-          <span className="font-mono text-[0.68rem] text-emerald-400 font-bold">MATCH ON</span>
-        </div>
-
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div>
-            <p className="font-bold text-white">Court 2 (Pickleball): Next Up</p>
-            <p className="text-[0.65rem] text-cyan-300">Alpha Smashers vs. Net Raiders</p>
-          </div>
-          <span className="font-mono text-[0.68rem] text-cyan-300">CALLING PLAYERS</span>
-        </div>
-
-        <div className="flex items-center justify-between rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <div>
-            <p className="font-bold text-white">Queue Ticket #Q-08 (Metro Spikers)</p>
-            <p className="text-[0.65rem] text-slate-400">Elo / DUPR: 1,420 · Waiting: 4 mins</p>
-          </div>
-          <span className="font-mono text-[0.68rem] text-amber-300">UP NEXT (COURT 3)</span>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Multi-Sport: Badminton / Padel / Pickleball</span>
-        <span>Auto TV Refresh</span>
-      </div>
-    </div>
-  );
-}
-
-/* 13. BITS Booking System Mockup */
-function BookingMockup() {
-  return (
-    <div className="overflow-hidden rounded-2xl border border-blue-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <CalendarCheck className="size-4 text-blue-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Booking & Reservations</span>
-        </div>
-        <span className="font-mono text-[0.68rem] text-blue-300">Hotels, Sports & Services</span>
-      </div>
-
-      <div className="mt-3 rounded-xl bg-slate-900 p-3 border border-slate-800 text-xs">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-          <div>
-            <p className="font-bold text-white">Booking #BK-9021 · Executive Suite 402</p>
-            <p className="text-[0.65rem] text-slate-400">Guest: Dr. Karen Cruz · Check-In: Today 14:00</p>
-          </div>
-          <span className="font-mono text-emerald-400 font-bold">CONFIRMED</span>
-        </div>
-
-        <div className="mt-2.5 space-y-1 text-[0.68rem] text-slate-300">
-          <div className="flex justify-between">
-            <span>Room/Court Allocation:</span>
-            <span className="text-white font-mono">Reserved & Locked</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Deposit Escrow:</span>
-            <span className="text-cyan-300 font-mono">₱2,500 Held via Tokenized Card</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Instant Mobile Pass:</span>
-            <span className="text-emerald-400 font-mono">QR Dispatched via WhatsApp</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>PCI-DSS Tokenized Checkout</span>
-        <span>Direct Sync with BITS Commerce</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Batch Name</th>
+              <th className="p-2.5">Deduction Rules</th>
+              <th className="p-2.5">Disbursement</th>
+              <th className="p-2.5">Bank File Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Floor Operations (88 Staff)</td>
+              <td className="p-2.5 text-slate-600">SSS + PhilHealth + BIR TRAIN</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Disbursed</span>
+              </td>
+              <td className="p-2.5 font-mono text-emerald-700 font-bold">BDO Direct Batch Ready</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Supervisors & QA (18 Staff)</td>
+              <td className="p-2.5 text-slate-600">13th Month Accrual Reserved</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Approved</span>
+              </td>
+              <td className="p-2.5 font-mono text-blue-700 font-bold">BPI Direct Batch Ready</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 14. BITS Smart Queuing System Mockup */
-function QueuingMockup() {
+/* 8. BITS Construction & Project Tracker Board */
+function ConstructionBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-rose-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Ticket className="size-4 text-rose-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS Smart Queuing Core</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-amber-200 bg-amber-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Project: Skyline Tower Phase 2</p>
+          <p className="text-[0.68rem] text-slate-500">Jobsite Milestones & CAD Revisions · Interconnected with Payroll & Inventory</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-rose-300 bg-rose-950/60 px-2 py-0.5 rounded border border-rose-500/30">
-          Retail, Clinic & Sports Venue
+        <span className="rounded-md bg-amber-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          68% On Schedule
         </span>
       </div>
 
-      {/* Overhead TV Display Card */}
-      <div className="mt-3 rounded-xl bg-gradient-to-r from-rose-950/40 to-slate-900 p-3 border border-rose-500/30 text-center">
-        <p className="text-[0.65rem] font-bold uppercase tracking-widest text-slate-400">Now Serving</p>
-        <div className="text-3xl font-extrabold text-cyan-300 font-mono tracking-wider mt-0.5">
-          TICKET #A-042
-        </div>
-        <p className="text-xs font-bold text-white mt-1">
-          Please Proceed to: <span className="text-emerald-400">Counter 3 (Collections Specialist)</span>
-        </p>
-      </div>
-
-      {/* Queue Velocity & Next In Line */}
-      <div className="mt-3 space-y-1.5 text-[0.7rem]">
-        <div className="flex justify-between items-center rounded-lg bg-slate-900 p-2 border border-slate-800">
-          <span className="text-slate-300">Next In Line: #A-043 (Wait: ~3 min)</span>
-          <span className="font-mono text-cyan-300">Paging SMS Dispatched</span>
-        </div>
-        <div className="flex justify-between items-center rounded-lg bg-slate-900 p-2 border border-slate-800">
-          <span className="text-slate-300">Floor Flow: 8 Tellers Active</span>
-          <span className="font-mono text-emerald-400">Avg Wait: 4.2 mins</span>
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Virtual QR Code Mobile Passes</span>
-        <span>Zero App Installation</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Milestone / Work Item</th>
+              <th className="p-2.5">Lead Engineer</th>
+              <th className="p-2.5">Status</th>
+              <th className="p-2.5">System Interconnect</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Level 8 HVAC Ducting Inspection</td>
+              <td className="p-2.5">Engr. M. Velasco</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Punchlist Passed</span>
+              </td>
+              <td className="p-2.5 text-blue-700 font-semibold">→ 48 Laborers to BITS Payroll</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Curtain Wall Glass Facade</td>
+              <td className="p-2.5">Engr. K. Ramos</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#fdab3d] px-2.5 py-1 text-[0.65rem] font-bold text-white">Working on it</span>
+              </td>
+              <td className="p-2.5 text-emerald-700 font-semibold">→ 140MT Rebar from Inventory</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* 15. BITS RAG Enterprise Knowledge Engine Mockup */
-function RagEngineMockup() {
+/* 9. BITS Inventory Board */
+function InventoryBoard() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-indigo-500/30 bg-slate-950 p-4 font-sans text-white shadow-2xl">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2">
-          <Database className="size-4 text-indigo-400" />
-          <span className="font-mono text-xs font-bold text-white">BITS RAG Knowledge Layer</span>
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Multi-Warehouse Stock Radar</p>
+          <p className="text-[0.68rem] text-slate-500">Real-Time RFID Scanning · Automated Par-Level Triggers</p>
         </div>
-        <span className="font-mono text-[0.68rem] text-indigo-300 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-500/30">
-          148,200 Vector Embeddings
+        <span className="rounded-md bg-blue-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          99.8% Accuracy
         </span>
       </div>
 
-      {/* Query & Retrieval Trace */}
-      <div className="mt-3 space-y-2 text-xs">
-        <div className="rounded-xl bg-slate-900 p-2.5 border border-slate-800">
-          <p className="text-[0.65rem] font-bold text-slate-400">Real-Time Ingestion Pipeline</p>
-          <p className="text-white mt-0.5">Policy PDFs + Collections SOPs + ERP Stock Database</p>
-        </div>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">SKU & Item Name</th>
+              <th className="p-2.5">Warehouse Depot</th>
+              <th className="p-2.5">Stock Level</th>
+              <th className="p-2.5">Automation Action</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">MT-RB-32MM (Rebar High-Tensile)</td>
+              <td className="p-2.5">Central Hub</td>
+              <td className="p-2.5 font-mono text-emerald-700 font-bold">840 Units (Healthy)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Par OK</span>
+              </td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">EL-CV-400A (Circuit Breakers)</td>
+              <td className="p-2.5">Jobsite Depot B</td>
+              <td className="p-2.5 font-mono text-amber-700 font-bold">18 Units (Min: 50)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#fdab3d] px-2.5 py-1 text-[0.65rem] font-bold text-white">Auto-PO Fired</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
-        <div className="rounded-xl bg-blue-950/30 p-2.5 border border-blue-500/30 text-[0.7rem]">
-          <div className="flex justify-between items-center text-cyan-300 font-bold mb-1">
-            <span>Query: &ldquo;Statutory Quiet Hours for Debt Collections&rdquo;</span>
-            <span className="font-mono text-[0.65rem] text-emerald-400">Latency: 118ms</span>
-          </div>
-          <p className="text-slate-300 text-[0.65rem] leading-relaxed">
-            Matched 3 chunks (Cosine sim 0.94) → Grounded output cite:{" "}
-            <span className="text-cyan-400 font-mono">BSP Circular 454/857 §3.2</span>
-          </p>
+/* 10. BITS Logistics Board */
+function LogisticsBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-indigo-200 bg-indigo-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Fleet Operations & AI Dispatch</p>
+          <p className="text-[0.68rem] text-slate-500">14 Active Routes · Real-Time GPS Tracking & Electronic POD</p>
         </div>
+        <span className="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          98.2% On-Time
+        </span>
       </div>
 
-      <div className="mt-3 flex items-center justify-between border-t border-slate-800 pt-2.5 text-[0.65rem] text-slate-400">
-        <span>Universal Connector for BITSagent & CRM</span>
-        <span>Zero Hallucinations</span>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Vehicle / Fleet #</th>
+              <th className="p-2.5">Assigned Driver</th>
+              <th className="p-2.5">Route Status</th>
+              <th className="p-2.5">ePOD Verification</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Truck #12 (Isuzu Giga 10W)</td>
+              <td className="p-2.5">R. Santos</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">ETA 14m (En Route)</span>
+              </td>
+              <td className="p-2.5 text-emerald-700 font-semibold">Digital Signature Ready</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Van #04 (HiAce Express)</td>
+              <td className="p-2.5">K. Dizon</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Delivered</span>
+              </td>
+              <td className="p-2.5 text-emerald-700 font-semibold">Geotag Lat 14.55 Verified</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* 11. BITS AI Sports Scoring Board */
+function SportsAiBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Computer Vision Sports Scoring & AI Coach</p>
+          <p className="text-[0.68rem] text-slate-500">Video Ingestion from Smartphone or GoPro · Automated Match Analytics</p>
+        </div>
+        <span className="rounded-md bg-cyan-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          &lt; 90s Turnaround
+        </span>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Match Footage</th>
+              <th className="p-2.5">Calculated Score</th>
+              <th className="p-2.5">Peak Smash Speed</th>
+              <th className="p-2.5">AI Coach Insight</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Men&apos;s Singles Championship</td>
+              <td className="p-2.5 font-mono font-bold text-emerald-700">21-18 · 19-21 · 21-16</td>
+              <td className="p-2.5 font-mono text-cyan-700 font-bold">312 km/h</td>
+              <td className="p-2.5 text-slate-700 font-medium">Timestamp [14:32] Footwork Recovery Drill Linked</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Women&apos;s Doubles Semifinal</td>
+              <td className="p-2.5 font-mono font-bold text-emerald-700">21-14 · 21-19</td>
+              <td className="p-2.5 font-mono text-cyan-700 font-bold">284 km/h</td>
+              <td className="p-2.5 text-slate-700 font-medium">8 Highlight Reels Auto-Clipped</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* 12. BITS Sports Hub (Sports360-Style) Board */
+function SportsHubBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Sports Venue & Court Queuing Hub (Sports360-Style)</p>
+          <p className="text-[0.68rem] text-slate-500">Overhead TV Court Display Screen · Tournament Elo Ladders</p>
+        </div>
+        <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white font-mono flex items-center gap-1">
+          <Tv className="size-3" /> TV Display Live
+        </span>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Court / Sport</th>
+              <th className="p-2.5">Scheduled Players</th>
+              <th className="p-2.5">Current Match State</th>
+              <th className="p-2.5">Queue Assignment</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Court 1 (Badminton)</td>
+              <td className="p-2.5">Metro Spikers</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Match On (18m left)</span>
+              </td>
+              <td className="p-2.5 text-slate-600">Game 2 (14 - 11)</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Court 2 (Pickleball)</td>
+              <td className="p-2.5">Net Raiders vs Smashers</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Calling Players</span>
+              </td>
+              <td className="p-2.5 text-blue-700 font-semibold">DUPR Rating: 1,420</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* 13. BITS Booking System Board */
+function BookingBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Multi-Industry Reservation Engine</p>
+          <p className="text-[0.68rem] text-slate-500">Hotels, Sports Courts & Consulting · Real-Time Availability</p>
+        </div>
+        <span className="rounded-md bg-blue-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          +42% Direct Bookings
+        </span>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Booking Folio</th>
+              <th className="p-2.5">Resource / Room</th>
+              <th className="p-2.5">Reservation State</th>
+              <th className="p-2.5">Deposit Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">#BK-9021 (Dr. Karen Cruz)</td>
+              <td className="p-2.5">Executive Suite 402</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Confirmed</span>
+              </td>
+              <td className="p-2.5 font-mono text-emerald-700 font-bold">₱2,500 Tokenized Escrow</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">#BK-9022 (A. Reyes)</td>
+              <td className="p-2.5">Tennis Court A (2h)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">QR Pass Sent</span>
+              </td>
+              <td className="p-2.5 font-mono text-blue-700 font-bold">Instant WhatsApp Voucher</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* 14. BITS Smart Queuing Board */
+function QueuingBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-rose-200 bg-rose-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Digital Queuing & Overhead TV Floor Dispatch</p>
+          <p className="text-[0.68rem] text-slate-500">Mobile QR Virtual Passes · Retail, Clinics & Arenas</p>
+        </div>
+        <span className="rounded-md bg-rose-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          -52% Wait Time
+        </span>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Virtual Ticket</th>
+              <th className="p-2.5">Service Type</th>
+              <th className="p-2.5">Queue Status</th>
+              <th className="p-2.5">Assigned Counter</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">TICKET #A-042</td>
+              <td className="p-2.5">Collections Consultation</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white">Now Serving</span>
+              </td>
+              <td className="p-2.5 font-mono text-blue-700 font-bold">Proceed to Counter 3</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">TICKET #A-043</td>
+              <td className="p-2.5">Account Settlement</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#fdab3d] px-2.5 py-1 text-[0.65rem] font-bold text-white">Next in Line (~3m)</span>
+              </td>
+              <td className="p-2.5 font-mono text-amber-700 font-bold">SMS Alert Paged</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* 15. BITS RAG Knowledge Engine Board */
+function RagBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-violet-200 bg-violet-50/70 p-3">
+        <div>
+          <p className="text-xs font-bold text-slate-900">Universal Enterprise RAG Knowledge Layer</p>
+          <p className="text-[0.68rem] text-slate-500">148,200 Vector Embeddings · Zero Hallucination Policy Grounding</p>
+        </div>
+        <span className="rounded-md bg-violet-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
+          99.4% Factual
+        </span>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Source Repository</th>
+              <th className="p-2.5">Document Scope</th>
+              <th className="p-2.5">Indexing Status</th>
+              <th className="p-2.5">Retrieval Latency</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">BSP Circular 454/857 Manual</td>
+              <td className="p-2.5 text-slate-600">Statutory Rules PDF (v4.2)</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white">Grounded</span>
+              </td>
+              <td className="p-2.5 font-mono text-emerald-700 font-bold">118ms (Cosine 0.94)</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5 font-bold text-slate-900">Enterprise SQL & ERP Lake</td>
+              <td className="p-2.5 text-slate-600">Product & Inventory Catalog</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#a25ddc] px-2.5 py-1 text-[0.65rem] font-bold text-white">Real-Time CDC</span>
+              </td>
+              <td className="p-2.5 font-mono text-purple-700 font-bold">142ms Hybrid Search</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -195,7 +195,7 @@ export function Header() {
                       aria-expanded={isOpen}
                       aria-haspopup="true"
                       className={cn(
-                        "inline-flex min-h-9 items-center gap-1.5 rounded-full px-3.5 py-1 text-[0.84rem] font-bold transition-all duration-200",
+                        "inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 py-1 text-[0.84rem] font-bold transition-all duration-200",
                         isOpen || isPageActive
                           ? "bg-white text-blue-600 shadow-xs ring-1 ring-slate-200/80"
                           : "text-slate-600 hover:bg-white/80 hover:text-blue-600"
@@ -238,35 +238,59 @@ export function Header() {
 
                           <div
                             className={cn(
-                              "grid gap-1",
+                              "grid gap-1.5",
                               section.dropdown.items.length > 4 ? "grid-cols-2" : "grid-cols-1"
                             )}
                           >
-                            {section.dropdown.items.map((item) => (
-                              <Link
-                                key={item.title}
-                                href={item.href}
-                                onClick={() => setActiveDropdown(null)}
-                                className="group flex items-start gap-3 rounded-xl p-2.5 transition-colors hover:bg-blue-50/70"
-                              >
-                                <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                                  <NavIcon name={item.icon} />
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-center gap-2">
-                                    <p className="text-[0.84rem] font-bold text-slate-800 transition-colors group-hover:text-blue-600">
-                                      {item.title}
-                                    </p>
-                                    <span className="rounded-full bg-slate-100 px-2 py-0.2 text-[0.62rem] font-semibold text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700">
-                                      {item.badge}
-                                    </span>
+                            {section.dropdown.items.map((item) => {
+                              const isItemActive = pathname === item.href;
+                              return (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={() => setActiveDropdown(null)}
+                                  className={cn(
+                                    "group flex items-start gap-3 rounded-xl p-2.5 transition-all duration-150",
+                                    isItemActive
+                                      ? "bg-blue-50/80 ring-1 ring-blue-500/20"
+                                      : "hover:bg-slate-50 hover:ring-1 hover:ring-slate-200/70"
+                                  )}
+                                >
+                                  <div
+                                    className={cn(
+                                      "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors",
+                                      isItemActive
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700"
+                                    )}
+                                  >
+                                    <NavIcon name={item.icon} />
                                   </div>
-                                  <p className="mt-0.5 line-clamp-1 text-[0.74rem] text-slate-500">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </Link>
-                            ))}
+                                  <div className="min-w-0 flex-1">
+                                    <div className="flex items-center gap-1.5">
+                                      <span
+                                        className={cn(
+                                          "text-xs font-bold transition-colors",
+                                          isItemActive
+                                            ? "text-blue-900"
+                                            : "text-slate-900 group-hover:text-blue-600"
+                                        )}
+                                      >
+                                        {item.title}
+                                      </span>
+                                      {item.badge && (
+                                        <span className="rounded bg-blue-100 px-1.5 py-0.2 text-[0.6rem] font-bold text-blue-700 uppercase">
+                                          {item.badge}
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="mt-0.5 text-[0.72rem] text-slate-500 line-clamp-1">
+                                      {item.description}
+                                    </p>
+                                  </div>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </motion.div>
                       )}
@@ -279,7 +303,7 @@ export function Header() {
                 <li key={section.id}>
                   <Link
                     href={section.href}
-                    className="inline-flex min-h-9 items-center rounded-full px-3.5 py-1 text-[0.84rem] font-bold text-slate-600 transition-all duration-200 hover:bg-white/80 hover:text-blue-600"
+                    className="inline-flex min-h-11 items-center rounded-full px-3.5 py-1 text-[0.84rem] font-bold text-slate-600 transition-all duration-200 hover:bg-white/80 hover:text-blue-600"
                   >
                     {section.label}
                   </Link>
@@ -292,7 +316,7 @@ export function Header() {
           <div className="hidden items-center lg:flex">
             <Link
               href="/#contact"
-              className="group flex h-10 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.86rem] font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98]"
+              className="group flex h-11 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.86rem] font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98]"
             >
               <span>Book a Consultation</span>
               <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span>

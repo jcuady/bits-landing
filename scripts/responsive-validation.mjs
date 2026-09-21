@@ -146,7 +146,7 @@ const failures = results.filter(
     result.smallFormText.length ||
     result.clipped.length ||
     result.errors.length ||
-    result.sectionCount !== 13 ||
+    result.sectionCount !== 17 ||
     result.h1Count !== 1 ||
     !result.contactVisible ||
     !result.contactFormPresent ||

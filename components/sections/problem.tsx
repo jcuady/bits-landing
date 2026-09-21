@@ -84,7 +84,7 @@ export function Problem() {
             <Reveal delay={0.32} y={8}>
               <a
                 href="#solutions"
-                className="group mt-10 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700"
+                className="group mt-10 inline-flex min-h-[44px] w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700"
               >
                 <span className="relative">
                   See the collections workspace

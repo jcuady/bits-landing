@@ -26,7 +26,7 @@ export function Contact() {
 
             <a
               href={`mailto:${site.inquiryEmail}`}
-              className="mt-6 inline-block text-base font-bold text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700"
+              className="mt-6 inline-flex min-h-[44px] items-center text-base font-bold text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700"
             >
               {site.inquiryEmail}
             </a>

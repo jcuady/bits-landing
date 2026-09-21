@@ -75,18 +75,18 @@ export function Hero() {
               </div>
 
               {/* Direct Deep-Dive Product Links */}
-              <div className="mt-5 flex items-center justify-center gap-4 text-[0.85rem] font-bold">
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-[0.85rem] font-bold">
                 <Link
                   href="/bitscrm"
-                  className="group inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
+                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
                 >
                   <span>Explore BITScrm</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
-                <span className="text-slate-300">•</span>
+                <span className="text-slate-300 hidden sm:inline">•</span>
                 <Link
                   href="/bitsagent"
-                  className="group inline-flex items-center gap-1.5 text-violet-600 hover:text-violet-700 transition-colors"
+                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-violet-600 hover:text-violet-700 transition-colors"
                 >
                   <span>Explore AI Operations (BITSagent)</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>

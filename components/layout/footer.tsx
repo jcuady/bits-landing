@@ -9,7 +9,7 @@ function SocialIcon({ d, label }: { d: string; label: string }) {
     <a
       href="#"
       aria-label={label}
-      className="flex size-10 items-center justify-center rounded-full bg-white/[0.06] text-white/60 ring-1 ring-white/10 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-white/[0.12] [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+      className="flex size-11 items-center justify-center rounded-full bg-slate-100 text-slate-600 ring-1 ring-slate-200 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-blue-50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600 [@media(hover:hover)_and_(pointer:fine)]:hover:ring-blue-300"
     >
       <svg className="size-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
         <path d={d} />
@@ -20,19 +20,19 @@ function SocialIcon({ d, label }: { d: string; label: string }) {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-navy-900 text-white">
-      <div className="bg-grid-dark pointer-events-none absolute inset-0 opacity-40" aria-hidden />
+    <footer className="relative overflow-hidden border-t border-slate-200 bg-white text-slate-800">
+      <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <Container className="relative">
         <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1.2fr_2fr] lg:gap-20">
           <div>
-            <Logo variant="reverse" className="h-9" />
-            <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-slate-300">
+            <Logo variant="horizontal" className="h-9" />
+            <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-slate-600">
               {site.tagline} Custom software, workflow automation, CRM, and AI operations engineered around how your organization actually operates.
             </p>
 
             {/* Newsletter signup */}
             <div className="mt-8">
-              <p className="text-[0.8rem] font-semibold uppercase tracking-wider text-signal-300/80">
+              <p className="text-[0.8rem] font-bold uppercase tracking-wider text-slate-900">
                 Newsletter
               </p>
               <NewsletterForm />
@@ -42,21 +42,21 @@ export function Footer() {
           <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-4">
             {footerColumns.map((col) => (
               <div key={col.title}>
-                <h3 className="text-overline text-signal-300/90">{col.title}</h3>
+                <h3 className="text-[0.78rem] font-bold uppercase tracking-wider text-slate-900">{col.title}</h3>
                 <ul className="mt-3">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       {link.href.startsWith("/") ? (
                         <Link
                           href={link.href}
-                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] text-white/65 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
                         >
                           {link.label}
                         </Link>
                       ) : (
                         <a
                           href={link.href}
-                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] text-white/65 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
                         >
                           {link.label}
                         </a>
@@ -69,9 +69,9 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-white/10 py-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-slate-200/80 py-7 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-            <p className="text-[0.82rem] tracking-[0.14em] text-white/50 uppercase">
+            <p className="text-[0.82rem] font-semibold tracking-[0.14em] text-slate-500 uppercase">
               People × Technology × Possibilities
             </p>
             {/* Social icons */}
@@ -82,11 +82,11 @@ export function Footer() {
             </div>
           </div>
 
-          <ul className="flex flex-wrap items-center gap-x-6 text-[0.85rem] text-white/55">
+          <ul className="flex flex-wrap items-center gap-x-6 text-[0.85rem] text-slate-500">
             <li>
               <Link
                 href="/legal#privacy"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 hover:text-blue-600"
               >
                 Privacy
               </Link>
@@ -94,7 +94,7 @@ export function Footer() {
             <li>
               <Link
                 href="/legal#terms"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 hover:text-blue-600"
               >
                 Terms
               </Link>
@@ -102,7 +102,7 @@ export function Footer() {
             <li>
               <a
                 href="#contact"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 hover:text-blue-600"
               >
                 Contact
               </a>
@@ -110,7 +110,7 @@ export function Footer() {
             <li>
               <Link
                 href="/login"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+                className="inline-flex min-h-11 min-w-11 items-center font-bold text-blue-600 transition-colors duration-200 hover:text-blue-700"
               >
                 CRM Sign in
               </Link>

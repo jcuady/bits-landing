@@ -21,7 +21,7 @@ const fieldOrder = [
 
 const inputClass = (invalid: boolean) =>
   cn(
-    "h-11 w-full rounded-xl border bg-white px-3.5 text-sm text-slate-900 transition-all duration-200 placeholder:text-slate-400",
+    "h-11 w-full rounded-xl border bg-white px-3.5 text-base text-slate-900 transition-all duration-200 placeholder:text-slate-400",
     "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20",
     invalid ? "border-rose-400" : "border-slate-200 hover:border-slate-300"
   );
@@ -169,7 +169,7 @@ export function ContactForm() {
               id="companySize"
               name="companySize"
               defaultValue={state.values.companySize ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-xs")}
+              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
             >
               <option value="">Select team size</option>
               {consultationOptions.companySizes.map((size) => (
@@ -194,7 +194,7 @@ export function ContactForm() {
               id="industry"
               name="industry"
               defaultValue={state.values.industry ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-xs")}
+              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
             >
               <option value="">Select industry</option>
               {consultationOptions.industries.map((ind) => (
@@ -219,7 +219,7 @@ export function ContactForm() {
               id="currentSystem"
               name="currentSystem"
               defaultValue={state.values.currentSystem ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-xs")}
+              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
             >
               <option value="">Select current system</option>
               {consultationOptions.currentSystems.map((sys) => (
@@ -244,7 +244,7 @@ export function ContactForm() {
               id="primaryChallenge"
               name="primaryChallenge"
               defaultValue={state.values.primaryChallenge ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-xs")}
+              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
             >
               <option value="">Select primary challenge</option>
               {consultationOptions.primaryChallenges.map((ch) => (
@@ -269,7 +269,7 @@ export function ContactForm() {
               id="preferredMethod"
               name="preferredMethod"
               defaultValue={state.values.preferredMethod ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-xs")}
+              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
             >
               <option value="">Select preferred method</option>
               {consultationOptions.preferredMethods.map((m) => (
@@ -297,7 +297,7 @@ export function ContactForm() {
             defaultValue={state.values.message ?? ""}
             aria-invalid={!!state.errors.message}
             aria-describedby={state.errors.message ? "message-error" : undefined}
-            className={cn(inputClass(!!state.errors.message), "h-auto min-h-[6.5rem] resize-y py-3 text-xs")}
+            className={cn(inputClass(!!state.errors.message), "h-auto min-h-[6.5rem] resize-y py-3 text-base")}
             placeholder="Tell us about your portfolio volume, dialing workflows, team structure, or required system integrations..."
           />
           <FieldError id="message-error" errors={state.errors.message} />

@@ -135,15 +135,15 @@ export function HeroProduct({ className }: { className?: string }) {
         <div className="rounded-[2rem] bg-slate-900/10 p-2 shadow-2xl shadow-blue-950/25 ring-1 ring-slate-900/10 backdrop-blur-xl">
           <div className="overflow-hidden rounded-[calc(2rem-8px)] border border-slate-200/80 bg-white shadow-inner">
             {/* iOS Dynamic Island header */}
-            <div className="bg-slate-900 px-4 pt-3 pb-3.5 text-white">
-              <div className="mx-auto mb-2.5 h-3.5 w-20 rounded-full bg-black/80 ring-1 ring-white/10" />
+            <div className="border-b border-slate-100 bg-slate-50 px-4 pt-3 pb-3.5">
+              <div className="mx-auto mb-2.5 h-3 w-16 rounded-full bg-slate-300 ring-1 ring-slate-400/20" />
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[0.62rem] font-bold tracking-widest text-blue-400 uppercase">BITS Dialer</p>
-                  <p className="text-[0.78rem] font-bold text-white">Field & Queue Mode</p>
+                  <p className="text-[0.62rem] font-bold tracking-widest text-blue-600 uppercase">BITS Dialer</p>
+                  <p className="text-[0.78rem] font-bold text-slate-900">Field & Queue Mode</p>
                 </div>
-                <span className="flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-emerald-300">
-                  <span className="size-1 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-emerald-700">
+                  <span className="size-1 rounded-full bg-emerald-500 animate-pulse" />
                   Live
                 </span>
               </div>

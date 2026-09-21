@@ -36,10 +36,10 @@ export function BitsAgentCallSpecimen({ className }: { className?: string }) {
           </div>
 
           {/* Waveform Visualization */}
-          <div className="flex h-12 items-center justify-between border-b border-slate-100 bg-slate-900 px-5 text-white" aria-hidden>
+          <div className="flex h-12 items-center justify-between border-b border-slate-100 bg-slate-50 px-5 text-slate-700" aria-hidden>
             <div className="flex items-center gap-1.5">
-              <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-mono text-[0.65rem] font-semibold text-slate-300 uppercase tracking-wider">
+              <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-mono text-[0.65rem] font-bold text-slate-600 uppercase tracking-wider">
                 Audio Stream Active
               </span>
             </div>
@@ -48,13 +48,13 @@ export function BitsAgentCallSpecimen({ className }: { className?: string }) {
               {WAVEFORM.map((height, index) => (
                 <span
                   key={index}
-                  className="w-[3px] rounded-full bg-violet-400/80 transition-all duration-300"
+                  className="w-[3px] rounded-full bg-violet-600/80 transition-all duration-300"
                   style={{ height: `${height * 0.4}px` }}
                 />
               ))}
             </div>
 
-            <span className="font-mono text-[0.65rem] font-medium text-slate-400">02:18</span>
+            <span className="font-mono text-[0.65rem] font-bold text-slate-500">02:18</span>
           </div>
 
           {/* Transcript Content */}

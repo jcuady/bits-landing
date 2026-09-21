@@ -59,7 +59,7 @@ export function Security() {
               <div className="mt-8">
                 <Link
                   href="/#contact"
-                  className="group inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
+                  className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
                 >
                   <span>Request a Security Architecture Briefing</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>

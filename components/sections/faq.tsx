@@ -74,7 +74,7 @@ export function FAQ() {
                     onClick={() => toggle(idx)}
                     aria-expanded={isOpen}
                     aria-controls={contentId}
-                    className="flex w-full items-start justify-between gap-4 text-left font-bold text-slate-900 transition-colors hover:text-blue-600"
+                    className="flex min-h-[48px] w-full items-center justify-between gap-4 py-2 text-left font-bold text-slate-900 transition-colors hover:text-blue-600"
                   >
                     <span className="text-[1.02rem] leading-snug sm:text-base">
                       {item.question}
@@ -98,10 +98,7 @@ export function FAQ() {
                   role="region"
                   aria-labelledby={headerId}
                   hidden={!isOpen}
-                  className={cn(
-                    "mt-3 text-[0.92rem] leading-relaxed text-slate-600 transition-all",
-                    !isOpen && "hidden"
-                  )}
+                  className="pt-3 text-sm leading-relaxed text-slate-600"
                 >
                   <p>{item.answer}</p>
                 </div>
@@ -115,17 +112,17 @@ export function FAQ() {
           <p className="text-sm text-slate-500">
             Have a specific operational workflow question or integration requirement?
           </p>
-          <div className="mt-3 flex items-center justify-center gap-4 text-sm font-bold">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-sm font-bold">
             <Link
               href="/#contact"
-              className="text-blue-600 hover:text-blue-700 hover:underline"
+              className="inline-flex min-h-[44px] items-center text-blue-600 hover:text-blue-700 hover:underline"
             >
               Book a technical consultation →
             </Link>
-            <span className="text-slate-300">•</span>
+            <span className="text-slate-300 hidden sm:inline">•</span>
             <a
               href="mailto:bits_inquiries@boundlessits.com"
-              className="text-slate-600 hover:text-slate-900 hover:underline"
+              className="inline-flex min-h-[44px] items-center text-slate-600 hover:text-slate-900 hover:underline"
             >
               bits_inquiries@boundlessits.com
             </a>

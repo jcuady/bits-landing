@@ -97,7 +97,7 @@ export function Pricing() {
                 type="button"
                 onClick={() => setActiveTab("all")}
                 className={cn(
-                  "cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
                   activeTab === "all"
                     ? "bg-slate-900 text-white shadow-xs"
                     : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
@@ -109,7 +109,7 @@ export function Pricing() {
                 type="button"
                 onClick={() => setActiveTab("starter")}
                 className={cn(
-                  "cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
                   activeTab === "starter"
                     ? "bg-blue-600 text-white shadow-xs"
                     : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
@@ -121,7 +121,7 @@ export function Pricing() {
                 type="button"
                 onClick={() => setActiveTab("growth")}
                 className={cn(
-                  "cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
                   activeTab === "growth"
                     ? "bg-blue-600 text-white shadow-xs"
                     : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
@@ -133,7 +133,7 @@ export function Pricing() {
                 type="button"
                 onClick={() => setActiveTab("enterprise")}
                 className={cn(
-                  "cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
                   activeTab === "enterprise"
                     ? "bg-slate-900 text-white shadow-xs"
                     : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
@@ -192,14 +192,14 @@ export function Pricing() {
                           <span className="size-1.5 rounded-full bg-white animate-pulse" />
                         </div>
                       ) : isEnterprise ? (
-                        <div className="mb-4 flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900 px-3.5 py-1.5 text-white shadow-xs">
+                        <div className="mb-4 flex items-center justify-between rounded-xl border border-indigo-200 bg-indigo-50/80 px-3.5 py-1.5 text-indigo-900 shadow-2xs">
                           <div className="flex items-center gap-1.5">
-                            <ShieldCheck className="size-3.5 text-cyan-400" />
-                            <span className="text-[0.68rem] font-bold uppercase tracking-wider text-cyan-300">
+                            <ShieldCheck className="size-3.5 text-indigo-600" />
+                            <span className="text-[0.68rem] font-bold uppercase tracking-wider text-indigo-800">
                               Sovereign & Dedicated SLA
                             </span>
                           </div>
-                          <span className="font-mono text-[0.65rem] font-semibold text-slate-300">
+                          <span className="font-mono text-[0.65rem] font-semibold text-indigo-700">
                             Bank-Grade
                           </span>
                         </div>
@@ -353,7 +353,7 @@ export function Pricing() {
             <button
               type="button"
               onClick={() => setShowMatrix(!showMatrix)}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-300/80 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-2xs transition-all hover:border-blue-400 hover:text-blue-600 hover:shadow-sm active:scale-[0.98]"
+              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full border border-slate-300/80 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-2xs transition-all hover:border-blue-400 hover:text-blue-600 hover:shadow-sm active:scale-[0.98]"
             >
               <Sliders className="size-3.5 text-blue-600" />
               <span>
@@ -374,17 +374,17 @@ export function Pricing() {
         {showMatrix && (
           <Reveal delay={0.05}>
             <div className="mx-auto mt-8 max-w-6xl overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-xl shadow-slate-950/5">
-              <div className="border-b border-slate-200 bg-slate-900 px-6 py-5 text-white">
+              <div className="border-b border-slate-200 bg-slate-50/90 px-6 py-5 text-slate-900">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className="text-base font-bold text-white sm:text-lg">
+                    <h3 className="text-base font-bold text-slate-900 sm:text-lg">
                       Full Capability & Statutory SLA Comparison
                     </h3>
-                    <p className="text-xs text-slate-300">
+                    <p className="text-xs text-slate-600">
                       Transparent technical evaluation for Operations Heads, CTOs, and Compliance Directors.
                     </p>
                   </div>
-                  <span className="w-fit rounded-full bg-blue-500/20 px-3 py-1 font-mono text-[0.7rem] font-semibold text-cyan-300 border border-cyan-400/30">
+                  <span className="w-fit rounded-full bg-blue-50 px-3 py-1 font-mono text-[0.7rem] font-bold text-blue-700 border border-blue-200">
                     21 Scoped Deliverables
                   </span>
                 </div>
@@ -487,35 +487,35 @@ export function Pricing() {
           </div>
         </Reveal>
 
-        {/* Sovereign Private VPC / On-Premises Callout Banner */}
+        {/* Sovereign Private VPC / On-Premises Callout Banner: Light Mode */}
         <Reveal delay={0.25}>
-          <div className="mx-auto mt-8 max-w-6xl rounded-3xl border border-blue-900/30 bg-gradient-to-r from-slate-950 via-[#071739] to-slate-950 p-6 text-white shadow-xl shadow-blue-950/20 sm:p-8">
+          <div className="mx-auto mt-8 max-w-6xl rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/60 to-white p-6 text-slate-900 shadow-xl shadow-blue-900/5 sm:p-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-cyan-400 animate-pulse" />
-                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-cyan-300">
+                  <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
+                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-blue-700">
                     Custom Sovereign & On-Premises Architecture
                   </span>
                 </div>
-                <h3 className="mt-2 text-lg font-bold text-white sm:text-xl">
+                <h3 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
                   Require private cloud data residency, custom banking ETLs, or bespoke CRM schemas?
                 </h3>
-                <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-300">
+                <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600">
                   Our engineering team works under mutual NDA to design custom digital infrastructure, proprietary scoring workflows, and dedicated telco interconnects.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3 shrink-0">
                 <Link
                   href="/#deployment"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-blue-400/30 bg-blue-500/10 px-5 text-xs font-bold text-cyan-300 transition-all hover:bg-blue-500/20 active:scale-[0.98]"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 text-xs font-bold text-blue-700 shadow-2xs transition-all hover:bg-blue-50 active:scale-[0.98]"
                 >
-                  <Server className="size-3.5" />
+                  <Server className="size-3.5 text-blue-600" />
                   <span>Cloud vs. On-Prem Specs</span>
                 </Link>
                 <Link
                   href="/#contact"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-blue-500 px-6 text-xs font-bold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-600 hover:shadow-blue-500/35 active:scale-[0.98]"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700 active:scale-[0.98]"
                 >
                   <span>Request Architecture Review</span>
                   <ArrowRight className="size-3.5" />

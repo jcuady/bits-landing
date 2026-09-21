@@ -37,49 +37,49 @@ export function DeploymentModels() {
   const activeScopingTier = hardwareScopingTiers[selectedTier];
 
   return (
-    <Section id="deployment" className="relative overflow-hidden bg-slate-900 text-white py-20 sm:py-28">
-      {/* Background Architectural Grid & Subtle Radial Glow */}
-      <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden>
-        <div className="absolute inset-0 bg-grid-dark" />
-        <div className="absolute -top-36 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-blue-600/15 blur-[140px]" />
+    <Section id="deployment" className="relative overflow-hidden bg-white text-slate-900 py-20 sm:py-28 border-t border-slate-200/80">
+      {/* Light Ambient Background Grid */}
+      <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden>
+        <div className="absolute inset-0 bg-grid-light" />
+        <div className="absolute -top-36 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-blue-500/[0.04] blur-[140px]" />
       </div>
 
       <Container className="relative z-10">
         {/* Section Header */}
         <div className="mx-auto max-w-4xl text-center">
           <Reveal>
-            <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-blue-500/25 bg-blue-500/10 px-4 py-1.5 backdrop-blur-md">
-              <span className="size-2 rounded-full bg-cyan-400 animate-pulse" aria-hidden />
-              <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-cyan-300">
+            <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-1.5 shadow-2xs backdrop-blur-md">
+              <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
+              <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
                 Flexible Deployment Architecture
               </span>
             </div>
-            <h2 className="text-h2 font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="text-display font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Cloud-Hosted or On-Premises:{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
                 Deploy on Your Terms
               </span>
             </h2>
-            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-300">
+            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
               Whether you want rapid cloud onboarding or need to leverage existing in-house server infrastructure,
               BITS delivers battle-tested deployment architectures with full engineering scoping.
             </p>
           </Reveal>
 
-          {/* Interactive Deployment Switcher Pill */}
+          {/* Interactive Deployment Switcher Pill: Clean Light Mode */}
           <Reveal delay={0.06}>
-            <div className="mx-auto mt-9 inline-flex rounded-full border border-slate-750 bg-slate-950/80 p-1.5 shadow-2xl backdrop-blur-xl">
+            <div className="mx-auto mt-8 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1.5 shadow-xs">
               <button
                 type="button"
                 onClick={() => setSelectedModel("on-prem")}
                 className={cn(
-                  "inline-flex cursor-pointer items-center gap-2.5 rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200",
+                  "inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200 sm:text-sm",
                   selectedModel === "on-prem"
-                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/30"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <Server className="size-4 text-cyan-300" />
+                <Server className={cn("size-4", selectedModel === "on-prem" ? "text-white" : "text-slate-500")} />
                 <span>On-Premises Deployment (Bare-Metal & Sovereign)</span>
               </button>
 
@@ -87,55 +87,55 @@ export function DeploymentModels() {
                 type="button"
                 onClick={() => setSelectedModel("cloud")}
                 className={cn(
-                  "inline-flex cursor-pointer items-center gap-2.5 rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200",
+                  "inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200 sm:text-sm",
                   selectedModel === "cloud"
-                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/30"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <Cloud className="size-4 text-cyan-300" />
+                <Cloud className={cn("size-4", selectedModel === "cloud" ? "text-white" : "text-slate-500")} />
                 <span>Managed Cloud Deployment (Rapid 1–2 Weeks)</span>
               </button>
             </div>
           </Reveal>
         </div>
 
-        {/* Dynamic Model Deep-Dive Showcase */}
-        <div className="mx-auto mt-12 max-w-6xl">
+        {/* Dynamic Model Deep-Dive Showcase: Clean Light Card */}
+        <div className="mx-auto mt-10 max-w-6xl">
           <Reveal delay={0.1}>
-            <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/70 p-7 shadow-2xl backdrop-blur-xl sm:p-10">
+            <div className="overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-7 shadow-xl shadow-slate-200/50 sm:p-10">
               <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
                 {/* Left Overview Column (7 Cols) */}
                 <div className="lg:col-span-7">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full bg-blue-500/20 px-3 py-1 font-mono text-[0.7rem] font-bold uppercase tracking-wider text-cyan-300 border border-cyan-400/30">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <span className="rounded-full bg-blue-50 px-3 py-1 font-mono text-[0.7rem] font-bold uppercase tracking-wider text-blue-700 border border-blue-200">
                       {activeData.badge}
                     </span>
-                    <span className="font-mono text-xs text-slate-400">
+                    <span className="font-mono text-xs text-slate-500 font-medium">
                       {activeData.idealFor}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                  <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
                     {activeData.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700 font-semibold">
                     {activeData.tagline}
                   </p>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">
                     {activeData.description}
                   </p>
 
                   {/* Operational Advantages List */}
-                  <div className="mt-7 border-t border-slate-800/80 pt-6">
-                    <h4 className="text-[0.7rem] font-bold uppercase tracking-wider text-cyan-400">
+                  <div className="mt-6 border-t border-slate-100 pt-5">
+                    <h4 className="text-[0.7rem] font-bold uppercase tracking-wider text-blue-700 font-mono">
                       Key Architectural Advantages
                     </h4>
-                    <ul className="mt-3.5 space-y-3">
+                    <ul className="mt-3 space-y-2.5">
                       {activeData.advantages.map((adv) => (
-                        <li key={adv} className="flex items-start gap-3 text-xs text-slate-200">
+                        <li key={adv} className="flex items-start gap-3 text-xs text-slate-700">
                           <span
-                            className="mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full bg-blue-600/30 border border-blue-400/40 text-cyan-300 text-[0.65rem]"
+                            className="mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-[0.65rem] font-bold"
                             aria-hidden
                           >
                             <Check className="size-3 stroke-[2.5]" />
@@ -148,54 +148,54 @@ export function DeploymentModels() {
                 </div>
 
                 {/* Right Specs & Financial Architecture Box (5 Cols) */}
-                <div className="flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-6 sm:p-7 lg:col-span-5">
+                <div className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-7 lg:col-span-5 shadow-2xs">
                   <div>
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                      <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                      <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                         Technical Delivery Specs
                       </span>
-                      <span className="font-mono text-[0.65rem] font-semibold text-emerald-400">
+                      <span className="font-mono text-[0.65rem] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                         Production Ready
                       </span>
                     </div>
 
                     {/* Quick Specs Grid */}
-                    <div className="mt-4 grid grid-cols-2 gap-3">
+                    <div className="mt-4 grid grid-cols-2 gap-2.5">
                       {activeData.specs.map((spec) => (
-                        <div key={spec.label} className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-3">
+                        <div key={spec.label} className="rounded-xl border border-slate-200 bg-white p-3 shadow-2xs">
                           <p className="text-[0.65rem] font-bold uppercase tracking-wider text-slate-400">
                             {spec.label}
                           </p>
-                          <p className="mt-1 font-mono text-xs font-bold text-white">
+                          <p className="mt-1 font-mono text-xs font-bold text-slate-900">
                             {spec.value}
                           </p>
                         </div>
                       ))}
                     </div>
 
-                    {/* Investment & Setup Fee Model (Zero Numerical Values) */}
-                    <div className="mt-5 rounded-xl border border-blue-900/40 bg-blue-950/30 p-4.5">
+                    {/* Investment & Setup Fee Model */}
+                    <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50/60 p-4">
                       <div className="flex items-center gap-2">
-                        <Zap className="size-3.5 text-cyan-400" />
-                        <span className="text-[0.68rem] font-bold uppercase tracking-wider text-cyan-300">
+                        <Zap className="size-3.5 text-blue-600 fill-blue-600" />
+                        <span className="text-[0.68rem] font-bold uppercase tracking-wider text-blue-800">
                           {activeData.financialModel.type}
                         </span>
                       </div>
 
-                      <div className="mt-3 space-y-2.5 text-xs">
+                      <div className="mt-2.5 space-y-2 text-xs">
                         <div>
-                          <p className="font-bold text-white">
+                          <p className="font-bold text-slate-900 text-[0.72rem]">
                             Setup & Implementation Scope:
                           </p>
-                          <p className="mt-0.5 text-[0.75rem] text-slate-300 leading-relaxed">
+                          <p className="mt-0.5 text-[0.7rem] text-slate-600 leading-relaxed">
                             {activeData.financialModel.setupDetails}
                           </p>
                         </div>
-                        <div className="border-t border-slate-800/80 pt-2.5">
-                          <p className="font-bold text-white">
+                        <div className="border-t border-blue-200/80 pt-2">
+                          <p className="font-bold text-slate-900 text-[0.72rem]">
                             Ongoing Operational Model:
                           </p>
-                          <p className="mt-0.5 text-[0.75rem] text-slate-300 leading-relaxed">
+                          <p className="mt-0.5 text-[0.7rem] text-slate-600 leading-relaxed">
                             {activeData.financialModel.ongoingDetails}
                           </p>
                         </div>
@@ -204,11 +204,11 @@ export function DeploymentModels() {
                   </div>
 
                   {/* CTA Action */}
-                  <div className="mt-6 pt-4 border-t border-slate-800">
+                  <div className="mt-5 pt-4 border-t border-slate-200">
                     <Magnetic className="w-full">
                       <Link
                         href="/#contact"
-                        className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98]"
+                        className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                       >
                         <span>
                           {selectedModel === "on-prem"
@@ -218,7 +218,7 @@ export function DeploymentModels() {
                         <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                       </Link>
                     </Magnetic>
-                    <p className="mt-2 text-center text-[0.68rem] text-slate-400">
+                    <p className="mt-2 text-center text-[0.68rem] text-slate-500">
                       Mutual NDA provided · Technical blueprint included
                     </p>
                   </div>
@@ -228,37 +228,37 @@ export function DeploymentModels() {
           </Reveal>
         </div>
 
-        {/* Existing Servers Scoping & Hardware Sizing Blueprint */}
-        <div className="mx-auto mt-16 max-w-6xl">
+        {/* Existing Servers Scoping & Hardware Sizing Blueprint: Clean Light Mode */}
+        <div className="mx-auto mt-14 max-w-6xl">
           <Reveal delay={0.12}>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <Terminal className="size-4 text-cyan-400" />
-                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-cyan-300">
+                  <Terminal className="size-4 text-blue-600" />
+                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-blue-700">
                     Infrastructure Requirement Scoping
                   </span>
                 </div>
-                <h3 className="mt-1 text-xl font-bold text-white sm:text-2xl">
+                <h3 className="mt-1 text-xl font-bold text-slate-900 sm:text-2xl">
                   Have Existing Servers? We Engineer the Full Sizing & Migration
                 </h3>
-                <p className="mt-1 max-w-2xl text-xs text-slate-300">
+                <p className="mt-1 max-w-2xl text-xs text-slate-600">
                   Don&apos;t discard existing IT investments. We audit your Dell, HPE, Supermicro, or virtualization clusters and dimension exact CPU, RAM, storage, and telephony interconnects.
                 </p>
               </div>
 
               {/* Scoping Floor Size Tabs */}
-              <div className="flex flex-wrap gap-1.5 rounded-full border border-slate-800 bg-slate-950 p-1">
+              <div className="flex flex-wrap gap-1 rounded-full border border-slate-200 bg-slate-50 p-1">
                 {hardwareScopingTiers.map((tier, idx) => (
                   <button
                     key={tier.floorSize}
                     type="button"
                     onClick={() => setSelectedTier(idx)}
                     className={cn(
-                      "cursor-pointer rounded-full px-3.5 py-1.5 font-mono text-[0.7rem] font-bold transition-all",
+                      "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-3.5 py-1.5 font-mono text-[0.7rem] font-bold transition-all",
                       selectedTier === idx
                         ? "bg-blue-600 text-white shadow-xs"
-                        : "text-slate-400 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900"
                     )}
                   >
                     {tier.floorSize}
@@ -267,89 +267,89 @@ export function DeploymentModels() {
               </div>
             </div>
 
-            {/* Hardware Specification Card for Selected Floor Tier */}
-            <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/80 p-6 shadow-xl backdrop-blur-xl">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            {/* Hardware Specification Card for Selected Floor Tier: Clean Light Mode */}
+            <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/40">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-mono text-xs font-bold uppercase text-white">
+                  <span className="size-2 rounded-full bg-emerald-500" />
+                  <span className="font-mono text-xs font-bold uppercase text-slate-900">
                     Hardware Specification Blueprint: {activeScopingTier.tier}
                   </span>
                 </div>
-                <span className="font-mono text-[0.68rem] text-cyan-300 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/30">
+                <span className="font-mono text-[0.68rem] text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 font-bold">
                   Target: {activeScopingTier.floorSize}
                 </span>
               </div>
 
-              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="rounded-xl border border-slate-800/90 bg-slate-900/60 p-4">
-                  <div className="flex items-center gap-2 text-cyan-300">
+              <div className="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+                  <div className="flex items-center gap-2 text-blue-600">
                     <Cpu className="size-4" />
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                       Compute (CPU)
                     </span>
                   </div>
-                  <p className="mt-2 font-mono text-xs font-bold text-white">
+                  <p className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                     {activeScopingTier.cpu}
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-800/90 bg-slate-900/60 p-4">
-                  <div className="flex items-center gap-2 text-cyan-300">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+                  <div className="flex items-center gap-2 text-blue-600">
                     <Layers className="size-4" />
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                       System Memory (RAM)
                     </span>
                   </div>
-                  <p className="mt-2 font-mono text-xs font-bold text-white">
+                  <p className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                     {activeScopingTier.ram}
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-800/90 bg-slate-900/60 p-4">
-                  <div className="flex items-center gap-2 text-cyan-300">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+                  <div className="flex items-center gap-2 text-blue-600">
                     <HardDrive className="size-4" />
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                       Storage Array (NVMe / SAS)
                     </span>
                   </div>
-                  <p className="mt-2 font-mono text-xs font-bold text-white">
+                  <p className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                     {activeScopingTier.storage}
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-800/90 bg-slate-900/60 p-4">
-                  <div className="flex items-center gap-2 text-cyan-300">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+                  <div className="flex items-center gap-2 text-blue-600">
                     <Network className="size-4" />
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                       Networking & Voice QoS
                     </span>
                   </div>
-                  <p className="mt-2 font-mono text-xs font-bold text-white">
+                  <p className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                     {activeScopingTier.network}
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-800/90 bg-slate-900/60 p-4">
-                  <div className="flex items-center gap-2 text-cyan-300">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+                  <div className="flex items-center gap-2 text-blue-600">
                     <Activity className="size-4" />
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                       Telephony Interconnect
                     </span>
                   </div>
-                  <p className="mt-2 font-mono text-xs font-bold text-white">
+                  <p className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                     {activeScopingTier.telephony}
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-800/90 bg-slate-900/60 p-4">
-                  <div className="flex items-center gap-2 text-cyan-300">
+                <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+                  <div className="flex items-center gap-2 text-blue-600">
                     <Server className="size-4" />
-                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
                       Hypervisor / OS Support
                     </span>
                   </div>
-                  <p className="mt-2 font-mono text-xs font-bold text-white">
+                  <p className="mt-1.5 font-mono text-xs font-bold text-slate-900">
                     {activeScopingTier.deploymentEnv}
                   </p>
                 </div>
@@ -359,27 +359,27 @@ export function DeploymentModels() {
         </div>
 
         {/* 4-Step Technical Scoping Methodology */}
-        <div className="mx-auto mt-14 max-w-6xl">
+        <div className="mx-auto mt-12 max-w-6xl">
           <Reveal delay={0.15}>
-            <div className="border-b border-slate-800 pb-3">
-              <span className="text-[0.7rem] font-bold uppercase tracking-widest text-slate-400">
+            <div className="border-b border-slate-200 pb-2.5">
+              <span className="text-[0.7rem] font-bold uppercase tracking-widest text-slate-400 font-mono">
                 End-to-End On-Premises Engineering Delivery Workflow
               </span>
             </div>
 
-            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
               {scopingProcessSteps.map((step) => (
                 <div
                   key={step.step}
-                  className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 transition-colors hover:border-slate-700"
+                  className="rounded-2xl border border-slate-200 bg-white p-4.5 shadow-2xs transition-all hover:border-slate-300 hover:shadow-sm"
                 >
-                  <span className="font-mono text-sm font-bold text-blue-400">
+                  <span className="font-mono text-xs font-bold text-blue-600">
                     STEP // {step.step}
                   </span>
-                  <h4 className="mt-2 text-sm font-bold text-white">
+                  <h4 className="mt-1.5 text-xs font-bold text-slate-900">
                     {step.title}
                   </h4>
-                  <p className="mt-1.5 text-xs leading-relaxed text-slate-400">
+                  <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -387,64 +387,6 @@ export function DeploymentModels() {
             </div>
           </Reveal>
         </div>
-
-        {/* Architectural Cost Comparison Strip (Transparent Models, Zero Arbitrary Values) */}
-        <Reveal delay={0.18}>
-          <div className="mx-auto mt-12 max-w-6xl rounded-3xl border border-slate-800 bg-slate-950/90 p-6 sm:p-8">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-800 pb-4">
-              <div>
-                <h4 className="text-base font-bold text-white">
-                  Cost Architecture & Financial Comparison
-                </h4>
-                <p className="text-xs text-slate-400">
-                  How organizations budget for Cloud vs. On-Premises deployments.
-                </p>
-              </div>
-              <span className="rounded-full bg-emerald-500/10 px-3 py-1 font-mono text-[0.68rem] font-semibold text-emerald-400 border border-emerald-500/20">
-                Transparent Scoping Framework
-              </span>
-            </div>
-
-            <div className="mt-5 overflow-x-auto">
-              <table className="w-full border-collapse text-left text-xs">
-                <thead>
-                  <tr className="border-b border-slate-800 text-slate-400 font-bold uppercase tracking-wider text-[0.68rem]">
-                    <th className="py-3 pr-4">Dimension</th>
-                    <th className="py-3 px-4 text-blue-300 w-5/12">Cloud Deployment</th>
-                    <th className="py-3 pl-4 text-cyan-300 w-5/12">On-Premises Deployment</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-850 text-slate-300">
-                  <tr>
-                    <td className="py-3 pr-4 font-bold text-white">Budget Model</td>
-                    <td className="py-3 px-4">Operational Expenditure (OpEx) monthly/annual</td>
-                    <td className="py-3 pl-4">Capital Expenditure (CapEx) optimization + annual SLA</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-bold text-white">Server Hardware</td>
-                    <td className="py-3 px-4">Zero hardware procurement or facility overhead</td>
-                    <td className="py-3 pl-4">Deploy on existing server fleet or custom procured servers</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-bold text-white">Setup & Onboarding</td>
-                    <td className="py-3 px-4">Data migration, queue configuration & agent training</td>
-                    <td className="py-3 pl-4">Hardware audit, OS hardening, local PBX interconnect & UAT</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-bold text-white">Long-Term Cost Advantage</td>
-                    <td className="py-3 px-4">Low barrier to start; scale up or down without penalty</td>
-                    <td className="py-3 pl-4">Eliminates cloud server markup; maximum ROI over multi-year scale</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-bold text-white">Data Control & Isolation</td>
-                    <td className="py-3 px-4">Dedicated cloud VPC with 256-bit encryption</td>
-                    <td className="py-3 pl-4">100% physically contained inside your corporate network</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </Reveal>
       </Container>
     </Section>
   );

@@ -195,7 +195,7 @@ export function Industries() {
                       <div className="mt-7">
                         <Link
                           href="/#contact"
-                          className="group inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
+                          className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
                         >
                           <span>Design a {sector.name} solution</span>
                           <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
