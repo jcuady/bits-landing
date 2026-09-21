@@ -173,6 +173,24 @@ export function ProductsSuite() {
             </p>
           </Reveal>
 
+          {/* Cloud Recommended & Continuous Evolution Assurance Pill */}
+          <Reveal delay={0.04}>
+            <div className="mx-auto mt-6 flex max-w-3xl flex-wrap items-center justify-center gap-2 rounded-full border border-blue-200/90 bg-white/95 px-4 py-2 text-xs shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 font-bold text-slate-900">
+                <span className="size-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
+                <span>Deploy via Managed Cloud</span>
+                <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-wider text-emerald-800">
+                  Recommended
+                </span>
+                <span className="text-slate-500 font-normal">or Sovereign On-Prem</span>
+              </span>
+              <span className="hidden text-slate-300 sm:inline" aria-hidden>•</span>
+              <span className="text-slate-600">
+                Continuous Security &amp; Architectural Improvements Included
+              </span>
+            </div>
+          </Reveal>
+
           {/* Monday-Style Category Filter Tabs with Color Accents */}
           <Reveal delay={0.08}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">

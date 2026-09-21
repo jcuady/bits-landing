@@ -20,9 +20,22 @@ import {
   ChevronUp,
   ArrowRight,
   Server,
+  Cloud,
 } from "lucide-react";
 
 const universalGuarantees = [
+  {
+    icon: Cloud,
+    label: "Flexible Deployment",
+    detail: "Cloud (Recommended) or On-Prem",
+    subtext: "Bare-metal or 1–2 wk cloud",
+  },
+  {
+    icon: Sparkles,
+    label: "Continuous Evolution",
+    detail: "Security & Tech Updates",
+    subtext: "Bespoke requests on demand*",
+  },
   {
     icon: Activity,
     label: "High-Availability SLA",
@@ -40,12 +53,6 @@ const universalGuarantees = [
     label: "Granular Security",
     detail: "Strict RBAC Permissions",
     subtext: "Supervisor separation of duties",
-  },
-  {
-    icon: Server,
-    label: "Data Integrity",
-    detail: "256-Bit TLS & Audits",
-    subtext: "Tamper-evident logs",
   },
   {
     icon: Headphones,
@@ -85,8 +92,7 @@ export function Pricing() {
               Technology Sized to Your Operation
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
-              BITS solutions are modular operational paths, not rigid licensing templates.
-              Select a baseline configuration and tailor modules, dialing volume, and AI agents around your exact floor workflows.
+              BITS solutions are modular operational paths deployable via <strong className="font-semibold text-slate-900">Managed Cloud (Recommended for 1–2 week activation)</strong> or <strong className="font-semibold text-slate-900">On-Premises</strong>. Every tier includes continuous architectural improvements, CVE patching, and security updates. Custom bespoke modules scoped on demand (costs vary).
             </p>
           </Reveal>
 
@@ -463,7 +469,7 @@ export function Pricing() {
               </span>
             </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
               {universalGuarantees.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -484,6 +490,9 @@ export function Pricing() {
                 );
               })}
             </div>
+            <p className="mt-4 border-t border-slate-100 pt-3 text-center text-[0.68rem] text-slate-500">
+              * Continuous system improvements and proactive security updates included in every plan. Custom bespoke feature requests and specialized ERP connectors scoped upon request (costs vary by complexity).
+            </p>
           </div>
         </Reveal>
 

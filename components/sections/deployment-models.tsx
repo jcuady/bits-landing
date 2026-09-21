@@ -26,10 +26,11 @@ import {
   Terminal,
   Activity,
   Zap,
+  Sliders,
 } from "lucide-react";
 
 export function DeploymentModels() {
-  const [selectedModel, setSelectedModel] = React.useState<"cloud" | "on-prem">("on-prem");
+  const [selectedModel, setSelectedModel] = React.useState<"cloud" | "on-prem">("cloud");
   const [selectedTier, setSelectedTier] = React.useState<number>(1);
 
   const activeData =
@@ -61,28 +62,13 @@ export function DeploymentModels() {
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
-              Whether you want rapid cloud onboarding or need to leverage existing in-house server infrastructure,
-              BITS delivers battle-tested deployment architectures with full engineering scoping.
+              All BITS systems can be deployed both on <strong className="text-slate-900 font-bold">Cloud</strong> and <strong className="text-slate-900 font-bold">On-Premises</strong>. We strongly recommend our Managed Cloud deployment for rapid 1–2 week rollout, automated maintenance, and maximum scaling velocity. For organizations with strict data residency mandates or existing bare-metal servers, we provide comprehensive hardware scoping and turnkey on-premises deployment.
             </p>
           </Reveal>
 
           {/* Interactive Deployment Switcher Pill: Clean Light Mode */}
           <Reveal delay={0.06}>
             <div className="mx-auto mt-8 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1.5 shadow-xs">
-              <button
-                type="button"
-                onClick={() => setSelectedModel("on-prem")}
-                className={cn(
-                  "inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200 sm:text-sm",
-                  selectedModel === "on-prem"
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
-                )}
-              >
-                <Server className={cn("size-4", selectedModel === "on-prem" ? "text-white" : "text-slate-500")} />
-                <span>On-Premises Deployment (Bare-Metal & Sovereign)</span>
-              </button>
-
               <button
                 type="button"
                 onClick={() => setSelectedModel("cloud")}
@@ -94,7 +80,31 @@ export function DeploymentModels() {
                 )}
               >
                 <Cloud className={cn("size-4", selectedModel === "cloud" ? "text-white" : "text-slate-500")} />
-                <span>Managed Cloud Deployment (Rapid 1–2 Weeks)</span>
+                <span>Managed Cloud (1–2 Weeks)</span>
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-wider",
+                    selectedModel === "cloud"
+                      ? "bg-white/20 text-white"
+                      : "bg-emerald-100 text-emerald-800"
+                  )}
+                >
+                  Recommended
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedModel("on-prem")}
+                className={cn(
+                  "inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200 sm:text-sm",
+                  selectedModel === "on-prem"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
+                )}
+              >
+                <Server className={cn("size-4", selectedModel === "on-prem" ? "text-white" : "text-slate-500")} />
+                <span>On-Premises Bare-Metal & Sovereign</span>
               </button>
             </div>
           </Reveal>
@@ -221,6 +231,88 @@ export function DeploymentModels() {
                     <p className="mt-2 text-center text-[0.68rem] text-slate-500">
                       Mutual NDA provided · Technical blueprint included
                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Continuous System Improvements & Proactive Security Evolution */}
+        <div className="mx-auto mt-12 max-w-6xl">
+          <Reveal delay={0.1}>
+            <div className="rounded-3xl border border-blue-200/90 bg-gradient-to-br from-blue-50/70 via-indigo-50/40 to-white p-6 shadow-sm sm:p-8">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-blue-100 pb-6">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-blue-300/80 bg-white px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-blue-700 shadow-2xs">
+                    <Sparkles className="size-3 text-blue-600" />
+                    <span>Continuous Evolution Guarantee</span>
+                  </div>
+                  <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+                    Continuous System Improvements & Proactive Security
+                  </h3>
+                  <p className="mt-1.5 max-w-2xl text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Deployments never go stale. Both Managed Cloud and Sovereign On-Premises environments receive continuous architectural and security upgrades as newer security standards and technologies emerge.
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <div className="rounded-2xl border border-blue-200 bg-white px-4 py-2.5 text-left sm:text-center shadow-2xs">
+                    <span className="block text-[0.65rem] font-bold uppercase tracking-wider text-slate-400">Policy Standard</span>
+                    <span className="font-mono text-sm font-extrabold text-blue-600">Active Lifecycle Evolution</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 Pillars: Continuous Security, Tech Evolution, Bespoke Requests */}
+              <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
+                  <div className="flex items-center gap-2.5 text-blue-600">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                      <ShieldCheck className="size-4" />
+                    </div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                      Continuous Security Updates
+                    </h4>
+                  </div>
+                  <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
+                    Proactive zero-day CVE patching, automated encryption cipher updates, and statutory compliance hardening aligned with BSP Circulars 454/857, NPC RA 10173, and ISO 27001 standards.
+                  </p>
+                  <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.65rem] font-semibold text-slate-700">
+                    <Check className="size-3 text-emerald-600" /> Proactively patched
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
+                  <div className="flex items-center gap-2.5 text-blue-600">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                      <Zap className="size-4" />
+                    </div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                      Emerging Tech & AI Evolution
+                    </h4>
+                  </div>
+                  <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
+                    As newer LLM models, lower-latency voice synthesis pipelines (&lt;150ms), and accelerated SIP codecs enter production, BITS updates system engines to deliver immediate speed and cost gains.
+                  </p>
+                  <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.65rem] font-semibold text-slate-700">
+                    <Check className="size-3 text-emerald-600" /> Continuous engine upgrades
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
+                  <div className="flex items-center gap-2.5 text-blue-600">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
+                      <Sliders className="size-4" />
+                    </div>
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                      Bespoke Requests on Demand
+                    </h4>
+                  </div>
+                  <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
+                    Require customized operational workflows, proprietary internal core banking adapters, or specialized reporting? Bespoke engineering is available upon request (scoping and cost vary per requirement).
+                  </p>
+                  <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-[0.65rem] font-semibold text-blue-700">
+                    <span>Tailored scope & engineering</span>
                   </div>
                 </div>
               </div>

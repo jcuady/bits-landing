@@ -1364,6 +1364,16 @@ export const faqItems = [
       "We follow a disciplined 5-step methodology: Understand, Design, Build, Deploy, and Improve. We begin by analyzing your actual floor operations, translate those processes into a technical specification, configure and test the software, execute controlled data migration, train your agents and supervisors, and provide ongoing continuous optimization.",
   },
   {
+    question: "Can BITS be deployed On-Premises or on Cloud, and what do you recommend?",
+    answer:
+      "All BITS systems can be deployed both On-Premises and on Cloud. We strongly recommend our Managed Cloud deployment for rapid 1–2 week activation, automated zero-downtime scaling, high-availability multi-region redundancy, and continuous security maintenance with zero IT hardware overhead. For enterprises with strict sovereign data residency mandates, regulated banking enclaves, or existing bare-metal server infrastructure, we provide comprehensive hardware scoping, on-site setup, and turnkey on-premises deployment.",
+  },
+  {
+    question: "Do BITS systems receive continuous updates, and how are new technology and security improvements handled?",
+    answer:
+      "Yes. All BITS systems receive continuous architectural, compliance, and security improvements as part of our standard lifecycle. When newer security standards (such as BSP Circulars, NPC Data Privacy guidelines, ISO 27001, and OWASP CVE mitigations) and advancing technologies (such as faster LLM inference, lower-latency voice synthesis, or updated framework libraries) become available, they are proactively integrated into the platform. Clients may also request bespoke custom operational features or specialized third-party integrations at any time (scoping and development costs vary based on requirement complexity).",
+  },
+  {
     question: "How are BITS solutions packaged and how do we get started?",
     answer:
       "We offer modular Solution Tiers—Starter, Growth, and Enterprise—tailored to your team size, workflow complexity, and communication volume. Because our solutions adapt to your exact operational requirements, we begin with a technical consultation to review your current processes and provide an exact blueprint. You can book a consultation directly through the form below.",
