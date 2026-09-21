@@ -1,10 +1,8 @@
-import { industries } from "@/lib/site";
+import Link from "next/link";
+import { targetIndustrySectors } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-
-const ctaClass =
-  "group mt-7 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
 
 function Bezel({
   title,
@@ -16,8 +14,8 @@ function Bezel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
-      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5">
+      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-5 py-4">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5 opacity-40">
             <div className="size-2.5 rounded-full bg-slate-400" />
@@ -26,16 +24,16 @@ function Bezel({
           </div>
           <div className="h-4 w-px bg-slate-200" />
           <div>
-            <p className="text-[0.75rem] font-semibold text-slate-700">{title}</p>
+            <p className="text-[0.75rem] font-semibold text-slate-800">{title}</p>
             <p className="truncate text-[0.68rem] font-medium text-slate-500">{kicker}</p>
           </div>
         </div>
-        <span className="relative flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 shadow-sm">
+        <span className="relative flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 shadow-xs">
           <span className="relative flex size-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500"></span>
           </span>
-          <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+          <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-600">Active</span>
         </span>
       </div>
       {children}
@@ -70,7 +68,7 @@ function SpecimenTable({
             <tr key={row.a} className="transition-colors hover:bg-slate-50/50">
               <td className="whitespace-nowrap px-4 py-3 font-bold text-slate-900">{row.a}</td>
               <td className="max-w-[10rem] truncate px-4 py-3 text-slate-600 sm:max-w-none">{row.b}</td>
-              <td className="whitespace-nowrap px-4 py-3 text-slate-600">{row.c}</td>
+              <td className="whitespace-nowrap px-4 py-3 font-semibold text-blue-600">{row.c}</td>
             </tr>
           ))}
         </tbody>
@@ -79,38 +77,53 @@ function SpecimenTable({
   );
 }
 
-const specimens = {
-  small: {
-    title: "Focused campaign",
-    kicker: "Core Collections",
-    caption: "Small team collections configuration",
-    columns: ["Module", "Scope", "State"] as const,
+const sectorSpecimens = {
+  bpo: {
+    title: "Multi-Tenant Operations",
+    kicker: "BPO & Contact Center Infrastructure",
+    caption: "BPO Campaign Staging Specimen",
+    columns: ["Operational Module", "Configuration Scope", "State"] as const,
     rows: [
-      { a: "Accounts", b: "One campaign", c: "Enabled" },
-      { a: "Queues", b: "One team", c: "Enabled" },
-      { a: "Reporting", b: "Standard", c: "Enabled" },
+      { a: "Tenant Isolation", b: "Per-client database partitioning", c: "Enforced" },
+      { a: "Dynamic Routing", b: "Skill & language matching", c: "Active" },
+      { a: "Supervisor HUD", b: "Listen / whisper / barge", c: "Ready" },
+      { a: "SLA Reporting", b: "Automated client export feeds", c: "Scheduled" },
     ],
   },
-  medium: {
-    title: "Growing operation",
-    kicker: "Collections + communication + QA",
-    caption: "Medium team collections configuration",
-    columns: ["Module", "Scope", "State"] as const,
+  collections: {
+    title: "Debt Recovery Engine",
+    kicker: "Delinquency & PTP Management",
+    caption: "Collection Agency Workflow Specimen",
+    columns: ["Workflow Component", "Policy Rule", "State"] as const,
     rows: [
-      { a: "Messaging", b: "Configured", c: "Enabled" },
-      { a: "Dialer", b: "Progressive", c: "Enabled" },
-      { a: "QA", b: "Scorecards", c: "Enabled" },
+      { a: "DPD Bucketing", b: "Automated age-based staging", c: "Dynamic" },
+      { a: "PTP Tracking", b: "Grace period & auto-follow-up", c: "Enforced" },
+      { a: "Broken PTP", b: "Immediate supervisor re-queue", c: "Automated" },
+      { a: "Quiet Hours", b: "Statutory contact time limits", c: "Compliant" },
     ],
   },
-  large: {
-    title: "High-volume operation",
-    kicker: "Modular enterprise configuration",
-    caption: "Large team collections configuration",
-    columns: ["Capability", "Scope", "State"] as const,
+  banking: {
+    title: "Financial Governance",
+    kicker: "Security-Conscious Banking Architecture",
+    caption: "Banking & Financial Services Specimen",
+    columns: ["Governance Control", "Architecture Standard", "State"] as const,
     rows: [
-      { a: "Multi-client", b: "Campaign scoped", c: "Enabled" },
-      { a: "Deployment", b: "On-prem option", c: "Supported" },
-      { a: "Workflows", b: "Custom rules", c: "Configured" },
+      { a: "RBAC Matrix", b: "Least-privilege operational roles", c: "Verified" },
+      { a: "Audit Trails", b: "Cryptographic immutable log", c: "Immutable" },
+      { a: "Data Ingestion", b: "Encrypted core banking ETL", c: "TLS 1.3" },
+      { a: "Hosting Model", b: "Private VPC or On-Premises", c: "Supported" },
+    ],
+  },
+  "growing-businesses": {
+    title: "Custom Business Engine",
+    kicker: "Bespoke Enterprise Systems",
+    caption: "Growing Business & Enterprise Specimen",
+    columns: ["Custom System", "Target Outcome", "State"] as const,
+    rows: [
+      { a: "Custom CRM", b: "Engineered around internal flows", c: "Bespoke" },
+      { a: "Task Automation", b: "Zero-touch operational triggers", c: "Integrated" },
+      { a: "Legacy Modernization", b: "API wrappers on legacy data", c: "Connected" },
+      { a: "BI Dashboards", b: "Executive decision intelligence", c: "Live" },
     ],
   },
 } as const;
@@ -118,58 +131,80 @@ const specimens = {
 export function Industries() {
   return (
     <Section id="industries" className="relative overflow-hidden bg-slate-50">
-      {/* Premium Light Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),transparent)]" />
 
       <Container className="relative z-10">
         <Reveal>
-          <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-white/80 px-4 py-1.5 backdrop-blur-md shadow-sm">
-            <span className="size-1.5 rounded-full bg-blue-500" aria-hidden />
-            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
-              No public prices · scoped configuration
+          <div className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-white/90 px-4 py-1.5 backdrop-blur-md shadow-xs">
+            <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+              Industry-Specific Solutions
             </span>
           </div>
-          <h2 className="text-h2 mt-4 max-w-4xl text-balance font-bold leading-[1.08] text-slate-900">
-            Built Around Your Operation.
-          </h2>
-          <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
-            Choose a starting configuration that fits your team today, then
-            expand modules as volume, communication, and supervision needs grow.
-          </p>
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="text-h2 font-bold tracking-tight text-slate-900">
+              Technology Built for High-Volume Operations
+            </h2>
+            <p className="text-lede mx-auto mt-4 max-w-[50ch] text-slate-600">
+              Explore how BITS adapts to the complex regulatory, communication, and workflow requirements of distinct operational industries.
+            </p>
+          </div>
         </Reveal>
 
-        <div className="mt-12 space-y-16 lg:mt-16 lg:space-y-24">
-          {industries.map((ind, i) => {
-            const spec = specimens[ind.id];
+        <div className="mt-14 space-y-16 lg:mt-20 lg:space-y-24">
+          {targetIndustrySectors.map((sector, i) => {
+            const spec = sectorSpecimens[sector.id as keyof typeof sectorSpecimens];
             const reverse = i % 2 === 1;
+
             return (
-              <Reveal key={ind.id} delay={i * 0.06} amount={0.15}>
-                <article id={ind.id} className="scroll-mt-24">
-                  <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-                    <div className={reverse ? "lg:order-2" : undefined}>
-                      <p className="font-mono text-[0.75rem] font-semibold tracking-widest text-blue-400">
-                        {ind.index}.
+              <Reveal key={sector.id} delay={i * 0.06} amount={0.15}>
+                <article id={sector.id} className="scroll-mt-24">
+                  <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+                    {/* Copy Column */}
+                    <div className={reverse ? "lg:col-span-6 lg:order-2" : "lg:col-span-6"}>
+                      <span className="inline-block rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                        {sector.highlight}
+                      </span>
+                      <h3 className="text-h3 mt-3 font-bold text-slate-900">
+                        {sector.name}
+                      </h3>
+                      <p className="mt-2 text-sm font-semibold text-slate-500">
+                        {sector.tagline}
                       </p>
-                      <h3 className="text-h3 mt-3 font-bold text-slate-900">{ind.name}</h3>
-                      <p className="mt-4 max-w-[46ch] text-[1.02rem] font-medium leading-relaxed text-slate-700">
-                        {ind.copy}
+                      <p className="mt-4 text-[0.98rem] leading-relaxed text-slate-600">
+                        {sector.description}
                       </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {ind.tags.map(tag => (
-                          <span key={tag} className="rounded-full border border-slate-200/60 bg-white/60 px-3 py-1 text-[0.75rem] font-semibold text-slate-500">
-                            {tag}
-                          </span>
-                        ))}
+
+                      {/* Workflows checklist */}
+                      <div className="mt-6 space-y-2.5">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                          Key Operational Capabilities
+                        </p>
+                        <ul className="grid gap-2 sm:grid-cols-2">
+                          {sector.workflows.map((wf) => (
+                            <li key={wf} className="flex items-start gap-2 text-xs font-medium text-slate-700">
+                              <span className="mt-0.5 flex size-3.5 shrink-0 items-center justify-center rounded-full bg-blue-600/10 text-[0.65rem] font-bold text-blue-600">
+                                ✓
+                              </span>
+                              <span>{wf}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <a href="#contact" className={ctaClass}>
-                        <span className="relative">
-                          {ind.cta}
-                          <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-                        </span>
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-                      </a>
+
+                      <div className="mt-7">
+                        <Link
+                          href="/#contact"
+                          className="group inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
+                        >
+                          <span>Design a {sector.name} solution</span>
+                          <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                        </Link>
+                      </div>
                     </div>
-                    <figure className={reverse ? "lg:order-1" : undefined}>
+
+                    {/* Specimen Table Column */}
+                    <div className={reverse ? "lg:col-span-6 lg:order-1" : "lg:col-span-6"}>
                       <Bezel title={spec.title} kicker={spec.kicker}>
                         <SpecimenTable
                           caption={spec.caption}
@@ -177,8 +212,7 @@ export function Industries() {
                           rows={spec.rows}
                         />
                       </Bezel>
-                      <figcaption className="sr-only">{spec.caption}</figcaption>
-                    </figure>
+                    </div>
                   </div>
                 </article>
               </Reveal>

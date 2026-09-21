@@ -26,8 +26,8 @@ export function Footer() {
         <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1.2fr_2fr] lg:gap-20">
           <div>
             <Logo variant="reverse" className="h-9" />
-            <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-mist">
-              {site.tagline} A modern collections CRM with built-in dialer, AI agents, and operational reporting.
+            <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-slate-300">
+              {site.tagline} Custom software, workflow automation, CRM, and AI operations engineered around how your organization actually operates.
             </p>
 
             {/* Newsletter signup */}

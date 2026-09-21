@@ -12,44 +12,44 @@ import {
 const securityStandards = [
   {
     logo: BspLogo,
-    name: "BSP Compliant",
-    standard: "Circular 454 & 857",
-    description: "Fair debt collection conduct & audit logging",
-    badge: "Central Bank",
+    name: "BSP Regulatory Alignment",
+    standard: "Circulars 454 & 857",
+    description: "Fair debt collection rules & supervisory audit trails",
+    badge: "Banking Standard",
   },
   {
     logo: NpcLogo,
-    name: "NPC Compliant",
+    name: "NPC Privacy Principles",
     standard: "RA 10173 (DPA 2012)",
-    description: "Granular PII role-masking & consent controls",
+    description: "Role-based PII masking & explicit consent controls",
     badge: "Data Privacy",
   },
   {
     logo: SecLogo,
-    name: "SEC Philippines",
+    name: "SEC Operational Guidelines",
     standard: "MC No. 18 (2019)",
-    description: "Prohibition on unfair debt collection practices",
-    badge: "Lending Regulator",
+    description: "Scoping for fair and lawful debt recovery practices",
+    badge: "Fair Practice",
   },
   {
     logo: CicLogo,
-    name: "Credit Info Corp",
+    name: "Credit Reporting Ready",
     standard: "RA 9510 (CISA)",
-    description: "Standardized credit reporting & data exchange",
-    badge: "Credit Bureau",
+    description: "Standardized account status & credit data formats",
+    badge: "Credit Data",
   },
   {
     logo: Iso27001Logo,
-    name: "ISO/IEC 27001",
+    name: "ISO/IEC 27001 Aligned",
     standard: "ISMS Framework",
-    description: "Enterprise security policies & risk management",
-    badge: "Global Standard",
+    description: "Security-conscious access policies & risk mitigation",
+    badge: "Security Standard",
   },
   {
     logo: DictLogo,
     name: "DICT Cybersecurity",
-    standard: "Cloud-First Policy",
-    description: "National cybersecurity & cloud infrastructure",
+    standard: "Cloud Security Framework",
+    description: "Secure data isolation & encrypted communication channels",
     badge: "Cybersecurity",
   },
 ];
@@ -57,7 +57,7 @@ const securityStandards = [
 export function TrustStrip() {
   return (
     <section
-      aria-label="Security standards and regulatory compliance"
+      aria-label="Security standards and regulatory alignment"
       className="relative z-10 border-y border-slate-200/80 bg-slate-50/80 py-12 sm:py-16"
     >
       <Container>
@@ -66,14 +66,14 @@ export function TrustStrip() {
             <div className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-3.5 py-1 backdrop-blur-md">
               <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
               <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Security & Regulatory Architecture
+                Security & Statutory Governance
               </span>
             </div>
             <h2 className="text-[1.35rem] font-bold tracking-tight text-slate-900 sm:text-[1.6rem]">
-              Engineered for Philippine Banking & Global Compliance Standards
+              Engineered in Alignment with Sensitive Operational Standards
             </h2>
             <p className="mt-2 text-[0.88rem] text-slate-600">
-              BITS enforces verifiable data isolation, encryption, and statutory collection rules across every account.
+              BITS enforces verifiable data isolation, encryption, role-based boundaries, and statutory quiet-hour rules.
             </p>
           </div>
 

@@ -51,7 +51,7 @@ export function BitsAgentPageContent() {
                     href="/#contact"
                     className="inline-flex min-h-12 items-center justify-center rounded-full bg-electric-600 px-7 text-[0.95rem] font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
                   >
-                    Request a Demo
+                    Book a Consultation
                   </Link>
                   <a
                     href="#calculator"

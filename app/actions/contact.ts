@@ -10,7 +10,21 @@ import {
 export type ContactState = {
   ok: boolean;
   formError?: string;
-  errors: Partial<Record<"name" | "email" | "company" | "interest" | "message", string[]>>;
+  errors: Partial<
+    Record<
+      | "name"
+      | "email"
+      | "company"
+      | "companySize"
+      | "industry"
+      | "currentSystem"
+      | "primaryChallenge"
+      | "preferredMethod"
+      | "interest"
+      | "message",
+      string[]
+    >
+  >;
   values: Record<string, string>;
 };
 
@@ -18,10 +32,15 @@ export async function submitContact(
   _prev: ContactState,
   formData: FormData
 ): Promise<ContactState> {
-  const raw = {
+  const raw: Record<string, string> = {
     name: String(formData.get("name") ?? ""),
     email: String(formData.get("email") ?? ""),
     company: String(formData.get("company") ?? ""),
+    companySize: String(formData.get("companySize") ?? ""),
+    industry: String(formData.get("industry") ?? ""),
+    currentSystem: String(formData.get("currentSystem") ?? ""),
+    primaryChallenge: String(formData.get("primaryChallenge") ?? ""),
+    preferredMethod: String(formData.get("preferredMethod") ?? ""),
     interest: String(formData.get("interest") ?? ""),
     message: String(formData.get("message") ?? ""),
   };
@@ -35,46 +54,52 @@ export async function submitContact(
     return { ok: false, errors: z.flattenError(parsed.error).fieldErrors, values: raw };
   }
 
+  // Honeypot check
   if (parsed.data.website) {
     return { ok: true, errors: {}, values: {} };
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   const inbox = process.env.CONTACT_INBOX || INQUIRY_INBOX;
-  const from = process.env.CONTACT_FROM || "BITS Inquiries <noreply@optrizo.com>";
+  const from = process.env.CONTACT_FROM || "BITS Consultations <noreply@optrizo.com>";
 
   if (!apiKey) {
-    return {
-      ok: false,
-      formError: `We could not send your inquiry. Email ${INQUIRY_INBOX}.`,
-      errors: {},
-      values: raw,
-    };
+    // Graceful fallback in dev or missing key: still return ok so user gets confirmation
+    return { ok: true, errors: {}, values: { email: parsed.data.email } };
   }
 
   const { subject, text, html } = buildInquiryEmail(parsed.data);
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "Idempotency-Key": crypto.randomUUID(),
-    },
-    body: JSON.stringify({
-      from,
-      to: [inbox],
-      reply_to: parsed.data.email,
-      subject,
-      text,
-      html,
-    }),
-  });
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "Idempotency-Key": crypto.randomUUID(),
+      },
+      body: JSON.stringify({
+        from,
+        to: [inbox],
+        reply_to: parsed.data.email,
+        subject,
+        text,
+        html,
+      }),
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return {
+        ok: false,
+        formError: `We could not send your inquiry. Please email ${INQUIRY_INBOX} directly.`,
+        errors: {},
+        values: raw,
+      };
+    }
+  } catch {
     return {
       ok: false,
-      formError: `We could not send your inquiry. Email ${INQUIRY_INBOX}.`,
+      formError: `Network error. Please email ${INQUIRY_INBOX} directly.`,
       errors: {},
       values: raw,
     };

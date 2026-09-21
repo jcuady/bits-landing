@@ -12,24 +12,27 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BITS — Collections CRM & Dialer Platform",
-    template: "%s | BITS",
+    default: "BITS — Technology Built Around Your Business",
+    template: "%s | BITS - Boundless IT Solutions",
   },
   description:
-    "BITS is an enterprise collections CRM and operations platform with predictive dialer, autonomous AI agents, compliance guardrails, and operational intelligence.",
+    "BITS (Boundless IT Solutions) builds business-specific software, workflow automation, CRM, AI-assisted operations, and digital infrastructure for BPOs, collection agencies, banks, and operations with complex workflows.",
   keywords: [
+    "BITS",
+    "Boundless IT Solutions",
+    "business-specific software",
+    "operational technology",
     "collections CRM",
+    "BITScrm",
+    "BITSagent",
+    "AI voice agents",
+    "workflow automation",
+    "BPO software platform",
     "debt collection software",
-    "collections operations platform",
-    "debt recovery CRM",
-    "collection agency software",
-    "collections dialer",
-    "predictive dialer",
-    "collections workflow",
-    "QA collections",
-    "BSP compliant collections",
-    "NPC compliant CRM",
-    "AI collections agents",
+    "banking operational infrastructure",
+    "predictive dialer CRM",
+    "supervisory call monitoring",
+    "custom enterprise software",
   ],
   alternates: { canonical: "/" },
   icons: {
@@ -46,22 +49,22 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.legalName,
-    title: "BITS — Collections CRM & Dialer Platform",
+    title: "BITS — Technology Built Around Your Business",
     description:
-      "Enterprise collections CRM with predictive auto-dialer, AI recovery agents, compliance rules, and operations intelligence. Accelerate debt recovery while staying fully compliant.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Collections CRM & Dialer Platform" }],
+      "Custom software, CRM, workflow automation, AI operations, and digital infrastructure designed around how your organization actually works.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Enterprise Technology Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITS — Collections CRM & Dialer Platform",
+    title: "BITS — Technology Built Around Your Business",
     description:
-      "Enterprise collections CRM with predictive auto-dialer, AI recovery agents, compliance rules, and operations intelligence.",
+      "Custom software, CRM, workflow automation, AI operations, and digital infrastructure designed around how your organization actually works.",
     images: ["/og.png"],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#06162F",
   width: "device-width",
   initialScale: 1,
 };
@@ -77,24 +80,29 @@ const jsonLd = {
       logo: `${site.url}/brand/logo-horizontal.png`,
       description: site.description,
       slogan: site.tagline,
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: site.inquiryEmail,
+        contactType: "Customer Support and Inquiries",
+      },
     },
     {
       "@type": "WebSite",
       name: site.legalName,
       url: site.url,
+      description: site.description,
     },
     {
       "@type": "SoftwareApplication",
-      name: "BITS Collections CRM & Operations Platform",
+      name: "BITS Technology Platform",
       applicationCategory: "BusinessApplication",
-      applicationSubCategory: "Debt Collection Software",
-      operatingSystem: "Web",
+      operatingSystem: "Web, Cloud, On-Premises",
       description: site.description,
       url: site.url,
       publisher: { "@type": "Organization", name: site.legalName },
       offers: {
         "@type": "OfferCatalog",
-        name: "BITS modules",
+        name: "BITS Solution Tiers",
         itemListElement: agents.map((module) => ({
           "@type": "Offer",
           itemOffered: {
@@ -105,44 +113,23 @@ const jsonLd = {
         })),
       },
     },
-    {
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "What is BITS?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "BITS is a collections CRM and operations platform that combines portfolio management, agent workflows, customer communications, built-in dialer, quality assurance, AI agents, and operational reporting into one workspace.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Does BITS support on-premises deployment?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. BITS supports cloud, on-premises, and supported hybrid deployment configurations designed around different infrastructure and operational requirements.",
-          },
-        },
-      ],
-    },
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en" className={jakarta.variable}>
-      <body>
+      <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <a
-          href="#content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-electric-600 focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
-        >
-          Skip to content
-        </a>
+      </head>
+      <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
         {children}
       </body>
     </html>

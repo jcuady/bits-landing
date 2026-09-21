@@ -6,38 +6,46 @@ import { ContactForm } from "@/components/sections/contact-form";
 
 export function Contact() {
   return (
-    <Section id="contact" className="scroll-mt-28 bg-cloud">
+    <Section id="contact" className="scroll-mt-28 bg-slate-50">
       <Container>
-        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-20">
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
           <Reveal>
-            <p className="text-overline text-electric-600">Contact</p>
-            <h2 className="text-h2 mt-4 max-w-[16ch] text-balance leading-[1.08] text-ink">
-              Write to the BITS team.
+            <div className="mb-4 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-white px-4 py-1.5 backdrop-blur-md shadow-xs">
+              <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+              <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+                Technical Consultation
+              </span>
+            </div>
+
+            <h2 className="text-h2 text-balance font-bold leading-[1.08] text-slate-900">
+              Let&apos;s Design Technology Around Your Operation.
             </h2>
-            <p className="text-lede mt-5 max-w-[42ch] text-pretty text-slateblue">
-              Tell us how you run portfolios, follow-up, and quality. We read every
-              inquiry and reply to the email you give us.
+            <p className="text-lede mt-5 max-w-[44ch] text-pretty text-slate-600">
+              Tell us how you manage accounts, customer outreach, and floor quality today. Our solutions architects will review your workflows and prepare a concrete technical blueprint.
             </p>
 
             <a
               href={`mailto:${site.inquiryEmail}`}
-              className="mt-8 inline-block text-[1.15rem] font-semibold tracking-[-0.02em] text-electric-600 underline decoration-electric-600/25 underline-offset-4 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-electric-500"
+              className="mt-6 inline-block text-base font-bold text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700"
             >
               {site.inquiryEmail}
             </a>
 
-            <dl className="mt-10 max-w-[42ch] border-t border-linelight pt-8">
+            <dl className="mt-10 max-w-[42ch] space-y-6 border-t border-slate-200 pt-8">
               <div>
-                <dt className="text-[0.85rem] font-semibold text-ink">What happens next</dt>
-                <dd className="mt-2 text-[0.92rem] leading-relaxed text-slateblue">
-                  We map the note to Core Collections, messaging, dialer, QA, or
-                  BITSagent, then reply with next steps. No free trials or unpaid pilots.
+                <dt className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  What Happens Next
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-slate-600">
+                  We review your team size and operational challenge, map an architecture proposal across BITScrm, AI operations, and custom integrations, and schedule an operational briefing.
                 </dd>
               </div>
-              <div className="mt-6">
-                <dt className="text-[0.85rem] font-semibold text-ink">Reply time</dt>
-                <dd className="mt-2 text-[0.92rem] leading-relaxed text-slateblue">
-                  Usually within one business day.
+              <div>
+                <dt className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Turnaround SLA
+                </dt>
+                <dd className="mt-2 text-sm leading-relaxed text-slate-600">
+                  You will receive a dedicated response within one business day.
                 </dd>
               </div>
             </dl>

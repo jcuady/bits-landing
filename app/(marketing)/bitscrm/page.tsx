@@ -402,22 +402,22 @@ export default function BitsCrmPage() {
       <section className="bg-cloud py-16 text-center">
         <Container>
           <div className="mx-auto max-w-3xl">
-            <h2 className="text-h2 text-ink">Ready to review BITS on your floor?</h2>
+            <h2 className="text-h2 text-ink">Ready to review BITScrm on your floor?</h2>
             <p className="text-lede mx-auto mt-4 max-w-[46ch] text-slateblue">
-              Request a scoped demonstration. We do not offer free trials or unpaid pilots.
+              Book an operational consultation with our engineering team. We configure workflows around your actual agency processes.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
                 href="/#contact"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-electric-600 px-8 font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
               >
-                Request a Demo
+                Book a Consultation
               </Link>
               <Link
                 href="/bitsagent"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-navy-700/20 bg-white px-8 font-semibold text-navy-700 transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-skywash"
               >
-                Learn about BITSagent
+                Explore BITSagent AI
               </Link>
             </div>
           </div>

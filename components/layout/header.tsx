@@ -85,16 +85,16 @@ export function Header() {
 
           <div className="hidden items-center gap-3 lg:flex">
             <Link
-              href="/#features"
+              href="/#ecosystem"
               className="inline-flex min-h-11 items-center rounded-full px-3.5 text-[0.88rem] font-bold text-slate-700 transition-colors hover:text-blue-600"
             >
-              Explore Platform
+              Explore Solutions
             </Link>
             <Link
               href="/#contact"
               className="group flex h-10 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.88rem] font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.98]"
             >
-              Contact us
+              Book a Consultation
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
@@ -187,15 +187,15 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className="group flex h-14 items-center justify-center gap-3 rounded-full bg-blue-600 px-6 text-[1rem] font-bold text-white transition-all hover:bg-blue-700 shadow-lg shadow-blue-900/20 active:scale-[0.98]"
               >
-                Contact us
+                Book a Consultation
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
               <Link
-                href="/#pricing"
+                href="/#solutions"
                 onClick={() => setOpen(false)}
                 className="flex h-14 items-center justify-center rounded-full bg-white border border-slate-200 px-6 text-[1rem] font-bold text-slate-900 shadow-sm transition-colors hover:bg-slate-50"
               >
-                See Pricing
+                Explore Solutions
               </Link>
             </motion.div>
           </motion.div>
