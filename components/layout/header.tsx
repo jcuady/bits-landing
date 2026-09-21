@@ -291,7 +291,7 @@ export function Header() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
-            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             className="relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full text-slate-900 transition-colors hover:bg-slate-100 lg:hidden"
           >
             <span className="relative block h-3.5 w-[18px]" aria-hidden>
