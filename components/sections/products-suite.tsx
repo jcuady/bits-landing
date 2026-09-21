@@ -43,13 +43,14 @@ import {
   Lock,
   Globe,
   Share2,
+  Landmark,
 } from "lucide-react";
 
 const categoryFilters = [
-  { id: "all", label: "All Products (16)", count: 16, color: "blue" },
+  { id: "all", label: "All Products (17)", count: 17, color: "blue" },
   { id: "flagship", label: "Core Flagships", count: 2, color: "indigo" },
   { id: "crm", label: "CRM Variants", count: 4, color: "emerald" },
-  { id: "operations", label: "Operations & Supply Chain", count: 5, color: "amber" },
+  { id: "operations", label: "ERP, Finance & Operations", count: 6, color: "amber" },
   { id: "sports", label: "Sports, Booking & Queuing", count: 4, color: "rose" },
   { id: "identity", label: "Smart NFC & Identity", count: 1, color: "cyan" },
   { id: "ai", label: "AI & Knowledge", count: 2, color: "purple" },
@@ -68,6 +69,10 @@ export function ProductsSuite() {
       return bitsProducts.filter((p) => p.category === "crm" || p.id === "service");
     if (activeCategory === "ai")
       return bitsProducts.filter((p) => p.category === "ai" || p.id === "ai-agent");
+    if (activeCategory === "operations")
+      return bitsProducts.filter(
+        (p) => p.category === "operations" || p.category === "workforce"
+      );
     return bitsProducts.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
 
@@ -86,6 +91,8 @@ export function ProductsSuite() {
         return Mail;
       case "commerce":
         return CreditCard;
+      case "accounting":
+        return Landmark;
       case "hrms":
         return Users;
       case "payroll":
@@ -125,6 +132,8 @@ export function ProductsSuite() {
         return "from-pink-600 to-rose-600 text-pink-600 bg-pink-50 border-pink-200";
       case "commerce":
         return "from-cyan-600 to-blue-600 text-cyan-600 bg-cyan-50 border-cyan-200";
+      case "accounting":
+        return "from-emerald-600 to-teal-700 text-emerald-700 bg-emerald-50 border-emerald-200";
       case "hrms":
         return "from-amber-600 to-orange-600 text-amber-600 bg-amber-50 border-amber-200";
       case "payroll":
@@ -178,7 +187,7 @@ export function ProductsSuite() {
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
-              Organize projects, automate revenue pipelines, dispatch service queues, and run autonomous voice AI.
+              Organize projects, streamline SAP-grade general ledgers, automate revenue pipelines, dispatch service queues, and run autonomous voice AI.
               Select any specialized engine below to explore live interactive boards and workflows in action.
             </p>
           </Reveal>
@@ -221,6 +230,10 @@ export function ProductsSuite() {
                           ? bitsProducts.filter((p) => p.category === "crm" || p.id === "service")
                           : tab.id === "ai"
                           ? bitsProducts.filter((p) => p.category === "ai" || p.id === "ai-agent")
+                          : tab.id === "operations"
+                          ? bitsProducts.filter(
+                              (p) => p.category === "operations" || p.category === "workforce"
+                            )
                           : bitsProducts.filter((p) => p.category === tab.id);
 
                       if (matching.length > 0 && !matching.some((p) => p.id === activeProductId)) {
@@ -469,6 +482,8 @@ function ProductMockupBoard({ productId }: { productId: string }) {
       return <MarketingBoard />;
     case "commerce":
       return <CommerceBoard />;
+    case "accounting":
+      return <AccountingBoard />;
     case "hrms":
       return <HrmsBoard />;
     case "payroll":
@@ -823,7 +838,122 @@ function CommerceBoard() {
   );
 }
 
-/* 6. BITS HRMS Board */
+/* 6. BITS Accounting & ERP Board (SAP-Grade Core) */
+function AccountingBoard() {
+  return (
+    <div className="space-y-4 font-sans">
+      <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-2xs">
+            <Landmark className="size-4" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-slate-900">Enterprise General Ledger & SAP-Grade Financial Cockpit</p>
+            <p className="text-[0.68rem] text-slate-500">BIR CAS Certified (RR 9-2009) · Real-Time 3-Way PO Matching · IFRS/GAAP</p>
+          </div>
+        </div>
+        <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white font-mono flex items-center gap-1">
+          <span className="size-1.5 rounded-full bg-white animate-pulse" /> 0-Day Close
+        </span>
+      </div>
+
+      {/* 4 Financial Health KPI Badges */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div className="rounded-lg border border-slate-200 bg-slate-50/80 p-2 text-left">
+          <span className="text-[0.62rem] font-bold text-slate-500 uppercase tracking-wider block">YTD Revenue</span>
+          <span className="font-mono text-xs font-bold text-slate-900">₱142,850,000</span>
+          <span className="text-[0.6rem] font-semibold text-emerald-600 block">+14.2% YoY</span>
+        </div>
+        <div className="rounded-lg border border-slate-200 bg-slate-50/80 p-2 text-left">
+          <span className="text-[0.62rem] font-bold text-slate-500 uppercase tracking-wider block">EBITDA Margin</span>
+          <span className="font-mono text-xs font-bold text-slate-900">31.4%</span>
+          <span className="text-[0.6rem] font-semibold text-blue-600 block">GAAP Compliant</span>
+        </div>
+        <div className="rounded-lg border border-slate-200 bg-slate-50/80 p-2 text-left">
+          <span className="text-[0.62rem] font-bold text-slate-500 uppercase tracking-wider block">Bank Rec Rate</span>
+          <span className="font-mono text-xs font-bold text-slate-900">99.8%</span>
+          <span className="text-[0.6rem] font-semibold text-emerald-600 block">Auto-Cleared</span>
+        </div>
+        <div className="rounded-lg border border-slate-200 bg-slate-50/80 p-2 text-left">
+          <span className="text-[0.62rem] font-bold text-slate-500 uppercase tracking-wider block">Fiscal Period</span>
+          <span className="font-mono text-xs font-bold text-slate-900">P09 / FY2026</span>
+          <span className="text-[0.6rem] font-semibold text-amber-600 block">Open for Entries</span>
+        </div>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Account Code & Description</th>
+              <th className="p-2.5">Entity / Cost Center</th>
+              <th className="p-2.5">Debit / Credit</th>
+              <th className="p-2.5">SAP Document Status</th>
+              <th className="p-2.5">Audit Lineage</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5">
+                <span className="font-mono font-bold text-slate-900">1010-00 Cash & Bank Feeds</span>
+                <span className="text-[0.62rem] text-slate-500 block">BDO / BPI Corporate Clearing</span>
+              </td>
+              <td className="p-2.5 text-slate-700 font-medium">BITS Corp HQ</td>
+              <td className="p-2.5 font-mono text-emerald-700 font-bold">DR ₱24,500,000</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#00c875] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">Posted & Cleared</span>
+              </td>
+              <td className="p-2.5 font-mono text-[0.65rem] text-slate-600">MT940 Live Feed</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5">
+                <span className="font-mono font-bold text-slate-900">1200-00 Trade Accounts Receivable</span>
+                <span className="text-[0.62rem] text-slate-500 block">Enterprise Client Portfolios</span>
+              </td>
+              <td className="p-2.5 text-slate-700 font-medium">BITS BPO Ops Inc.</td>
+              <td className="p-2.5 font-mono text-blue-700 font-bold">CR ₱18,200,000</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#0073ea] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">Auto-Balanced</span>
+              </td>
+              <td className="p-2.5 font-mono text-[0.65rem] text-slate-600">BITScrm Direct Sync</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5">
+                <span className="font-mono font-bold text-slate-900">2010-00 Accounts Payable (PO Clearing)</span>
+                <span className="text-[0.62rem] text-slate-500 block">Dell / Supermicro Server Upgrades</span>
+              </td>
+              <td className="p-2.5 text-slate-700 font-medium">Datacenter Infra</td>
+              <td className="p-2.5 font-mono text-amber-700 font-bold">DR ₱4,750,000</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#a25ddc] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">3-Way PO Matched</span>
+              </td>
+              <td className="p-2.5 font-mono text-[0.65rem] text-slate-600">Inv #PO-8841-A</td>
+            </tr>
+            <tr className="hover:bg-slate-50/70 transition-colors">
+              <td className="p-2.5">
+                <span className="font-mono font-bold text-slate-900">4010-00 Enterprise Software Revenue</span>
+                <span className="text-[0.62rem] text-slate-500 block">ASC 606 / IFRS 15 Recognized</span>
+              </td>
+              <td className="p-2.5 text-slate-700 font-medium">Consolidated Corp</td>
+              <td className="p-2.5 font-mono text-purple-700 font-bold">CR ₱119,900,000</td>
+              <td className="p-2.5">
+                <span className="rounded-md bg-[#579bfc] px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs">Audited & Locked</span>
+              </td>
+              <td className="p-2.5 font-mono text-[0.65rem] text-slate-600">WORM Ledger Hash</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-between gap-2 text-[0.68rem] text-slate-500 pt-1">
+        <span>Intercompany Eliminations: Balanced (₱0 Net Variance)</span>
+        <span>Daily FX Multi-Currency Revaluation: Auto-Executed</span>
+      </div>
+    </div>
+  );
+}
+
+/* 7. BITS HRMS Board */
 function HrmsBoard() {
   return (
     <div className="space-y-4 font-sans">
@@ -1107,13 +1237,13 @@ function SportsAiBoard() {
   );
 }
 
-/* 12. BITS Sports Hub (Sports360-Style) Board */
+/* 13. BITS Sports Arena & Venue Hub Board */
 function SportsHubBoard() {
   return (
     <div className="space-y-4 font-sans">
       <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
         <div>
-          <p className="text-xs font-bold text-slate-900">Sports Venue & Court Queuing Hub (Sports360-Style)</p>
+          <p className="text-xs font-bold text-slate-900">Sports Venue Operations & Live Court Queuing Hub</p>
           <p className="text-[0.68rem] text-slate-500">Overhead TV Court Display Screen · Tournament Elo Ladders</p>
         </div>
         <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white font-mono flex items-center gap-1">
