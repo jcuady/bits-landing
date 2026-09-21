@@ -67,6 +67,12 @@ function NavIcon({ name, className }: { name: string; className?: string }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
       );
+    case "server":
+      return (
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+        </svg>
+      );
     case "process":
       return (
         <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -217,7 +223,10 @@ export function Header() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
                           transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}
-                          className="absolute left-1/2 top-full mt-2.5 w-[380px] -translate-x-1/2 rounded-2xl border border-slate-200/90 bg-white/95 p-3.5 shadow-2xl shadow-blue-950/15 backdrop-blur-xl"
+                          className={cn(
+                            "absolute left-1/2 top-full mt-2.5 -translate-x-1/2 rounded-2xl border border-slate-200/90 bg-white/95 p-3.5 shadow-2xl shadow-blue-950/15 backdrop-blur-xl",
+                            section.dropdown.items.length > 4 ? "w-[720px]" : "w-[380px]"
+                          )}
                           onMouseEnter={() => handleMouseEnter(section.id)}
                         >
                           <div className="mb-2 flex items-center justify-between border-b border-slate-100 px-2 pb-2">
@@ -227,7 +236,12 @@ export function Header() {
                             <span className="size-1 rounded-full bg-blue-500" />
                           </div>
 
-                          <div className="grid gap-1">
+                          <div
+                            className={cn(
+                              "grid gap-1",
+                              section.dropdown.items.length > 4 ? "grid-cols-2" : "grid-cols-1"
+                            )}
+                          >
                             {section.dropdown.items.map((item) => (
                               <Link
                                 key={item.title}

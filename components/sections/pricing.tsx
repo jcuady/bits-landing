@@ -505,13 +505,22 @@ export function Pricing() {
                   Our engineering team works under mutual NDA to design custom digital infrastructure, proprietary scoring workflows, and dedicated telco interconnects.
                 </p>
               </div>
-              <Link
-                href="/#contact"
-                className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-500 px-6 text-xs font-bold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-600 hover:shadow-blue-500/35 active:scale-[0.98]"
-              >
-                <span>Request Architecture Review</span>
-                <ArrowRight className="size-3.5" />
-              </Link>
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <Link
+                  href="/#deployment"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-blue-400/30 bg-blue-500/10 px-5 text-xs font-bold text-cyan-300 transition-all hover:bg-blue-500/20 active:scale-[0.98]"
+                >
+                  <Server className="size-3.5" />
+                  <span>Cloud vs. On-Prem Specs</span>
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-blue-500 px-6 text-xs font-bold text-white shadow-md shadow-blue-500/25 transition-all hover:bg-blue-600 hover:shadow-blue-500/35 active:scale-[0.98]"
+                >
+                  <span>Request Architecture Review</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
             </div>
           </div>
         </Reveal>

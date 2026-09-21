@@ -4,11 +4,13 @@ import { StatsStrip } from "@/components/sections/stats-strip";
 import { Problem } from "@/components/sections/problem";
 import { TheDifference } from "@/components/sections/the-difference";
 import { Ecosystem } from "@/components/sections/ecosystem";
+import { ProductsSuite } from "@/components/sections/products-suite";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { BitsAgentShowcase } from "@/components/sections/bits-agent-showcase";
 import { Industries } from "@/components/sections/industries";
 import { Security } from "@/components/sections/security";
 import { Process } from "@/components/sections/process";
+import { DeploymentModels } from "@/components/sections/deployment-models";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { CtaBanner } from "@/components/sections/cta-banner";
@@ -35,6 +37,9 @@ export default function Home() {
       {/* 6. BITS Technology Ecosystem: The 6 Platform Pillars */}
       <Ecosystem />
 
+      {/* 6.1 Enterprise Product Suite: Modular Engines (Payroll, HRMS, Sales, Marketing, Commerce) & Flagships */}
+      <ProductsSuite />
+
       {/* 7. Flagship Product: BITScrm Operational Core */}
       <ProductShowcase />
 
@@ -50,7 +55,10 @@ export default function Home() {
       {/* 11. Methodology: 01 Understand, 02 Design, 03 Build, 04 Deploy, 05 Improve */}
       <Process />
 
-      {/* 12. Solution Packages: Starter, Growth, Enterprise consultative tiers */}
+      {/* 12. Deployment Architecture: Cloud vs. On-Premises Scoping */}
+      <DeploymentModels />
+
+      {/* 13. Solution Packages: Starter, Growth, Enterprise consultative tiers */}
       <Pricing />
 
       {/* 13. FAQ: 10 Comprehensive enterprise questions with Schema.org markup */}

@@ -7,15 +7,16 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { pricingTiers } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ProductShowcase } from "@/components/sections/product-showcase";
+import { CrmVariantsExplorer } from "@/components/sections/crm-variants-explorer";
 
 export const metadata: Metadata = {
-  title: "BITScrm — Enterprise Collections CRM & Predictive Dialer",
+  title: "BITScrm — Modular Enterprise CRM & Collections Operations Core",
   description:
-    "Accelerate debt recovery with BITScrm. Unify delinquent portfolio queues, predictive voice dialing, automated PTP tracking, live supervisor barge-in, and QA scorecards.",
+    "Explore BITScrm: our core flagship Customer Service & Collections CRM, plus specialized variants for Sales, Marketing, and Commerce, universally connected to BITSagent AI and BITS RAG.",
   openGraph: {
-    title: "BITScrm — Enterprise Collections CRM & Predictive Dialer",
+    title: "BITScrm — Modular Enterprise CRM & Collections Operations Core",
     description:
-      "Accelerate debt recovery with BITScrm. Unify delinquent portfolio queues, predictive voice dialing, automated PTP tracking, live supervisor barge-in, and QA scorecards.",
+      "Explore BITScrm: our core flagship Customer Service & Collections CRM, plus specialized variants for Sales, Marketing, and Commerce, universally connected to BITSagent AI and BITS RAG.",
   },
 };
 
@@ -208,6 +209,9 @@ export default function BitsCrmPage() {
           </div>
         </Container>
       </section>
+
+      {/* Modular CRM Variants Explorer (Customer Service, Sales, Marketing, Commerce) + BITSagent & BITS RAG Interconnect */}
+      <CrmVariantsExplorer />
 
       {/* Interactive Role Workspaces Demo */}
       <section className="py-20 sm:py-28">
