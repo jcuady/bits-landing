@@ -66,10 +66,10 @@ export function Hero() {
                 </Magnetic>
                 <Magnetic className="w-full sm:w-auto">
                   <Link
-                    href="/#ecosystem"
+                    href="/#products-suite"
                     className="flex h-14 w-full items-center justify-center rounded-full bg-white px-8 font-bold text-slate-900 shadow-xs ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-50 hover:ring-slate-300 active:scale-[0.99] sm:w-auto"
                   >
-                    Explore Solutions
+                    Explore 16 Work OS Engines
                   </Link>
                 </Magnetic>
               </div>
@@ -80,7 +80,7 @@ export function Hero() {
                   href="/bitscrm"
                   className="group inline-flex min-h-[44px] items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
                 >
-                  <span>Explore BITScrm</span>
+                  <span>Explore BITScrm Core</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
                 <span className="text-slate-300 hidden sm:inline">•</span>
@@ -89,6 +89,14 @@ export function Hero() {
                   className="group inline-flex min-h-[44px] items-center gap-1.5 text-violet-600 hover:text-violet-700 transition-colors"
                 >
                   <span>Explore AI Operations (BITSagent)</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                </Link>
+                <span className="text-slate-300 hidden sm:inline">•</span>
+                <Link
+                  href="/#products-suite"
+                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-cyan-600 hover:text-cyan-700 transition-colors"
+                >
+                  <span>Smart NFC Identity Card</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
@@ -104,7 +112,7 @@ export function Hero() {
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Private Cloud or On-Premises Ready
+                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud (Recommended) or Sovereign On-Prem
                 </span>
               </div>
             </Reveal>

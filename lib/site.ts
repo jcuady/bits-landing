@@ -1437,6 +1437,9 @@ export const consultationOptions = {
     "Debt Collection Agency",
     "Bank / Financial Institution",
     "Lending & Fintech",
+    "Construction & Supply Chain",
+    "Sports Venue, Club & Hospitality",
+    "Smart NFC & Identity Card Solutions",
     "Growing Business / Enterprise",
     "Other Operational Business",
   ],
@@ -1453,6 +1456,7 @@ export const consultationOptions = {
     "Disconnected tools & lack of operational visibility",
     "Compliance tracking & audit trail governance",
     "Need to scale operations without hiring linearly",
+    "Smart NFC identity card & paperless networking",
     "Custom proprietary workflow requirements",
   ],
   preferredMethods: [
