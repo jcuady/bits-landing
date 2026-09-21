@@ -38,14 +38,20 @@ import {
   Filter,
   Columns3,
   SlidersHorizontal,
+  Radio,
+  Smartphone,
+  Lock,
+  Globe,
+  Share2,
 } from "lucide-react";
 
 const categoryFilters = [
-  { id: "all", label: "All Products (15)", count: 15, color: "blue" },
+  { id: "all", label: "All Products (16)", count: 16, color: "blue" },
   { id: "flagship", label: "Core Flagships", count: 2, color: "indigo" },
   { id: "crm", label: "CRM Variants", count: 4, color: "emerald" },
   { id: "operations", label: "Operations & Supply Chain", count: 5, color: "amber" },
   { id: "sports", label: "Sports, Booking & Queuing", count: 4, color: "rose" },
+  { id: "identity", label: "Smart NFC & Identity", count: 1, color: "cyan" },
   { id: "ai", label: "AI & Knowledge", count: 2, color: "purple" },
 ] as const;
 
@@ -100,6 +106,8 @@ export function ProductsSuite() {
         return Ticket;
       case "rag-engine":
         return Database;
+      case "nfc-card":
+        return Radio;
       default:
         return Layers;
     }
@@ -137,6 +145,8 @@ export function ProductsSuite() {
         return "from-rose-600 to-pink-600 text-rose-700 bg-rose-50 border-rose-200";
       case "rag-engine":
         return "from-violet-600 to-purple-700 text-violet-700 bg-violet-50 border-violet-200";
+      case "nfc-card":
+        return "from-cyan-600 to-blue-600 text-cyan-700 bg-cyan-50 border-cyan-200";
       default:
         return "from-blue-600 to-indigo-600 text-blue-600 bg-blue-50 border-blue-200";
     }
@@ -479,6 +489,8 @@ function ProductMockupBoard({ productId }: { productId: string }) {
       return <QueuingBoard />;
     case "rag-engine":
       return <RagBoard />;
+    case "nfc-card":
+      return <NfcCardBoard />;
     default:
       return <ServiceBoard />;
   }
@@ -1283,6 +1295,464 @@ function RagBoard() {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+/* 16. BITS Smart NFC Business & Identity Card Board */
+function NfcCardBoard() {
+  const [activeTab, setActiveTab] = React.useState<"simulator" | "multipurpose" | "security">("simulator");
+  const [isLocked, setIsLocked] = React.useState(false);
+  const [tapped, setTapped] = React.useState(false);
+
+  const handleSimulateTap = () => {
+    setTapped(true);
+    setTimeout(() => setTapped(false), 2000);
+  };
+
+  return (
+    <div className="space-y-4 font-sans">
+      {/* Top Value Banner: 1 Card for Life & Zero App Required */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-cyan-600 text-white shadow-2xs">
+            <Radio className="size-4 animate-pulse" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-bold text-slate-900">
+                BITS Tap™ Contactless Smart NFC Architecture
+              </p>
+              <span className="rounded-full bg-emerald-100 px-2 py-0.2 text-[0.62rem] font-extrabold text-emerald-800 uppercase">
+                1 Card for Life
+              </span>
+            </div>
+            <p className="text-[0.68rem] text-slate-600">
+              Zero recipient app required · Works natively on 99% of iOS &amp; Android devices
+            </p>
+          </div>
+        </div>
+
+        {/* View Mode Switcher */}
+        <div className="flex rounded-lg border border-cyan-200 bg-white p-0.5 shadow-2xs">
+          <button
+            type="button"
+            onClick={() => setActiveTab("simulator")}
+            className={cn(
+              "cursor-pointer rounded-md px-2.5 py-1 text-[0.68rem] font-bold transition-all",
+              activeTab === "simulator"
+                ? "bg-cyan-600 text-white shadow-2xs"
+                : "text-slate-600 hover:text-slate-900"
+            )}
+          >
+            Tap Simulator
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("multipurpose")}
+            className={cn(
+              "cursor-pointer rounded-md px-2.5 py-1 text-[0.68rem] font-bold transition-all",
+              activeTab === "multipurpose"
+                ? "bg-cyan-600 text-white shadow-2xs"
+                : "text-slate-600 hover:text-slate-900"
+            )}
+          >
+            Multipurpose Embeds
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("security")}
+            className={cn(
+              "cursor-pointer rounded-md px-2.5 py-1 text-[0.68rem] font-bold transition-all",
+              activeTab === "security"
+                ? "bg-cyan-600 text-white shadow-2xs"
+                : "text-slate-600 hover:text-slate-900"
+            )}
+          >
+            Security &amp; Remote Lock
+          </button>
+        </div>
+      </div>
+
+      {/* Tab 1: Physical Card & Live Phone Simulator */}
+      {activeTab === "simulator" && (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+          {/* Left: Physical Smart Card Mockup */}
+          <div className="lg:col-span-6 flex flex-col justify-between rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-5 text-white shadow-md">
+            <div>
+              {/* Card Header with Contactless Symbol & Brand */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex size-7 items-center justify-center rounded-lg bg-white/10 text-cyan-400 backdrop-blur-xs border border-white/10">
+                    <Radio className="size-4" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[0.72rem] font-extrabold tracking-widest text-white">
+                      BITS<span className="text-cyan-400">TAP</span>
+                    </span>
+                    <span className="block text-[0.55rem] tracking-wider text-slate-400 uppercase font-mono">
+                      Encrypted Smart NFC
+                    </span>
+                  </div>
+                </div>
+
+                {/* Status Indicator */}
+                <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-2 py-0.5 text-[0.62rem] font-bold">
+                  <span
+                    className={cn(
+                      "size-1.5 rounded-full",
+                      isLocked ? "bg-amber-400" : "bg-emerald-400 animate-pulse"
+                    )}
+                  />
+                  <span className={isLocked ? "text-amber-300" : "text-emerald-300"}>
+                    {isLocked ? "Card Frozen" : "Ready to Tap"}
+                  </span>
+                </div>
+              </div>
+
+              {/* NFC Chip Graphic */}
+              <div className="mt-8 flex items-center gap-3">
+                <div className="size-9 rounded-md border border-amber-400/40 bg-gradient-to-br from-amber-300/20 to-amber-600/30 p-1">
+                  <div className="h-full w-full rounded-xs border border-amber-400/30 grid grid-cols-2 gap-0.5 p-0.5">
+                    <span className="bg-amber-400/30 rounded-2xs" />
+                    <span className="bg-amber-400/30 rounded-2xs" />
+                    <span className="bg-amber-400/30 rounded-2xs" />
+                    <span className="bg-amber-400/30 rounded-2xs" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 text-slate-400 text-[0.65rem] font-mono">
+                  <span>((( · )))</span>
+                  <span>Contactless Proximity</span>
+                </div>
+              </div>
+
+              {/* Cardholder Information */}
+              <div className="mt-6">
+                <h4 className="text-base font-bold tracking-tight text-white">
+                  Alexander Vance
+                </h4>
+                <p className="text-[0.72rem] font-medium text-cyan-300">
+                  VP of Enterprise Architecture &amp; Partnerships
+                </p>
+                <p className="text-[0.65rem] text-slate-400">
+                  Boundless IT Solutions (BITS)
+                </p>
+              </div>
+            </div>
+
+            {/* Card Footer: Material Badge & Interactive Tap Button */}
+            <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+              <span className="font-mono text-[0.6rem] text-slate-400 uppercase tracking-wider">
+                Titanium Brushed Metal · ID: #BITS-8821
+              </span>
+              <button
+                type="button"
+                onClick={handleSimulateTap}
+                className={cn(
+                  "cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition-all",
+                  tapped
+                    ? "bg-emerald-500 text-white shadow-md scale-95"
+                    : "bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-sm"
+                )}
+              >
+                {tapped ? "✓ Tapped Phone!" : "Simulate Tap"}
+              </button>
+            </div>
+          </div>
+
+          {/* Right: Instant Smartphone Digital Profile Preview */}
+          <div className="lg:col-span-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2">
+                <Smartphone className="size-4 text-cyan-600" />
+                <span className="text-xs font-bold text-slate-800">
+                  Recipient Smartphone View (No App Needed)
+                </span>
+              </div>
+              <span className="rounded bg-emerald-50 text-emerald-700 font-mono text-[0.62rem] font-bold px-1.5 py-0.5 border border-emerald-200">
+                Instant Safari / Chrome Sheet
+              </span>
+            </div>
+
+            {/* Mobile Sheet Content */}
+            <div className="mt-3 space-y-3">
+              {/* Profile Card Header */}
+              <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3 border border-slate-100">
+                <div className="flex size-11 items-center justify-center rounded-full bg-gradient-to-tr from-cyan-600 to-blue-600 text-white font-bold text-sm shadow-2xs">
+                  AV
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <p className="text-xs font-bold text-slate-900 truncate">
+                      Alexander Vance
+                    </p>
+                    <CheckCircle2 className="size-3.5 text-blue-600 shrink-0" />
+                  </div>
+                  <p className="text-[0.68rem] text-slate-500 truncate">
+                    Boundless IT Solutions · Enterprise Lead
+                  </p>
+                </div>
+                <span className="shrink-0 rounded-full bg-blue-50 border border-blue-200 px-2 py-0.5 text-[0.6rem] font-bold text-blue-700">
+                  Verified
+                </span>
+              </div>
+
+              {/* Primary 1-Tap Action: Save to Contacts */}
+              <button
+                type="button"
+                className="flex w-full min-h-[44px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/20 hover:bg-blue-700 transition-colors"
+              >
+                <Check className="size-3.5" />
+                <span>Save Contact to Phone (.vCard)</span>
+              </button>
+
+              {/* Embedded Quick Links */}
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2.5 hover:border-blue-300 transition-colors">
+                  <Globe className="size-3.5 text-blue-600 shrink-0" />
+                  <div className="truncate">
+                    <p className="font-bold text-slate-900 text-[0.7rem] truncate">Company Website</p>
+                    <p className="text-[0.62rem] text-slate-500 truncate">bits-solutions.ph</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2.5 hover:border-blue-300 transition-colors">
+                  <CalendarCheck className="size-3.5 text-indigo-600 shrink-0" />
+                  <div className="truncate">
+                    <p className="font-bold text-slate-900 text-[0.7rem] truncate">Book Strategy Call</p>
+                    <p className="text-[0.62rem] text-slate-500 truncate">15-min Meeting</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2.5 hover:border-blue-300 transition-colors">
+                  <Share2 className="size-3.5 text-sky-600 shrink-0" />
+                  <div className="truncate">
+                    <p className="font-bold text-slate-900 text-[0.7rem] truncate">LinkedIn &amp; Socials</p>
+                    <p className="text-[0.62rem] text-slate-500 truncate">@alexandervance</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2.5 hover:border-blue-300 transition-colors">
+                  <CreditCard className="size-3.5 text-emerald-600 shrink-0" />
+                  <div className="truncate">
+                    <p className="font-bold text-slate-900 text-[0.7rem] truncate">GCash / Maya / Bank</p>
+                    <p className="text-[0.62rem] text-slate-500 truncate">Tap to Send Payment</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Lead Exchange Mini-Form */}
+              <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.68rem] font-bold text-slate-800">
+                    Direct Lead Capture Box
+                  </span>
+                  <span className="text-[0.6rem] font-mono text-blue-700 bg-white px-1.5 py-0.2 rounded border border-blue-200">
+                    Syncs to BITScrm
+                  </span>
+                </div>
+                <p className="mt-1 text-[0.65rem] text-slate-600">
+                  Recipients can send back their details with 1 tap—automatically populating your BITScrm pipeline.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 2: Multipurpose Embed Showcase */}
+      {activeTab === "multipurpose" && (
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+          <div className="border-b border-slate-100 pb-3">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+              One Smart Card Embeds Your Entire Digital Footprint
+            </h4>
+            <p className="mt-0.5 text-[0.7rem] text-slate-600">
+              Businesses and individuals can embed any link, media, payment method, or operational workflow with instant zero-reprint dynamic updates.
+            </p>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="flex items-center gap-2 text-blue-600">
+                <Users className="size-4" />
+                <span className="text-xs font-bold text-slate-900">Complete Contact Info</span>
+              </div>
+              <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
+                Full name, direct mobile, office lines, WhatsApp, email, physical office address, and downloadable .vCard that saves directly to Apple Contacts or Google Contacts with 1 tap.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">.vCard</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">WhatsApp</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Direct Call</span>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="flex items-center gap-2 text-indigo-600">
+                <Globe className="size-4" />
+                <span className="text-xs font-bold text-slate-900">Websites &amp; Portfolios</span>
+              </div>
+              <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
+                Embed your company website, Behance / Dribbble portfolio, GitHub repositories, Google Drive pitch decks, product catalogs, and custom landing page links.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Pitch Decks</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Catalog PDF</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Portfolio</span>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="flex items-center gap-2 text-pink-600">
+                <Share2 className="size-4" />
+                <span className="text-xs font-bold text-slate-900">All Social Media Hub</span>
+              </div>
+              <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
+                Consolidate your entire social reach: LinkedIn, Instagram, X (Twitter), YouTube, Facebook, TikTok, and Telegram into one curated, brand-aligned tap page.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">LinkedIn</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Instagram</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">YouTube</span>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="flex items-center gap-2 text-cyan-600">
+                <CalendarCheck className="size-4" />
+                <span className="text-xs font-bold text-slate-900">Meeting &amp; Calendar Booking</span>
+              </div>
+              <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
+                Eliminate email back-and-forth at conferences. Connect Google Meet, Calendly, or BITS Booking engine so clients can book consultations instantly.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Calendly</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Google Meet</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">BITS Booking</span>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="flex items-center gap-2 text-emerald-600">
+                <CreditCard className="size-4" />
+                <span className="text-xs font-bold text-slate-900">Payments &amp; Banking</span>
+              </div>
+              <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
+                Accept client deposits and invoices on the fly. Embed GCash QR, Maya, PayPal, Stripe payment links, or Philippine bank account numbers (BDO/BPI/UBP).
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">GCash / Maya</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Stripe / PayPal</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Bank Details</span>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="flex items-center gap-2 text-amber-600">
+                <Sparkles className="size-4" />
+                <span className="text-xs font-bold text-slate-900">Lead Capture &amp; Reviews</span>
+              </div>
+              <p className="mt-1 text-[0.68rem] text-slate-600 leading-relaxed">
+                Equip your sales reps with digital lead capture that pipes leads into BITScrm in real time. Also embed Google Reviews links to boost venue or retail ratings.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">BITScrm Lead Sync</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Google Reviews</span>
+                <span className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[0.6rem] font-mono text-slate-700">Wi-Fi Share</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 3: Security & Remote Lock Dashboard */}
+      {activeTab === "security" && (
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <Lock className="size-4 text-blue-600" />
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                  Enterprise Security &amp; Instant Remote Lock
+                </h4>
+              </div>
+              <p className="mt-0.5 text-[0.7rem] text-slate-600">
+                Unlike paper business cards that anyone can exploit or lose, BITS Smart NFC Cards give you total cloud control over your identity.
+              </p>
+            </div>
+
+            {/* Interactive Remote Freeze Switch */}
+            <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+              <span className="text-[0.68rem] font-bold text-slate-700">
+                Remote Card Lock:
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsLocked(!isLocked)}
+                className={cn(
+                  "cursor-pointer rounded-full px-3 py-1 text-[0.65rem] font-extrabold uppercase tracking-wider transition-all",
+                  isLocked
+                    ? "bg-amber-600 text-white shadow-2xs"
+                    : "bg-emerald-600 text-white shadow-2xs"
+                )}
+              >
+                {isLocked ? "Frozen (Locked)" : "Active (Tap On)"}
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <span className="text-[0.65rem] font-mono font-bold text-blue-600 uppercase">
+                Hardware Protection
+              </span>
+              <p className="mt-1 text-xs font-bold text-slate-900">
+                NTAG 424 DNA Cryptographic Chip
+              </p>
+              <p className="mt-1 text-[0.65rem] text-slate-600">
+                AES-128 cryptographic challenge-response authentication. Zero static PII stored on physical chip.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <span className="text-[0.65rem] font-mono font-bold text-emerald-600 uppercase">
+                Instant Cloud Kill-Switch
+              </span>
+              <p className="mt-1 text-xs font-bold text-slate-900">
+                1-Click Remote Deactivation
+              </p>
+              <p className="mt-1 text-[0.65rem] text-slate-600">
+                Card misplaced or stolen? Freeze it instantly from your mobile portal so no unauthorized person can read your profile.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <span className="text-[0.65rem] font-mono font-bold text-indigo-600 uppercase">
+                Field-Level Privacy
+              </span>
+              <p className="mt-1 text-xs font-bold text-slate-900">
+                PIN-Protected Sensitive Data
+              </p>
+              <p className="mt-1 text-[0.65rem] text-slate-600">
+                Lock confidential pitch decks, executive mobile numbers, or banking details behind a 4-digit PIN access code.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <span className="text-[0.65rem] font-mono font-bold text-purple-600 uppercase">
+                Real-Time Telemetry
+              </span>
+              <p className="mt-1 text-xs font-bold text-slate-900">
+                Live Tap Analytics &amp; Geo-Log
+              </p>
+              <p className="mt-1 text-[0.65rem] text-slate-600">
+                See exact date, time, and engagement metrics every time your card is tapped at client meetings or expos.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

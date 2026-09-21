@@ -85,6 +85,13 @@ export const navigationSections = [
           href: "/#products-suite",
           icon: "layers" as const,
         },
+        {
+          title: "BITS Smart NFC Business & Identity Card",
+          badge: "1 Card for Life",
+          description: "Tap to share contacts, socials, websites & payments. 100% secure, dynamic & multipurpose.",
+          href: "/#products-suite",
+          icon: "card" as const,
+        },
       ],
     },
   },
@@ -653,6 +660,37 @@ export const bitsProducts = [
     ],
     metrics: { label: "Retrieval Accuracy", value: "99.4% Factual" },
     ctaText: "Explore BITS RAG Layer",
+    ctaHref: "/#contact",
+  },
+  {
+    id: "nfc-card",
+    name: "BITS Smart NFC Business & Identity Card",
+    shortName: "Smart NFC Card",
+    category: "identity",
+    categoryLabel: "Digital Identity & Smart NFC Hardware",
+    badge: "1 Card for Life",
+    isFlagship: false,
+    tagline: "Next-Gen Digital Business Card, Dynamic Bio Hub & Instant Lead Capture",
+    description:
+      "Replace thousands of paper business cards forever with one premium metal or matte NFC smart card. Tap against any modern smartphone to instantly share your full contact info (.vCard), company website, social media portfolio, meeting calendars, and payment details. Features bank-grade encrypted chip security, instant remote card freeze if lost, dynamic cloud-hosted updates with zero reprinting, and seamless lead syncing directly into BITScrm.",
+    complianceBadges: [
+      "NTAG 424 DNA Encrypted Chip",
+      "NPC RA 10173 DPA Aligned",
+      "Instant 1-Click Remote Lock",
+      "Zero Recipient App Required",
+    ],
+    capabilities: [
+      "1-Tap Contact Download (.vCard auto-saved to phone contacts)",
+      "Embed Websites, Portfolios, Socials, Calendars & Payments",
+      "Dynamic Cloud Updates (Update info anytime with zero reprinting)",
+      "Instant Remote Card Freeze / Kill-Switch if Lost or Stolen",
+      "Integrated Lead Capture Form with Direct BITScrm Pipeline Sync",
+      "Multipurpose Modes: Bio Hub, Direct Link, Booking or Payments",
+      "Real-Time Tap Analytics, Geo-Insights & Link Click Tracking",
+      "Premium Finishes: Matte PVC, Brushed Metal & Sustainable Bamboo",
+    ],
+    metrics: { label: "Paper Card Waste", value: "100% Eliminated" },
+    ctaText: "Configure Your Smart NFC Card",
     ctaHref: "/#contact",
   },
 ] as const;
@@ -1372,6 +1410,11 @@ export const faqItems = [
     question: "Do BITS systems receive continuous updates, and how are new technology and security improvements handled?",
     answer:
       "Yes. All BITS systems receive continuous architectural, compliance, and security improvements as part of our standard lifecycle. When newer security standards (such as BSP Circulars, NPC Data Privacy guidelines, ISO 27001, and OWASP CVE mitigations) and advancing technologies (such as faster LLM inference, lower-latency voice synthesis, or updated framework libraries) become available, they are proactively integrated into the platform. Clients may also request bespoke custom operational features or specialized third-party integrations at any time (scoping and development costs vary based on requirement complexity).",
+  },
+  {
+    question: "What is the BITS Smart NFC Business Card and how does it work?",
+    answer:
+      "The BITS Smart NFC Business & Identity Card is an all-in-one digital identity replacement for traditional paper business cards. Utilizing an encrypted contactless chip, a single tap against any modern smartphone (iOS or Android) instantly displays your digital identity profile—including your contact information (with one-click .vCard saving), company website, social media profiles, portfolio, meeting schedulers, and payment links—with zero recipient app installation required. You only ever need 1 card: all information can be updated dynamically in real-time through our web portal without reprinting, and the card can be remotely frozen instantly if misplaced or stolen.",
   },
   {
     question: "How are BITS solutions packaged and how do we get started?",
