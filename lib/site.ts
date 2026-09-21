@@ -21,6 +21,119 @@ export const navItems = [
   { label: "FAQ", href: "/#faq" },
 ] as const;
 
+/* ── Structured Navigation with Subsections ── */
+export const navigationSections = [
+  {
+    id: "platform",
+    label: "Platform",
+    dropdown: {
+      heading: "Platform & Products",
+      items: [
+        {
+          title: "BITScrm Platform",
+          badge: "Flagship CRM",
+          description: "Collections & operations CRM with WebRTC softphone & QA.",
+          href: "/bitscrm",
+          icon: "crm" as const,
+        },
+        {
+          title: "BITSagent AI",
+          badge: "Autonomous AI",
+          description: "Conversational voice agents, email outreach & call QA.",
+          href: "/bitsagent",
+          icon: "ai" as const,
+        },
+        {
+          title: "Solutions Ecosystem",
+          badge: "6 Pillars",
+          description: "Unified stack combining CRM, automation, AI & analytics.",
+          href: "/#ecosystem",
+          icon: "layers" as const,
+        },
+        {
+          title: "The Difference",
+          badge: "Built For You",
+          description: "Why tailored operational architecture beats generic SaaS.",
+          href: "/#the-difference",
+          icon: "sparkles" as const,
+        },
+      ],
+    },
+  },
+  {
+    id: "industries",
+    label: "Industries",
+    dropdown: {
+      heading: "Target Operational Sectors",
+      items: [
+        {
+          title: "BPO & Contact Centers",
+          badge: "Multi-Client",
+          description: "Campaign tenant isolation, skill routing & supervisor QA HUD.",
+          href: "/#industries",
+          icon: "headset" as const,
+        },
+        {
+          title: "Debt Collection Agencies",
+          badge: "Recovery Pipeline",
+          description: "DPD tracking, automated PTP scheduling & auto-dialing.",
+          href: "/#industries",
+          icon: "pipeline" as const,
+        },
+        {
+          title: "Banks & Financial Services",
+          badge: "Governance",
+          description: "Security-conscious architecture, RBAC & immutable audit logs.",
+          href: "/#industries",
+          icon: "shield" as const,
+        },
+        {
+          title: "Growing Businesses",
+          badge: "Custom Systems",
+          description: "Bespoke operational software, workflows & API integrations.",
+          href: "/#industries",
+          icon: "briefcase" as const,
+        },
+      ],
+    },
+  },
+  {
+    id: "governance",
+    label: "Trust & Security",
+    dropdown: {
+      heading: "Governance & Process",
+      items: [
+        {
+          title: "Security & Governance",
+          badge: "RBAC Matrix",
+          description: "Role-based boundaries, data isolation & BSP/NPC principles.",
+          href: "/#security",
+          icon: "lock" as const,
+        },
+        {
+          title: "5-Step Methodology",
+          badge: "Delivery",
+          description: "Understand, Design, Build, Deploy, and continuous Improve.",
+          href: "/#methodology",
+          icon: "process" as const,
+        },
+        {
+          title: "Enterprise FAQ",
+          badge: "10 Answers",
+          description: "Factual answers regarding architecture, security & onboarding.",
+          href: "/#faq",
+          icon: "help" as const,
+        },
+      ],
+    },
+  },
+  {
+    id: "solutions",
+    label: "Solutions & Pricing",
+    href: "/#solutions",
+  },
+] as const;
+
 /* ── Hero Benchmarks ── */
 export const heroStats = [
   { value: "3.2x", label: "Faster Right-Party Connects" },
