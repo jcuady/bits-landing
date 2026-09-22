@@ -2,7 +2,7 @@ export const site = {
   name: "BITS",
   legalName: "BITS - Boundless IT Solutions",
   tagline: "Technology built around the way your business actually operates.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://boundlessits.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.boundlessits.com",
   inquiryEmail: "bits_inquiries@boundlessits.com",
   description:
     "Business-specific software, workflow automation, CRM, AI-assisted operations, and digital infrastructure for BPOs, collection agencies, banks, and operations with complex workflows.",
