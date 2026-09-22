@@ -983,6 +983,19 @@ function SalesBoard({
 
   return (
     <div className="space-y-4">
+      {/* Customer Outcome ROI Banner */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50/90 via-teal-50/50 to-white p-3 text-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="size-4 text-emerald-600 shrink-0" />
+          <span className="font-semibold text-slate-800">
+            <strong>Customer Outcome:</strong> Accelerates deal velocity by 38% with automated CPQ proposals, two-way sync, and AI win-probability territory routing.
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
+          +₱14.8M Pipeline Accelerated
+        </span>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Q3 Enterprise Pipeline Kanban</p>
@@ -995,9 +1008,9 @@ function SalesBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-emerald-300 px-3 py-2 text-xs font-bold text-emerald-800 hover:bg-emerald-100 shadow-2xs min-h-[44px] inline-flex items-center justify-center"
+            className="rounded-md bg-white border border-emerald-300 px-3 py-2 text-xs font-bold text-emerald-800 hover:bg-emerald-100 shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -1054,7 +1067,7 @@ function SalesBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-emerald-700 shadow-2xs min-h-[44px] inline-flex items-center justify-center"
+          className="rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-emerald-700 shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer"
         >
           Execute Stage Transition
         </button>
@@ -1113,6 +1126,19 @@ function MarketingBoard({
 
   return (
     <div className="space-y-4">
+      {/* Customer Outcome ROI Banner */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-pink-200 bg-gradient-to-r from-pink-50/90 via-rose-50/50 to-white p-3 text-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="size-4 text-pink-600 shrink-0" />
+          <span className="font-semibold text-slate-800">
+            <strong>Customer Outcome:</strong> Boosts multichannel engagement by 4.5x with automated SMS/email customer journeys while ensuring 100% NPC RA 10173 consent compliance.
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-extrabold text-pink-700 bg-white px-2.5 py-1 rounded-full border border-pink-200 shadow-2xs">
+          42.1% SMS Click-Through
+        </span>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-pink-200 bg-pink-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Customer Journey Automation</p>
@@ -1125,9 +1151,9 @@ function MarketingBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-pink-300 px-2.5 py-1 text-xs font-bold text-pink-700 hover:bg-pink-100"
+            className="rounded-md bg-white border border-pink-300 px-3 py-2 text-xs font-bold text-pink-700 hover:bg-pink-100 shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -1177,7 +1203,7 @@ function MarketingBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-pink-600 px-3 py-1 text-xs font-bold text-white hover:bg-pink-700"
+          className="rounded-lg bg-pink-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-pink-700 shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer"
         >
           Run Trigger
         </button>
@@ -1233,6 +1259,19 @@ function CommerceBoard({
 
   return (
     <div className="space-y-4">
+      {/* Customer Outcome ROI Banner */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-cyan-200 bg-gradient-to-r from-cyan-50/90 via-sky-50/50 to-white p-3 text-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="size-4 text-cyan-600 shrink-0" />
+          <span className="font-semibold text-slate-800">
+            <strong>Customer Outcome:</strong> Recovers 9.2% monthly recurring revenue otherwise lost to card failures through smart automated dunning and BIR CAS e-invoicing.
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-extrabold text-cyan-700 bg-white px-2.5 py-1 rounded-full border border-cyan-200 shadow-2xs">
+          99.99% Billing Precision
+        </span>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Subscription &amp; Usage Billing Core</p>
@@ -1245,9 +1284,9 @@ function CommerceBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-cyan-300 px-2.5 py-1 text-xs font-bold text-cyan-800 hover:bg-cyan-100"
+            className="rounded-md bg-white border border-cyan-300 px-3 py-2 text-xs font-bold text-cyan-800 hover:bg-cyan-100 shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -1297,9 +1336,9 @@ function CommerceBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-cyan-600 px-3 py-1 text-xs font-bold text-white hover:bg-cyan-700"
+          className="rounded-lg bg-cyan-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-cyan-700 shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer"
         >
-          Execute Action
+          Execute Billing Action
         </button>
       </div>
     </div>

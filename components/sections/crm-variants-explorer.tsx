@@ -527,10 +527,10 @@ function ServiceMockupLight() {
         </div>
         <button
           type="button"
-          onClick={() => handleAction("🎙️ Coach whisper sent to agent: 'Offer 2-month split terms for Carlos Mendoza.'")}
-          className="rounded-lg bg-blue-600 px-2.5 py-1 text-[0.68rem] font-bold text-white hover:bg-blue-700 active:scale-95 cursor-pointer shadow-xs"
+          onClick={() => handleAction("Coach whisper sent to agent: 'Offer 2-month split terms for Carlos Mendoza.'")}
+          className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center"
         >
-          Whisper Coaching 🎙️
+          Whisper Coaching
         </button>
       </div>
 
@@ -608,10 +608,10 @@ function SalesMockupLight() {
         </div>
         <button
           type="button"
-          onClick={() => handleAction("⚡ Deal advanced! 'Apex Global BPO' moved to 'Contract Negotiation' stage (+₱4.2M).")}
-          className="rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-emerald-700 active:scale-95 cursor-pointer shadow-xs"
+          onClick={() => handleAction("Deal advanced: 'Apex Global BPO' moved to 'Contract Negotiation' stage (+₱4.2M).")}
+          className="rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-emerald-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center"
         >
-          Advance Deal ⚡
+          Advance Deal
         </button>
       </div>
 
@@ -651,11 +651,11 @@ function SalesMockupLight() {
               }}
               className={cn("transition-colors cursor-pointer", activeDeal === "Pacific" ? "bg-emerald-50/60 font-medium" : "hover:bg-slate-50")}
             >
-              <td className="p-2 font-bold text-slate-900">Pacific Recovery</td>
+              <td className="p-2 font-bold text-slate-900">Pacific Recovery Agency</td>
               <td className="p-2">
                 <span className="rounded bg-[#00c875] px-2 py-0.5 text-[0.62rem] font-bold text-white">Closed-Won</span>
               </td>
-              <td className="p-2 font-mono text-emerald-700 font-bold">₱7.4M (3-Yr Term)</td>
+              <td className="p-2 font-mono text-slate-800">₱3.5M (Prob 100%)</td>
             </tr>
           </tbody>
         </table>
@@ -688,10 +688,10 @@ function MarketingMockupLight() {
         </div>
         <button
           type="button"
-          onClick={() => handleAction("📲 1,840 SMS payment reminders fired through Semaphore gateway!")}
-          className="rounded-lg bg-pink-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-pink-700 active:scale-95 cursor-pointer shadow-xs"
+          onClick={() => handleAction("1,840 SMS payment reminders fired through Semaphore gateway!")}
+          className="rounded-lg bg-pink-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-pink-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center"
         >
-          Trigger Drip Broadcast 📲
+          Trigger Drip Broadcast
         </button>
       </div>
 
@@ -757,15 +757,15 @@ function CommerceMockupLight() {
 
       <div className="flex items-center justify-between rounded-xl border border-cyan-200 bg-white p-3 shadow-2xs">
         <div>
-          <p className="text-xs font-bold text-slate-900">Invoicing & Recurring Subscriptions</p>
+          <p className="text-xs font-bold text-slate-900">Invoicing &amp; Recurring Subscriptions</p>
           <p className="text-[0.68rem] text-slate-500">PCI-DSS Level 1 Ready · Tokenized Gateways</p>
         </div>
         <button
           type="button"
           onClick={() => handleAction("✓ Auto-debit verified: 120 Enterprise Seat retainers billed successfully (+₱180,000).")}
-          className="rounded-lg bg-cyan-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-cyan-700 active:scale-95 cursor-pointer shadow-xs"
+          className="rounded-lg bg-cyan-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-cyan-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center"
         >
-          Execute Auto-Debit 💳
+          Execute Auto-Debit
         </button>
       </div>
 

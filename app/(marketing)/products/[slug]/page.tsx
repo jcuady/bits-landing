@@ -483,6 +483,22 @@ function getBespokeFaqQuestion(id: string, name: string) {
   }
 }
 
+function getCrmSynergy(currentId: string, siblingId: string): string {
+  if (siblingId === "service") {
+    return "Shares real-time customer histories, omnichannel ticketing, and supervisor audio whisper logs directly with your account records.";
+  }
+  if (siblingId === "sales") {
+    return "Transitions qualified inbound leads into visual Kanban deal stages with AI win-probability scoring and CPQ quote generation.";
+  }
+  if (siblingId === "marketing") {
+    return "Triggers automated omnichannel SMS, Viber, and email sequences based on account status, DPD aging, or deal milestones.";
+  }
+  if (siblingId === "commerce") {
+    return "Instantly bills enterprise retainers, licenses, and metered usage via PCI-DSS tokenized card or Maya gateways with automated dunning.";
+  }
+  return "Natively synchronizes customer accounts, interactions, and operational audit trails on one shared database schema.";
+}
+
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = bitsProducts.find((p) => p.id === slug);
@@ -493,6 +509,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   const problems = getProductProblems(product);
   const faqs = getProductFaqs(product);
+
+  const isCrmProduct = product.category === "crm" || product.id === "service";
+  const otherCrmVariants = bitsProducts.filter(
+    (p) => (p.category === "crm" || p.id === "service") && p.id !== product.id
+  );
+  const crmVariantsList = [
+    { id: "service", label: "Customer Service", href: "/products/service" },
+    { id: "sales", label: "Sales Pipeline", href: "/products/sales" },
+    { id: "marketing", label: "Marketing Journeys", href: "/products/marketing" },
+    { id: "commerce", label: "Commerce & Billing", href: "/products/commerce" },
+  ];
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -650,6 +677,42 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </span>
               </div>
             </Reveal>
+
+            {/* Interactive CRM Variant Switcher Bar */}
+            {isCrmProduct && (
+              <Reveal delay={0.03} y={10}>
+                <div className="mb-6 flex flex-wrap items-center justify-center gap-1.5 rounded-2xl border border-blue-200/90 bg-slate-50/90 p-1.5 shadow-xs backdrop-blur-md">
+                  <span className="px-2.5 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 hidden sm:inline-block">
+                    CRM Suite:
+                  </span>
+                  {crmVariantsList.map((v) => {
+                    const isActive = v.id === product.id;
+                    return (
+                      <Link
+                        key={v.id}
+                        href={v.href}
+                        className={cn(
+                          "inline-flex min-h-[36px] items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all duration-150",
+                          isActive
+                            ? "bg-white text-blue-700 shadow-xs ring-1 ring-blue-200"
+                            : "text-slate-600 hover:bg-white/70 hover:text-slate-900"
+                        )}
+                      >
+                        {isActive && <span className="size-1.5 rounded-full bg-blue-600" />}
+                        <span>{v.label}</span>
+                      </Link>
+                    );
+                  })}
+                  <Link
+                    href="/products/crm"
+                    className="inline-flex min-h-[36px] items-center gap-1 rounded-xl bg-blue-100/70 px-3 py-1.5 text-xs font-bold text-blue-800 hover:bg-blue-100 transition-colors"
+                  >
+                    <span>Architecture Hub</span>
+                    <span>→</span>
+                  </Link>
+                </div>
+              </Reveal>
+            )}
 
             {/* H1 Headline */}
             <Reveal delay={0.06} y={16}>
@@ -919,6 +982,96 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
         </Container>
       </section>
+
+      {/* 6.5. Cross-Variant CRM Architecture Section (For all CRM variants) */}
+      {isCrmProduct && (
+        <section className="bg-slate-50/70 py-20 sm:py-28 border-b border-slate-200/60">
+          <Container>
+            <div className="mx-auto max-w-3xl text-center mb-14">
+              <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+                Unified Revenue Architecture
+              </span>
+              <h2 className="text-h2 mt-3 font-bold text-slate-900">
+                Four Specialized Variants. One Sovereign Data Layer.
+              </h2>
+              <p className="text-lede mt-4 text-slate-600">
+                BITScrm variants operate together seamlessly without fragile third-party webhooks or API duct tape.
+                Deploy {product.name} today, then activate sibling variants on the same database schema as your operations scale.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {otherCrmVariants.map((variant) => (
+                <div
+                  key={variant.id}
+                  className="flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-xs hover:border-blue-300 hover:shadow-lg transition-all"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-blue-50 border border-blue-200/60 px-2.5 py-0.5 text-[0.65rem] font-bold text-blue-700 uppercase tracking-wider">
+                        {variant.badge}
+                      </span>
+                      <span className="font-mono text-xs font-bold text-slate-400">
+                        {variant.metrics.value}
+                      </span>
+                    </div>
+                    <h3 className="mt-4 text-lg font-bold text-slate-900">{variant.name}</h3>
+                    <p className="mt-1 text-xs font-medium text-blue-600">{variant.tagline}</p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600">
+                      {variant.description}
+                    </p>
+
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <p className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
+                        Synergy with {product.shortName}:
+                      </p>
+                      <p className="mt-1 text-xs text-slate-700 font-medium">
+                        {getCrmSynergy(product.id, variant.id)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-100">
+                    <Link
+                      href={variant.ctaHref}
+                      className="inline-flex w-full min-h-[44px] items-center justify-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-xs font-bold text-slate-800 hover:bg-blue-600 hover:text-white transition-all shadow-2xs cursor-pointer"
+                    >
+                      <span>Explore {variant.shortName}</span>
+                      <span>→</span>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 rounded-2xl border border-blue-200 bg-white p-6 sm:p-8 text-center shadow-xs">
+              <div className="mx-auto max-w-2xl">
+                <h4 className="text-base font-bold text-slate-900">
+                  Need a multi-variant CRM deployment for your enterprise?
+                </h4>
+                <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                  Combine Customer Service, Sales, Marketing, and Commerce under a single unified database with bespoke role permissions and zero data-replatforming headaches.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                  <Link
+                    href="/products/crm"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-sm"
+                  >
+                    <span>Explore Master CRM Architecture Hub</span>
+                    <span>→</span>
+                  </Link>
+                  <Link
+                    href="/#contact"
+                    className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-200 bg-white px-6 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+                  >
+                    Request Scoping Call
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* 7. Prompt-Mirror AEO FAQ Section */}
       <section className="bg-white py-20 sm:py-28 border-b border-slate-200/60">

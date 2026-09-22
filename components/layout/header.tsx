@@ -304,6 +304,25 @@ export function Header() {
                               );
                             })}
                           </div>
+
+                          {section.id === "platform" && (
+                            <div className="mt-3 flex items-center justify-between rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50/90 via-indigo-50/40 to-blue-50/80 px-3.5 py-2.5 text-xs">
+                              <div className="flex items-center gap-2">
+                                <span className="flex size-2 rounded-full bg-blue-600 animate-pulse" />
+                                <span className="text-[0.72rem] font-semibold text-slate-800">
+                                  Looking for all 4 CRM variants unified?
+                                </span>
+                              </div>
+                              <Link
+                                href="/products/crm"
+                                onClick={() => setActiveDropdown(null)}
+                                className="inline-flex min-h-[36px] items-center gap-1 text-[0.72rem] font-bold text-blue-700 hover:text-blue-900 transition-colors"
+                              >
+                                <span>Explore CRM Architecture Hub</span>
+                                <span>→</span>
+                              </Link>
+                            </div>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -430,6 +449,18 @@ export function Header() {
                                 </span>
                               </Link>
                             ))}
+                            {section.id === "platform" && (
+                              <div className="mt-2 pt-2 border-t border-slate-200/70">
+                                <Link
+                                  href="/products/crm"
+                                  onClick={() => setMobileOpen(false)}
+                                  className="flex items-center justify-between rounded-xl bg-blue-50/90 p-3 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors"
+                                >
+                                  <span>Explore CRM Architecture Hub</span>
+                                  <span>→</span>
+                                </Link>
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>

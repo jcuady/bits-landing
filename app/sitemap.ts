@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: site.url, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
     { url: `${site.url}/bitscrm`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${site.url}/products/crm`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${site.url}/bitsagent`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     ...productEntries,
     { url: `${site.url}/brandbook.html`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },

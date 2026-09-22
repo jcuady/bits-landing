@@ -44,11 +44,25 @@ export const navigationSections = [
           icon: "ai" as const,
         },
         {
-          title: "CRM Variants (Sales, Mktg, Commerce)",
-          badge: "Revenue Suite",
-          description: "Visual deal Kanban, CPQ, journeys, subscription billing & PCI payments.",
+          title: "BITScrm Sales",
+          badge: "Revenue Engine",
+          description: "Visual deal Kanban, CPQ, territory routing & predictive win scoring.",
           href: "/products/sales",
           icon: "pipeline" as const,
+        },
+        {
+          title: "BITScrm Marketing",
+          badge: "Journeys",
+          description: "Omnichannel customer journeys, drip automation & closed-loop attribution.",
+          href: "/products/marketing",
+          icon: "process" as const,
+        },
+        {
+          title: "BITScrm Commerce",
+          badge: "Billing Core",
+          description: "Recurring subscriptions, tokenized PCI payments & automated dunning.",
+          href: "/products/commerce",
+          icon: "card" as const,
         },
         {
           title: "BITS Construction & Logistics",
@@ -1938,11 +1952,13 @@ export const footerColumns = [
   {
     title: "Platform",
     links: [
-      { label: "BITScrm Flagship", href: "/bitscrm" },
+      { label: "BITScrm Customer Service", href: "/bitscrm" },
+      { label: "BITScrm Sales Engine", href: "/products/sales" },
+      { label: "BITScrm Marketing", href: "/products/marketing" },
+      { label: "BITScrm Commerce", href: "/products/commerce" },
+      { label: "CRM Architecture Hub", href: "/products/crm" },
       { label: "BITSagent AI Suite", href: "/bitsagent" },
       { label: "Enterprise Engines (18)", href: "/#products-suite" },
-      { label: "Solutions Ecosystem", href: "/#ecosystem" },
-      { label: "5-Step Methodology", href: "/#methodology" },
     ],
   },
   {
