@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/bitscrm`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${site.url}/bitsagent`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     ...productEntries,
+    { url: `${site.url}/brandbook.html`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${site.url}/legal`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
   ];
 }

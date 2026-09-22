@@ -1931,6 +1931,7 @@ export const footerColumns = [
     title: "Company",
     links: [
       { label: "Boundless IT Solutions", href: "/#the-difference" },
+      { label: "Brand Guidelines (Brandbook)", href: "/brandbook.html" },
       { label: "Book Consultation", href: "/#contact" },
       { label: "CRM Portal Login", href: "/login" },
       { label: "bits_inquiries@boundlessits.com", href: "mailto:bits_inquiries@boundlessits.com" },

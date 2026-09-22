@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BITS Official Brandbook & Design System 2026 — Boundless IT Solutions</title>
+  <meta name="description" content="Official brand identity guidelines, design system, typography, color architecture, social media rules, and product suite catalog for Boundless IT Solutions (BITS)." />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Brand Core Colors */
+      --bits-navy-900: #06162F;
+      --bits-navy-800: #0B2349;
+      --bits-navy-700: #103061;
+      --bits-blue-600: #2563EB;
+      --bits-blue-500: #3B82F6;
+      --bits-blue-50: #EFF6FF;
+      --bits-blue-100: #DBEAFE;
+      
+      /* Neutrals */
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50: #F8FAFC;
+      --white: #FFFFFF;
+
+      /* Product Accent Tokens */
+      --accent-crm: #2563EB;
+      --accent-ai: #7C3AED;
+      --accent-accounting: #059669;
+      --accent-hrms: #0D9488;
+      --accent-construction: #D97706;
+      --accent-nfc: #0891B2;
+      --accent-whitelabel: #EA580C;
+      --accent-sports: #DC2626;
+
+      /* Layout */
+      --container-max: 1280px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-subtle: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+      --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      --shadow-hover: 0 12px 28px -4px rgba(37, 99, 235, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container Utility */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--slate-900);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Top Sticky Navigation Bar */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 14px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-book-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--slate-700);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--slate-600);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--bits-blue-600);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      min-height: 40px;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--bits-blue-600);
+      color: var(--white);
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.32);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--slate-800);
+      border: 1px solid var(--slate-200);
+    }
+
+    .btn-secondary:hover {
+      background: var(--slate-50);
+      border-color: var(--slate-300);
+    }
+
+    /* Hero Section */
+    .brand-hero {
+      position: relative;
+      background: var(--white);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 64px 0 54px;
+      overflow: hidden;
+    }
+
+    .hero-radial {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 400px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(37, 99, 235, 0.09), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      background: var(--bits-blue-50);
+      border: 1px solid var(--bits-blue-100);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--bits-blue-600);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--bits-blue-600) 0%, #4338CA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-lead {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--slate-600);
+      max-width: 720px;
+      margin: 0 auto 32px;
+      line-height: 1.55;
+    }
+
+    /* Automation Comparison Switch Banner (Socia.ph style) */
+    .compare-toggle-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 20px;
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-full);
+      margin-bottom: 28px;
+      font-size: 0.88rem;
+    }
+
+    .compare-tag-bad {
+      color: var(--slate-500);
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+
+    .compare-pill-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bits-blue-600);
+      color: var(--white);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* Quick Filter Pills (Monday.com style) */
+    .category-pills-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--slate-700);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .cat-pill:hover, .cat-pill.active {
+      background: var(--slate-900);
+      border-color: var(--slate-900);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .cat-pill.active .check-dot {
+      background: #10B981;
+    }
+
+    .check-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--slate-300);
+    }
+
+    /* Section Wrapper */
+    .section-wrap {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .section-head {
+      margin-bottom: 40px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--bits-blue-600);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--slate-600);
+      max-width: 680px;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    /* Card Box */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-card);
+      border-color: #cbd5e1;
+    }
+
+    /* Section 01: Brand Identity Core */
+    .brand-pillar-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pillar-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--bits-blue-600);
+    }
+
+    .pillar-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .pillar-body {
+      font-size: 0.94rem;
+      color: var(--slate-600);
+      line-height: 1.55;
+    }
+
+    /* Section 02: Logo System */
+    .logo-showcase-box {
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .logo-box-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: var(--slate-100);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .logo-preview-area {
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      transition: background 0.3s ease;
+    }
+
+    .logo-preview-area.bg-light { background: #FFFFFF; }
+    .logo-preview-area.bg-dark { background: #06162F; }
+    .logo-preview-area.bg-blue { background: #2563EB; }
+
+    .logo-preview-img {
+      max-height: 72px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .bg-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bg-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--slate-300);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .bg-btn:hover { transform: scale(1.15); }
+    .bg-btn.white { background: #FFFFFF; }
+    .bg-btn.dark { background: #06162F; }
+    .bg-btn.blue { background: #2563EB; }
+
+    .logo-rules-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 0.92rem;
+    }
+
+    .logo-rules-table th, .logo-rules-table td {
+      padding: 12px 16px;
+      border: 1px solid var(--slate-200);
+      text-align: left;
+    }
+
+    .logo-rules-table th {
+      background: var(--slate-100);
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .badge-pass {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #DCFCE7;
+      color: #15803D;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .badge-fail {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #FEE2E2;
+      color: #B91C1C;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    /* Section 03: Color Swatches */
+    .color-swatch-card {
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--white);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .color-swatch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .swatch-fill {
+      height: 96px;
+      width: 100%;
+      position: relative;
+    }
+
+    .swatch-details {
+      padding: 14px;
+    }
+
+    .swatch-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .swatch-role {
+      font-size: 0.78rem;
+      color: var(--slate-500);
+      margin-bottom: 8px;
+    }
+
+    .swatch-copy-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--slate-700);
+      background: var(--slate-100);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: all;
+    }
+
+    .swatch-copy-row:hover {
+      background: var(--bits-blue-50);
+      color: var(--bits-blue-600);
+    }
+
+    /* Section 04: Typography Table */
+    .type-specimen-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .type-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--slate-500);
+    }
+
+    .type-meta strong {
+      display: block;
+      color: var(--slate-800);
+      font-size: 0.88rem;
+    }
+
+    /* Section 05: Product Catalog Cards */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card:hover {
+      border-color: var(--bits-blue-500);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .product-card-top {
+      margin-bottom: 20px;
+    }
+
+    .product-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .badge-flagship {
+      background: #EFF6FF;
+      color: #2563EB;
+      border: 1px solid #BFDBFE;
+    }
+
+    .badge-operations {
+      background: #FEF3C7;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+    }
+
+    .badge-finance {
+      background: #D1FAE5;
+      color: #047857;
+      border: 1px solid #A7F3D0;
+    }
+
+    .badge-hardware {
+      background: #CFFAFE;
+      color: #0E7490;
+      border: 1px solid #A5F3FC;
+    }
+
+    .badge-ai {
+      background: #F3E8FF;
+      color: #6B21A8;
+      border: 1px solid #E9D5FF;
+    }
+
+    .badge-general {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+    }
+
+    .product-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 6px;
+    }
+
+    .product-tagline {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--bits-blue-600);
+      margin-bottom: 12px;
+    }
+
+    .product-desc {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .product-capabilities-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .product-capabilities-list li {
+      font-size: 0.82rem;
+      color: var(--slate-700);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product-capabilities-list li::before {
+      content: "✓";
+      color: #10B981;
+      font-weight: 800;
+    }
+
+    .product-card-footer {
+      border-top: 1px solid var(--slate-100);
+      padding-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-metric-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--slate-800);
+      background: var(--slate-100);
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .product-link {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--bits-blue-600);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .product-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Section 06: Social Media Post Templates (Socia.ph style) */
+    .social-template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .mock-post-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .mock-post-canvas {
+      background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
+      padding: 32px 24px;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .mock-post-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mock-logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--bits-navy-900);
+    }
+
+    .mock-logo span {
+      color: var(--bits-blue-600);
+    }
+
+    .mock-post-headline {
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--slate-900);
+      margin: 16px 0 8px;
+    }
+
+    .mock-post-subhead {
+      font-size: 0.95rem;
+      color: var(--slate-600);
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .mock-split-slider {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .mock-split-left {
+      color: #94A3B8;
+      font-size: 0.8rem;
+      text-decoration: line-through;
+    }
+
+    .mock-split-right {
+      background: #EFF6FF;
+      color: var(--bits-blue-600);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mock-post-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--bits-blue-600);
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mock-post-footer-url {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--slate-400);
+      margin-top: 14px;
+    }
+
+    .mock-post-meta {
+      padding: 18px 24px;
+      background: var(--white);
+    }
+
+    .mock-post-meta h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .mock-post-meta p {
+      font-size: 0.82rem;
+      color: var(--slate-500);
+    }
+
+    /* Section 08: Tone of Voice Table */
+    .tone-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    .tone-table th, .tone-table td {
+      padding: 14px 18px;
+      border: 1px solid var(--slate-200);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .tone-table th {
+      background: var(--slate-100);
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--slate-900);
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Print Stylesheet for Executive PDF Generation */
+    @media print {
+      .top-navbar, .nav-actions, .category-pills-bar, .bg-switcher, .toast {
+        display: none !important;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .card, .product-card, .mock-post-card {
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #CCCCCC !important;
+      }
+
+      .section-wrap {
+        page-break-after: always;
+        padding: 32px 0 !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .type-specimen-row { grid-template-columns: 1fr; gap: 8px; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <header class="top-navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand-logo-wrap">
+        <img src="/brand/logo-horizontal.png" alt="BITS Logo" class="brand-logo-img" onerror="this.src='/brand/mark.png'" />
+        <span class="brand-book-badge">Brandbook 2026</span>
+      </a>
+
+      <nav aria-label="Brandbook Navigation">
+        <ul class="nav-links">
+          <li><a href="#identity" class="nav-link">Identity</a></li>
+          <li><a href="#logo" class="nav-link">Logo</a></li>
+          <li><a href="#colors" class="nav-link">Colors</a></li>
+          <li><a href="#typography" class="nav-link">Typography</a></li>
+          <li><a href="#products" class="nav-link">18 Products</a></li>
+          <li><a href="#social" class="nav-link">Social & Ads</a></li>
+          <li><a href="#voice" class="nav-link">Voice</a></li>
+          <li><a href="#assets" class="nav-link">Assets</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+          Print / PDF
+        </button>
+        <a href="#assets" class="btn btn-primary">Download Kit ↓</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Monday.com & Socia.ph hybrid aesthetic) -->
+  <section class="brand-hero">
+    <div class="hero-radial" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span>●</span> Official BITS Identity Guidelines & Design System
+      </div>
+
+      <h1 class="hero-title">
+        Technology Built Around The Way <br />
+        <span>Business Actually Operates.</span>
+      </h1>
+
+      <p class="hero-lead">
+        The master brand guidelines, design language, color tokens, social media templates, and 18-engine product portfolio for Boundless IT Solutions (BITS). Clean, modern, and straight to the point.
+      </p>
+
+      <!-- Socia.ph Style Process Toggle -->
+      <div class="compare-toggle-strip">
+        <span class="compare-tag-bad">Rigid SaaS & Manual Spreadsheets</span>
+        <span>⟶</span>
+        <div class="compare-pill-active">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          Automation 100% · BITS Engines
+        </div>
+      </div>
+
+      <!-- Monday.com Style Interactive Product Category Filter -->
+      <div class="category-pills-bar" id="categoryFilterBar">
+        <div class="cat-pill active" data-filter="all">
+          <span class="check-dot"></span> All 18 Engines
+        </div>
+        <div class="cat-pill" data-filter="flagship">
+          <span class="check-dot"></span> Flagships (2)
+        </div>
+        <div class="cat-pill" data-filter="crm">
+          <span class="check-dot"></span> Revenue & CRM (3)
+        </div>
+        <div class="cat-pill" data-filter="finance">
+          <span class="check-dot"></span> Finance & ERP (2)
+        </div>
+        <div class="cat-pill" data-filter="operations">
+          <span class="check-dot"></span> Operations & Field (3)
+        </div>
+        <div class="cat-pill" data-filter="vertical">
+          <span class="check-dot"></span> Vertical Practice (5)
+        </div>
+        <div class="cat-pill" data-filter="universal">
+          <span class="check-dot"></span> Enablers & Hardware (3)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <!-- Section 01: Brand Identity & Core Metaphor -->
+    <section id="identity" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">01 · Foundation</div>
+        <h2 class="section-title">Brand Identity & Strategic Core</h2>
+        <p class="section-desc">
+          Boundless IT Solutions (BITS) exists to eliminate the friction of disconnected spreadsheets and off-the-shelf software. We engineer systems that conform to how real organizations function.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card brand-pillar-card">
+          <div class="pillar-num">01 / DNA</div>
+          <div class="pillar-title">Operational Sovereignty</div>
+          <div class="pillar-body">
+            You own your business processes and data. BITS systems deploy to our managed high-performance cloud or sovereign on-premises bare-metal servers.
+          </div>
+        </div>
+
+        <div class="card brand-pillar-card">
+          <div class="pillar-num">02 / MISSION</div>
+          <div class="pillar-title">Engineering-Grade Fit</div>
+          <div class="pillar-body">
+            Zero generic templates. Work queues, collections dialers, ERP ledgers, and voice AI agents are custom-tailored to floor realities.
+          </div>
+        </div>
+
+        <div class="card brand-pillar-card">
+          <div class="pillar-num">03 / VALUE</div>
+          <div class="pillar-title">Automate Smarter</div>
+          <div class="pillar-body">
+            Turn manual copy-pasting into autonomous state machines. From Promise-to-Pay tracking to biometric payroll and BIR CAS compliance.
+          </div>
+        </div>
+
+        <div class="card brand-pillar-card">
+          <div class="pillar-num">04 / PARTNERSHIP</div>
+          <div class="pillar-title">Boundless Evolution</div>
+          <div class="pillar-body">
+            We operate as your dedicated engineering partner. No rigid roadmaps—your software updates and adapts as your business scales.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: Master Logo System -->
+    <section id="logo" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">02 · Brandmark</div>
+        <h2 class="section-title">Master Logo System & Usage</h2>
+        <p class="section-desc">
+          The BITS mark combines typographic authority with modern technical geometry. Always preserve contrast, aspect ratio, and breathing room.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <!-- Interactive Logo Preview Box -->
+        <div class="logo-showcase-box">
+          <div class="logo-box-toolbar">
+            <span class="font-mono" style="font-size: 0.8rem; font-weight: 700; color: var(--slate-700);">
+              Primary Horizontal Lockup
+            </span>
+            <div class="bg-switcher">
+              <span style="font-size: 0.75rem; color: var(--slate-500); margin-right: 4px;">Background:</span>
+              <button class="bg-btn white" onclick="changeLogoBg(this, 'bg-light', '/brand/logo-horizontal.png')" title="White"></button>
+              <button class="bg-btn dark" onclick="changeLogoBg(this, 'bg-dark', '/brand/logo-white.png')" title="Navy"></button>
+              <button class="bg-btn blue" onclick="changeLogoBg(this, 'bg-blue', '/brand/logo-white.png')" title="Electric Blue"></button>
+            </div>
+          </div>
+          <div class="logo-preview-area bg-light" id="mainLogoPreview">
+            <img id="mainLogoImg" src="/brand/logo-horizontal.png" alt="BITS Logo Primary" class="logo-preview-img" onerror="this.src='/brand/mark.png'" />
+          </div>
+        </div>
+
+        <!-- App Icon & Mark Tile -->
+        <div class="logo-showcase-box">
+          <div class="logo-box-toolbar">
+            <span class="font-mono" style="font-size: 0.8rem; font-weight: 700; color: var(--slate-700);">
+              Icon Mark & Favicon Tile
+            </span>
+            <span style="font-size: 0.75rem; color: var(--slate-500);">512 × 512 px</span>
+          </div>
+          <div class="logo-preview-area bg-light">
+            <img src="/brand/mark.png" alt="BITS Mark" style="height: 96px; width: auto;" onerror="this.src='/icon.png'" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo Clear Space and Minimum Sizes Table -->
+      <table class="logo-rules-table">
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>Minimum Size</th>
+            <th>Clear Space</th>
+            <th>Approved Backgrounds</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Digital Header / Web</strong></td>
+            <td>Height: 32px (120px width)</td>
+            <td>16px all sides (Height of 'B')</td>
+            <td>White, Cloud #F8FAFC, Slate #0F172A</td>
+            <td><span class="badge-pass">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Favicon & App Icon</strong></td>
+            <td>16 × 16 px (32px / 48px retina)</td>
+            <td>Edge-to-edge with 15% inner padding</td>
+            <td>Square with rounded radius</td>
+            <td><span class="badge-pass">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Social Media Post Watermark</strong></td>
+            <td>Height: 28px</td>
+            <td>24px from top/bottom borders</td>
+            <td>Single color white or navy</td>
+            <td><span class="badge-pass">Verified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Print / Physical Letterhead</strong></td>
+            <td>Height: 12 mm</td>
+            <td>8 mm margin perimeter</td>
+            <td>High-res CMYK Vector / 300 DPI</td>
+            <td><span class="badge-pass">Verified</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 03: Color Architecture -->
+    <section id="colors" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">03 · Palette Tokens</div>
+        <h2 class="section-title">Color System & Semantic Tokens</h2>
+        <p class="section-desc">
+          A high-contrast, professional palette with maximum readability. Click any token row to copy the exact Hex value to your clipboard.
+        </p>
+      </div>
+
+      <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: var(--slate-900);">Primary Brand System</h3>
+      <div class="grid-4" style="margin-bottom: 32px;">
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #06162F;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">BITS Deep Navy</div>
+            <div class="swatch-role">Primary Headings & Authority</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#06162F')">
+              <span>HEX: #06162F</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #2563EB;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">BITS Electric Blue</div>
+            <div class="swatch-role">Primary Action / Links</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#2563EB')">
+              <span>HEX: #2563EB</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #475569;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">Slate Steel</div>
+            <div class="swatch-role">Body Text & Meta Labels</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#475569')">
+              <span>HEX: #475569</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #F8FAFC; border-bottom: 1px solid #E2E8F0;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">Cloud White</div>
+            <div class="swatch-role">Surface & App Canvas</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#F8FAFC')">
+              <span>HEX: #F8FAFC</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 16px; font-size: 1.1rem; color: var(--slate-900);">Product & Engine Accents</h3>
+      <div class="grid-4">
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #7C3AED;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">BITSagent AI Violet</div>
+            <div class="swatch-role">Autonomous AI & Voice</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#7C3AED')">
+              <span>HEX: #7C3AED</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #059669;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">Accounting Emerald</div>
+            <div class="swatch-role">Financial ERP & Balances</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#059669')">
+              <span>HEX: #059669</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #0891B2;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">BITS Tap Cyan</div>
+            <div class="swatch-role">Smart NFC Identity Card</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#0891B2')">
+              <span>HEX: #0891B2</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-swatch-card">
+          <div class="swatch-fill" style="background: #D97706;"></div>
+          <div class="swatch-details">
+            <div class="swatch-name">Construction Amber</div>
+            <div class="swatch-role">Jobsite, Fleet & Inventory</div>
+            <div class="swatch-copy-row" onclick="copyToClipboard('#D97706')">
+              <span>HEX: #D97706</span>
+              <span>Copy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 04: Typography System -->
+    <section id="typography" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">04 · Type System</div>
+        <h2 class="section-title">Typography Hierarchy</h2>
+        <p class="section-desc">
+          Clean, modern sans-serif type pairing providing bold editorial authority for headlines and effortless legibility for dense operational dashboards.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 0 24px;">
+        <div class="type-specimen-row">
+          <div class="type-meta">
+            <strong>Display / Hero H1</strong>
+            <span>font-extrabold · 48-60px</span>
+            <span>leading: 1.1 · -0.03em</span>
+          </div>
+          <div style="font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;">
+            Stop wrestling with generic SaaS.
+          </div>
+        </div>
+
+        <div class="type-specimen-row">
+          <div class="type-meta">
+            <strong>Section Heading H2</strong>
+            <span>font-bold · 32-40px</span>
+            <span>leading: 1.2 · -0.02em</span>
+          </div>
+          <div style="font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em;">
+            Technology Sized to Your Operation
+          </div>
+        </div>
+
+        <div class="type-specimen-row">
+          <div class="type-meta">
+            <strong>Lead Body / Subtitle</strong>
+            <span>font-medium · 18-20px</span>
+            <span>leading: 1.6 · text-slate-600</span>
+          </div>
+          <div style="font-size: 1.15rem; color: var(--slate-600); line-height: 1.6; max-width: 60ch;">
+            Eliminate disconnected spreadsheets and rigid SaaS. BITS engineers custom enterprise software, collections CRM, and compliance ERP tailored to your real workflows.
+          </div>
+        </div>
+
+        <div class="type-specimen-row">
+          <div class="type-meta">
+            <strong>Technical Data / Metric</strong>
+            <span>JetBrains Mono · 14-16px</span>
+            <span>font-bold · tracking-wide</span>
+          </div>
+          <div class="font-mono" style="font-size: 1.1rem; font-weight: 700; color: var(--bits-blue-600);">
+            3.2x Right-Party Connect · 99.9% Telephony SLA · &lt;300ms Turn Latency
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 05: Product Architecture (All 18 Engines) -->
+    <section id="products" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">05 · Portfolio Architecture</div>
+        <h2 class="section-title">Complete 18-Product Suite Showcase</h2>
+        <p class="section-desc">
+          BITS operates as a modular operational ecosystem. Each engine can function standalone or interconnect seamlessly with unified identity, RBAC, and telephony.
+        </p>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+
+        <!-- 1. BITScrm Customer Service -->
+        <div class="product-card" data-category="flagship">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-flagship">Primary Flagship</span>
+            <h3 class="product-title">BITScrm Customer Service</h3>
+            <div class="product-tagline">High-Velocity Collections & Omnichannel Resolution</div>
+            <p class="product-desc">
+              The mission-critical operations core for BPOs, debt collection agencies, and banks. Unifies delinquent account staging, queue distribution, WebRTC auto-dialing, and supervisor QA HUD.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Dynamic Debtor & Account Staging Queues</li>
+              <li>Built-in WebRTC Softphone with AMD Detection</li>
+              <li>Automated Promise-to-Pay (PTP) Scheduling</li>
+              <li>BSP Circulars 454 & 857 Compliance Rules</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">3.2x RPC Boost</span>
+            <a href="/bitscrm" class="product-link">Explore Platform →</a>
+          </div>
+        </div>
+
+        <!-- 2. BITSagent AI Operations -->
+        <div class="product-card" data-category="flagship">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-ai">Autonomous AI</span>
+            <h3 class="product-title">BITSagent AI Operations</h3>
+            <div class="product-tagline">Conversational Voice & Email AI Agents</div>
+            <p class="product-desc">
+              Sub-300ms ultra-realistic conversational voice and email agents that autonomously negotiate payment arrangements, answer inquiries, and resolve tier-1 workflows with enterprise RAG.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Conversational Voice AI (&lt; 300ms Turn Latency)</li>
+              <li>Autonomous Multi-Turn Terms Negotiation</li>
+              <li>Omnichannel Email & SMS Payment Intake</li>
+              <li>Instant Warm Transfer to Live Human Agent</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">68% Auto-Resolution</span>
+            <a href="/bitsagent" class="product-link">Explore BITSagent →</a>
+          </div>
+        </div>
+
+        <!-- 3. BITScrm Sales Enterprise -->
+        <div class="product-card" data-category="crm">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-flagship">Revenue Suite</span>
+            <h3 class="product-title">BITScrm Sales Enterprise</h3>
+            <div class="product-tagline">High-Velocity Revenue Pipeline & Deal Intelligence</div>
+            <p class="product-desc">
+              Purpose-built for institutional sales, loan origination, and B2B deal closers. Combines visual Kanban stages, AI win scoring, territory routing, and CPQ quote-to-cash workflows.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Visual Multi-Stage Deal Pipeline Kanban</li>
+              <li>Predictive AI Lead Scoring & Win Probability</li>
+              <li>CPQ (Configure, Price, Quote) Generator</li>
+              <li>Two-Way Email & Calendar Activity Sync</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">+38% Pipeline Speed</span>
+            <a href="/products/sales" class="product-link">Explore Sales →</a>
+          </div>
+        </div>
+
+        <!-- 4. BITScrm Marketing Cloud -->
+        <div class="product-card" data-category="crm">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-flagship">Audience Journeys</span>
+            <h3 class="product-title">BITScrm Marketing Cloud</h3>
+            <div class="product-tagline">Omnichannel Customer Journeys & Audience Automation</div>
+            <p class="product-desc">
+              Orchestrate multi-touch acquisition, customer onboarding, and debtor re-engagement drips across email, SMS, and webhooks with closed-loop attribution analytics.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Visual Multi-Branch Journey Builder</li>
+              <li>Dynamic Audience Segmentation & Behavioral Tags</li>
+              <li>Automated SMS & Email Drip Sequences</li>
+              <li>NPC RA 10173 & TCPA Opt-Out Compliance</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">4.5x Engagement</span>
+            <a href="/products/marketing" class="product-link">Explore Marketing →</a>
+          </div>
+        </div>
+
+        <!-- 5. BITScrm Digital Commerce -->
+        <div class="product-card" data-category="crm">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-flagship">Revenue Operations</span>
+            <h3 class="product-title">BITScrm Digital Commerce</h3>
+            <div class="product-tagline">Subscription Billing, Portal & Payment Gateway</div>
+            <p class="product-desc">
+              Seamlessly handles online debtor repayment portals, recurring subscription billing, payment settlement reconciliation (GCash, Maya, cards), and digital invoices.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Self-Service Debtor & Customer Portal</li>
+              <li>Multi-Rail Payments (GCash, Maya, Cards, QR Ph)</li>
+              <li>Automated Dunning & Involuntary Churn Recovery</li>
+              <li>PCI-DSS Level 1 Encryption & Receipts</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">99.8% Billing SLA</span>
+            <a href="/products/commerce" class="product-link">Explore Commerce →</a>
+          </div>
+        </div>
+
+        <!-- 6. BITS Accounting & Financial ERP -->
+        <div class="product-card" data-category="finance">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-finance">SAP-Grade Core</span>
+            <h3 class="product-title">BITS Accounting & ERP</h3>
+            <div class="product-tagline">General Ledger, Multi-Entity Consolidation & Tax</div>
+            <p class="product-desc">
+              Enterprise financial core designed for holding companies and fast-scaling organizations. Features double-entry general ledger, 3-way AP/AR matching, and BIR CAS compliance.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Multi-Currency & Intercompany Eliminations</li>
+              <li>Automated Bank Feeds & Payment Reconciliations</li>
+              <li>BIR CAS & Audit Trail Generation</li>
+              <li>Real-Time Balance Sheet & P&L Cockpits</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">100% Tax Compliant</span>
+            <a href="/products/accounting" class="product-link">Explore Accounting →</a>
+          </div>
+        </div>
+
+        <!-- 7. BITS HRMS & Payroll -->
+        <div class="product-card" data-category="finance">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-finance">Workforce Suite</span>
+            <h3 class="product-title">BITS HRMS & Payroll</h3>
+            <div class="product-tagline">24/7 BPO Rostering, Statutory Deductions & Biometrics</div>
+            <p class="product-desc">
+              Engineered for Philippine 24/7 shifts and large-scale enterprises. Calculates SSS, PhilHealth, Pag-IBIG, night differentials, and holiday pay with direct bank disbursements.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Biometric Device Hardware Sync (ZKTeco / Face)</li>
+              <li>Automated TRAIN Law Tax Bracket Computations</li>
+              <li>Multi-Shift Scheduling, Overtime & Leave HUD</li>
+              <li>Direct Bank PESONet & InstaPay Batch Feeds</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">&lt; 10 Mins Payroll</span>
+            <a href="/products/hrms" class="product-link">Explore HRMS →</a>
+          </div>
+        </div>
+
+        <!-- 8. BITS Construction & Field Logistics -->
+        <div class="product-card" data-category="operations">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-operations">Field Operations</span>
+            <h3 class="product-title">BITS Construction & Field Ops</h3>
+            <div class="product-tagline">Jobsite Milestones, Equipment GPS & Materials Sync</div>
+            <p class="product-desc">
+              Bridges headquarters and the field. Real-time project jobsite tracking, subcontractor requisition approval, inventory consumption tracking, and heavy fleet GPS dispatch.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Daily Jobsite Manpower & Progress Logs</li>
+              <li>Materials Requisition with 3-Level Signoff</li>
+              <li>Fleet GPS Telematics & Fuel Maintenance Logs</li>
+              <li>Interconnect with BITS Payroll for Onsite Crews</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">-22% Waste Cost</span>
+            <a href="/products/construction" class="product-link">Explore Field Ops →</a>
+          </div>
+        </div>
+
+        <!-- 9. BITS Tap™ Smart NFC Business Card -->
+        <div class="product-card" data-category="universal">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-hardware">Hardware & Identity</span>
+            <h3 class="product-title">BITS Tap™ NFC Smart Card</h3>
+            <div class="product-tagline">1 Card for Life · Dynamic Identity & Digital Exchange</div>
+            <p class="product-desc">
+              Tap any smartphone to instantly share contact profiles, portfolio decks, payment links, or employee badges. Managed centrally with enterprise directory sync and analytics.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Matte Black Executive Steel / PVC Finishes</li>
+              <li>Dynamic Cloud Profile (Update Without Re-Printing)</li>
+              <li>Corporate Fleet Portal (Auto-Revoke on Resignation)</li>
+              <li>Direct Contact Card (.vcf) Download to iOS & Android</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">Zero Monthly Fees</span>
+            <a href="/products/nfc-card" class="product-link">Explore BITS Tap →</a>
+          </div>
+        </div>
+
+        <!-- 10. BITS White-Label Reseller Platform -->
+        <div class="product-card" data-category="universal">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-general">Brand Autonomy</span>
+            <h3 class="product-title">BITS White-Label Platform</h3>
+            <div class="product-tagline">Rebrand Any BITS Engine Under Your Custom Identity</div>
+            <p class="product-desc">
+              Empowers agencies, consultants, and enterprise franchisees to deploy BITScrm, HRMS, or ERP under their own custom domain, logo, and brand color palette with zero BITS attribution.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Custom Apex Domain & Automated SSL Provisioning</li>
+              <li>Custom CSS Theme Tokens & Brand Accent Colors</li>
+              <li>Custom Outbound SMTP & SMS Sender ID Routing</li>
+              <li>Dedicated Multi-Tenant Master Admin Console</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">100% Whitelabel</span>
+            <a href="/products/white-label" class="product-link">Explore Reseller →</a>
+          </div>
+        </div>
+
+        <!-- 11. BITS Enterprise RAG Knowledge Base -->
+        <div class="product-card" data-category="universal">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-ai">Universal AI Layer</span>
+            <h3 class="product-title">BITS Enterprise RAG</h3>
+            <div class="product-tagline">Ground AI Agents & CRM in Proprietary Business Knowledge</div>
+            <p class="product-desc">
+              Secure vector index that ingests internal PDF contracts, operational SOPs, underwriting rules, and customer notes to ground BITSagent AI and human representatives in 100% factual data.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Deterministic Grounding (Zero Hallucinations)</li>
+              <li>Document Chunking & Hybrid Dense/Sparse Search</li>
+              <li>Role-Based Access Filtering on Retrieved Chunks</li>
+              <li>Plug-and-Play API for External Workflows</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">0% Hallucinations</span>
+            <a href="/products/rag-engine" class="product-link">Explore RAG →</a>
+          </div>
+        </div>
+
+        <!-- 12. BITS AI Sports Scoring & Motion Analysis -->
+        <div class="product-card" data-category="vertical">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-ai">Computer Vision</span>
+            <h3 class="product-title">BITS AI Sports Scoring</h3>
+            <div class="product-tagline">Automatic Scoring, Player Stats & Highlight Generation</div>
+            <p class="product-desc">
+              Upload raw smartphone or court-camera video. Computer vision automatically detects ball trajectory, player actions, calculates box scores, and generates shareable highlight reels.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Sub-Second Motion Tracking & Ball Vectoring</li>
+              <li>Automated Box Score & Shot Chart Production</li>
+              <li>AI Social Media Highlight Clipper & Replay Reels</li>
+              <li>Mobile-First Player Profiles & Leaderboards</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">Sub-Second CV</span>
+            <a href="/products/sports-ai" class="product-link">Explore Sports AI →</a>
+          </div>
+        </div>
+
+        <!-- 13. BITS Sports Arena & Queuing Hub -->
+        <div class="product-card" data-category="operations">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-operations">Venues & Retail</span>
+            <h3 class="product-title">BITS Sports Arena & Queuing Hub</h3>
+            <div class="product-tagline">Court Queuing, TV Display HUD & Virtual Ticketing</div>
+            <p class="product-desc">
+              Solves recreational court bottlenecks (badminton, basketball, pickleball). Players join queue via mobile QR code, live order appears on big TV screens, and fees settle digitally.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Digital Court Queue Scheduling & Timer Displays</li>
+              <li>Smart TV Billboard Fullscreen HDMI Mode</li>
+              <li>Cashless Court Rental & Snack Concession POS</li>
+              <li>Automated Tournament Bracket Management</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">Zero Queue Clutter</span>
+            <a href="/products/sports-hub" class="product-link">Explore Arena Hub →</a>
+          </div>
+        </div>
+
+        <!-- 14. BITS Real Estate & Property CRM -->
+        <div class="product-card" data-category="vertical">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-flagship">Property Core</span>
+            <h3 class="product-title">BITS Real Estate & Property OS</h3>
+            <div class="product-tagline">Unit Inventory, Broker Commission & Lease Workflows</div>
+            <p class="product-desc">
+              Engineered for property developers, condo managers, and brokerage firms. Tracks unit availability, contract-to-sell milestones, broker commission tiers, and maintenance tickets.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Visual Floorplan & Unit Staging Matrix</li>
+              <li>Broker Commission Tier Calculations</li>
+              <li>Automated PDC & Lease Contract Expiry Reminders</li>
+              <li>Tenant Portal for Maintenance & Statements</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">100% Lease Tracking</span>
+            <a href="/products/real-estate" class="product-link">Explore Property →</a>
+          </div>
+        </div>
+
+        <!-- 15. BITS Healthcare & Clinical Practice OS -->
+        <div class="product-card" data-category="vertical">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-general">Clinical Suite</span>
+            <h3 class="product-title">BITS Healthcare & Clinic OS</h3>
+            <div class="product-tagline">Electronic Health Records (EHR), Appointments & HMO</div>
+            <p class="product-desc">
+              HIPAA & DPA-aligned clinical management system. Streamlines doctor queue scheduling, encrypted patient history, digital prescriptions, and HMO claim reconciliation.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Encrypted Electronic Medical Records (EMR)</li>
+              <li>HMO Guarantee Letter & Claim Reconciliation</li>
+              <li>SMS Patient Appointment Reminders & Teleconsult</li>
+              <li>Integrated Clinic Inventory & Pharmacy POS</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">DPA/HIPAA Compliant</span>
+            <a href="/products/healthcare" class="product-link">Explore Healthcare →</a>
+          </div>
+        </div>
+
+        <!-- 16. BITS Automotive & Dealership Operations -->
+        <div class="product-card" data-category="operations">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-operations">Dealership OS</span>
+            <h3 class="product-title">BITS Automotive Operations</h3>
+            <div class="product-tagline">Vehicle Inventory, Service Bay Tracking & Parts POS</div>
+            <p class="product-desc">
+              Comprehensive dealer management system. Manages showroom test drives, vehicle allocation by VIN, job-order tracking across service bays, and spare parts replenishment.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Showroom Walk-in & Test Drive Routing</li>
+              <li>Service Bay Job Card & Mechanic Timesheets</li>
+              <li>VIN Number History & Warranty Tracking</li>
+              <li>Automated 5,000km Maintenance Reminders</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">+40% Bay Throughput</span>
+            <a href="/products/automotive" class="product-link">Explore Automotive →</a>
+          </div>
+        </div>
+
+        <!-- 17. BITS Education & SIS -->
+        <div class="product-card" data-category="vertical">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-general">Academic Suite</span>
+            <h3 class="product-title">BITS Education & SIS</h3>
+            <div class="product-tagline">Enrollment, Grade Management & Tuition Billing</div>
+            <p class="product-desc">
+              Digital student information system for private academies and colleges. Coordinates online admissions, section scheduling, teacher grading portals, and tuition payment tracking.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Online Student Enrollment & Document Intake</li>
+              <li>DepEd / CHED Format Report Card & Form 137</li>
+              <li>Tuition Installment Payment Ledger & SMS Alerts</li>
+              <li>Parent & Student Portal with Grade Visibility</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">100% Digital Records</span>
+            <a href="/products/education" class="product-link">Explore Education →</a>
+          </div>
+        </div>
+
+        <!-- 18. BITS Legal & Practice Management Core -->
+        <div class="product-card" data-category="vertical">
+          <div class="product-card-top">
+            <span class="product-header-badge badge-general">Legal Core</span>
+            <h3 class="product-title">BITS Legal Practice Core</h3>
+            <div class="product-tagline">Case Dockets, Court Calendaring & Billable Hours</div>
+            <p class="product-desc">
+              Secure practice management system for litigation and corporate law firms. Organizes pleadings, court hearing deadlines, conflict-of-interest checks, and trust retainer accounts.
+            </p>
+            <ul class="product-capabilities-list">
+              <li>Case Docket Number & Pleadings Archive</li>
+              <li>Court Appearance Calendar & Hearing Alarms</li>
+              <li>Timer-Based Billable Hours & Trust Accounting</li>
+              <li>Privileged Attorney-Client RBAC Data Barriers</li>
+            </ul>
+          </div>
+          <div class="product-card-footer">
+            <span class="product-metric-pill">Tamper-Proof Audit</span>
+            <a href="/products/legal" class="product-link">Explore Legal →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 06: Social Media & Posting Guidelines (Socia.ph style) -->
+    <section id="social" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">06 · Social Media & Advertising</div>
+        <h2 class="section-title">High-Converting Social Media Templates</h2>
+        <p class="section-desc">
+          Inspired by Socia.ph and Monday.com social layouts: every post must have a bold benefit headline, a visual comparison (manual vs automated), a verifiable metric, and a direct pill CTA.
+        </p>
+      </div>
+
+      <div class="social-template-grid">
+        <!-- Template 1: The Automation Split Comparison -->
+        <div class="mock-post-card">
+          <div class="mock-post-canvas">
+            <div class="mock-post-header">
+              <div class="mock-logo">BITS<span>.</span></div>
+              <span class="badge-pass font-mono" style="font-size: 0.72rem;">BSP & NPC Aligned</span>
+            </div>
+
+            <div>
+              <h4 class="mock-post-headline">
+                Automate Smarter.<br />Scale Faster.
+              </h4>
+              <p class="mock-post-subhead">
+                Turn manual spreadsheet headaches into high-velocity automated systems.
+              </p>
+
+              <!-- Socia.ph style split element -->
+              <div class="mock-split-slider">
+                <span class="mock-split-left">Manual Order Taking</span>
+                <span class="mock-split-right">
+                  <span>✓</span> Sales & CRM 100%
+                </span>
+              </div>
+              <div class="mock-split-slider" style="margin-bottom: 0;">
+                <span class="mock-split-left">Spreadsheet Payroll</span>
+                <span class="mock-split-right">
+                  <span>✓</span> BITS HRMS Core
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <div class="mock-post-cta">BUILD YOUR SYSTEM TODAY →</div>
+              <div class="mock-post-footer-url">www.boundlessits.com</div>
+            </div>
+          </div>
+          <div class="mock-post-meta">
+            <h4>Format A · Comparison Post (1:1 / 4:5)</h4>
+            <p>Ideal for LinkedIn and Instagram. Contrasts legacy friction with BITS automated workflows.</p>
+          </div>
+        </div>
+
+        <!-- Template 2: The Operational Stat & Authority Post -->
+        <div class="mock-post-card">
+          <div class="mock-post-canvas" style="background: linear-gradient(135deg, #06162F 0%, #0F2A59 100%); color: var(--white);">
+            <div class="mock-post-header">
+              <div class="mock-logo" style="color: #FFFFFF;">BITS<span>.</span></div>
+              <span class="badge-flagship font-mono" style="font-size: 0.72rem; background: rgba(37,99,235,0.3); color: #93C5FD; border-color: rgba(147,197,253,0.3);">
+                BITScrm Flagship
+              </span>
+            </div>
+
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 800; color: #60A5FA; line-height: 1;">
+                3.2x Boost
+              </div>
+              <h4 class="mock-post-headline" style="color: #FFFFFF; font-size: 1.5rem; margin-top: 8px;">
+                Higher Right-Party Connect Rates.
+              </h4>
+              <p class="mock-post-subhead" style="color: #94A3B8;">
+                Built-in WebRTC predictive softphone with AMD answering machine detection. Zero dead air.
+              </p>
+            </div>
+
+            <div>
+              <div class="mock-post-cta" style="background: #2563EB;">BOOK AN OPERATIONAL SCOPING →</div>
+              <div class="mock-post-footer-url" style="color: #64748B;">www.boundlessits.com/bitscrm</div>
+            </div>
+          </div>
+          <div class="mock-post-meta">
+            <h4>Format B · Authority & KPI Spotlight (1:1)</h4>
+            <p>Designed for BPO directors, lenders, and debt collection executives.</p>
+          </div>
+        </div>
+
+        <!-- Template 3: The Monday.com Style Persona Matrix -->
+        <div class="mock-post-card">
+          <div class="mock-post-canvas">
+            <div class="mock-post-header">
+              <div class="mock-logo">BITS<span>.</span></div>
+              <span class="badge-ai font-mono" style="font-size: 0.72rem;">Sub-300ms AI</span>
+            </div>
+
+            <div>
+              <h4 class="mock-post-headline" style="font-size: 1.6rem;">
+                People and AI working as one team.
+              </h4>
+              <p class="mock-post-subhead">
+                Autonomous voice agents for tier-1 negotiation, seamless warm transfer to live human supervisors.
+              </p>
+
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;">
+                <span style="background: #EFF6FF; color: #1D4ED8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 9999px;">✓ Collections</span>
+                <span style="background: #F1F5F9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 9999px;">Customer Care</span>
+                <span style="background: #F1F5F9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 9999px;">Surveys</span>
+                <span style="background: #F1F5F9; color: #475569; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 9999px;">Verification</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="mock-post-cta">EXPLORE BITSAGENT AI →</div>
+              <div class="mock-post-footer-url">www.boundlessits.com/bitsagent</div>
+            </div>
+          </div>
+          <div class="mock-post-meta">
+            <h4>Format C · Multi-Pillar Showcase (4:5 / Story)</h4>
+            <p>Highlights operational harmony between human agents and autonomous AI operations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Media Copy Best Practices -->
+      <div class="card" style="margin-top: 32px;">
+        <h3 style="margin-bottom: 12px; font-size: 1.15rem;">Social Media Copywriting Rules</h3>
+        <div class="grid-2">
+          <div>
+            <h4 style="font-size: 0.95rem; color: #15803D; margin-bottom: 8px;">✓ Approved Copy Formula</h4>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: var(--slate-700);">
+              <li><strong>1. Lead with the Floor Problem:</strong> "Your agents are spending 45% of shift time dialing dead numbers."</li>
+              <li><strong>2. Present the Engineering Fix:</strong> "BITScrm automates queue routing and filters answering machines in under 300ms."</li>
+              <li><strong>3. Show Concrete Evidence:</strong> "Result: 3.2x higher Right-Party Connect rates without adding seats."</li>
+              <li><strong>4. Clean Direct CTA:</strong> "Request architecture consultation at boundlessits.com"</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; color: #B91C1C; margin-bottom: 8px;">✗ Banned Copy Clichés</h4>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: var(--slate-700);">
+              <li><strong>No Vague Hype:</strong> Never say "revolutionize your business", "supercharge your synergy", or "unleash AI magic".</li>
+              <li><strong>No Emoji Spam:</strong> Ban emoji overload (🚀🔥💥🤖). Keep posts clean and corporate.</li>
+              <li><strong>No Fake Guarantees:</strong> Never promise "100% debt recovery guaranteed" or legal advice.</li>
+              <li><strong>No Dark Gimmicks:</strong> No generic purple AI neon glows or misleading screenshots.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 07: Website & Digital UI Guidelines -->
+    <section id="website-ui" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">07 · Digital Standards</div>
+        <h2 class="section-title">Website & UI Component Rules</h2>
+        <p class="section-desc">
+          Strict front-end standards ensuring tactile micro-interactions, responsive mobile stability, and WCAG accessibility across all web touchpoints.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Buttons & Targets</h3>
+          <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 16px;">
+            Touch targets must always be at least <strong>44 × 44 px</strong>. Primary buttons use rounded-full pill shape with electric blue fill.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn btn-primary" style="width: 100%;">Primary Action Button</button>
+            <button class="btn btn-secondary" style="width: 100%;">Secondary Ghost Button</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Form & Inputs</h3>
+          <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 14px;">
+            Labels sit strictly above inputs. Form text inputs must be at least <strong>16px</strong> to prevent automatic iOS Safari viewport zoom.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 0.82rem; font-weight: 700; color: var(--slate-700);">Work Email Address</label>
+            <input type="email" placeholder="name@company.com" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--slate-300); font-size: 16px;" readonly />
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px;">Cards & Materiality</h3>
+          <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 14px;">
+            Use light mode only. Standardize borders to <code>1px solid rgba(226, 232, 240, 0.9)</code> with 16-24px border radius.
+          </p>
+          <div style="padding: 12px; background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 12px; font-size: 0.82rem; color: var(--slate-600);">
+            ✓ Subtle shadow-xs elevation<br />
+            ✓ 0% dark surface neon glows<br />
+            ✓ No redundant cards-in-cards
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 08: Tone of Voice & Messaging Matrix -->
+    <section id="voice" class="section-wrap">
+      <div class="section-head">
+        <div class="section-badge">08 · Messaging Matrix</div>
+        <h2 class="section-title">Brand Tone & Communication Rules</h2>
+        <p class="section-desc">
+          How BITS speaks across pitch decks, product docs, marketing landing pages, customer support, and sales outreach.
+        </p>
+      </div>
+
+      <table class="tone-table">
+        <thead>
+          <tr>
+            <th>Context / Dimension</th>
+            <th>Instead of Saying (Legacy / Fluff)</th>
+            <th>Say This (The BITS Way)</th>
+            <th>Strategic Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Software Sizing</strong></td>
+            <td>"We have a generic CRM for everyone."</td>
+            <td><strong>"Custom operational software engineered around your actual business workflows."</strong></td>
+            <td>Positions BITS as an engineering partner, not a rigid off-the-shelf vendor.</td>
+          </tr>
+          <tr>
+            <td><strong>Voice AI Operations</strong></td>
+            <td>"Our AI chatbot replaces your staff."</td>
+            <td><strong>"Autonomous voice and multichannel agents that negotiate payment arrangements with sub-300ms turn latency."</strong></td>
+            <td>Focuses on concrete performance, latency, and operational augmentation.</td>
+          </tr>
+          <tr>
+            <td><strong>Data Sovereignty</strong></td>
+            <td>"Your data is somewhere in the cloud."</td>
+            <td><strong>"Deploy in our managed secure cloud or on sovereign on-premises bare-metal servers."</strong></td>
+            <td>Crucial for Philippine banks, BSP compliance, and data privacy officers.</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing Model</strong></td>
+            <td>"Contact sales for customized quote (hidden fees)."</td>
+            <td><strong>"Transparent indicative tiers starting at ₱28,500/mo ($495) with continuous updates and zero PBX lock-in."</strong></td>
+            <td>Builds immediate trust and removes procurement friction.</td>
+          </tr>
+          <tr>
+            <td><strong>Hardware (BITS Tap)</strong></td>
+            <td>"Digital business card gizmo."</td>
+            <td><strong>"BITS Tap™ 1 Card for Life: Enterprise dynamic identity and contactless exchange with fleet admin directory."</strong></td>
+            <td>Positions the hardware as a high-end corporate asset with central IT controls.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 09: Asset Downloads & Kit -->
+    <section id="assets" class="section-wrap" style="border-bottom: none;">
+      <div class="section-head">
+        <div class="section-badge">09 · Download Kit</div>
+        <h2 class="section-title">Official Brand Assets & Package Downloads</h2>
+        <p class="section-desc">
+          Download high-resolution vector and PNG assets for website implementation, partner decks, marketing collateral, and social media postings.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Horizontal Primary Logo</h3>
+          <p style="font-size: 0.86rem; color: var(--slate-600); margin-bottom: 16px;">
+            Full color lockup for websites, decks, proposals, and light backgrounds.
+          </p>
+          <a href="/brand/logo-horizontal.png" download="BITS-Logo-Horizontal.png" class="btn btn-secondary" style="width: 100%;">
+            Download PNG (296 KB) ↓
+          </a>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">White Reverse Logo</h3>
+          <p style="font-size: 0.86rem; color: var(--slate-600); margin-bottom: 16px;">
+            Crisp reverse white lockup for dark navy hero bars and physical merchandise.
+          </p>
+          <a href="/brand/logo-white.png" download="BITS-Logo-White.png" class="btn btn-secondary" style="width: 100%;">
+            Download PNG (242 KB) ↓
+          </a>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Icon Mark & Tile</h3>
+          <p style="font-size: 0.86rem; color: var(--slate-600); margin-bottom: 16px;">
+            High-res square tile for app icons, favicons, social avatars, and watermarks.
+          </p>
+          <a href="/brand/mark.png" download="BITS-Mark.png" class="btn btn-secondary" style="width: 100%;">
+            Download PNG (185 KB) ↓
+          </a>
+        </div>
+      </div>
+
+      <!-- PDF Export Banner -->
+      <div class="card" style="margin-top: 32px; background: linear-gradient(135deg, var(--bits-navy-900) 0%, #0F2A59 100%); color: var(--white); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+        <div>
+          <h3 style="color: #FFFFFF; font-size: 1.4rem; margin-bottom: 6px;">Need this brandbook in PDF format?</h3>
+          <p style="color: #94A3B8; font-size: 0.95rem; max-width: 580px;">
+            This document is built with native print-optimized media queries. Press the export button to generate an executive-ready brand guideline PDF deck.
+          </p>
+        </div>
+        <button class="btn btn-primary" onclick="window.print()" style="background: var(--bits-blue-600);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+          Export Brandbook PDF
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="copyToast" class="toast">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+    <span id="toastMsg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    // Copy to clipboard with toast notification
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied: ' + text);
+      }).catch(() => {
+        showToast('Value copied');
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('copyToast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
+    // Logo Background Switcher
+    function changeLogoBg(btn, bgClass, imgSrc) {
+      const preview = document.getElementById('mainLogoPreview');
+      const img = document.getElementById('mainLogoImg');
+      preview.className = 'logo-preview-area ' + bgClass;
+      img.src = imgSrc;
+    }
+
+    // Monday.com Style Category Filter
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterPills = document.querySelectorAll('.cat-pill');
+      const productCards = document.querySelectorAll('.product-card');
+
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+
+          const filter = pill.getAttribute('data-filter');
+
+          productCards.forEach(card => {
+            const cat = card.getAttribute('data-category');
+            if (filter === 'all' || cat === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
