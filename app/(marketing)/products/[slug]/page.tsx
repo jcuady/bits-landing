@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-/* ── Domain-Specific Problem Statements ── */
+/* ── Domain-Specific Problem Statements for All 18 Products ── */
 function getProductProblems(product: (typeof bitsProducts)[number]) {
   switch (product.id) {
     case "accounting":
@@ -134,6 +134,204 @@ function getProductProblems(product: (typeof bitsProducts)[number]) {
           title: "Fragmented Employee Records",
           description:
             "Storing 201 files, performance evaluations, and disciplinary memos in separate shared folders violates Data Privacy Act (RA 10173) safeguards.",
+        },
+      ];
+    case "sales":
+      return [
+        {
+          title: "Lead Leakage & Unassigned Prospects",
+          description:
+            "Inbound leads go cold while sitting in shared inboxes or disorganized spreadsheets, resulting in missed deal windows and lost pipeline revenue.",
+        },
+        {
+          title: "Inaccurate Deal Forecasting",
+          description:
+            "Sales managers rely on subjective rep gut feelings instead of objective AI win-probability scoring, leading to missed quarterly revenue targets.",
+        },
+        {
+          title: "Slow CPQ Quote Generation",
+          description:
+            "Reps take days to compile custom proposals and discount approvals, stalling enterprise negotiations and losing deals to faster competitors.",
+        },
+      ];
+    case "marketing":
+      return [
+        {
+          title: "Disconnected Multi-Touch Attribution",
+          description:
+            "Marketing teams cannot see which campaigns, SMS blasts, or emails actually drive closed revenue, resulting in wasted ad spend and poor budget allocation.",
+        },
+        {
+          title: "Regulatory Consent & Unsubscribe Violations",
+          description:
+            "Manually tracking opt-ins across multiple channels risks severe Data Privacy Act fines and telecom carrier blacklisting for non-compliant messaging.",
+        },
+        {
+          title: "Generic, Unsegmented Blasts",
+          description:
+            "Sending one-size-fits-all emails and SMS notifications leads to high bounce rates, low engagement, and unsubscribes from qualified prospective buyers.",
+        },
+      ];
+    case "commerce":
+      return [
+        {
+          title: "High Churn From Failed Card Renewals",
+          description:
+            "Without intelligent automated dunning and smart card account updater mechanisms, recurring subscription revenue drops by 5% to 9% every month.",
+        },
+        {
+          title: "Manual Invoicing & Reconciliations",
+          description:
+            "Billing enterprise clients with custom usage meters or milestone deposits on spreadsheets creates cash collection delays and payment mismatches.",
+        },
+        {
+          title: "PCI-DSS Security Vulnerabilities",
+          description:
+            "Storing raw customer payment information on internal servers exposes organizations to catastrophic breach liabilities and regulatory shutdown.",
+        },
+      ];
+    case "construction":
+      return [
+        {
+          title: "Jobsite Material & Labor Cost Leakage",
+          description:
+            "Without real-time sync between field foreman logs and accounting, material theft and unaccounted overtime erode project gross margins by over 20%.",
+        },
+        {
+          title: "Outdated Blueprint & Punch List Versioning",
+          description:
+            "Subcontractors working off superseded CAD revisions cause rework, structural errors, inspection failures, and expensive project completion delays.",
+        },
+        {
+          title: "Disconnected Requisitions & Purchase Orders",
+          description:
+            "Waiting days for site requisitions to be verified against central warehouse stock halts field crews and delays critical concrete and steel milestones.",
+        },
+      ];
+    case "inventory":
+      return [
+        {
+          title: "Stockouts & Emergency Reorder Costs",
+          description:
+            "Relying on manual physical counts causes surprise stockouts of critical parts, halting fulfillment lines and forcing expensive rush shipping.",
+        },
+        {
+          title: "Shrinkage & Untracked Warehouse Loss",
+          description:
+            "Without serial, batch, and lot-level barcode scanning, items disappear between transfer trucks and secondary job sites with zero auditability.",
+        },
+        {
+          title: "Siloed Stock Across Multiple Locations",
+          description:
+            "Having no central visibility across distributed depots and satellite stores causes over-purchasing in one branch while another branch sits empty.",
+        },
+      ];
+    case "logistics":
+      return [
+        {
+          title: "Excess Fleet Mileage & Fuel Waste",
+          description:
+            "Dispatchers manually routing delivery vans waste 25% more fuel and road time than algorithmically optimized multi-stop sequence planning.",
+        },
+        {
+          title: "Lost Paper Proof-of-Delivery (ePOD)",
+          description:
+            "Disputes over damaged or unreceived cargo persist for weeks when drivers rely on signed paper slips instead of digital geofenced signature capture.",
+        },
+        {
+          title: "Zero Real-Time Fleet Visibility",
+          description:
+            "Dispatchers are blind to driver delays, traffic bottlenecks, and unauthorized vehicle stops without live telemetry and GPS geofence alerts.",
+        },
+      ];
+    case "sports-ai":
+      return [
+        {
+          title: "Hours Wasted on Manual Video Review",
+          description:
+            "Coaches spend 4 to 6 hours after every match scrubbing footage to manually clip plays, tally unforced errors, and track player court positions.",
+        },
+        {
+          title: "Subjective, Biased Player Evaluation",
+          description:
+            "Without computer vision tracking ball trajectory and shot speed, athlete development plans are based on guesswork rather than objective data.",
+        },
+        {
+          title: "High Production Costs for Match Analytics",
+          description:
+            "Traditional sports data setups require dedicated optical camera rigs costing tens of thousands of dollars, making high-end analytics inaccessible.",
+        },
+      ];
+    case "sports-hub":
+      return [
+        {
+          title: "Court Queue Squabbles & Walkouts",
+          description:
+            "Disorganized whiteboard queues and favoritism create friction among players waiting for courts, leading to bad reviews and lost court rental revenue.",
+        },
+        {
+          title: "Chaotic Manual Tournament Ladders",
+          description:
+            "Organizing single/double elimination brackets on paper slips causes scoring errors, delayed start times, and frustrated tournament participants.",
+        },
+        {
+          title: "Unmonitored Membership & Waiver Compliance",
+          description:
+            "Allowing non-members or unsigned athletes onto courts exposes venue owners to personal injury liabilities and unauthorized facility usage.",
+        },
+      ];
+    case "booking":
+      return [
+        {
+          title: "Double Bookings & Availability Clashes",
+          description:
+            "Managing reservation calendars across multiple staff members or third-party phone channels leads to embarrassing overbooking errors.",
+        },
+        {
+          title: "High No-Show Rates & Lost Deposits",
+          description:
+            "Without automated SMS/email reminders and tokenized deposit escrow, customers forget appointments, leaving slots unfillable at the last minute.",
+        },
+        {
+          title: "Disorganized Guest Folios & Check-in Queues",
+          description:
+            "Requiring guests to fill out manual paper check-in sheets causes lobby congestion and delays billing settlements at checkout.",
+        },
+      ];
+    case "queuing":
+      return [
+        {
+          title: "Overcrowded Waiting Lobbies & Walkouts",
+          description:
+            "Patients, shoppers, and visitors forced to stand in long physical lines experience high frustration, with over 30% abandoning service entirely.",
+        },
+        {
+          title: "Uneven Teller & Service Bay Workloads",
+          description:
+            "Without dynamic skill-based ticket routing, some staff are overwhelmed while other service windows sit idle with zero visibility.",
+        },
+        {
+          title: "Lack of Service-Level Bottleneck Data",
+          description:
+            "Branch managers have no verifiable logs indicating which service categories suffer the longest wait times or cause customer dissatisfaction.",
+        },
+      ];
+    case "rag-engine":
+      return [
+        {
+          title: "Costly AI Hallucinations on Company Policy",
+          description:
+            "Standard public LLMs guess answers when asked about complex proprietary SOPs, risking catastrophic errors in customer-facing operations.",
+        },
+        {
+          title: "Outdated Internal Knowledge Retrieval",
+          description:
+            "Employees spend 20% of their workday searching through disorganized Google Drive folders, stale Confluence wikis, and PDF manuals.",
+        },
+        {
+          title: "Uncontrolled Document Access Permissions",
+          description:
+            "Ingesting sensitive files into AI models without strict role-based document access (RBAC) risks exposing executive compensation and confidential IP.",
         },
       ];
     case "nfc-card":
@@ -195,6 +393,8 @@ function getProductProblems(product: (typeof bitsProducts)[number]) {
 
 /* ── Prompt-Mirror AEO FAQ Generator ── */
 function getProductFaqs(product: (typeof bitsProducts)[number]) {
+  const bespokeQuestion = getBespokeFaqQuestion(product.id, product.name);
+
   return [
     {
       q: `Can ${product.name} be deployed on-premises or in a private cloud?`,
@@ -203,6 +403,10 @@ function getProductFaqs(product: (typeof bitsProducts)[number]) {
     {
       q: `Does ${product.name} receive continuous security updates and improvements?`,
       a: `Yes. All BITS systems receive continuous security patches, vulnerability mitigations, and performance updates. Bespoke operational modifications, new integrations, or custom modules can be engineered upon request as your organization's workflows scale.`,
+    },
+    {
+      q: bespokeQuestion.q,
+      a: bespokeQuestion.a,
     },
     {
       q: `How does ${product.name} integrate with other BITS modules?`,
@@ -217,6 +421,56 @@ function getProductFaqs(product: (typeof bitsProducts)[number]) {
       a: `${product.name} is engineered to adhere to ${product.complianceBadges.join(", ")}, ensuring full compliance with local regulatory authorities and international enterprise security standards.`,
     },
   ];
+}
+
+function getBespokeFaqQuestion(id: string, name: string) {
+  switch (id) {
+    case "accounting":
+      return {
+        q: "Is BITS Accounting & ERP ready for BIR Computerized Accounting System (CAS) registration?",
+        a: "Yes. BITS Accounting & ERP produces audit-compliant general journals, sales books, purchase journals, and general ledgers structured to satisfy the documentary and system controls required for Bureau of Internal Revenue (BIR) CAS accreditation in the Philippines.",
+      };
+    case "payroll":
+      return {
+        q: "Does BITS Payroll support batch disbursement files for Philippine commercial banks?",
+        a: "Yes. BITS Payroll exports encrypted batch payment disbursement files formatted for BDO, BPI (BizLink), Metrobank, UnionBank, Security Bank, and RCBC, allowing one-click payroll clearance with zero manual account re-entry.",
+      };
+    case "hrms":
+      return {
+        q: "Can BITS HRMS connect with our existing biometric timekeeping hardware?",
+        a: "Yes. BITS HRMS integrates with industry-standard ZKTeco, Hikvision, and IP-based biometric facial recognition and fingerprint terminals, automatically pulling clock-in logs into agent timesheets in real time.",
+      };
+    case "nfc-card":
+      return {
+        q: "Does the person tapping my BITS Smart NFC Card need to install an app?",
+        a: "No. The recipient does not need any app. When they tap your card with their iPhone or Android device, their native browser opens your digital bio profile instantly, allowing them to download your .vCard with one tap.",
+      };
+    case "white-label":
+      return {
+        q: "Can we sell white-labeled BITS engines to our clients at our own custom pricing?",
+        a: "Yes. Under our White Label Reseller agreement, you set your own retail seat prices, monthly retainers, or setup fees. BITS charges you a wholesale infrastructure rate while you retain 100% of your client margins.",
+      };
+    case "sales":
+      return {
+        q: "Does BITS Sales CRM include automated CPQ quoting and deal pipeline forecasting?",
+        a: "Yes. BITScrm Sales features visual drag-and-drop Kanban deal boards, automated territory routing, AI win-probability scoring, and a full Configure, Price, Quote (CPQ) document generator that outputs branded PDF proposals.",
+      };
+    case "logistics":
+      return {
+        q: "Does the BITS Logistics driver mobile app work offline in areas with poor cellular coverage?",
+        a: "Yes. The driver mobile app caches route itineraries and delivery manifests offline. Signatures, photos, and electronic proof of delivery (ePOD) timestamps sync automatically once connectivity is restored.",
+      };
+    case "sports-ai":
+      return {
+        q: "What camera or smartphone equipment is required to use BITS AI Sports Scoring?",
+        a: "Any standard smartphone (iPhone or Android), GoPro, or high-definition camera placed on a tripod with a clear view of the court can be used. Our computer vision engine ingests standard MP4/MOV footage and extracts match metrics in under 90 seconds.",
+      };
+    default:
+      return {
+        q: `How long does an operational onboarding rollout take for ${name}?`,
+        a: `Standard scoped rollouts take between 1 to 3 weeks depending on historical data migration complexity, integration touchpoints, and custom workflow rules. We handle initial data import, schema configuration, and staff training.`,
+      };
+  }
 }
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {

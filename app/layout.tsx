@@ -12,29 +12,38 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BITS — Technology Built Around Your Business",
+    default: "BITS — Enterprise Operations Software, Collections CRM & AI Infrastructure (Philippines)",
     template: "%s | BITS - Boundless IT Solutions",
   },
   description:
-    "BITS (Boundless IT Solutions) builds business-specific software, workflow automation, CRM, AI-assisted operations, and digital infrastructure for BPOs, collection agencies, banks, and operations with complex workflows.",
+    "Eliminate disconnected spreadsheets and rigid SaaS. BITS engineers custom enterprise software, collections CRM, autonomous voice AI, and compliance-ready ERP tailored to your real workflows. Deployed on managed cloud or sovereign on-prem.",
   keywords: [
     "BITS",
     "Boundless IT Solutions",
+    "enterprise operations software Philippines",
     "business-specific software",
     "operational technology",
-    "collections CRM",
+    "collections CRM software",
     "BITScrm",
     "BITSagent",
     "AI voice agents",
-    "workflow automation",
+    "debt collection software Philippines",
     "BPO software platform",
-    "debt collection software",
     "banking operational infrastructure",
     "predictive dialer CRM",
     "supervisory call monitoring",
+    "Philippine payroll TRAIN law compliance",
     "custom enterprise software",
+    "white label enterprise SaaS platform",
   ],
   alternates: { canonical: "/" },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google-site-verification-placeholder",
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    other: {
+      "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
+    },
+  },
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png", sizes: "512x512" },
@@ -49,16 +58,16 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.legalName,
-    title: "BITS — Technology Built Around Your Business",
+    title: "BITS — Enterprise Operations Software, Collections CRM & AI Infrastructure",
     description:
-      "Custom software, CRM, workflow automation, AI operations, and digital infrastructure designed around how your organization actually works.",
+      "Eliminate disconnected spreadsheets and rigid SaaS. BITS engineers custom enterprise software, collections CRM, autonomous voice AI, and compliance-ready ERP tailored to your real workflows.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Enterprise Technology Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITS — Technology Built Around Your Business",
+    title: "BITS — Enterprise Operations Software, Collections CRM & AI Infrastructure",
     description:
-      "Custom software, CRM, workflow automation, AI operations, and digital infrastructure designed around how your organization actually works.",
+      "Eliminate disconnected spreadsheets and rigid SaaS. BITS engineers custom enterprise software, collections CRM, autonomous voice AI, and compliance-ready ERP tailored to your real workflows.",
     images: ["/og.png"],
   },
 };
