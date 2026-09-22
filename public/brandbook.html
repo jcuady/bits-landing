@@ -588,11 +588,46 @@
       }
     }
 
-    /* Responsive scaling for laptops */
+    /* Responsive scaling for laptops, tablets and mobile */
     @media (max-width: 1480px) {
       .slide {
         max-width: 94vw;
         padding: 40px 48px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .slide {
+        aspect-ratio: auto;
+        min-height: auto;
+        height: auto;
+        padding: 36px 32px;
+      }
+      .deck-viewport {
+        padding-top: 72px;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .deck-controller {
+        padding: 0 12px;
+      }
+      .controller-tag {
+        display: none;
+      }
+      .btn-ctrl span#viewModeText {
+        display: none;
+      }
+      .slide {
+        max-width: 96vw;
+        padding: 28px 20px;
+        border-radius: var(--radius-lg);
+      }
+      .slide-footer {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
       }
     }
   </style>
@@ -602,7 +637,7 @@
   <!-- Fixed Top Controller Bar -->
   <header class="deck-controller">
     <div class="controller-left">
-      <a href="#" class="controller-brand">
+      <a href="/" class="controller-brand" title="Return to BITS Homepage">
         <img src="/brand/logo-white.png" alt="BITS Logo" onerror="this.src='/brand/mark.png'" />
         <span>Brandbook</span>
       </a>
@@ -610,17 +645,17 @@
     </div>
 
     <div class="controller-center">
-      <button class="btn-ctrl" onclick="prevSlide()" title="Previous Slide (Left Arrow)">◀</button>
-      <span class="slide-counter" id="slideCounter">Slide 1 / 37</span>
-      <button class="btn-ctrl" onclick="nextSlide()" title="Next Slide (Right Arrow)">▶</button>
+      <button class="btn-ctrl" onclick="prevSlide()" title="Previous Slide (Left Arrow)" aria-label="Previous Slide">◀</button>
+      <span class="slide-counter" id="slideCounter" aria-live="polite">Slide 1 / 37</span>
+      <button class="btn-ctrl" onclick="nextSlide()" title="Next Slide (Right Arrow)" aria-label="Next Slide">▶</button>
     </div>
 
     <div class="controller-right">
-      <button class="btn-ctrl" onclick="toggleViewMode()" id="viewModeBtn">
+      <button class="btn-ctrl" onclick="toggleViewMode()" id="viewModeBtn" title="Toggle between Scroll View and Single Deck View" aria-label="Toggle Deck View">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         <span id="viewModeText">Deck View</span>
       </button>
-      <button class="btn-ctrl primary" onclick="window.print()">
+      <button class="btn-ctrl primary" onclick="window.print()" title="Print / Export Brandbook to PDF" aria-label="Print or Export PDF">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
         Export PDF
       </button>
@@ -2294,9 +2329,16 @@
       if (index < 1) index = 1;
       if (index > totalSlides) index = totalSlides;
       currentSlide = index;
-      const target = document.getElementById(`slide-${currentSlide}`);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (isDeckMode) {
+        document.querySelectorAll('.slide').forEach((s, idx) => {
+          s.style.display = (idx + 1 === currentSlide) ? 'flex' : 'none';
+        });
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else {
+        const target = document.getElementById(`slide-${currentSlide}`);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
       updateCounter();
     }
@@ -2311,6 +2353,7 @@
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         nextSlide();
@@ -2322,16 +2365,37 @@
 
     // Copy to clipboard
     function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Copied: ' + text);
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
         showToast('Copied: ' + text);
-      }).catch(() => {
+      } catch (err) {
         showToast('Value copied');
-      });
+      }
+      document.body.removeChild(textarea);
     }
 
     function showToast(msg) {
       const toast = document.getElementById('copyToast');
       const toastMsg = document.getElementById('toastMsg');
+      if (!toast || !toastMsg) return;
       toastMsg.textContent = msg;
       toast.classList.add('show');
       setTimeout(() => {
@@ -2344,19 +2408,21 @@
       isDeckMode = !isDeckMode;
       const btnText = document.getElementById('viewModeText');
       if (isDeckMode) {
-        btnText.textContent = 'Deck View';
+        if (btnText) btnText.textContent = 'Deck View';
         document.querySelectorAll('.slide').forEach((s, idx) => {
-          if (idx + 1 !== currentSlide) s.style.display = 'none';
+          s.style.display = (idx + 1 === currentSlide) ? 'flex' : 'none';
         });
+        window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
-        btnText.textContent = 'Scroll View';
+        if (btnText) btnText.textContent = 'Scroll View';
         document.querySelectorAll('.slide').forEach(s => s.style.display = 'flex');
-        scrollToSlide(currentSlide);
+        setTimeout(() => scrollToSlide(currentSlide), 50);
       }
     }
 
     // Intersection observer to track current visible slide during scrolling
     const observer = new IntersectionObserver((entries) => {
+      if (isDeckMode) return;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
