@@ -1307,7 +1307,7 @@ export const scopingProcessSteps = [
   },
 ] as const;
 
-/* ── Solution Tiers (Consultative Pricing Model) ── */
+/* ── Solution Tiers (Consultative Pricing Model — No Fixed Retail Tags) ── */
 export const solutionPackages = [
   {
     id: "starter",
@@ -1317,10 +1317,9 @@ export const solutionPackages = [
     tagline: "For boutique recovery teams and specialized agencies replacing disconnected spreadsheets.",
     teamScope: "1 – 15 Seats",
     deployment: "Secure Managed Cloud",
-    pricePhp: "₱28,500",
-    priceUsd: "$495",
-    billingCadence: "/ month baseline",
-    pricingModel: "Custom Scoped Baseline",
+    investmentModel: "Modular Entry Scoping",
+    billingCadence: "Tailored to Team Scale & Portfolio Volume",
+    pricingModel: "Modular Base Scoping",
     pricingSubtext: "Assisted portfolio migration & floor onboarding included",
     roiBenchmark: "Replaces 3–4 disconnected SaaS subscriptions & manual Excel sheets",
     highlights: [
@@ -1334,7 +1333,8 @@ export const solutionPackages = [
       "Custom CSV/Excel Data Mapping",
       "Direct Technical Implementation Support",
     ],
-    primaryCta: "Design Starter Solution",
+    primaryCta: "Book Starter Scoping",
+    ctaHref: "/#contact?package=starter",
     popular: false,
   },
   {
@@ -1345,9 +1345,8 @@ export const solutionPackages = [
     tagline: "For scaling agencies requiring integrated communications, auto-dialing, and supervisor QA.",
     teamScope: "16 – 100+ Floor",
     deployment: "High-Availability Cloud + SIP",
-    pricePhp: "₱68,000",
-    priceUsd: "$1,180",
-    billingCadence: "/ month (16–100 seats)",
+    investmentModel: "Flexible Volume Licensing",
+    billingCadence: "Scales with Concurrent Dialing & Floor Density",
     pricingModel: "Modular Seat & Volume",
     pricingSubtext: "Volume floor discounts & priority engineering access",
     roiBenchmark: "Cuts agent idle time by 42% via automated dialer & supervisor HUD",
@@ -1362,7 +1361,8 @@ export const solutionPackages = [
       "BITSagent AI Voice & Email Operations",
       "Priority Implementation Engineering",
     ],
-    primaryCta: "Design Your Solution",
+    primaryCta: "Request Growth Blueprint",
+    ctaHref: "/#contact?package=growth",
     popular: true,
   },
   {
@@ -1373,9 +1373,8 @@ export const solutionPackages = [
     tagline: "For banks, high-volume BPOs, and organizations with complex security & workflow needs.",
     teamScope: "100+ / Multi-Tenant",
     deployment: "Private VPC / Sovereign / On-Prem",
-    pricePhp: "₱185,000+",
-    priceUsd: "$3,200+",
-    billingCadence: "/ month (dedicated / sovereign)",
+    investmentModel: "Sovereign Master Agreement",
+    billingCadence: "Bespoke Enterprise SLA & Dedicated Hardware",
     pricingModel: "Master Services Agreement",
     pricingSubtext: "Dedicated Solutions Architect, Custom SLA & Audit",
     roiBenchmark: "Zero per-seat inflation penalties; complete private VPC & data residency",
@@ -1390,7 +1389,8 @@ export const solutionPackages = [
       "Private Cloud or Sovereign On-Premises",
       "Dedicated Solutions Architect & 99.99% SLA",
     ],
-    primaryCta: "Book Architecture Consultation",
+    primaryCta: "Request Sovereign Proposal",
+    ctaHref: "/#contact?package=enterprise",
     popular: false,
   },
   {
@@ -1401,9 +1401,8 @@ export const solutionPackages = [
     tagline: "Deploy any BITS product under your own brand — logo, domain, and color identity. Ideal for resellers & enterprise groups.",
     teamScope: "Any Tier",
     deployment: "Cloud or On-Prem (Any)",
-    pricePhp: "₱35,000",
-    priceUsd: "$650",
-    billingCadence: "one-time setup + licensing",
+    investmentModel: "Turnkey Reseller License",
+    billingCadence: "White-Label Setup + Wholesale Infrastructure",
     pricingModel: "Custom Branding License",
     pricingSubtext: "Scoped on top of any Starter, Growth, or Enterprise tier",
     roiBenchmark: "100% brand equity ownership; resell to clients under your own agency brand",
@@ -1419,7 +1418,52 @@ export const solutionPackages = [
       "Full Documentation & Help Center Rebranding",
     ],
     primaryCta: "Request White Label Proposal",
+    ctaHref: "/#contact?package=whitelabel",
     popular: false,
+  },
+] as const;
+
+/* ── Multi-Product Bundle Presets ── */
+export const suiteBundlePresets = [
+  {
+    id: "collections-bpo",
+    name: "Collections & Contact Center BPO",
+    tagline: "End-to-end debt recovery, softphone dialers, and automated speech AI.",
+    productIds: ["service", "ai-agent", "rag-engine"],
+    recommendedFor: "BPOs, recovery agencies, auto loan & microfinance desks",
+    highlight: "Saves 2.5h/agent daily and cuts broken PTP defaults by 42%",
+  },
+  {
+    id: "enterprise-erp",
+    name: "Complete Enterprise ERP & People Suite",
+    tagline: "Unified accounting, statutory DOLE HRMS, TRAIN payroll & inventory.",
+    productIds: ["accounting", "hrms", "payroll", "inventory"],
+    recommendedFor: "Mid-market enterprises, commercial operators & conglomerates",
+    highlight: "0-day month-end close with automated BIR 2307 & eFPS exports",
+  },
+  {
+    id: "field-supply-chain",
+    name: "Field Operations & Supply Chain",
+    tagline: "Heavy-industry inventory, GPS fleet dispatch & construction BOQ.",
+    productIds: ["construction", "inventory", "logistics"],
+    recommendedFor: "Contractors, logistics 3PLs, warehousing & distribution",
+    highlight: "Eliminates phantom inventory and tracks material usage in real-time",
+  },
+  {
+    id: "sports-hospitality",
+    name: "Sports, Booking & Hospitality Hub",
+    tagline: "Turnkey venue booking, smart queuing, tournament AI & NFC cards.",
+    productIds: ["sports-hub", "sports-ai", "booking", "queuing", "nfc-card"],
+    recommendedFor: "Arenas, sports complexes, tournament organizers & country clubs",
+    highlight: "100% automated court booking, live scoreboards & contactless tap",
+  },
+  {
+    id: "reseller-agency",
+    name: "White-Label Reseller Platform",
+    tagline: "Deploy any combination of BITS engines under your company brand.",
+    productIds: ["service", "accounting", "white-label", "nfc-card"],
+    recommendedFor: "Agencies, SaaS resellers & multi-brand holding groups",
+    highlight: "100% client margin retention with zero BITS attribution",
   },
 ] as const;
 
@@ -1876,13 +1920,17 @@ export const processSteps = [
 ] as const;
 
 export const contactInterests = [
+  "Custom Multi-Product Bundle (Combine Multiple Engines)",
   "BITScrm — Collections & Operations Core",
   "BITSagent — Conversational Voice AI",
   "BITSagent — Autonomous Email & SMS",
   "BITS Suite (CRM + AI Operations)",
+  "Secure Managed Cloud Deployment",
+  "Sovereign On-Premises Deployment & Hardware Scoping",
+  "White Label SaaS Platform",
+  "Smart NFC & Identity Card Solutions",
   "Workflow Automation & System Integrations",
   "Custom Software & Digital Infrastructure",
-  "Enterprise Private Cloud / On-Premises",
   "General Operational Consultation",
 ] as const;
 

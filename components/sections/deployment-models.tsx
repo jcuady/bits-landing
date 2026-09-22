@@ -30,6 +30,9 @@ import {
   Users,
   CheckCircle2,
   Search,
+  Boxes,
+  Workflow,
+  Database,
 } from "lucide-react";
 
 export function DeploymentModels() {
@@ -55,17 +58,17 @@ export function DeploymentModels() {
             <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-1.5 shadow-2xs backdrop-blur-md">
               <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Flexible Deployment Architecture
+                Multi-Product Deployment &amp; Sovereign Architecture
               </span>
             </div>
             <h2 className="text-display font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Cloud-Hosted or On-Premises:{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                Deploy on Your Terms
+                Deploy &amp; Combine on Your Terms
               </span>
             </h2>
-            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
-              All BITS systems can be deployed both on <strong className="text-slate-900 font-bold">Cloud</strong> and <strong className="text-slate-900 font-bold">On-Premises</strong>. We strongly recommend our Managed Cloud deployment for rapid 1–2 week rollout, automated maintenance, and maximum scaling velocity. For organizations with strict data residency mandates or existing bare-metal servers, we provide comprehensive hardware scoping and turnkey on-premises deployment.
+            <p className="text-lede mx-auto mt-4 max-w-3xl text-pretty text-slate-600 font-normal">
+              Every engine in our 18-product catalog can be deployed individually or combined into a unified operational ecosystem. Choose our turnkey <strong className="text-slate-900 font-bold">Managed Cloud</strong> for 1–2 week zero-overhead rollout, or run <strong className="text-slate-900 font-bold">Sovereign On-Premises</strong> on your existing bare-metal servers with zero external data exposure and complete CapEx ROI.
             </p>
           </Reveal>
 
@@ -220,7 +223,11 @@ export function DeploymentModels() {
                   <div className="mt-5 pt-4 border-t border-slate-200">
                     <Magnetic className="w-full">
                       <Link
-                        href="/#contact"
+                        href={
+                          selectedModel === "on-prem"
+                            ? "/#contact?package=on-premises"
+                            : "/#contact?package=managed-cloud"
+                        }
                         className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                       >
                         <span>
@@ -235,6 +242,58 @@ export function DeploymentModels() {
                       Mutual NDA provided · Technical blueprint included
                     </p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Multi-Product Interoperability & Architecture Stacking Banner */}
+        <div className="mx-auto mt-12 max-w-6xl">
+          <Reveal delay={0.1}>
+            <div className="relative rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 p-6 sm:p-8 text-white shadow-xl">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div className="max-w-3xl">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-blue-300">
+                    <Boxes className="size-3.5 text-blue-400" />
+                    <span>Multi-Product Modular Architecture</span>
+                  </div>
+                  <h3 className="mt-2.5 text-xl font-bold tracking-tight text-white sm:text-2xl">
+                    Combine Any of Our 18 Products into a Unified Deployment
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    Our modular engines share a single database layer, unified event streaming, and role-based permissions. Whether running our high-throughput predictive dialer alongside ERP payroll or deploying a full 18-product sovereign operational suite, there is zero duplicate server footprint and zero custom glue code required.
+                  </p>
+                  <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      ✓ Shared PostgreSQL &amp; Redis Bus
+                    </span>
+                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      ✓ Centralized SSO &amp; RBAC
+                    </span>
+                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      ✓ Zero Duplicated Infrastructure
+                    </span>
+                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      ✓ Hybrid Cloud/On-Prem Ready
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                  <Link
+                    href="/#solutions"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-blue-600/30 transition-all hover:bg-blue-500"
+                  >
+                    <span>Open Solution Stacking Studio</span>
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                  <Link
+                    href="/#contact?package=custom-deployment"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-5 py-2.5 text-xs font-bold text-slate-200 transition-colors hover:bg-slate-700 hover:text-white"
+                  >
+                    <span>Custom Deployment Scoping</span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -603,7 +662,7 @@ export function DeploymentModels() {
                 </div>
 
                 <Link
-                  href="/#contact"
+                  href="/#contact?package=on-premises"
                   className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-600/50"
                 >
                   <span>Request Hardware Audit</span>

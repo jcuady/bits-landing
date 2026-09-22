@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useActionState } from "react";
-import { consultationOptions, site } from "@/lib/site";
+import { consultationOptions, contactInterests, site } from "@/lib/site";
 import { submitContact, type ContactState } from "@/app/actions/contact";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +11,7 @@ const fieldOrder = [
   "name",
   "email",
   "company",
+  "interest",
   "companySize",
   "industry",
   "currentSystem",
@@ -37,6 +38,34 @@ function FieldError({ id, errors }: { id: string; errors?: string[] }) {
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContact, initialContactState);
+  const [selectedInterest, setSelectedInterest] = React.useState<string>(
+    state.values.interest ?? ""
+  );
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const pkg = params.get("package");
+    const bundle = params.get("bundle");
+    const product = params.get("product");
+    if (bundle || pkg === "custom-deployment") {
+      setSelectedInterest("Custom Multi-Product Bundle (Combine Multiple Engines)");
+    } else if (pkg === "starter") {
+      setSelectedInterest("BITScrm — Collections & Operations Core");
+    } else if (pkg === "growth") {
+      setSelectedInterest("BITS Suite (CRM + AI Operations)");
+    } else if (pkg === "enterprise" || pkg === "on-premises") {
+      setSelectedInterest("Sovereign On-Premises Deployment & Hardware Scoping");
+    } else if (pkg === "managed-cloud") {
+      setSelectedInterest("Secure Managed Cloud Deployment");
+    } else if (pkg === "whitelabel") {
+      setSelectedInterest("White Label SaaS Platform");
+    } else if (pkg === "nfc") {
+      setSelectedInterest("Smart NFC & Identity Card Solutions");
+    } else if (product) {
+      setSelectedInterest(product);
+    }
+  }, []);
 
   React.useEffect(() => {
     if (state.ok) return;
@@ -140,7 +169,8 @@ export function ContactForm() {
         </div>
 
         {/* Company */}
-        <div className="flex flex-col gap-1.5">
+        {/* Company */}
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="company" className="text-xs font-bold text-slate-700">
             Company Name <span className="text-rose-500">*</span>
           </label>
@@ -157,6 +187,32 @@ export function ContactForm() {
             className={inputClass(!!state.errors.company)}
           />
           <FieldError id="company-error" errors={state.errors.company} />
+        </div>
+
+        {/* Solution / Product Interest */}
+        <div className="flex flex-col gap-1.5 sm:col-span-2">
+          <label htmlFor="interest" className="text-xs font-bold text-slate-700">
+            Products &amp; Solution Scope of Interest
+          </label>
+          <div className="relative">
+            <select
+              id="interest"
+              name="interest"
+              value={selectedInterest}
+              onChange={(e) => setSelectedInterest(e.target.value)}
+              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+            >
+              <option value="">Select product, bundle or consultative scope...</option>
+              {contactInterests.map((interest) => (
+                <option key={interest} value={interest}>
+                  {interest}
+                </option>
+              ))}
+            </select>
+            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+              ▾
+            </span>
+          </div>
         </div>
 
         {/* Company Size */}

@@ -33,11 +33,12 @@ export function escapeHtml(value: string) {
 }
 
 export function buildInquiryEmail(data: Omit<ContactFields, "website">) {
-  const subject = `BITS Consultation Request — ${data.company} (${data.industry || "General"})`;
+  const subject = `BITS Consultation Request — ${data.company} (${data.interest || data.industry || "General"})`;
   const text = [
     `Name: ${data.name}`,
     `Work Email: ${data.email}`,
     `Company: ${data.company}`,
+    `Solution / Product Interest: ${data.interest || "Not specified"}`,
     `Company Size: ${data.companySize || "Not specified"}`,
     `Industry: ${data.industry || "Not specified"}`,
     `Current System: ${data.currentSystem || "Not specified"}`,
@@ -63,6 +64,7 @@ export function buildInquiryEmail(data: Omit<ContactFields, "website">) {
         <p style="margin:0 0 10px;"><strong>Name:</strong> ${escapeHtml(data.name)}</p>
         <p style="margin:0 0 10px;"><strong>Email:</strong> ${escapeHtml(data.email)}</p>
         <p style="margin:0 0 10px;"><strong>Company:</strong> ${escapeHtml(data.company)}</p>
+        <p style="margin:0 0 10px;"><strong>Product / Solution Interest:</strong> <span style="color:#2563eb;font-weight:600;">${escapeHtml(data.interest || "General Consultation")}</span></p>
         <p style="margin:0 0 10px;"><strong>Team Size:</strong> ${escapeHtml(data.companySize || "N/A")}</p>
         <p style="margin:0 0 10px;"><strong>Industry:</strong> ${escapeHtml(data.industry || "N/A")}</p>
         <p style="margin:0 0 10px;"><strong>Current System:</strong> ${escapeHtml(data.currentSystem || "N/A")}</p>
