@@ -14,9 +14,9 @@ const platformPillars = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-x-hidden bg-white">
+    <section className="relative overflow-hidden bg-white">
       {/* Background radial gradient & ambient lights */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_50%_0%,rgba(59,130,246,0.08),rgba(255,255,255,0))]" />
         <div className="absolute -right-48 top-1/4 h-[600px] w-[600px] rounded-full bg-blue-500/[0.04] blur-[100px]" />
         <div className="absolute -left-48 bottom-1/4 h-[500px] w-[500px] rounded-full bg-indigo-500/[0.03] blur-[80px]" />

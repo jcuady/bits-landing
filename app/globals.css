@@ -75,11 +75,14 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-cloud text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    max-width: 100vw;
   }
 
   ::selection {

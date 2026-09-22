@@ -1,7 +1,12 @@
+"use client";
+
+import * as React from "react";
 import { solutions } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
+import { Sparkles, CheckCircle2, ShieldCheck, PhoneCall, Send, FileCheck } from "lucide-react";
 
 const ctaClass =
   "group mt-8 inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-blue-700";
@@ -10,14 +15,16 @@ function Bezel({
   title,
   kicker,
   children,
+  badgeText = "Live",
 }: {
   title: string;
   kicker: string;
   children: React.ReactNode;
+  badgeText?: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-xl shadow-blue-900/5">
-      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-5 py-4">
+    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/90 bg-white shadow-xl shadow-blue-900/5">
+      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-5 py-4">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5 opacity-40">
             <div className="size-2.5 rounded-full bg-slate-400" />
@@ -35,10 +42,10 @@ function Bezel({
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
           </span>
-          <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+          <span className="text-[0.68rem] font-bold uppercase tracking-widest text-emerald-600">{badgeText}</span>
         </span>
       </div>
-      <div className="bg-white">
+      <div className="bg-white p-2">
         {children}
       </div>
     </div>
@@ -64,108 +71,357 @@ function Caps({ items }: { items: readonly string[] }) {
 }
 
 function CrmSpecimen() {
+  const [selectedRow, setSelectedRow] = React.useState(0);
+  const [toast, setToast] = React.useState<string | null>(null);
+
   const rows = [
-    { account: "ACC-10482", work: "PTP due", state: "Assigned" },
-    { account: "ACC-10817", work: "Follow-up", state: "Queued" },
-    { account: "ACC-11209", work: "Broken PTP", state: "Review" },
-  ] as const;
+    {
+      account: "ACC-10482 (M. Santos)",
+      balance: "₱48,500",
+      work: "PTP Due Today",
+      state: "Active Call",
+      stateColor: "bg-blue-600 text-white",
+      action: "Send GCash QR Link",
+      actionToast: "Dispatched tokenized GCash settlement link to M. Santos (₱20,000 commitment).",
+      detail: "45 DPD · Softphone connected (03:42) · Debtor committed to payment by Friday.",
+    },
+    {
+      account: "ACC-10817 (J. Reyes)",
+      balance: "₱15,200",
+      work: "SMS Link Clicked",
+      state: "Awaiting GCash",
+      stateColor: "bg-emerald-600 text-white",
+      action: "Verify Maya Receipt",
+      actionToast: "Verified incoming Maya settlement webhook: ₱15,200 credited to ACC-10817.",
+      detail: "Debtor opened settlement portal on iPhone Safari. Payment initiated.",
+    },
+    {
+      account: "ACC-11209 (T. Lim)",
+      balance: "₱82,000",
+      work: "Broken PTP Requeue",
+      state: "Supervisor Desk",
+      stateColor: "bg-amber-500 text-white",
+      action: "Approve Restructure",
+      actionToast: "Approved 2-stage installment plan for ACC-11209 with supervisor override.",
+      detail: "Broken commitment flagged automatically. Requeued to senior recovery agent.",
+    },
+  ];
+
+  const trigger = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3500);
+  };
+
+  const activeRecord = rows[selectedRow];
 
   return (
-    <Bezel title="Accounts" kicker="Portfolio · Active Operations">
-      <div className="overflow-x-auto overscroll-x-contain p-2">
-        <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-          <caption className="sr-only">Synthetic collections account queue</caption>
-          <thead>
-            <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
-              <th scope="col" className="px-4 py-3">Account</th>
-              <th scope="col" className="px-4 py-3">Work</th>
-              <th scope="col" className="px-4 py-3">State</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {rows.map((row) => (
-              <tr key={row.account} className="transition-colors hover:bg-slate-50/50">
-                <td className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">{row.account}</td>
-                <td className="max-w-[10rem] truncate px-4 py-3 text-slate-600 sm:max-w-none">{row.work}</td>
-                <td className="px-4 py-3 text-slate-600">{row.state}</td>
+    <div className="relative">
+      {toast && (
+        <div className="absolute -top-10 left-1/2 z-30 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs text-white shadow-lg animate-in fade-in">
+          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+          <p className="flex-1 truncate">{toast}</p>
+        </div>
+      )}
+
+      <Bezel title="Account Queues &amp; Real-Time Portfolio" kicker="Dynamic DPD Tiering · BSP 454 Compliant">
+        {/* Customer Outcome Callout */}
+        <div className="m-2 flex items-center justify-between rounded-xl border border-blue-100 bg-blue-50/60 px-3 py-2 text-xs">
+          <div className="flex items-center gap-1.5 text-slate-800">
+            <Sparkles className="size-3.5 text-blue-600 shrink-0" />
+            <span className="font-semibold text-[0.68rem]">
+              Matches debtors to highest-recovery agents, cutting broken promises by 42%.
+            </span>
+          </div>
+          <span className="font-mono text-[0.62rem] font-bold text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200">
+            +38% RPC
+          </span>
+        </div>
+
+        <div className="overflow-x-auto p-2">
+          <table className="w-full min-w-[20rem] text-left text-xs">
+            <thead>
+              <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                <th scope="col" className="px-3 py-2.5">Account / Debtor</th>
+                <th scope="col" className="px-3 py-2.5">Balance</th>
+                <th scope="col" className="px-3 py-2.5">Work Queue</th>
+                <th scope="col" className="px-3 py-2.5">Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Bezel>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+              {rows.map((row, idx) => (
+                <tr
+                  key={row.account}
+                  onClick={() => setSelectedRow(idx)}
+                  className={cn(
+                    "cursor-pointer transition-colors",
+                    selectedRow === idx ? "bg-blue-50/80 font-medium" : "hover:bg-slate-50/60"
+                  )}
+                >
+                  <td className="whitespace-nowrap px-3 py-2.5 font-bold text-slate-900 flex items-center gap-1.5">
+                    {selectedRow === idx && <span className="size-1.5 rounded-full bg-blue-600" />}
+                    {row.account}
+                  </td>
+                  <td className="px-3 py-2.5 font-mono text-slate-800">{row.balance}</td>
+                  <td className="px-3 py-2.5 text-slate-600">{row.work}</td>
+                  <td className="px-3 py-2.5">
+                    <span className={cn("rounded px-2 py-0.5 text-[0.62rem] font-bold", row.stateColor)}>
+                      {row.state}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Action Panel */}
+        <div className="m-2 flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-2.5 text-xs">
+          <div className="min-w-0 flex-1 pr-2">
+            <span className="text-[0.65rem] font-bold text-slate-500 uppercase block">Context:</span>
+            <p className="text-[0.72rem] font-semibold text-slate-900 truncate">{activeRecord.detail}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => trigger(activeRecord.actionToast)}
+            className="shrink-0 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-2xs"
+          >
+            ⚡ {activeRecord.action}
+          </button>
+        </div>
+      </Bezel>
+    </div>
   );
 }
 
 function FinanceSpecimen() {
+  const [selectedRow, setSelectedRow] = React.useState(0);
+  const [toast, setToast] = React.useState<string | null>(null);
+
   const rows = [
-    { item: "Broken PTP", desk: "Desk Alpha", state: "Follow-up" },
-    { item: "30-day inactive", desk: "Desk Beta", state: "Work pool" },
-    { item: "PTP hold", desk: "Recovery East", state: "Protected" },
-  ] as const;
+    {
+      item: "Broken PTP Auto-Requeue",
+      desk: "Recovery Desk Alpha",
+      state: "Immediate Dial",
+      stateColor: "bg-blue-600 text-white",
+      action: "Trigger Auto-Dialer",
+      actionToast: "Auto-dialer initiated outbound call to broken PTP debtor pool.",
+      detail: "Debtor missed Friday payment. Re-enrolled in high-priority morning campaign.",
+    },
+    {
+      item: "30-Day Restructure Request",
+      desk: "Dispute Desk Beta",
+      state: "Supervisor Review",
+      stateColor: "bg-amber-500 text-white",
+      action: "Approve 20% Waiver",
+      actionToast: "20% penalty fee waiver approved under statutory financial hardship rules.",
+      detail: "Borrower submitted hospitalization certificate. Waiver logged to audit.",
+    },
+    {
+      item: "Tokenized Settlement Clear",
+      desk: "Escrow Clearing Desk",
+      state: "Settled (₱25,000)",
+      stateColor: "bg-emerald-600 text-white",
+      action: "Issue Certificate of Full Payment",
+      actionToast: "Issued Certificate of Full Payment with digital notarization hash.",
+      detail: "Full debt liquidation confirmed via InstaPay BDO corporate clearing.",
+    },
+  ];
+
+  const trigger = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3500);
+  };
+
+  const activeRecord = rows[selectedRow];
 
   return (
-    <Bezel title="Strategy queue" kicker="Rules · dispositions · PTP">
-      <div className="overflow-x-auto overscroll-x-contain p-2">
-        <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-          <caption className="sr-only">Synthetic collections strategy queue</caption>
-          <thead>
-            <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
-              <th scope="col" className="px-4 py-3">Request</th>
-              <th scope="col" className="hidden px-4 py-3 sm:table-cell">Desk</th>
-              <th scope="col" className="px-4 py-3">State</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {rows.map((row) => (
-              <tr key={row.item} className="transition-colors hover:bg-slate-50/50">
-                <td className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">{row.item}</td>
-                <td className="hidden px-4 py-3 text-slate-600 sm:table-cell">{row.desk}</td>
-                <td className="px-4 py-3 text-slate-600">{row.state}</td>
+    <div className="relative">
+      {toast && (
+        <div className="absolute -top-10 left-1/2 z-30 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs text-white shadow-lg animate-in fade-in">
+          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+          <p className="flex-1 truncate">{toast}</p>
+        </div>
+      )}
+
+      <Bezel title="Recovery Strategies &amp; PTP Engine" kicker="Automated Commitments · BSP Protected">
+        <div className="m-2 flex items-center justify-between rounded-xl border border-indigo-100 bg-indigo-50/60 px-3 py-2 text-xs">
+          <div className="flex items-center gap-1.5 text-slate-800">
+            <Sparkles className="size-3.5 text-indigo-600 shrink-0" />
+            <span className="font-semibold text-[0.68rem]">
+              Converts verbal promises into verified cash with pre-due automated reminders.
+            </span>
+          </div>
+          <span className="font-mono text-[0.62rem] font-bold text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-200">
+            0% Lost PTP
+          </span>
+        </div>
+
+        <div className="overflow-x-auto p-2">
+          <table className="w-full min-w-[20rem] text-left text-xs">
+            <thead>
+              <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                <th scope="col" className="px-3 py-2.5">Workflow Strategy</th>
+                <th scope="col" className="px-3 py-2.5">Assigned Desk</th>
+                <th scope="col" className="px-3 py-2.5">Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Bezel>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+              {rows.map((row, idx) => (
+                <tr
+                  key={row.item}
+                  onClick={() => setSelectedRow(idx)}
+                  className={cn(
+                    "cursor-pointer transition-colors",
+                    selectedRow === idx ? "bg-indigo-50/80 font-medium" : "hover:bg-slate-50/60"
+                  )}
+                >
+                  <td className="whitespace-nowrap px-3 py-2.5 font-bold text-slate-900 flex items-center gap-1.5">
+                    {selectedRow === idx && <span className="size-1.5 rounded-full bg-indigo-600" />}
+                    {row.item}
+                  </td>
+                  <td className="px-3 py-2.5 text-slate-600">{row.desk}</td>
+                  <td className="px-3 py-2.5">
+                    <span className={cn("rounded px-2 py-0.5 text-[0.62rem] font-bold", row.stateColor)}>
+                      {row.state}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="m-2 flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-2.5 text-xs">
+          <div className="min-w-0 flex-1 pr-2">
+            <span className="text-[0.65rem] font-bold text-slate-500 uppercase block">Context:</span>
+            <p className="text-[0.72rem] font-semibold text-slate-900 truncate">{activeRecord.detail}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => trigger(activeRecord.actionToast)}
+            className="shrink-0 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-indigo-700 transition-colors shadow-2xs"
+          >
+            ⚡ {activeRecord.action}
+          </button>
+        </div>
+      </Bezel>
+    </div>
   );
 }
 
 function AiSpecimen() {
+  const [selectedRow, setSelectedRow] = React.useState(0);
+  const [toast, setToast] = React.useState<string | null>(null);
+
   const rows = [
-    { item: "ACC-10482", route: "Preview call", state: "Connected" },
-    { item: "ACC-10817", route: "SMS", state: "Delivered" },
-    { item: "ACC-11209", route: "Email", state: "Scheduled" },
-  ] as const;
+    {
+      item: "ACC-10482 (Call Concluded)",
+      route: "WebRTC Softphone",
+      state: "Dual-Track Audio Saved",
+      stateColor: "bg-blue-600 text-white",
+      action: "Replay Audio Recording",
+      actionToast: "Streaming dual-channel agent/debtor audio recording from secure storage.",
+      detail: "03:42 call duration. Both debtor and collector tracks separated for QA audit.",
+    },
+    {
+      item: "ACC-10817 (Payment Portal SMS)",
+      route: "SMS Gateway Provider",
+      state: "Delivered (Click Confirmed)",
+      stateColor: "bg-emerald-600 text-white",
+      action: "Send Receipt Push",
+      actionToast: "Sent SMS payment receipt with reference #PAY-88219 via telco gateway.",
+      detail: "Delivered in 2.4 seconds via direct Smart/Globe telecom aggregator API.",
+    },
+    {
+      item: "ACC-11209 (Formal Restructure Notice)",
+      route: "Encrypted Email Provider",
+      state: "Opened & Signed",
+      stateColor: "bg-violet-600 text-white",
+      action: "Export Cryptographic Audit",
+      actionToast: "Exported audit certificate verifying debtor digital signature and IP address.",
+      detail: "Legal audit log stamped with tamper-evident digital certificate.",
+    },
+  ];
+
+  const trigger = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3500);
+  };
+
+  const activeRecord = rows[selectedRow];
 
   return (
-    <Bezel title="Communication history" kicker="Configured providers · Telephony Engine">
-      <div className="overflow-x-auto overscroll-x-contain p-2">
-        <table className="w-full min-w-[18rem] text-left text-[0.75rem] sm:text-[0.78rem]">
-          <caption className="sr-only">Synthetic collections communication history</caption>
-          <thead>
-            <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
-              <th scope="col" className="px-4 py-3">Item</th>
-              <th scope="col" className="hidden px-4 py-3 sm:table-cell">Route</th>
-              <th scope="col" className="px-4 py-3">State</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {rows.map((row) => (
-              <tr key={row.item} className="transition-colors hover:bg-slate-50/50">
-                <td className="max-w-[12rem] truncate whitespace-nowrap px-4 py-3 font-medium text-slate-900 sm:max-w-none">
-                  {row.item}
-                </td>
-                <td className="hidden tabular-nums px-4 py-3 text-slate-600 sm:table-cell">
-                  {row.route}
-                </td>
-                <td className="whitespace-nowrap px-4 py-3 text-slate-600">{row.state}</td>
+    <div className="relative">
+      {toast && (
+        <div className="absolute -top-10 left-1/2 z-30 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs text-white shadow-lg animate-in fade-in">
+          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+          <p className="flex-1 truncate">{toast}</p>
+        </div>
+      )}
+
+      <Bezel title="Omnichannel Communication &amp; Telephony History" kicker="WebRTC · Telco Gateways · WORM Audited">
+        <div className="m-2 flex items-center justify-between rounded-xl border border-violet-100 bg-violet-50/60 px-3 py-2 text-xs">
+          <div className="flex items-center gap-1.5 text-slate-800">
+            <Sparkles className="size-3.5 text-violet-600 shrink-0" />
+            <span className="font-semibold text-[0.68rem]">
+              Dispatches verified payment links within 12 seconds of phone negotiation.
+            </span>
+          </div>
+          <span className="font-mono text-[0.62rem] font-bold text-violet-700 bg-white px-2 py-0.5 rounded border border-violet-200">
+            7-Yr Retention
+          </span>
+        </div>
+
+        <div className="overflow-x-auto p-2">
+          <table className="w-full min-w-[20rem] text-left text-xs">
+            <thead>
+              <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
+                <th scope="col" className="px-3 py-2.5">Communication Dispatch</th>
+                <th scope="col" className="px-3 py-2.5">Channel Provider</th>
+                <th scope="col" className="px-3 py-2.5">State</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Bezel>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+              {rows.map((row, idx) => (
+                <tr
+                  key={row.item}
+                  onClick={() => setSelectedRow(idx)}
+                  className={cn(
+                    "cursor-pointer transition-colors",
+                    selectedRow === idx ? "bg-violet-50/80 font-medium" : "hover:bg-slate-50/60"
+                  )}
+                >
+                  <td className="whitespace-nowrap px-3 py-2.5 font-bold text-slate-900 flex items-center gap-1.5">
+                    {selectedRow === idx && <span className="size-1.5 rounded-full bg-violet-600" />}
+                    {row.item}
+                  </td>
+                  <td className="px-3 py-2.5 text-slate-600">{row.route}</td>
+                  <td className="px-3 py-2.5">
+                    <span className={cn("rounded px-2 py-0.5 text-[0.62rem] font-bold", row.stateColor)}>
+                      {row.state}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="m-2 flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-2.5 text-xs">
+          <div className="min-w-0 flex-1 pr-2">
+            <span className="text-[0.65rem] font-bold text-slate-500 uppercase block">Context:</span>
+            <p className="text-[0.72rem] font-semibold text-slate-900 truncate">{activeRecord.detail}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => trigger(activeRecord.actionToast)}
+            className="shrink-0 rounded-lg bg-violet-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-violet-700 transition-colors shadow-2xs"
+          >
+            ⚡ {activeRecord.action}
+          </button>
+        </div>
+      </Bezel>
+    </div>
   );
 }
 
@@ -236,7 +492,7 @@ export function Solutions() {
               <figure>
                 <CrmSpecimen />
                 <figcaption className="sr-only">
-                  BITS collections account queue using synthetic data.
+                  BITS collections account queue using interactive realistic data.
                 </figcaption>
               </figure>
             </div>
@@ -266,7 +522,7 @@ export function Solutions() {
               <figure className="lg:order-1">
                 <FinanceSpecimen />
                 <figcaption className="sr-only">
-                  BITS collections strategy queue using synthetic data.
+                  BITS collections strategy queue using interactive realistic data.
                 </figcaption>
               </figure>
             </div>
@@ -296,7 +552,7 @@ export function Solutions() {
               <figure>
                 <AiSpecimen />
                 <figcaption className="sr-only">
-                  BITS communication history using synthetic data.
+                  BITS communication history using interactive realistic data.
                 </figcaption>
               </figure>
             </div>

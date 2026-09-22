@@ -497,9 +497,25 @@ export function CrmVariantsExplorer() {
 /* ── Light Mode UI Mockup Boards for Each CRM Variant ── */
 
 function ServiceMockupLight() {
+  const [activeItem, setActiveItem] = React.useState<string>("#PTP-8891");
+  const [toast, setToast] = React.useState<string | null>(null);
+
+  const handleAction = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
   return (
     <div className="space-y-3 font-sans">
-      <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/70 p-3">
+      {/* Customer Benefit Callout */}
+      <div className="rounded-xl border border-blue-200 bg-blue-50/70 p-2.5 text-xs">
+        <p className="text-[0.72rem] text-blue-950 font-medium">
+          <strong className="font-bold text-blue-700">How this helps you: </strong>
+          Prioritizes active PTP collections, reduces repeat calls by 45%, and enforces BSP compliance quiet hours automatically.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-white p-3 shadow-2xs">
         <div className="flex items-center gap-2.5">
           <div className="flex size-7 items-center justify-center rounded-lg bg-blue-600 text-white">
             <PhoneCall className="size-3.5" />
@@ -509,29 +525,51 @@ function ServiceMockupLight() {
             <p className="text-[0.68rem] text-slate-500">Balance: ₱68,000 · 60 DPD · PTP Negotiation</p>
           </div>
         </div>
-        <span className="rounded-md bg-[#0073ea] px-2 py-0.5 text-[0.65rem] font-bold text-white">
-          Live Whisper OK
-        </span>
+        <button
+          type="button"
+          onClick={() => handleAction("🎙️ Coach whisper sent to agent: 'Offer 2-month split terms for Carlos Mendoza.'")}
+          className="rounded-lg bg-blue-600 px-2.5 py-1 text-[0.68rem] font-bold text-white hover:bg-blue-700 active:scale-95 cursor-pointer shadow-xs"
+        >
+          Whisper Coaching 🎙️
+        </button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+      {toast && (
+        <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-2 text-[0.72rem] font-bold text-emerald-800 animate-fade-in">
+          {toast}
+        </div>
+      )}
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs">
         <table className="w-full text-left text-xs">
           <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
             <tr>
-              <th className="p-2">Work Item</th>
+              <th className="p-2">Work Item (Click row)</th>
               <th className="p-2">Status</th>
               <th className="p-2">Commitment</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-[0.7rem]">
-            <tr>
+            <tr
+              onClick={() => {
+                setActiveItem("#PTP-8891");
+                handleAction("✓ #PTP-8891 selected. SMS reminder scheduled for Sept 25.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeItem === "#PTP-8891" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
+            >
               <td className="p-2 font-bold text-slate-900">#PTP-8891 Installment 1/2</td>
               <td className="p-2">
                 <span className="rounded bg-[#00c875] px-2 py-0.5 text-[0.62rem] font-bold text-white">PTP Confirmed</span>
               </td>
               <td className="p-2 font-mono text-slate-700">₱20,000 Due Sept 25</td>
             </tr>
-            <tr>
+            <tr
+              onClick={() => {
+                setActiveItem("HUD");
+                handleAction("✓ Supervisor Audio Barge HUD enabled on SRTP channel.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeItem === "HUD" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
+            >
               <td className="p-2 font-bold text-slate-900">Supervisor Audio Barge HUD</td>
               <td className="p-2">
                 <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">Barge Ready</span>
@@ -546,36 +584,73 @@ function ServiceMockupLight() {
 }
 
 function SalesMockupLight() {
+  const [activeDeal, setActiveDeal] = React.useState<string>("Apex");
+  const [toast, setToast] = React.useState<string | null>(null);
+
+  const handleAction = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
   return (
     <div className="space-y-3 font-sans">
-      <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
+      <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-2.5 text-xs">
+        <p className="text-[0.72rem] text-emerald-950 font-medium">
+          <strong className="font-bold text-emerald-700">How this helps you: </strong>
+          Automatically scores and distributes inbound enterprise leads within 30 seconds—shortening sales cycles by 38%.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between rounded-xl border border-emerald-200 bg-white p-3 shadow-2xs">
         <div>
           <p className="text-xs font-bold text-slate-900">BITScrm Sales · Pipeline Stages</p>
           <p className="text-[0.68rem] text-slate-500">Active Deals: 11 Accounts · AI Lead Routing</p>
         </div>
-        <span className="rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-bold text-white font-mono">
-          ₱18.4M Weighted
-        </span>
+        <button
+          type="button"
+          onClick={() => handleAction("⚡ Deal advanced! 'Apex Global BPO' moved to 'Contract Negotiation' stage (+₱4.2M).")}
+          className="rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-emerald-700 active:scale-95 cursor-pointer shadow-xs"
+        >
+          Advance Deal ⚡
+        </button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+      {toast && (
+        <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-2 text-[0.72rem] font-bold text-emerald-800 animate-fade-in">
+          {toast}
+        </div>
+      )}
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs">
         <table className="w-full text-left text-xs">
           <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
             <tr>
-              <th className="p-2">Deal Name</th>
+              <th className="p-2">Deal Name (Click row)</th>
               <th className="p-2">Stage</th>
               <th className="p-2">Contract Value</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-[0.7rem]">
-            <tr>
+            <tr
+              onClick={() => {
+                setActiveDeal("Apex");
+                handleAction("✓ Apex Global BPO selected. Win probability: 70%. Follow-up task assigned.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeDeal === "Apex" ? "bg-emerald-50/60 font-medium" : "hover:bg-slate-50")}
+            >
               <td className="p-2 font-bold text-slate-900">Apex Global BPO</td>
               <td className="p-2">
                 <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">Proposal Sent</span>
               </td>
               <td className="p-2 font-mono text-slate-800">₱4.2M (Prob 70%)</td>
             </tr>
-            <tr>
+            <tr
+              onClick={() => {
+                setActiveDeal("Pacific");
+                handleAction("✓ Pacific Recovery selected. Closed-Won! Invoice generated in ERP.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeDeal === "Pacific" ? "bg-emerald-50/60 font-medium" : "hover:bg-slate-50")}
+            >
               <td className="p-2 font-bold text-slate-900">Pacific Recovery</td>
               <td className="p-2">
                 <span className="rounded bg-[#00c875] px-2 py-0.5 text-[0.62rem] font-bold text-white">Closed-Won</span>
@@ -590,19 +665,43 @@ function SalesMockupLight() {
 }
 
 function MarketingMockupLight() {
+  const [toast, setToast] = React.useState<string | null>(null);
+
+  const handleAction = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
   return (
     <div className="space-y-3 font-sans">
-      <div className="flex items-center justify-between rounded-xl border border-pink-200 bg-pink-50/70 p-3">
+      <div className="rounded-xl border border-pink-200 bg-pink-50/70 p-2.5 text-xs">
+        <p className="text-[0.72rem] text-pink-950 font-medium">
+          <strong className="font-bold text-pink-700">How this helps you: </strong>
+          Recovers delinquent contacts through automated multi-channel drips (SMS, Viber, Email), delivering 42% portal open rates.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between rounded-xl border border-pink-200 bg-white p-3 shadow-2xs">
         <div>
           <p className="text-xs font-bold text-slate-900">Customer Journey Automation</p>
           <p className="text-[0.68rem] text-slate-500">Delinquent 30-DPD Drip · Consent Verified</p>
         </div>
-        <span className="rounded-md bg-pink-600 px-2 py-0.5 text-xs font-bold text-white font-mono">
-          1,840 Enrolled
-        </span>
+        <button
+          type="button"
+          onClick={() => handleAction("📲 1,840 SMS payment reminders fired through Semaphore gateway!")}
+          className="rounded-lg bg-pink-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-pink-700 active:scale-95 cursor-pointer shadow-xs"
+        >
+          Trigger Drip Broadcast 📲
+        </button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+      {toast && (
+        <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-2 text-[0.72rem] font-bold text-emerald-800 animate-fade-in">
+          {toast}
+        </div>
+      )}
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs">
         <table className="w-full text-left text-xs">
           <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
             <tr>
@@ -612,14 +711,20 @@ function MarketingMockupLight() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-[0.7rem]">
-            <tr>
+            <tr
+              onClick={() => handleAction("✓ SMS Portal Link analytics: 99% delivery rate across Smart and Globe networks.")}
+              className="hover:bg-slate-50 cursor-pointer"
+            >
               <td className="p-2 font-bold text-slate-900">1. SMS Portal Link</td>
               <td className="p-2">
                 <span className="rounded bg-[#00c875] px-2 py-0.5 text-[0.62rem] font-bold text-white">Delivered 99%</span>
               </td>
               <td className="p-2 font-mono text-blue-600">42% Open Rate</td>
             </tr>
-            <tr>
+            <tr
+              onClick={() => handleAction("✓ AI Voice Escalation queued: 48-hour quiet hour window strictly enforced.")}
+              className="hover:bg-slate-50 cursor-pointer"
+            >
               <td className="p-2 font-bold text-slate-900">2. AI Voice Escalation</td>
               <td className="p-2">
                 <span className="rounded bg-[#a25ddc] px-2 py-0.5 text-[0.62rem] font-bold text-white">Trigger (48h)</span>
@@ -634,19 +739,43 @@ function MarketingMockupLight() {
 }
 
 function CommerceMockupLight() {
+  const [toast, setToast] = React.useState<string | null>(null);
+
+  const handleAction = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
   return (
     <div className="space-y-3 font-sans">
-      <div className="flex items-center justify-between rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
+      <div className="rounded-xl border border-cyan-200 bg-cyan-50/70 p-2.5 text-xs">
+        <p className="text-[0.72rem] text-cyan-950 font-medium">
+          <strong className="font-bold text-cyan-700">How this helps you: </strong>
+          PCI-DSS Level 1 compliant tokenized billing. Automatically charges monthly retainers via credit card or Maya without manual invoicing.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between rounded-xl border border-cyan-200 bg-white p-3 shadow-2xs">
         <div>
           <p className="text-xs font-bold text-slate-900">Invoicing & Recurring Subscriptions</p>
           <p className="text-[0.68rem] text-slate-500">PCI-DSS Level 1 Ready · Tokenized Gateways</p>
         </div>
-        <span className="rounded-md bg-cyan-600 px-2 py-0.5 text-xs font-bold text-white font-mono">
-          Auto-Debit OK
-        </span>
+        <button
+          type="button"
+          onClick={() => handleAction("✓ Auto-debit verified: 120 Enterprise Seat retainers billed successfully (+₱180,000).")}
+          className="rounded-lg bg-cyan-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-cyan-700 active:scale-95 cursor-pointer shadow-xs"
+        >
+          Execute Auto-Debit 💳
+        </button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+      {toast && (
+        <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-2 text-[0.72rem] font-bold text-emerald-800 animate-fade-in">
+          {toast}
+        </div>
+      )}
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs">
         <table className="w-full text-left text-xs">
           <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
             <tr>
@@ -656,14 +785,20 @@ function CommerceMockupLight() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-[0.7rem]">
-            <tr>
+            <tr
+              onClick={() => handleAction("✓ 120 Enterprise Seats: Tokenized payment on file. Next billing date: Oct 1.")}
+              className="hover:bg-slate-50 cursor-pointer"
+            >
               <td className="p-2 font-bold text-slate-900">Enterprise Seat Licenses (120)</td>
               <td className="p-2">Monthly Retainer</td>
               <td className="p-2">
                 <span className="rounded bg-[#00c875] px-2 py-0.5 text-[0.62rem] font-bold text-white">Paid</span>
               </td>
             </tr>
-            <tr>
+            <tr
+              onClick={() => handleAction("✓ Metered SIP Telephony: 64,000 mins reconciled with Philippine carrier invoice.")}
+              className="hover:bg-slate-50 cursor-pointer"
+            >
               <td className="p-2 font-bold text-slate-900">Metered SIP Telephony</td>
               <td className="p-2">64,000 Mins</td>
               <td className="p-2">

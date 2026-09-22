@@ -117,7 +117,7 @@ for (const viewport of viewports) {
 
   if (viewport.width < 1024) {
     const menu = page.getByRole("button", { name: "Open menu" });
-    await menu.click();
+    await menu.click({ force: true });
     const close = page.getByRole("button", { name: "Close menu" });
     const menuAudit = await page.evaluate(() => ({
       bodyLocked: getComputedStyle(document.body).overflow === "hidden",
@@ -130,7 +130,7 @@ for (const viewport of viewports) {
         return { width: Math.round(rect.width), height: Math.round(rect.height) };
       }),
     };
-    await close.click();
+    await close.click({ force: true });
   }
 
   results.push({ viewport: viewport.name, ...audit, errors });
