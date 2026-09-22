@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google-site-verification-placeholder",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google645361b8cef93e08",
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
     other: {
       "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION || "",
