@@ -24,9 +24,15 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  if (pathname === "/brandbook.html" && request.nextUrl.searchParams.has("_rsc")) {
+    const url = request.nextUrl.clone();
+    url.searchParams.delete("_rsc");
+    return NextResponse.redirect(url, 308);
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/app/:path*", "/login", "/forgot-password"],
+  matcher: ["/app/:path*", "/login", "/forgot-password", "/brandbook.html"],
 };

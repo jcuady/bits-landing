@@ -25,127 +25,136 @@ export function Hero() {
       <Container className="relative z-10">
         <div className="flex min-h-[100dvh] flex-col pb-10 pt-24 sm:pb-14 sm:pt-28 md:pt-[6.5rem] lg:pb-16">
           <div className="mx-auto flex max-w-5xl flex-col items-center px-2 pt-4 text-center sm:pt-8 lg:pt-10">
-            {/* Eyebrow */}
+            {/* Eyebrow Pill */}
             <Reveal y={16}>
-              <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/15 bg-blue-50/70 px-4 py-1.5 backdrop-blur-md shadow-xs">
-                <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" aria-hidden />
-                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                  Boundless IT Solutions · BITS Enterprise Operations Suite
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50/90 px-3.5 py-1.5 shadow-xs backdrop-blur-md">
+                <span className="relative flex size-2" aria-hidden>
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                </span>
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-slate-700">
+                  Enterprise Operations Suite · Custom Deployed for Philippine Business
                 </span>
               </div>
             </Reveal>
 
-            {/* Headline */}
+            {/* Headline with simple, powerful words */}
             <Reveal delay={0.06} y={18}>
-              <h1 className="text-display mt-2 max-w-5xl text-balance font-bold leading-[1.08] text-slate-900">
-                Stop wrestling with generic SaaS.{" "}
+              <h1 className="text-display mt-2 max-w-4xl text-balance font-bold leading-[1.05] tracking-tight text-slate-900">
+                Software built for your business.{" "}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                  Deploy software built around your business.
+                  Not the other way around.
                 </span>
               </h1>
             </Reveal>
 
             {/* Supporting Copy */}
             <Reveal delay={0.12} y={14}>
-              <p className="text-lede mx-auto mt-5 max-w-[56ch] text-pretty text-slate-600">
-                Boundless IT Solutions (BITS) engineers tailored operational software engines—from our flagship BITScrm predictive dialer and BITSagent voice AI to SAP-grade accounting and compliance payroll—deployed on managed cloud or sovereign on-prem.
+              <p className="text-lede mx-auto mt-6 max-w-[54ch] text-pretty text-slate-600">
+                Stop forcing your team into rigid, per-seat SaaS. BITS designs, deploys, and manages custom software engines—from AI-powered CRM and predictive dialers to automated ERP and payroll—tailored exactly to how you operate.
               </p>
             </Reveal>
 
-            {/* Primary & Secondary CTAs */}
+            {/* Primary & Secondary CTAs (Apple Island & Button-in-Button Architecture) */}
             <Reveal delay={0.18} y={12}>
               <div className="mt-8 flex flex-col items-stretch justify-center gap-3.5 sm:mt-10 sm:flex-row sm:items-center">
                 <Magnetic className="w-full sm:w-auto">
                   <Link
                     href="/#contact"
-                    className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.99] sm:w-auto"
+                    className="group relative flex h-14 w-full items-center justify-between gap-4 rounded-full bg-blue-600 pl-7 pr-3 font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 active:scale-[0.98] sm:w-auto sm:justify-center"
                   >
-                    <span>Request Architecture Scoping</span>
-                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                    <span className="text-[0.95rem]">Schedule Architecture Call</span>
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </span>
                   </Link>
                 </Magnetic>
                 <Magnetic className="w-full sm:w-auto">
                   <Link
                     href="/#products-suite"
-                    className="flex h-14 w-full items-center justify-center rounded-full bg-white px-8 font-bold text-slate-900 shadow-xs ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-50 hover:ring-slate-300 active:scale-[0.99] sm:w-auto"
+                    className="group flex h-14 w-full items-center justify-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-7 font-bold text-slate-800 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-blue-600 active:scale-[0.98] sm:w-auto"
                   >
-                    Explore 18 Enterprise Engines
+                    <span className="text-[0.95rem]">Explore 18 Engines</span>
+                    <span className="text-slate-400 transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                   </Link>
                 </Magnetic>
               </div>
 
-              {/* Direct Deep-Dive Product Links */}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-[0.85rem] font-bold">
+              {/* Direct Deep-Dive Product Links with standard touch-targets */}
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[0.82rem] font-bold">
                 <Link
                   href="/bitscrm"
-                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50/80 px-3.5 py-1.5 text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50/80 hover:text-blue-700"
                 >
+                  <span className="size-1.5 rounded-full bg-blue-600" />
                   <span>BITScrm Core</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                  <span className="text-slate-400">↗</span>
                 </Link>
-                <span className="text-slate-300 hidden sm:inline">•</span>
                 <Link
                   href="/bitsagent"
-                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-violet-600 hover:text-violet-700 transition-colors"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50/80 px-3.5 py-1.5 text-slate-700 transition-colors hover:border-violet-300 hover:bg-violet-50/80 hover:text-violet-700"
                 >
-                  <span>AI Operations (BITSagent)</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                  <span className="size-1.5 rounded-full bg-violet-600" />
+                  <span>AI Phone Agents</span>
+                  <span className="text-slate-400">↗</span>
                 </Link>
-                <span className="text-slate-300 hidden sm:inline">•</span>
                 <Link
                   href="/products/accounting"
-                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-emerald-600 hover:text-emerald-700 transition-colors"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50/80 px-3.5 py-1.5 text-slate-700 transition-colors hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-700"
                 >
+                  <span className="size-1.5 rounded-full bg-emerald-600" />
                   <span>Accounting ERP</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                  <span className="text-slate-400">↗</span>
                 </Link>
-                <span className="text-slate-300 hidden sm:inline">•</span>
                 <Link
                   href="/products/nfc-card"
-                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-cyan-600 hover:text-cyan-700 transition-colors"
+                  className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50/80 px-3.5 py-1.5 text-slate-700 transition-colors hover:border-cyan-300 hover:bg-cyan-50/80 hover:text-cyan-700"
                 >
+                  <span className="size-1.5 rounded-full bg-cyan-600" />
                   <span>Smart NFC Card</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                  <span className="text-slate-400">↗</span>
                 </Link>
               </div>
 
               {/* Friction-reducing reassurance row */}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.78rem] font-medium text-slate-500">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.78rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
                   <span className="font-bold text-emerald-600">✓</span> Aligned with BSP & NPC Data Privacy
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud (Recommended) or On-Prem
+                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud or Sovereign On-Prem
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Continuous Security & System Upgrades
+                  <span className="font-bold text-emerald-600">✓</span> Zero Per-User License Penalties
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> White-Label Branding Ready
+                  <span className="font-bold text-emerald-600">✓</span> Full Source Code & IP Ownership Option
                 </span>
               </div>
             </Reveal>
 
-            {/* Platform Benchmarks */}
+            {/* Platform Benchmarks / Apple Hardware Bento */}
             <Reveal delay={0.24} y={10}>
               <div className="mx-auto mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
-                <div className="flex items-center gap-2.5 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 shadow-xs backdrop-blur-md">
+                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-2.5 shadow-xs backdrop-blur-md">
                   <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
-                  <span className="font-mono text-[0.88rem] font-bold text-blue-600">3.2x Connects</span>
-                  <span className="text-[0.78rem] font-medium text-slate-600">Predictive Dialing Connects</span>
+                  <span className="font-mono text-[0.92rem] font-bold text-blue-600">3.2× Connects</span>
+                  <span className="text-[0.78rem] font-medium text-slate-600">Predictive Auto-Dialing</span>
                 </div>
 
-                <div className="flex items-center gap-2.5 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 shadow-xs backdrop-blur-md">
-                  <span className="font-mono text-[0.82rem] font-bold text-slate-800">256-Bit TLS</span>
-                  <span className="text-[0.78rem] font-medium text-slate-600">Security-Conscious Architecture</span>
+                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-2.5 shadow-xs backdrop-blur-md">
+                  <span className="font-mono text-[0.88rem] font-bold text-slate-800">99.9%</span>
+                  <span className="text-[0.78rem] font-medium text-slate-600">Telephony SLA & TLS 1.3</span>
                 </div>
 
-                <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 shadow-xs backdrop-blur-md">
-                  <span className="font-mono text-[0.88rem] font-bold text-emerald-600">99.9%</span>
-                  <span className="text-[0.78rem] font-medium text-slate-600">High-Availability Telephony SLA</span>
+                <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-2.5 shadow-xs backdrop-blur-md">
+                  <span className="font-mono text-[0.92rem] font-bold text-emerald-600">&lt; 30 Days</span>
+                  <span className="text-[0.78rem] font-medium text-slate-600">Custom Deployment Velocity</span>
                 </div>
               </div>
             </Reveal>

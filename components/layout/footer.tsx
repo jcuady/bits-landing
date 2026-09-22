@@ -44,25 +44,35 @@ export function Footer() {
               <div key={col.title}>
                 <h3 className="text-[0.78rem] font-bold uppercase tracking-wider text-slate-900">{col.title}</h3>
                 <ul className="mt-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      {link.href.startsWith("/") ? (
-                        <Link
-                          href={link.href}
-                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
-                        >
-                          {link.label}
-                        </Link>
-                      ) : (
-                        <a
-                          href={link.href}
-                          className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
-                        >
-                          {link.label}
-                        </a>
-                      )}
-                    </li>
-                  ))}
+                  {col.links.map((link) => {
+                    const isInternalPage =
+                      link.href.startsWith("/") &&
+                      !link.href.endsWith(".html") &&
+                      !link.href.endsWith(".pdf") &&
+                      !link.href.includes(".xml");
+
+                    return (
+                      <li key={link.label}>
+                        {isInternalPage ? (
+                          <Link
+                            href={link.href}
+                            className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
+                          >
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            target={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "_blank" : undefined}
+                            rel={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
+                            className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
+                          >
+                            {link.label}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
