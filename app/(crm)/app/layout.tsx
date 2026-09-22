@@ -1,8 +1,17 @@
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { CRM_SESSION_COOKIE, decodeSession } from "@/lib/crm/auth";
 import { CrmProvider } from "@/lib/crm/store";
 import { AppShellClient } from "@/components/crm/app-shell-client";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 export default async function CrmAppLayout({ children }: { children: React.ReactNode }) {
   const jar = await cookies();

@@ -23,11 +23,11 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-slate-200 bg-white text-slate-800">
       <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <Container className="relative">
-        <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1.2fr_2fr] lg:gap-20">
+        <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.4fr] lg:gap-14">
           <div>
             <Logo variant="horizontal" className="h-9" />
             <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-slate-600">
-              {site.tagline} Custom software, workflow automation, CRM, and AI operations engineered around how your organization actually operates.
+              <strong className="font-semibold text-slate-900">Boundless IT Solutions (BITS)</strong> — {site.tagline} Custom software, workflow automation, CRM, and AI operations engineered around how your organization actually operates.
             </p>
 
             {/* Newsletter signup */}
@@ -39,7 +39,7 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-4">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
             {footerColumns.map((col) => (
               <div key={col.title}>
                 <h3 className="text-[0.78rem] font-bold uppercase tracking-wider text-slate-900">{col.title}</h3>

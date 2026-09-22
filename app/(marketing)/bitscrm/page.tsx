@@ -4,19 +4,46 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
-import { pricingTiers } from "@/lib/site";
+import { pricingTiers, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { CrmVariantsExplorer } from "@/components/sections/crm-variants-explorer";
 
 export const metadata: Metadata = {
-  title: "BITScrm — Modular Enterprise CRM & Collections Operations Core",
+  title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
   description:
-    "Explore BITScrm: our core flagship Customer Service & Collections CRM, plus specialized variants for Sales, Marketing, and Commerce, universally connected to BITSagent AI and BITS RAG.",
+    "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring. Sovereign cloud or on-premise.",
+  keywords: [
+    "BITScrm",
+    "BITS CRM",
+    "Boundless IT Solutions CRM",
+    "Boundless IT Solutions BITScrm",
+    "collections CRM software Philippines",
+    "debt collection software Philippines",
+    "predictive dialer CRM",
+    "supervisory call monitoring CRM",
+    "BSP collections compliance software",
+    "omnichannel contact center CRM",
+    "debt recovery platform",
+    "customer service CRM Philippines",
+  ],
+  alternates: {
+    canonical: `${site.url}/bitscrm`,
+  },
   openGraph: {
-    title: "BITScrm — Modular Enterprise CRM & Collections Operations Core",
+    title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
     description:
-      "Explore BITScrm: our core flagship Customer Service & Collections CRM, plus specialized variants for Sales, Marketing, and Commerce, universally connected to BITSagent AI and BITS RAG.",
+      "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring.",
+    url: `${site.url}/bitscrm`,
+    siteName: site.legalName,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITScrm Enterprise Collections Platform" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
+    description:
+      "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring.",
+    images: ["/og.png"],
   },
 };
 
@@ -417,7 +444,71 @@ export default function BitsCrmPage() {
             </p>
           </div>
 
-          {/* JSON-LD Structured Data */}
+          {/* JSON-LD Structured Data: SoftwareApplication, Breadcrumbs & FAQPage */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                name: "BITScrm Enterprise Collections Platform",
+                alternateName: [
+                  "BITScrm",
+                  "BITS CRM",
+                  "Boundless IT Solutions Collections CRM",
+                  "Boundless IT Solutions BITScrm",
+                  "BITS Collections Core",
+                ],
+                applicationCategory: "BusinessApplication",
+                operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
+                description:
+                  "Flagship enterprise collections and customer service CRM engineered by Boundless IT Solutions with predictive dialing, automated PTP recovery, supervisory HUD, and compliance controls.",
+                url: `${site.url}/bitscrm`,
+                publisher: {
+                  "@type": "Organization",
+                  name: "BITS - Boundless IT Solutions",
+                  legalName: "Boundless IT Solutions",
+                  url: site.url,
+                },
+                brand: {
+                  "@type": "Brand",
+                  name: "Boundless IT Solutions",
+                  alternateName: "BITS",
+                },
+                offers: {
+                  "@type": "Offer",
+                  priceCurrency: "PHP",
+                  price: "28500",
+                  priceValidUntil: "2027-12-31",
+                  availability: "https://schema.org/InStock",
+                  url: `${site.url}/bitscrm`,
+                },
+              }),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: site.url,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: "BITScrm Collections Platform",
+                    item: `${site.url}/bitscrm`,
+                  },
+                ],
+              }),
+            }}
+          />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{

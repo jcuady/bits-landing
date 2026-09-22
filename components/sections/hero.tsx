@@ -30,7 +30,7 @@ export function Hero() {
               <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/15 bg-blue-50/70 px-4 py-1.5 backdrop-blur-md shadow-xs">
                 <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" aria-hidden />
                 <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                  BITS Enterprise Operations Suite · Serving BPOs, Banks & Enterprises
+                  Boundless IT Solutions · BITS Enterprise Operations Suite
                 </span>
               </div>
             </Reveal>
@@ -48,7 +48,7 @@ export function Hero() {
             {/* Supporting Copy */}
             <Reveal delay={0.12} y={14}>
               <p className="text-lede mx-auto mt-5 max-w-[56ch] text-pretty text-slate-600">
-                From high-velocity collections dialers and autonomous voice AI to SAP-grade accounting and compliance payroll—BITS delivers tailored operational software engines deployed on managed cloud or sovereign on-prem.
+                Boundless IT Solutions (BITS) engineers tailored operational software engines—from our flagship BITScrm predictive dialer and BITSagent voice AI to SAP-grade accounting and compliance payroll—deployed on managed cloud or sovereign on-prem.
               </p>
             </Reveal>
 

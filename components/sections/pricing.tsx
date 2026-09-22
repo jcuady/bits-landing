@@ -159,7 +159,7 @@ export function Pricing() {
                   type="button"
                   onClick={() => setCurrency("PHP")}
                   className={cn(
-                    "inline-flex min-h-[36px] min-w-[76px] items-center justify-center rounded-full px-3 py-1 font-mono text-xs font-bold transition-all",
+                    "inline-flex min-h-[44px] min-w-[80px] cursor-pointer items-center justify-center rounded-full px-4 py-2 font-mono text-xs font-bold transition-all",
                     currency === "PHP"
                       ? "bg-blue-600 text-white shadow-xs"
                       : "text-slate-600 hover:text-slate-900"
@@ -171,7 +171,7 @@ export function Pricing() {
                   type="button"
                   onClick={() => setCurrency("USD")}
                   className={cn(
-                    "inline-flex min-h-[36px] min-w-[76px] items-center justify-center rounded-full px-3 py-1 font-mono text-xs font-bold transition-all",
+                    "inline-flex min-h-[44px] min-w-[80px] cursor-pointer items-center justify-center rounded-full px-4 py-2 font-mono text-xs font-bold transition-all",
                     currency === "USD"
                       ? "bg-blue-600 text-white shadow-xs"
                       : "text-slate-600 hover:text-slate-900"

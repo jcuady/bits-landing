@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
-  const title = `${product.name} — ${product.tagline}`;
-  const description = `${product.description.slice(0, 155)}...`;
+  const title = `${product.name} — ${product.tagline} | Boundless IT Solutions (BITS)`;
+  const description = `${product.description.slice(0, 150)}... Custom enterprise software engineered by Boundless IT Solutions (BITS).`;
 
   return {
     title,
@@ -53,11 +53,21 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     keywords: [
       product.name,
       product.shortName,
+      `BITS ${product.shortName}`,
+      `BITS ${product.name}`,
+      `Boundless IT Solutions ${product.name}`,
+      `Boundless IT Solutions ${product.shortName}`,
+      "Boundless IT Solutions",
+      "Boundless IT Solutions Philippines",
+      "BITS",
+      "BITScrm",
       product.categoryLabel,
       ...product.complianceBadges,
-      "BITS software Philippines",
-      "enterprise software",
-      "cloud or on-premise",
+      `${product.shortName} software Philippines`,
+      "enterprise operations software",
+      "custom enterprise software Philippines",
+      "cloud or sovereign on-premise",
+      "white label enterprise platform",
     ],
     alternates: {
       canonical: `${site.url}/products/${product.id}`,
@@ -522,9 +532,83 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     ],
   };
 
+  const isHardware = product.id === "nfc-card";
+  const productSchema = isHardware
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        alternateName: [
+          `BITS ${product.shortName}`,
+          `Boundless IT Solutions ${product.name}`,
+          `Boundless IT Solutions ${product.shortName}`,
+          product.shortName,
+        ],
+        description: product.description,
+        url: `${site.url}/products/${product.id}`,
+        brand: {
+          "@type": "Brand",
+          name: "Boundless IT Solutions",
+          alternateName: "BITS",
+        },
+        manufacturer: {
+          "@type": "Organization",
+          name: "BITS - Boundless IT Solutions",
+          legalName: "Boundless IT Solutions",
+          url: site.url,
+        },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "PHP",
+          price: "1499",
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          url: `${site.url}/products/${product.id}`,
+        },
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: product.name,
+        alternateName: [
+          `BITS ${product.shortName}`,
+          `BITS ${product.name}`,
+          `Boundless IT Solutions ${product.name}`,
+          `Boundless IT Solutions ${product.shortName}`,
+          product.shortName,
+        ],
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
+        description: product.description,
+        url: `${site.url}/products/${product.id}`,
+        publisher: {
+          "@type": "Organization",
+          name: "BITS - Boundless IT Solutions",
+          legalName: "Boundless IT Solutions",
+          url: site.url,
+        },
+        brand: {
+          "@type": "Brand",
+          name: "Boundless IT Solutions",
+          alternateName: "BITS",
+        },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "PHP",
+          price: "28500",
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          url: `${site.url}/products/${product.id}`,
+        },
+      };
+
   return (
     <main id="content" className="pt-20">
-      {/* Schema.org Structured Data for Answer Engine Optimization (AEO) */}
+      {/* Schema.org Structured Data for Answer Engine Optimization (AEO) & Google Knowledge Graph */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
