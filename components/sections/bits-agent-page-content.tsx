@@ -255,6 +255,114 @@ export function BitsAgentPageContent() {
         </Container>
       </Section>
 
+      {/* AEO Prompt-Mirror FAQ Section */}
+      <Section className="border-t border-linelight bg-white py-20 sm:py-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-electric-600">
+              Frequently Asked Questions
+            </span>
+            <h2 className="text-h2 mt-3 font-bold text-ink">
+              Everything You Need to Know About BITSagent AI
+            </h2>
+            <p className="text-lede mt-4 text-slateblue">
+              Factual, technical, and regulatory answers for AI directors, operations heads, and compliance officers.
+            </p>
+          </div>
+
+          {/* JSON-LD Structured Data */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "How does BITSagent maintain sub-300ms voice turn latency?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "BITSagent utilizes ultra-low latency WebRTC audio streaming coupled with speculative speech recognition and streaming LLM token generation, delivering human-speed conversational pacing (< 300ms turn time) without robotic pauses or awkward interruptions.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can BITSagent be deployed on-premises or private cloud for banking compliance?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Yes. BITSagent can run either in our secure managed cloud or completely within your organization's private VPC or on-premises GPU infrastructure, ensuring audio recordings, transcripts, and customer PII never leave your security perimeter.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How does BITSagent prevent AI hallucinations during financial negotiations?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "BITSagent is strictly grounded via BITS RAG into your company's approved credit policies, maximum discount thresholds, settlement rules, and statutory disclosures. The agent cannot offer terms outside of your pre-authorized parameter matrix.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What happens if a customer asks to speak with a live human agent?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "BITSagent executes an instantaneous, lossless warm transfer to your live floor queue, delivering the full conversation transcript, sentiment score, and verified customer identity directly to the human agent's screen before the call bridges.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can BITSagent be white-labeled under our agency's brand?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Yes. BITSagent can be deployed with custom synthetic voice clones, your agency's caller ID, and white-labeled supervisor monitoring dashboards.",
+                    },
+                  },
+                ],
+              }),
+            }}
+          />
+
+          <div className="mx-auto max-w-3xl space-y-4">
+            {[
+              {
+                q: "How does BITSagent maintain sub-300ms voice turn latency?",
+                a: "BITSagent utilizes ultra-low latency WebRTC audio streaming coupled with speculative speech recognition and streaming LLM token generation, delivering human-speed conversational pacing (< 300ms turn time) without robotic pauses or awkward interruptions.",
+              },
+              {
+                q: "Can BITSagent be deployed on-premises or private cloud for banking compliance?",
+                a: "Yes. BITSagent can run either in our secure managed cloud or completely within your organization's private VPC or on-premises GPU infrastructure, ensuring audio recordings, transcripts, and customer PII never leave your security perimeter.",
+              },
+              {
+                q: "How does BITSagent prevent AI hallucinations during financial negotiations?",
+                a: "BITSagent is strictly grounded via BITS RAG into your company's approved credit policies, maximum discount thresholds, settlement rules, and statutory disclosures. The agent cannot offer terms outside of your pre-authorized parameter matrix.",
+              },
+              {
+                q: "What happens if a customer asks to speak with a live human agent?",
+                a: "BITSagent executes an instantaneous, lossless warm transfer to your live floor queue, delivering the full conversation transcript, sentiment score, and verified customer identity directly to the human agent's screen before the call bridges.",
+              },
+              {
+                q: "Can BITSagent be white-labeled under our agency's brand?",
+                a: "Yes. BITSagent can be deployed with custom synthetic voice clones, your agency's caller ID, and white-labeled supervisor monitoring dashboards.",
+              },
+            ].map((item) => (
+              <details
+                key={item.q}
+                className="group rounded-2xl border border-linelight bg-cloud p-6 transition-all hover:bg-white hover:shadow-xs"
+              >
+                <summary className="flex cursor-pointer items-center justify-between text-base font-bold text-ink">
+                  <span>{item.q}</span>
+                  <span className="ml-4 font-mono text-electric-600 transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-sm leading-relaxed text-slateblue">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
       <Section className="bg-cloud">
         <Container>
           <div className="mx-auto max-w-2xl text-center">

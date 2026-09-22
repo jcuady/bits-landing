@@ -1,0 +1,650 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
+import { Magnetic } from "@/components/ui/magnetic";
+import { bitsProducts, pricingTiers, site } from "@/lib/site";
+import { cn } from "@/lib/utils";
+import { ProductMockupBoard } from "@/components/sections/products-suite";
+import {
+  ShieldCheck,
+  Check,
+  ArrowRight,
+  Zap,
+  Server,
+  Cloud,
+  Lock,
+  Sparkles,
+  HelpCircle,
+  Clock,
+  Activity,
+  Layers,
+  FileCheck,
+} from "lucide-react";
+
+interface ProductPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return bitsProducts.map((product) => ({
+    slug: product.id,
+  }));
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const product = bitsProducts.find((p) => p.id === slug);
+
+  if (!product) {
+    return {
+      title: "Product Not Found | BITS",
+    };
+  }
+
+  const title = `${product.name} — ${product.tagline}`;
+  const description = `${product.description.slice(0, 155)}...`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      product.name,
+      product.shortName,
+      product.categoryLabel,
+      ...product.complianceBadges,
+      "BITS software Philippines",
+      "enterprise software",
+      "cloud or on-premise",
+    ],
+    alternates: {
+      canonical: `${site.url}/products/${product.id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${site.url}/products/${product.id}`,
+      type: "website",
+      siteName: site.legalName,
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: product.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og.png"],
+    },
+  };
+}
+
+/* ── Domain-Specific Problem Statements ── */
+function getProductProblems(product: (typeof bitsProducts)[number]) {
+  switch (product.id) {
+    case "accounting":
+      return [
+        {
+          title: "Disconnected Manual Journal Entries",
+          description:
+            "Finance teams waste dozens of hours copying invoices and payroll figures between isolated spreadsheets, leading to month-end reconciliation delays and ledger mismatches.",
+        },
+        {
+          title: "Rigid Multi-Entity Visibility",
+          description:
+            "Managing multiple subsidiaries without native intercompany eliminations forces manual consolidations and creates blind spots in group cash flow.",
+        },
+        {
+          title: "Strict Tax & CAS Audit Scrutiny",
+          description:
+            "Failing BIR Computerized Accounting System (CAS) or IFRS requirements risks heavy regulatory penalties, non-compliance fines, and disallowed tax deductions.",
+        },
+      ];
+    case "payroll":
+      return [
+        {
+          title: "Complex Statutory Calculation Errors",
+          description:
+            "Manual computations for SSS, PhilHealth, Pag-IBIG brackets, and TRAIN Law withholding tax tables frequently result in payroll disputes and government audit penalties.",
+        },
+        {
+          title: "Night Differential & 24/7 Shift Leakage",
+          description:
+            "Tracking graveyard hours, holiday premiums, and overtime across hundreds of agents without biometric hardware integration creates massive administrative overhead.",
+        },
+        {
+          title: "Disbursement Delays & Banking Friction",
+          description:
+            "Generating bank-specific payroll batch files manually is error-prone, risks payout delays, and exposes sensitive salary figures to unnecessary internal eyes.",
+        },
+      ];
+    case "hrms":
+      return [
+        {
+          title: "Chaotic 24/7 Shift Rostering",
+          description:
+            "BPO operations and multi-site facilities lose hours each week reconciling shift trades, sudden absences, and holiday coverage on brittle spreadsheet rosters.",
+        },
+        {
+          title: "Disconnected Attendance & Timekeeping",
+          description:
+            "Standalone biometric clocks that don't talk directly to leave balances and payroll cause constant manual timesheet adjustments and agent disputes.",
+        },
+        {
+          title: "Fragmented Employee Records",
+          description:
+            "Storing 201 files, performance evaluations, and disciplinary memos in separate shared folders violates Data Privacy Act (RA 10173) safeguards.",
+        },
+      ];
+    case "nfc-card":
+      return [
+        {
+          title: "Expensive & Outdated Paper Cards",
+          description:
+            "88% of paper business cards are tossed in the trash within a week. Re-printing cards whenever a title, phone number, or address changes costs thousands annually.",
+        },
+        {
+          title: "Lost High-Intent In-Person Leads",
+          description:
+            "Handing out a paper card relies on the prospect manually typing in your contact information, leading to near-zero follow-up conversion rates.",
+        },
+        {
+          title: "Zero Security If a Card is Lost",
+          description:
+            "Traditional cards cannot be revoked or locked if compromised, leaving sensitive corporate details and contact numbers circulating indefinitely.",
+        },
+      ];
+    case "white-label":
+      return [
+        {
+          title: "Prohibitive Custom Software Development Costs",
+          description:
+            "Building an enterprise CRM, ERP, or AI platform from scratch requires millions of dollars, years of engineering, and massive ongoing infrastructure maintenance.",
+        },
+        {
+          title: "Vendor Lock-in & Third-Party Branding",
+          description:
+            "Reselling off-the-shelf software exposes your clients to third-party vendor logos and direct vendor upsells, weakening your agency's brand authority.",
+        },
+        {
+          title: "Inability to Set Custom Client Pricing",
+          description:
+            "Rigid per-seat retail pricing from global vendors limits your profit margins and prevents you from packaging software into your own high-ticket retainer contracts.",
+        },
+      ];
+    default:
+      return [
+        {
+          title: "Disconnected Data Silos & Spreadsheets",
+          description:
+            "Operational records scattered across emails, spreadsheets, and legacy tools lead to human error, duplicated data entry, and slow team velocity.",
+        },
+        {
+          title: "Rigid Workflows that Don't Match Reality",
+          description:
+            "Generic off-the-shelf software forces your operators to change how they work to fit the tool, creating friction and shadow workarounds on the floor.",
+        },
+        {
+          title: "Lack of Auditable Compliance & RBAC",
+          description:
+            "Without granular role-based permissions and immutable activity logs, operations remain vulnerable to regulatory non-compliance and data security risks.",
+        },
+      ];
+  }
+}
+
+/* ── Prompt-Mirror AEO FAQ Generator ── */
+function getProductFaqs(product: (typeof bitsProducts)[number]) {
+  return [
+    {
+      q: `Can ${product.name} be deployed on-premises or in a private cloud?`,
+      a: `Yes. Like all BITS enterprise engines, ${product.name} can be deployed in a fully managed cloud environment (recommended for automated updates and zero infrastructure overhead) or self-hosted entirely on-premises within your organization's private datacenter for complete data sovereignty and regulatory compliance.`,
+    },
+    {
+      q: `Does ${product.name} receive continuous security updates and improvements?`,
+      a: `Yes. All BITS systems receive continuous security patches, vulnerability mitigations, and performance updates. Bespoke operational modifications, new integrations, or custom modules can be engineered upon request as your organization's workflows scale.`,
+    },
+    {
+      q: `How does ${product.name} integrate with other BITS modules?`,
+      a: `Every BITS engine shares a unified API contract and schema layer. For example, ${product.name} natively interconnects with BITS Accounting & ERP, BITS Payroll, BITScrm, and BITSagent AI, eliminating manual duplicate data entry across departments.`,
+    },
+    {
+      q: `Can ${product.name} be white-labeled under our own corporate branding?`,
+      a: `Yes. Through the BITS White Label Platform, you can deploy ${product.name} fully rebranded under your own company logo, custom domain, and color palette with zero mention of BITS, maintaining 100% brand equity with your customers and stakeholders.`,
+    },
+    {
+      q: `What compliance and statutory standards does ${product.name} adhere to?`,
+      a: `${product.name} is engineered to adhere to ${product.complianceBadges.join(", ")}, ensuring full compliance with local regulatory authorities and international enterprise security standards.`,
+    },
+  ];
+}
+
+export default async function ProductDetailPage({ params }: ProductPageProps) {
+  const { slug } = await params;
+  const product = bitsProducts.find((p) => p.id === slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  const problems = getProductProblems(product);
+  const faqs = getProductFaqs(product);
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: site.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products",
+        item: `${site.url}/#products-suite`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `${site.url}/products/${product.id}`,
+      },
+    ],
+  };
+
+  return (
+    <main id="content" className="pt-20">
+      {/* Schema.org Structured Data for Answer Engine Optimization (AEO) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
+      {/* 1. Hero Section */}
+      <section className="relative overflow-hidden bg-white pb-16 pt-12 sm:pb-24 sm:pt-16">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.07),rgba(255,255,255,0))]" />
+          <div className="absolute -right-40 top-1/4 h-[500px] w-[500px] rounded-full bg-blue-500/[0.04] blur-[100px]" />
+          <div className="absolute -left-40 bottom-1/4 h-[400px] w-[400px] rounded-full bg-indigo-500/[0.03] blur-[80px]" />
+        </div>
+
+        <Container className="relative z-10">
+          <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+            {/* Breadcrumb / Category Pill */}
+            <Reveal y={12}>
+              <div className="mb-6 flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-50/80 px-4 py-1.5 backdrop-blur-md">
+                <Link
+                  href="/"
+                  className="text-[0.72rem] font-bold text-slate-500 hover:text-blue-600 transition-colors"
+                >
+                  Platform
+                </Link>
+                <span className="text-[0.72rem] text-slate-400">/</span>
+                <Link
+                  href="/#products-suite"
+                  className="text-[0.72rem] font-bold text-slate-500 hover:text-blue-600 transition-colors"
+                >
+                  Products
+                </Link>
+                <span className="text-[0.72rem] text-slate-400">/</span>
+                <span className="text-[0.72rem] font-bold uppercase tracking-[0.15em] text-blue-700">
+                  {product.shortName}
+                </span>
+              </div>
+            </Reveal>
+
+            {/* H1 Headline */}
+            <Reveal delay={0.06} y={16}>
+              <h1 className="text-display text-balance font-bold leading-[1.08] text-slate-900">
+                {product.name}
+              </h1>
+            </Reveal>
+
+            {/* Tagline & Subtitle */}
+            <Reveal delay={0.12} y={14}>
+              <p className="mt-3 text-lg font-bold text-blue-600 sm:text-xl">
+                {product.tagline}
+              </p>
+              <p className="text-lede mx-auto mt-4 max-w-[62ch] text-pretty text-slate-600">
+                {product.description}
+              </p>
+            </Reveal>
+
+            {/* Action CTAs */}
+            <Reveal delay={0.18} y={12}>
+              <div className="mt-8 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
+                <Magnetic className="w-full sm:w-auto">
+                  <Link
+                    href="/#contact"
+                    className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-900/20 transition-all hover:bg-blue-700 active:scale-[0.98] sm:w-auto"
+                  >
+                    <span>Request Architecture Scoping</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+                </Magnetic>
+                <Magnetic className="w-full sm:w-auto">
+                  <Link
+                    href="/#pricing"
+                    className="flex h-14 w-full items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-bold text-slate-800 shadow-xs transition-colors hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] sm:w-auto"
+                  >
+                    View Enterprise Pricing
+                  </Link>
+                </Magnetic>
+              </div>
+
+              {/* Reassurance Row */}
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.8rem] font-medium text-slate-500">
+                <span className="flex items-center gap-1.5 text-slate-600">
+                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud (Recommended) or On-Prem
+                </span>
+                <span className="flex items-center gap-1.5 text-slate-600">
+                  <span className="font-bold text-emerald-600">✓</span> Continuous Security Updates
+                </span>
+                <span className="flex items-center gap-1.5 text-slate-600">
+                  <span className="font-bold text-emerald-600">✓</span> White-Label Ready
+                </span>
+              </div>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* 2. KPI Benchmark Strip */}
+      <section className="border-y border-slate-200/80 bg-slate-50/70 py-10">
+        <Container>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            <div className="text-center">
+              <div className="font-mono text-3xl font-bold tracking-tight text-blue-600 sm:text-4xl">
+                {product.metrics.value}
+              </div>
+              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">
+                {product.metrics.label}
+              </p>
+              <p className="text-[0.72rem] text-slate-500">Measured customer benchmark</p>
+            </div>
+            <div className="text-center">
+              <div className="font-mono text-3xl font-bold tracking-tight text-emerald-600 sm:text-4xl">
+                99.99%
+              </div>
+              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Availability SLA</p>
+              <p className="text-[0.72rem] text-slate-500">Dual-redundant architecture</p>
+            </div>
+            <div className="text-center">
+              <div className="font-mono text-3xl font-bold tracking-tight text-indigo-600 sm:text-4xl">
+                0-Day
+              </div>
+              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Audit Trail Latency</p>
+              <p className="text-[0.72rem] text-slate-500">Immutable WORM activity logs</p>
+            </div>
+            <div className="text-center">
+              <div className="font-mono text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                100%
+              </div>
+              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Data Sovereignty</p>
+              <p className="text-[0.72rem] text-slate-500">Private VPC or On-Prem</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 3. The Operational Problem Section */}
+      <section className="py-20 sm:py-28 bg-white border-b border-slate-200/60">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              The Operational Problem
+            </span>
+            <h2 className="text-h2 mt-3 font-bold text-slate-900">
+              Why off-the-shelf software and spreadsheets fail in this domain.
+            </h2>
+            <p className="text-lede mt-4 text-slate-600">
+              Rigid workflows, disconnected systems, and compliance oversights create hidden costs
+              that erode operational margins every single month.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {problems.map((problem, i) => (
+              <div
+                key={problem.title}
+                className="relative flex flex-col rounded-[2rem] border border-slate-200/90 bg-slate-50/50 p-8 shadow-xs transition-all hover:border-blue-200 hover:bg-white hover:shadow-lg"
+              >
+                <div className="flex size-10 items-center justify-center rounded-xl bg-rose-50 border border-rose-200 text-rose-600 font-mono text-sm font-bold">
+                  0{i + 1}
+                </div>
+                <h3 className="mt-5 text-lg font-bold text-slate-900">{problem.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {problem.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* 4. Signature Interactive Board Mockup */}
+      <section className="bg-slate-50/60 py-20 sm:py-28 border-b border-slate-200/70">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center mb-12">
+            <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              Live Workspace Console
+            </span>
+            <h2 className="text-h2 mt-3 font-bold text-slate-900">
+              Experience {product.name} in Action
+            </h2>
+            <p className="text-lede mt-4 text-slate-600">
+              Engineered with clean light-mode surfaces, real-time status cues, and zero clutter.
+              Explore the live interactive module below.
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xl shadow-slate-200/60 sm:p-10">
+            <ProductMockupBoard productId={product.id} />
+          </div>
+        </Container>
+      </section>
+
+      {/* 5. Architectural Capabilities & Compliance Badges */}
+      <section className="bg-white py-20 sm:py-28 border-b border-slate-200/60">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              Engineered Architecture
+            </span>
+            <h2 className="text-h2 mt-3 font-bold text-slate-900">
+              Core Capabilities & Technical Specifications
+            </h2>
+            <p className="text-lede mt-4 text-slate-600">
+              Built on scalable, type-safe foundations designed around your organization&apos;s real
+              operational throughput.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {product.capabilities.map((cap, idx) => (
+              <div
+                key={cap}
+                className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/40 p-6 transition-all hover:bg-white hover:border-blue-200 hover:shadow-md"
+              >
+                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-700 font-bold text-xs mt-0.5">
+                  <Check className="size-3.5" />
+                </span>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900">{cap}</h3>
+                  <p className="mt-1 text-xs text-slate-500">
+                    Engineered for high-volume enterprise operations with full auditability.
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Compliance Alignment Grid */}
+          <div className="mt-14 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h4 className="text-sm font-bold uppercase tracking-wider text-slate-900">
+                  Statutory & Compliance Certifications Aligned
+                </h4>
+                <p className="text-xs text-slate-600 mt-1">
+                  Validated against national regulatory circulars and international security benchmarks.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {product.complianceBadges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-2xs"
+                  >
+                    <ShieldCheck className="size-4 text-blue-600" />
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 6. Deployment Models & Security Guarantee */}
+      <section className="bg-slate-50/60 py-20 sm:py-24 border-b border-slate-200/60">
+        <Container>
+          <div className="mx-auto max-w-4xl rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-white to-indigo-50/80 p-8 sm:p-12 shadow-sm">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center">
+              <div>
+                <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+                  Deployment Scoping
+                </span>
+                <h3 className="text-2xl font-bold text-slate-900 sm:text-3xl mt-2">
+                  Cloud or On-Premises. Built around your data sovereignty.
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                  All BITS systems can be deployed on-premises or on cloud. We recommend managed cloud for
+                  automatic scaling, continuous security patches, and effortless backups, but on-premise
+                  deployment is fully supported for banking, government, or high-security compliance.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="flex items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 border border-slate-200">
+                    <Cloud className="size-4 text-blue-600" />
+                    Managed Cloud (Recommended)
+                  </div>
+                  <div className="flex items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 border border-slate-200">
+                    <Server className="size-4 text-indigo-600" />
+                    Sovereign On-Premises
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3 rounded-2xl bg-white p-6 border border-slate-200/90 shadow-xs">
+                <div className="flex items-start gap-3">
+                  <Check className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <p className="text-xs text-slate-700">
+                    <strong>Continuous Security:</strong> Continuous improvement and security patches applied automatically as new threats evolve.
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Check className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <p className="text-xs text-slate-700">
+                    <strong>Tailored Evolution:</strong> Custom features and workflow modifications can be engineered upon request as your team scales.
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Check className="size-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <p className="text-xs text-slate-700">
+                    <strong>White-Label Ready:</strong> Deploy under your company&apos;s custom domain and branding with zero BITS attribution.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 7. Prompt-Mirror AEO FAQ Section */}
+      <section className="bg-white py-20 sm:py-28 border-b border-slate-200/60">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              Frequently Asked Questions
+            </span>
+            <h2 className="text-h2 mt-3 font-bold text-slate-900">
+              Everything you need to know about {product.shortName}
+            </h2>
+            <p className="text-lede mt-4 text-slate-600">
+              Clear, direct, and factual answers for technical directors, operations leaders, and
+              compliance officers.
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-3xl space-y-4">
+            {faqs.map((faq) => (
+              <details
+                key={faq.q}
+                className="group rounded-2xl border border-slate-200/80 bg-slate-50/40 p-6 transition-all hover:bg-white hover:shadow-xs"
+              >
+                <summary className="flex cursor-pointer items-center justify-between text-base font-bold text-slate-900">
+                  <span>{faq.q}</span>
+                  <span className="ml-4 font-mono text-blue-600 transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* 8. Bottom CTA Banner */}
+      <section className="bg-slate-50 py-20 text-center">
+        <Container>
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-h2 font-bold text-slate-900">
+              Ready to deploy {product.name} on your floor?
+            </h2>
+            <p className="text-lede mx-auto mt-4 max-w-[48ch] text-slate-600">
+              Schedule an operational scoping consultation with our engineering team. We analyze your
+              bottlenecks and configure a tailored proof-of-concept for your team.
+            </p>
+            <div className="mt-8 flex flex-col justify-center gap-3.5 sm:flex-row">
+              <Link
+                href="/#contact"
+                className="inline-flex h-14 items-center justify-center rounded-full bg-blue-600 px-8 font-bold text-white shadow-md shadow-blue-900/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
+              >
+                Request Architecture Consultation
+              </Link>
+              <Link
+                href="/#products-suite"
+                className="inline-flex h-14 items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-bold text-slate-800 shadow-xs transition-colors hover:bg-slate-50 active:scale-[0.98]"
+              >
+                Explore All 18 Engines
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </main>
+  );
+}

@@ -47,57 +47,64 @@ export const navigationSections = [
           title: "CRM Variants (Sales, Mktg, Commerce)",
           badge: "Revenue Suite",
           description: "Visual deal Kanban, CPQ, journeys, subscription billing & PCI payments.",
-          href: "/#products-suite",
+          href: "/products/sales",
           icon: "pipeline" as const,
         },
         {
           title: "BITS Construction & Logistics",
           badge: "Operations",
           description: "Jobsite tracking, inventory sync, fleet dispatch & payroll interconnect.",
-          href: "/#products-suite",
+          href: "/products/construction",
           icon: "process" as const,
         },
         {
           title: "BITS HRMS & Payroll",
           badge: "Workforce",
           description: "24/7 BPO rosters, biometric sync, statutory deductions & direct bank feeds.",
-          href: "/#products-suite",
+          href: "/products/hrms",
           icon: "headset" as const,
         },
         {
           title: "BITS AI Sports Scoring & Analysis",
           badge: "Computer Vision",
           description: "Upload smartphone/GoPro video: auto scoring, player stats, highlight reels & AI coach.",
-          href: "/#products-suite",
+          href: "/products/sports-ai",
           icon: "sparkles" as const,
         },
         {
           title: "BITS Accounting & ERP",
           badge: "SAP-Grade Core",
           description: "General Ledger, AP/AR 3-way match, multi-entity consolidation & BIR CAS.",
-          href: "/#products-suite",
+          href: "/products/accounting",
           icon: "accounting" as const,
         },
         {
           title: "BITS Sports Arena & Queuing Hub",
           badge: "Venues & Retail",
           description: "Court queues, TV display screens, tournament brackets & virtual ticketing.",
-          href: "/#products-suite",
+          href: "/products/sports-hub",
           icon: "briefcase" as const,
         },
         {
           title: "BITS RAG Enterprise Knowledge",
           badge: "Universal AI Layer",
           description: "Ground BITSagent AI & CRM in proprietary PDFs, databases & SOP manuals.",
-          href: "/#products-suite",
+          href: "/products/rag-engine",
           icon: "layers" as const,
         },
         {
           title: "BITS Smart NFC Business & Identity Card",
           badge: "1 Card for Life",
           description: "Tap to share contacts, socials, websites & payments. 100% secure, dynamic & multipurpose.",
-          href: "/#products-suite",
+          href: "/products/nfc-card",
           icon: "card" as const,
+        },
+        {
+          title: "BITS White Label Platform",
+          badge: "Custom Brand",
+          description: "Deploy any BITS engine rebranded under your own domain, logo & color identity.",
+          href: "/products/white-label",
+          icon: "sparkles" as const,
         },
       ],
     },
@@ -317,7 +324,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Pipeline Velocity", value: "+38% Faster" },
     ctaText: "Explore CRM Sales",
-    ctaHref: "/#contact",
+    ctaHref: "/products/sales",
   },
   {
     id: "marketing",
@@ -346,7 +353,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Engagement Lift", value: "4.5x Higher" },
     ctaText: "Explore CRM Marketing",
-    ctaHref: "/#contact",
+    ctaHref: "/products/marketing",
   },
   {
     id: "commerce",
@@ -375,7 +382,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Billing Accuracy", value: "99.99% Precision" },
     ctaText: "Explore CRM Commerce",
-    ctaHref: "/#contact",
+    ctaHref: "/products/commerce",
   },
   {
     id: "accounting",
@@ -408,7 +415,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Financial Close Speed", value: "Real-Time 0-Day" },
     ctaText: "Explore BITS Accounting ERP",
-    ctaHref: "/#contact",
+    ctaHref: "/products/accounting",
   },
   {
     id: "hrms",
@@ -437,7 +444,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Shift Compliance", value: "100% Tracking" },
     ctaText: "Explore BITS HRMS",
-    ctaHref: "/#contact",
+    ctaHref: "/products/hrms",
   },
   {
     id: "payroll",
@@ -466,7 +473,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Tax Calculation Accuracy", value: "100% Certified" },
     ctaText: "Explore BITS Payroll",
-    ctaHref: "/#contact",
+    ctaHref: "/products/payroll",
   },
   {
     id: "construction",
@@ -495,7 +502,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Project Cost Leakage", value: "-24% Saved" },
     ctaText: "Explore Construction Tracker",
-    ctaHref: "/#contact",
+    ctaHref: "/products/construction",
   },
   {
     id: "inventory",
@@ -524,7 +531,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Stock Accuracy", value: "99.8% Certified" },
     ctaText: "Explore Inventory Engine",
-    ctaHref: "/#contact",
+    ctaHref: "/products/inventory",
   },
   {
     id: "logistics",
@@ -553,7 +560,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Fleet Mileage Efficiency", value: "+31% Saved" },
     ctaText: "Explore Logistics Cloud",
-    ctaHref: "/#contact",
+    ctaHref: "/products/logistics",
   },
   {
     id: "sports-ai",
@@ -584,7 +591,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Analysis Turnaround", value: "< 90s Engine" },
     ctaText: "Explore AI Sports Scoring",
-    ctaHref: "/#contact",
+    ctaHref: "/products/sports-ai",
   },
   {
     id: "sports-hub",
@@ -613,7 +620,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Court Utilization", value: "98.4% Peak" },
     ctaText: "Explore Sports Venue Hub",
-    ctaHref: "/#contact",
+    ctaHref: "/products/sports-hub",
   },
   {
     id: "booking",
@@ -642,7 +649,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Direct Booking Rate", value: "+42% Higher" },
     ctaText: "Explore Booking Engine",
-    ctaHref: "/#contact",
+    ctaHref: "/products/booking",
   },
   {
     id: "queuing",
@@ -671,7 +678,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Perceived Wait Time", value: "-52% Drop" },
     ctaText: "Explore Smart Queuing",
-    ctaHref: "/#contact",
+    ctaHref: "/products/queuing",
   },
   {
     id: "rag-engine",
@@ -700,7 +707,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Retrieval Accuracy", value: "99.4% Factual" },
     ctaText: "Explore BITS RAG Layer",
-    ctaHref: "/#contact",
+    ctaHref: "/products/rag-engine",
   },
   {
     id: "nfc-card",
@@ -731,7 +738,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Paper Card Waste", value: "100% Eliminated" },
     ctaText: "Configure Your Smart NFC Card",
-    ctaHref: "/#contact",
+    ctaHref: "/products/nfc-card",
   },
   {
     id: "white-label",
@@ -762,7 +769,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Brand Ownership", value: "100% Yours" },
     ctaText: "Inquire About White Label",
-    ctaHref: "/#contact",
+    ctaHref: "/products/white-label",
   },
 ] as const;
 
@@ -1519,6 +1526,11 @@ export const faqItems = [
     question: "What is the BITS Smart NFC Business Card and how does it work?",
     answer:
       "The BITS Smart NFC Business & Identity Card is an all-in-one digital identity replacement for traditional paper business cards. Utilizing an encrypted contactless chip, a single tap against any modern smartphone (iOS or Android) instantly displays your digital identity profile—including your contact information (with one-click .vCard saving), company website, social media profiles, portfolio, meeting schedulers, and payment links—with zero recipient app installation required. You only ever need 1 card: all information can be updated dynamically in real-time through our web portal without reprinting, and the card can be remotely frozen instantly if misplaced or stolen.",
+  },
+  {
+    question: "Can we white-label BITS software under our own brand?",
+    answer:
+      "Yes. With the BITS White Label Platform, you can deploy any BITS product—including CRM, ERP, HRMS, Payroll, Booking, Queuing, Accounting, AI Agents, or NFC Cards—completely rebranded under your own company's logo, custom domain (yourbrand.com), and brand color palette with zero mention of BITS. You maintain 100% ownership of your customer relationships while BITS powers the infrastructure quietly behind the scenes.",
   },
   {
     question: "How are BITS solutions packaged and how do we get started?",

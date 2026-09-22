@@ -402,6 +402,114 @@ export default function BitsCrmPage() {
         </Container>
       </section>
 
+      {/* AEO Prompt-Mirror FAQ Section */}
+      <section className="bg-slate-50/70 py-20 sm:py-28 border-t border-slate-200/60">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center mb-14">
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
+              Frequently Asked Questions
+            </span>
+            <h2 className="text-h2 mt-3 font-bold text-slate-900">
+              Everything You Need to Know About BITScrm
+            </h2>
+            <p className="text-lede mt-4 text-slate-600">
+              Clear, direct, and factual answers for collections directors, risk officers, and contact center heads.
+            </p>
+          </div>
+
+          {/* JSON-LD Structured Data */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "How does BITScrm comply with Bangko Sentral ng Pilipinas (BSP) collections regulations?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "BITScrm enforces strict compliance with BSP Circulars 454 and 857, including automated curfew contact hours (quiet hours), maximum daily call attempts per debtor, immutable call recordings, and mandatory Right-Party Connect (RPC) verification before debt disclosure.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can BITScrm be deployed on-premises within our company's private datacenter?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Yes. While we recommend our secure managed cloud for automated scaling and zero PBX maintenance, BITScrm can be fully self-hosted on-premises within your organization's private cloud or physical server racks for strict regulatory data sovereignty.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Do our agents need physical desk phones or PBX hardware?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "No. BITScrm features a built-in WebRTC browser softphone that runs directly inside Chrome or Edge with zero hardware or desktop software installation. It includes dual-channel audio recording, predictive dialing, and live supervisor listen/whisper/barge capabilities.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How does the Promise-to-Pay (PTP) tracking engine work?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "When an agent logs a verbal payment commitment, BITScrm generates automated SMS and email payment reminders at 48 hours and 24 hours prior to the due date. If a payment is missed, the account is automatically flagged and re-queued with elevated priority.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Can BITScrm be white-labeled under our agency's branding?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Yes. With the BITS White Label Platform, you can deploy BITScrm under your own custom domain, logo, and brand color scheme with zero mention of BITS.",
+                    },
+                  },
+                ],
+              }),
+            }}
+          />
+
+          <div className="mx-auto max-w-3xl space-y-4">
+            {[
+              {
+                q: "How does BITScrm comply with Bangko Sentral ng Pilipinas (BSP) collections regulations?",
+                a: "BITScrm enforces strict compliance with BSP Circulars 454 and 857, including automated curfew contact hours (quiet hours), maximum daily call attempts per debtor, immutable call recordings, and mandatory Right-Party Connect (RPC) verification before debt disclosure.",
+              },
+              {
+                q: "Can BITScrm be deployed on-premises within our company's private datacenter?",
+                a: "Yes. While we recommend our secure managed cloud for automated scaling and zero PBX maintenance, BITScrm can be fully self-hosted on-premises within your organization's private cloud or physical server racks for strict regulatory data sovereignty.",
+              },
+              {
+                q: "Do our agents need physical desk phones or PBX hardware?",
+                a: "No. BITScrm features a built-in WebRTC browser softphone that runs directly inside Chrome or Edge with zero hardware or desktop software installation. It includes dual-channel audio recording, predictive dialing, and live supervisor listen/whisper/barge capabilities.",
+              },
+              {
+                q: "How does the Promise-to-Pay (PTP) tracking engine work?",
+                a: "When an agent logs a verbal payment commitment, BITScrm generates automated SMS and email payment reminders at 48 hours and 24 hours prior to the due date. If a payment is missed, the account is automatically flagged and re-queued with elevated priority.",
+              },
+              {
+                q: "Can BITScrm be white-labeled under our agency's branding?",
+                a: "Yes. With the BITS White Label Platform, you can deploy BITScrm under your own custom domain, logo, and brand color scheme with zero mention of BITS.",
+              },
+            ].map((item) => (
+              <details
+                key={item.q}
+                className="group rounded-2xl border border-slate-200/80 bg-white p-6 transition-all hover:shadow-xs"
+              >
+                <summary className="flex cursor-pointer items-center justify-between text-base font-bold text-slate-900">
+                  <span>{item.q}</span>
+                  <span className="ml-4 font-mono text-blue-600 transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* Bottom CTA Banner */}
       <section className="bg-cloud py-16 text-center">
         <Container>

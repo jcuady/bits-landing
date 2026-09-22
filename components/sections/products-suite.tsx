@@ -476,7 +476,7 @@ export function ProductsSuite() {
 }
 
 /* ── monday.com-Style Signature Light Mode Board Mockups ── */
-function ProductMockupBoard({ productId }: { productId: string }) {
+export function ProductMockupBoard({ productId }: { productId: string }) {
   switch (productId) {
     case "service":
       return <ServiceBoard />;

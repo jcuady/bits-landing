@@ -30,7 +30,7 @@ export function Hero() {
               <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/15 bg-blue-50/70 px-4 py-1.5 backdrop-blur-md shadow-xs">
                 <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" aria-hidden />
                 <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                  BITS · Boundless IT Solutions
+                  BITS Enterprise Operations Suite · Serving BPOs, Banks & Enterprises
                 </span>
               </div>
             </Reveal>
@@ -38,17 +38,17 @@ export function Hero() {
             {/* Headline */}
             <Reveal delay={0.06} y={18}>
               <h1 className="text-display mt-2 max-w-5xl text-balance font-bold leading-[1.08] text-slate-900">
-                Technology built around{" "}
+                Stop wrestling with generic SaaS.{" "}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                  your business.
+                  Deploy software built around your business.
                 </span>
               </h1>
             </Reveal>
 
             {/* Supporting Copy */}
             <Reveal delay={0.12} y={14}>
-              <p className="text-lede mx-auto mt-5 max-w-[54ch] text-pretty text-slate-600">
-                Custom software, CRM, automation, AI, and operational systems designed around how your organization actually works. Purpose-built for BPOs, collections agencies, banks, and operations with complex workflows.
+              <p className="text-lede mx-auto mt-5 max-w-[56ch] text-pretty text-slate-600">
+                From high-velocity collections dialers and autonomous voice AI to SAP-grade accounting and compliance payroll—BITS delivers tailored operational software engines deployed on managed cloud or sovereign on-prem.
               </p>
             </Reveal>
 
@@ -60,7 +60,7 @@ export function Hero() {
                     href="/#contact"
                     className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 active:scale-[0.99] sm:w-auto"
                   >
-                    <span>Book a Consultation</span>
+                    <span>Request Architecture Scoping</span>
                     <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
                   </Link>
                 </Magnetic>
@@ -69,7 +69,7 @@ export function Hero() {
                     href="/#products-suite"
                     className="flex h-14 w-full items-center justify-center rounded-full bg-white px-8 font-bold text-slate-900 shadow-xs ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-50 hover:ring-slate-300 active:scale-[0.99] sm:w-auto"
                   >
-                    Explore 16 Work OS Engines
+                    Explore 18 Enterprise Engines
                   </Link>
                 </Magnetic>
               </div>
@@ -80,7 +80,7 @@ export function Hero() {
                   href="/bitscrm"
                   className="group inline-flex min-h-[44px] items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
                 >
-                  <span>Explore BITScrm Core</span>
+                  <span>BITScrm Core</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
                 <span className="text-slate-300 hidden sm:inline">•</span>
@@ -88,15 +88,23 @@ export function Hero() {
                   href="/bitsagent"
                   className="group inline-flex min-h-[44px] items-center gap-1.5 text-violet-600 hover:text-violet-700 transition-colors"
                 >
-                  <span>Explore AI Operations (BITSagent)</span>
+                  <span>AI Operations (BITSagent)</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
                 <span className="text-slate-300 hidden sm:inline">•</span>
                 <Link
-                  href="/#products-suite"
+                  href="/products/accounting"
+                  className="group inline-flex min-h-[44px] items-center gap-1.5 text-emerald-600 hover:text-emerald-700 transition-colors"
+                >
+                  <span>Accounting ERP</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+                </Link>
+                <span className="text-slate-300 hidden sm:inline">•</span>
+                <Link
+                  href="/products/nfc-card"
                   className="group inline-flex min-h-[44px] items-center gap-1.5 text-cyan-600 hover:text-cyan-700 transition-colors"
                 >
-                  <span>Smart NFC Identity Card</span>
+                  <span>Smart NFC Card</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
@@ -104,15 +112,19 @@ export function Hero() {
               {/* Friction-reducing reassurance row */}
               <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.78rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Aligned with BSP & NPC Data Privacy Principles
+                  <span className="font-bold text-emerald-600">✓</span> Aligned with BSP & NPC Data Privacy
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Configured to Your Real Floor Workflows
+                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud (Recommended) or On-Prem
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud (Recommended) or Sovereign On-Prem
+                  <span className="font-bold text-emerald-600">✓</span> Continuous Security & System Upgrades
+                </span>
+                <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
+                <span className="flex items-center gap-1.5 text-slate-600">
+                  <span className="font-bold text-emerald-600">✓</span> White-Label Branding Ready
                 </span>
               </div>
             </Reveal>
