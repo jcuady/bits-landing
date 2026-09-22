@@ -65,6 +65,7 @@ const universalGuarantees = [
 
 export function Pricing() {
   const [activeTab, setActiveTab] = React.useState<"all" | "starter" | "growth" | "enterprise">("all");
+  const [currency, setCurrency] = React.useState<"PHP" | "USD">("PHP");
   const [showMatrix, setShowMatrix] = React.useState(false);
 
   return (
@@ -86,68 +87,99 @@ export function Pricing() {
             <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-white/90 px-4 py-1.5 shadow-2xs backdrop-blur-md">
               <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Modular Solution Packages
+                Transparent Solution Investment
               </span>
             </div>
             <h2 className="text-h2 font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Technology Sized to Your Operation
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
-              BITS solutions are modular operational paths deployable via <strong className="font-semibold text-slate-900">Managed Cloud (Recommended for 1–2 week activation)</strong> or <strong className="font-semibold text-slate-900">On-Premises</strong>. Every tier includes continuous architectural improvements, CVE patching, and security updates. Custom bespoke modules scoped on demand (costs vary).
+              BITS solutions are modular operational paths deployable via <strong className="font-semibold text-slate-900">Managed Cloud (Recommended for 1–2 week activation)</strong> or <strong className="font-semibold text-slate-900">On-Premises</strong>. Every tier includes continuous architectural improvements, CVE patching, and security updates.
             </p>
           </Reveal>
 
-          {/* Operational Audience Filter Tabs */}
+          {/* Operational Audience Filter Tabs + Currency Switcher */}
           <Reveal delay={0.06}>
-            <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab("all")}
-                className={cn(
-                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
-                  activeTab === "all"
-                    ? "bg-slate-900 text-white shadow-xs"
-                    : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                )}
-              >
-                All Packages
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("starter")}
-                className={cn(
-                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
-                  activeTab === "starter"
-                    ? "bg-blue-600 text-white shadow-xs"
-                    : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                )}
-              >
-                1 – 15 Seats (Starter)
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("growth")}
-                className={cn(
-                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
-                  activeTab === "growth"
-                    ? "bg-blue-600 text-white shadow-xs"
-                    : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                )}
-              >
-                16 – 100+ Floor (Growth)
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("enterprise")}
-                className={cn(
-                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
-                  activeTab === "enterprise"
-                    ? "bg-slate-900 text-white shadow-xs"
-                    : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                )}
-              >
-                Enterprise / Banks
-              </button>
+            <div className="mx-auto mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between max-w-4xl">
+              {/* Audience Filter Pills */}
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("all")}
+                  className={cn(
+                    "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                    activeTab === "all"
+                      ? "bg-slate-900 text-white shadow-xs"
+                      : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
+                  )}
+                >
+                  All Packages
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("starter")}
+                  className={cn(
+                    "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                    activeTab === "starter"
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
+                  )}
+                >
+                  1 – 15 Seats (Starter)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("growth")}
+                  className={cn(
+                    "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                    activeTab === "growth"
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
+                  )}
+                >
+                  16 – 100+ Floor (Growth)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("enterprise")}
+                  className={cn(
+                    "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-1.5 text-xs font-bold transition-all duration-200",
+                    activeTab === "enterprise"
+                      ? "bg-slate-900 text-white shadow-xs"
+                      : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
+                  )}
+                >
+                  Enterprise / Banks
+                </button>
+              </div>
+
+              {/* Currency Switcher */}
+              <div className="inline-flex items-center rounded-full border border-slate-200 bg-white p-1 shadow-2xs">
+                <button
+                  type="button"
+                  onClick={() => setCurrency("PHP")}
+                  className={cn(
+                    "inline-flex min-h-[36px] min-w-[76px] items-center justify-center rounded-full px-3 py-1 font-mono text-xs font-bold transition-all",
+                    currency === "PHP"
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  )}
+                >
+                  🇵🇭 ₱ PHP
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCurrency("USD")}
+                  className={cn(
+                    "inline-flex min-h-[36px] min-w-[76px] items-center justify-center rounded-full px-3 py-1 font-mono text-xs font-bold transition-all",
+                    currency === "USD"
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900"
+                  )}
+                >
+                  🇺🇸 $ USD
+                </button>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -267,10 +299,10 @@ export function Pricing() {
                         {pkg.tagline}
                       </p>
 
-                      {/* Operational Deployment Scope Box (Consistent Height) */}
+                      {/* Price & Billing Scope Block */}
                       <div
                         className={cn(
-                          "mt-5 min-h-[7.5rem] rounded-2xl border p-4 transition-colors",
+                          "mt-5 rounded-2xl border p-4 transition-colors",
                           isPopular
                             ? "border-blue-200/90 bg-blue-50/70"
                             : "border-slate-150 bg-slate-50/80"
@@ -278,23 +310,30 @@ export function Pricing() {
                       >
                         <div className="flex items-center justify-between gap-2">
                           <p className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
-                            Deployment Scope
+                            Indicative Investment
                           </p>
                           <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] font-semibold text-emerald-700">
                             <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            Live Scoped
+                            Transparent ROI
                           </span>
                         </div>
 
-                        <p className="mt-1.5 text-sm font-bold text-slate-900">
-                          {pkg.pricingModel}
-                        </p>
-                        <p className="mt-0.5 text-[0.72rem] text-slate-500 leading-normal">
-                          {pkg.pricingSubtext}
-                        </p>
+                        <div className="mt-2 flex items-baseline gap-1.5">
+                          <span className="font-mono text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+                            {currency === "PHP" ? pkg.pricePhp : pkg.priceUsd}
+                          </span>
+                          <span className="text-[0.75rem] font-medium text-slate-500">
+                            {pkg.billingCadence}
+                          </span>
+                        </div>
 
-                        <div className="mt-3 flex items-center gap-2 border-t border-slate-200/70 pt-2.5 text-[0.72rem] font-medium text-slate-700">
-                          <span className="size-1.5 rounded-full bg-blue-500" />
+                        <div className="mt-2 flex items-center gap-1.5 border-t border-slate-200/60 pt-2 text-[0.72rem] font-medium text-slate-600">
+                          <Sparkles className="size-3 text-blue-600 shrink-0" />
+                          <span className="leading-tight">{pkg.roiBenchmark}</span>
+                        </div>
+
+                        <div className="mt-2 flex items-center gap-2 border-t border-slate-200/60 pt-2 text-[0.72rem] font-medium text-slate-700">
+                          <span className="size-1.5 rounded-full bg-blue-500 shrink-0" />
                           <span className="truncate">{pkg.deployment}</span>
                         </div>
                       </div>
@@ -331,7 +370,7 @@ export function Pricing() {
                         <Link
                           href="/#contact"
                           className={cn(
-                            "group flex h-12 w-full items-center justify-center gap-2 rounded-xl text-xs font-bold transition-all duration-200 active:scale-[0.98]",
+                            "group flex h-12 min-h-[44px] w-full items-center justify-center gap-2 rounded-xl text-xs font-bold transition-all duration-200 active:scale-[0.98]",
                             isPopular
                               ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/25 hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:shadow-blue-600/35"
                               : isEnterprise
@@ -354,26 +393,71 @@ export function Pricing() {
           })}
         </div>
 
-        {/* Interactive Feature Matrix Accordion Toggle */}
-        <Reveal delay={0.15}>
-          <div className="mx-auto mt-10 max-w-6xl text-center">
-            <button
-              type="button"
-              onClick={() => setShowMatrix(!showMatrix)}
-              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full border border-slate-300/80 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-2xs transition-all hover:border-blue-400 hover:text-blue-600 hover:shadow-sm active:scale-[0.98]"
-            >
-              <Sliders className="size-3.5 text-blue-600" />
-              <span>
-                {showMatrix
-                  ? "Hide Detailed Capability Comparison Matrix"
-                  : "Compare All 21 Capabilities & SLA Specifications Side-by-Side"}
-              </span>
-              {showMatrix ? (
-                <ChevronUp className="size-3.5" />
-              ) : (
-                <ChevronDown className="size-3.5" />
-              )}
-            </button>
+        {/* ── BITS TAP NFC SMART BUSINESS CARD TIER ── */}
+        <Reveal delay={0.1}>
+          <div className="mx-auto mt-10 max-w-6xl overflow-hidden rounded-3xl border border-emerald-200 bg-gradient-to-r from-emerald-50/80 via-teal-50/50 to-white shadow-xl shadow-emerald-900/5">
+            <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-emerald-700">
+                    Hardware + Digital Smart Card Solution
+                  </span>
+                </div>
+                <h3 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
+                  BITS Tap™ NFC Digital Business Card — 1 Card for Lifetime Networking
+                </h3>
+                <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600">
+                  Eliminate recurring paper card printing forever. Tap on any iPhone or Android to instantly share your verified vCard, company website, portfolio, and social channels. Real-time cryptographic remote lock and revocation if a card is lost. Zero recurring monthly subscription fees for individual cards.
+                </p>
+                <div className="mt-3.5 flex flex-wrap items-center gap-4">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="font-mono text-2xl font-extrabold text-slate-900">
+                      {currency === "PHP" ? "₱1,499" : "$28"}
+                    </span>
+                    <span className="text-xs text-slate-500 font-medium">one-time / card</span>
+                  </div>
+                  <span className="text-slate-300">|</span>
+                  <div className="text-xs text-slate-600">
+                    <strong className="text-emerald-700 font-bold">Corporate Batch (25+ Cards):</strong>{" "}
+                    {currency === "PHP" ? "₱999" : "$18"} / card with centralized team directory admin
+                  </div>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {[
+                    "1 Card Only Needed",
+                    "Zero Monthly Subscription",
+                    "Instant Remote Lock If Lost",
+                    "Tap to Share vCard & Socials",
+                    "Dynamic Live Cloud Profile",
+                    "Custom Corporate Matte / Metal",
+                  ].map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-white px-2.5 py-1 text-[0.68rem] font-semibold text-emerald-800"
+                    >
+                      <Check className="size-2.5 text-emerald-600 stroke-[3]" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex shrink-0 flex-wrap items-center gap-3">
+                <Link
+                  href="/products/nfc-card"
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center gap-2 rounded-xl border border-emerald-300 bg-white px-5 text-xs font-bold text-emerald-700 shadow-2xs transition-all hover:bg-emerald-50 active:scale-[0.98]"
+                >
+                  <span>Explore NFC Tech Specs</span>
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 text-xs font-bold text-white shadow-md shadow-emerald-600/25 transition-all hover:bg-emerald-700 active:scale-[0.98]"
+                >
+                  <span>Order Executive Cards</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </Reveal>
 
@@ -392,8 +476,20 @@ export function Pricing() {
                   Launch BITS products under your own brand — logo, domain, and color identity
                 </h3>
                 <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600">
-                  Any BITS product can be deployed as a fully white-labeled platform under your company's branding. Ideal for software resellers, enterprise groups, and businesses that want to own the client relationship. Zero mention of BITS required. NDA-protected.
+                  Any BITS product can be deployed as a fully white-labeled platform under your company&apos;s branding. Ideal for software resellers, enterprise groups, and agencies that want to own the client relationship. Zero mention of BITS required. NDA-protected.
                 </p>
+                <div className="mt-3.5 flex flex-wrap items-center gap-4">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="font-mono text-2xl font-extrabold text-slate-900">
+                      {currency === "PHP" ? "₱35,000" : "$650"}
+                    </span>
+                    <span className="text-xs text-slate-500 font-medium">one-time branding onboarding</span>
+                  </div>
+                  <span className="text-slate-300">|</span>
+                  <div className="text-xs text-slate-600">
+                    <strong className="text-orange-700 font-bold">Reseller License:</strong> Deploy across unlimited client sub-accounts with 100% markup flexibility
+                  </div>
+                </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {[
                     "Custom Domain & SSL",
@@ -414,21 +510,44 @@ export function Pricing() {
               </div>
               <div className="flex shrink-0 flex-wrap items-center gap-3">
                 <Link
-                  href="/#contact"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-orange-300 bg-white px-5 text-xs font-bold text-orange-700 shadow-2xs transition-all hover:bg-orange-50 active:scale-[0.98]"
+                  href="/products/white-label"
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center gap-2 rounded-xl border border-orange-300 bg-white px-5 text-xs font-bold text-orange-700 shadow-2xs transition-all hover:bg-orange-50 active:scale-[0.98]"
                 >
                   <Palette className="size-3.5 text-orange-600" />
-                  <span>View White Label Branding</span>
+                  <span>View White Label Specs</span>
                 </Link>
                 <Link
                   href="/#contact"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 text-xs font-bold text-white shadow-md shadow-orange-600/25 transition-all hover:bg-orange-700 active:scale-[0.98]"
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 text-xs font-bold text-white shadow-md shadow-orange-600/25 transition-all hover:bg-orange-700 active:scale-[0.98]"
                 >
                   <span>Request White Label Proposal</span>
                   <ArrowRight className="size-3.5" />
                 </Link>
               </div>
             </div>
+          </div>
+        </Reveal>
+
+        {/* Interactive Feature Matrix Accordion Toggle */}
+        <Reveal delay={0.14}>
+          <div className="mx-auto mt-10 max-w-6xl text-center">
+            <button
+              type="button"
+              onClick={() => setShowMatrix(!showMatrix)}
+              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full border border-slate-300/80 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-2xs transition-all hover:border-blue-400 hover:text-blue-600 hover:shadow-sm active:scale-[0.98]"
+            >
+              <Sliders className="size-3.5 text-blue-600" />
+              <span>
+                {showMatrix
+                  ? "Hide Detailed Capability Comparison Matrix"
+                  : "Compare All 21 Capabilities & SLA Specifications Side-by-Side"}
+              </span>
+              {showMatrix ? (
+                <ChevronUp className="size-3.5" />
+              ) : (
+                <ChevronDown className="size-3.5" />
+              )}
+            </button>
           </div>
         </Reveal>
 
