@@ -29,14 +29,20 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  return bitsProducts.map((product) => ({
+  const baseParams = bitsProducts.map((product) => ({
     slug: product.id,
   }));
+  return [
+    ...baseParams,
+    { slug: "service" },
+    { slug: "sports-ai" },
+  ];
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = bitsProducts.find((p) => p.id === slug);
+  const resolvedSlug = slug === "service" ? "collections" : slug === "sports-ai" ? "pickleball" : slug;
+  const product = bitsProducts.find((p) => p.id === resolvedSlug);
 
   if (!product) {
     return {
@@ -93,7 +99,6 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 function getProductProblems(product: (typeof bitsProducts)[number]) {
   switch (product.id) {
     case "collections":
-    case "service":
       return [
         {
           title: "Delinquent Debtor Queue Stagnation",
@@ -291,22 +296,22 @@ function getProductProblems(product: (typeof bitsProducts)[number]) {
             "Dispatchers are blind to driver delays, traffic bottlenecks, and unauthorized vehicle stops without live telemetry and GPS geofence alerts.",
         },
       ];
-    case "sports-ai":
+    case "pickleball":
       return [
         {
-          title: "Hours Wasted on Manual Video Review",
+          title: "Whiteboard Queue Chaos & Court Arguments",
           description:
-            "Coaches spend 4 to 6 hours after every match scrubbing footage to manually clip plays, tally unforced errors, and track player court positions.",
+            "Managing open-play paddle queues on manual whiteboards leads to angry player disputes, accusations of favoritism, and walkouts during peak evening sessions.",
         },
         {
-          title: "Subjective, Biased Player Evaluation",
+          title: "Empty Courts & Lost Booking Revenue",
           description:
-            "Without computer vision tracking ball trajectory and shot speed, athlete development plans are based on guesswork rather than objective data.",
+            "Without instant online reservations and deposit locks, venues suffer from high no-show rates, double-booked slots, and lost prime-time court rental income.",
         },
         {
-          title: "High Production Costs for Match Analytics",
+          title: "Unbalanced Skill Levels in Open Play",
           description:
-            "Traditional sports data setups require dedicated optical camera rigs costing tens of thousands of dollars, making high-end analytics inaccessible.",
+            "Pairing advanced 4.5+ players with beginner 2.5 players ruins the game flow for everyone. Without automated skill-tier rotation rules, casual drop-ins leave frustrated.",
         },
       ];
     case "sports-hub":
@@ -518,10 +523,10 @@ function getBespokeFaqQuestion(id: string, name: string) {
         q: "Does the BITS Logistics driver mobile app work offline in areas with poor cellular coverage?",
         a: "Yes. The driver mobile app caches route itineraries and delivery manifests offline. Signatures, photos, and electronic proof of delivery (ePOD) timestamps sync automatically once connectivity is restored.",
       };
-    case "sports-ai":
+    case "pickleball":
       return {
-        q: "What camera or smartphone equipment is required to use BITS AI Sports Scoring?",
-        a: "Any standard smartphone (iPhone or Android), GoPro, or high-definition camera placed on a tripod with a clear view of the court can be used. Our computer vision engine ingests standard MP4/MOV footage and extracts match metrics in under 90 seconds.",
+        q: "Can the BITS Pickleball system handle open-play paddle rotations and private court bookings at the same time?",
+        a: "Yes! You can designate specific courts for open-play rotations with digital paddle rack queuing while reserving other courts for private online time-block reservations. Everything syncs live to your front-desk TV screens and player mobile passes.",
       };
     default:
       return {
@@ -552,7 +557,8 @@ function getCrmSynergy(currentId: string, siblingId: string): string {
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = bitsProducts.find((p) => p.id === slug);
+  const resolvedSlug = slug === "service" ? "collections" : slug === "sports-ai" ? "pickleball" : slug;
+  const product = bitsProducts.find((p) => p.id === resolvedSlug);
 
   if (!product) {
     notFound();
@@ -563,13 +569,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   const isCrmProduct =
     product.category === "crm" ||
-    product.id === "service" ||
     product.id === "collections";
   const otherCrmVariants = bitsProducts.filter(
     (p) =>
-      (p.category === "crm" || p.id === "service" || p.id === "collections") &&
-      p.id !== product.id &&
-      p.id !== "service"
+      (p.category === "crm" || p.id === "collections") &&
+      p.id !== product.id
   );
   const crmVariantsList = [
     { id: "collections", label: "Collections (Flagship)", href: "/bitscrm" },

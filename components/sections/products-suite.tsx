@@ -57,28 +57,131 @@ import {
 
 const categoryFilters = [
   { id: "all", label: "All Products (19)", count: 19, color: "blue" },
-  { id: "flagship", label: "Core Flagships", count: 2, color: "indigo" },
-  { id: "crm", label: "CRM Variants", count: 4, color: "emerald" },
-  { id: "operations", label: "ERP, Finance & Operations", count: 6, color: "amber" },
-  { id: "sports", label: "Sports, Booking & Queuing", count: 4, color: "rose" },
-  { id: "identity", label: "Smart NFC & Identity", count: 1, color: "cyan" },
-  { id: "ai", label: "AI & Knowledge", count: 2, color: "purple" },
-  { id: "whitelabel", label: "White Label", count: 1, color: "orange" },
+  { id: "flagship", label: "Core Flagships (2)", count: 2, color: "indigo" },
+  { id: "crm", label: "CRM Variants (4)", count: 4, color: "emerald" },
+  { id: "operations", label: "ERP, Finance & Operations (6)", count: 6, color: "amber" },
+  { id: "sports", label: "Sports, Booking & Queuing (4)", count: 4, color: "rose" },
+  { id: "identity", label: "Smart NFC & Identity (1)", count: 1, color: "cyan" },
+  { id: "ai", label: "AI & Knowledge (1)", count: 1, color: "purple" },
+  { id: "whitelabel", label: "White Label (1)", count: 1, color: "orange" },
 ] as const;
 
 type CategoryFilterId = (typeof categoryFilters)[number]["id"];
 
+/* ── Plain-English Business Pain Points & Solutions for Buyers ── */
+function getProductPainPoint(id: string): { pain: string; solution: string } {
+  switch (id) {
+    case "collections":
+    case "service":
+      return {
+        pain: "Uncollected delinquent debt, broken promise-to-pay commitments, slow manual dialing, and manual compliance audits.",
+        solution: "Automated debtor staging queues, WebRTC predictive softphones, and supervisor QA HUD boost recovery by 3.2x.",
+      };
+    case "ai-agent":
+      return {
+        pain: "High contact-center headcount costs and inability to answer customer queries or negotiate terms 24/7 without delays.",
+        solution: "Sub-300ms ultra-realistic conversational voice and email AI resolves 68% of inquiries autonomously with zero hallucinations.",
+      };
+    case "sales":
+      return {
+        pain: "Deals lost in messy spreadsheets, inaccurate revenue projections, and hours wasted manually drafting pricing proposals.",
+        solution: "Visual Kanban deal pipeline, AI win-probability scoring, and 1-click CPQ quoting accelerate sales velocity by 38%.",
+      };
+    case "support":
+      return {
+        pain: "Customer inquiries scattered across channels, missed SLA deadlines, agent burnout, and zero real-time CSAT visibility.",
+        solution: "Unified omnichannel ticket queue with live countdown timers, automated macros, and sentiment telemetry.",
+      };
+    case "commerce":
+      return {
+        pain: "Manual billing, missed subscription renewals, high card transaction drop-offs, and painful failed payment recovery.",
+        solution: "Automated recurring billing, tokenized PCI credit card / Maya checkout, and smart dunning retry sequences.",
+      };
+    case "accounting":
+      return {
+        pain: "Delayed month-end book closes, unreconciled bank statements, and risk of severe statutory BIR tax penalties.",
+        solution: "Audit-ready SAP-grade general ledger, 3-way PO matching, multi-entity consolidation, and 1-click BIR CAS exports.",
+      };
+    case "hrms":
+      return {
+        pain: "Disorganized shift rosters, manual paper leave forms, and missing DOLE compliance audit documentation.",
+        solution: "24/7 shift scheduling, multi-tier digital leave approvals, biometric clock sync, and encrypted staff records.",
+      };
+    case "payroll":
+      return {
+        pain: "Tax computation errors, tedious statutory filing (SSS/PhilHealth/Pag-IBIG), and delayed salary disbursements.",
+        solution: "100% certified TRAIN law tax tables, automated deduction schedules, and 1-click batch bank disbursement.",
+      };
+    case "construction":
+      return {
+        pain: "Jobsite budget overruns, uncoordinated subcontractors, and expensive construction materials disappearing unaccounted for.",
+        solution: "Real-time project milestone tracking, punch lists, direct inventory linkage, and labor cost reconciliation.",
+      };
+    case "inventory":
+      return {
+        pain: "Stockouts during peak demand, phantom inventory across warehouses, and untracked stock shrinkage.",
+        solution: "Multi-warehouse barcode tracking, automated par-level reorder alerts, and tamper-resistant inventory ledgers.",
+      };
+    case "logistics":
+      return {
+        pain: "Dispatchers blind to vehicle delays, fuel waste, driver disputes, and lost paper delivery receipts.",
+        solution: "Live GPS route tracking, driver mobile manifests, turn-by-turn routing, and electronic proof of delivery (ePOD).",
+      };
+    case "pickleball":
+    case "sports-ai":
+      return {
+        pain: "Whiteboard queue chaos, angry player arguments over paddle order, empty court downtime, and phone-booking no-shows.",
+        solution: "Automated digital paddle rack rotations after every game, live overhead TV display screens, and instant deposit court booking.",
+      };
+    case "sports-hub":
+      return {
+        pain: "Chaotic tournament brackets, paper scorecards, and disorganized multi-sport court scheduling.",
+        solution: "Overhead TV screen scoreboards, automated elimination tournament brackets, and player leaderboards.",
+      };
+    case "booking":
+      return {
+        pain: "Double-booked reservation slots, high no-show cancellations, and staff tied up taking phone bookings.",
+        solution: "24/7 self-service online calendar booking, instant deposit payments, and automated SMS appointment reminders.",
+      };
+    case "queuing":
+      return {
+        pain: "Overcrowded waiting rooms, angry customers standing in line, and slow front-counter service.",
+        solution: "Scan-to-queue mobile tickets, live estimated wait times, and synchronized multi-screen counter calling.",
+      };
+    case "rag-engine":
+      return {
+        pain: "AI chatbots hallucinating wrong answers because they lack access to internal business knowledge.",
+        solution: "Connects your company SOP manuals, contracts, and internal databases directly to conversational AI with verified citations.",
+      };
+    case "nfc-card":
+      return {
+        pain: "Outdated paper business cards thrown away and lost, and clunky event contact exchange.",
+        solution: "Tap any modern smartphone to instantly share contact vCards, portfolios, payment links, and social channels with zero apps needed.",
+      };
+    case "white-label":
+      return {
+        pain: "Agencies and enterprise groups wanting to offer SaaS software to clients under their own brand without building from scratch.",
+        solution: "Full brand transformation: your logo, your custom domain, your color palette, and your corporate identity with zero BITS attribution.",
+      };
+    default:
+      return {
+        pain: "Fragmented spreadsheets and disconnected off-the-shelf software tools that slow down your team.",
+        solution: "Unified, high-throughput enterprise software tailored to your specific workflows and business operations.",
+      };
+  }
+}
+
 export function ProductsSuite() {
   const [activeCategory, setActiveCategory] = React.useState<CategoryFilterId>("all");
-  const [activeProductId, setActiveProductId] = React.useState<string>("service");
+  const [activeProductId, setActiveProductId] = React.useState<string>("collections");
 
   const filteredProducts = React.useMemo(() => {
     if (activeCategory === "all") return bitsProducts;
     if (activeCategory === "flagship") return bitsProducts.filter((p) => p.isFlagship);
     if (activeCategory === "crm")
-      return bitsProducts.filter((p) => p.category === "crm" || p.id === "service");
+      return bitsProducts.filter((p) => p.category === "crm");
     if (activeCategory === "ai")
-      return bitsProducts.filter((p) => p.category === "ai" || p.id === "ai-agent");
+      return bitsProducts.filter((p) => p.category === "ai" && !p.isFlagship);
     if (activeCategory === "operations")
       return bitsProducts.filter(
         (p) => p.category === "operations" || p.category === "workforce"
@@ -91,12 +194,15 @@ export function ProductsSuite() {
 
   const getProductIcon = (id: string) => {
     switch (id) {
+      case "collections":
       case "service":
         return PhoneCall;
       case "ai-agent":
         return Bot;
       case "sales":
         return TrendingUp;
+      case "support":
+        return PhoneCall;
       case "marketing":
         return Mail;
       case "commerce":
@@ -113,10 +219,11 @@ export function ProductsSuite() {
         return Boxes;
       case "logistics":
         return Truck;
+      case "pickleball":
       case "sports-ai":
-        return Video;
-      case "sports-hub":
         return Trophy;
+      case "sports-hub":
+        return Tv;
       case "booking":
         return CalendarCheck;
       case "queuing":
@@ -134,12 +241,15 @@ export function ProductsSuite() {
 
   const getProductColor = (id: string) => {
     switch (id) {
+      case "collections":
       case "service":
         return "from-blue-600 to-indigo-600 text-blue-600 bg-blue-50 border-blue-200";
       case "ai-agent":
         return "from-violet-600 to-purple-600 text-violet-600 bg-violet-50 border-violet-200";
       case "sales":
         return "from-emerald-600 to-teal-600 text-emerald-600 bg-emerald-50 border-emerald-200";
+      case "support":
+        return "from-blue-600 to-cyan-600 text-blue-600 bg-blue-50 border-blue-200";
       case "marketing":
         return "from-pink-600 to-rose-600 text-pink-600 bg-pink-50 border-pink-200";
       case "commerce":
@@ -156,8 +266,9 @@ export function ProductsSuite() {
         return "from-blue-500 to-cyan-600 text-blue-700 bg-blue-50 border-blue-200";
       case "logistics":
         return "from-indigo-600 to-blue-600 text-indigo-700 bg-indigo-50 border-indigo-200";
+      case "pickleball":
       case "sports-ai":
-        return "from-cyan-600 to-teal-600 text-cyan-700 bg-cyan-50 border-cyan-200";
+        return "from-emerald-600 to-teal-600 text-emerald-700 bg-emerald-50 border-emerald-200";
       case "sports-hub":
         return "from-emerald-600 to-teal-700 text-emerald-700 bg-emerald-50 border-emerald-200";
       case "booking":
@@ -241,9 +352,9 @@ export function ProductsSuite() {
                           : tab.id === "flagship"
                           ? bitsProducts.filter((p) => p.isFlagship)
                           : tab.id === "crm"
-                          ? bitsProducts.filter((p) => p.category === "crm" || p.id === "service")
+                          ? bitsProducts.filter((p) => p.category === "crm")
                           : tab.id === "ai"
-                          ? bitsProducts.filter((p) => p.category === "ai" || p.id === "ai-agent")
+                          ? bitsProducts.filter((p) => p.category === "ai" && !p.isFlagship)
                           : tab.id === "operations"
                           ? bitsProducts.filter(
                               (p) => p.category === "operations" || p.category === "workforce"
@@ -278,6 +389,80 @@ export function ProductsSuite() {
             </div>
           </Reveal>
         </div>
+
+        {/* Commercial Packaging & Customization Banner */}
+        <Reveal delay={0.1}>
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="flex flex-col justify-between rounded-2xl border border-blue-200/90 bg-white/95 p-4 shadow-2xs transition-all hover:border-blue-300 hover:shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100">
+                  <Boxes className="size-4" />
+                </div>
+                <div>
+                  <span className="font-mono text-[0.65rem] font-bold uppercase tracking-wider text-blue-700">
+                    Modular Procurement
+                  </span>
+                  <h3 className="text-xs font-bold text-slate-900 sm:text-sm">
+                    Solo Modules or Bundled Packages
+                  </h3>
+                  <p className="mt-1 text-[0.72rem] leading-relaxed text-slate-600">
+                    Acquire standalone to solve one specific bottleneck (e.g. Pickleball Queuing, Payroll, or Collections), or combine multiple engines into one integrated suite.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5 border-t border-slate-100 pt-2 text-[0.65rem] font-bold text-blue-700">
+                <CheckCircle2 className="size-3 text-blue-600" />
+                <span>Zero Bloat · Pay Only for What You Use</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-between rounded-2xl border border-indigo-200/90 bg-white/95 p-4 shadow-2xs transition-all hover:border-indigo-300 hover:shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+                  <SlidersHorizontal className="size-4" />
+                </div>
+                <div>
+                  <span className="font-mono text-[0.65rem] font-bold uppercase tracking-wider text-indigo-700">
+                    Bespoke Engineering
+                  </span>
+                  <h3 className="text-xs font-bold text-slate-900 sm:text-sm">
+                    100% Customizable upon Request
+                  </h3>
+                  <p className="mt-1 text-[0.72rem] leading-relaxed text-slate-600">
+                    Tailored to your exact operational workflows, approval hierarchies, custom data schemas, and legacy database connections upon request.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5 border-t border-slate-100 pt-2 text-[0.65rem] font-bold text-indigo-700">
+                <CheckCircle2 className="size-3 text-indigo-600" />
+                <span>Bespoke Workflows · Legacy System Sync</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-between rounded-2xl border border-purple-200/90 bg-white/95 p-4 shadow-2xs transition-all hover:border-purple-300 hover:shadow-sm">
+              <div className="flex items-start gap-3">
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
+                  <Palette className="size-4" />
+                </div>
+                <div>
+                  <span className="font-mono text-[0.65rem] font-bold uppercase tracking-wider text-purple-700">
+                    Client Branding Option
+                  </span>
+                  <h3 className="text-xs font-bold text-slate-900 sm:text-sm">
+                    White-Label &amp; Custom Domain
+                  </h3>
+                  <p className="mt-1 text-[0.72rem] leading-relaxed text-slate-600">
+                    Deploy with your company logo, custom domain, and styling. Completely invisible vendor layer with 100% brand equity ownership.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5 border-t border-slate-100 pt-2 text-[0.65rem] font-bold text-purple-700">
+                <CheckCircle2 className="size-3 text-purple-600" />
+                <span>100% Brand Ownership · Zero BITS Attribution</span>
+              </div>
+            </div>
+          </div>
+        </Reveal>
 
         {/* Monday.com-Style Horizontal Product Pills Carousel */}
         <div className="mt-8 overflow-x-auto pb-4 scrollbar-none">
@@ -352,7 +537,7 @@ export function ProductsSuite() {
 
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
             {/* Left Column: Product Information & Value Props */}
-            <div className="lg:col-span-5 space-y-6">
+            <div className="lg:col-span-5 space-y-5">
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="rounded-full bg-blue-50 border border-blue-200 px-3 py-1 font-mono text-[0.7rem] font-bold text-blue-700 uppercase tracking-wider">
@@ -372,6 +557,34 @@ export function ProductsSuite() {
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   {activeProduct.description}
                 </p>
+              </div>
+
+              {/* Target Pain Point Solved (Plain English for Business Buyers) */}
+              <div className="rounded-2xl border border-amber-200/90 bg-amber-50/60 p-4 shadow-2xs space-y-2">
+                <div className="flex items-center gap-1.5 text-[0.68rem] font-bold uppercase tracking-wider text-amber-900">
+                  <span className="size-2 rounded-full bg-amber-500 animate-pulse" />
+                  <span>The Pain Point This Solves</span>
+                </div>
+                <p className="text-xs text-slate-700 leading-snug">
+                  {getProductPainPoint(activeProduct.id).pain}
+                </p>
+                <div className="border-t border-amber-200/60 pt-2 text-xs font-semibold text-emerald-800 flex items-start gap-1.5">
+                  <CheckCircle2 className="size-3.5 shrink-0 text-emerald-600 mt-0.5" />
+                  <span>{getProductPainPoint(activeProduct.id).solution}</span>
+                </div>
+              </div>
+
+              {/* Packaging & Customization Badges */}
+              <div className="flex flex-wrap gap-1.5">
+                <span className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-blue-700">
+                  <Boxes className="size-3" /> Solo or Package
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-indigo-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-indigo-700">
+                  <SlidersHorizontal className="size-3" /> Fully Customizable
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full border border-purple-200 bg-purple-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-purple-700">
+                  <Palette className="size-3" /> White-Label Ready
+                </span>
               </div>
 
               {/* Performance / Value Metric Box */}
@@ -543,8 +756,9 @@ export function ProductMockupBoard({ productId }: { productId: string }) {
             return <InventoryBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
           case "logistics":
             return <LogisticsBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
+          case "pickleball":
           case "sports-ai":
-            return <SportsAiBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
+            return <PickleballBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
           case "sports-hub":
             return <SportsHubBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
           case "booking":
@@ -2380,114 +2594,278 @@ function LogisticsBoard({
   );
 }
 
-/* ── 12. BITS AI Sports Scoring Board ── */
-function SportsAiBoard({
+/* ── 12. BITS Pickleball & Court Operating System Board ── */
+function PickleballBoard({
   onAction,
 }: {
   onAction: (msg: string) => void;
   filter: string;
   setFilter: (f: any) => void;
 }) {
-  const [selectedRow, setSelectedRow] = React.useState(0);
+  const [selectedCourt, setSelectedCourt] = React.useState(1);
+  const [rotationRule, setRotationRule] = React.useState<"4-on-4-off" | "winner-stays">("4-on-4-off");
+  const [paddleQueue] = React.useState([
+    { id: "P1", name: "Marco R. & Ken T.", tier: "DUPR 3.8", wait: "Next Up", status: "Ready" },
+    { id: "P2", name: "Jasmine S. & Bea M.", tier: "DUPR 3.5", wait: "4m wait", status: "In Line" },
+    { id: "P3", name: "Carlos D. & Leo B.", tier: "DUPR 3.6", wait: "9m wait", status: "In Line" },
+    { id: "P4", name: "Donna P. & Ryan G.", tier: "DUPR 3.4", wait: "14m wait", status: "In Line" },
+  ]);
 
-  const rows = [
+  const courts = [
     {
-      match: "Men's Singles Championship",
-      score: "21-18 · 19-21 · 21-16",
-      speed: "312 km/h",
-      insight: "Timestamp [14:32] Footwork Recovery Drill Linked",
-      action: "Clip 312 km/h Smash Video",
-      actionToast: "Generated 1080p 60fps instant replay clip of 312 km/h smash at Match Point.",
-      detail: "Computer vision analyzed 1,840 frames. Identified 4 unforced errors on backhand cross-court.",
+      id: 1,
+      name: "Court 1 · Center Court",
+      type: "Open Play (Doubles)",
+      status: "In Play",
+      statusClass: "bg-emerald-600 text-white",
+      players: "Dave & Chris vs Ben & Troy",
+      score: "11 - 9 · Match Point",
+      timeRemaining: "01:45",
+      actionToast: "Score updated to 11-9 on Court 1. Match Point chime triggered on TV screen.",
+      detail: "Doubles open play. 4-On 4-Off rule active. Players registered via mobile QR paddle check-in.",
     },
     {
-      match: "Women's Doubles Semifinal",
-      score: "21-14 · 21-19",
-      speed: "284 km/h",
-      insight: "8 Highlight Reels Auto-Clipped",
-      action: "Export TikTok / Reels Highlights",
-      actionToast: "Exported 8 vertical 9:16 highlight reels ready for social media posting.",
-      detail: "Rally tracking detected 34-shot rally with automated crowd reaction audio tagging.",
+      id: 2,
+      name: "Court 2 · Covered Bay",
+      type: "Open Play Rotation",
+      status: "Game Over · Rotate Now",
+      statusClass: "bg-blue-600 text-white animate-pulse",
+      players: "Sarah & Tina (Winners: 11) vs Mia & Bea (7)",
+      score: "Final: 11 - 7",
+      timeRemaining: "Ready for Next 4",
+      actionToast: "Chime sounded on Court 2 Overhead TV: Calling Marco R. & Ken T. onto Court 2!",
+      detail: "Game concluded. Calling next 4 players from digital paddle rack queue to take the court.",
     },
     {
-      match: "Varsity Training Camp",
-      score: "Drill Metric: 94%",
-      speed: "245 km/h",
-      insight: "Automated Biomechanics Scorecard",
-      action: "Generate Coaching Summary",
-      actionToast: "Generated PDF coaching report with player shoulder rotation angles.",
-      detail: "Pose estimation tracked 18 skeletal landmarks across 12 amateur student athletes.",
+      id: 3,
+      name: "Court 3 · West Court",
+      type: "Private Court Rental",
+      status: "Online Booking Active",
+      statusClass: "bg-purple-600 text-white",
+      players: "Metro Smashers Club (Private 2hr)",
+      score: "Reserved: 5:00 PM – 7:00 PM",
+      timeRemaining: "42 min left",
+      actionToast: "Verified online booking QR pass for Metro Smashers. Security deposit captured via tokenized checkout.",
+      detail: "Booked online via BITS Booking Engine. Court unlocked via contactless RFID/QR court sensor.",
+    },
+    {
+      id: 4,
+      name: "Court 4 · East Court",
+      type: "Coaching / Clinic Slot",
+      status: "Upcoming 6:00 PM",
+      statusClass: "bg-amber-500 text-white",
+      players: "Junior Academy DUPR Clinic",
+      score: "4 Players Checked In",
+      timeRemaining: "Starts in 18 min",
+      actionToast: "Sent automated SMS alert to 4 clinic players: 'Court 4 warmup starts in 15 minutes.'",
+      detail: "Automated check-in roster confirmed. Balls and equipment cart dispatched to Court 4.",
     },
   ];
 
-  const activeRecord = rows[selectedRow] || rows[0];
+  const activeCourt = courts.find((c) => c.id === selectedCourt) || courts[0];
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
-        <div>
-          <p className="text-xs font-bold text-slate-900">Computer Vision Sports Scoring &amp; AI Coach</p>
-          <p className="text-[0.68rem] text-slate-500">Video Ingestion from Smartphone or GoPro · Automated Match Analytics</p>
+      {/* Top HUD Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-emerald-200 bg-emerald-50/80 p-3.5">
+        <div className="flex items-center gap-3">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-emerald-600 text-white shadow-xs">
+            <Trophy className="size-4" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-bold text-slate-900">Pickleball &amp; Court Operating System</p>
+              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[0.62rem] font-extrabold uppercase text-emerald-800">
+                Live TV Overhead HUD
+              </span>
+            </div>
+            <p className="text-[0.68rem] text-slate-500">
+              Automated Paddle Queuing for Every Play · 4 Courts Live · Zero Whiteboard Chaos
+            </p>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="rounded-md bg-cyan-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
-            &lt; 90s Turnaround
-          </span>
+
+        <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
-            onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-cyan-300 px-2.5 py-1 text-xs font-bold text-cyan-800 hover:bg-cyan-100"
+            onClick={() => {
+              setRotationRule("4-on-4-off");
+              onAction("Switched queue mode to 4-On 4-Off. Both winners and losers rotate out on game point.");
+            }}
+            className={cn(
+              "rounded-lg px-2.5 py-1 text-xs font-bold transition-all min-h-[38px] flex items-center gap-1",
+              rotationRule === "4-on-4-off"
+                ? "bg-emerald-700 text-white shadow-xs"
+                : "border border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-100"
+            )}
           >
-            ⚡ {activeRecord.action}
+            <RefreshCw className="size-3" /> 4-On / 4-Off
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setRotationRule("winner-stays");
+              onAction("Switched to Winner Stays (Max 2 games). Winners hold court, losers rejoin paddle rack.");
+            }}
+            className={cn(
+              "rounded-lg px-2.5 py-1 text-xs font-bold transition-all min-h-[38px] flex items-center gap-1",
+              rotationRule === "winner-stays"
+                ? "bg-emerald-700 text-white shadow-xs"
+                : "border border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-100"
+            )}
+          >
+            <Trophy className="size-3" /> Winner Stays
+          </button>
+          <button
+            type="button"
+            onClick={() => onAction("TV Overhead HUD Audio Chime Broadcasted: 'Next 4 players please proceed to Court 2.'")}
+            className="flex min-h-[38px] items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1 text-xs font-bold text-white shadow-xs hover:bg-emerald-700 transition-colors"
+          >
+            <Tv className="size-3.5" /> Call Court 2 Chime
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-        <table className="w-full text-left text-xs">
-          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
-            <tr>
-              <th className="p-2.5">Match Footage</th>
-              <th className="p-2.5">Calculated Score</th>
-              <th className="p-2.5">Peak Smash Speed</th>
-              <th className="p-2.5">AI Coach Insight</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
-            {rows.map((row, idx) => (
-              <tr
-                key={row.match}
-                onClick={() => setSelectedRow(idx)}
-                className={cn(
-                  "cursor-pointer transition-colors",
-                  selectedRow === idx ? "bg-cyan-50/80 font-medium" : "hover:bg-slate-50/70"
-                )}
-              >
-                <td className="p-2.5 font-bold text-slate-900 flex items-center gap-1.5">
-                  {selectedRow === idx && <span className="size-1.5 rounded-full bg-cyan-600" />}
-                  {row.match}
-                </td>
-                <td className="p-2.5 font-mono font-bold text-emerald-700">{row.score}</td>
-                <td className="p-2.5 font-mono text-cyan-700 font-bold">{row.speed}</td>
-                <td className="p-2.5 text-slate-700 font-medium">{row.insight}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* 4-Court Interactive Real-Time Grid */}
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+        {courts.map((court) => {
+          const isSelected = selectedCourt === court.id;
+          return (
+            <button
+              key={court.id}
+              type="button"
+              onClick={() => setSelectedCourt(court.id)}
+              className={cn(
+                "group relative flex min-h-[44px] flex-col justify-between rounded-xl border p-3 text-left transition-all",
+                isSelected
+                  ? "border-emerald-600 bg-emerald-50/50 shadow-md ring-2 ring-emerald-500/20"
+                  : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80"
+              )}
+            >
+              <div>
+                <div className="flex items-center justify-between gap-1 mb-1.5">
+                  <span className="text-[0.72rem] font-bold text-slate-900">{court.name}</span>
+                  <span className={cn("rounded px-1.5 py-0.5 text-[0.6rem] font-bold shadow-2xs", court.statusClass)}>
+                    {court.status}
+                  </span>
+                </div>
+                <p className="text-[0.68rem] font-medium text-slate-600 line-clamp-1">{court.players}</p>
+              </div>
+
+              <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-2 text-[0.68rem]">
+                <span className="font-mono font-bold text-emerald-800">{court.score}</span>
+                <span className="inline-flex items-center gap-1 text-slate-500 font-medium">
+                  <Clock className="size-3" /> {court.timeRemaining}
+                </span>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
-      <div className="rounded-xl border border-cyan-100 bg-cyan-50/40 p-3 text-xs flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <span className="text-[0.65rem] font-mono font-bold text-cyan-700 uppercase">Vision Processing Breakdown:</span>
-          <p className="font-semibold text-slate-900">{activeRecord.detail}</p>
+      {/* Selected Court Detail & Digital Paddle Rack Queue */}
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-12">
+        {/* Left Sub-Card: Court Detail & Immediate Action */}
+        <div className="lg:col-span-7 rounded-xl border border-slate-200 bg-white p-3.5 space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="text-[0.65rem] font-mono font-bold uppercase tracking-wider text-emerald-700">
+                Selected Court Telemetry
+              </span>
+              <h4 className="text-xs font-bold text-slate-900">{activeCourt.name} · {activeCourt.type}</h4>
+            </div>
+            <span className={cn("rounded-md px-2 py-0.5 text-xs font-bold", activeCourt.statusClass)}>
+              {activeCourt.status}
+            </span>
+          </div>
+
+          <div className="rounded-lg bg-slate-50 p-2.5 text-xs space-y-1">
+            <div className="flex justify-between text-slate-600">
+              <span className="font-medium">Active Matchup:</span>
+              <span className="font-bold text-slate-900">{activeCourt.players}</span>
+            </div>
+            <div className="flex justify-between text-slate-600">
+              <span className="font-medium">Live Score / Booking Slot:</span>
+              <span className="font-mono font-bold text-emerald-700">{activeCourt.score}</span>
+            </div>
+            <div className="flex justify-between text-slate-600">
+              <span className="font-medium">Operating Mode:</span>
+              <span className="text-slate-800">{activeCourt.detail}</span>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+            <div className="flex items-center gap-1 text-[0.68rem] text-slate-500">
+              <CheckCircle2 className="size-3.5 text-emerald-600" />
+              <span>Synced with Overhead TV Wall &amp; Mobile Passes</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => onAction(activeCourt.actionToast)}
+              className="flex min-h-[44px] items-center gap-1.5 rounded-lg bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-emerald-700 transition-colors"
+            >
+              <Zap className="size-3.5" /> Execute Court Action
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-cyan-600 px-3 py-1 text-xs font-bold text-white hover:bg-cyan-700"
-        >
-          Run Vision Pipeline
-        </button>
+
+        {/* Right Sub-Card: Digital Paddle Rack Queue ("Next 4 Up") */}
+        <div className="lg:col-span-5 rounded-xl border border-emerald-100 bg-emerald-50/40 p-3.5 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <Users className="size-3.5 text-emerald-700" />
+              <span className="text-xs font-bold text-slate-900">Digital Paddle Rack</span>
+            </div>
+            <span className="rounded bg-emerald-200/70 px-1.5 py-0.5 text-[0.62rem] font-bold text-emerald-800">
+              4 Queued
+            </span>
+          </div>
+
+          <div className="space-y-1.5">
+            {paddleQueue.map((item, idx) => (
+              <div
+                key={item.id}
+                className={cn(
+                  "flex items-center justify-between rounded-lg border px-2.5 py-1.5 text-xs",
+                  idx === 0
+                    ? "border-emerald-300 bg-white shadow-2xs font-semibold text-slate-900"
+                    : "border-emerald-100 bg-white/70 text-slate-700"
+                )}
+              >
+                <div className="flex items-center gap-2">
+                  <span
+                    className={cn(
+                      "flex size-5 items-center justify-center rounded-full text-[0.62rem] font-extrabold",
+                      idx === 0 ? "bg-emerald-600 text-white" : "bg-slate-200 text-slate-600"
+                    )}
+                  >
+                    {idx + 1}
+                  </span>
+                  <div>
+                    <p className="leading-tight text-[0.72rem]">{item.name}</p>
+                    <span className="text-[0.62rem] text-slate-400 font-mono">{item.tier}</span>
+                  </div>
+                </div>
+                <span
+                  className={cn(
+                    "rounded px-1.5 py-0.5 text-[0.62rem] font-bold",
+                    idx === 0 ? "bg-emerald-100 text-emerald-800 animate-pulse" : "bg-slate-100 text-slate-500"
+                  )}
+                >
+                  {item.wait}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => onAction("Simulated player mobile scan: Added Chloe M. & Jay V. to Paddle Rack Queue position #5.")}
+            className="flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-emerald-300 bg-white px-3 py-1.5 text-xs font-bold text-emerald-800 hover:bg-emerald-50 transition-colors"
+          >
+            <CalendarCheck className="size-3.5" /> + Simulate Player Mobile QR Check-In
+          </button>
+        </div>
       </div>
     </div>
   );

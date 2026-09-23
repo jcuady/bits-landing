@@ -82,7 +82,7 @@ export function Pricing() {
 
   // Multi-Product Bundle Builder State
   const [selectedProductIds, setSelectedProductIds] = React.useState<string[]>([
-    "service",
+    "collections",
     "ai-agent",
     "rag-engine",
   ]);
@@ -115,7 +115,7 @@ export function Pricing() {
     {
       group: "CRM & Telephony",
       products: bitsProducts.filter((p) =>
-        ["service", "sales", "marketing", "commerce"].includes(p.id)
+        ["collections", "sales", "marketing", "commerce"].includes(p.id)
       ),
     },
     {
@@ -133,7 +133,7 @@ export function Pricing() {
     {
       group: "Venues, Hubs & Identity",
       products: bitsProducts.filter((p) =>
-        ["sports-hub", "sports-ai", "booking", "queuing", "nfc-card", "white-label"].includes(p.id)
+        ["pickleball", "sports-hub", "booking", "queuing", "nfc-card", "white-label"].includes(p.id)
       ),
     },
   ];

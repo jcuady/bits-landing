@@ -40,7 +40,7 @@ This system architecture establishes **Boundless IT Solutions (BITS)** as an aut
 | `/products/accounting` | `https://www.boundlessits.com/products/accounting` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/hrms` | `https://www.boundlessits.com/products/hrms` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/construction` | `https://www.boundlessits.com/products/construction` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
-| `/products/sports-ai` | `https://www.boundlessits.com/products/sports-ai` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/products/pickleball` | `https://www.boundlessits.com/products/pickleball` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/sports-hub` | `https://www.boundlessits.com/products/sports-hub` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/rag-engine` | `https://www.boundlessits.com/products/rag-engine` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/nfc-card` | `https://www.boundlessits.com/products/nfc-card` | `index, follow` | weekly | 0.8 | `Product`, `BreadcrumbList`, `FAQPage` |
