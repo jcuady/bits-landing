@@ -52,10 +52,11 @@ import {
   RefreshCw,
   ExternalLink,
   Eye,
+  Mic,
 } from "lucide-react";
 
 const categoryFilters = [
-  { id: "all", label: "All Products (18)", count: 18, color: "blue" },
+  { id: "all", label: "All Products (19)", count: 19, color: "blue" },
   { id: "flagship", label: "Core Flagships", count: 2, color: "indigo" },
   { id: "crm", label: "CRM Variants", count: 4, color: "emerald" },
   { id: "operations", label: "ERP, Finance & Operations", count: 6, color: "amber" },
@@ -517,8 +518,11 @@ export function ProductMockupBoard({ productId }: { productId: string }) {
       {/* Interactive Board Switcher */}
       {(() => {
         switch (productId) {
+          case "collections":
           case "service":
-            return <ServiceBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
+            return <CollectionsBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
+          case "support":
+            return <SupportBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
           case "ai-agent":
             return <AiAgentBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
           case "sales":
@@ -554,15 +558,15 @@ export function ProductMockupBoard({ productId }: { productId: string }) {
           case "white-label":
             return <WhiteLabelBoard onAction={triggerToast} />;
           default:
-            return <ServiceBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
+            return <CollectionsBoard onAction={triggerToast} filter={filter} setFilter={setFilter} />;
         }
       })()}
     </div>
   );
 }
 
-/* ── 1. Flagship Customer Service CRM Board ── */
-function ServiceBoard({
+/* ── 1. Flagship Collections CRM Board ── */
+function CollectionsBoard({
   onAction,
   filter,
   setFilter,
@@ -645,7 +649,7 @@ function ServiceBoard({
       {/* Top softphone banner with interactive buttons */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50/60 p-3">
         <div className="flex items-center gap-2.5">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-2xs">
             <PhoneCall className="size-4 animate-bounce" />
           </div>
           <div>
@@ -657,16 +661,18 @@ function ServiceBoard({
           <button
             type="button"
             onClick={() => onAction("Supervisor initiated private whisper coaching to agent MT.")}
-            className="rounded-lg bg-white border border-blue-200 px-3 py-2 text-xs font-bold text-blue-700 hover:bg-blue-50 transition-colors shadow-2xs min-h-[44px] inline-flex items-center justify-center"
+            className="rounded-lg bg-white border border-blue-200 px-3 py-2 text-xs font-bold text-blue-700 hover:bg-blue-50 transition-colors shadow-2xs min-h-[44px] inline-flex items-center justify-center gap-1.5"
           >
-            🎙️ Whisper Coach
+            <Mic className="size-3.5 text-blue-600" />
+            <span>Whisper Coach</span>
           </button>
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-xs min-h-[44px] inline-flex items-center justify-center"
+            className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-xs min-h-[44px] inline-flex items-center justify-center gap-1.5"
           >
-            ⚡ {activeRecord.action}
+            <Zap className="size-3.5 text-white" />
+            <span>{activeRecord.action}</span>
           </button>
         </div>
       </div>
@@ -773,6 +779,250 @@ function ServiceBoard({
       <div className="flex items-center justify-between text-[0.68rem] text-slate-500 pt-1">
         <span>BSP 454/857 Quiet Hours: Active (10PM - 6AM Protected)</span>
         <span>Dual Channel Audio Retention: 7 Years</span>
+      </div>
+    </div>
+  );
+}
+
+/* ── Flagship Support & Helpdesk CRM Board ── */
+function SupportBoard({
+  onAction,
+  filter,
+  setFilter,
+}: {
+  onAction: (msg: string) => void;
+  filter: "all" | "active" | "resolved";
+  setFilter: (f: "all" | "active" | "resolved") => void;
+}) {
+  const [selectedRow, setSelectedRow] = React.useState(0);
+
+  const rows = [
+    {
+      id: "8841",
+      ticketId: "TICK-8841",
+      client: "Manila Water BPO (#8841)",
+      subject: "P1: Gateway Webhook 504 Timeout during billing batch run",
+      assignee: "JR (Tier-3 SRE)",
+      priority: "P1 Critical",
+      priorityBg: "bg-rose-600",
+      channel: "API Webhook",
+      sla: "11m 42s remaining",
+      slaColor: "bg-rose-50 text-rose-700 border-rose-200 animate-pulse",
+      sentiment: "Negative (Frustrated)",
+      sentimentColor: "bg-rose-50 text-rose-700 border-rose-200",
+      type: "active",
+      action: "Replay Secondary Gateway",
+      actionToast: "Replayed 1,420 queued webhook events via Secondary Route B. SLA timer paused.",
+      detail: "Tier-3 Escalation · Enterprise Diamond SLA (15m response commitment) · On-call SRE dispatched.",
+    },
+    {
+      id: "8842",
+      ticketId: "TICK-8842",
+      client: "BDO FinTech Partners (#8842)",
+      subject: "P2: Okta SAML 2.0 IdP Certificate Rotation & SCIM Provisioning",
+      assignee: "MT (SecOps)",
+      priority: "P2 High",
+      priorityBg: "bg-amber-500",
+      channel: "SSO Portal",
+      sla: "1h 45m remaining",
+      slaColor: "bg-amber-50 text-amber-700 border-amber-200",
+      sentiment: "Neutral",
+      sentimentColor: "bg-slate-100 text-slate-700 border-slate-200",
+      type: "active",
+      action: "Install Okta IdP XML Patch",
+      actionToast: "Installed rotated X.509 cert to tenant IdP profile. Single Sign-On re-validated.",
+      detail: "SecOps queue · Awaiting client test assertion via staging ACS URL. Zero downtime reported.",
+    },
+    {
+      id: "8843",
+      ticketId: "TICK-8843",
+      client: "SM Retail Logistics (#8843)",
+      subject: "P3: POS Barcode Scanner Latency on Counter 14",
+      assignee: "CS (Field Ops)",
+      priority: "P3 Medium",
+      priorityBg: "bg-blue-600",
+      channel: "In-App Chat",
+      sla: "3h 15m remaining",
+      slaColor: "bg-blue-50 text-blue-700 border-blue-200",
+      sentiment: "Positive / Patient",
+      sentimentColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      type: "active",
+      action: "Flush Cache & Push 4.2",
+      actionToast: "Pushed firmware OTA 4.2 to Counter 14 scanner terminal. Latency reduced to 42ms.",
+      detail: "Branch ID #104 · Scanner firmware memory cache cleared remotely via MQTT channel.",
+    },
+    {
+      id: "8844",
+      ticketId: "TICK-8844",
+      client: "Ayala Land Premier (#8844)",
+      subject: "P2: Automated Lease Dunning Email Not Firing",
+      assignee: "AI Dispatch",
+      priority: "P2 Resolved",
+      priorityBg: "bg-emerald-600",
+      channel: "Email",
+      sla: "Resolved (08m MTTR)",
+      slaColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      sentiment: "Satisfied (5/5 CSAT)",
+      sentimentColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      type: "resolved",
+      action: "Send Resolution CSAT",
+      actionToast: "Dispatched automated 1-click CSAT survey to Ayala Land account manager.",
+      detail: "Root cause: SPF record DNS propagation delay. Verified 100% deliverability with BIMI check.",
+    },
+  ];
+
+  const displayedRows = filter === "all" ? rows : rows.filter((r) => r.type === filter);
+  const activeRecord = rows[selectedRow] || rows[0];
+
+  return (
+    <div className="space-y-4">
+      {/* Concrete Customer ROI & Value Callout */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/50 to-white p-3 text-xs">
+        <div className="flex items-center gap-2">
+          <Sparkles className="size-4 text-blue-600 shrink-0" />
+          <span className="font-semibold text-slate-800">
+            <strong>Customer Outcome:</strong> Cuts first-response time by 64% and accelerates MTTR with AI sentiment prioritization and automated SLA escalation.
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-extrabold text-blue-700 bg-white px-2.5 py-1 rounded-full border border-blue-200 shadow-2xs">
+          +46% First Contact Resolution · 94.2% CSAT
+        </span>
+      </div>
+
+      {/* Top Active Incident Banner */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-rose-200 bg-rose-50/60 p-3">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-rose-600 text-white shadow-2xs">
+            <Radio className="size-4 animate-pulse" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-slate-900">Active Incident Queue: {activeRecord.ticketId} — {activeRecord.client}</p>
+            <p className="text-[0.68rem] text-slate-600">{activeRecord.subject} · Priority: {activeRecord.priority}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => onAction("Initiated emergency incident bridge for TICK-8841 with on-call Tier-3 SRE.")}
+            className="rounded-lg bg-white border border-rose-200 px-3 py-2 text-xs font-bold text-rose-700 hover:bg-rose-50 transition-colors shadow-2xs min-h-[44px] inline-flex items-center justify-center gap-1.5"
+          >
+            <Radio className="size-3.5 text-rose-600" />
+            <span>Dispatch SRE Bridge</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onAction(activeRecord.actionToast)}
+            className="rounded-lg bg-rose-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-rose-700 transition-colors shadow-xs min-h-[44px] inline-flex items-center justify-center gap-1.5"
+          >
+            <Zap className="size-3.5 text-white" />
+            <span>{activeRecord.action}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Filter Tabs */}
+      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
+        <div className="flex gap-1">
+          {(["all", "active", "resolved"] as const).map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              className={cn(
+                "rounded-lg px-3 py-2 text-[0.68rem] font-bold capitalize transition-all min-h-[44px] inline-flex items-center justify-center",
+                filter === f
+                  ? "bg-slate-900 text-white"
+                  : "text-slate-600 hover:bg-slate-100"
+              )}
+            >
+              {f === "all" ? "All Tickets (18)" : f === "active" ? "Active SLA (4)" : "Resolved / Closed (7)"}
+            </button>
+          ))}
+        </div>
+        <span className="text-[0.65rem] text-slate-500">Click any row to inspect telemetry</span>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2.5">Ticket / Client</th>
+              <th className="p-2.5">Assignee</th>
+              <th className="p-2.5">Priority</th>
+              <th className="p-2.5">Channel</th>
+              <th className="p-2.5">SLA Countdown</th>
+              <th className="p-2.5">Customer Sentiment</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.72rem]">
+            {displayedRows.map((row) => {
+              const isSelected = rows[selectedRow]?.id === row.id;
+              return (
+                <tr
+                  key={row.id}
+                  onClick={() => setSelectedRow(rows.findIndex((r) => r.id === row.id))}
+                  className={cn(
+                    "cursor-pointer transition-colors",
+                    isSelected ? "bg-blue-50/80 font-medium" : "hover:bg-slate-50/70"
+                  )}
+                >
+                  <td className="p-2.5 font-bold text-slate-900 flex items-center gap-1.5">
+                    {isSelected && <span className="size-1.5 rounded-full bg-blue-600" />}
+                    <span>{row.ticketId}</span>
+                    <span className="font-normal text-slate-500 text-[0.68rem]">· {row.client}</span>
+                  </td>
+                  <td className="p-2.5 text-slate-700 font-medium">{row.assignee}</td>
+                  <td className="p-2.5">
+                    <span className={cn("rounded-md px-2.5 py-1 text-[0.65rem] font-bold text-white shadow-2xs", row.priorityBg)}>
+                      {row.priority}
+                    </span>
+                  </td>
+                  <td className="p-2.5 text-slate-600 font-mono text-[0.68rem]">{row.channel}</td>
+                  <td className="p-2.5">
+                    <span className={cn("rounded px-2 py-0.5 text-[0.65rem] font-bold border", row.slaColor)}>
+                      {row.sla}
+                    </span>
+                  </td>
+                  <td className="p-2.5">
+                    <span className={cn("rounded px-2 py-0.5 text-[0.65rem] font-semibold border", row.sentimentColor)}>
+                      {row.sentiment}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Selected Row Operational Inspector */}
+      <div className="rounded-xl border border-blue-100 bg-blue-50/40 p-3 text-xs flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span className="text-[0.65rem] font-mono font-bold text-blue-700 uppercase">Selected Incident Context:</span>
+          <p className="font-semibold text-slate-900">{activeRecord.detail}</p>
+        </div>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => onAction(`Automated escalation note appended to ticket ${activeRecord.ticketId} audit log.`)}
+            className="rounded-lg bg-white border border-slate-200 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-2xs min-h-[44px] inline-flex items-center justify-center"
+          >
+            Audit Log
+          </button>
+          <button
+            type="button"
+            onClick={() => onAction(activeRecord.actionToast)}
+            className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-2xs min-h-[44px] inline-flex items-center justify-center"
+          >
+            Execute Macro
+          </button>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between text-[0.68rem] text-slate-500 pt-1">
+        <span>SLA Engine: Tier 1–4 Auto-Escalation Active</span>
+        <span>CSAT Telemetry: 94.2% (Last 30 Days)</span>
       </div>
     </div>
   );
@@ -1558,7 +1808,7 @@ function HrmsBoard({
       statusColor: "bg-[#0073ea]",
       diff: "Standard + 1h ND",
       action: "Authorize Overtime Float",
-      actionToast: "Approved 2 float agents to cover Shift B customer service queue.",
+      actionToast: "Approved 2 float agents to cover Shift B support desk queue.",
       detail: "2 approved vacation leaves covered by cross-trained float roster.",
     },
     {
@@ -2521,7 +2771,7 @@ function QueuingBoard({
       statusColor: "bg-[#a25ddc]",
       counter: "Window 1 Pre-Assigned",
       action: "Transfer to Counter 2",
-      actionToast: "Transferred Ticket A-044 to specialized customer service desk Counter 2.",
+      actionToast: "Transferred Ticket A-044 to specialized helpdesk Counter 2.",
       detail: "Client checked in via mobile QR scan at entrance foyer kiosk.",
     },
   ];

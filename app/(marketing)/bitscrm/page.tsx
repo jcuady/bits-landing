@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "BSP collections compliance software",
     "omnichannel contact center CRM",
     "debt recovery platform",
-    "customer service CRM Philippines",
+    "debt recovery collections CRM",
   ],
   alternates: {
     canonical: `${site.url}/bitscrm`,
@@ -237,7 +237,7 @@ export default function BitsCrmPage() {
         </Container>
       </section>
 
-      {/* Modular CRM Variants Explorer (Customer Service, Sales, Marketing, Commerce) + BITSagent & BITS RAG Interconnect */}
+      {/* Modular CRM Variants Explorer (Collections Flagship, Support, Sales, Marketing, Commerce) + BITSagent & BITS RAG Interconnect */}
       <CrmVariantsExplorer />
 
       {/* Interactive Role Workspaces Demo */}
@@ -462,7 +462,7 @@ export default function BitsCrmPage() {
                 applicationCategory: "BusinessApplication",
                 operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
                 description:
-                  "Flagship enterprise collections and customer service CRM engineered by Boundless IT Solutions with predictive dialing, automated PTP recovery, supervisory HUD, and compliance controls.",
+                  "Flagship enterprise debt recovery and collections CRM engineered by Boundless IT Solutions with predictive dialing, automated PTP recovery, supervisory HUD, and compliance controls.",
                 url: `${site.url}/bitscrm`,
                 publisher: {
                   "@type": "Organization",

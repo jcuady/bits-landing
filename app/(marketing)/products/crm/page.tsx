@@ -24,18 +24,21 @@ import {
   Workflow,
   Database,
   Building2,
+  Headset,
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BITScrm Suite — Unified Customer Service, Sales, Marketing & Commerce Cloud | Boundless IT Solutions",
+  title: "BITScrm Suite — Flagship Collections, Support, Sales, Marketing & Commerce Cloud | Boundless IT Solutions",
   description:
-    "Explore the 4 enterprise CRM variants by Boundless IT Solutions: Service, Sales, Marketing, and Commerce. Unified on a single sovereign data schema with native AI automation, zero replatforming, and cloud or on-premises deployment.",
+    "Explore the 5 purpose-built CRM variants by Boundless IT Solutions: Flagship Collections, Support Desk, Sales, Marketing, and Commerce. Unified on a single sovereign data schema with native AI automation, zero replatforming, and cloud or on-premises deployment.",
   keywords: [
     "BITScrm",
     "BITScrm Suite",
     "CRM variants",
     "enterprise CRM Philippines",
-    "collections CRM",
+    "collections CRM flagship",
+    "debt recovery CRM",
+    "support desk CRM",
     "sales pipeline CRM",
     "marketing automation CRM",
     "commerce subscription billing CRM",
@@ -47,41 +50,61 @@ export const metadata: Metadata = {
     canonical: `${site.url}/products/crm`,
   },
   openGraph: {
-    title: "BITScrm Suite — Unified Customer Service, Sales, Marketing & Commerce Cloud",
+    title: "BITScrm Suite — Flagship Collections, Support, Sales, Marketing & Commerce Cloud",
     description:
-      "Four purpose-built CRM variants on one sovereign data schema. Eliminate fragmented vendor SaaS stacks with zero data replatforming.",
+      "Five purpose-built CRM variants on one sovereign data schema: Collections (Flagship), Support, Sales, Marketing, and Commerce. Zero vendor lock-in, zero data replatforming.",
     url: `${site.url}/products/crm`,
     siteName: site.legalName,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITScrm Enterprise Suite" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITScrm Suite — Unified Customer Service, Sales, Marketing & Commerce Cloud",
+    title: "BITScrm Suite — Flagship Collections, Support, Sales, Marketing & Commerce Cloud",
     description:
-      "Four purpose-built CRM variants on one sovereign data schema. Eliminate fragmented vendor SaaS stacks with zero data replatforming.",
+      "Five purpose-built CRM variants on one sovereign data schema: Collections (Flagship), Support, Sales, Marketing, and Commerce. Zero vendor lock-in, zero data replatforming.",
     images: ["/og.png"],
   },
 };
 
 const CRM_VARIANTS_OVERVIEW = [
   {
-    id: "service",
-    name: "BITScrm Customer Service",
-    shortName: "Service & Collections",
+    id: "collections",
+    name: "BITScrm Collections",
+    shortName: "Collections Flagship",
     badge: "Primary Flagship Platform",
-    tagline: "Collections, Customer Care & High-Volume Contact Center Core",
+    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
     icon: PhoneCall,
     color: "blue",
     description:
-      "Engineered for debt recovery agencies, BPO contact centers, and financial lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in.",
+      "Engineered for debt recovery agencies, BPO contact centers, and financial lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in HUD.",
     metric: { value: "3.2x Boost", label: "Right-Party Connect" },
     href: "/bitscrm",
-    productHref: "/products/service",
+    productHref: "/bitscrm",
     keyFeatures: [
       "Dynamic Debtor & Account Staging Queues",
       "WebRTC In-Browser SIP Softphone & Auto-Dialer",
       "Automated Promise-to-Pay (PTP) Scheduling Engine",
       "Supervisor Listen, Whisper & Barge-in HUD",
+    ],
+  },
+  {
+    id: "support",
+    name: "BITScrm Support",
+    shortName: "Support Desk",
+    badge: "Helpdesk Core Variant",
+    tagline: "Omnichannel Ticket Queue, Real-Time SLA Countdown & AI Sentiment Telemetry",
+    icon: Headset,
+    color: "indigo",
+    description:
+      "Built for enterprise helpdesks, technical support teams, and customer care centers. Centralizes cross-channel ticketing (email, live chat, portal, API), multi-tier P1–P4 SLA countdowns, and automated resolution macros.",
+    metric: { value: "+46% Lift", label: "First Contact Resolution" },
+    href: "/products/support",
+    productHref: "/products/support",
+    keyFeatures: [
+      "Omnichannel Unified Ticket Inbox (Email, Chat, Portal, API)",
+      "Multi-Tier P1–P4 Priority & Real-Time SLA Countdown HUD",
+      "AI-Powered Customer Sentiment Detection & Escalation",
+      "One-Click Automated Responses & Resolution Macros",
     ],
   },
   {
@@ -177,7 +200,7 @@ const ARCHITECTURE_COMPARISONS = [
 const CRM_FAQS = [
   {
     q: "Can we deploy one CRM variant today and add others later?",
-    a: "Yes. Every BITScrm variant is fully functional as a standalone system. When you decide to activate an additional variant (e.g. adding Commerce to Sales, or adding Service to Marketing), it connects instantly to your existing customer database without any data migration, schema rewriting, or replatforming.",
+    a: "Yes. Every BITScrm variant is fully functional as a standalone system. When you decide to activate an additional variant (e.g. adding Commerce to Sales, or adding Support to Collections), it connects instantly to your existing customer database without any data migration, schema rewriting, or replatforming.",
   },
   {
     q: "How does BITScrm eliminate data replatforming between departments?",
@@ -189,7 +212,7 @@ const CRM_FAQS = [
   },
   {
     q: "Does BITScrm integrate with BITSagent Conversational Voice AI?",
-    a: "Yes. BITSagent voice and email AI agents connect natively to BITScrm Customer Service, Sales, and Marketing. For example, BITSagent can autonomously dial overdue debtors, negotiate payment plans, and write confirmed PTP schedules directly into the CRM database in real-time.",
+    a: "Yes. BITSagent voice and email AI agents connect natively to BITScrm Collections, Support, Sales, and Marketing. For example, BITSagent can autonomously dial overdue debtors, negotiate payment plans, and write confirmed PTP schedules directly into the CRM database in real-time.",
   },
   {
     q: "How does BITScrm Commerce handle Philippine tax compliance?",
@@ -206,7 +229,7 @@ export default function CrmMasterPage() {
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
     description:
-      "Four purpose-built CRM variants (Customer Service, Sales, Marketing, Commerce) unified on a single zero-replatforming database schema with native AI automation.",
+      "Five purpose-built CRM variants (Collections Flagship, Support, Sales, Marketing, Commerce) unified on a single zero-replatforming database schema with native AI automation.",
     url: `${site.url}/products/crm`,
     publisher: {
       "@type": "Organization",
@@ -326,7 +349,13 @@ export default function CrmMasterPage() {
                   href="/bitscrm"
                   className="inline-flex min-h-[36px] items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-white hover:text-slate-900 transition-all"
                 >
-                  Customer Service
+                  Collections (Flagship)
+                </Link>
+                <Link
+                  href="/products/support"
+                  className="inline-flex min-h-[36px] items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-white hover:text-slate-900 transition-all"
+                >
+                  Support Desk
                 </Link>
                 <Link
                   href="/products/sales"
@@ -363,11 +392,11 @@ export default function CrmMasterPage() {
             {/* Tagline & Subtitle */}
             <Reveal delay={0.12} y={14}>
               <p className="mt-3 text-lg font-bold text-blue-600 sm:text-xl">
-                Four Specialized Variants. One Sovereign Data Layer. Zero Replatforming.
+                Flagship Collections &amp; Four Specialized Variants. One Sovereign Data Layer.
               </p>
               <p className="text-lede mx-auto mt-4 max-w-[64ch] text-pretty text-slate-600">
                 Stop stitching together disparate SaaS systems with brittle webhooks and compounding seat fees.
-                BITScrm unifies high-volume customer service, institutional deal pipelines, automated multichannel journeys,
+                BITScrm unifies delinquent debt recovery, enterprise support desks, institutional deal pipelines, automated multichannel journeys,
                 and subscription commerce into a single high-performance operational core.
               </p>
             </Reveal>
@@ -564,7 +593,7 @@ export default function CrmMasterPage() {
               Native Interconnects
             </span>
             <h2 className="text-h2 mt-3 font-bold text-slate-900">
-              How the 4 Variants Synchronize in Real-Time
+              How the 5 CRM Engines Synchronize in Real-Time
             </h2>
             <p className="text-lede mt-4 text-slate-600">
               When data changes anywhere in your customer lifecycle, all authorized departments see
@@ -572,7 +601,7 @@ export default function CrmMasterPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6">
               <div className="flex size-8 items-center justify-center rounded-lg bg-pink-100 text-pink-700 font-mono font-bold text-xs">
                 01
@@ -604,12 +633,22 @@ export default function CrmMasterPage() {
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-blue-100 text-blue-700 font-mono font-bold text-xs">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-indigo-100 text-indigo-700 font-mono font-bold text-xs">
                 04
               </div>
-              <h3 className="mt-4 text-sm font-bold text-slate-900">Service Resolves Floor</h3>
+              <h3 className="mt-4 text-sm font-bold text-slate-900">Support Resolves Incidents</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                When customers call or chat, agents see full historical invoices, open deals, and prior PTP commitments directly on their WebRTC softphone console.
+                When enterprise users report incidents, support engineers see full invoice histories, active contracts, and telemetry with real-time SLA countdown timers.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:col-span-2 lg:col-span-2">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-blue-100 text-blue-700 font-mono font-bold text-xs">
+                05
+              </div>
+              <h3 className="mt-4 text-sm font-bold text-slate-900">Collections Recovers Delinquent Portfolios</h3>
+              <p className="mt-2 text-xs leading-relaxed text-slate-600">
+                Overdue balances trigger automated delinquent staging queues in Collections. WebRTC predictive dialers connect right parties while recording PTP schedules and enforcing BSP quiet hours.
               </p>
             </div>
           </div>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Boundless IT Solutions BITSagent",
     "voice AI agents Philippines",
     "conversational AI collections",
-    "autonomous customer service AI",
+    "autonomous support & collections AI",
     "WebRTC voice AI agent",
     "enterprise AI operations",
     "AI debt negotiation",

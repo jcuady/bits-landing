@@ -26,9 +26,10 @@ import {
   FileText,
   Filter,
   Columns3,
+  Headset,
 } from "lucide-react";
 
-export type CrmVariantId = "service" | "sales" | "marketing" | "commerce";
+export type CrmVariantId = "collections" | "support" | "sales" | "marketing" | "commerce";
 
 interface CrmVariantData {
   id: CrmVariantId;
@@ -45,13 +46,13 @@ interface CrmVariantData {
 
 const CRM_VARIANTS: CrmVariantData[] = [
   {
-    id: "service",
-    name: "BITScrm Customer Service",
+    id: "collections",
+    name: "BITScrm Collections",
     badge: "Primary Flagship Platform",
     isFlagship: true,
-    tagline: "Collections, Customer Care & High-Volume Contact Center Core",
+    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
     description:
-      "Our core flagship system built for debt recovery agencies, BPO contact centers, and financial lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in.",
+      "Our core flagship platform built for debt recovery agencies, BPO contact centers, banks, and consumer lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in HUD.",
     metric: {
       label: "Right-Party Connect",
       value: "3.2x Boost",
@@ -71,7 +72,36 @@ const CRM_VARIANTS: CrmVariantData[] = [
       "Dual-Channel Call Audio Archiving & Scorecards",
       "Immutable Audit Trails & Strict Contact Hour Enforcing",
     ],
-    ctaLabel: "Schedule Service Demo",
+    ctaLabel: "Schedule Collections Demo",
+  },
+  {
+    id: "support",
+    name: "BITScrm Support",
+    badge: "Helpdesk Core Variant",
+    isFlagship: false,
+    tagline: "Omnichannel Ticket Queue, Real-Time SLA Countdown & AI Sentiment Telemetry",
+    description:
+      "Built for enterprise helpdesks, technical support teams, and customer care centers. Centralizes cross-channel ticketing (email, live chat, portal, API), multi-tier P1–P4 SLA countdowns, automated resolution macros, and real-time CSAT tracking.",
+    metric: {
+      label: "First Contact Resolution",
+      value: "+46% Lift",
+      detail: "faster time-to-resolution",
+    },
+    compliance: [
+      "SOC 2 Type II Controls",
+      "Granular RBAC Permissions",
+      "NPC RA 10173 DPA",
+      "End-to-End TLS Encryption",
+    ],
+    capabilities: [
+      "Omnichannel Unified Ticket Inbox (Email, Chat, Portal, API)",
+      "Multi-Tier P1–P4 Priority & Real-Time SLA Countdown HUD",
+      "AI-Powered Customer Sentiment Detection & Escalation",
+      "One-Click Automated Canned Responses & Resolution Macros",
+      "Skill-Based Automatic Routing & Tier-3 Escalation Bridges",
+      "Real-Time CSAT Telemetry & First Contact Resolution Dashboards",
+    ],
+    ctaLabel: "Schedule Support Demo",
   },
   {
     id: "sales",
@@ -163,7 +193,7 @@ const CRM_VARIANTS: CrmVariantData[] = [
 ];
 
 export function CrmVariantsExplorer() {
-  const [activeVariantId, setActiveVariantId] = React.useState<CrmVariantId>("service");
+  const [activeVariantId, setActiveVariantId] = React.useState<CrmVariantId>("collections");
   const currentVariant =
     CRM_VARIANTS.find((v) => v.id === activeVariantId) || CRM_VARIANTS[0];
 
@@ -190,13 +220,13 @@ export function CrmVariantsExplorer() {
             <h2 className="text-display font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               One Unified CRM Core.{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                Four Specialized Operational Variants.
+                Flagship Collections &amp; Specialized Operational Variants.
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
-              While our flagship <strong className="text-slate-900">Customer Service CRM</strong> powers mission-critical
-              contact center operations, BITS provides specialized variants for sales, marketing, and commerce—all
-              sharing the same unified data layer and AI automation.
+              While our flagship <strong className="text-slate-900">BITScrm Collections</strong> powers mission-critical
+              debt recovery and contact center operations, BITS provides specialized variants for support, sales, marketing, and commerce—all
+              sharing the same unified sovereign data layer and AI automation.
             </p>
           </Reveal>
 
@@ -205,8 +235,10 @@ export function CrmVariantsExplorer() {
             {CRM_VARIANTS.map((variant) => {
               const isSelected = activeVariantId === variant.id;
               const Icon =
-                variant.id === "service"
+                variant.id === "collections"
                   ? PhoneCall
+                  : variant.id === "support"
+                  ? Headset
                   : variant.id === "sales"
                   ? TrendingUp
                   : variant.id === "marketing"
@@ -374,7 +406,8 @@ export function CrmVariantsExplorer() {
                 </div>
 
                 <div className="p-4 sm:p-5">
-                  {activeVariantId === "service" && <ServiceMockupLight />}
+                  {(activeVariantId === "collections" || (activeVariantId as string) === "service") && <CollectionsMockupLight />}
+                  {activeVariantId === "support" && <SupportMockupLight />}
                   {activeVariantId === "sales" && <SalesMockupLight />}
                   {activeVariantId === "marketing" && <MarketingMockupLight />}
                   {activeVariantId === "commerce" && <CommerceMockupLight />}
@@ -391,11 +424,11 @@ export function CrmVariantsExplorer() {
               Universal Intelligence Layer
             </span>
             <h3 className="text-2xl font-bold text-slate-900 sm:text-3xl mt-2">
-              Connect BITSagent AI & BITS RAG to Any CRM Variant
+              Connect BITSagent AI &amp; BITS RAG to Any CRM Variant
             </h3>
             <p className="mt-3 text-sm text-slate-600">
               Zero vendor lock-in. BITSagent autonomous voice/email agents and BITS RAG knowledge grounding integrate
-              natively across Customer Service, Sales, Marketing, Commerce, or your legacy databases and telephony backbones.
+              natively across Collections, Support, Sales, Marketing, Commerce, or your legacy databases and telephony backbones.
             </p>
           </div>
 
@@ -496,7 +529,7 @@ export function CrmVariantsExplorer() {
 
 /* ── Light Mode UI Mockup Boards for Each CRM Variant ── */
 
-function ServiceMockupLight() {
+function CollectionsMockupLight() {
   const [activeItem, setActiveItem] = React.useState<string>("#PTP-8891");
   const [toast, setToast] = React.useState<string | null>(null);
 
@@ -553,7 +586,7 @@ function ServiceMockupLight() {
             <tr
               onClick={() => {
                 setActiveItem("#PTP-8891");
-                handleAction("✓ #PTP-8891 selected. SMS reminder scheduled for Sept 25.");
+                handleAction("#PTP-8891 selected. SMS reminder scheduled for Sept 25.");
               }}
               className={cn("transition-colors cursor-pointer", activeItem === "#PTP-8891" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
             >
@@ -566,7 +599,7 @@ function ServiceMockupLight() {
             <tr
               onClick={() => {
                 setActiveItem("HUD");
-                handleAction("✓ Supervisor Audio Barge HUD enabled on SRTP channel.");
+                handleAction("Supervisor Audio Barge HUD enabled on SRTP channel.");
               }}
               className={cn("transition-colors cursor-pointer", activeItem === "HUD" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
             >
@@ -575,6 +608,107 @@ function ServiceMockupLight() {
                 <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">Barge Ready</span>
               </td>
               <td className="p-2 text-slate-600">Dual-Channel SRTP</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function SupportMockupLight() {
+  const [activeTicket, setActiveTicket] = React.useState<string>("TICK-8841");
+  const [toast, setToast] = React.useState<string | null>(null);
+
+  const handleAction = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  return (
+    <div className="space-y-3 font-sans">
+      {/* Customer Benefit Callout */}
+      <div className="rounded-xl border border-blue-200 bg-blue-50/70 p-2.5 text-xs">
+        <p className="text-[0.72rem] text-blue-950 font-medium">
+          <strong className="font-bold text-blue-700">How this helps you: </strong>
+          Triages multi-tier support queues with real-time SLA countdowns, sentiment escalation, and one-click resolution macros.
+        </p>
+      </div>
+
+      <div className="flex items-center justify-between rounded-xl border border-blue-200 bg-white p-3 shadow-2xs">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-7 items-center justify-center rounded-lg bg-blue-600 text-white">
+            <Headset className="size-3.5" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-slate-900">Incident: TICK-8841 (Manila Water BPO)</p>
+            <p className="text-[0.68rem] text-slate-500">P1 Critical · 11m 42s SLA Remaining · Tier-3 SRE</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => handleAction("Incident bridge dispatched to on-call Tier-3 SRE for TICK-8841.")}
+          className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center gap-1.5"
+        >
+          <Radio className="size-3.5 text-white" />
+          <span>Dispatch SRE Bridge</span>
+        </button>
+      </div>
+
+      {toast && (
+        <div className="rounded-lg border border-blue-300 bg-blue-50 p-2 text-[0.72rem] font-bold text-blue-800 animate-fade-in">
+          {toast}
+        </div>
+      )}
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-200 bg-slate-50/90 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
+            <tr>
+              <th className="p-2">Ticket / Client (Click row)</th>
+              <th className="p-2">Priority</th>
+              <th className="p-2">SLA Countdown</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 text-[0.7rem]">
+            <tr
+              onClick={() => {
+                setActiveTicket("TICK-8841");
+                handleAction("TICK-8841 selected. Fallback webhook retry executed successfully.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeTicket === "TICK-8841" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
+            >
+              <td className="p-2 font-bold text-slate-900">TICK-8841 Manila Water 504 Timeout</td>
+              <td className="p-2">
+                <span className="rounded bg-rose-600 px-2 py-0.5 text-[0.62rem] font-bold text-white">P1 Critical</span>
+              </td>
+              <td className="p-2 font-mono text-rose-600 font-bold">11m 42s SLA</td>
+            </tr>
+            <tr
+              onClick={() => {
+                setActiveTicket("TICK-8842");
+                handleAction("TICK-8842 selected. Rotated X.509 cert installed to IdP profile.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeTicket === "TICK-8842" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
+            >
+              <td className="p-2 font-bold text-slate-900">TICK-8842 BDO FinTech SAML Rotation</td>
+              <td className="p-2">
+                <span className="rounded bg-amber-500 px-2 py-0.5 text-[0.62rem] font-bold text-white">P2 High</span>
+              </td>
+              <td className="p-2 font-mono text-slate-600">1h 45m SLA</td>
+            </tr>
+            <tr
+              onClick={() => {
+                setActiveTicket("TICK-8843");
+                handleAction("TICK-8843 selected. Scanner cache cleared remotely via MQTT.");
+              }}
+              className={cn("transition-colors cursor-pointer", activeTicket === "TICK-8843" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
+            >
+              <td className="p-2 font-bold text-slate-900">TICK-8843 SM Retail POS Scanner</td>
+              <td className="p-2">
+                <span className="rounded bg-blue-600 px-2 py-0.5 text-[0.62rem] font-bold text-white">P3 Medium</span>
+              </td>
+              <td className="p-2 font-mono text-slate-600">3h 15m SLA</td>
             </tr>
           </tbody>
         </table>

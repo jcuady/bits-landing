@@ -92,6 +92,43 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 /* ── Domain-Specific Problem Statements for All 18 Products ── */
 function getProductProblems(product: (typeof bitsProducts)[number]) {
   switch (product.id) {
+    case "collections":
+    case "service":
+      return [
+        {
+          title: "Delinquent Debtor Queue Stagnation",
+          description:
+            "Managing large borrower portfolios on static spreadsheets causes high-priority past-due accounts to slip through the cracks, leading to broken promises to pay and lower portfolio yields.",
+        },
+        {
+          title: "Manual Dialing Fatigue & Slow Connect Rates",
+          description:
+            "Collectors manually punching numbers into desk phones waste up to 45 minutes of every hour on busy signals, answering machines, and disconnected lines.",
+        },
+        {
+          title: "BSP & Statutory Compliance Vulnerabilities",
+          description:
+            "Without strict automated contact hour enforcement (BSP Circulars 454/857) and tamper-evident audio recording, agencies risk severe regulatory sanctions and borrower harassment lawsuits.",
+        },
+      ];
+    case "support":
+      return [
+        {
+          title: "SLA Breaches & Unprioritized Support Queues",
+          description:
+            "Without automated multi-tier P1–P4 prioritization and real-time countdown alerts, critical enterprise outages sit in general inboxes until SLAs are breached.",
+        },
+        {
+          title: "Agent Burnout from Repetitive Tier-1 Tickets",
+          description:
+            "Support staff drown in routine status inquiries and repetitive password/token requests instead of focusing on complex technical troubleshooting and root-cause resolution.",
+        },
+        {
+          title: "Siloed Context & Blind Escalations",
+          description:
+            "Escalating tickets between Tier 1, Tier 2, and SRE engineers without integrated CRM account telemetry forces customers to repeatedly explain their issue across multiple channels.",
+        },
+      ];
     case "accounting":
       return [
         {
@@ -465,6 +502,17 @@ function getBespokeFaqQuestion(id: string, name: string) {
         q: "Does BITS Sales CRM include automated CPQ quoting and deal pipeline forecasting?",
         a: "Yes. BITScrm Sales features visual drag-and-drop Kanban deal boards, automated territory routing, AI win-probability scoring, and a full Configure, Price, Quote (CPQ) document generator that outputs branded PDF proposals.",
       };
+    case "support":
+      return {
+        q: "How does BITScrm Support handle multi-tier SLAs and automated escalations?",
+        a: "BITScrm Support tracks active tickets against contractual SLA countdown timers (P1 to P4). If a ticket approaches 75% of its SLA threshold without resolution, the engine automatically escalates priority, pages Tier-3 on-call SREs, and notifies floor supervisors.",
+      };
+    case "collections":
+    case "service":
+      return {
+        q: "How does BITScrm Collections enforce compliance with BSP Circulars 454 and 857?",
+        a: "BITScrm Collections includes automated contact window enforcement that locks outgoing calls and SMS outside of legally permitted hours (6:00 AM to 10:00 PM), records dual-channel audio for 7-year retention, and logs all Promise-to-Pay arrangements to an immutable audit trail.",
+      };
     case "logistics":
       return {
         q: "Does the BITS Logistics driver mobile app work offline in areas with poor cellular coverage?",
@@ -484,8 +532,11 @@ function getBespokeFaqQuestion(id: string, name: string) {
 }
 
 function getCrmSynergy(currentId: string, siblingId: string): string {
-  if (siblingId === "service") {
-    return "Shares real-time customer histories, omnichannel ticketing, and supervisor audio whisper logs directly with your account records.";
+  if (siblingId === "collections" || siblingId === "service") {
+    return "Shares real-time delinquent account staging, DPD aging brackets, and supervisor softphone whisper logs directly with your account records.";
+  }
+  if (siblingId === "support") {
+    return "Connects omnichannel ticket histories, multi-tier P1–P4 SLA countdowns, and real-time CSAT telemetry directly to customer records.";
   }
   if (siblingId === "sales") {
     return "Transitions qualified inbound leads into visual Kanban deal stages with AI win-probability scoring and CPQ quote generation.";
@@ -510,12 +561,19 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const problems = getProductProblems(product);
   const faqs = getProductFaqs(product);
 
-  const isCrmProduct = product.category === "crm" || product.id === "service";
+  const isCrmProduct =
+    product.category === "crm" ||
+    product.id === "service" ||
+    product.id === "collections";
   const otherCrmVariants = bitsProducts.filter(
-    (p) => (p.category === "crm" || p.id === "service") && p.id !== product.id
+    (p) =>
+      (p.category === "crm" || p.id === "service" || p.id === "collections") &&
+      p.id !== product.id &&
+      p.id !== "service"
   );
   const crmVariantsList = [
-    { id: "service", label: "Customer Service", href: "/products/service" },
+    { id: "collections", label: "Collections (Flagship)", href: "/bitscrm" },
+    { id: "support", label: "Support Desk", href: "/products/support" },
     { id: "sales", label: "Sales Pipeline", href: "/products/sales" },
     { id: "marketing", label: "Marketing Journeys", href: "/products/marketing" },
     { id: "commerce", label: "Commerce & Billing", href: "/products/commerce" },
@@ -1050,7 +1108,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   Need a multi-variant CRM deployment for your enterprise?
                 </h4>
                 <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                  Combine Customer Service, Sales, Marketing, and Commerce under a single unified database with bespoke role permissions and zero data-replatforming headaches.
+                  Combine Collections, Support, Sales, Marketing, and Commerce under a single unified database with bespoke role permissions and zero data-replatforming headaches.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
                   <Link

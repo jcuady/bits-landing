@@ -30,9 +30,9 @@ export const navigationSections = [
       heading: "Enterprise Software Portfolio",
       items: [
         {
-          title: "BITScrm Customer Service",
+          title: "BITScrm Collections",
           badge: "Primary Flagship",
-          description: "Collections, customer care, and omnichannel contact center CRM.",
+          description: "High-volume debt recovery, delinquent account staging & supervisory telephony.",
           href: "/bitscrm",
           icon: "crm" as const,
         },
@@ -49,6 +49,13 @@ export const navigationSections = [
           description: "Visual deal Kanban, CPQ, territory routing & predictive win scoring.",
           href: "/products/sales",
           icon: "pipeline" as const,
+        },
+        {
+          title: "BITScrm Support",
+          badge: "Enterprise Helpdesk",
+          description: "Omnichannel ticket queue, real-time SLA countdown timers & CSAT telemetry.",
+          href: "/products/support",
+          icon: "headset" as const,
         },
         {
           title: "BITScrm Marketing",
@@ -254,16 +261,16 @@ export const theDifference = [
 /* ── BITS Full Enterprise Product Portfolio (Flagships & Add-Ons) ── */
 export const bitsProducts = [
   {
-    id: "service",
-    name: "BITScrm Customer Service",
-    shortName: "Service CRM",
+    id: "collections",
+    name: "BITScrm Collections",
+    shortName: "Collections CRM",
     category: "flagship",
     categoryLabel: "Primary Flagship Platform",
     badge: "Core Flagship",
     isFlagship: true,
-    tagline: "High-Volume Customer Service, Collections & Omnichannel Resolution",
+    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
     description:
-      "The mission-critical operational platform for BPOs, collections agencies, banks, and lenders. Unifies delinquent account staging, queue distribution, browser WebRTC softphones, automated PTP scheduling, supervisor QA HUD, and regulatory compliance.",
+      "The mission-critical flagship platform for debt recovery agencies, BPOs, banks, and consumer lenders. Unifies delinquent account staging, queue distribution, browser WebRTC softphones, automated PTP scheduling, supervisor QA HUD, and BSP Circulars 454/857 compliance.",
     complianceBadges: [
       "HIPAA Security Rule Aligned",
       "SOC 2 Type II Controls",
@@ -271,7 +278,7 @@ export const bitsProducts = [
       "NPC RA 10173 DPA",
     ],
     capabilities: [
-      "Dynamic Debtor & Customer Staging Queues",
+      "Dynamic Debtor & Account Staging Queues",
       "Built-in WebRTC Browser SIP Softphone & Auto-Dialer",
       "Automated Promise-to-Pay (PTP) Scheduling Engine",
       "Supervisor Live Listen, Whisper & Barge HUD",
@@ -279,7 +286,36 @@ export const bitsProducts = [
       "Granular Role-Based Access (RBAC) & WORM Logs",
     ],
     metrics: { label: "Right-Party Connect", value: "3.2x Boost" },
-    ctaText: "Explore BITScrm Service",
+    ctaText: "Explore BITScrm Collections",
+    ctaHref: "/bitscrm",
+  },
+  {
+    id: "service",
+    name: "BITScrm Collections",
+    shortName: "Collections CRM",
+    category: "flagship",
+    categoryLabel: "Primary Flagship Platform",
+    badge: "Core Flagship",
+    isFlagship: true,
+    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
+    description:
+      "The mission-critical flagship platform for debt recovery agencies, BPOs, banks, and consumer lenders. Unifies delinquent account staging, queue distribution, browser WebRTC softphones, automated PTP scheduling, supervisor QA HUD, and BSP Circulars 454/857 compliance.",
+    complianceBadges: [
+      "HIPAA Security Rule Aligned",
+      "SOC 2 Type II Controls",
+      "BSP Circulars 454/857",
+      "NPC RA 10173 DPA",
+    ],
+    capabilities: [
+      "Dynamic Debtor & Account Staging Queues",
+      "Built-in WebRTC Browser SIP Softphone & Auto-Dialer",
+      "Automated Promise-to-Pay (PTP) Scheduling Engine",
+      "Supervisor Live Listen, Whisper & Barge HUD",
+      "Standardized QA Scorecards & Audit Worklists",
+      "Granular Role-Based Access (RBAC) & WORM Logs",
+    ],
+    metrics: { label: "Right-Party Connect", value: "3.2x Boost" },
+    ctaText: "Explore BITScrm Collections",
     ctaHref: "/bitscrm",
   },
   {
@@ -339,6 +375,35 @@ export const bitsProducts = [
     metrics: { label: "Pipeline Velocity", value: "+38% Faster" },
     ctaText: "Explore CRM Sales",
     ctaHref: "/products/sales",
+  },
+  {
+    id: "support",
+    name: "BITScrm Support",
+    shortName: "Support CRM",
+    category: "crm",
+    categoryLabel: "CRM & Revenue Cloud",
+    badge: "Enterprise Helpdesk",
+    isFlagship: false,
+    tagline: "Omnichannel Ticket Queue, Real-Time SLA Countdown & AI Sentiment Telemetry",
+    description:
+      "Engineered for high-volume enterprise helpdesks, technical support desks, and BPO operations. Unifies cross-channel tickets (email, live chat, portal, API), multi-tier P1-P4 priority queues, automated resolution macros, and real-time CSAT tracking.",
+    complianceBadges: [
+      "SOC 2 Type II Controls",
+      "NPC RA 10173 DPA",
+      "Granular RBAC Permissions",
+      "End-to-End TLS Encryption",
+    ],
+    capabilities: [
+      "Omnichannel Unified Ticket Inbox (Email, Chat, Portal, API)",
+      "Multi-Tier P1–P4 Priority & Real-Time SLA Countdown HUD",
+      "AI-Powered Customer Sentiment Detection & Auto-Escalation",
+      "One-Click Automated Canned Responses & Resolution Macros",
+      "Skill-Based Automatic Routing & Tier-3 Escalation Bridges",
+      "Real-Time CSAT Telemetry & First Contact Resolution (FCR) Dashboards",
+    ],
+    metrics: { label: "First Contact Resolution", value: "+46% FCR" },
+    ctaText: "Explore CRM Support",
+    ctaHref: "/products/support",
   },
   {
     id: "marketing",
@@ -1952,13 +2017,14 @@ export const footerColumns = [
   {
     title: "Platform",
     links: [
-      { label: "BITScrm Customer Service", href: "/bitscrm" },
+      { label: "BITScrm Collections (Flagship)", href: "/bitscrm" },
+      { label: "BITScrm Support Desk", href: "/products/support" },
       { label: "BITScrm Sales Engine", href: "/products/sales" },
       { label: "BITScrm Marketing", href: "/products/marketing" },
       { label: "BITScrm Commerce", href: "/products/commerce" },
       { label: "CRM Architecture Hub", href: "/products/crm" },
       { label: "BITSagent AI Suite", href: "/bitsagent" },
-      { label: "Enterprise Engines (18)", href: "/#products-suite" },
+      { label: "Enterprise Engines (19)", href: "/#products-suite" },
     ],
   },
   {
