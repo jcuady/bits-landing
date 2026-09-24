@@ -6,7 +6,8 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { Sparkles, CheckCircle2, ShieldCheck, PhoneCall, Send, FileCheck } from "lucide-react";
+import { Sparkles, CheckCircle2, ShieldCheck, PhoneCall, Send, FileCheck, ArrowUpRight, Activity, Zap } from "lucide-react";
+import { BionisLogo } from "@/components/bionis/logo";
 
 const ctaClass =
   "group mt-8 inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-blue-700";
@@ -73,30 +74,36 @@ function Caps({ items }: { items: readonly string[] }) {
 function CrmSpecimen() {
   const [selectedRow, setSelectedRow] = React.useState(0);
   const [toast, setToast] = React.useState<string | null>(null);
+  const [timeline, setTimeline] = React.useState<"today" | "7d" | "30d">("7d");
 
   const rows = [
     {
-      account: "ACC-10482 (M. Santos)",
+      account: "M. Santos",
+      accNo: "#ACC-10482",
       balance: "₱48,500",
       work: "PTP Due Today",
       state: "Active Call",
-      stateColor: "bg-blue-600 text-white",
+      stateColor: "bg-[#1975f2] text-white",
       action: "Send GCash QR Link",
       actionToast: "Dispatched tokenized GCash settlement link to M. Santos (₱20,000 commitment).",
       detail: "45 DPD · Softphone connected (03:42) · Debtor committed to payment by Friday.",
+      score: "89%",
     },
     {
-      account: "ACC-10817 (J. Reyes)",
+      account: "J. Reyes",
+      accNo: "#ACC-10817",
       balance: "₱15,200",
       work: "SMS Link Clicked",
       state: "Awaiting GCash",
-      stateColor: "bg-emerald-600 text-white",
+      stateColor: "bg-[#00b153] text-white",
       action: "Verify Maya Receipt",
       actionToast: "Verified incoming Maya settlement webhook: ₱15,200 credited to ACC-10817.",
       detail: "Debtor opened settlement portal on iPhone Safari. Payment initiated.",
+      score: "94%",
     },
     {
-      account: "ACC-11209 (T. Lim)",
+      account: "T. Lim",
+      accNo: "#ACC-11209",
       balance: "₱82,000",
       work: "Broken PTP Requeue",
       state: "Supervisor Desk",
@@ -104,6 +111,7 @@ function CrmSpecimen() {
       action: "Approve Restructure",
       actionToast: "Approved 2-stage installment plan for ACC-11209 with supervisor override.",
       detail: "Broken commitment flagged automatically. Requeued to senior recovery agent.",
+      score: "72%",
     },
   ];
 
@@ -115,80 +123,184 @@ function CrmSpecimen() {
   const activeRecord = rows[selectedRow];
 
   return (
-    <div className="relative">
+    <div className="bionis-dashboard relative font-sans">
       {toast && (
-        <div className="absolute -top-10 left-1/2 z-30 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs text-white shadow-lg animate-in fade-in">
-          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+        <div className="absolute -top-12 left-1/2 z-40 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-xl bg-neutral-900 px-3.5 py-2 text-xs font-semibold text-white shadow-xl animate-in fade-in">
+          <CheckCircle2 className="size-4 text-[#00b153] shrink-0" />
           <p className="flex-1 truncate">{toast}</p>
         </div>
       )}
 
-      <Bezel title="Account Queues &amp; Real-Time Portfolio" kicker="Dynamic DPD Tiering · BSP 454 Compliant">
-        {/* Customer Outcome Callout */}
-        <div className="m-2 flex items-center justify-between rounded-xl border border-blue-100 bg-blue-50/60 px-3 py-2 text-xs">
-          <div className="flex items-center gap-1.5 text-slate-800">
-            <Sparkles className="size-3.5 text-blue-600 shrink-0" />
-            <span className="font-semibold text-[0.68rem]">
-              Matches debtors to highest-recovery agents, cutting broken promises by 42%.
-            </span>
+      {/* Outer Hardware Shell with Bionis Double-Bezel */}
+      <div className="overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-2 shadow-2xl shadow-blue-950/10 dark:border-[#222] dark:bg-[#141414]">
+        {/* Bionis Top Control Bar */}
+        <div className="flex items-center justify-between border-b border-[#eeefe9] bg-[#fafafa] px-4 py-3 dark:border-[#222] dark:bg-[#18181b] rounded-t-2xl">
+          <div className="flex items-center gap-3">
+            <BionisLogo className="size-6 text-[#1975f2]" />
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+                  BITScrm
+                </span>
+                <span className="rounded-full bg-[#1975f2]/10 px-1.5 py-0.2 text-[0.62rem] font-bold text-[#1975f2]">
+                  Bionis HUD
+                </span>
+              </div>
+              <p className="text-[0.65rem] text-neutral-500">Delinquent Staging · BSP 454 Compliant</p>
+            </div>
           </div>
-          <span className="font-mono text-[0.62rem] font-bold text-blue-700 bg-white px-2 py-0.5 rounded border border-blue-200">
-            +38% RPC
-          </span>
-        </div>
 
-        <div className="overflow-x-auto p-2">
-          <table className="w-full min-w-[20rem] text-left text-xs">
-            <thead>
-              <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
-                <th scope="col" className="px-3 py-2.5">Account / Debtor</th>
-                <th scope="col" className="px-3 py-2.5">Balance</th>
-                <th scope="col" className="px-3 py-2.5">Work Queue</th>
-                <th scope="col" className="px-3 py-2.5">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-[0.72rem]">
-              {rows.map((row, idx) => (
-                <tr
-                  key={row.account}
-                  onClick={() => setSelectedRow(idx)}
+          <div className="flex items-center gap-2">
+            <div className="flex rounded-lg border border-neutral-200 bg-white p-0.5 text-[0.65rem] font-medium dark:border-neutral-800 dark:bg-neutral-900">
+              {(["today", "7d", "30d"] as const).map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setTimeline(t)}
                   className={cn(
-                    "cursor-pointer transition-colors",
-                    selectedRow === idx ? "bg-blue-50/80 font-medium" : "hover:bg-slate-50/60"
+                    "rounded px-2 py-0.5 font-bold uppercase transition-colors cursor-pointer",
+                    timeline === t
+                      ? "bg-[#1975f2] text-white"
+                      : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white"
                   )}
                 >
-                  <td className="whitespace-nowrap px-3 py-2.5 font-bold text-slate-900 flex items-center gap-1.5">
-                    {selectedRow === idx && <span className="size-1.5 rounded-full bg-blue-600" />}
-                    {row.account}
-                  </td>
-                  <td className="px-3 py-2.5 font-mono text-slate-800">{row.balance}</td>
-                  <td className="px-3 py-2.5 text-slate-600">{row.work}</td>
-                  <td className="px-3 py-2.5">
-                    <span className={cn("rounded px-2 py-0.5 text-[0.62rem] font-bold", row.stateColor)}>
-                      {row.state}
-                    </span>
-                  </td>
-                </tr>
+                  {t}
+                </button>
               ))}
-            </tbody>
-          </table>
+            </div>
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00b153] opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-[#00b153]" />
+            </span>
+          </div>
         </div>
 
-        {/* Action Panel */}
-        <div className="m-2 flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 p-2.5 text-xs">
-          <div className="min-w-0 flex-1 pr-2">
-            <span className="text-[0.65rem] font-bold text-slate-500 uppercase block">Context:</span>
-            <p className="text-[0.72rem] font-semibold text-slate-900 truncate">{activeRecord.detail}</p>
+        {/* Inner Core: Micro KPI Strip */}
+        <div className="p-3 bg-neutral-50/60 dark:bg-neutral-900/40">
+          <div className="grid grid-cols-3 gap-2">
+            <div className="rounded-xl border border-neutral-200/80 bg-white p-2.5 dark:border-neutral-800 dark:bg-neutral-900 shadow-2xs">
+              <div className="flex items-center justify-between text-[0.65rem] font-bold text-neutral-500 uppercase tracking-wider">
+                <span>Recovery Score</span>
+                <span className="text-[#1975f2] font-mono">92/100</span>
+              </div>
+              <p className="mt-1 text-sm font-extrabold font-mono text-neutral-900 dark:text-white">
+                Optimal
+              </p>
+              <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
+                <div className="h-full rounded-full bg-[#1975f2]" style={{ width: "92%" }} />
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-neutral-200/80 bg-white p-2.5 dark:border-neutral-800 dark:bg-neutral-900 shadow-2xs">
+              <div className="flex items-center justify-between text-[0.65rem] font-bold text-neutral-500 uppercase tracking-wider">
+                <span>RPC Rate</span>
+                <span className="text-[#00b153] font-bold">+38%</span>
+              </div>
+              <p className="mt-1 text-sm font-extrabold font-mono text-neutral-900 dark:text-white">
+                78.4%
+              </p>
+              <p className="mt-0.5 text-[0.62rem] text-neutral-500">Live WebRTC connected</p>
+            </div>
+
+            <div className="rounded-xl border border-neutral-200/80 bg-white p-2.5 dark:border-neutral-800 dark:bg-neutral-900 shadow-2xs">
+              <div className="flex items-center justify-between text-[0.65rem] font-bold text-neutral-500 uppercase tracking-wider">
+                <span>Collected</span>
+                <span className="text-[#1975f2] font-bold">+18.6%</span>
+              </div>
+              <p className="mt-1 text-sm font-extrabold font-mono text-neutral-900 dark:text-white">
+                ₱482.5K
+              </p>
+              <p className="mt-0.5 text-[0.62rem] text-neutral-500">PTP commitments</p>
+            </div>
           </div>
-          <button
-            type="button"
-            onClick={() => trigger(activeRecord.actionToast)}
-            className="shrink-0 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-2xs"
-          >
-            ⚡ {activeRecord.action}
-          </button>
+
+          {/* AI Prediction Callout */}
+          <div className="mt-2.5 flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/70 px-3 py-2 text-xs dark:border-blue-900/50 dark:bg-blue-950/30">
+            <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
+              <Sparkles className="size-3.5 text-[#1975f2] shrink-0" />
+              <span className="font-medium text-[0.7rem]">
+                <strong className="font-bold text-[#1975f2]">Bionis Telemetry: </strong>
+                Auto-assigned 14 broken commitments to prime call window. PTP probability elevated +34%.
+              </span>
+            </div>
+            <span className="font-mono text-[0.65rem] font-bold text-[#1975f2] bg-white dark:bg-neutral-900 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0 hidden sm:inline-block">
+              &lt; 300ms Dial Latency
+            </span>
+          </div>
+
+          {/* Accounts Staging Queue */}
+          <div className="mt-2.5 overflow-hidden rounded-xl border border-neutral-200/80 bg-white shadow-2xs dark:border-neutral-800 dark:bg-neutral-900">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[22rem] text-left text-xs">
+                <thead>
+                  <tr className="border-b border-neutral-100 bg-neutral-50/80 text-[0.65rem] font-bold uppercase tracking-wider text-neutral-500 dark:border-neutral-800 dark:bg-neutral-800/40">
+                    <th className="px-3 py-2">Debtor &amp; ID</th>
+                    <th className="px-3 py-2">Balance</th>
+                    <th className="px-3 py-2">Queue / Stage</th>
+                    <th className="px-3 py-2 text-right">Probability</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-100 text-[0.72rem] dark:divide-neutral-800">
+                  {rows.map((row, idx) => (
+                    <tr
+                      key={row.account}
+                      onClick={() => setSelectedRow(idx)}
+                      className={cn(
+                        "cursor-pointer transition-colors",
+                        selectedRow === idx
+                          ? "bg-blue-50/80 font-medium dark:bg-blue-950/40"
+                          : "hover:bg-neutral-50 dark:hover:bg-neutral-800/40"
+                      )}
+                    >
+                      <td className="px-3 py-2.5">
+                        <div className="flex items-center gap-2">
+                          <div className="flex size-6 items-center justify-center rounded-full bg-neutral-200 text-[0.62rem] font-bold text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
+                            {row.account.charAt(0)}
+                          </div>
+                          <div>
+                            <p className="font-bold text-neutral-900 dark:text-neutral-100">{row.account}</p>
+                            <p className="font-mono text-[0.62rem] text-neutral-400">{row.accNo}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-3 py-2.5 font-mono font-bold text-neutral-900 dark:text-neutral-100">
+                        {row.balance}
+                      </td>
+                      <td className="px-3 py-2.5">
+                        <span className={cn("rounded-md px-2 py-0.5 text-[0.62rem] font-bold shadow-2xs", row.stateColor)}>
+                          {row.work}
+                        </span>
+                      </td>
+                      <td className="px-3 py-2.5 text-right font-mono font-bold text-[#1975f2]">
+                        {row.score}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Action Bar */}
+            <div className="flex items-center justify-between border-t border-neutral-100 bg-neutral-50/80 p-3 dark:border-neutral-800 dark:bg-neutral-800/40">
+              <div className="min-w-0 flex-1 pr-2">
+                <span className="text-[0.62rem] font-bold uppercase tracking-wider text-neutral-400 block">
+                  Active Intelligence Context:
+                </span>
+                <p className="text-[0.72rem] font-medium text-neutral-800 dark:text-neutral-200 truncate">
+                  {activeRecord.detail}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => trigger(activeRecord.actionToast)}
+                className="shrink-0 rounded-xl bg-[#1975f2] px-3.5 py-1.5 text-xs font-bold text-white hover:bg-[#1975f2]/90 transition-all shadow-sm active:scale-95 cursor-pointer"
+              >
+                ⚡ {activeRecord.action}
+              </button>
+            </div>
+          </div>
         </div>
-      </Bezel>
+      </div>
     </div>
   );
 }

@@ -59,6 +59,26 @@ export async function submitContact(
     return { ok: true, errors: {}, values: {} };
   }
 
+  // Record inbound lead directly in CRM
+  try {
+    const { recordInboundLead } = await import("@/lib/crm/inbound-service");
+    recordInboundLead({
+      name: parsed.data.name,
+      email: parsed.data.email,
+      company: parsed.data.company,
+      companySize: parsed.data.companySize,
+      industry: parsed.data.industry,
+      currentSystem: parsed.data.currentSystem,
+      primaryChallenge: parsed.data.primaryChallenge,
+      preferredMethod: parsed.data.preferredMethod,
+      interest: parsed.data.interest,
+      message: parsed.data.message,
+      source: "Website Contact Form",
+    });
+  } catch (err) {
+    console.error("Failed to record inbound CRM lead:", err);
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const inbox = process.env.CONTACT_INBOX || INQUIRY_INBOX;
   const from = process.env.CONTACT_FROM || "BITS Consultations <noreply@optrizo.com>";

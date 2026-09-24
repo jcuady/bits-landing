@@ -1,4 +1,10 @@
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/geist@5/400.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/geist@5/500.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/geist@5/600.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5/400.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/500.css");
 @import "tailwindcss";
+@import "../components/bionis/dashboard.css";
 
 /*
   BITS design tokens — v2.0.

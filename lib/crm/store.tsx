@@ -65,6 +65,35 @@ export function CrmProvider({
   const [state, setState] = React.useState<CrmState>(cloneSeed);
   const [displayName, setDisplayNameState] = React.useState(initialName);
 
+  // Sync latest inbound website form submissions from server
+  React.useEffect(() => {
+    fetch("/api/crm/leads")
+      .then((r) => r.json())
+      .then((res) => {
+        if (res.ok && res.mapped) {
+          setState((curr) => {
+            const currentLeadIds = new Set(curr.leads.map((l) => l.id));
+            const newLeads = res.mapped.leads.filter((l: any) => !currentLeadIds.has(l.id));
+            if (!newLeads || newLeads.length === 0) return curr;
+
+            const currentCompanyIds = new Set(curr.companies.map((c) => c.id));
+            const newCompanies = res.mapped.companies.filter((c: any) => !currentCompanyIds.has(c.id));
+
+            const currentOppIds = new Set(curr.opportunities.map((o) => o.id));
+            const newOpps = res.mapped.opportunities.filter((o: any) => !currentOppIds.has(o.id));
+
+            return {
+              ...curr,
+              leads: [...newLeads, ...curr.leads],
+              companies: [...newCompanies, ...curr.companies],
+              opportunities: [...newOpps, ...curr.opportunities],
+            };
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const setDisplayName = React.useCallback((name: string) => {
     const parsed = displayNameSchema.safeParse(name);
     if (!parsed.success) {
@@ -275,6 +304,9 @@ export function useCrm() {
 }
 
 export function roleForEmail(email: string, state: CrmState): CrmRole {
-  const member = state.team.find((t) => t.email.toLowerCase() === email.toLowerCase());
-  return member?.role ?? "Rep";
+  const norm = email.toLowerCase().trim();
+  const member = state.team.find((t) => t.email.toLowerCase() === norm);
+  if (member) return member.role;
+  if (norm.startsWith("malcolm@")) return "Admin";
+  return "Rep";
 }

@@ -27,7 +27,9 @@ import {
   Filter,
   Columns3,
   Headset,
+  Activity,
 } from "lucide-react";
+import { BionisLogo } from "@/components/bionis/logo";
 
 export type CrmVariantId = "collections" | "support" | "sales" | "marketing" | "commerce";
 
@@ -381,31 +383,31 @@ export function CrmVariantsExplorer() {
               </div>
             </div>
 
-            {/* Right Column: monday.com Style Light Mode Board Preview */}
+            {/* Right Column: Bionis Dashboard Hardware Frame & Live Board Preview */}
             <div className="lg:col-span-7">
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
-                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/80 px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1.5 opacity-60">
-                      <span className="size-2.5 rounded-full bg-rose-400" />
-                      <span className="size-2.5 rounded-full bg-amber-400" />
-                      <span className="size-2.5 rounded-full bg-emerald-400" />
-                    </div>
-                    <div className="h-4 w-px bg-slate-200" />
-                    <span className="text-xs font-bold text-slate-800">{currentVariant.name}</span>
-                    <span className="rounded bg-slate-200/70 px-2 py-0.5 text-[0.62rem] font-bold text-slate-600">
-                      Live CRM Board
+              <div className="bionis-dashboard relative overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-2 shadow-2xl shadow-blue-950/10 dark:border-[#222] dark:bg-[#141414]">
+                {/* Bionis Control Bar Header */}
+                <div className="flex items-center justify-between border-b border-[#eeefe9] bg-[#fafafa] px-4 py-3 dark:border-[#222] dark:bg-[#18181b] rounded-t-2xl">
+                  <div className="flex items-center gap-2.5">
+                    <BionisLogo className="size-5 text-[#1975f2]" />
+                    <div className="h-4 w-px bg-[#eeefe9] dark:bg-[#222]" />
+                    <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">{currentVariant.name}</span>
+                    <span className="rounded-full bg-[#1975f2]/10 px-2 py-0.5 text-[0.62rem] font-bold text-[#1975f2]">
+                      Bionis HUD
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[0.68rem] text-slate-500 font-medium hidden sm:inline-flex items-center gap-1">
-                      <Filter className="size-3" /> Filter
+                    <span className="rounded border border-neutral-200 bg-white px-2 py-0.5 text-[0.62rem] font-mono font-semibold text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 hidden sm:inline-flex items-center gap-1">
+                      <Activity className="size-3 text-[#1975f2]" /> Live Stream
                     </span>
-                    <span className="inline-flex size-2 rounded-full bg-emerald-500" />
+                    <span className="relative flex size-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00b153] opacity-75" />
+                      <span className="relative inline-flex size-2 rounded-full bg-[#00b153]" />
+                    </span>
                   </div>
                 </div>
 
-                <div className="p-4 sm:p-5">
+                <div className="p-3 sm:p-4 bg-neutral-50/50 dark:bg-neutral-900/30 rounded-b-2xl">
                   {(activeVariantId === "collections" || (activeVariantId as string) === "service") && <CollectionsMockupLight />}
                   {activeVariantId === "support" && <SupportMockupLight />}
                   {activeVariantId === "sales" && <SalesMockupLight />}

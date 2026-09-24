@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { ArrowUpRight, ArrowDownRight, Minus, TrendingUp } from "lucide-react";
 
 export function KpiStat({
   label,
@@ -16,23 +17,43 @@ export function KpiStat({
   target?: string;
 }) {
   return (
-    <div className="rounded-xl border border-linelight bg-white px-4 py-3.5 shadow-[0_1px_2px_rgb(6_22_47/0.04)]">
-      <p className="text-[0.72rem] font-semibold tracking-[0.06em] text-slateblue uppercase">{label}</p>
-      <p className="mt-1.5 text-[1.45rem] font-bold tracking-[-0.03em] text-ink tabular-nums">{value}</p>
-      <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.78rem]">
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm transition-all hover:shadow-md hover:border-border/80">
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[0.72rem] font-semibold tracking-wider text-muted-foreground uppercase">
+          {label}
+        </span>
         <span
           className={cn(
-            "font-semibold tabular-nums",
-            deltaTone === "up" && "text-emerald-700",
-            deltaTone === "down" && "text-red-600",
-            deltaTone === "flat" && "text-slateblue"
+            "inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-[0.68rem] font-bold",
+            deltaTone === "up" && "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+            deltaTone === "down" && "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+            deltaTone === "flat" && "bg-muted text-muted-foreground"
           )}
         >
+          {deltaTone === "up" && <ArrowUpRight className="size-3" />}
+          {deltaTone === "down" && <ArrowDownRight className="size-3" />}
+          {deltaTone === "flat" && <Minus className="size-3" />}
           {delta}
         </span>
-        <span className="text-slateblue">{context}</span>
       </div>
-      {target ? <p className="mt-1.5 text-[0.72rem] text-slateblue/90">{target}</p> : null}
+
+      <div className="mt-2 flex items-baseline justify-between">
+        <p className="text-2xl font-bold tracking-tight text-foreground font-mono tabular-nums sm:text-3xl">
+          {value}
+        </p>
+      </div>
+
+      <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-border/60 text-xs">
+        <span className="text-[0.72rem] text-muted-foreground truncate">{context}</span>
+        {target && (
+          <span className="text-[0.68rem] font-mono text-muted-foreground shrink-0">
+            {target}
+          </span>
+        )}
+      </div>
+
+      {/* Subtle Bionis glow accent at bottom */}
+      <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-[#1975f2]/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
     </div>
   );
 }

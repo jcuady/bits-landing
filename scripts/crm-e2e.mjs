@@ -68,7 +68,7 @@ async function main() {
     await page.goto(BASE + "/login?next=%2Fapplication");
     await page.getByRole("button", { name: "Enter demo" }).click();
     await page.waitForURL("**/app/dashboard");
-    await page.getByRole("heading", { name: "Dashboard", exact: true }).waitFor({ timeout: 15000 });
+    await page.getByRole("heading", { name: /Dashboard/i }).waitFor({ timeout: 15000 });
 
     await page.getByRole("button", { name: "Notifications" }).click();
     await page.getByRole("dialog", { name: "Notifications" }).waitFor();
@@ -98,7 +98,7 @@ async function main() {
 
     await page.goto(BASE + "/app/leads");
     await page.locator("select").selectOption("qualified");
-    await page.getByText("Sofia Lim").waitFor();
+    await page.getByText("Marcus Sterling").first().waitFor();
 
     await page.goto(BASE + "/app/leads/ld-1");
     await page.getByRole("button", { name: "qualified", exact: true }).click();
