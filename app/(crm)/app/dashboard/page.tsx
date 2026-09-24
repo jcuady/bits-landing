@@ -396,7 +396,7 @@ export default function DashboardPage() {
                         type="button"
                         onClick={() => {
                           updateLeadStatus(lead.id, "working");
-                          triggerToast(`📞 WebRTC Softphone connected: Dialing ${lead.name} (${lead.company}).`);
+                          triggerToast(`WebRTC Softphone connected: Dialing ${lead.name} (${lead.company}).`);
                         }}
                         className="inline-flex items-center gap-1 rounded-lg bg-[#1975f2] px-2.5 py-1 text-xs font-bold text-white hover:bg-[#1975f2]/90 shadow-2xs active:scale-95 transition-all cursor-pointer"
                       >
@@ -407,7 +407,7 @@ export default function DashboardPage() {
                         type="button"
                         onClick={() => {
                           updateLeadStatus(lead.id, "qualified");
-                          triggerToast(`✉️ Fast-touch email template dispatched to ${lead.email}.`);
+                          triggerToast(`Fast-touch email template dispatched to ${lead.email}.`);
                         }}
                         className="inline-flex items-center gap-1 rounded-lg border border-neutral-200 bg-white px-2 py-1 text-xs font-medium text-neutral-700 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 active:scale-95 transition-all cursor-pointer"
                       >

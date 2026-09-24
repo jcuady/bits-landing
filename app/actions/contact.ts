@@ -86,7 +86,7 @@ export async function submitContact(
   const inbox = process.env.CONTACT_INBOX || INQUIRY_INBOX;
   const from =
     process.env.CONTACT_FROM ||
-    "BITS Website <noreply@boundlessitsolutions.com>";
+    "BITS Inquiries <onboarding@resend.dev>";
 
   if (!apiKey) {
     // Dev fallback — still confirm to the user. Lead is already in Supabase.

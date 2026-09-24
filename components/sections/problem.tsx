@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { Sparkles, CheckCircle2, Zap } from "lucide-react";
+import { Sparkles, CheckCircle2, Zap, X } from "lucide-react";
 
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
@@ -81,8 +81,13 @@ export function Problem() {
         >
           <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
           <p className="flex-1 font-medium">{toast}</p>
-          <button type="button" onClick={() => setToast(null)} className="text-slate-400 hover:text-white">
-            ✕
+          <button
+            type="button"
+            onClick={() => setToast(null)}
+            className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
+            aria-label="Dismiss toast"
+          >
+            <X className="size-3.5" />
           </button>
         </div>
       )}
@@ -277,9 +282,9 @@ export function Problem() {
                     <button
                       type="button"
                       onClick={() => triggerToast(`Simulated 1-click dial: Softphone connected to ${activeRecord.debtor}.`)}
-                      className="shrink-0 rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-2xs min-h-[44px] inline-flex items-center justify-center"
+                      className="shrink-0 rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-2xs min-h-[44px] inline-flex items-center justify-center cursor-pointer active:scale-95"
                     >
-                      ⚡ 1-Click Dial
+                      1-Click Dial
                     </button>
                   </div>
                 </div>

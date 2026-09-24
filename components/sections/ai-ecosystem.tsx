@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { Sparkles, CheckCircle2, SlidersHorizontal, ShieldCheck } from "lucide-react";
+import { Sparkles, CheckCircle2, SlidersHorizontal, ShieldCheck, X } from "lucide-react";
 
 const steps = [
   "Start with Core Collections for portfolios, accounts, queues, PTP, and reporting",
@@ -119,9 +119,10 @@ export function AiEcosystem() {
           <button
             type="button"
             onClick={() => setToastMessage(null)}
-            className="text-slate-400 hover:text-white"
+            className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
+            aria-label="Dismiss toast"
           >
-            ✕
+            <X className="size-3.5" />
           </button>
         </div>
       )}

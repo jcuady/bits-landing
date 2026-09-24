@@ -102,7 +102,7 @@ function TicketsView() {
                   key={row.a}
                   onClick={() => {
                     setSelected(row.a);
-                    trigger(`📞 Connecting WebRTC dialer to ${row.a}. Screen popped with debtor dossier.`);
+                    trigger(`Connecting WebRTC dialer to ${row.a}. Screen popped with debtor dossier.`);
                   }}
                   className={cn(
                     "transition-colors cursor-pointer",
@@ -121,7 +121,7 @@ function TicketsView() {
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-right">
                     <span className="text-[0.68rem] font-bold text-blue-600 hover:underline">
-                      Dial 📞
+                      Dial
                     </span>
                   </td>
                 </tr>
@@ -180,7 +180,7 @@ function ExceptionsView() {
               {rows.map((row) => (
                 <tr
                   key={row.a}
-                  onClick={() => trigger(`🎙️ Supervisor channel activated on ${row.a}: Whisper mode connected.`)}
+                  onClick={() => trigger(`Supervisor channel activated on ${row.a}: Whisper mode connected.`)}
                   className="transition-colors hover:bg-slate-50/50 cursor-pointer"
                 >
                   <td className="whitespace-nowrap px-4 py-3 font-bold text-slate-900">{row.a}</td>
@@ -192,7 +192,7 @@ function ExceptionsView() {
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-right">
                     <span className="text-[0.68rem] font-bold text-amber-600 hover:underline">
-                      Barge In ⚡
+                      Barge In
                     </span>
                   </td>
                 </tr>
@@ -251,7 +251,7 @@ function QaView() {
               {rows.map((row) => (
                 <tr
                   key={row.a}
-                  onClick={() => trigger(`✓ Automated QA Scorecard generated for ${row.a}: Score 96/100 (Pass). NPC Verified.`)}
+                  onClick={() => trigger(`Automated QA Scorecard generated for ${row.a}: Score 96/100 (Pass). NPC Verified.`)}
                   className="transition-colors hover:bg-slate-50/50 cursor-pointer"
                 >
                   <td className="whitespace-nowrap px-4 py-3 font-bold text-slate-900">{row.a}</td>
@@ -322,7 +322,7 @@ function ApprovalsView() {
               {rows.map((row) => (
                 <tr
                   key={row.a}
-                  onClick={() => trigger(`✓ Authorization granted for ${row.a}. Security audit log entry created.`)}
+                  onClick={() => trigger(`Authorization granted for ${row.a}. Security audit log entry created.`)}
                   className="transition-colors hover:bg-slate-50/50 cursor-pointer"
                 >
                   <td className="whitespace-nowrap px-4 py-3 font-bold text-slate-900">{row.a}</td>
@@ -334,7 +334,7 @@ function ApprovalsView() {
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-right">
                     <span className="text-[0.68rem] font-bold text-blue-600 hover:underline">
-                      Authorize ✓
+                      Authorize
                     </span>
                   </td>
                 </tr>

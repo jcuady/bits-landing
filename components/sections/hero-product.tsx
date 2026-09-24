@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { collectionAccounts as initialRows, dashboardStats as initialStats } from "@/lib/marketing-specimens";
 
@@ -69,7 +70,7 @@ export function HeroProduct({ className }: { className?: string }) {
 
   const handleSimulatePayment = () => {
     setReconciledCount((c) => c + 1);
-    triggerToast("✓ InstaPay Ref #88491-TX reconciled instantly! Core ledger updated: +₱15,000.");
+    triggerToast("InstaPay Ref #88491-TX reconciled instantly! Core ledger updated: +₱15,000.");
   };
 
   const handleToggleAutoDial = () => {
@@ -82,11 +83,11 @@ export function HeroProduct({ className }: { className?: string }) {
   };
 
   const handleWhisper = () => {
-    triggerToast("🎙️ Coach whisper sent to Agent Desk 14: 'Offer 2-month split terms for ACC-10482.'");
+    triggerToast("Coach whisper sent to Agent Desk 14: 'Offer 2-month split terms for ACC-10482.'");
   };
 
   const handleSendSms = () => {
-    triggerToast("📲 Dynamic QR Ph payment link sent via SMS gateway to debtor (+63 917 *** 4821).");
+    triggerToast("Dynamic QR Ph payment link sent via SMS gateway to debtor (+63 917 *** 4821).");
   };
 
   return (
@@ -251,7 +252,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       onClick={handleSimulatePayment}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-emerald-700 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>⚡ Test InstaPay Reconcile (+₱15,000)</span>
+                      <span>Test InstaPay Reconcile (+₱15,000)</span>
                     </button>
                   )}
 
@@ -264,7 +265,7 @@ export function HeroProduct({ className }: { className?: string }) {
                         isAutoDialing ? "bg-amber-600 hover:bg-amber-700" : "bg-blue-600 hover:bg-blue-700"
                       )}
                     >
-                      <span>{isAutoDialing ? "⏸ Pause Auto-Dial" : "▶ Start Auto-Dial"}</span>
+                      <span>{isAutoDialing ? "Pause Auto-Dial" : "Start Auto-Dial"}</span>
                     </button>
                   )}
 
@@ -274,7 +275,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       onClick={handleWhisper}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-violet-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-violet-700 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>🎙️ Whisper Coaching Prompt</span>
+                      <span>Whisper Coaching Prompt</span>
                     </button>
                   )}
 
@@ -284,17 +285,17 @@ export function HeroProduct({ className }: { className?: string }) {
                       onClick={handleSendSms}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-blue-700 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>📲 Dispatch QR Ph Link</span>
+                      <span>Dispatch QR Ph Link</span>
                     </button>
                   )}
 
                   {activeTab === "erp" && (
                     <button
                       type="button"
-                      onClick={() => triggerToast("✓ BIR Form 2307 auto-compiled for Q3 withholding! Ready for eFPS filing.")}
+                      onClick={() => triggerToast("BIR Form 2307 auto-compiled for Q3 withholding! Ready for eFPS filing.")}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-slate-800 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>📑 Generate BIR 2307 PDF</span>
+                      <span>Generate BIR 2307 PDF</span>
                     </button>
                   )}
                 </div>
@@ -413,7 +414,7 @@ export function HeroProduct({ className }: { className?: string }) {
                                       }}
                                       className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 min-h-[44px] inline-flex items-center justify-center text-[0.68rem] font-bold text-blue-600 hover:bg-blue-50 cursor-pointer"
                                     >
-                                      Direct Dial 📞
+                                      Direct Dial
                                     </button>
                                   </td>
                                 </tr>
@@ -503,10 +504,13 @@ export function HeroProduct({ className }: { className?: string }) {
                         </div>
                       </div>
                       <div className="mt-3 flex items-center justify-between border-t border-violet-200/60 pt-2 text-[0.7rem]">
-                        <span className="text-emerald-700 font-bold">✓ PTP Detected: ₱5,000 on Sept 25</span>
+                        <span className="text-emerald-700 font-bold inline-flex items-center gap-1">
+                          <Check className="size-3 text-emerald-600 shrink-0" />
+                          <span>PTP Detected: ₱5,000 on Sept 25</span>
+                        </span>
                         <button
                           type="button"
-                          onClick={() => triggerToast("✓ Supervisor Barge Enabled: You are now whispering directly to the agent's earpiece.")}
+                          onClick={() => triggerToast("Supervisor Barge Enabled: You are now whispering directly to the agent's earpiece.")}
                           className="text-violet-700 font-bold hover:underline cursor-pointer"
                         >
                           Enable Live Audio Barge →

@@ -8,6 +8,7 @@ import { pricingTiers, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ProductShowcase } from "@/components/sections/product-showcase";
 import { CrmVariantsExplorer } from "@/components/sections/crm-variants-explorer";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
@@ -195,13 +196,13 @@ export default function BitsCrmPage() {
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.8rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Scoped demo, no free trial
+                  <Check className="size-4 text-emerald-600 shrink-0" /> Scoped demo, no free trial
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> BSP & NPC DPA Compliant
+                  <Check className="size-4 text-emerald-600 shrink-0" /> BSP & NPC DPA Compliant
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> WebRTC Softphone Included
+                  <Check className="size-4 text-emerald-600 shrink-0" /> WebRTC Softphone Included
                 </span>
               </div>
             </Reveal>
@@ -298,7 +299,7 @@ export default function BitsCrmPage() {
                 <ul className="mt-6 flex-1 space-y-3 border-t border-slate-100 pt-6">
                   {pillar.capabilities.map((cap) => (
                     <li key={cap} className="flex items-start gap-2.5 text-[0.83rem] text-slate-700">
-                      <span className="mt-0.5 font-bold text-blue-600">✓</span>
+                      <Check className="mt-0.5 size-4 text-blue-600 shrink-0" />
                       <span>{cap}</span>
                     </li>
                   ))}
@@ -406,7 +407,7 @@ export default function BitsCrmPage() {
                 <ul className="mt-6 flex-1 space-y-3 border-t border-slate-200/60 pt-6">
                   {tier.features.map((feat) => (
                     <li key={feat} className="flex items-start gap-2.5 text-[0.85rem] text-slate-700">
-                      <span className="text-blue-600 font-bold">✓</span>
+                      <Check className="mt-0.5 size-4 text-blue-600 shrink-0" />
                       <span>{feat}</span>
                     </li>
                   ))}

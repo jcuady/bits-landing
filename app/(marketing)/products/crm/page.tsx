@@ -428,13 +428,13 @@ export default function CrmMasterPage() {
               {/* Reassurance Row */}
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.8rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud or Sovereign On-Prem
+                  <Check className="size-4 text-emerald-600 shrink-0" /> Managed Cloud or Sovereign On-Prem
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> BSP 454/857 &amp; NPC DPA Aligned
+                  <Check className="size-4 text-emerald-600 shrink-0" /> BSP 454/857 &amp; NPC DPA Aligned
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Zero Data Replatforming
+                  <Check className="size-4 text-emerald-600 shrink-0" /> Zero Data Replatforming
                 </span>
               </div>
             </Reveal>

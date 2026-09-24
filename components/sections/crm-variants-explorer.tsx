@@ -770,7 +770,7 @@ function SalesMockupLight() {
             <tr
               onClick={() => {
                 setActiveDeal("Apex");
-                handleAction("✓ Apex Global BPO selected. Win probability: 70%. Follow-up task assigned.");
+                handleAction("Apex Global BPO selected. Win probability: 70%. Follow-up task assigned.");
               }}
               className={cn("transition-colors cursor-pointer", activeDeal === "Apex" ? "bg-emerald-50/60 font-medium" : "hover:bg-slate-50")}
             >
@@ -783,7 +783,7 @@ function SalesMockupLight() {
             <tr
               onClick={() => {
                 setActiveDeal("Pacific");
-                handleAction("✓ Pacific Recovery selected. Closed-Won! Invoice generated in ERP.");
+                handleAction("Pacific Recovery selected. Closed-Won! Invoice generated in ERP.");
               }}
               className={cn("transition-colors cursor-pointer", activeDeal === "Pacific" ? "bg-emerald-50/60 font-medium" : "hover:bg-slate-50")}
             >
@@ -848,7 +848,7 @@ function MarketingMockupLight() {
           </thead>
           <tbody className="divide-y divide-slate-100 text-[0.7rem]">
             <tr
-              onClick={() => handleAction("✓ SMS Portal Link analytics: 99% delivery rate across Smart and Globe networks.")}
+              onClick={() => handleAction("SMS Portal Link analytics: 99% delivery rate across Smart and Globe networks.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
               <td className="p-2 font-bold text-slate-900">1. SMS Portal Link</td>
@@ -858,7 +858,7 @@ function MarketingMockupLight() {
               <td className="p-2 font-mono text-blue-600">42% Open Rate</td>
             </tr>
             <tr
-              onClick={() => handleAction("✓ AI Voice Escalation queued: 48-hour quiet hour window strictly enforced.")}
+              onClick={() => handleAction("AI Voice Escalation queued: 48-hour quiet hour window strictly enforced.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
               <td className="p-2 font-bold text-slate-900">2. AI Voice Escalation</td>
@@ -898,7 +898,7 @@ function CommerceMockupLight() {
         </div>
         <button
           type="button"
-          onClick={() => handleAction("✓ Auto-debit verified: 120 Enterprise Seat retainers billed successfully (+₱180,000).")}
+          onClick={() => handleAction("Auto-debit verified: 120 Enterprise Seat retainers billed successfully (+₱180,000).")}
           className="rounded-lg bg-cyan-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-cyan-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center"
         >
           Execute Auto-Debit
@@ -922,7 +922,7 @@ function CommerceMockupLight() {
           </thead>
           <tbody className="divide-y divide-slate-100 text-[0.7rem]">
             <tr
-              onClick={() => handleAction("✓ 120 Enterprise Seats: Tokenized payment on file. Next billing date: Oct 1.")}
+              onClick={() => handleAction("120 Enterprise Seats: Tokenized payment on file. Next billing date: Oct 1.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
               <td className="p-2 font-bold text-slate-900">Enterprise Seat Licenses (120)</td>
@@ -932,7 +932,7 @@ function CommerceMockupLight() {
               </td>
             </tr>
             <tr
-              onClick={() => handleAction("✓ Metered SIP Telephony: 64,000 mins reconciled with Philippine carrier invoice.")}
+              onClick={() => handleAction("Metered SIP Telephony: 64,000 mins reconciled with Philippine carrier invoice.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
               <td className="p-2 font-bold text-slate-900">Metered SIP Telephony</td>

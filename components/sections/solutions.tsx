@@ -295,7 +295,7 @@ function CrmSpecimen() {
                 onClick={() => trigger(activeRecord.actionToast)}
                 className="shrink-0 rounded-xl bg-[#1975f2] px-3.5 py-1.5 text-xs font-bold text-white hover:bg-[#1975f2]/90 transition-all shadow-sm active:scale-95 cursor-pointer"
               >
-                ⚡ {activeRecord.action}
+                {activeRecord.action}
               </button>
             </div>
           </div>
@@ -411,9 +411,9 @@ function FinanceSpecimen() {
           <button
             type="button"
             onClick={() => trigger(activeRecord.actionToast)}
-            className="shrink-0 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-indigo-700 transition-colors shadow-2xs"
+            className="shrink-0 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-indigo-700 transition-colors shadow-2xs active:scale-95 cursor-pointer"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </Bezel>
@@ -527,9 +527,9 @@ function AiSpecimen() {
           <button
             type="button"
             onClick={() => trigger(activeRecord.actionToast)}
-            className="shrink-0 rounded-lg bg-violet-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-violet-700 transition-colors shadow-2xs"
+            className="shrink-0 rounded-lg bg-violet-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-violet-700 transition-colors shadow-2xs active:scale-95 cursor-pointer"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </Bezel>

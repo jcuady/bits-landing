@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { Sparkles, CheckCircle2, Database, FileCheck } from "lucide-react";
+import { Sparkles, CheckCircle2, Database, FileCheck, X } from "lucide-react";
 
 const ctaClass =
   "group mt-8 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
@@ -74,9 +74,10 @@ export function CustomSolutions() {
           <button
             type="button"
             onClick={() => setToastMessage(null)}
-            className="text-slate-400 hover:text-white"
+            className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
+            aria-label="Dismiss toast"
           >
-            ✕
+            <X className="size-3.5" />
           </button>
         </div>
       )}
@@ -192,9 +193,9 @@ export function CustomSolutions() {
                   <button
                     type="button"
                     onClick={() => triggerToast(activeRecord.actionToast)}
-                    className="shrink-0 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-2xs"
+                    className="shrink-0 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition-colors shadow-2xs active:scale-95 cursor-pointer"
                   >
-                    ⚡ Test Ingestion
+                    Test Ingestion
                   </button>
                 </div>
               </div>

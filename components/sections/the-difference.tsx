@@ -63,8 +63,8 @@ export function TheDifference() {
                   {/* Generic SaaS */}
                   <div className="rounded-xl border border-rose-100 bg-rose-50/40 p-3 sm:col-span-4 sm:border-0 sm:bg-transparent sm:p-0">
                     <div className="flex items-start gap-2.5">
-                      <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-rose-100 text-[0.65rem] font-bold text-rose-600">
-                        ✕
+                      <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-600">
+                        <X className="size-2.5 text-rose-600 stroke-[3]" />
                       </span>
                       <p className="text-xs leading-relaxed text-slate-600 sm:text-[0.85rem]">
                         {item.generic}
@@ -75,8 +75,8 @@ export function TheDifference() {
                   {/* BITS Approach */}
                   <div className="rounded-xl border border-blue-100 bg-blue-50/40 p-3 sm:col-span-5 sm:border-0 sm:bg-transparent sm:p-0">
                     <div className="flex items-start gap-2.5">
-                      <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[0.65rem] font-bold text-emerald-700">
-                        ✓
+                      <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                        <Check className="size-2.5 text-emerald-700 stroke-[3]" />
                       </span>
                       <p className="text-xs leading-relaxed font-semibold text-slate-800 sm:text-[0.88rem]">
                         {item.bits}

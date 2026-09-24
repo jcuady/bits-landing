@@ -849,13 +849,13 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               {/* Reassurance Row */}
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.8rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud (Recommended) or On-Prem
+                  <Check className="size-4 text-emerald-600 shrink-0" /> Managed Cloud (Recommended) or On-Prem
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Continuous Security Updates
+                  <Check className="size-4 text-emerald-600 shrink-0" /> Continuous Security Updates
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> White-Label Ready
+                  <Check className="size-4 text-emerald-600 shrink-0" /> White-Label Ready
                 </span>
               </div>
             </Reveal>

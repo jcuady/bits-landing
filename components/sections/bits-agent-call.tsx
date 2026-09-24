@@ -12,6 +12,7 @@ import {
   Sparkles,
   ShieldCheck,
   CheckCircle2,
+  X,
 } from "lucide-react";
 
 interface Scenario {
@@ -139,10 +140,10 @@ export function BitsAgentCallSpecimen({ className }: { className?: string }) {
           <button
             type="button"
             onClick={() => setToastMessage(null)}
-            className="text-emerald-300 hover:text-white"
+            className="text-emerald-300 hover:text-white p-1 rounded-md transition-colors"
             aria-label="Dismiss toast"
           >
-            ✕
+            <X className="size-3.5" />
           </button>
         </div>
       )}

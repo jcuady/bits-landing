@@ -55,6 +55,7 @@ import {
   Mic,
   Building2,
   ShieldAlert,
+  X,
 } from "lucide-react";
 
 const categoryFilters = [
@@ -984,10 +985,10 @@ export function ProductMockupBoard({ productId }: { productId: string }) {
           <button
             type="button"
             onClick={() => setToastMessage(null)}
-            className="text-emerald-300 hover:text-white min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+            className="text-emerald-300 hover:text-white min-h-[44px] min-w-[44px] inline-flex items-center justify-center p-1 rounded-md transition-colors"
             aria-label="Dismiss toast"
           >
-            ✕
+            <X className="size-3.5" />
           </button>
         </div>
       )}
@@ -1651,7 +1652,7 @@ function AiAgentBoard({
             onClick={() => onAction("Simulated AI voice turn triggered: 'Next payment scheduled for March 15 via GCash.'")}
             className="rounded-lg bg-violet-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-violet-700 transition-colors shadow-2xs min-h-[44px] inline-flex items-center justify-center"
           >
-            ⚡ Test Voice Turn
+            Test Voice Turn
           </button>
         </div>
       </div>
@@ -2275,7 +2276,7 @@ function AccountingBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-emerald-300 px-2.5 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -2476,7 +2477,7 @@ function HrmsBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-amber-300 px-2.5 py-1 text-xs font-bold text-amber-800 hover:bg-amber-100"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -2628,7 +2629,7 @@ function PayrollBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-emerald-300 px-2.5 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -2766,7 +2767,7 @@ function ConstructionBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-amber-300 px-2.5 py-1 text-xs font-bold text-amber-800 hover:bg-amber-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -2904,7 +2905,7 @@ function InventoryBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-blue-300 px-2.5 py-1 text-xs font-bold text-blue-700 hover:bg-blue-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -3042,7 +3043,7 @@ function LogisticsBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-indigo-300 px-2.5 py-1 text-xs font-bold text-indigo-800 hover:bg-indigo-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -3475,7 +3476,7 @@ function SportsHubBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-emerald-300 px-2.5 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -3613,7 +3614,7 @@ function BookingBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-blue-300 px-2.5 py-1 text-xs font-bold text-blue-800 hover:bg-blue-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -3751,7 +3752,7 @@ function QueuingBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-rose-300 px-2.5 py-1 text-xs font-bold text-rose-800 hover:bg-rose-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -3889,7 +3890,7 @@ function RagBoard({
             onClick={() => onAction(activeRecord.actionToast)}
             className="rounded-md bg-white border border-violet-300 px-2.5 py-1 text-xs font-bold text-violet-800 hover:bg-violet-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
-            ⚡ {activeRecord.action}
+            {activeRecord.action}
           </button>
         </div>
       </div>
@@ -4122,7 +4123,7 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
                     : "bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-sm"
                 )}
               >
-                {tapped ? "✓ Tapped Phone!" : "Simulate Tap"}
+                {tapped ? "Tapped Phone!" : "Simulate Tap"}
               </button>
             </div>
           </div>

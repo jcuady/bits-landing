@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Magnetic } from "@/components/ui/magnetic";
 import { HeroProduct } from "@/components/sections/hero-product";
+import { Check } from "lucide-react";
 
 const platformPillars = [
   "01 BITScrm CORE",
@@ -121,19 +122,19 @@ export function Hero() {
               {/* Friction-reducing reassurance row */}
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.78rem] font-medium text-slate-500">
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Aligned with BSP & NPC Data Privacy
+                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Aligned with BSP & NPC Data Privacy
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Managed Cloud or Sovereign On-Prem
+                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Managed Cloud or Sovereign On-Prem
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Zero Per-User License Penalties
+                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Zero Per-User License Penalties
                 </span>
                 <span className="hidden h-1 w-1 rounded-full bg-slate-300 sm:inline-block" aria-hidden />
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <span className="font-bold text-emerald-600">✓</span> Full Source Code & IP Ownership Option
+                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Full Source Code & IP Ownership Option
                 </span>
               </div>
             </Reveal>

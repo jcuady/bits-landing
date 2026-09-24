@@ -43,3 +43,4 @@ logo/
 master prompt.md
 .vercel
 .env*
+!.env.example

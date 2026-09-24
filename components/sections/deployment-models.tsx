@@ -265,17 +265,21 @@ export function DeploymentModels() {
                     Our modular engines share a single database layer, unified event streaming, and role-based permissions. Whether running our high-throughput predictive dialer alongside ERP payroll or deploying a full 18-product sovereign operational suite, there is zero duplicate server footprint and zero custom glue code required.
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
-                      ✓ Shared PostgreSQL &amp; Redis Bus
+                    <span className="inline-flex items-center gap-1 rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      <Check className="size-3 text-emerald-400 shrink-0" />
+                      Shared PostgreSQL &amp; Redis Bus
                     </span>
-                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
-                      ✓ Centralized SSO &amp; RBAC
+                    <span className="inline-flex items-center gap-1 rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      <Check className="size-3 text-emerald-400 shrink-0" />
+                      Centralized SSO &amp; RBAC
                     </span>
-                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
-                      ✓ Zero Duplicated Infrastructure
+                    <span className="inline-flex items-center gap-1 rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      <Check className="size-3 text-emerald-400 shrink-0" />
+                      Zero Duplicated Infrastructure
                     </span>
-                    <span className="rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
-                      ✓ Hybrid Cloud/On-Prem Ready
+                    <span className="inline-flex items-center gap-1 rounded-lg bg-slate-800/80 px-2.5 py-1 text-[0.7rem] font-mono text-slate-300 border border-slate-700/60">
+                      <Check className="size-3 text-emerald-400 shrink-0" />
+                      Hybrid Cloud/On-Prem Ready
                     </span>
                   </div>
                 </div>
