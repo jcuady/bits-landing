@@ -65,12 +65,17 @@ function TicketsView() {
 
   return (
     <div className="p-3 sm:p-4 space-y-3">
-      {/* Customer Benefit Banner */}
-      <div className="rounded-xl border border-blue-200 bg-blue-50/70 p-2.5 text-xs">
-        <p className="text-[0.72rem] text-blue-950 font-medium">
-          <strong className="font-bold text-blue-700">How this helps agents: </strong>
-          Surfaces debtor promises, prior payments, and 1-click dialer buttons so agents spend zero time searching files—saving 3.5 hrs/day.
-        </p>
+      {/* Sleek Operational Header Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-200/80 bg-blue-50/60 px-3 py-2 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
+          <span className="font-semibold text-slate-800">
+            Agent Queue: One-click WebRTC dialer &amp; PTP account dossier
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-bold text-blue-700 bg-white px-2 py-0.5 rounded-full border border-blue-200 shadow-2xs">
+          Save 3.5 hrs/day
+        </span>
       </div>
 
       {toast && (
@@ -140,11 +145,17 @@ function ExceptionsView() {
 
   return (
     <div className="p-3 sm:p-4 space-y-3">
-      <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-2.5 text-xs">
-        <p className="text-[0.72rem] text-amber-950 font-medium">
-          <strong className="font-bold text-amber-700">How this helps supervisors: </strong>
-          Full floor visibility. Listen, whisper coaching, or barge into difficult calls with zero delay, cutting escalation time by 60%.
-        </p>
+      {/* Sleek Operational Header Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amber-200/80 bg-amber-50/60 px-3 py-2 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="size-2 rounded-full bg-amber-600 animate-pulse" />
+          <span className="font-semibold text-slate-800">
+            Live Supervision: Real-time listen, whisper coaching &amp; barge
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-bold text-amber-700 bg-white px-2 py-0.5 rounded-full border border-amber-200 shadow-2xs">
+          -60% Escalation Time
+        </span>
       </div>
 
       {toast && (
@@ -205,11 +216,17 @@ function QaView() {
 
   return (
     <div className="p-3 sm:p-4 space-y-3">
-      <div className="rounded-xl border border-violet-200 bg-violet-50/70 p-2.5 text-xs">
-        <p className="text-[0.72rem] text-violet-950 font-medium">
-          <strong className="font-bold text-violet-700">How this helps QA: </strong>
-          100% automated speech scoring against NPC Data Privacy and BSP quiet hours rules—reducing manual review hours by 80%.
-        </p>
+      {/* Sleek Operational Header Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-violet-200/80 bg-violet-50/60 px-3 py-2 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="size-2 rounded-full bg-violet-600 animate-pulse" />
+          <span className="font-semibold text-slate-800">
+            Automated QA: 100% Speech scoring &amp; regulatory audit
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-bold text-violet-700 bg-white px-2 py-0.5 rounded-full border border-violet-200 shadow-2xs">
+          -80% Audit Hours
+        </span>
       </div>
 
       {toast && (
@@ -270,11 +287,17 @@ function ApprovalsView() {
 
   return (
     <div className="p-3 sm:p-4 space-y-3">
-      <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-2.5 text-xs">
-        <p className="text-[0.72rem] text-slate-900 font-medium">
-          <strong className="font-bold text-slate-700">How this helps management: </strong>
-          One-click CSV debtor portfolio imports, dynamic caller ID pacing rules, and role-based permissions without IT support.
-        </p>
+      {/* Sleek Operational Header Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-200/80 bg-slate-50/80 px-3 py-2 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="size-2 rounded-full bg-slate-600 animate-pulse" />
+          <span className="font-semibold text-slate-800">
+            Administration: Portfolio ingestion &amp; RBAC permission logs
+          </span>
+        </div>
+        <span className="font-mono text-[0.68rem] font-bold text-slate-700 bg-white px-2 py-0.5 rounded-full border border-slate-200 shadow-2xs">
+          Zero-Code Control
+        </span>
       </div>
 
       {toast && (

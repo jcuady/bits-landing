@@ -130,18 +130,14 @@ export function HeroProduct({ className }: { className?: string }) {
             </div>
           </div>
 
-          {/* Interactive Customer Impact Value Banner */}
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-blue-100 bg-blue-50/50 px-4 py-2 sm:px-6">
-            <div className="flex items-center gap-2 text-xs">
-              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-[0.65rem]">
-                ✓
-              </span>
-              <p className="text-[0.75rem] font-medium text-slate-700">
-                <strong className="font-bold text-blue-950">How this helps your business: </strong>
-                {activeModule.valueProp}
-              </p>
+          {/* Sleek Minimalist Operational Value Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-slate-50/60 px-4 py-2 sm:px-6 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
+              <span className="font-bold text-slate-900">{activeModule.name}:</span>
+              <span className="text-[0.75rem] text-slate-600 font-medium">{activeModule.valueProp}</span>
             </div>
-            <span className="hidden sm:inline-flex rounded-full bg-blue-600 px-2.5 py-0.5 text-[0.68rem] font-bold text-white shadow-xs">
+            <span className="rounded-full bg-blue-50 border border-blue-200/90 px-2.5 py-0.5 font-mono text-[0.68rem] font-bold text-blue-700 shadow-2xs">
               {activeModule.benefitStat}
             </span>
           </div>

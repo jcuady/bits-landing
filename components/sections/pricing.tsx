@@ -88,6 +88,7 @@ export function Pricing() {
   ]);
   const [activePreset, setActivePreset] = React.useState<string>("collections-bpo");
   const [bundleDeployment, setBundleDeployment] = React.useState<"cloud" | "on-prem">("cloud");
+  const [bundleBranding, setBundleBranding] = React.useState<"native" | "whitelabel">("native");
 
   // Handle preset selection
   const handleSelectPreset = (presetId: string) => {
@@ -192,34 +193,69 @@ export function Pricing() {
                     </p>
                   </div>
 
-                  {/* Deployment Choice Toggle for the Bundle */}
-                  <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-1">
-                    <button
-                      type="button"
-                      onClick={() => setBundleDeployment("cloud")}
-                      className={cn(
-                        "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
-                        bundleDeployment === "cloud"
-                          ? "bg-blue-600 text-white shadow-xs"
-                          : "text-slate-600 hover:text-slate-900"
-                      )}
-                    >
-                      <Cloud className="size-3.5" />
-                      <span>Managed Cloud</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBundleDeployment("on-prem")}
-                      className={cn(
-                        "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
-                        bundleDeployment === "on-prem"
-                          ? "bg-blue-600 text-white shadow-xs"
-                          : "text-slate-600 hover:text-slate-900"
-                      )}
-                    >
-                      <Server className="size-3.5" />
-                      <span>On-Premises / Sovereign</span>
-                    </button>
+                  {/* Dual Controls: Branding Option + Deployment Choice */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Branding Option Toggle */}
+                    <div className="flex items-center gap-1 rounded-2xl border border-slate-200 bg-slate-50 p-1">
+                      <button
+                        type="button"
+                        onClick={() => setBundleBranding("native")}
+                        className={cn(
+                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
+                          bundleBranding === "native"
+                            ? "bg-white text-blue-700 shadow-xs ring-1 ring-slate-200"
+                            : "text-slate-600 hover:text-slate-900"
+                        )}
+                        title="Deploy with native BITS branding"
+                      >
+                        <ShieldCheck className="size-3.5 text-blue-600" />
+                        <span>BITS Native</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setBundleBranding("whitelabel")}
+                        className={cn(
+                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
+                          bundleBranding === "whitelabel"
+                            ? "bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-xs"
+                            : "text-slate-600 hover:text-slate-900"
+                        )}
+                        title="Universal White-Label Option: Your logo & custom domain"
+                      >
+                        <Palette className="size-3.5" />
+                        <span>White-Label Option</span>
+                      </button>
+                    </div>
+
+                    {/* Deployment Choice Toggle */}
+                    <div className="flex items-center gap-1 rounded-2xl border border-slate-200 bg-slate-50 p-1">
+                      <button
+                        type="button"
+                        onClick={() => setBundleDeployment("cloud")}
+                        className={cn(
+                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
+                          bundleDeployment === "cloud"
+                            ? "bg-blue-600 text-white shadow-xs"
+                            : "text-slate-600 hover:text-slate-900"
+                        )}
+                      >
+                        <Cloud className="size-3.5" />
+                        <span>Managed Cloud</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setBundleDeployment("on-prem")}
+                        className={cn(
+                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
+                          bundleDeployment === "on-prem"
+                            ? "bg-blue-600 text-white shadow-xs"
+                            : "text-slate-600 hover:text-slate-900"
+                        )}
+                      >
+                        <Server className="size-3.5" />
+                        <span>On-Premises</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -341,7 +377,31 @@ export function Pricing() {
                         <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-800 border border-emerald-200">
                           {bundleDeployment === "cloud" ? "Managed Cloud" : "On-Premises Bare-Metal"}
                         </span>
+                        {bundleBranding === "whitelabel" ? (
+                          <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[0.65rem] font-bold text-orange-900 border border-orange-300 flex items-center gap-1">
+                            <Palette className="size-3 text-orange-600" />
+                            <span>100% White-Label Brand (app.yourcompany.com)</span>
+                          </span>
+                        ) : (
+                          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.65rem] font-bold text-slate-700 border border-slate-200 flex items-center gap-1">
+                            <ShieldCheck className="size-3 text-blue-600" />
+                            <span>BITS Native Brand</span>
+                          </span>
+                        )}
                       </div>
+
+                      {/* White-Label Add-on Informative Spec Strip if enabled */}
+                      {bundleBranding === "whitelabel" && (
+                        <div className="mt-3 rounded-xl border border-orange-200 bg-orange-50/90 p-3 text-xs text-orange-950">
+                          <div className="flex items-center gap-2 font-bold text-orange-900">
+                            <Palette className="size-4 text-orange-600 shrink-0" />
+                            <span>White-Label Option Active on Selected Stack:</span>
+                          </div>
+                          <p className="mt-1 text-[0.72rem] text-orange-900/90 leading-relaxed">
+                            Deploys all {selectedProductIds.length} selected engines completely rebranded under your own corporate identity, custom logo, custom domain (app.yourcompany.com), and custom email sender with zero BITS attribution. Full reseller margin ownership under strict NDA.
+                          </p>
+                        </div>
+                      )}
 
                       <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-700 font-medium">
                         <div className="flex items-center gap-1.5">
@@ -373,10 +433,13 @@ export function Pricing() {
                         <Link
                           href={`/#contact?bundle=${encodeURIComponent(
                             selectedProductIds.join(",")
-                          )}&deployment=${bundleDeployment}`}
+                          )}&deployment=${bundleDeployment}&branding=${bundleBranding}`}
                           className="group relative inline-flex min-h-[48px] items-center justify-between gap-3 rounded-full bg-blue-600 px-6 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-600/35 active:scale-[0.98]"
                         >
-                          <span>Request Proposal for Selected Stack ({selectedProductIds.length} Products)</span>
+                          <span>
+                            Request Proposal ({selectedProductIds.length} Products
+                            {bundleBranding === "whitelabel" ? " + White-Label" : ""})
+                          </span>
                           <span className="flex size-7 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                             <ArrowRight className="size-3.5" />
                           </span>
@@ -580,6 +643,16 @@ export function Pricing() {
                               <span className="size-1.5 rounded-full bg-blue-500 shrink-0" />
                               <span className="truncate">{pkg.deployment}</span>
                             </div>
+
+                            <div className="mt-2 flex items-center justify-between gap-1 border-t border-slate-200/60 pt-2 text-[0.72rem] font-medium text-slate-700">
+                              <span className="flex items-center gap-1.5">
+                                <Palette className="size-3 text-orange-600 shrink-0" />
+                                <span>Branding:</span>
+                              </span>
+                              <span className="font-semibold text-slate-800 text-[0.7rem]">
+                                Native BITS or White-Label Option
+                              </span>
+                            </div>
                           </div>
 
                           {/* Feature Highlights List */}
@@ -697,18 +770,18 @@ export function Pricing() {
                 <div className="flex items-center gap-2">
                   <span className="size-2 rounded-full bg-orange-500 animate-pulse" />
                   <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-orange-700">
-                    White-Label &amp; Custom Branding Add-On
+                    Master Branding Option · Not a Standalone Software Product
                   </span>
                 </div>
                 <h4 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
-                  Deploy Any BITS Product Under Your Own Agency Brand
+                  Universal White-Label Option — Deploy Any BITS Engine Under Your Brand
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  Deploy any combination of our 18 enterprise engines with your logo, custom domain (app.yourbrand.com), and corporate styling. Complete NDA protection with zero BITS attribution. Resell to clients under your own retainer contracts with 100% markup ownership.
+                  White-label is an overarching branding license add-on available for any of our 18 software products or custom suites. Purchase at wholesale infrastructure rates, deploy on your custom domain (app.yourbrand.com) with your corporate logo and styling, and resell to your clients at 100% margin retention under strict NDA.
                 </p>
                 <div className="mt-3.5 rounded-xl border border-orange-200/80 bg-white/80 p-3 text-xs">
-                  <p className="font-semibold text-orange-900">
-                    <strong>Investment Model:</strong> Turnkey reseller licensing scoped on top of any active engine tier. Wholesale infrastructure rates with total client pricing freedom.
+                  <p className="font-semibold text-orange-950">
+                    <strong>Key Inclusions:</strong> Custom Domain &amp; SSL · Client Logo &amp; HEX Colors · Branded Notification Senders · Zero BITS Attribution · 100% Reseller Margin Ownership.
                   </p>
                 </div>
               </div>

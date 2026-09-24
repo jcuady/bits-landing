@@ -50,7 +50,7 @@ export const aiAgentConversations = [
     entries: [
       { type: "system" as const, text: "Prioritizing ACC-10482 — PTP due today, 3 prior contacts" },
       { type: "action" as const, text: "Initiating preview call to primary number" },
-      { type: "result" as const, text: "Connected — PTP confirmed, $240 payment scheduled" },
+      { type: "result" as const, text: "Connected — PTP confirmed, ₱12,500 payment scheduled" },
     ],
   },
   {

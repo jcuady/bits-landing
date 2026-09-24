@@ -1111,17 +1111,36 @@ function CollectionsBoard({
 
   return (
     <div className="space-y-4">
-      {/* Concrete Customer ROI & Value Callout */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-blue-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Cuts debtor broken-PTP rate by 42% via automated payment SMS &amp; real-time whisper supervision.
-          </span>
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Total Liquidated</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">₱2.84M</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">+38% MoM</span>
+          </div>
         </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-blue-700 bg-white px-2.5 py-1 rounded-full border border-blue-200 shadow-2xs">
-          +₱2.8M Monthly Recovered
-        </span>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">PTP Kept Rate</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-blue-700">94.2%</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">Auto SMS</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Dialer Pacing</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">38/hr</span>
+            <span className="text-[0.62rem] font-bold text-indigo-600">3.2x Manual</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">BSP 454 Audit</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-emerald-700">100% Pass</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">Zero Breaches</span>
+          </div>
+        </div>
       </div>
 
       {/* Top softphone banner with interactive buttons */}
@@ -1354,17 +1373,36 @@ function SupportBoard({
 
   return (
     <div className="space-y-4">
-      {/* Concrete Customer ROI & Value Callout */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-blue-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Cuts first-response time by 64% and accelerates MTTR with AI sentiment prioritization and automated SLA escalation.
-          </span>
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">First Contact Resolution</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">88.4%</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">+46% FCR</span>
+          </div>
         </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-blue-700 bg-white px-2.5 py-1 rounded-full border border-blue-200 shadow-2xs">
-          +46% First Contact Resolution · 94.2% CSAT
-        </span>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Mean Time to Resolve</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-blue-700">11m 40s</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">-58% MTTR</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">SLA Breach Count</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-emerald-700">0</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">100% Protected</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">CSAT Score</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">96.8%</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">Verified CSAT</span>
+          </div>
+        </div>
       </div>
 
       {/* Top Active Incident Banner */}
@@ -1521,36 +1559,36 @@ function AiAgentBoard({
   const rows = [
     {
       id: "VC-8821",
-      type: "Voice Negotiation (#VC-8821)",
+      type: "Enterprise Voice Concierge (#VC-8821)",
       engine: "Sub-300ms Conversational",
-      status: "Settlement Done",
+      status: "Booking Confirmed",
       statusColor: "bg-[#00c875]",
-      grounding: "Credit Policy v4.2",
-      action: "Play Audio Recording",
-      actionToast: "Replaying synchronized dual-channel audio for #VC-8821 (Mr. Ramos).",
-      detail: "Debtor agreed to two installments of ₱6,000. Sentiment: 94% Cooperative.",
+      grounding: "Customer Service SOP v4.2",
+      action: "Play Call Audio",
+      actionToast: "Playing synchronized dual-channel audio for #VC-8821 (Executive Reservation).",
+      detail: "Customer confirmed executive booking for Tuesday 2:00 PM. Sentiment: 98% Satisfied.",
     },
     {
       id: "SM-4902",
-      type: "Inbound SMS Portal (#SM-4902)",
+      type: "Inbound SMS Dispatcher (#SM-4902)",
       engine: "Autonomous Text Agent",
-      status: "Link Dispatched",
+      status: "Tracking Sent",
       statusColor: "bg-[#0073ea]",
-      grounding: "GCash/Maya Tokenized",
+      grounding: "Logistics Hub DB",
       action: "Test Inbound Webhook",
-      actionToast: "Simulated incoming SMS keyword 'PAYNOW' - instant response returned in 180ms.",
-      detail: "Direct payment link generated with single-use checkout token.",
+      actionToast: "Simulated incoming SMS keyword 'TRACK' - instant response returned in 180ms.",
+      detail: "Delivery address updated to Warehouse 4. Real-time GPS link generated.",
     },
     {
       id: "QA-1092",
-      type: "Live Call QA Audit (#QA-1092)",
-      engine: "Real-Time Transcription",
+      type: "Live Support QA Audit (#QA-1092)",
+      engine: "Real-Time Speech Transcription",
       status: "100% Compliant",
       statusColor: "bg-[#a25ddc]",
-      grounding: "BSP Script Checklist",
+      grounding: "Brand Guidelines v2",
       action: "Export QA Scorecard",
-      actionToast: "Automated QA scorecard exported with zero profanity and 100% script adherence.",
-      detail: "Continuous audio analysis scored 98.4/100 across standard debt recovery metrics.",
+      actionToast: "Automated QA scorecard exported with 100% brand guideline adherence.",
+      detail: "Continuous audio analysis scored 99.2/100 across customer service satisfaction metrics.",
     },
   ];
 
@@ -1558,17 +1596,36 @@ function AiAgentBoard({
 
   return (
     <div className="space-y-4">
-      {/* Customer ROI Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50/90 via-purple-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Bot className="size-4 text-violet-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Reduces cost-per-contact from ₱85 to ₱2.20 while handling 24/7 call surges with sub-300ms turn latency.
-          </span>
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Cost-Per-Contact</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">₱2.20</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">-82% vs Live</span>
+          </div>
         </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-violet-700 bg-white px-2.5 py-1 rounded-full border border-violet-200 shadow-2xs">
-          -82% Operating Expense
-        </span>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Voice Turn Latency</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-violet-700">284ms</span>
+            <span className="text-[0.62rem] font-bold text-violet-600">Sub-300ms</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Auto Resolution</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-emerald-700">68.4%</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">Zero Handoff</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">RAG Grounding</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">99.4%</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">0 Hallucination</span>
+          </div>
+        </div>
       </div>
 
       {/* Real-time Voice Waveform Banner */}
@@ -1583,7 +1640,7 @@ function AiAgentBoard({
           ))}
         </div>
         <p className="mt-2 text-xs font-bold text-slate-900">
-          &ldquo;I understand Mr. Ramos. We can split your balance into two installments of ₱6,000.&rdquo;
+          &ldquo;Good afternoon! I have confirmed your appointment for Tuesday at 2:00 PM and emailed your calendar invite.&rdquo;
         </p>
         <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
           <span className="inline-block text-[0.65rem] font-semibold text-violet-700 bg-white/80 px-2 py-0.5 rounded-full border border-violet-200">
@@ -1694,16 +1751,16 @@ function SalesBoard({
     },
     {
       id: "3",
-      name: "Pacific Recovery Agency",
+      name: "Zenith Commercial Logistics",
       stage: "Scoping Audit",
       stageColor: "bg-[#fdab3d]",
       value: "₱3.5M",
       prob: "60%",
       probWidth: "w-[60%]",
       probColor: "bg-amber-500 text-amber-700",
-      action: "Send Scoping Document",
-      actionToast: "Technical scoping audit report dispatched to Pacific Recovery leadership.",
-      detail: "Evaluating 60-agent dialer migration from legacy on-prem PBX.",
+      action: "Send Scoping Proposal",
+      actionToast: "Technical scoping proposal dispatched to Zenith Commercial leadership.",
+      detail: "Evaluating 60-seat sales CPQ integration with SAP ERP ledger.",
     },
   ];
 
@@ -1711,17 +1768,36 @@ function SalesBoard({
 
   return (
     <div className="space-y-4">
-      {/* Customer Outcome ROI Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50/90 via-teal-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-emerald-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Accelerates deal velocity by 38% with automated CPQ proposals, two-way sync, and AI win-probability territory routing.
-          </span>
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Active Pipeline</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">₱14.8M</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">+38% MoM</span>
+          </div>
         </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
-          +₱14.8M Pipeline Accelerated
-        </span>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">AI Win Rate</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-emerald-700">64.2%</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">Scored</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">CPQ Generation</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-blue-700">1-Click</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">PDF Quote</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Sales Cycle</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">18 Days</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">-12d Faster</span>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
@@ -1816,37 +1892,37 @@ function MarketingBoard({
 
   const rows = [
     {
-      step: "1. Delinquency Trigger",
-      channel: "Status Webhook",
+      step: "1. High-Intent Ingestion",
+      channel: "Webhook Trigger",
       status: "1,840 Enrolled",
       statusColor: "bg-[#00c875]",
       perf: "100% Triggered",
       perfColor: "text-emerald-600",
       action: "Test Webhook Ingestion",
-      actionToast: "Tested webhook ingestion: 42 new accounts successfully enrolled in journey.",
-      detail: "Trigger fires instantly when ERP logs accounts exceeding 30 DPD.",
+      actionToast: "Tested webhook ingestion: 42 new qualified leads enrolled into automated onboarding journey.",
+      detail: "Captures and segments high-intent signups instantly from web forms, ads, and landing pages.",
     },
     {
-      step: "2. Portal Link SMS",
+      step: "2. Interactive SMS Portal",
       channel: "SMS Gateway",
       status: "Dispatched",
       statusColor: "bg-[#0073ea]",
-      perf: "42.1% Click-Through",
+      perf: "42.1% CTR",
       perfColor: "text-blue-600",
-      action: "Send Blast Preview",
+      action: "Send Campaign Preview",
       actionToast: "Dispatched preview SMS to admin test device (+63 917 *** 0000).",
-      detail: "Personalized short links with 1-click GCash/Maya settlement payment portal.",
+      detail: "Branded short links with instant GCash/Maya/Card digital checkout and onboarding access.",
     },
     {
-      step: "3. AI Voice Escalation",
+      step: "3. Autonomous AI Voice Nurture",
       channel: "BITSagent Voice",
-      status: "Conditional (48h)",
+      status: "Dynamic (48h)",
       statusColor: "bg-[#a25ddc]",
-      perf: "68% Resolution",
+      perf: "68.0% Resolution",
       perfColor: "text-violet-600",
-      action: "Simulate 48h Escalation",
-      actionToast: "Simulated escalation: 120 unresponsive accounts routed to BITSagent auto-dial queue.",
-      detail: "Fires only if debtor does not click link within 48 hours of initial SMS delivery.",
+      action: "Simulate Voice Nurture",
+      actionToast: "Simulated escalation: 120 unengaged leads routed to conversational BITSagent Voice queue.",
+      detail: "Engages warm prospects with voice AI when initial link remains unopened after 48 hours.",
     },
   ];
 
@@ -1854,23 +1930,28 @@ function MarketingBoard({
 
   return (
     <div className="space-y-4">
-      {/* Customer Outcome ROI Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-pink-200 bg-gradient-to-r from-pink-50/90 via-rose-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-pink-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Boosts multichannel engagement by 4.5x with automated SMS/email customer journeys while ensuring 100% NPC RA 10173 consent compliance.
-          </span>
-        </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-pink-700 bg-white px-2.5 py-1 rounded-full border border-pink-200 shadow-2xs">
-          42.1% SMS Click-Through
-        </span>
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Omnichannel Reach", value: "94.8%", trend: "+12.4% MoM", tone: "text-pink-600" },
+          { label: "SMS/Email CTR", value: "42.1%", trend: "1-Click Portal", tone: "text-blue-600" },
+          { label: "Auto-Resolution", value: "68.0%", trend: "Zero Touch", tone: "text-violet-600" },
+          { label: "DPA RA 10173 Audit", value: "100% Pass", trend: "NPC Compliant", tone: "text-emerald-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-pink-200 bg-pink-50/70 p-3">
         <div>
-          <p className="text-xs font-bold text-slate-900">Customer Journey Automation</p>
-          <p className="text-[0.68rem] text-slate-500">Delinquent 30-DPD Multi-Touch Sequence · NPC DPA Compliant</p>
+          <p className="text-xs font-bold text-slate-900">Multichannel Journey Automation</p>
+          <p className="text-[0.68rem] text-slate-500">Automated SMS, Email &amp; Conversational AI Flows · NPC DPA Compliant</p>
         </div>
         <div className="flex items-center gap-2">
           <span className="rounded-md bg-pink-600 px-2.5 py-1 text-xs font-bold text-white font-mono">
@@ -1987,17 +2068,22 @@ function CommerceBoard({
 
   return (
     <div className="space-y-4">
-      {/* Customer Outcome ROI Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-cyan-200 bg-gradient-to-r from-cyan-50/90 via-sky-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-cyan-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Recovers 9.2% monthly recurring revenue otherwise lost to card failures through smart automated dunning and BIR CAS e-invoicing.
-          </span>
-        </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-cyan-700 bg-white px-2.5 py-1 rounded-full border border-cyan-200 shadow-2xs">
-          99.99% Billing Precision
-        </span>
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "MRR Recovered", value: "+9.2%", trend: "Smart Dunning", tone: "text-cyan-700" },
+          { label: "Billing Precision", value: "99.99%", trend: "Zero Leakage", tone: "text-emerald-600" },
+          { label: "BIR CAS Audit", value: "100% Pass", trend: "Official E-Stamp", tone: "text-blue-600" },
+          { label: "Involuntary Churn", value: "0.8%", trend: "-3.4% MoM", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-cyan-200 bg-cyan-50/70 p-3">
@@ -2098,15 +2184,15 @@ function AccountingBoard({
     },
     {
       code: "1200-00 Trade Accounts Receivable",
-      desc: "Enterprise Client Portfolios",
-      entity: "BITS BPO Ops Inc.",
+      desc: "Commercial Enterprise Clients",
+      entity: "Holdings Operating Unit",
       debit: "CR ₱18,200,000",
       status: "Auto-Balanced",
       statusColor: "bg-[#0073ea]",
-      lineage: "BITScrm Direct Sync",
+      lineage: "Commercial Invoicing Sync",
       action: "Sync Receivables Ledger",
-      actionToast: "Synchronized 1,420 debtor settlement commitments directly to General Ledger.",
-      detail: "Direct bidirectional sync with collections CRM engine.",
+      actionToast: "Synchronized 1,420 commercial sales invoices directly to General Ledger.",
+      detail: "Direct bidirectional sync with commercial billing and CRM engine.",
     },
     {
       code: "2010-00 Accounts Payable (PO Clearing)",
@@ -2138,17 +2224,36 @@ function AccountingBoard({
 
   return (
     <div className="space-y-4">
-      {/* Customer Outcome Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50/90 via-teal-50/50 to-white p-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Landmark className="size-4 text-emerald-600 shrink-0" />
-          <span className="font-semibold text-slate-800">
-            <strong>Customer Outcome:</strong> Closes financial books in 0 days with automated 3-way PO matching, live MT940 bank feeds, and BIR CAS audit lineage.
-          </span>
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Month-End Close</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-emerald-700">0-Day Close</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">Real-Time GL</span>
+          </div>
         </div>
-        <span className="font-mono text-[0.68rem] font-extrabold text-emerald-700 bg-white px-2.5 py-1 rounded-full border border-emerald-200 shadow-2xs">
-          0-Day Period Close
-        </span>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">General Ledger</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">₱119.9M</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">Dr = Cr</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">3-Way PO Match</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-blue-700">100% Auto</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">0 Variance</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">BIR CAS Audit</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">Certified</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">RR 9-2009</span>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
@@ -2290,13 +2395,33 @@ function HrmsBoard({
       detail: "2 approved vacation leaves covered by cross-trained float roster.",
     },
     {
+      shift: "Shift A (06:00 - 15:00)",
+      team: "Warehouse & Fulfillment (32 Staff)",
+      status: "100% Present",
+      statusColor: "bg-[#00c875]",
+      diff: "Standard Daytime",
+      action: "Log Shift Verification",
+      actionToast: "Shift A biometric attendance locked: 32/32 staff confirmed present on floor.",
+      detail: "Hardware biometric sync completed with zero manual override requests.",
+    },
+    {
+      shift: "Shift B (14:00 - 23:00)",
+      team: "Retail & Customer Care (38 Staff)",
+      status: "2 On Leave (Covered)",
+      statusColor: "bg-[#0073ea]",
+      diff: "Standard + 1h ND",
+      action: "Authorize Overtime Float",
+      actionToast: "Approved 2 float staff to cover Shift B customer care queue.",
+      detail: "2 approved vacation leaves covered by cross-trained float roster.",
+    },
+    {
       shift: "Shift C (22:00 - 07:00)",
-      team: "Team US-East (24 Agents)",
+      team: "Logistics Fleet & IT Ops (24 Staff)",
       status: "Night Shift Active",
       statusColor: "bg-[#a25ddc]",
       diff: "+10% Night Diff Auto",
       action: "Compute Night Differential",
-      actionToast: "Computed DOLE-compliant +10% Night Shift Differential for 24 agents.",
+      actionToast: "Computed DOLE-compliant +10% Night Shift Differential for 24 staff.",
       detail: "Automatic DOLE statutory compliance: +10% rate calculated from 10PM to 6AM.",
     },
   ];
@@ -2305,9 +2430,41 @@ function HrmsBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Attendance Sync</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">100% Sync</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">Biometric</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Floor Headcount</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">94 / 96</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">97.9% Active</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Leave Approvals</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-blue-700">Digital</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">Paperless</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">DOLE Audit</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-emerald-700">100% Vaulted</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">Compliant</span>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amber-200 bg-amber-50/70 p-3">
         <div>
-          <p className="text-xs font-bold text-slate-900">24/7 BPO Multi-Shift Roster</p>
+          <p className="text-xs font-bold text-slate-900">24/7 Multi-Shift Roster &amp; Biometric Attendance</p>
           <p className="text-[0.68rem] text-slate-500">Biometric Facial Clock-In · 94/96 Seats Active Headcount</p>
         </div>
         <div className="flex items-center gap-2">
@@ -2425,6 +2582,38 @@ function PayrollBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Signal Operational KPI Strip */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Tax Precision</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">100% Pass</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">TRAIN Law</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Statutory Schedules</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-blue-700">Auto SSS</span>
+            <span className="text-[0.62rem] font-bold text-blue-600">+PhilHealth</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Disbursement Run</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-slate-900">4.5 Mins</span>
+            <span className="text-[0.62rem] font-bold text-emerald-600">Batch ACH</span>
+          </div>
+        </div>
+        <div className="rounded-xl border border-slate-200/90 bg-slate-50/80 p-2.5">
+          <p className="text-[0.62rem] font-mono font-bold uppercase text-slate-500">Supported Banks</p>
+          <div className="mt-0.5 flex items-baseline justify-between">
+            <span className="font-mono text-sm font-bold text-indigo-700">All Ph Banks</span>
+            <span className="text-[0.62rem] font-bold text-slate-500">BDO/BPI/MBTC</span>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Statutory Tax &amp; Direct Bank Feeds</p>
@@ -2545,6 +2734,24 @@ function ConstructionBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Milestone Velocity", value: "92.4%", trend: "Phase 2 Active", tone: "text-amber-700" },
+          { label: "QA Punchlist", value: "100% Passed", trend: "Digital Sign-Off", tone: "text-emerald-600" },
+          { label: "Timesheet Sync", value: "48 Laborers", trend: "Direct Payroll", tone: "text-blue-600" },
+          { label: "Concrete Rating", value: "4,250 PSI", trend: "Lab Certified", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amber-200 bg-amber-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Project: Skyline Tower Phase 2</p>
@@ -2557,7 +2764,7 @@ function ConstructionBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-amber-300 px-2.5 py-1 text-xs font-bold text-amber-800 hover:bg-amber-100"
+            className="rounded-md bg-white border border-amber-300 px-2.5 py-1 text-xs font-bold text-amber-800 hover:bg-amber-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -2609,7 +2816,7 @@ function ConstructionBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-amber-600 px-3 py-1 text-xs font-bold text-white hover:bg-amber-700"
+          className="rounded-lg bg-amber-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-amber-700 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
         >
           Sign-Off Milestone
         </button>
@@ -2665,6 +2872,24 @@ function InventoryBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Par Accuracy", value: "99.8%", trend: "RFID Calibrated", tone: "text-blue-700" },
+          { label: "Active Depots", value: "4 Hubs", trend: "Multi-Warehouse", tone: "text-emerald-600" },
+          { label: "Auto-PO Fired", value: "12 Orders", trend: "Safety Par Level", tone: "text-amber-600" },
+          { label: "Holding Variance", value: "-14.2%", trend: "JIT Optimized", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-200 bg-blue-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Multi-Warehouse Stock Radar</p>
@@ -2677,7 +2902,7 @@ function InventoryBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-blue-300 px-2.5 py-1 text-xs font-bold text-blue-700 hover:bg-blue-100"
+            className="rounded-md bg-white border border-blue-300 px-2.5 py-1 text-xs font-bold text-blue-700 hover:bg-blue-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -2729,7 +2954,7 @@ function InventoryBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-blue-600 px-3 py-1 text-xs font-bold text-white hover:bg-blue-700"
+          className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
         >
           Execute Action
         </button>
@@ -2785,6 +3010,24 @@ function LogisticsBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "On-Time Dispatch", value: "98.2%", trend: "+3.4% MoM", tone: "text-indigo-700" },
+          { label: "Active Routes", value: "14 Fleets", trend: "GPS Telematics", tone: "text-emerald-600" },
+          { label: "Electronic POD", value: "100% Geotagged", trend: "Digital Glass", tone: "text-blue-600" },
+          { label: "Fuel Routing", value: "-18.5%", trend: "AI Dynamic", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-indigo-200 bg-indigo-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Fleet Operations &amp; AI Dispatch</p>
@@ -2797,7 +3040,7 @@ function LogisticsBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-indigo-300 px-2.5 py-1 text-xs font-bold text-indigo-800 hover:bg-indigo-100"
+            className="rounded-md bg-white border border-indigo-300 px-2.5 py-1 text-xs font-bold text-indigo-800 hover:bg-indigo-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -2849,7 +3092,7 @@ function LogisticsBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-indigo-600 px-3 py-1 text-xs font-bold text-white hover:bg-indigo-700"
+          className="rounded-lg bg-indigo-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-indigo-700 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
         >
           Verify Geotag
         </button>
@@ -2930,6 +3173,24 @@ function PickleballBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Court Utilization", value: "99.4%", trend: "Paddle Rack Live", tone: "text-emerald-700" },
+          { label: "Queue Wait Time", value: "4.5 Mins", trend: "4-On / 4-Off", tone: "text-blue-600" },
+          { label: "Overhead TV HUD", value: "4 Courts", trend: "Sub-Second Sync", tone: "text-emerald-600" },
+          { label: "Daily Online Bookings", value: "₱38.4k", trend: "+28% vs Walk-In", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Top HUD Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-emerald-200 bg-emerald-50/80 p-3.5">
         <div className="flex items-center gap-3">
@@ -3182,6 +3443,24 @@ function SportsHubBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Venue Revenue", value: "₱142.8k", trend: "Multi-Court", tone: "text-emerald-700" },
+          { label: "Overhead TV Display", value: "100% Synced", trend: "Real-Time Chime", tone: "text-blue-600" },
+          { label: "Kiosk Check-In", value: "1.8 Secs", trend: "QR Scan", tone: "text-emerald-600" },
+          { label: "Tournament Ladder", value: "64 Teams", trend: "Elo Tracked", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Sports Venue Operations &amp; Live Court Queuing Hub</p>
@@ -3194,7 +3473,7 @@ function SportsHubBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-emerald-300 px-2.5 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100"
+            className="rounded-md bg-white border border-emerald-300 px-2.5 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -3302,6 +3581,24 @@ function BookingBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Direct Bookings", value: "+42.0%", trend: "Zero OTA Fee", tone: "text-blue-700" },
+          { label: "Escrow Deposit", value: "₱284.5k", trend: "Tokenized Card", tone: "text-emerald-600" },
+          { label: "No-Show Rate", value: "1.4%", trend: "WhatsApp QR", tone: "text-blue-600" },
+          { label: "Turnstile Gate", value: "100% Synced", trend: "Dynamic PIN", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-blue-200 bg-blue-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Multi-Industry Reservation Engine</p>
@@ -3314,7 +3611,7 @@ function BookingBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-blue-300 px-2.5 py-1 text-xs font-bold text-blue-800 hover:bg-blue-100"
+            className="rounded-md bg-white border border-blue-300 px-2.5 py-1 text-xs font-bold text-blue-800 hover:bg-blue-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -3366,7 +3663,7 @@ function BookingBoard({
         <button
           type="button"
           onClick={() => onAction(activeRecord.actionToast)}
-          className="rounded-lg bg-blue-600 px-3 py-1 text-xs font-bold text-white hover:bg-blue-700"
+          className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
         >
           Re-send Pass
         </button>
@@ -3388,7 +3685,7 @@ function QueuingBoard({
   const rows = [
     {
       ticket: "TICKET #A-042",
-      service: "Collections Consultation",
+      service: "Priority Enterprise Consultation",
       status: "Now Serving",
       statusColor: "bg-[#0073ea]",
       counter: "Proceed to Counter 3",
@@ -3398,7 +3695,7 @@ function QueuingBoard({
     },
     {
       ticket: "TICKET #A-043",
-      service: "Account Settlement",
+      service: "Account Verification & Onboarding",
       status: "Next in Line (~3m)",
       statusColor: "bg-[#fdab3d]",
       counter: "SMS Alert Paged",
@@ -3408,7 +3705,7 @@ function QueuingBoard({
     },
     {
       ticket: "TICKET #A-044",
-      service: "General Information",
+      service: "Specialized Technical Helpdesk",
       status: "Virtual Queue",
       statusColor: "bg-[#a25ddc]",
       counter: "Window 1 Pre-Assigned",
@@ -3422,6 +3719,24 @@ function QueuingBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Average Wait Time", value: "-52.0%", trend: "Floor TV Dispatch", tone: "text-rose-700" },
+          { label: "Service SLA", value: "8m 12s", trend: "Sub-10m Target", tone: "text-emerald-600" },
+          { label: "Virtual QR Passes", value: "1,420 Enrolled", trend: "Zero Foyer Crowd", tone: "text-blue-600" },
+          { label: "Counter Load", value: "6 Windows", trend: "Dynamic Balance", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-rose-200 bg-rose-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Digital Queuing &amp; Overhead TV Floor Dispatch</p>
@@ -3434,7 +3749,7 @@ function QueuingBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-rose-300 px-2.5 py-1 text-xs font-bold text-rose-800 hover:bg-rose-100"
+            className="rounded-md bg-white border border-rose-300 px-2.5 py-1 text-xs font-bold text-rose-800 hover:bg-rose-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -3507,14 +3822,14 @@ function RagBoard({
 
   const rows = [
     {
-      repo: "BSP Circular 454/857 Manual",
-      scope: "Statutory Rules PDF (v4.2)",
+      repo: "Enterprise Statutory & Policy Index",
+      scope: "Statutory Compliance PDF (v4.2)",
       status: "Grounded",
       statusColor: "bg-[#00c875]",
       latency: "118ms (Cosine 0.94)",
       action: "Test Vector Policy Query",
-      actionToast: "Vector query executed against BSP 454 embeddings: 100% matched citation returned in 118ms.",
-      detail: "Prohibits debt collector contact between 10:00 PM and 6:00 AM. Grounded in sovereign chunk index #482.",
+      actionToast: "Vector query executed against sovereign policy embeddings: 100% matched citation returned in 118ms.",
+      detail: "Enterprise statutory compliance chunk #482. Cross-validated against sovereign policy rules with strict citation grounding.",
     },
     {
       repo: "Enterprise SQL & ERP Lake",
@@ -3542,6 +3857,24 @@ function RagBoard({
 
   return (
     <div className="space-y-4">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Vector Latency", value: "94ms", trend: "BM25 + Dense", tone: "text-violet-700" },
+          { label: "Grounding Accuracy", value: "99.4%", trend: "Zero Hallucination", tone: "text-emerald-600" },
+          { label: "Sovereign Embeddings", value: "148.2k", trend: "ERP & Policy Lake", tone: "text-blue-600" },
+          { label: "CDC Sync Speed", value: "Sub-Second", trend: "Live Change Stream", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-violet-200 bg-violet-50/70 p-3">
         <div>
           <p className="text-xs font-bold text-slate-900">Universal Enterprise RAG Knowledge Layer</p>
@@ -3554,7 +3887,7 @@ function RagBoard({
           <button
             type="button"
             onClick={() => onAction(activeRecord.actionToast)}
-            className="rounded-md bg-white border border-violet-300 px-2.5 py-1 text-xs font-bold text-violet-800 hover:bg-violet-100"
+            className="rounded-md bg-white border border-violet-300 px-2.5 py-1 text-xs font-bold text-violet-800 hover:bg-violet-100 min-h-[44px] inline-flex items-center justify-center cursor-pointer shadow-2xs"
           >
             ⚡ {activeRecord.action}
           </button>
@@ -3688,6 +4021,24 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
             Security &amp; Remote Lock
           </button>
         </div>
+      </div>
+
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "Device Compatibility", value: "99.2%", trend: "iOS & Android", tone: "text-cyan-700" },
+          { label: "Tap Engagement", value: "88.5%", trend: "Zero App Needed", tone: "text-emerald-600" },
+          { label: "Cloud Sync Latency", value: "Real-Time", trend: "Sub-Second Edit", tone: "text-blue-600" },
+          { label: "Hardware Security", value: "EAL6+ AES", trend: "Remote Lockable", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Tab 1: Physical Card & Live Phone Simulator */}
@@ -4095,12 +4446,35 @@ function WhiteLabelBoard({ onAction }: { onAction?: (msg: string) => void }) {
 
   return (
     <div className="space-y-4 font-sans">
+      {/* High-Density KPI Metric Strip */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {[
+          { label: "BITS Attribution", value: "0% Hidden", trend: "Full NDA Shield", tone: "text-orange-700" },
+          { label: "Custom Domain SSL", value: "CNAME Active", trend: "Multi-Tenant", tone: "text-emerald-600" },
+          { label: "Partner Margin", value: "100% Retained", trend: "Zero Royalty", tone: "text-blue-600" },
+          { label: "Module Coverage", value: "All BITS Apps", trend: "Universal Option", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 transition-all hover:bg-slate-50">
+            <span className="text-[0.62rem] font-medium uppercase tracking-wider text-slate-500">{kpi.label}</span>
+            <div className="mt-0.5 flex items-baseline justify-between gap-1">
+              <span className="font-mono text-sm font-bold text-slate-900">{kpi.value}</span>
+              <span className={cn("text-[0.62rem] font-bold", kpi.tone)}>{kpi.trend}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Header banner */}
       <div className="flex items-center justify-between rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 p-3">
         <div>
-          <p className="text-xs font-bold text-slate-900">White Label Brand Configuration Portal</p>
+          <div className="flex items-center gap-2">
+            <p className="text-xs font-bold text-slate-900">Universal White-Label Branding Option</p>
+            <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[0.62rem] font-extrabold uppercase text-orange-800">
+              Master Add-On
+            </span>
+          </div>
           <p className="text-[0.68rem] text-slate-500">
-            4 Products Branded · NDA Active · Zero BITS Attribution
+            Available across any BITS software solution · 100% Client Domain &amp; Brand Identity · Zero BITS Attribution
           </p>
         </div>
         <div className="flex items-center gap-1.5">
