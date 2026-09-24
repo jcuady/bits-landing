@@ -115,7 +115,7 @@ export function Pricing() {
     {
       group: "CRM & Telephony",
       products: bitsProducts.filter((p) =>
-        ["collections", "sales", "marketing", "commerce"].includes(p.id)
+        ["collections", "sales", "support", "marketing", "commerce"].includes(p.id)
       ),
     },
     {
@@ -133,7 +133,7 @@ export function Pricing() {
     {
       group: "Venues, Hubs & Identity",
       products: bitsProducts.filter((p) =>
-        ["pickleball", "sports-hub", "booking", "queuing", "nfc-card", "white-label"].includes(p.id)
+        ["pickleball", "sports-hub", "booking", "queuing", "nfc-card"].includes(p.id)
       ),
     },
   ];

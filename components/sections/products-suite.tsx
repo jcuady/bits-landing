@@ -53,17 +53,18 @@ import {
   ExternalLink,
   Eye,
   Mic,
+  Building2,
+  ShieldAlert,
 } from "lucide-react";
 
 const categoryFilters = [
-  { id: "all", label: "All Products (19)", count: 19, color: "blue" },
+  { id: "all", label: "All Products (18)", count: 18, color: "blue" },
   { id: "flagship", label: "Core Flagships (2)", count: 2, color: "indigo" },
-  { id: "crm", label: "CRM Variants (4)", count: 4, color: "emerald" },
+  { id: "crm", label: "CRM & Growth (4)", count: 4, color: "emerald" },
   { id: "operations", label: "ERP, Finance & Operations (6)", count: 6, color: "amber" },
   { id: "sports", label: "Sports, Booking & Queuing (4)", count: 4, color: "rose" },
   { id: "identity", label: "Smart NFC & Identity (1)", count: 1, color: "cyan" },
-  { id: "ai", label: "AI & Knowledge (1)", count: 1, color: "purple" },
-  { id: "whitelabel", label: "White Label (1)", count: 1, color: "orange" },
+  { id: "ai", label: "Enterprise AI & RAG (1)", count: 1, color: "purple" },
 ] as const;
 
 type CategoryFilterId = (typeof categoryFilters)[number]["id"];
@@ -171,9 +172,158 @@ function getProductPainPoint(id: string): { pain: string; solution: string } {
   }
 }
 
+/* ── Deep Business Solutions & Daily Workflows for Marketing Hooks ── */
+interface ProductDeepSolution {
+  idealFor: string;
+  whoUses: string;
+  coreImpact: string;
+  workflowStep: string;
+}
+
+function getProductDeepSolution(id: string): ProductDeepSolution {
+  switch (id) {
+    case "collections":
+    case "service":
+      return {
+        idealFor: "Debt Recovery Agencies, Debt Purchase Funds, Consumer Lenders & Recovery BPOs",
+        whoUses: "Collection Agents, Skip Tracers, Legal Floor Supervisors & Recovery Directors",
+        coreImpact: "+38% Liquidation Recovery & 100% BSP 454/857 Audit Defense",
+        workflowStep: "Stages delinquent accounts by DPD buckets, fires predictive auto-dialer, enforces legal contact windows, and locks Promise-to-Pay dates with automated SMS payment links.",
+      };
+    case "ai-agent":
+      return {
+        idealFor: "Commercial Enterprises, Customer Support Desks, Healthcare Clinics & E-Commerce",
+        whoUses: "Customer Experience Teams, Floor Operations & Front-Desk Receptionists",
+        coreImpact: "68% Autonomous Resolution & Zero Customer Hold Time",
+        workflowStep: "Sub-300ms natural voice AI handles incoming inquiries, books appointments, answers complex product questions using enterprise RAG, and warm-transfers to staff when needed.",
+      };
+    case "sales":
+      return {
+        idealFor: "B2B Companies, Wholesalers, Distributors, Tech Vendors & Commercial Sales Teams",
+        whoUses: "Account Executives, Sales Directors, Territory Managers & Revenue Ops",
+        coreImpact: "+38% Pipeline Velocity & 0 Lost Spreadsheet Leads",
+        workflowStep: "Auto-routes incoming leads, scores win probability with predictive AI, manages deal progression across drag-and-drop Kanban stages, and generates 1-click CPQ proposals.",
+      };
+    case "support":
+      return {
+        idealFor: "Multi-Channel Retailers, SaaS Companies, Healthcare Providers & Service Desks",
+        whoUses: "Tier 1–3 Support Engineers, Team Leads & Customer Success Managers",
+        coreImpact: "+46% First Contact Resolution (FCR) & 0 Breached SLAs",
+        workflowStep: "Aggregates tickets from email, chat, and web portals into priority queues with live countdown SLA timers, auto-sentiment detection, and 1-click macro resolutions.",
+      };
+    case "marketing":
+      return {
+        idealFor: "Direct-to-Consumer Brands, Retail Networks, Real Estate Brokerages & Agencies",
+        whoUses: "Marketing Managers, Growth Leads, Campaign Specialists & CRM Strategists",
+        coreImpact: "4.5x Higher Customer Engagement & Multi-Touch Revenue Attribution",
+        workflowStep: "Constructs visual multi-branch customer journeys triggering targeted SMS, email, and Viber promotions based on real customer purchasing activity and lead milestones.",
+      };
+    case "commerce":
+      return {
+        idealFor: "Subscription Businesses, B2B Wholesalers, Professional Retainers & Digital Services",
+        whoUses: "Billing Operations, Finance Managers & Accounts Receivable Specialists",
+        coreImpact: "62% Involuntary Churn Recovered & 99.99% Invoicing Precision",
+        workflowStep: "Automates recurring billing and usage invoices, accepts credit card and e-wallet payments via tokenized checkout, and triggers automated smart dunning on failed cards.",
+      };
+    case "accounting":
+      return {
+        idealFor: "Commercial Corporations, Multi-Entity Holdings, Manufacturers & Conglomerates",
+        whoUses: "Chief Financial Officers, Corporate Controllers & Senior Accountants",
+        coreImpact: "Real-Time 0-Day Month-End Close & BIR CAS Audit Compliance",
+        workflowStep: "Automates double-entry general ledgers, 3-way PO matching for accounts payable, live MT940 bank statement reconciliations, multi-entity consolidations, and BIR tax exports.",
+      };
+    case "hrms":
+      return {
+        idealFor: "Corporate Offices, Multi-Branch Retailers, Hospitals, Factories & Enterprises",
+        whoUses: "HR Directors, People Operations, Shift Supervisors & Office Managers",
+        coreImpact: "100% Shift Attendance Tracking & Zero DOLE Compliance Gaps",
+        workflowStep: "Syncs directly with biometric hardware, automates multi-shift rosters and leave approval ladders, maintains digital employee 201 records, and scores KPI appraisals.",
+      };
+    case "payroll":
+      return {
+        idealFor: "Mid-Market to Large Employers (10 to 10,000+ staff across any industry)",
+        whoUses: "Payroll Officers, Compensation & Benefits Managers & Finance Teams",
+        coreImpact: "100% Mathematical Tax Compliance & 1-Click Bank Batch Disbursements",
+        workflowStep: "Calculates TRAIN law tax tables, SSS, PhilHealth, Pag-IBIG, night diff, and holiday premiums, exports encrypted bank files (BDO, BPI, Metrobank, UnionBank), and delivers digital payslips.",
+      };
+    case "construction":
+      return {
+        idealFor: "General Contractors, Real Estate Developers, Civil Engineers & Project Builders",
+        whoUses: "Project Managers, Site Engineers, Quantity Surveyors & Safety Officers",
+        coreImpact: "-24% Project Cost Leakage & Accurate Milestone Job Costing",
+        workflowStep: "Tracks site milestones on interactive Gantt charts, links materials directly to BITS Inventory, logs site labor directly to BITS Payroll, and resolves punch lists with photo evidence.",
+      };
+    case "inventory":
+      return {
+        idealFor: "Retail Chains, Wholesalers, Distributors, Warehouses & Manufacturers",
+        whoUses: "Warehouse Managers, Logistics Coordinators & Inventory Controllers",
+        coreImpact: "99.8% Inventory Accuracy & Zero Phantom Stockouts",
+        workflowStep: "Tracks multi-location warehouse bin locations with barcode/RFID scanners, triggers automatic reorder thresholds before stock runs out, and logs tamper-resistant audit ledgers.",
+      };
+    case "logistics":
+      return {
+        idealFor: "Delivery Fleets, 3PL Couriers, Field Service Companies & Transport Operators",
+        whoUses: "Fleet Dispatchers, Logistics Managers & Mobile Delivery Drivers",
+        coreImpact: "+31% Route Mileage Saved & Instant Electronic Proof of Delivery",
+        workflowStep: "Calculates optimal multi-stop driver routes with AI, tracks vehicle GPS in real-time with geofences, and captures customer digital signatures and photo delivery proofs.",
+      };
+    case "pickleball":
+    case "sports-ai":
+      return {
+        idealFor: "Pickleball Clubs, Padel Centers, Racket Sports Complexes & Recreation Venues",
+        whoUses: "Club Managers, Front-Desk Organizers & Tournament Directors",
+        coreImpact: "99.4% Court Utilization & Zero Paddle Queue Whiteboard Arguments",
+        workflowStep: "Automates open-play paddle rack rotation after every single play (4-on-4-off, winner stays), broadcasts live next-up queue to overhead TV screens, and takes online deposit bookings.",
+      };
+    case "sports-hub":
+      return {
+        idealFor: "Multi-Sport Arenas, Athletic Clubs, Tournament Organizers & Gyms",
+        whoUses: "Facility Directors, League Coordinators & Sports Event Organizers",
+        coreImpact: "98.4% Peak Venue Scheduling & Automated Elimination Brackets",
+        workflowStep: "Broadcasts live court displays on overhead TV screens, schedules court rentals across multiple sports, and generates automated single/double elimination tournament brackets.",
+      };
+    case "booking":
+      return {
+        idealFor: "Medical Clinics, Spas & Salons, Professional Consultants, Studios & Venues",
+        whoUses: "Front-Desk Receptionists, Practice Managers & Service Professionals",
+        coreImpact: "+42% Direct Self-Service Bookings & 75% Drop in No-Shows",
+        workflowStep: "Provides a 24/7 client self-service booking portal with real-time calendar availability, charges upfront booking deposits, and dispatches automated SMS reminders.",
+      };
+    case "queuing":
+      return {
+        idealFor: "Bank Branches, Healthcare Clinics, Government Offices & Retail Service Desks",
+        whoUses: "Counter Tellers, Service Desk Representatives & Branch Managers",
+        coreImpact: "-52% Customer Perceived Wait Time & Zero Overcrowded Waiting Rooms",
+        workflowStep: "Customers scan a QR code to grab a mobile queue ticket with live wait estimations, while staff dispatch tickets across counters with synchronized overhead TV audio calling.",
+      };
+    case "rag-engine":
+      return {
+        idealFor: "Corporations, Law Firms, Support Centers & Knowledge-Intensive Enterprises",
+        whoUses: "Chief Technology Officers, Knowledge Managers & Customer Support Leads",
+        coreImpact: "99.4% Factual Grounding Accuracy & Zero AI Hallucinations",
+        workflowStep: "Ingests internal corporate PDFs, SOP manuals, contracts, and database records into a private vector store, giving AI voice/chat agents instant factual answers with source citations.",
+      };
+    case "nfc-card":
+      return {
+        idealFor: "Corporate Executives, Sales Professionals, Real Estate Brokers & Field Reps",
+        whoUses: "Business Development Teams, Managing Directors & Enterprise Staff",
+        coreImpact: "100% Paper Card Waste Eliminated & Instant Contact Downloads",
+        workflowStep: "Tap any modern smartphone to instantly save your full contact vCard, portfolio, booking link, and socials with zero apps required; update card info remotely anytime.",
+      };
+    default:
+      return {
+        idealFor: "General Commercial & Multi-Industry Enterprises",
+        whoUses: "Operational Leaders, Team Managers & Enterprise Executives",
+        coreImpact: "Unified Operational Throughput & 0 Disconnected Data Silos",
+        workflowStep: "Replaces fragmented spreadsheets with mission-critical enterprise workflows tailored to your specific organizational requirements.",
+      };
+  }
+}
+
 export function ProductsSuite() {
   const [activeCategory, setActiveCategory] = React.useState<CategoryFilterId>("all");
   const [activeProductId, setActiveProductId] = React.useState<string>("collections");
+  const [brandMode, setBrandMode] = React.useState<"bits" | "whitelabel">("bits");
 
   const filteredProducts = React.useMemo(() => {
     if (activeCategory === "all") return bitsProducts;
@@ -554,6 +704,32 @@ export function ProductsSuite() {
                 <p className="mt-1 text-sm font-semibold text-blue-600">
                   {activeProduct.tagline}
                 </p>
+
+                {/* Industry Scope Demarcation */}
+                <div className="mt-3">
+                  {activeProduct.id === "collections" ? (
+                    <div className="flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50/90 p-2.5 text-xs text-rose-900 font-semibold shadow-2xs">
+                      <ShieldAlert className="size-4 shrink-0 text-rose-600" />
+                      <div>
+                        <span className="font-bold text-rose-950">Industry Scope: </span>
+                        <span className="text-rose-800">
+                          Specialized for Collections Agencies, BPOs &amp; Consumer Lending Desks. (Not a general sales CRM).
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50/80 p-2.5 text-xs text-blue-900 font-semibold shadow-2xs">
+                      <Building2 className="size-4 shrink-0 text-blue-600" />
+                      <div>
+                        <span className="font-bold text-blue-950">Industry Scope: </span>
+                        <span className="text-blue-800">
+                          General Commercial &amp; Multi-Industry Use across Any Business (Retail, Services, Corporate, Logistics, Sports &amp; Tech).
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   {activeProduct.description}
                 </p>
@@ -574,6 +750,31 @@ export function ProductsSuite() {
                 </div>
               </div>
 
+              {/* In-Depth Business Solution & Operational Workflow Card */}
+              {(() => {
+                const deepSolution = getProductDeepSolution(activeProduct.id);
+                return (
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-2xs space-y-2.5">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                      <span className="font-mono text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
+                        Operational Solution &amp; User Roles
+                      </span>
+                      <span className="rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[0.62rem] font-extrabold text-emerald-800">
+                        {deepSolution.coreImpact}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-[0.65rem] font-bold uppercase tracking-wider text-slate-400">Target Users / Roles</p>
+                      <p className="text-xs font-semibold text-slate-800">{deepSolution.whoUses}</p>
+                    </div>
+                    <div>
+                      <p className="text-[0.65rem] font-bold uppercase tracking-wider text-slate-400">Daily Operational Workflow</p>
+                      <p className="text-xs leading-relaxed text-slate-600">{deepSolution.workflowStep}</p>
+                    </div>
+                  </div>
+                );
+              })()}
+
               {/* Packaging & Customization Badges */}
               <div className="flex flex-wrap gap-1.5">
                 <span className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-blue-700">
@@ -582,8 +783,8 @@ export function ProductsSuite() {
                 <span className="inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-indigo-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-indigo-700">
                   <SlidersHorizontal className="size-3" /> Fully Customizable
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full border border-purple-200 bg-purple-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-purple-700">
-                  <Palette className="size-3" /> White-Label Ready
+                <span className="inline-flex items-center gap-1 rounded-full border border-orange-200 bg-orange-50/80 px-2.5 py-1 text-[0.65rem] font-bold text-orange-700">
+                  <Palette className="size-3" /> White-Label Option
                 </span>
               </div>
 
@@ -655,11 +856,56 @@ export function ProductsSuite() {
               </div>
             </div>
 
-            {/* Right Column: monday.com-Inspired Interactive Light Mode Board Mockup */}
+            {/* Right Column: monday.com-Inspired Interactive Light Mode Board Mockup with Brand Mode Switcher */}
             <div className="lg:col-span-7">
+              {/* Brand Mode Option Switcher */}
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-slate-200/90 bg-white p-2 shadow-2xs">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-bold text-slate-700">Branding Option:</span>
+                  <div className="inline-flex rounded-xl border border-slate-200 bg-slate-100 p-0.5">
+                    <button
+                      type="button"
+                      onClick={() => setBrandMode("bits")}
+                      className={cn(
+                        "min-h-[44px] flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all cursor-pointer",
+                        brandMode === "bits"
+                          ? "bg-white text-blue-700 shadow-xs ring-1 ring-slate-200"
+                          : "text-slate-600 hover:text-slate-900"
+                      )}
+                    >
+                      <ShieldCheck className="size-3.5 text-blue-600" />
+                      <span>BITS Native Brand</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setBrandMode("whitelabel")}
+                      className={cn(
+                        "min-h-[44px] flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all cursor-pointer",
+                        brandMode === "whitelabel"
+                          ? "bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-xs"
+                          : "text-slate-600 hover:text-slate-900"
+                      )}
+                    >
+                      <Palette className="size-3.5" />
+                      <span>White-Label Brand (Client Option)</span>
+                      <span className="rounded-full bg-white/20 px-1.5 py-0.2 text-[0.6rem] font-extrabold uppercase">
+                        Live Preview
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <Link
+                  href="/products/white-label"
+                  className="text-[0.68rem] font-bold text-orange-700 hover:text-orange-800 hover:underline inline-flex items-center gap-1 min-h-[44px] px-2"
+                >
+                  <span>White-Label Specs</span>
+                  <ExternalLink className="size-3" />
+                </Link>
+              </div>
+
               <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
                 {/* monday.com Board Header Bar */}
-                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/80 px-4 py-3">
+                <div className="flex flex-wrap items-center justify-between border-b border-slate-200 bg-slate-50/90 px-4 py-3 gap-2">
                   <div className="flex items-center gap-3">
                     <div className="flex gap-1.5 opacity-60">
                       <span className="size-2.5 rounded-full bg-rose-400" />
@@ -667,21 +913,39 @@ export function ProductsSuite() {
                       <span className="size-2.5 rounded-full bg-emerald-400" />
                     </div>
                     <div className="h-4 w-px bg-slate-200" />
-                    <span className="text-xs font-bold text-slate-800">{activeProduct.name}</span>
-                    <span className="rounded bg-slate-200/70 px-2 py-0.5 text-[0.62rem] font-bold text-slate-600">
-                      Live Workspace
+                    <span className="text-xs font-bold text-slate-800">
+                      {brandMode === "whitelabel" ? `Acme Portal · ${activeProduct.name}` : activeProduct.name}
+                    </span>
+                    <span
+                      className={cn(
+                        "rounded px-2 py-0.5 text-[0.62rem] font-bold",
+                        brandMode === "whitelabel"
+                          ? "bg-orange-100 text-orange-800 border border-orange-200"
+                          : "bg-slate-200/70 text-slate-600"
+                      )}
+                    >
+                      {brandMode === "whitelabel" ? "100% White-Labeled" : "Live Workspace"}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="hidden sm:inline-flex items-center gap-1 text-[0.68rem] text-slate-500 font-medium">
-                      <Filter className="size-3" /> Filter
-                    </span>
-                    <span className="hidden sm:inline-flex items-center gap-1 text-[0.68rem] text-slate-500 font-medium">
-                      <Columns3 className="size-3" /> Columns
+                    <span className="font-mono text-[0.65rem] text-slate-500">
+                      {brandMode === "whitelabel" ? "app.yourcompany.com" : `boundlessits.com/app/${activeProduct.id}`}
                     </span>
                     <span className="inline-flex size-2 rounded-full bg-emerald-500 animate-ping" />
                   </div>
                 </div>
+
+                {/* White-Label Active Banner */}
+                {brandMode === "whitelabel" && (
+                  <div className="border-b border-orange-200 bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 px-4 py-2 text-xs flex items-center justify-between">
+                    <span className="text-[0.72rem] text-orange-950 font-medium">
+                      <strong>White-Label Option Active:</strong> Deployed with your company logo, custom domain (app.yourcompany.com), and corporate styling. Zero BITS branding or attribution under strict NDA.
+                    </span>
+                    <Link href="/products/white-label" className="text-[0.68rem] font-bold text-orange-800 hover:underline shrink-0 ml-2">
+                      Licensing Details →
+                    </Link>
+                  </div>
+                )}
 
                 {/* Monday-Style Board Body Container */}
                 <div className="p-4 sm:p-5">

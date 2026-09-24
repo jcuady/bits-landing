@@ -121,9 +121,9 @@ export const navigationSections = [
           icon: "card" as const,
         },
         {
-          title: "BITS White Label Platform",
-          badge: "Custom Brand",
-          description: "Deploy any BITS engine rebranded under your own domain, logo & color identity.",
+          title: "White-Label & Custom Branding",
+          badge: "Branding Option",
+          description: "Deploy any of our 18 software products under your own domain, logo & corporate styling.",
           href: "/products/white-label",
           icon: "sparkles" as const,
         },
@@ -265,12 +265,12 @@ export const bitsProducts = [
     name: "BITScrm Collections",
     shortName: "Collections CRM",
     category: "flagship",
-    categoryLabel: "Primary Flagship Platform",
-    badge: "Core Flagship",
+    categoryLabel: "Specialized Flagship Platform",
+    badge: "Collections Agency Only",
     isFlagship: true,
     tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
     description:
-      "The mission-critical flagship platform for debt recovery agencies, BPOs, banks, and consumer lenders. Unifies delinquent account staging, queue distribution, browser WebRTC softphones, automated PTP scheduling, supervisor QA HUD, and BSP Circulars 454/857 compliance.",
+      "The mission-critical debt recovery platform purpose-built exclusively for collection agencies, debt recovery law firms, consumer lending desks, and recovery BPOs. (Not a general sales CRM). Unifies delinquent account staging, aging bucket distribution, browser WebRTC softphones, automated PTP scheduling, supervisor QA HUD, and BSP Circulars 454/857 compliance.",
     complianceBadges: [
       "HIPAA Security Rule Aligned",
       "SOC 2 Type II Controls",
@@ -299,7 +299,7 @@ export const bitsProducts = [
     isFlagship: true,
     tagline: "Autonomous Conversational Voice & Email AI Agents",
     description:
-      "Sub-300ms ultra-realistic conversational voice and email agents that autonomously negotiate payment arrangements, answer customer questions, and transcribe calls with enterprise RAG knowledge grounding.",
+      "Sub-300ms ultra-realistic conversational voice and email agents that autonomously answer customer questions, schedule appointments, handle support triage, and transcribe calls with enterprise RAG knowledge grounding across any industry.",
     complianceBadges: [
       "HIPAA Compliant Audio",
       "SOC 2 Type II Security",
@@ -308,8 +308,8 @@ export const bitsProducts = [
     ],
     capabilities: [
       "Conversational Voice AI (< 300ms Turn Latency)",
-      "Autonomous Multi-Turn Debt & Terms Negotiation",
-      "Omnichannel Email & SMS Payment Intake Agent",
+      "Autonomous Multi-Turn Terms & Support Resolution",
+      "Omnichannel Email & SMS Customer Intake Agent",
       "Real-Time Sentiment Analysis & Script Adherence",
       "Enterprise RAG Business Knowledge Grounding",
       "Instant Warm Transfer to Live Human Agent",
@@ -324,11 +324,11 @@ export const bitsProducts = [
     shortName: "Sales CRM",
     category: "crm",
     categoryLabel: "CRM & Revenue Cloud",
-    badge: "Revenue Engine",
+    badge: "General Commercial CRM",
     isFlagship: false,
-    tagline: "High-Velocity Revenue Pipeline & Deal Intelligence Engine",
+    tagline: "High-Velocity Revenue Pipeline & Deal Intelligence for Any Enterprise",
     description:
-      "Purpose-built for institutional sales, loan origination, and B2B client acquisition. Combines visual Kanban deal stages, AI win-probability scoring, automated territory routing, and CPQ quote-to-cash workflows.",
+      "Purpose-built for commercial sales teams, wholesale distributors, B2B vendors, and high-growth companies across any industry. Combines visual Kanban deal stages, AI win-probability scoring, automated territory routing, and CPQ quote-to-cash workflows to accelerate sales velocity.",
     complianceBadges: [
       "SOC 2 Type II Controls",
       "Granular RBAC Permissions",
@@ -353,11 +353,11 @@ export const bitsProducts = [
     shortName: "Support CRM",
     category: "crm",
     categoryLabel: "CRM & Revenue Cloud",
-    badge: "Enterprise Helpdesk",
+    badge: "General Enterprise Helpdesk",
     isFlagship: false,
     tagline: "Omnichannel Ticket Queue, Real-Time SLA Countdown & AI Sentiment Telemetry",
     description:
-      "Engineered for high-volume enterprise helpdesks, technical support desks, and BPO operations. Unifies cross-channel tickets (email, live chat, portal, API), multi-tier P1-P4 priority queues, automated resolution macros, and real-time CSAT tracking.",
+      "Engineered for high-volume customer service desks, enterprise helpdesks, and technical support operations across retail, healthcare, logistics, and tech. Unifies cross-channel tickets (email, live chat, portal, API), multi-tier P1-P4 priority queues, automated resolution macros, and real-time CSAT tracking.",
     complianceBadges: [
       "SOC 2 Type II Controls",
       "NPC RA 10173 DPA",
@@ -382,11 +382,11 @@ export const bitsProducts = [
     shortName: "Marketing CRM",
     category: "crm",
     categoryLabel: "CRM & Revenue Cloud",
-    badge: "Audience Journeys",
+    badge: "General Marketing Cloud",
     isFlagship: false,
-    tagline: "Omnichannel Customer Journeys & Audience Automation",
+    tagline: "Omnichannel Customer Journeys & Audience Automation for Any Business",
     description:
-      "Orchestrate multi-touch customer acquisition, debtor re-engagement, and loan lifecycle journeys across email, SMS, messaging channels, and webhooks with closed-loop attribution analytics.",
+      "Orchestrate multi-touch customer acquisition, lifecycle re-engagement, and omnichannel promotional campaigns across email, SMS, messaging channels, and webhooks with closed-loop attribution analytics for any commercial business or retail network.",
     complianceBadges: [
       "NPC RA 10173 DPA",
       "CAN-SPAM / TCPA Alignment",
@@ -444,7 +444,7 @@ export const bitsProducts = [
     isFlagship: false,
     tagline: "Enterprise General Ledger, Multi-Entity Consolidation & SAP-Grade Accounting",
     description:
-      "Turnkey enterprise financial accounting and ERP suite engineered for multi-entity corporations, conglomerates, and high-growth organizations. Unifies double-entry General Ledger (GL), automated Accounts Payable (AP) 3-way PO matching, Accounts Receivable (AR) credit controls, multi-currency FX revaluation, automated bank reconciliation, fixed assets depreciation, and BIR/IFRS-compliant financial statements with immutable audit trails.",
+      "Turnkey enterprise financial accounting and ERP suite engineered for multi-entity corporations, conglomerates, and high-growth organizations across any industry. Unifies double-entry General Ledger (GL), automated Accounts Payable (AP) 3-way PO matching, Accounts Receivable (AR) credit controls, multi-currency FX revaluation, automated bank reconciliation, fixed assets depreciation, and BIR/IFRS-compliant financial statements with immutable audit trails.",
     complianceBadges: [
       "BIR CAS (Computerized Accounting) Ready",
       "IFRS / GAAP Standards Aligned",
@@ -473,11 +473,11 @@ export const bitsProducts = [
     shortName: "HRMS Cloud",
     category: "workforce",
     categoryLabel: "Workforce & Operations Cloud",
-    badge: "24/7 Operations",
+    badge: "Enterprise HR Core",
     isFlagship: false,
-    tagline: "Human Resource Management & 24/7 Floor Workforce Operations",
+    tagline: "Human Resource Management & Multi-Location Workforce Operations",
     description:
-      "Engineered specifically for 24/7 BPO operations, shift rotations, and multi-site enterprise teams. Unifies employee profiles, biometric attendance feeds, automated shift scheduling, leave approval matrices, and performance appraisal rubrics.",
+      "Comprehensive human resources management system engineered for mid-market and enterprise organizations across any industry—corporate offices, retail chains, healthcare, manufacturing, hospitality, and multi-branch teams. Unifies employee records, biometric attendance feeds, automated shift scheduling, leave approval matrices, and performance appraisal rubrics.",
     complianceBadges: [
       "NPC RA 10173 DPA",
       "DOLE Labor Standards Aligned",
@@ -485,12 +485,12 @@ export const bitsProducts = [
       "Immutable Timekeeping Logs",
     ],
     capabilities: [
-      "24/7 BPO Multi-Shift Roster & Scheduling",
+      "Dynamic Multi-Shift Roster & Scheduling for Any Workforce",
       "Biometric Hardware & Facial Clock-In Sync",
       "Automated Overtime, Night Diff & Holiday Rules",
       "Multi-Tier Leave Approval & Filing Matrix",
       "Digital Employee Lifecycle & Onboarding Portal",
-      "Performance Appraisals & Agent KPI Scoring",
+      "Performance Appraisals & Employee KPI Scoring",
     ],
     metrics: { label: "Shift Compliance", value: "100% Tracking" },
     ctaText: "Explore BITS HRMS",
@@ -788,38 +788,40 @@ export const bitsProducts = [
     ctaText: "Configure Your Smart NFC Card",
     ctaHref: "/products/nfc-card",
   },
-  {
-    id: "white-label",
-    name: "BITS White Label Platform",
-    shortName: "White Label",
-    category: "whitelabel",
-    categoryLabel: "White Label & Custom Branding",
-    badge: "Your Brand, Our Engine",
-    isFlagship: false,
-    tagline: "Deploy Any BITS Product Under Your Own Brand Identity",
-    description:
-      "Launch any BITS product suite—CRM, HRMS, Payroll, Booking, Queuing, Accounting, AI Agents, or NFC Cards—completely rebranded under your company's own name, logo, domain, and color identity. Ideal for software resellers, enterprise groups, government agencies, and businesses that require a fully white-labeled operational platform with zero mention of BITS. Maintain full ownership of the client relationship while BITS powers the engine silently behind the scenes.",
-    complianceBadges: [
-      "Custom Domain & SSL Certificate",
-      "Logo & Brand Color System",
-      "NDA-Protected Confidentiality",
-      "Full Reseller Licensing Available",
-    ],
-    capabilities: [
-      "Full Brand Replacement: Logo, Domain, Color Palette & Typography",
-      "White-Label Any BITS Product: CRM, HRMS, Payroll, Booking & More",
-      "Custom Client-Facing Login Portal with Your Brand Identity",
-      "NDA-Protected: Zero BITS Branding or Attribution Required",
-      "Reseller Licensing: Sell to Your Own Clients at Your Own Price",
-      "Custom Email Domain & Notification Templates with Your Brand",
-      "Dedicated Subdomain or Fully Custom Domain (yourbrand.com)",
-      "Priority Engineering Channel for Branded Feature Requests",
-    ],
-    metrics: { label: "Brand Ownership", value: "100% Yours" },
-    ctaText: "Inquire About White Label",
-    ctaHref: "/products/white-label",
-  },
 ] as const;
+
+/* ── Universal White-Label & Custom Branding Option (Available Across All 18 Products) ── */
+export const whiteLabelBrandingOption = {
+  id: "white-label",
+  name: "BITS White-Label & Custom Branding Program",
+  shortName: "White-Label Option",
+  category: "whitelabel",
+  categoryLabel: "Universal Branding Option",
+  badge: "Universal Branding Option",
+  isFlagship: false,
+  tagline: "Deploy Any of Our 18 Software Products Under Your Own Brand Identity",
+  description:
+    "Deploy any BITS enterprise software product—Collections CRM, Sales CRM, Support CRM, Marketing CRM, Commerce, Accounting ERP, HRMS, Payroll, Construction ERP, Inventory, Logistics Fleet, Pickleball OS, Sports Arena, Booking, Queuing, NFC, or Knowledge RAG—completely rebranded under your company's own name, logo, custom domain, and color palette. Maintain 100% brand equity and direct client ownership while BITS runs silently behind the scenes.",
+  complianceBadges: [
+    "Custom Domain & Automated SSL Certificate",
+    "Logo, Favicon & Brand Color System",
+    "Strict NDA-Protected Confidentiality",
+    "Turnkey Reseller Licensing Available",
+  ],
+  capabilities: [
+    "Full Brand Replacement: Logo, Favicon, Domain (app.yourcompany.com) & Color Palette",
+    "Universal Availability: White-Label Any of Our 18 Software Products (Solo or Bundled)",
+    "Custom Client-Facing Login Portal with Your Corporate Brand Identity",
+    "NDA-Protected: Zero BITS Branding, Attribution, or Watermarks Required",
+    "Reseller Licensing: Sell to Your Own Clients at Your Own Custom Pricing & Retainers",
+    "Custom Email Domain & Notification Templates with Your Corporate Brand",
+    "Dedicated Subdomain or Fully Sovereign Custom Domain (yourbrand.com)",
+    "Priority Engineering Channel for Branded Workflows & Client Features",
+  ],
+  metrics: { label: "Brand Equity Ownership", value: "100% Yours" },
+  ctaText: "Inquire About White-Label Branding",
+  ctaHref: "/products/white-label",
+} as const;
 
 /* ── BITS Technology Platform / Ecosystem Pillars ── */
 export const ecosystemPillars = [
@@ -1507,11 +1509,11 @@ export const suiteBundlePresets = [
   },
   {
     id: "reseller-agency",
-    name: "White-Label Reseller Platform",
-    tagline: "Deploy any combination of BITS engines under your company brand.",
-    productIds: ["collections", "accounting", "white-label", "nfc-card"],
-    recommendedFor: "Agencies, SaaS resellers & multi-brand holding groups",
-    highlight: "100% client margin retention with zero BITS attribution",
+    name: "White-Label Partner & Reseller Suite",
+    tagline: "Deploy any combination of our 18 software products under your own agency brand.",
+    productIds: ["collections", "sales", "accounting", "nfc-card"],
+    recommendedFor: "Agencies, IT MSPs, software resellers & enterprise conglomerates",
+    highlight: "100% client margin retention with zero BITS attribution and custom domains",
   },
 ] as const;
 
@@ -1993,7 +1995,7 @@ export const footerColumns = [
       { label: "BITScrm Commerce", href: "/products/commerce" },
       { label: "CRM Architecture Hub", href: "/products/crm" },
       { label: "BITSagent AI Suite", href: "/bitsagent" },
-      { label: "Enterprise Engines (19)", href: "/#products-suite" },
+      { label: "Enterprise Software (18)", href: "/#products-suite" },
     ],
   },
   {
@@ -2003,7 +2005,7 @@ export const footerColumns = [
       { label: "HRMS & Payroll Core", href: "/products/hrms" },
       { label: "Construction & Field Ops", href: "/products/construction" },
       { label: "Smart NFC Card", href: "/products/nfc-card" },
-      { label: "White-Label Platform", href: "/products/white-label" },
+      { label: "White-Label Branding Option", href: "/products/white-label" },
     ],
   },
   {

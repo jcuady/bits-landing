@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
-import { bitsProducts, pricingTiers, site } from "@/lib/site";
+import { bitsProducts, pricingTiers, site, whiteLabelBrandingOption } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ProductMockupBoard } from "@/components/sections/products-suite";
 import {
@@ -22,6 +22,8 @@ import {
   Activity,
   Layers,
   FileCheck,
+  Building2,
+  ShieldAlert,
 } from "lucide-react";
 
 interface ProductPageProps {
@@ -36,13 +38,16 @@ export async function generateStaticParams() {
     ...baseParams,
     { slug: "service" },
     { slug: "sports-ai" },
+    { slug: "white-label" },
   ];
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const resolvedSlug = slug === "service" ? "collections" : slug === "sports-ai" ? "pickleball" : slug;
-  const product = bitsProducts.find((p) => p.id === resolvedSlug);
+  const product = resolvedSlug === "white-label"
+    ? whiteLabelBrandingOption
+    : bitsProducts.find((p) => p.id === resolvedSlug);
 
   if (!product) {
     return {
@@ -95,8 +100,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-/* ── Domain-Specific Problem Statements for All 18 Products ── */
-function getProductProblems(product: (typeof bitsProducts)[number]) {
+/* ── Domain-Specific Problem Statements for All 18 Products + White-Label Option ── */
+type ProductItem = (typeof bitsProducts)[number] | typeof whiteLabelBrandingOption;
+
+function getProductProblems(product: ProductItem) {
   switch (product.id) {
     case "collections":
       return [
@@ -444,7 +451,7 @@ function getProductProblems(product: (typeof bitsProducts)[number]) {
 }
 
 /* ── Prompt-Mirror AEO FAQ Generator ── */
-function getProductFaqs(product: (typeof bitsProducts)[number]) {
+function getProductFaqs(product: ProductItem) {
   const bespokeQuestion = getBespokeFaqQuestion(product.id, product.name);
 
   return [
@@ -558,7 +565,9 @@ function getCrmSynergy(currentId: string, siblingId: string): string {
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const resolvedSlug = slug === "service" ? "collections" : slug === "sports-ai" ? "pickleball" : slug;
-  const product = bitsProducts.find((p) => p.id === resolvedSlug);
+  const product = resolvedSlug === "white-label"
+    ? whiteLabelBrandingOption
+    : bitsProducts.find((p) => p.id === resolvedSlug);
 
   if (!product) {
     notFound();
@@ -791,6 +800,26 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <p className="text-lede mx-auto mt-4 max-w-[62ch] text-pretty text-slate-600">
                 {product.description}
               </p>
+
+              {/* Industry Scope & Positioning Badge */}
+              <div className="mt-5 flex justify-center">
+                {product.id === "collections" ? (
+                  <div className="inline-flex items-center gap-2 rounded-full border border-rose-300 bg-rose-50 px-4 py-1.5 text-xs font-bold text-rose-900 shadow-2xs">
+                    <ShieldAlert className="size-4 text-rose-600" />
+                    <span>Specialized Vertical: Exclusively for Collections Agencies, BPOs &amp; Consumer Lending Desks</span>
+                  </div>
+                ) : product.id === "white-label" ? (
+                  <div className="inline-flex items-center gap-2 rounded-full border border-orange-300 bg-orange-50 px-4 py-1.5 text-xs font-bold text-orange-950 shadow-2xs">
+                    <Sparkles className="size-4 text-orange-600" />
+                    <span>Universal Commercial Option: Available Across All 18 BITS Software Products</span>
+                  </div>
+                ) : (
+                  <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-4 py-1.5 text-xs font-bold text-blue-950 shadow-2xs">
+                    <Building2 className="size-4 text-blue-600" />
+                    <span>General Commercial Software: Engineered for Any Business &amp; Multi-Industry Use</span>
+                  </div>
+                )}
+              </div>
             </Reveal>
 
             {/* Action CTAs */}
