@@ -1,24 +1,13 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { CRM_SESSION_COOKIE, encodeSession } from "@/lib/crm/auth";
-import { safeAppNext, sessionCookieOptions, clearSessionCookieOptions } from "@/lib/crm/safe-next";
-import { forgotPasswordSchema, loginSchema } from "@/lib/crm/validation";
-
-function displayNameFromEmail(email: string) {
-  const local = email.split("@")[0] ?? "User";
-  return (
-    local
-      .replace(/[._-]+/g, " ")
-      .replace(/\b\w/g, (c) => c.toUpperCase())
-      .trim()
-      .slice(0, 80) || "BITS User"
-  );
-}
+import { createClient } from "@/lib/supabase/server";
+import { safeAppNext } from "@/lib/crm/safe-next";
+import { loginSchema, forgotPasswordSchema } from "@/lib/crm/validation";
 
 export async function loginAction(formData: FormData) {
   const next = safeAppNext(String(formData.get("next") ?? "/app/dashboard"));
+
   const parsed = loginSchema.safeParse({
     email: String(formData.get("email") ?? ""),
     password: String(formData.get("password") ?? ""),
@@ -27,42 +16,45 @@ export async function loginAction(formData: FormData) {
   if (!parsed.success) {
     const issue = parsed.error.issues[0];
     const field = issue?.path[0] === "password" ? "password" : "email";
-    // ponytail: fixed error codes only — never reflect free-text `message` (phishing surface)
     redirect(`/login?error=${field}&next=${encodeURIComponent(next)}`);
   }
 
-  const jar = await cookies();
-  jar.set(
-    CRM_SESSION_COOKIE,
-    encodeSession({
-      email: parsed.data.email,
-      name: displayNameFromEmail(parsed.data.email),
-      signedInAt: new Date().toISOString(),
-    }),
-    sessionCookieOptions()
-  );
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithPassword({
+    email: parsed.data.email,
+    password: parsed.data.password,
+  });
+
+  if (error) {
+    redirect(`/login?error=invalid&next=${encodeURIComponent(next)}`);
+  }
 
   redirect(next);
 }
 
 export async function demoLoginAction(formData: FormData) {
   const next = safeAppNext(String(formData.get("next") ?? "/app/dashboard"));
-  const jar = await cookies();
-  jar.set(
-    CRM_SESSION_COOKIE,
-    encodeSession({
-      email: "malcolm@boundlessitsolutions.com",
-      name: "Malcolm Cuady",
-      signedInAt: new Date().toISOString(),
-    }),
-    sessionCookieOptions()
-  );
+
+  const supabase = await createClient();
+
+  // Demo account — try to sign in with the preset credentials.
+  // The account must exist in Supabase Auth (seeded separately).
+  const { error } = await supabase.auth.signInWithPassword({
+    email: "demo@boundlessitsolutions.com",
+    password: "BITSdemo2024!",
+  });
+
+  if (error) {
+    // Fallback: send the user to login with an error so they can try manually
+    redirect(`/login?error=invalid&next=${encodeURIComponent(next)}`);
+  }
+
   redirect(next);
 }
 
 export async function logoutAction() {
-  const jar = await cookies();
-  jar.set(CRM_SESSION_COOKIE, "", { ...clearSessionCookieOptions(), maxAge: 0 });
+  const supabase = await createClient();
+  await supabase.auth.signOut();
   redirect("/login");
 }
 
@@ -70,10 +62,17 @@ export async function forgotPasswordAction(formData: FormData) {
   const parsed = forgotPasswordSchema.safeParse({
     email: String(formData.get("email") ?? ""),
   });
+
   if (!parsed.success) {
     redirect(`/forgot-password?error=email`);
   }
-  // Cap reflected email length in the URL for the simulated success screen.
+
+  const supabase = await createClient();
+  // Send password reset email via Supabase Auth
+  await supabase.auth.resetPasswordForEmail(parsed.data.email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3847"}/app/settings?tab=password`,
+  });
+
   const email = parsed.data.email.slice(0, 254);
   redirect(`/forgot-password?sent=1&email=${encodeURIComponent(email)}`);
 }

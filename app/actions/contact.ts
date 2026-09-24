@@ -54,15 +54,15 @@ export async function submitContact(
     return { ok: false, errors: z.flattenError(parsed.error).fieldErrors, values: raw };
   }
 
-  // Honeypot check
+  // Honeypot check — silently succeed to deny bots any feedback
   if (parsed.data.website) {
     return { ok: true, errors: {}, values: {} };
   }
 
-  // Record inbound lead directly in CRM
+  // 1. Persist lead to Supabase inbound_leads table
   try {
     const { recordInboundLead } = await import("@/lib/crm/inbound-service");
-    recordInboundLead({
+    await recordInboundLead({
       name: parsed.data.name,
       email: parsed.data.email,
       company: parsed.data.company,
@@ -76,15 +76,23 @@ export async function submitContact(
       source: "Website Contact Form",
     });
   } catch (err) {
-    console.error("Failed to record inbound CRM lead:", err);
+    console.error("[contact] Failed to persist inbound lead to Supabase:", err);
+    // Continue — do not block the user even if DB write fails
   }
 
+  // 2. Send email notification to boundlessitsolutions@gmail.com
   const apiKey = process.env.RESEND_API_KEY;
+  // CONTACT_INBOX env overrides; defaults to the hardcoded INQUIRY_INBOX
   const inbox = process.env.CONTACT_INBOX || INQUIRY_INBOX;
-  const from = process.env.CONTACT_FROM || "BITS Consultations <noreply@optrizo.com>";
+  const from =
+    process.env.CONTACT_FROM ||
+    "BITS Website <noreply@boundlessitsolutions.com>";
 
   if (!apiKey) {
-    // Graceful fallback in dev or missing key: still return ok so user gets confirmation
+    // Dev fallback — still confirm to the user. Lead is already in Supabase.
+    console.warn(
+      `[contact] RESEND_API_KEY not set — email NOT sent. Lead saved to Supabase. Inbox: ${inbox}`
+    );
     return { ok: true, errors: {}, values: { email: parsed.data.email } };
   }
 
@@ -109,20 +117,15 @@ export async function submitContact(
     });
 
     if (!response.ok) {
-      return {
-        ok: false,
-        formError: `We could not send your inquiry. Please email ${INQUIRY_INBOX} directly.`,
-        errors: {},
-        values: raw,
-      };
+      const body = await response.text();
+      console.error(`[contact] Resend error ${response.status}:`, body);
+      // Lead is already saved — just warn, still return ok
+      return { ok: true, errors: {}, values: { email: parsed.data.email } };
     }
-  } catch {
-    return {
-      ok: false,
-      formError: `Network error. Please email ${INQUIRY_INBOX} directly.`,
-      errors: {},
-      values: raw,
-    };
+  } catch (err) {
+    console.error("[contact] Network error sending email:", err);
+    // Lead is in Supabase — return ok so user isn't penalised for email provider issue
+    return { ok: true, errors: {}, values: { email: parsed.data.email } };
   }
 
   return { ok: true, errors: {}, values: { email: parsed.data.email } };

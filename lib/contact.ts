@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { contactInterests } from "@/lib/site";
 
-export const INQUIRY_INBOX = "bits_inquiries@boundlessits.com";
+export const INQUIRY_INBOX = "boundlessitsolutions@gmail.com";
 
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name."),
