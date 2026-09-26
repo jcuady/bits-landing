@@ -143,10 +143,10 @@ export function Industries() {
           </div>
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-h2 font-bold tracking-tight text-slate-900">
-              Technology Built for High-Volume Operations
+              Built for Fast-Paced Teams and Demanding Industries
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-[50ch] text-slate-600">
-              Explore how BITS adapts to the complex regulatory, communication, and workflow requirements of distinct operational industries.
+              See how BITS adapts to the legal rules, phone systems, and daily worklists of real businesses.
             </p>
           </div>
         </Reveal>

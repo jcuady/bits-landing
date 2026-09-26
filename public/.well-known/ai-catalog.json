@@ -1,0 +1,35 @@
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:boundlessits-com:llms-txt",
+      "displayName": "BITS Architectural & LLM Grounding Dossier",
+      "type": "text/markdown",
+      "url": "https://www.boundlessits.com/llms.txt",
+      "representativeQueries": [
+        "What enterprise software and collections CRM does Boundless IT Solutions build?",
+        "What statutory regulations (BSP, BIR, NPC) does BITS comply with?"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:bitscrm-collections",
+      "displayName": "BITScrm Collections Platform",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/bitscrm",
+      "representativeQueries": [
+        "How does BITScrm handle high-volume debt recovery and PTP tracking?",
+        "Does BITScrm include browser WebRTC softphone and supervisor live listen?"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:bitsagent-ai",
+      "displayName": "BITSagent Autonomous Voice AI",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/bitsagent",
+      "representativeQueries": [
+        "How low is BITSagent voice conversational latency?",
+        "Can BITSagent automate collections call negotiation and support triage?"
+      ]
+    }
+  ]
+}

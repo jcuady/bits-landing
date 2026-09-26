@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, Activity } from "lucide-react";
-import { BionisLogo } from "@/components/bionis/logo";
+import { Logo } from "@/components/ui/logo";
 import { crmNav } from "@/lib/crm/nav";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +28,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
   if (!open) return null;
 
   return (
-    <div className="bionis-dashboard fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="CRM navigation">
+    <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="CRM navigation">
       <button
         type="button"
         className="absolute inset-0 cursor-pointer bg-black/60 backdrop-blur-xs transition-opacity"
@@ -38,8 +38,8 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
       <div className="absolute inset-y-0 left-0 flex w-[min(100%,300px)] flex-col bg-background text-foreground border-r border-border shadow-2xl">
         <div className="flex h-16 items-center justify-between border-b border-border px-4">
           <div className="flex items-center gap-2">
-            <BionisLogo className="size-6 text-[#1975f2]" />
-            <span className="text-sm font-bold tracking-tight text-foreground">BITScrm · Bionis</span>
+            <Logo variant="tile" className="size-6 rounded-md shadow-xs" />
+            <span className="text-sm font-bold tracking-tight text-foreground">BITScrm · Enterprise</span>
           </div>
           <button
             type="button"
@@ -57,18 +57,18 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
               Platform HUD
             </p>
             <Link
-              href="/app/bionis"
+              href="/app/telemetry"
               onClick={onClose}
               className={cn(
                 "flex h-11 items-center justify-between rounded-xl border px-3 text-sm font-medium transition-all",
-                pathname === "/app/bionis"
+                pathname === "/app/telemetry"
                   ? "border-border bg-card text-foreground font-semibold shadow-xs"
                   : "border-transparent text-muted-foreground hover:bg-muted"
               )}
             >
               <div className="flex items-center gap-2.5">
                 <Activity className="size-4 text-[#1975f2]" />
-                <span>Bionis Vitals HUD</span>
+                <span>BITS Platform Vitals</span>
               </div>
               <span className="rounded bg-[#1975f2] px-1.5 py-0.5 text-[0.62rem] font-bold text-white">
                 Live

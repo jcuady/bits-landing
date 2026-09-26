@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 import { Sparkles, CheckCircle2, ShieldCheck, PhoneCall, Send, FileCheck, ArrowUpRight, Activity, Zap } from "lucide-react";
-import { BionisLogo } from "@/components/bionis/logo";
+import { Logo } from "@/components/ui/logo";
 
 const ctaClass =
   "group mt-8 inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-blue-700";
@@ -131,19 +131,19 @@ function CrmSpecimen() {
         </div>
       )}
 
-      {/* Outer Hardware Shell with Bionis Double-Bezel */}
+      {/* Outer Hardware Shell with BITS Double-Bezel */}
       <div className="overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-2 shadow-2xl shadow-blue-950/10 dark:border-[#222] dark:bg-[#141414]">
-        {/* Bionis Top Control Bar */}
+        {/* BITS Top Control Bar */}
         <div className="flex items-center justify-between border-b border-[#eeefe9] bg-[#fafafa] px-4 py-3 dark:border-[#222] dark:bg-[#18181b] rounded-t-2xl">
           <div className="flex items-center gap-3">
-            <BionisLogo className="size-6 text-[#1975f2]" />
+            <Logo variant="tile" className="size-6" />
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
                   BITScrm
                 </span>
                 <span className="rounded-full bg-[#1975f2]/10 px-1.5 py-0.2 text-[0.62rem] font-bold text-[#1975f2]">
-                  Bionis HUD
+                  BITS Core
                 </span>
               </div>
               <p className="text-[0.65rem] text-neutral-500">Delinquent Staging · BSP 454 Compliant</p>
@@ -219,7 +219,7 @@ function CrmSpecimen() {
             <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
               <Sparkles className="size-3.5 text-[#1975f2] shrink-0" />
               <span className="font-medium text-[0.7rem]">
-                <strong className="font-bold text-[#1975f2]">Bionis Telemetry: </strong>
+                <strong className="font-bold text-[#1975f2]">BITS Telemetry: </strong>
                 Auto-assigned 14 broken commitments to prime call window. PTP probability elevated +34%.
               </span>
             </div>
@@ -476,7 +476,7 @@ function AiSpecimen() {
           <div className="flex items-center gap-1.5 text-slate-800">
             <Sparkles className="size-3.5 text-violet-600 shrink-0" />
             <span className="font-semibold text-[0.68rem]">
-              Dispatches verified payment links within 12 seconds of phone negotiation.
+              Dispatches verified payment links instantly upon verbal phone negotiation.
             </span>
           </div>
           <span className="font-mono text-[0.62rem] font-bold text-violet-700 bg-white px-2 py-0.5 rounded border border-violet-200">

@@ -45,6 +45,17 @@ export const metadata: Metadata = {
     "white label enterprise SaaS platform",
   ],
   alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google645361b8cef93e08",
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
@@ -92,6 +103,7 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
+      "@id": `${site.url}/#organization`,
       name: site.legalName,
       legalName: "Boundless IT Solutions",
       alternateName: [
@@ -109,6 +121,11 @@ const jsonLd = {
       image: `${site.url}/og.png`,
       description: site.description,
       slogan: site.tagline,
+      areaServed: {
+        "@type": "Country",
+        name: "Philippines",
+        identifier: "PH",
+      },
       address: {
         "@type": "PostalAddress",
         addressCountry: "PH",
@@ -129,32 +146,40 @@ const jsonLd = {
         "@type": "ContactPoint",
         email: site.inquiryEmail,
         contactType: "Customer Support and Inquiries",
+        areaServed: "PH",
+        availableLanguage: ["English", "Filipino"],
       },
+      publishingPrinciples: `${site.url}/legal`,
     },
     {
       "@type": "WebSite",
+      "@id": `${site.url}/#website`,
       name: "Boundless IT Solutions (BITS)",
       alternateName: ["Boundless IT Solutions", "BITS", "BITScrm"],
       url: site.url,
+      inLanguage: "en-PH",
       description: site.description,
       publisher: {
-        "@type": "Organization",
-        name: site.legalName,
+        "@id": `${site.url}/#organization`,
       },
     },
     {
       "@type": "SoftwareApplication",
+      "@id": `${site.url}/#platform`,
       name: "BITS Enterprise Technology Platform",
       alternateName: [
         "Boundless IT Solutions Platform",
         "BITScrm Suite",
         "BITS Suite",
       ],
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
+      applicationCategory: "BusinessApplication, CRMApplication",
+      operatingSystem: "Web, Managed Cloud, Sovereign On-Premises, Linux, Windows",
+      inLanguage: "en-PH",
       description: site.description,
       url: site.url,
-      publisher: { "@type": "Organization", name: site.legalName },
+      publisher: {
+        "@id": `${site.url}/#organization`,
+      },
       brand: {
         "@type": "Brand",
         name: "Boundless IT Solutions",
@@ -175,6 +200,7 @@ const jsonLd = {
     },
   ],
 };
+
 
 export default function RootLayout({
   children,

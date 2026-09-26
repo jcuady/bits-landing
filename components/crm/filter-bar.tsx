@@ -29,19 +29,19 @@ export function FilterBar({
       )}
     >
       <label className="relative min-w-0 flex-1">
-        <span className="mb-1 block text-[0.7rem] font-semibold tracking-[0.06em] text-slateblue uppercase sm:sr-only">
+        <span className="mb-1 block text-[0.7rem] font-semibold tracking-wider text-muted-foreground uppercase sm:sr-only">
           Search
         </span>
         <span className="relative block">
           <Search
-            className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slateblue"
+            className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden
           />
           <input
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className="h-11 w-full cursor-text rounded-xl border border-linelight bg-white pr-3 pl-9 text-[0.88rem] text-ink outline-none transition focus:border-electric-600 focus:ring-4 focus:ring-electric-600/12"
+            className="h-10 w-full cursor-text rounded-xl border border-border bg-card pr-3 pl-9 text-[0.84rem] text-foreground outline-none transition focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 placeholder:text-muted-foreground"
           />
         </span>
       </label>

@@ -35,7 +35,7 @@ const SCENARIOS: Scenario[] = [
     account: "Maria Santos · ACC-10482",
     badge: "Delinquent 45 DPD",
     latency: "< 280ms",
-    customerOutcome: "Verbal commitment converted to verified GCash/Maya QR within 42 seconds, eliminating 80% manual follow-up labor.",
+    customerOutcome: "Verbal commitment converted to verified GCash/Maya QR instantly, eliminating 80% manual follow-up labor.",
     roiMetric: "₱5,000 Secured · Zero Agent Labor",
     transcript: [
       {

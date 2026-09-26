@@ -11,6 +11,7 @@ import { CrmButton } from "@/components/crm/crm-controls";
 import { useCrm } from "@/lib/crm/store";
 import { companyName, contactName, formatMoney } from "@/lib/crm/selectors";
 import type { OpportunityStage } from "@/lib/crm/types";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 const stages: OpportunityStage[] = [
   "discovery",
@@ -27,53 +28,61 @@ export default function OpportunityDetailPage() {
   if (!opp) return <EmptyState title="Opportunity not found" />;
 
   return (
-    <div>
+    <div className="space-y-6">
       <PageHeader
         title={opp.name}
         description={companyName(state, opp.companyId)}
         actions={
-          <Button asChild variant="secondary" size="sm">
-            <Link href="/app/opportunities">Back</Link>
+          <Button asChild variant="outline" size="sm" className="gap-1.5">
+            <Link href="/app/opportunities">
+              <ArrowLeft className="size-3.5" />
+              Back to deals
+            </Link>
           </Button>
         }
       />
-      <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-        <section className="rounded-xl border border-linelight bg-white p-5">
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+        <section className="rounded-xl border border-border bg-card p-6 shadow-sm dark:border-neutral-800 dark:bg-[#141414]">
           <dl className="grid gap-4 sm:grid-cols-2">
-            <Field label="Amount" value={formatMoney(opp.amount)} />
-            <Field label="Probability" value={`${opp.probability}%`} />
-            <Field label="Close date" value={opp.closeDate} />
-            <Field label="Owner" value={opp.owner} />
+            <Field label="Deal Amount (₱ PHP)" value={<span className="font-mono font-bold text-foreground dark:text-neutral-100">{formatMoney(opp.amount)}</span>} />
+            <Field label="Win Probability" value={`${opp.probability}%`} />
+            <Field label="Target Close Date" value={opp.closeDate} />
+            <Field label="Account Executive" value={opp.owner} />
             <Field
-              label="Contact"
+              label="Primary Contact"
               value={
                 <Link
                   href={`/app/contacts/${opp.contactId}`}
-                  className="cursor-pointer font-medium text-electric-600 hover:text-navy-700"
+                  className="cursor-pointer font-medium text-electric-600 hover:text-electric-500 inline-flex items-center gap-1"
                 >
                   {contactName(state, opp.contactId)}
+                  <ArrowUpRight className="size-3" />
                 </Link>
               }
             />
             <Field
-              label="Company"
+              label="Organization"
               value={
                 <Link
                   href={`/app/companies/${opp.companyId}`}
-                  className="cursor-pointer font-medium text-electric-600 hover:text-navy-700"
+                  className="cursor-pointer font-medium text-electric-600 hover:text-electric-500 inline-flex items-center gap-1"
                 >
                   {companyName(state, opp.companyId)}
+                  <ArrowUpRight className="size-3" />
                 </Link>
               }
             />
           </dl>
         </section>
-        <section className="rounded-xl border border-linelight bg-white p-5">
-          <p className="text-[0.75rem] font-semibold tracking-wide text-slateblue uppercase">Stage</p>
-          <div className="mt-2">
+
+        <section className="rounded-xl border border-border bg-card p-6 shadow-sm dark:border-neutral-800 dark:bg-[#141414]">
+          <p className="text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:text-neutral-400">
+            Pipeline Stage
+          </p>
+          <div className="mt-3">
             <StatusBadge status={opp.stage} />
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap gap-2">
             {stages.map((s) => (
               <CrmButton
                 key={s}
@@ -87,9 +96,9 @@ export default function OpportunityDetailPage() {
           </div>
           <Link
             href="/app/pipelines"
-            className="mt-5 inline-block cursor-pointer text-[0.85rem] font-semibold text-electric-600"
+            className="mt-6 inline-flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-electric-600 hover:text-electric-500"
           >
-            Open pipeline board →
+            Open Kanban Pipeline Board →
           </Link>
         </section>
       </div>
@@ -100,8 +109,12 @@ export default function OpportunityDetailPage() {
 function Field({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div>
-      <dt className="text-[0.72rem] font-semibold tracking-wide text-slateblue uppercase">{label}</dt>
-      <dd className="mt-1 text-[0.9rem] text-ink">{value}</dd>
+      <dt className="text-xs font-semibold tracking-wider text-muted-foreground uppercase dark:text-neutral-400">
+        {label}
+      </dt>
+      <dd className="mt-1 text-sm font-medium text-foreground dark:text-neutral-100">
+        {value}
+      </dd>
     </div>
   );
 }

@@ -94,7 +94,7 @@ export function ContactForm() {
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
           A BITS solutions architect will review your operational requirements and reach out
-          {state.values.email ? ` to ${state.values.email}` : ""} within one business day.
+          {state.values.email ? ` to ${state.values.email}` : ""} promptly with your custom blueprint.
         </p>
       </div>
     );
@@ -102,6 +102,9 @@ export function ContactForm() {
 
   return (
     <form
+      id="contact-consultation-form"
+      name="contact-consultation"
+      aria-label="Enterprise Blueprint Consultation Request Form"
       action={formAction}
       noValidate
       aria-busy={pending}
@@ -109,11 +112,12 @@ export function ContactForm() {
       key={`${state.values.name ?? ""}-${state.values.email ?? ""}-${Object.keys(state.errors).join(",")}-${state.formError ?? ""}`}
     >
       <div className="border-b border-slate-100 pb-5">
+
         <h3 className="text-xl font-bold text-slate-900">
-          Book an Operational Blueprint Consultation
+          Book a Free Consultation &amp; Live Demo
         </h3>
         <p className="mt-1 text-xs text-slate-500">
-          Fill out your organization&apos;s details below. We read every request and prepare a tailored architecture discussion.
+          Fill out your organization&apos;s details below. We read every request and prepare a tailored software proposal and live demo.
         </p>
       </div>
 
@@ -376,7 +380,7 @@ export function ContactForm() {
           disabled={pending}
           className="inline-flex h-11 w-full items-center justify-center rounded-full bg-blue-600 px-7 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-[0.98] disabled:opacity-60 sm:w-auto"
         >
-          {pending ? "Submitting Request…" : "Book a Consultation"}
+          {pending ? "Submitting Request…" : "Book a Free Consultation"}
         </button>
       </div>
     </form>

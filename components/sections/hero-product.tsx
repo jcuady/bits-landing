@@ -18,38 +18,38 @@ interface ModuleConfig {
 const MODULES: ModuleConfig[] = [
   {
     id: "dashboard",
-    name: "Live Dashboard",
-    badge: null,
-    valueProp: "Consolidates recovery queues, softphone telephony, and PTP commitments into a single live glass cockpit—saving supervisors 4+ hours of manual report compiling daily.",
-    benefitStat: "Saves 4 hrs/day per supervisor",
+    name: "BITScrm Dashboard",
+    badge: "Live View",
+    valueProp: "See all your team calls, customer payments, and daily sales on one simple screen.",
+    benefitStat: "Save 4 hours every day",
   },
   {
     id: "queue",
-    name: "Predictive Queue",
-    badge: "142 queued",
-    valueProp: "Bypasses busy tones, dead lines, and answering machines automatically. Agents only receive live human connections, tripling talk-time efficiency.",
-    benefitStat: "3.2× contact rate boost",
+    name: "Auto-Dialer Queue",
+    badge: "142 waiting",
+    valueProp: "Skips busy tones and voicemail. Connects your staff only when a real person picks up.",
+    benefitStat: "3.2x more customer talks",
   },
   {
     id: "ai",
-    name: "AI Voice Supervisor",
-    badge: "48 live",
-    valueProp: "Real-time speech transcription listening to 100% of floor calls. Instantly alerts supervisors if compliance rules or quiet hours are challenged.",
-    benefitStat: "100% audit coverage",
+    name: "BITSagent Voice AI",
+    badge: "24/7 Live",
+    valueProp: "Answers incoming customer questions 24/7 with a friendly, natural voice. Zero hold times.",
+    benefitStat: "Sub-300ms turn latency",
   },
   {
     id: "ptp",
-    name: "Collections & PTP",
+    name: "Payment Tracker",
     badge: "₱148k today",
-    valueProp: "Automated Promise-to-Pay tracking with instant QR Ph & InstaPay link dispatch. Reconciles collections into your core ledger in under 2 seconds.",
-    benefitStat: "Instant 2-sec reconciliation",
+    valueProp: "Send QR and bank payment links straight to customer phones by SMS. Updates your books instantly.",
+    benefitStat: "Get paid 38% faster",
   },
   {
     id: "erp",
-    name: "Accounting ERP",
-    badge: "BIR 2307",
-    valueProp: "Fully aligned with Philippine tax regulations. Automatically generates BIR Form 2307 withholding certificates and balances VAT with zero double-entry.",
-    benefitStat: "Zero manual tax errors",
+    name: "Accounting & BIR CAS",
+    badge: "Tax Ready",
+    valueProp: "Tracks sales, receipts, and government taxes automatically with zero math mistakes.",
+    benefitStat: "Audit-ready reports",
   },
 ];
 
@@ -70,24 +70,24 @@ export function HeroProduct({ className }: { className?: string }) {
 
   const handleSimulatePayment = () => {
     setReconciledCount((c) => c + 1);
-    triggerToast("InstaPay Ref #88491-TX reconciled instantly! Core ledger updated: +₱15,000.");
+    triggerToast("Payment received via QR/InstaPay! Customer balance updated: +₱15,000.");
   };
 
   const handleToggleAutoDial = () => {
     setIsAutoDialing((v) => !v);
     triggerToast(
       !isAutoDialing
-        ? "▶ Predictive auto-dialer active: Dialing at 3.2:1 pacing ratio across 8 carrier SIP trunks."
-        : "⏸ Predictive auto-dialer paused. Agents wrapping up active calls."
+        ? "▶ Auto-dialer started: Automatically connecting your staff to ready customers."
+        : "⏸ Auto-dialer paused. Staff finishing active conversations."
     );
   };
 
   const handleWhisper = () => {
-    triggerToast("Coach whisper sent to Agent Desk 14: 'Offer 2-month split terms for ACC-10482.'");
+    triggerToast("Private coach tip sent to Staff Desk 14: 'Offer 2-month installment plan.'");
   };
 
   const handleSendSms = () => {
-    triggerToast("Dynamic QR Ph payment link sent via SMS gateway to debtor (+63 917 *** 4821).");
+    triggerToast("Instant payment link sent by SMS to customer (+63 917 *** 4821).");
   };
 
   return (
@@ -108,7 +108,7 @@ export function HeroProduct({ className }: { className?: string }) {
               <span className="size-3 rounded-full bg-[#FFBD2E] ring-1 ring-[#DEA123]/50 shadow-xs" aria-hidden />
               <span className="size-3 rounded-full bg-[#27C93F] ring-1 ring-[#1AAB29]/50 shadow-xs" aria-hidden />
               <span className="ml-3 hidden text-[0.75rem] font-bold text-slate-700 sm:inline">
-                BITS Enterprise Cockpit · {activeModule.name}
+                BITS Business App · {activeModule.name}
               </span>
             </div>
 
@@ -117,8 +117,8 @@ export function HeroProduct({ className }: { className?: string }) {
               <svg className="size-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <span>Click items below to inspect real operations</span>
-              <kbd className="rounded bg-slate-100 px-1.5 py-0.5 text-[0.62rem] font-bold text-slate-500 ring-1 ring-slate-200">Interactive</kbd>
+              <span>Click any button below to see how it works</span>
+              <kbd className="rounded bg-blue-50 px-1.5 py-0.5 text-[0.62rem] font-bold text-blue-700 ring-1 ring-blue-200">Live Demo</kbd>
             </div>
 
             {/* Live Telephony Status Indicator */}
@@ -127,7 +127,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="uppercase tracking-wider">Live · 48 Agents Connected</span>
+              <span className="uppercase tracking-wider">Live · 48 Staff Connected</span>
             </div>
           </div>
 
@@ -233,14 +233,14 @@ export function HeroProduct({ className }: { className?: string }) {
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-3 sm:px-6">
                 <div>
                   <h3 className="text-[0.88rem] font-bold text-slate-900">
-                    {activeTab === "dashboard" && "Portfolio Operations & Live Collections HUD"}
-                    {activeTab === "queue" && "Predictive Auto-Dialer & Telephony Dispatch"}
-                    {activeTab === "ai" && "Real-Time AI Speech Transcription & Supervisor HUD"}
-                    {activeTab === "ptp" && "Promise-To-Pay & Dynamic QR Ph Clearing"}
-                    {activeTab === "erp" && "Tax-Ready Accounting & BIR 2307 Ledgers"}
+                    {activeTab === "dashboard" && "Live Payments & Daily Collections"}
+                    {activeTab === "queue" && "Fast Auto-Calling & Phone List"}
+                    {activeTab === "ai" && "24/7 AI Phone Assistant & Voice Helper"}
+                    {activeTab === "ptp" && "Customer Payment Schedule & QR Code"}
+                    {activeTab === "erp" && "Simple Bookkeeping & Tax Invoices"}
                   </h3>
                   <p className="text-[0.72rem] text-slate-500">
-                    Click rows or test buttons to see live workflow behavior
+                    Click the buttons on the right to test live features
                   </p>
                 </div>
 
@@ -252,7 +252,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       onClick={handleSimulatePayment}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-emerald-700 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>Test InstaPay Reconcile (+₱15,000)</span>
+                      <span>Receive Payment (+₱15,000)</span>
                     </button>
                   )}
 
@@ -265,7 +265,7 @@ export function HeroProduct({ className }: { className?: string }) {
                         isAutoDialing ? "bg-amber-600 hover:bg-amber-700" : "bg-blue-600 hover:bg-blue-700"
                       )}
                     >
-                      <span>{isAutoDialing ? "Pause Auto-Dial" : "Start Auto-Dial"}</span>
+                      <span>{isAutoDialing ? "Pause Calling" : "Start Auto-Calling"}</span>
                     </button>
                   )}
 
@@ -275,7 +275,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       onClick={handleWhisper}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-violet-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-violet-700 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>Whisper Coaching Prompt</span>
+                      <span>Send Coach Note</span>
                     </button>
                   )}
 
@@ -285,17 +285,17 @@ export function HeroProduct({ className }: { className?: string }) {
                       onClick={handleSendSms}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-blue-700 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>Dispatch QR Ph Link</span>
+                      <span>Send Payment Link via SMS</span>
                     </button>
                   )}
 
                   {activeTab === "erp" && (
                     <button
                       type="button"
-                      onClick={() => triggerToast("BIR Form 2307 auto-compiled for Q3 withholding! Ready for eFPS filing.")}
+                      onClick={() => triggerToast("Tax form BIR 2307 generated successfully! Ready for your records.")}
                       className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-slate-800 active:scale-[0.98] cursor-pointer"
                     >
-                      <span>Generate BIR 2307 PDF</span>
+                      <span>Download Tax Form PDF</span>
                     </button>
                   )}
                 </div>

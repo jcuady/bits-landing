@@ -30,11 +30,14 @@ This system architecture establishes **Boundless IT Solutions (BITS)** as an aut
 
 | URL Route | Canonical URL | Index Policy | Change Freq | Priority | Primary Structured Data |
 |:---|:---|:---:|:---:|:---:|:---|
-| `/` | `https://www.boundlessits.com/` | `index, follow` | weekly | 1.0 | `Organization`, `WebSite`, `SoftwareApplication`, `FAQPage` |
-| `/bitscrm` | `https://www.boundlessits.com/bitscrm` | `index, follow` | weekly | 0.9 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
-| `/bitsagent` | `https://www.boundlessits.com/bitsagent` | `index, follow` | weekly | 0.9 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
-| `/products/service` | `https://www.boundlessits.com/products/service` | `index, follow` | weekly | 0.9 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/` | `https://www.boundlessits.com/` | `index, follow` | daily | 1.0 | `Organization`, `WebSite`, `SoftwareApplication`, `FAQPage`, `OfferCatalog` |
+| `/bitscrm` | `https://www.boundlessits.com/bitscrm` | `index, follow` | weekly | 0.95 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/bitsagent` | `https://www.boundlessits.com/bitsagent` | `index, follow` | weekly | 0.95 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/products/crm` | `https://www.boundlessits.com/products/crm` | `index, follow` | weekly | 0.9 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/products/collections` | `https://www.boundlessits.com/products/collections` | `index, follow` | weekly | 0.9 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/products/ai-agent` | `https://www.boundlessits.com/products/ai-agent` | `index, follow` | weekly | 0.9 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/sales` | `https://www.boundlessits.com/products/sales` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
+| `/products/support` | `https://www.boundlessits.com/products/support` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/marketing` | `https://www.boundlessits.com/products/marketing` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/commerce` | `https://www.boundlessits.com/products/commerce` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/accounting` | `https://www.boundlessits.com/products/accounting` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
@@ -50,8 +53,10 @@ This system architecture establishes **Boundless IT Solutions (BITS)** as an aut
 | `/products/automotive` | `https://www.boundlessits.com/products/automotive` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/education` | `https://www.boundlessits.com/products/education` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
 | `/products/legal` | `https://www.boundlessits.com/products/legal` | `index, follow` | weekly | 0.8 | `SoftwareApplication`, `BreadcrumbList`, `FAQPage` |
-| `/legal` | `https://www.boundlessits.com/legal` | `index, follow` | yearly | 0.2 | `WebPage` |
+| `/brandbook` | `https://www.boundlessits.com/brandbook` | `index, follow` | monthly | 0.6 | `WebPage`, `BreadcrumbList` |
+| `/legal` | `https://www.boundlessits.com/legal` | `index, follow` | yearly | 0.3 | `WebPage`, `BreadcrumbList` |
 | `/login` | — | `noindex, nofollow` | — | — | Authentication Boundary |
+| `/forgot-password` | — | `noindex, nofollow` | — | — | Authentication Boundary |
 | `/app/**` | — | `noindex, nofollow` | — | — | Private CRM Application Workspace |
 | `/api/**` | — | `noindex, nofollow` | — | — | Internal Backend API Endpoints |
 
@@ -65,17 +70,82 @@ User-agent: *
 Allow: /
 Disallow: /app/
 Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
 
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: OAI-AdsBot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+User-agent: Google-Extended
+User-agent: Google-Agent
+User-agent: Googlebot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+User-agent: Bingbot
+User-agent: msnbot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+User-agent: Applebot
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+User-agent: CCBot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /login
+Disallow: /forgot-password
+
+Host: https://www.boundlessits.com
 Sitemap: https://www.boundlessits.com/sitemap.xml
 ```
 
 ### AI Crawler Compatibility
 - **Googlebot & Google-Extended:** Full access to public marketing & product documentation.
 - **Bingbot:** Full access.
-- **OAI-SearchBot & GPTBot:** Full access for OpenAI SearchGPT citations.
-- **PerplexityBot:** Full access for live Perplexity answer retrieval.
-- **ClaudeBot / Anthropic:** Full access for real-time model synthesis.
-- **Private Data Protection:** `/app/` (CRM dashboard) and `/api/` are strictly blocked via `robots.txt` + `robots: { index: false, follow: false, nocache: true }` HTTP response header metadata.
+- **OAI-SearchBot, GPTBot, ChatGPT-User:** Full access for OpenAI SearchGPT citations.
+- **PerplexityBot & Perplexity-User:** Full access for live Perplexity answer retrieval.
+- **ClaudeBot, Claude-SearchBot, Claude-User:** Full access for Anthropic Claude search synthesis.
+- **Applebot & Applebot-Extended:** Full access for Apple Intelligence web discovery.
+- **Private Data Protection:** `/app/` (CRM dashboard), `/api/`, `/login`, and `/forgot-password` are strictly blocked via `robots.txt` + `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet` HTTP response headers.
+
 
 ---
 

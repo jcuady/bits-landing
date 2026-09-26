@@ -44,3 +44,10 @@ master prompt.md
 .vercel
 .env*
 !.env.example
+
+# Python / Playwright / SEO runtime
+.venv/
+ms-playwright/
+__pycache__/
+*.pyc
+*.pyo

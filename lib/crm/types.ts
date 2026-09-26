@@ -151,13 +151,25 @@ export type Template = {
   usage30d: number;
 };
 
+export type CrmRole = "Admin" | "Manager" | "Rep" | "Marketing";
+
 export type TeamMember = {
   id: string;
   name: string;
   email: string;
-  role: "Admin" | "Manager" | "Rep" | "Marketing";
+  role: CrmRole;
   openDeals: number;
   closedWon30d: number;
+};
+
+export type NotificationItem = {
+  id: string;
+  title: string;
+  desc: string;
+  time: string;
+  href: string;
+  urgent?: boolean;
+  read?: boolean;
 };
 
 export type Activity = {

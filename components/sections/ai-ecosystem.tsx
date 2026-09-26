@@ -32,7 +32,7 @@ const INITIAL_MODULES: ModuleState[] = [
     category: "Foundation",
     required: true,
     enabled: true,
-    leadTime: "1-2 Weeks",
+    leadTime: "Turnkey Core",
     desc: "Portfolio tiering (1-30, 31-60, 60+ DPD), debtor work queues, PTP tracking, and audit reporting.",
   },
   {
@@ -41,7 +41,7 @@ const INITIAL_MODULES: ModuleState[] = [
     category: "Communication",
     required: false,
     enabled: true,
-    leadTime: "3-5 Days",
+    leadTime: "Instant API",
     desc: "Integrated telco aggregator APIs for tokenized GCash/Maya settlement SMS & payment links.",
   },
   {
@@ -50,7 +50,7 @@ const INITIAL_MODULES: ModuleState[] = [
     category: "Supervision",
     required: false,
     enabled: true,
-    leadTime: "3-5 Days",
+    leadTime: "Instant Setup",
     desc: "Configurable agent evaluations, call sampling worklists, and automated BSP script compliance.",
   },
   {
@@ -59,7 +59,7 @@ const INITIAL_MODULES: ModuleState[] = [
     category: "Telephony",
     required: false,
     enabled: false,
-    leadTime: "1 Week",
+    leadTime: "Guided Setup",
     desc: "Carrier-grade browser softphone, AMD answering machine detection, and supervisor whisper barge-in.",
   },
   {
@@ -68,7 +68,7 @@ const INITIAL_MODULES: ModuleState[] = [
     category: "Autonomous AI",
     required: false,
     enabled: false,
-    leadTime: "2 Weeks",
+    leadTime: "On-Demand",
     desc: "Sub-300ms conversational turn-taking, Taglish/English dialect support, and automated settlement scheduling.",
   },
 ];
@@ -224,7 +224,7 @@ export function AiEcosystem() {
                     <thead>
                       <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-semibold tracking-widest text-slate-500 uppercase">
                         <th scope="col" className="px-4 py-3">Module Component</th>
-                        <th scope="col" className="hidden px-4 py-3 sm:table-cell">Rollout</th>
+                        <th scope="col" className="hidden px-4 py-3 sm:table-cell">Activation</th>
                         <th scope="col" className="px-4 py-3 text-right">Toggle State</th>
                       </tr>
                     </thead>

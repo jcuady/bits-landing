@@ -58,17 +58,17 @@ export function DeploymentModels() {
             <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-4 py-1.5 shadow-2xs backdrop-blur-md">
               <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Multi-Product Deployment &amp; Sovereign Architecture
+                Flexible Hosting Options
               </span>
             </div>
             <h2 className="text-display font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              Cloud-Hosted or On-Premises:{" "}
+              Cloud-Hosted or Your Own Office Servers:{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                Deploy &amp; Combine on Your Terms
+                Run BITS Your Way
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-3xl text-pretty text-slate-600 font-normal">
-              Every engine in our 18-product catalog can be deployed individually or combined into a unified operational ecosystem. Choose our turnkey <strong className="text-slate-900 font-bold">Managed Cloud</strong> for 1–2 week zero-overhead rollout, or run <strong className="text-slate-900 font-bold">Sovereign On-Premises</strong> on your existing bare-metal servers with zero external data exposure and complete CapEx ROI.
+              Every engine in our 18-product catalog can be run in our secure <strong className="text-slate-900 font-bold">Managed Cloud</strong> with zero hardware needed, or installed directly on <strong className="text-slate-900 font-bold">Your Own Office Servers</strong> for complete privacy and one-time setup ownership.
             </p>
           </Reveal>
 
@@ -86,7 +86,7 @@ export function DeploymentModels() {
                 )}
               >
                 <Cloud className={cn("size-4", selectedModel === "cloud" ? "text-white" : "text-slate-500")} />
-                <span>Managed Cloud (1–2 Weeks)</span>
+                <span>Managed Cloud</span>
                 <span
                   className={cn(
                     "rounded-full px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-wider",
@@ -110,7 +110,7 @@ export function DeploymentModels() {
                 )}
               >
                 <Server className={cn("size-4", selectedModel === "on-prem" ? "text-white" : "text-slate-500")} />
-                <span>On-Premises Bare-Metal & Sovereign</span>
+                <span>Your Own Office Servers</span>
               </button>
             </div>
           </Reveal>
@@ -145,7 +145,7 @@ export function DeploymentModels() {
                   {/* Operational Advantages List */}
                   <div className="mt-6 border-t border-slate-100 pt-5">
                     <h4 className="text-[0.7rem] font-bold uppercase tracking-wider text-blue-700 font-mono">
-                      Key Architectural Advantages
+                      Key Operational Benefits
                     </h4>
                     <ul className="mt-3 space-y-2.5">
                       {activeData.advantages.map((adv) => (
@@ -168,7 +168,7 @@ export function DeploymentModels() {
                   <div>
                     <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                       <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
-                        Technical Delivery Specs
+                        System Overview
                       </span>
                       <span className="font-mono text-[0.65rem] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                         Production Ready
@@ -201,7 +201,7 @@ export function DeploymentModels() {
                       <div className="mt-2.5 space-y-2 text-xs">
                         <div>
                           <p className="font-bold text-slate-900 text-[0.72rem]">
-                            Setup & Implementation Scope:
+                            Setup & Implementation:
                           </p>
                           <p className="mt-0.5 text-[0.7rem] text-slate-600 leading-relaxed">
                             {activeData.financialModel.setupDetails}
@@ -209,7 +209,7 @@ export function DeploymentModels() {
                         </div>
                         <div className="border-t border-blue-200/80 pt-2">
                           <p className="font-bold text-slate-900 text-[0.72rem]">
-                            Ongoing Operational Model:
+                            Ongoing Support & Updates:
                           </p>
                           <p className="mt-0.5 text-[0.7rem] text-slate-600 leading-relaxed">
                             {activeData.financialModel.ongoingDetails}
@@ -232,8 +232,8 @@ export function DeploymentModels() {
                       >
                         <span>
                           {selectedModel === "on-prem"
-                            ? "Request On-Prem Hardware Scoping"
-                            : "Configure Cloud Solution"}
+                            ? "Plan Your Office Server Setup"
+                            : "Configure Your Cloud Setup"}
                         </span>
                         <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                       </Link>
@@ -315,16 +315,16 @@ export function DeploymentModels() {
                     <span>Continuous Evolution Guarantee</span>
                   </div>
                   <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-                    Continuous System Improvements & Proactive Security
+                    Continuous Improvements &amp; Automatic Security
                   </h3>
                   <p className="mt-1.5 max-w-2xl text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    Deployments never go stale. Both Managed Cloud and Sovereign On-Premises environments receive continuous architectural and security upgrades as newer security standards and technologies emerge.
+                    Your software always stays fresh. Whether on our cloud or your office servers, BITS receives continuous performance and security upgrades with zero headaches.
                   </p>
                 </div>
                 <div className="shrink-0">
                   <div className="rounded-2xl border border-blue-200 bg-white px-4 py-2.5 text-left sm:text-center shadow-2xs">
-                    <span className="block text-[0.65rem] font-bold uppercase tracking-wider text-slate-400">Policy Standard</span>
-                    <span className="font-mono text-sm font-extrabold text-blue-600">Active Lifecycle Evolution</span>
+                    <span className="block text-[0.65rem] font-bold uppercase tracking-wider text-slate-400">Included Support</span>
+                    <span className="font-mono text-sm font-extrabold text-blue-600">Active Lifecycle Updates</span>
                   </div>
                 </div>
               </div>
@@ -337,11 +337,11 @@ export function DeploymentModels() {
                       <ShieldCheck className="size-4" />
                     </div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
-                      Continuous Security Updates
+                      Automatic Security Updates
                     </h4>
                   </div>
                   <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
-                    Proactive zero-day CVE patching, automated encryption cipher updates, and statutory compliance hardening aligned with BSP Circulars 454/857, NPC RA 10173, and ISO 27001 standards.
+                    Regular security patches, automatic data protection, and strict privacy controls to keep your customer records safe at all times.
                   </p>
                   <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.65rem] font-semibold text-slate-700">
                     <Check className="size-3 text-emerald-600" /> Proactively patched
@@ -354,11 +354,11 @@ export function DeploymentModels() {
                       <Zap className="size-4" />
                     </div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
-                      Emerging Tech & AI Evolution
+                      Modern AI &amp; Speed Upgrades
                     </h4>
                   </div>
                   <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
-                    As newer LLM models, lower-latency voice synthesis pipelines (&lt;150ms), and accelerated SIP codecs enter production, BITS updates system engines to deliver immediate speed and cost gains.
+                    As newer voice tools, faster speech processing, and better calling technology emerge, BITS automatically updates your system so you stay ahead.
                   </p>
                   <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.65rem] font-semibold text-slate-700">
                     <Check className="size-3 text-emerald-600" /> Continuous engine upgrades
@@ -371,11 +371,11 @@ export function DeploymentModels() {
                       <Sliders className="size-4" />
                     </div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
-                      Bespoke Requests on Demand
+                      Custom Features On Demand
                     </h4>
                   </div>
                   <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
-                    Require customized operational workflows, proprietary internal core banking adapters, or specialized reporting? Bespoke engineering is available upon request (scoping and cost vary per requirement).
+                    Need custom reports, special approval steps, or a direct link to your existing software? Our team builds tailored features for your exact business.
                   </p>
                   <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-[0.65rem] font-semibold text-blue-700">
                     <span>Tailored scope & engineering</span>
@@ -394,13 +394,13 @@ export function DeploymentModels() {
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-1 font-mono text-[0.72rem] font-bold text-blue-700">
                   <Terminal className="size-3.5 text-blue-600" />
-                  <span>INFRASTRUCTURE REQUIREMENT SCOPING</span>
+                  <span>OFFICE SERVER SETUP</span>
                 </div>
                 <h3 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-                  Have Existing Servers? We Engineer the Full Sizing & Migration
+                  Already Have Computers or Servers? We Set Up Everything For You
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Don&apos;t discard existing IT investments. Our systems engineers audit your on-prem Dell, HPE, Supermicro, or virtualization clusters and dimension exact CPU cores, ECC RAM, IOPS, and SIP bandwidth down to the hardware level.
+                  Keep using your existing equipment. Our technical team checks your current office computers or server room and sets up BITS so you don&apos;t have to buy expensive new hardware.
                 </p>
               </div>
 
@@ -690,7 +690,7 @@ export function DeploymentModels() {
                 </h4>
               </div>
               <p className="text-xs text-slate-500 font-medium">
-                Standard lead time: 5 to 14 business days from audit to go-live
+                Guided step-by-step setup from initial review to live operations
               </p>
             </div>
 

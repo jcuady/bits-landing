@@ -29,11 +29,10 @@ export function Security() {
                 </span>
               </div>
               <h2 className="text-h2 text-balance font-bold leading-[1.08] text-slate-900">
-                Built for Sensitive Business Operations.
+                Bank-Grade Security for Sensitive Business Data.
               </h2>
               <p className="text-lede mt-5 max-w-[48ch] text-pretty text-slate-600">
-                Financial and BPO operations handle strictly regulated debtor records and confidential transactions.
-                BITS is engineered with defense-in-depth isolation, granular permissions, and statutory audit logging.
+                Your customer records, financial transactions, and phone calls are protected with strict user permissions, private data separation, and tamper-proof activity logs.
               </p>
 
               {/* Regulatory Alignment Badges */}

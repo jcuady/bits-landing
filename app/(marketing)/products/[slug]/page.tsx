@@ -537,8 +537,8 @@ function getBespokeFaqQuestion(id: string, name: string) {
       };
     default:
       return {
-        q: `How long does an operational onboarding rollout take for ${name}?`,
-        a: `Standard scoped rollouts take between 1 to 3 weeks depending on historical data migration complexity, integration touchpoints, and custom workflow rules. We handle initial data import, schema configuration, and staff training.`,
+        q: `How does onboarding and setup work for ${name}?`,
+        a: `We provide a fast, guided rollout tailored to your team. Our technical engineers handle data import, workflow configuration, and complete team training so you can start using ${name} smoothly with zero disruption.`,
       };
   }
 }

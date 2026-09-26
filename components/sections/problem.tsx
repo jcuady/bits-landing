@@ -11,18 +11,18 @@ import { Sparkles, CheckCircle2, Zap, X } from "lucide-react";
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
 const pains = [
-  "Portfolio records split across disparate spreadsheets and legacy tools",
-  "Agents dialing manually with low right-party connect rates",
-  "Promises-to-pay lost in handoffs — leading to unrecovered revenue",
-  "Call recordings and QA scorecards isolated from the account timeline",
+  "Customer records split across messy spreadsheets and outdated tools",
+  "Agents dialing numbers manually with too many unanswered calls",
+  "Payment promises lost during staff handoffs",
+  "Call recordings and review scores isolated from customer history",
 ] as const;
 
 const scattered = [
-  { name: "Spreadsheets", pain: "Manual copy-pasting, formula corruption, zero audit trail" },
-  { name: "Legacy CRM", pain: "Slow page loads, disconnected from actual dialer" },
-  { name: "Separate Dialer", pain: "High dead air, no live supervisor whisper barge-in" },
-  { name: "Payment CSVs", pain: "48-hour delay reconciling bank deposits against PTPs" },
-  { name: "QA Sheets", pain: "Paper scorecards never tied to live audio recordings" },
+  { name: "Spreadsheets", pain: "Manual copy-pasting, formula errors, zero activity history" },
+  { name: "Legacy CRM", pain: "Slow loading screens, completely disconnected from your phone system" },
+  { name: "Separate Dialer", pain: "Too much dead air, no live manager whisper or call assist" },
+  { name: "Payment CSVs", pain: "Slow manual delays matching bank deposits against customer promises" },
+  { name: "QA Sheets", pain: "Paper review sheets never linked to actual call audio" },
 ] as const;
 
 const floor = [
@@ -111,16 +111,16 @@ export function Problem() {
               <div className="mb-6 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-4 py-1.5 backdrop-blur-md">
                 <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
                 <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                  The Recovery Gap
+                  The Operational Bottleneck
                 </span>
               </div>
               <h2 className="text-h2 text-balance font-bold leading-[1.08] text-slate-900">
-                Fragmented tools quietly drain recovery velocity.
+                Scattered spreadsheets and apps waste your team&apos;s time.
               </h2>
               <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slate-600">
-                When customer portfolios, dialers, and payment promises are spread
-                across multiple disconnected systems, promises slip through the cracks,
-                disputes drag on, and floor visibility vanishes.
+                When customer records, phone dialers, and payment notes are trapped
+                in separate tools, payments get missed, disputes drag on,
+                and managers lose visibility.
               </p>
             </Reveal>
 

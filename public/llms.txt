@@ -1,0 +1,59 @@
+# Boundless IT Solutions (BITS)
+
+> Boundless IT Solutions (BITS) engineers custom enterprise operations software, the BITScrm debt recovery core, autonomous voice & omnichannel AI agents (BITSagent), and Philippine compliance-ready ERP systems tailored to real-world workflows.
+
+## Core Platform & Flagship Products
+
+- [BITScrm Collections Platform](https://www.boundlessits.com/bitscrm): Mission-critical debt recovery CRM with WebRTC softphones, automated Promise-to-Pay (PTP) scheduling, aging bucket staging, supervisory HUD (live listen, whisper, barge), and BSP Circulars 454/857 compliance.
+- [BITSagent Autonomous AI Operations](https://www.boundlessits.com/bitsagent): Sub-300ms ultra-realistic conversational voice, SMS, and email agents for automated collections negotiation, customer support triage, appointment booking, and enterprise RAG grounding.
+- [BITS Enterprise Platform](https://www.boundlessits.com/): Unified architecture providing modular ERP, HRMS, and workflow automation engines for BPOs, banks, and enterprises.
+
+## All 18 Enterprise Software Products
+
+### CRM & Revenue Cloud
+- [BITScrm Collections](https://www.boundlessits.com/bitscrm): High-volume debt recovery, WebRTC auto-dialer, and supervisory HUD.
+- [BITScrm Sales](https://www.boundlessits.com/products/sales): Deal Kanban pipeline, CPQ, territory routing, and predictive win scoring.
+- [BITScrm Support](https://www.boundlessits.com/products/support): Omnichannel ticket inbox, real-time SLA countdown HUD, and CSAT telemetry.
+- [BITScrm Marketing](https://www.boundlessits.com/products/marketing): Multi-channel customer journeys, automated drip sequences, and attribution analytics.
+- [BITScrm Commerce](https://www.boundlessits.com/products/commerce): Recurring subscriptions, tokenized PCI-DSS payments, and automated dunning.
+- [CRM Architecture Hub](https://www.boundlessits.com/products/crm): Unified overview of all four commercial and debt recovery CRM engines.
+
+### Enterprise Financials & Workforce Cloud
+- [BITS Accounting & ERP](https://www.boundlessits.com/products/accounting): General Ledger, AP/AR 3-way match, multi-entity consolidation, and BIR CAS compliance.
+- [BITS HRMS](https://www.boundlessits.com/products/hrms): Multi-shift rosters, biometric clock-in, leave approval matrix, and personnel records.
+- [BITS Payroll](https://www.boundlessits.com/products/payroll): TRAIN Law tax tables, SSS, PhilHealth, Pag-IBIG computations, and direct bank batch disbursement feeds.
+
+### Operations, Supply Chain & Field Services
+- [BITS Construction & Project Tracker](https://www.boundlessits.com/products/construction): Jobsite progress, Gantt milestones, blueprint vault, and inventory interconnect.
+- [BITS Inventory Engine](https://www.boundlessits.com/products/inventory): Multi-warehouse allocation, par-level triggers, barcode/RFID scanning, and lot tracking.
+- [BITS Logistics Cloud](https://www.boundlessits.com/products/logistics): AI multi-stop route optimization, real-time GPS tracking, driver app, and ePOD signatures.
+
+### Sports, Venues & Operational Queues
+- [BITS Pickleball & Court OS](https://www.boundlessits.com/products/pickleball): Automated paddle rack rotations, match queues, court booking, and overhead TV displays.
+- [BITS Sports Arena & Venue Hub](https://www.boundlessits.com/products/sports-hub): Multi-sport facility booking, tournament ladders, and live TV scoreboards.
+- [BITS Booking System](https://www.boundlessits.com/products/booking): Online appointments, capacity management, and escrow deposit payments.
+- [BITS Smart Queuing](https://www.boundlessits.com/products/queuing): Virtual queuing, QR tickets, SMS chime alerts, and teller window HUD.
+
+### AI Infrastructure, Hardware & Reseller Licensing
+- [BITS RAG Enterprise Knowledge Engine](https://www.boundlessits.com/products/rag-engine): Vectorized RAG grounding in proprietary PDFs, databases, and SOP manuals with zero hallucination.
+- [BITS Smart NFC Dynamic Business Card](https://www.boundlessits.com/products/nfc-card): Dynamic contactless identity cards with real-time analytics.
+- [BITS White-Label Enterprise Platform](https://www.boundlessits.com/products/white-label): 100% white-label rebranding across all 18 products with custom domain, client styling, and zero BITS attribution.
+
+## Key Technical Specifications & Compliance
+
+- **Statutory Governance (Philippines)**: Bangko Sentral ng Pilipinas (BSP) Circulars 454 & 857 (Collections Ethics), National Privacy Commission (NPC) RA 10173 Data Privacy Act (DPA 2012), BIR CAS (Computerized Accounting System) ready, and DOLE / TRAIN Law payroll automation.
+- **Enterprise Security**: Role-Based Access Control (RBAC), multi-tenant isolation, immutable WORM audit logs, end-to-end TLS 1.3 encryption, HIPAA-aligned audio redaction, and SOC 2 Type II architectural controls.
+- **Telephony & Communications**: Browser-native WebRTC SIP softphone, Asterisk / FreePBX PBX integration, automated call recording, real-time transcription, and omnichannel routing (WhatsApp, Viber, SMS, Email).
+- **Deployment Architecture**: Dual deployment models — Sovereign Cloud (multi-AZ managed cloud) or Air-Gapped / On-Premises bare metal with zero vendor lock-in.
+
+## Documentation & Deep Context
+
+- [Full Architectural & Entity Dossier](https://www.boundlessits.com/llms-full.txt): Comprehensive technical specifications, compliance matrices, API contracts, and module breakdown for AI models and search systems.
+- [Brand Identity & Guidelines](https://www.boundlessits.com/brandbook): Official design tokens, typography, brand marks, and voice guidelines.
+- [Legal & Privacy Policy](https://www.boundlessits.com/legal): Terms of service, data processing agreements, and security compliance statements.
+
+## Contact & Consultation
+
+- **Inquiries & Consultation**: bits_inquiries@boundlessits.com
+- **Headquarters**: Metro Manila, National Capital Region (NCR), Philippines
+- **Website**: https://www.boundlessits.com

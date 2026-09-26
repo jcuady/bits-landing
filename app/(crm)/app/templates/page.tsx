@@ -6,23 +6,45 @@ import { FilterBar } from "@/components/crm/filter-bar";
 import { StatusBadge } from "@/components/crm/status-badge";
 import { EmptyState } from "@/components/crm/empty-state";
 import { CrmButton, StatusFilter } from "@/components/crm/crm-controls";
+import { CrmModal } from "@/components/crm/crm-modal";
 import { useCrm } from "@/lib/crm/store";
 import type { Template } from "@/lib/crm/types";
+import { Mail, MessageSquare, Copy, Check } from "lucide-react";
+import { useToast } from "@/components/crm/crm-toast";
 
 export default function TemplatesPage() {
   const { state } = useCrm();
+  const { showToast } = useToast();
   const [q, setQ] = React.useState("");
   const [channel, setChannel] = React.useState("all");
   const [preview, setPreview] = React.useState<Template | null>(null);
+  const [copied, setCopied] = React.useState(false);
+
   const rows = state.templates.filter((t) => {
     const hay = `${t.name} ${t.category}`.toLowerCase();
     return hay.includes(q.toLowerCase()) && (channel === "all" || t.channel === channel);
   });
 
+  const copyTemplateContent = () => {
+    if (!preview) return;
+    const body =
+      preview.channel === "sms"
+        ? `Hi {{first_name}} — reminder from BITS: your next step is ready. Reply STOP to opt out.`
+        : `Subject: Following up on {{company}}\n\nHi {{first_name}},\n\nThanks for the conversation. Attached is a short outline of how BITS can support your team this quarter.\n\nBest,\n{{sender_name}}`;
+    navigator.clipboard.writeText(body);
+    setCopied(true);
+    showToast("Template text copied to clipboard.");
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div>
-      <PageHeader title="Templates" description="Email and SMS message templates." />
-      <FilterBar value={q} onChange={setQ} placeholder="Search templates…">
+    <div className="space-y-6">
+      <PageHeader
+        title="Outreach & Collections Templates"
+        description="Standardized omnichannel communication templates with dynamic merge parameters."
+      />
+
+      <FilterBar value={q} onChange={setQ} placeholder="Search templates by title or category…">
         <StatusFilter
           label="Channel"
           value={channel}
@@ -34,76 +56,112 @@ export default function TemplatesPage() {
           ]}
         />
       </FilterBar>
+
       {rows.length === 0 ? (
-        <EmptyState title="No templates match" />
+        <EmptyState
+          title="No templates match"
+          description="Try selecting a different channel or clear your search query."
+        />
       ) : (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rows.map((t) => (
-            <li key={t.id} className="flex flex-col rounded-xl border border-linelight bg-white p-4">
-              <div className="flex items-start justify-between gap-2">
-                <h2 className="text-[0.92rem] font-semibold text-ink">{t.name}</h2>
-                <StatusBadge status={t.channel} label={t.channel.toUpperCase()} />
+            <li
+              key={t.id}
+              className="flex flex-col justify-between rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-electric-600/40 dark:border-neutral-800 dark:bg-[#141414]"
+            >
+              <div>
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    {t.channel === "email" ? (
+                      <Mail className="size-4 text-electric-600" />
+                    ) : (
+                      <MessageSquare className="size-4 text-emerald-600" />
+                    )}
+                    <h2 className="text-sm font-semibold text-foreground dark:text-neutral-100">
+                      {t.name}
+                    </h2>
+                  </div>
+                  <StatusBadge status={t.channel} label={t.channel.toUpperCase()} />
+                </div>
+
+                <p className="mt-2 text-xs font-medium text-muted-foreground dark:text-neutral-400">
+                  Category: <span className="text-foreground dark:text-neutral-200">{t.category}</span>
+                </p>
+
+                <p className="mt-3 text-xs text-muted-foreground dark:text-neutral-400">
+                  Last updated {t.updatedAt} · Dispatched{" "}
+                  <strong className="font-mono text-foreground dark:text-neutral-200">{t.usage30d}×</strong> this month
+                </p>
               </div>
-              <p className="mt-2 text-[0.8rem] text-slateblue">{t.category}</p>
-              <p className="mt-3 flex-1 text-[0.78rem] text-slateblue">
-                Updated {t.updatedAt} · Used {t.usage30d}× in 30d
-              </p>
-              <CrmButton className="mt-4 w-full" onClick={() => setPreview(t)}>
-                Preview
-              </CrmButton>
+
+              <div className="mt-5">
+                <CrmButton
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => setPreview(t)}
+                >
+                  Inspect Template
+                </CrmButton>
+              </div>
             </li>
           ))}
         </ul>
       )}
 
+      {/* Accessible Preview Modal */}
       {preview ? (
-        <div
-          className="fixed inset-0 z-50 flex cursor-pointer items-end justify-center bg-navy-900/40 p-4 sm:items-center"
-          role="presentation"
-          onClick={() => setPreview(null)}
-          onKeyDown={(e) => e.key === "Escape" && setPreview(null)}
+        <CrmModal
+          isOpen={Boolean(preview)}
+          onClose={() => setPreview(null)}
+          title={preview.name}
+          description={`${preview.channel.toUpperCase()} Dispatch Template · Category: ${preview.category}`}
         >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Preview ${preview.name}`}
-            className="w-full max-w-lg cursor-default rounded-2xl border border-linelight bg-white p-5 shadow-lift"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <h3 className="text-[1.05rem] font-bold text-ink">{preview.name}</h3>
-                <p className="mt-1 text-[0.8rem] text-slateblue">
-                  {preview.channel.toUpperCase()} · {preview.category}
-                </p>
-              </div>
-              <CrmButton onClick={() => setPreview(null)}>Close</CrmButton>
-            </div>
-            <div className="mt-4 rounded-xl border border-linelight bg-cloud/70 p-4 text-[0.9rem] leading-relaxed text-ink">
+          <div className="space-y-4">
+            <div className="rounded-xl border border-border bg-muted/40 p-4 text-xs font-mono leading-relaxed text-foreground dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-100">
               {preview.channel === "sms" ? (
                 <p>
                   Hi {"{{first_name}}"} — reminder from BITS: your next step is ready. Reply STOP to opt out.
                 </p>
               ) : (
-                <>
-                  <p className="font-semibold">Subject: Following up on {"{{company}}"}</p>
-                  <p className="mt-3">
+                <div className="space-y-3 font-sans">
+                  <p className="font-semibold text-sm">Subject: Following up on {"{{company}}"}</p>
+                  <p className="text-xs text-muted-foreground leading-normal">
                     Hi {"{{first_name}}"},
                     <br />
                     <br />
-                    Thanks for the conversation. Attached is a short outline of how BITS can support your team
-                    this quarter.
+                    Thanks for the conversation. Attached is a short outline of how BITS can support your revops, collections, and AI workflow automation this quarter.
                     <br />
                     <br />
-                    Best,
+                    Best regards,
                     <br />
                     {"{{sender_name}}"}
+                    <br />
+                    <span className="text-electric-600 font-medium">Boundless IT Solutions (BITS)</span>
                   </p>
-                </>
+                </div>
               )}
             </div>
+
+            <div className="flex justify-between items-center pt-2">
+              <span className="text-xs text-muted-foreground dark:text-neutral-400">
+                Variables: <code className="text-electric-600">{"{{first_name}}"}</code>, <code className="text-electric-600">{"{{company}}"}</code>
+              </span>
+              <div className="flex gap-2">
+                <CrmButton
+                  variant="outline"
+                  onClick={copyTemplateContent}
+                  className="flex items-center gap-1.5"
+                >
+                  {copied ? <Check className="size-3.5 text-emerald-500" /> : <Copy className="size-3.5" />}
+                  {copied ? "Copied" : "Copy Content"}
+                </CrmButton>
+                <CrmButton variant="primary" onClick={() => setPreview(null)}>
+                  Done
+                </CrmButton>
+              </div>
+            </div>
           </div>
-        </div>
+        </CrmModal>
       ) : null}
     </div>
   );

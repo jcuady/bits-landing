@@ -96,6 +96,45 @@ const breadcrumbSchema = {
   ],
 };
 
+const bitsagentFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is BITSagent's conversational voice turn latency?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "BITSagent operates with sub-300ms end-to-end turn latency by chaining streaming speech recognition, optimized LLM reasoning, and streaming neural text-to-speech with natural interruption handling.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does BITSagent support Tagalog, English, and Taglish for Philippine operations?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, BITSagent natively understands and speaks natural Philippine English, conversational Tagalog, and bilingual Taglish commonly used in domestic contact center operations.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can BITSagent negotiate debt recovery settlements and Promise-to-Pay (PTP) schedules?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, BITSagent operates within supervisory guardrails to explain account obligations, present approved payment restructuring terms, capture PTP commitments, and trigger real-time SMS payment confirmations.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can BITSagent deploy on-premises with local PBX and SIP telephony?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, BITSagent supports sovereign on-premises deployment, connecting directly via SIP trunking to Asterisk, FreePBX, or legacy enterprise telephony systems without external audio egress.",
+      },
+    },
+  ],
+};
+
 export default function BitsAgentPage() {
   return (
     <main id="content">
@@ -107,7 +146,12 @@ export default function BitsAgentPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bitsagentFaqSchema) }}
+      />
       <BitsAgentPageContent />
     </main>
   );
 }
+

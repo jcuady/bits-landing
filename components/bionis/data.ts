@@ -65,13 +65,13 @@ export const navigationGroups: NavigationGroup[] = [
   },
 ]
 
-const currentUserName = 'Vansh Patel'
+const currentUserName = 'Malcolm Cuady'
 
 export const currentUser = {
   name: currentUserName,
-  email: 'vansh@bionis.com',
-  initials: 'VP',
-  age: 34,
+  email: 'demo@boundlessitsolutions.com',
+  initials: 'MC',
+  age: 32,
   planStatus: 'Active plan' as const,
   avatar: `https://api.dicebear.com/9.x/avataaars/svg?seed=${encodeURIComponent(currentUserName)}`,
 }

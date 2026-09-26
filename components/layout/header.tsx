@@ -258,7 +258,7 @@ export function Header() {
                               const isItemActive = pathname === item.href;
                               return (
                                 <Link
-                                  key={item.href}
+                                  key={`${section.id}-${item.title}`}
                                   href={item.href}
                                   onClick={() => setActiveDropdown(null)}
                                   className={cn(

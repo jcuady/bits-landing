@@ -30,8 +30,8 @@ export function TheDifference() {
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
-              Most SaaS forces high-volume operations into rigid templates, arbitrary fields, and generic worklists.
-              BITS engineers technology around your exact floor hierarchy, compliance policies, and operational DNA.
+              Most software forces your business into rigid forms, confusing menus, and generic screens.
+              BITS builds technology directly around how your team and managers actually work.
             </p>
           </Reveal>
         </div>
@@ -101,10 +101,14 @@ export function TheDifference() {
           </div>
           <Link
             href="/#contact"
-            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
+            className="group flex h-12 shrink-0 items-center justify-between gap-3.5 rounded-full bg-blue-600 pl-6 pr-2.5 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
           >
             <span>Book a Consultation</span>
-            <ArrowRight className="size-3.5" />
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <svg className="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </span>
           </Link>
         </div>
       </Container>

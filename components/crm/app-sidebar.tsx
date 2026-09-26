@@ -3,20 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BionisLogo } from "@/components/bionis/logo";
+import { Logo } from "@/components/ui/logo";
 import { crmNav } from "@/lib/crm/nav";
 import { cn } from "@/lib/utils";
 import {
   Sparkles,
   Activity,
-  ChevronRight,
-  LogOut,
-  Shield,
-  CreditCard,
-  User,
-  Zap,
 } from "lucide-react";
-import { logoutAction } from "@/app/actions/auth";
 
 export function AppSidebar({ className }: { className?: string }) {
   const pathname = usePathname();
@@ -24,23 +17,23 @@ export function AppSidebar({ className }: { className?: string }) {
   return (
     <aside
       className={cn(
-        "bionis-dashboard flex h-full w-[260px] shrink-0 flex-col border-r border-[#eeefe9] bg-[#fafafa] dark:border-[#222] dark:bg-[#111] transition-all",
+        "flex h-full w-[260px] shrink-0 flex-col border-r border-border bg-card dark:border-[#222] dark:bg-[#111] transition-all",
         className
       )}
     >
       {/* Workspace / Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-[#eeefe9] dark:border-[#222] px-4">
+      <div className="flex h-16 items-center justify-between border-b border-border dark:border-[#222] px-4">
         <Link
           href="/app/dashboard"
           className="flex items-center gap-2.5 rounded-lg py-1 transition-opacity hover:opacity-90"
-          aria-label="BITScrm Bionis Dashboard"
+          aria-label="BITScrm Enterprise Dashboard"
         >
-          <BionisLogo className="size-7 shrink-0" />
+          <Logo variant="tile" className="size-7 shrink-0 rounded-lg shadow-xs" />
           <div className="flex flex-col">
             <span className="text-[0.92rem] font-bold tracking-tight text-foreground flex items-center gap-1.5">
               BITScrm
               <span className="rounded-full bg-[#1975f2]/10 px-1.5 py-0.2 text-[0.62rem] font-semibold text-[#1975f2]">
-                Bionis
+                Enterprise
               </span>
             </span>
             <span className="text-[0.68rem] text-muted-foreground">
@@ -52,24 +45,24 @@ export function AppSidebar({ className }: { className?: string }) {
 
       {/* Main Navigation */}
       <nav aria-label="CRM" className="flex-1 overflow-y-auto px-3 py-4 space-y-5 no-scrollbar">
-        {/* Quick Bionis Telemetry Highlight Link */}
+        {/* Quick BITS Telemetry Highlight Link */}
         <div>
           <p className="mb-2 px-2 text-[0.66rem] font-semibold tracking-wider text-muted-foreground uppercase">
             Platform HUD
           </p>
           <Link
-            href="/app/bionis"
-            aria-current={pathname === "/app/bionis" ? "page" : undefined}
+            href="/app/telemetry"
+            aria-current={pathname === "/app/telemetry" ? "page" : undefined}
             className={cn(
               "flex h-11 cursor-pointer items-center justify-between rounded-xl border px-3 text-[0.85rem] font-medium transition-all active:scale-[0.98]",
-              pathname === "/app/bionis"
+              pathname === "/app/telemetry"
                 ? "border-border bg-background text-foreground shadow-[1px_2px_12px_rgba(158,158,158,0.08)] dark:border-transparent dark:bg-neutral-800"
                 : "border-transparent text-muted-foreground hover:bg-neutral-200/50 hover:text-foreground dark:hover:bg-neutral-800/60"
             )}
           >
             <div className="flex items-center gap-2.5">
               <Activity className="size-4 text-[#1975f2]" />
-              <span>Bionis Vitals HUD</span>
+              <span>BITS Platform Vitals</span>
             </div>
             <span className="rounded bg-[#1975f2] px-1.5 py-0.5 text-[0.62rem] font-bold text-white shadow-2xs">
               Live
@@ -122,13 +115,13 @@ export function AppSidebar({ className }: { className?: string }) {
         ))}
       </nav>
 
-      {/* Bionis Promo / Hardware Status Card */}
-      <div className="p-3 border-t border-[#eeefe9] dark:border-[#222]">
+      {/* BITS Copilot Hardware & Engine Status Card */}
+      <div className="p-3 border-t border-border dark:border-[#222]">
         <div className="relative overflow-hidden rounded-xl border border-blue-200/70 bg-gradient-to-br from-blue-50/80 to-indigo-50/40 p-3 dark:border-blue-900/40 dark:from-blue-950/30 dark:to-neutral-900">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
               <Sparkles className="size-3.5 text-[#1975f2]" />
-              <span className="text-[0.72rem] font-bold text-foreground">Bionis Copilot Active</span>
+              <span className="text-[0.72rem] font-bold text-foreground">BITS Copilot Active</span>
             </div>
             <span className="size-2 rounded-full bg-[#00b153] animate-pulse" />
           </div>

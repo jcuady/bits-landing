@@ -32,11 +32,11 @@ export function StickyMobileCta() {
             href="#contact"
             className="group flex h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-blue-600 px-6 font-bold text-white shadow-md shadow-blue-900/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
           >
-            <span>Contact us</span>
+            <span>Book a Free Consultation</span>
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </a>
           <span className="text-[0.68rem] font-medium text-slate-500">
-            We reply within one business day
+            Fast reply from our solutions team · No obligation
           </span>
         </div>
       </div>

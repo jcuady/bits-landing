@@ -29,7 +29,7 @@ import {
   Headset,
   Activity,
 } from "lucide-react";
-import { BionisLogo } from "@/components/bionis/logo";
+import { Logo } from "@/components/ui/logo";
 
 export type CrmVariantId = "collections" | "support" | "sales" | "marketing" | "commerce";
 
@@ -386,14 +386,14 @@ export function CrmVariantsExplorer() {
             {/* Right Column: Bionis Dashboard Hardware Frame & Live Board Preview */}
             <div className="lg:col-span-7">
               <div className="bionis-dashboard relative overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-2 shadow-2xl shadow-blue-950/10 dark:border-[#222] dark:bg-[#141414]">
-                {/* Bionis Control Bar Header */}
+                {/* BITS Control Bar Header */}
                 <div className="flex items-center justify-between border-b border-[#eeefe9] bg-[#fafafa] px-4 py-3 dark:border-[#222] dark:bg-[#18181b] rounded-t-2xl">
                   <div className="flex items-center gap-2.5">
-                    <BionisLogo className="size-5 text-[#1975f2]" />
+                    <Logo variant="tile" className="size-5" />
                     <div className="h-4 w-px bg-[#eeefe9] dark:bg-[#222]" />
                     <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">{currentVariant.name}</span>
                     <span className="rounded-full bg-[#1975f2]/10 px-2 py-0.5 text-[0.62rem] font-bold text-[#1975f2]">
-                      Bionis HUD
+                      BITS Core
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -733,7 +733,7 @@ function SalesMockupLight() {
       <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-2.5 text-xs">
         <p className="text-[0.72rem] text-emerald-950 font-medium">
           <strong className="font-bold text-emerald-700">How this helps you: </strong>
-          Automatically scores and distributes inbound enterprise leads within 30 seconds—shortening sales cycles by 38%.
+          Automatically scores and distributes inbound enterprise leads instantly—shortening sales cycles by 38%.
         </p>
       </div>
 

@@ -25,27 +25,27 @@ function AnimatedValue({ value, delay }: { value: string; delay: number }) {
 const recoveryMetrics = [
   {
     value: "3.2x",
-    label: "Higher Right-Party Connect (RPC) Velocity",
-    subtext: "Intelligent auto-dialing vs manual calling lists",
+    label: "More Live Customer Talks",
+    subtext: "Smart auto-dialing connects staff only when a real person answers",
     badge: "Efficiency",
   },
   {
     value: "45%",
-    label: "Reduction in Broken PTP Default Rates",
-    subtext: "Automated SMS/Email reminders & escalation logic",
+    label: "Fewer Missed Payment Promises",
+    subtext: "Automatic SMS & email reminders keep customers on track",
     badge: "Recovery",
   },
   {
     value: "99.9%",
-    label: "Telephony Infrastructure Uptime SLA",
-    subtext: "Carrier-grade SIP trunking & WebRTC softphones",
+    label: "Reliable Calling Uptime",
+    subtext: "Clear, stable phone lines for uninterrupted daily operations",
     badge: "Reliability",
   },
   {
-    value: "< 48h",
-    label: "Rapid Operations Onboarding",
-    subtext: "Pre-configured campaign mapping & CSV imports",
-    badge: "Velocity",
+    value: "100%",
+    label: "Guided Setup & Free Training",
+    subtext: "We import your customer data and train your entire team",
+    badge: "Turnkey",
   },
 ];
 
@@ -63,18 +63,17 @@ export function StatsStrip() {
           <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-4 py-1.5 backdrop-blur-md">
             <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
             <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-              High-Recovery Architecture
+              Proven Business Impact
             </span>
           </div>
           <h2 className="mx-auto mt-4 max-w-3xl text-h2 text-balance font-bold text-slate-900">
-            Engineered for{" "}
+            Real Results That Drive{" "}
             <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              High-Velocity Delinquency
-            </span>{" "}
-            Operations.
+              Faster Cash Collection.
+            </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[0.98rem] text-slate-600 text-pretty">
-            Built from the ground up to replace fragmented spreadsheets with automated, high-speed recovery workflows.
+            Built to replace messy spreadsheets with automated calling, instant payment tracking, and higher cash recovery.
           </p>
         </motion.div>
 

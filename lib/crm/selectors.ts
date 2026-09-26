@@ -14,11 +14,7 @@ export type Kpi = {
 export const MOCK_NOW = new Date("2026-09-13T12:00:00Z");
 
 function money(n: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(n);
+  return `₱${Math.round(n).toLocaleString("en-US")}`;
 }
 
 function openPipeline(opps: Opportunity[]) {
@@ -55,7 +51,7 @@ export function dashboardKpis(state: CrmState, now = MOCK_NOW): Kpi[] {
       delta: `${open.length} deals`,
       deltaTone: "flat",
       context: "live session",
-      target: "Target $520k",
+      target: "Target ₱5.2M",
     },
     {
       id: "won",
@@ -64,7 +60,7 @@ export function dashboardKpis(state: CrmState, now = MOCK_NOW): Kpi[] {
       delta: money(won30),
       deltaTone: "up",
       context: "close date in last 30 days",
-      target: "Target $250k",
+      target: "Target ₱2.5M",
     },
     {
       id: "winrate",

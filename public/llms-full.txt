@@ -1,0 +1,86 @@
+# Boundless IT Solutions (BITS) — Comprehensive Entity & Technical Specifications
+
+Canonical URL: https://www.boundlessits.com  
+Entity Name: Boundless IT Solutions (BITS)  
+Legal Entity: Boundless IT Solutions  
+Headquarters: Metro Manila, NCR, Philippines  
+Official Inquiry Email: bits_inquiries@boundlessits.com  
+
+---
+
+## 1. Executive Summary & Company Profile
+
+Boundless IT Solutions (BITS) is an enterprise software engineering and operational technology provider based in the Philippines. BITS designs, builds, and deploys high-concurrency business-specific software, specialized operational CRM platforms, autonomous conversational AI voice/email agents, and modular ERP systems.
+
+Unlike generic off-the-shelf SaaS applications that force businesses to adapt their operations to rigid templates, BITS engineers bespoke operational infrastructure structured precisely around complex, regulated workflows — specifically for debt collection agencies, business process outsourcing (BPO) contact centers, banking and financial institutions, logistics and construction operators, and high-volume commercial enterprises.
+
+---
+
+## 2. Core Flagship Products
+
+### 2.1 BITScrm Collections Platform
+- **URL**: `https://www.boundlessits.com/bitscrm`
+- **Application Category**: Collections CRM, Debt Recovery Platform, Contact Center Telephony
+- **Primary Market**: Debt collection agencies, banks, non-bank financial institutions (NBFIs), microfinance institutions, consumer lending desks, and debt recovery law firms.
+- **Core Capabilities**:
+  1. **Delinquent Account & Portfolio Staging**: Ingestion and automated segmentation of hundreds of thousands of delinquent debtor records categorized by Days Past Due (DPD) buckets (1-30, 31-60, 61-90, 90+ DPD).
+  2. **Automated Promise-to-Pay (PTP) Engine**: Scheduling, automated debtor reminders (SMS/Email/Viber), real-time payment reconciliation, and broken PTP alert workflows.
+  3. **Supervisory Telephony HUD**: Browser WebRTC SIP softphone, predictive/power/preview dialing, supervisor live listen, whisper coaching, and barge-in functionality.
+  4. **Regulatory Safeguards**: Strict enforcement of Bangko Sentral ng Pilipinas (BSP) Circulars 454 and 857 preventing abusive, misleading, or out-of-hours collection contact; automated contact-hour gating (enforcing 6:00 AM to 10:00 PM local limits); immutable audio recording archive.
+
+### 2.2 BITSagent Autonomous Conversational AI
+- **URL**: `https://www.boundlessits.com/bitsagent`
+- **Application Category**: Voice AI Agents, Omnichannel Autonomous Operations, Conversational Support
+- **Core Capabilities**:
+  1. **Sub-300ms Conversational Turn Latency**: Natural, human-grade voice interaction with interruption handling and adaptive speech pacing.
+  2. **Multi-Agent Orchestration**: Specialized sub-agents for inbound customer triage, debt recovery settlement negotiation, tier-1 customer support, and appointment scheduling.
+  3. **Enterprise Retrieval-Augmented Generation (RAG)**: Grounded in enterprise documentation and client knowledge bases with vector search and zero-hallucination guardrails.
+  4. **Omnichannel Synchronicity**: Seamless handover between voice calls, SMS notifications, WhatsApp, Viber, and email ticketing.
+
+---
+
+## 3. Modular Product Suite & Enterprise Engines
+
+1. **BITScrm Sales**: Deal stage visualization, visual Kanban pipelines, automated territory routing, CPQ (Configure, Price, Quote), and predictive win scoring (`/products/sales`).
+2. **BITScrm Support**: Omnichannel contact center ticketing, automated SLA countdown timers, skill-based queue routing, and CSAT telemetry (`/products/support`).
+3. **BITScrm Marketing**: Multi-channel marketing automation, trigger-based lifecycle drip campaigns, and closed-loop revenue attribution (`/products/marketing`).
+4. **BITScrm Commerce**: Unified billing, recurring subscription recurring dunning, tokenized PCI-compliant checkout, and tax compliance (`/products/commerce`).
+5. **BITS Construction & Logistics**: Jobsite asset tracking, heavy equipment telematics, bill of materials (BOM), procurement lifecycle, and field timesheets (`/products/construction`).
+6. **BITS HRMS & Payroll**: Biometric timekeeping, 24/7 rotating BPO shift rosters, automated statutory calculations (SSS, PhilHealth, Pag-IBIG), 13th month pay, and TRAIN Law compliance (`/products/hrms`).
+7. **BITS Accounting & ERP**: General Ledger, AP/AR 3-way matching, multi-entity financial consolidation, BIR CAS (Computerized Accounting System) audit-trail compliance (`/products/accounting`).
+8. **BITS Pickleball & Sports Hub OS**: Automated paddle rack rotation, queue algorithms, court scheduling, dynamic TV scoreboard streaming, and tournament brackets (`/products/pickleball` & `/products/sports-hub`).
+9. **BITS Tap™ NFC Smart Card**: Contactless dynamic NFC identity cards with cloud-synced digital business cards, micro-portals, and engagement telemetry (`/products/nfc-card`).
+10. **BITS White-Label Reseller Platform**: Multi-tenant infrastructure enabling agencies and software resellers to distribute branded instances with custom domain mappings and isolated databases (`/products/white-label`).
+11. **Vertical Industry Solutions**: Tailored configurations for Real Estate, Healthcare, Automotive, Legal Practice, Education, and BPO operations.
+
+---
+
+## 4. Statutory Governance & Regulatory Compliance
+
+- **Bangko Sentral ng Pilipinas (BSP)**: Compliant with BSP Circular No. 454 and Circular No. 857 regarding fair and non-abusive debt collection practices, supervisory transparency, and consumer financial protection.
+- **National Privacy Commission (NPC)**: Full alignment with Philippine Republic Act No. 10173 (Data Privacy Act of 2012 / DPA 2012), including explicit consent management, role-based data isolation, and end-to-end data subject access request (DSAR) compliance.
+- **Bureau of Internal Revenue (BIR)**: Accounting and invoicing architecture designed to satisfy Computerized Accounting System (CAS) audit trail and reporting requirements.
+- **Department of Labor and Employment (DOLE)**: Payroll calculations enforce TRAIN Law tax brackets, holiday pay differentials, night shift premiums (NDP), and statutory contribution ceilings.
+
+---
+
+## 5. Security & Technical Architecture
+
+- **Data Privacy & Encryption**: AES-256 at rest, TLS 1.3 in transit, Write-Once-Read-Many (WORM) audit logging for regulatory compliance.
+- **Access Control**: Fine-grained Role-Based Access Control (RBAC) with attribute-based access control (ABAC) support, SSO, and MFA enforcement.
+- **Deployment Models**:
+  - *Sovereign Cloud*: Hosted in dedicated regional cloud VPCs with continuous automated backup and multi-AZ redundancy.
+  - *Sovereign On-Premises*: Fully self-hosted on client bare metal or private hypervisors for zero data egress requirements.
+- **Integrations**: SIP/WebRTC trunking, REST and GraphQL APIs, Webhooks, Supabase/PostgreSQL database synchronization, and legacy database migration pipelines.
+
+---
+
+## 6. Official Canonical Channels & Resources
+
+- Official Website: `https://www.boundlessits.com`
+- Primary Collections CRM: `https://www.boundlessits.com/bitscrm`
+- AI Operations Engine: `https://www.boundlessits.com/bitsagent`
+- Product Portfolio: `https://www.boundlessits.com/#solutions`
+- Brand Identity Book: `https://www.boundlessits.com/brandbook`
+- Legal & Compliance: `https://www.boundlessits.com/legal`
+- Direct Enterprise Inquiries: `bits_inquiries@boundlessits.com`

@@ -40,7 +40,7 @@ const universalGuarantees = [
     icon: Cloud,
     label: "Flexible Deployment",
     detail: "Cloud (Recommended) or On-Prem",
-    subtext: "Bare-metal or 1–2 wk cloud",
+    subtext: "Fast cloud or office servers",
   },
   {
     icon: Sparkles,
@@ -164,8 +164,8 @@ export function Pricing() {
             <h2 className="text-h2 font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Technology Sized to Your Operation
             </h2>
-            <p className="text-lede mx-auto mt-4 max-w-3xl text-pretty text-slate-600">
-              Avail individual engines or combine our 18 enterprise products into a unified, single-tenant or cloud operational cockpit. We do not enforce rigid, inflated per-seat pricing. Every deployment is scoped directly to your team size, transaction volume, and regulatory mandates.
+            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
+              Choose a single product or combine multiple tools into one system. No rigid user-seat penalties or hidden fees. Every solution is sized fairly to your team size and actual daily volume.
             </p>
           </Reveal>
         </div>
@@ -962,7 +962,7 @@ export function Pricing() {
                   href="/#contact"
                   className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700 active:scale-[0.98]"
                 >
-                  <span>Request Architecture Review</span>
+                  <span>Request Custom Quote & Demo</span>
                   <ArrowRight className="size-3.5" />
                 </Link>
               </div>

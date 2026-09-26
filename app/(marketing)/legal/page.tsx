@@ -4,13 +4,61 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Privacy & Terms | ${site.legalName}`,
-  description: "Privacy notice and terms of use for the BITS website.",
-  alternates: { canonical: "/legal" },
+  description: "Official Privacy notice, Data Privacy Act compliance, and terms of use for Boundless IT Solutions (BITS).",
+  alternates: { canonical: `${site.url}/legal` },
+  openGraph: {
+    title: `Privacy & Terms | ${site.legalName}`,
+    description: "Official Privacy notice, Data Privacy Act compliance, and terms of use for Boundless IT Solutions (BITS).",
+    url: `${site.url}/legal`,
+    siteName: site.legalName,
+    type: "website",
+  },
+};
+
+const legalSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${site.url}/legal#webpage`,
+      name: `Privacy & Terms | ${site.legalName}`,
+      url: `${site.url}/legal`,
+      description: "Official Privacy notice and terms of use for Boundless IT Solutions (BITS).",
+      inLanguage: "en-PH",
+      publisher: {
+        "@type": "Organization",
+        name: site.legalName,
+        url: site.url,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: site.url,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Privacy & Terms",
+          item: `${site.url}/legal`,
+        },
+      ],
+    },
+  ],
 };
 
 export default function LegalPage() {
   return (
     <main id="content" className="bg-cloud pb-24 pt-32 md:pt-36">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(legalSchema) }}
+      />
+
       <Container className="max-w-3xl">
         <h1 className="text-h2 text-ink">Privacy & Terms</h1>
 

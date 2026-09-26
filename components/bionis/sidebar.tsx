@@ -15,7 +15,7 @@ import {
   ToggleIcon,
   UserIcon,
 } from './icons'
-import { BionisLogo } from './logo'
+import { Logo } from '@/components/ui/logo'
 import { DashboardLink, useDashboardNavigation } from './navigation'
 import { useTheme } from './theme-provider'
 import { Button } from '@/components/ui/button'
@@ -105,19 +105,19 @@ function HelpItem() {
         >
           <DropdownMenuLabel className="font-normal">
             <p className="text-sm font-medium text-foreground">Need help?</p>
-            <p>Guides, docs, and support for Bionis.</p>
+            <p>Guides, docs, and support for BITS.</p>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
-              <a href="https://docs.bionis.com" target="_blank" rel="noreferrer">
+              <a href="/#contact" target="_blank" rel="noreferrer">
                 <BookOpenIcon />
                 Documentation
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a
-                href="https://bionis.com/support"
+                href="/#contact"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -223,7 +223,7 @@ function CollapseControl({
   return (
     <div className="relative size-11 shrink-0">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center transition-all ease-linear group-hover:scale-75 group-hover:opacity-0">
-        <BionisLogo className="size-6" />
+        <Logo variant="tile" className="size-6" />
       </div>
       <div className="pointer-events-none absolute inset-0 flex scale-75 items-center justify-center opacity-0 transition-all ease-linear group-hover:pointer-events-auto group-hover:scale-100 group-hover:opacity-100">
         <button
@@ -302,9 +302,9 @@ export function DashboardSidebar() {
       >
         {!collapsed && (
           <div className="flex min-w-0 flex-1 items-center gap-2">
-            <BionisLogo className="size-5.5 shrink-0" />
+            <Logo variant="tile" className="size-5.5 shrink-0" />
             <span className="truncate text-xl font-semibold tracking-tight">
-              Bionis
+              BITS RevOps HUD
             </span>
           </div>
         )}

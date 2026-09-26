@@ -8,12 +8,12 @@ import {
   Search,
   CheckCircle2,
   AlertTriangle,
-  Zap,
   Moon,
   Sun,
   LogOut,
   ChevronDown,
-  Sparkles,
+  X,
+  Check,
 } from "lucide-react";
 import { logoutAction } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
@@ -31,33 +31,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-
-const DEMO_ALERTS = [
-  {
-    id: "1",
-    title: "Voltgrid Deal Stalled",
-    desc: "Stage: Proposal · Stalled 12 days past expected close",
-    time: "2h ago",
-    href: "/app/opportunities/op-3",
-    urgent: true,
-  },
-  {
-    id: "2",
-    title: "RPC Lift Flagged",
-    desc: "PTP installment cleared for Carlos Mendoza (₱20,000)",
-    time: "3h ago",
-    href: "/app/pipelines",
-    urgent: false,
-  },
-  {
-    id: "3",
-    title: "Predictive Pacing Adjusted",
-    desc: "AI dialer increased connect frequency by +18%",
-    time: "5h ago",
-    href: "/app/dashboard",
-    urgent: false,
-  },
-];
+import { useCrm } from "@/lib/crm/store";
 
 export function AppTopbar({
   userName,
@@ -68,11 +42,20 @@ export function AppTopbar({
   userEmail: string;
   onMenuClick: () => void;
 }) {
+  const {
+    notifications,
+    dismissNotification,
+    markAllNotificationsRead,
+    markNotificationRead,
+  } = useCrm();
+
   const [searchQuery, setSearchQuery] = React.useState("");
   const [isDark, setIsDark] = React.useState(false);
   const [timeline, setTimeline] = React.useState<"today" | "7d" | "30d" | "90d">("7d");
   const [alertsOpen, setAlertsOpen] = React.useState(false);
   const alertsRef = React.useRef<HTMLDivElement>(null);
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   React.useEffect(() => {
     if (!alertsOpen) return;
@@ -90,9 +73,18 @@ export function AppTopbar({
     };
   }, [alertsOpen]);
 
-  // Check initial theme
+  // Check initial theme from localStorage or document
   React.useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
+    const saved = localStorage.getItem("bits_theme");
+    if (saved === "dark") {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    } else if (saved === "light") {
+      setIsDark(false);
+      document.documentElement.classList.remove("dark");
+    } else {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -100,19 +92,21 @@ export function AppTopbar({
     setIsDark(next);
     if (next) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem("bits_theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem("bits_theme", "light");
     }
   };
 
   return (
-    <header className="bionis-dashboard flex h-16 shrink-0 items-center justify-between gap-3 border-b border-[#eeefe9] bg-background px-4 md:h-18 md:px-6 dark:border-[#222]">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-border bg-background px-4 md:h-18 md:px-6 dark:border-[#222]">
       {/* Left: Mobile trigger & Page Identity */}
       <div className="flex items-center gap-3 min-w-0">
         <button
           type="button"
           onClick={onMenuClick}
-          className="inline-flex size-10 items-center justify-center rounded-xl border border-border text-foreground transition hover:bg-muted lg:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-xl border border-border text-foreground transition hover:bg-muted lg:hidden cursor-pointer"
           aria-label="Open navigation"
         >
           <Menu className="size-4" />
@@ -121,15 +115,15 @@ export function AppTopbar({
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-[#00b153] animate-pulse" />
           <span className="text-sm font-semibold text-foreground tracking-tight hidden sm:inline-block">
-            Bionis Operations Engine
+            BITS RevOps Engine
           </span>
           <span className="text-xs text-muted-foreground hidden md:inline-block">
-            · RevOps Telemetry
+            · Real-Time Telemetry
           </span>
         </div>
       </div>
 
-      {/* Middle: Bionis Search Bar with InputGroup */}
+      {/* Middle: Search Bar */}
       <div className="hidden md:flex max-w-sm flex-1 px-4">
         <InputGroup className="h-10 w-full rounded-xl border-border bg-muted/60 px-2.5">
           <InputGroupAddon className="text-muted-foreground pl-0">
@@ -174,7 +168,7 @@ export function AppTopbar({
           size="icon-sm"
           onClick={toggleTheme}
           aria-label="Toggle theme"
-          className="size-9 rounded-xl border-border"
+          className="size-9 rounded-xl border-border cursor-pointer hover:bg-muted"
         >
           {isDark ? (
             <Sun className="size-4 text-amber-500" />
@@ -183,20 +177,22 @@ export function AppTopbar({
           )}
         </Button>
 
-        {/* Bionis Notifications Popover / Dialog */}
+        {/* Operational Notifications Popover / Dialog */}
         <div className="relative" ref={alertsRef}>
           <Button
             type="button"
             variant="outline"
             size="icon-sm"
             onClick={() => setAlertsOpen((v) => !v)}
-            className="relative size-9 rounded-xl border-border cursor-pointer"
+            className="relative size-9 rounded-xl border-border cursor-pointer hover:bg-muted"
             aria-label="Notifications"
             aria-expanded={alertsOpen}
             aria-controls="crm-alerts"
           >
             <Bell className="size-4 text-muted-foreground" />
-            <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-[#1975f2] ring-2 ring-background" />
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 flex size-2.5 items-center justify-center rounded-full bg-[#1975f2] ring-2 ring-background" />
+            )}
           </Button>
 
           {alertsOpen && (
@@ -204,48 +200,88 @@ export function AppTopbar({
               id="crm-alerts"
               role="dialog"
               aria-label="Notifications"
-              className="absolute top-[calc(100%+8px)] right-0 z-50 w-80 rounded-2xl border border-border bg-card p-3 shadow-2xl animate-in fade-in zoom-in-95"
+              className="absolute top-[calc(100%+8px)] right-0 z-50 w-84 rounded-2xl border border-border bg-card p-3 shadow-2xl animate-in fade-in zoom-in-95 dark:border-[#262626] dark:bg-[#141414]"
             >
               <div className="flex items-center justify-between pb-2 border-b border-border mb-2 px-1">
-                <span className="text-xs font-bold text-foreground">Operational Alerts</span>
-                <span className="rounded-full bg-[#1975f2]/10 px-2 py-0.5 text-[0.65rem] font-bold text-[#1975f2]">
-                  3 New
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-foreground">Operational Alerts</span>
+                  {unreadCount > 0 && (
+                    <span className="rounded-full bg-[#1975f2]/10 px-2 py-0.5 text-[0.65rem] font-bold text-[#1975f2]">
+                      {unreadCount} New
+                    </span>
+                  )}
+                </div>
+                {unreadCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={markAllNotificationsRead}
+                    className="text-[0.68rem] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  >
+                    Mark all read
+                  </button>
+                )}
               </div>
-              <ul className="space-y-1">
-                {DEMO_ALERTS.map((alert) => (
-                  <li key={alert.id}>
-                    <Link
-                      href={alert.href}
-                      onClick={() => setAlertsOpen(false)}
-                      className="flex flex-col gap-0.5 rounded-xl p-2 hover:bg-muted transition-colors cursor-pointer"
+
+              {notifications.length === 0 ? (
+                <div className="py-6 text-center text-xs text-muted-foreground">
+                  No active alerts
+                </div>
+              ) : (
+                <ul className="space-y-1 max-h-72 overflow-y-auto no-scrollbar">
+                  {notifications.map((alert) => (
+                    <li
+                      key={alert.id}
+                      className={`group relative flex items-start justify-between gap-2 rounded-xl p-2 transition-colors ${
+                        alert.read ? "hover:bg-muted/60 opacity-80" : "bg-muted/40 hover:bg-muted"
+                      }`}
                     >
-                      <div className="flex items-center justify-between w-full">
-                        <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
-                          {alert.urgent ? (
-                            <AlertTriangle className="size-3.5 text-amber-500" />
-                          ) : (
-                            <CheckCircle2 className="size-3.5 text-[#00b153]" />
-                          )}
-                          {alert.title}
-                        </span>
-                        <span className="text-[0.65rem] text-muted-foreground font-mono">
-                          {alert.time}
-                        </span>
-                      </div>
-                      <p className="text-[0.7rem] text-muted-foreground pl-5">
-                        {alert.desc}
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                      <Link
+                        href={alert.href}
+                        onClick={() => {
+                          markNotificationRead(alert.id);
+                          setAlertsOpen(false);
+                        }}
+                        className="flex flex-col gap-0.5 flex-1 min-w-0 cursor-pointer"
+                      >
+                        <div className="flex items-center justify-between w-full">
+                          <span className="text-xs font-bold text-foreground flex items-center gap-1.5 truncate">
+                            {alert.urgent ? (
+                              <AlertTriangle className="size-3.5 text-amber-500 shrink-0" />
+                            ) : (
+                              <CheckCircle2 className="size-3.5 text-[#00b153] shrink-0" />
+                            )}
+                            <span className="truncate">{alert.title}</span>
+                          </span>
+                          <span className="text-[0.65rem] text-muted-foreground font-mono shrink-0 ml-1">
+                            {alert.time}
+                          </span>
+                        </div>
+                        <p className="text-[0.7rem] text-muted-foreground pl-5 leading-relaxed">
+                          {alert.desc}
+                        </p>
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          dismissNotification(alert.id);
+                        }}
+                        className="shrink-0 p-1 text-muted-foreground/60 hover:text-foreground rounded-md hover:bg-background transition-colors cursor-pointer"
+                        title="Dismiss alert"
+                      >
+                        <X className="size-3" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
               <button
                 type="button"
                 onClick={() => setAlertsOpen(false)}
                 className="mt-2.5 w-full rounded-xl border border-border bg-muted/60 py-2 text-xs font-bold text-foreground hover:bg-muted transition-colors cursor-pointer"
               >
-                Dismiss
+                Close
               </button>
             </div>
           )}
@@ -286,8 +322,8 @@ export function AppTopbar({
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/app/bionis" className="cursor-pointer flex items-center justify-between">
-                <span>Bionis Telemetry</span>
+              <Link href="/app/telemetry" className="cursor-pointer flex items-center justify-between">
+                <span>BITS Platform Vitals</span>
                 <span className="text-[0.62rem] font-bold text-[#1975f2] uppercase">Live</span>
               </Link>
             </DropdownMenuItem>

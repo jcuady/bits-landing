@@ -613,8 +613,16 @@ export const seedCrmState = (): CrmState => ({
   ],
   team: [
     {
-      id: "tm-1",
+      id: "tm-0",
       name: "Malcolm Cuady",
+      email: "demo@boundlessitsolutions.com",
+      role: "Admin",
+      openDeals: 4,
+      closedWon30d: 1_250_000,
+    },
+    {
+      id: "tm-1",
+      name: "Malcolm Cuady (Primary)",
       email: "malcolm@boundlessitsolutions.com",
       role: "Admin",
       openDeals: 4,

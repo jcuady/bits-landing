@@ -8,8 +8,13 @@
     "start": "next start -p 3847",
     "seed:supabase": "node scripts/seed-supabase.mjs",
     "test:crm": "node scripts/crm-e2e.mjs",
-    "test:responsive": "node scripts/responsive-validation.mjs"
+    "test:responsive": "node scripts/responsive-validation.mjs",
+    "seo:doctor": "claude-seo doctor",
+    "seo:agentic": "claude-seo run agentic_check.py https://www.boundlessits.com --json",
+    "seo:drift": "claude-seo run drift_baseline.py https://www.boundlessits.com",
+    "seo:audit": "claude-seo run unlighthouse_run.py"
   },
+
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",
     "@radix-ui/react-dropdown-menu": "^2.1.24",

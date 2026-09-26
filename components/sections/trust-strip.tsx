@@ -66,14 +66,14 @@ export function TrustStrip() {
             <div className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-3.5 py-1 backdrop-blur-md">
               <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
               <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Security & Statutory Governance
+                Security &amp; Legal Compliance
               </span>
             </div>
             <h2 className="text-[1.35rem] font-bold tracking-tight text-slate-900 sm:text-[1.6rem]">
-              Engineered in Alignment with Sensitive Operational Standards
+              Built to Meet Strict Business &amp; Privacy Laws
             </h2>
             <p className="mt-2 text-[0.88rem] text-slate-600">
-              BITS enforces verifiable data isolation, encryption, role-based boundaries, and statutory quiet-hour rules.
+              BITS protects your customer data with bank-grade encryption, privacy controls, and automatic quiet-hour call rules.
             </p>
           </div>
 

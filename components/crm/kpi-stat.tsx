@@ -52,7 +52,7 @@ export function KpiStat({
         )}
       </div>
 
-      {/* Subtle Bionis glow accent at bottom */}
+      {/* Subtle BITS glow accent at bottom */}
       <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-[#1975f2]/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
     </div>
   );

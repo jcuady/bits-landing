@@ -30,26 +30,30 @@ export function CtaBanner() {
               </h2>
 
               <p className="text-lede mx-auto mt-6 max-w-[50ch] text-pretty text-blue-50">
-                Stop compromising your floor processes with generic off-the-shelf software.
-                Schedule an architectural blueprint consultation with our engineering team today.
+                Stop compromising your operations with rigid, generic software.
+                Book a free consultation with our solutions team to see a live demo tailored to your workflows.
               </p>
 
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Magnetic>
+              <div className="mt-10 flex flex-col items-stretch sm:items-center justify-center gap-4 sm:flex-row">
+                <Magnetic className="w-full sm:w-auto">
                   <Link
                     href="/#contact"
-                    className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-full bg-white px-8 text-sm font-bold text-blue-700 shadow-lg shadow-black/10 transition-all hover:bg-blue-50 active:scale-[0.98]"
+                    className="group relative flex h-14 w-full sm:w-auto items-center justify-between gap-4 rounded-full bg-white pl-8 pr-3 text-sm font-bold text-blue-700 shadow-xl shadow-black/15 transition-all duration-300 hover:bg-blue-50 active:scale-[0.98]"
                   >
-                    <span>Book a Consultation</span>
-                    <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                    <span>Book a Free Consultation</span>
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </span>
                   </Link>
                 </Magnetic>
-                <Magnetic>
+                <Magnetic className="w-full sm:w-auto">
                   <Link
-                    href="/#solutions"
-                    className="inline-flex h-14 items-center justify-center rounded-full border border-white/40 bg-white/10 px-8 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                    href="/#products-suite"
+                    className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-full border border-white/30 bg-white/10 px-8 text-sm font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/50 active:scale-[0.98]"
                   >
-                    Explore Solution Tiers
+                    Explore All 18 Products →
                   </Link>
                 </Magnetic>
               </div>

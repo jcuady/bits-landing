@@ -35,8 +35,8 @@ export function Ecosystem() {
               The BITS Solutions Ecosystem
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-[52ch] text-slate-600">
-              A cohesive operational stack combining CRM, workflow automation, autonomous AI agents,
-              and enterprise integrations into one unified environment.
+              One connected system combining your customer records, team workflows, smart AI assistants,
+              and business tools into a single clear screen.
             </p>
           </Reveal>
         </div>

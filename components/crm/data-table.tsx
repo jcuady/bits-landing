@@ -20,28 +20,37 @@ export function DataTable<T extends { id: string }>({
   className?: string;
 }) {
   return (
-    <div className={cn("overflow-x-auto rounded-xl border border-linelight bg-white", className)}>
-      <table className="w-full min-w-[640px] border-collapse text-left text-[0.85rem]">
+    <div className={cn("overflow-x-auto rounded-2xl border border-border bg-card shadow-xs dark:border-[#242424] dark:bg-[#141414]", className)}>
+      <table className="w-full min-w-[640px] border-collapse text-left text-xs">
         <thead>
-          <tr className="border-b border-linelight bg-cloud/70">
+          <tr className="border-b border-border bg-muted/60 dark:border-[#242424] dark:bg-neutral-900/60">
             {columns.map((col) => (
-              <th key={col.key} className={cn("px-3.5 py-2.5 text-[0.7rem] font-semibold tracking-[0.06em] text-slateblue uppercase", col.className)}>
+              <th
+                key={col.key}
+                className={cn(
+                  "px-4 py-3 text-[0.68rem] font-bold tracking-wider text-muted-foreground uppercase",
+                  col.className
+                )}
+              >
                 {col.header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-border/60 dark:divide-[#242424]">
           {rows.map((row) => (
-            <tr key={row.id} className="transition-colors hover:bg-navy-700/[0.03]">
+            <tr
+              key={row.id}
+              className="hover:bg-muted/40 dark:hover:bg-neutral-800/40 transition-colors"
+            >
               {columns.map((col) => (
-                <td key={col.key} className={cn("border-t border-linelight p-0", col.className)}>
+                <td key={col.key} className={cn("px-4 py-3 text-foreground", col.className)}>
                   {href ? (
-                    <Link href={href(row)} className="block px-3.5 py-2.5 text-ink">
+                    <Link href={href(row)} className="block text-foreground hover:text-[#1975f2] transition-colors">
                       {col.cell(row)}
                     </Link>
                   ) : (
-                    <div className="px-3.5 py-2.5 text-ink">{col.cell(row)}</div>
+                    <div>{col.cell(row)}</div>
                   )}
                 </td>
               ))}

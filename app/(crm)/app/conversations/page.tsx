@@ -7,18 +7,22 @@ import { useCrm } from "@/lib/crm/store";
 import { formatRelative } from "@/lib/crm/selectors";
 import { cn } from "@/lib/utils";
 import { CrmButton } from "@/components/crm/crm-controls";
+import { useToast } from "@/components/crm/crm-toast";
+import { Send, Mail, MessageSquare, PhoneCall } from "lucide-react";
 
 export default function ConversationsPage() {
   const { state, markConversationRead, replyToConversation } = useCrm();
+  const { showToast } = useToast();
   const [activeId, setActiveId] = React.useState(state.conversations[0]?.id ?? "");
   const [draft, setDraft] = React.useState("");
   const [replyError, setReplyError] = React.useState<string | null>(null);
   const [q, setQ] = React.useState("");
+
   const threads = state.conversations.filter((c) => {
     const hay = `${c.contactName} ${c.subject} ${c.channel}`.toLowerCase();
     return hay.includes(q.toLowerCase());
   });
-  // Only the explicitly selected thread — never auto-fallback (avoids marking unread as read on search).
+
   const active = threads.find((c) => c.id === activeId);
 
   React.useEffect(() => {
@@ -32,24 +36,35 @@ export default function ConversationsPage() {
 
   function send() {
     if (!active) return;
-    const result = replyToConversation(active.id, draft);
+    if (!draft.trim()) {
+      setReplyError("Message cannot be empty.");
+      return;
+    }
+    const result = replyToConversation(active.id, draft.trim());
     if (!result.ok) {
       setReplyError(result.error);
       return;
     }
+    showToast(`Reply sent to ${active.contactName}.`);
     setReplyError(null);
     setDraft("");
   }
 
   return (
-    <div>
-      <PageHeader title="Conversations" description="Mock email and SMS threads — reply persists in session." />
-      <FilterBar value={q} onChange={setQ} placeholder="Search conversations…" />
-      <div className="grid min-h-[420px] overflow-hidden rounded-xl border border-linelight bg-white lg:grid-cols-[280px_1fr]">
-        <ul className="border-b border-linelight lg:max-h-[70vh] lg:overflow-y-auto lg:border-r lg:border-b-0">
+    <div className="space-y-6">
+      <PageHeader
+        title="Omnichannel Conversations"
+        description="Unified email, SMS, and WhatsApp thread inbox for enterprise clients."
+      />
+
+      <FilterBar value={q} onChange={setQ} placeholder="Search conversations by contact, subject, or channel…" />
+
+      <div className="grid min-h-[480px] overflow-hidden rounded-xl border border-border bg-card shadow-sm dark:border-neutral-800 dark:bg-[#141414] lg:grid-cols-[300px_1fr]">
+        {/* Thread Sidebar */}
+        <ul className="divide-y divide-border border-b border-border dark:divide-neutral-800 dark:border-neutral-800 lg:max-h-[70vh] lg:overflow-y-auto lg:border-r lg:border-b-0">
           {threads.length === 0 ? (
-            <li className="px-3.5 py-8 text-center text-[0.85rem] text-slateblue">
-              No threads match. Clear search or try a contact name.
+            <li className="px-4 py-8 text-center text-xs text-muted-foreground dark:text-neutral-400">
+              No threads match this search query.
             </li>
           ) : (
             threads.map((c) => (
@@ -58,55 +73,90 @@ export default function ConversationsPage() {
                   type="button"
                   onClick={() => setActiveId(c.id)}
                   className={cn(
-                    "min-h-14 w-full cursor-pointer border-b border-linelight px-3.5 py-3 text-left transition hover:bg-cloud focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-electric-600/15",
-                    active?.id === c.id && "bg-electric-600/8"
+                    "w-full cursor-pointer px-4 py-3.5 text-left transition-colors hover:bg-muted/40 dark:hover:bg-neutral-800/40",
+                    active?.id === c.id
+                      ? "bg-electric-600/10 dark:bg-electric-500/15"
+                      : "bg-transparent"
                   )}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <p className="truncate text-[0.84rem] font-semibold text-ink">{c.contactName}</p>
-                    {c.unread ? <span className="size-2 shrink-0 rounded-full bg-electric-600" /> : null}
+                    <p className="truncate text-sm font-semibold text-foreground dark:text-neutral-100">
+                      {c.contactName}
+                    </p>
+                    {c.unread ? (
+                      <span className="size-2 shrink-0 rounded-full bg-electric-600" />
+                    ) : null}
                   </div>
-                  <p className="mt-0.5 truncate text-[0.78rem] text-slateblue">{c.subject}</p>
-                  <p className="mt-1 text-[0.7rem] text-slateblue">
-                    {c.channel.toUpperCase()} · {formatRelative(c.updatedAt)}
+                  <p className="mt-0.5 truncate text-xs text-muted-foreground dark:text-neutral-400">
+                    {c.subject}
                   </p>
+                  <div className="mt-1 flex items-center gap-1.5 text-[0.68rem] text-muted-foreground dark:text-neutral-500">
+                    {c.channel === "email" ? (
+                      <Mail className="size-3" />
+                    ) : c.channel === "sms" ? (
+                      <MessageSquare className="size-3" />
+                    ) : (
+                      <PhoneCall className="size-3" />
+                    )}
+                    <span className="uppercase tracking-wider font-semibold">
+                      {c.channel}
+                    </span>
+                    <span>·</span>
+                    <span>{formatRelative(c.updatedAt)}</span>
+                  </div>
                 </button>
               </li>
             ))
           )}
         </ul>
-        <div className="flex min-h-[320px] flex-col">
+
+        {/* Message Thread Area */}
+        <div className="flex min-h-[360px] flex-col">
           {active ? (
             <>
-              <div className="border-b border-linelight px-4 py-3">
-                <p className="text-[0.95rem] font-semibold text-ink">{active.subject}</p>
-                <p className="text-[0.78rem] text-slateblue">
+              {/* Thread Header */}
+              <div className="border-b border-border px-5 py-3.5 dark:border-neutral-800">
+                <p className="text-sm font-semibold text-foreground dark:text-neutral-100">
+                  {active.subject}
+                </p>
+                <p className="text-xs text-muted-foreground dark:text-neutral-400">
                   {active.contactName} · {active.contactEmail}
                 </p>
               </div>
-              <div className="flex-1 space-y-3 overflow-y-auto p-4">
-                {active.messages.map((m) => (
-                  <div
-                    key={m.id}
-                    className={cn(
-                      "max-w-[85%] rounded-xl px-3.5 py-2.5 text-[0.86rem] leading-relaxed",
-                      m.direction === "outbound" ? "ml-auto bg-electric-600 text-white" : "bg-cloud text-ink"
-                    )}
-                  >
-                    <p>{m.body}</p>
-                    <p
+
+              {/* Messages Body */}
+              <div className="flex-1 space-y-3.5 overflow-y-auto p-5">
+                {active.messages.map((m) => {
+                  const isOutbound = m.direction === "outbound";
+                  return (
+                    <div
+                      key={m.id}
                       className={cn(
-                        "mt-1 text-[0.68rem]",
-                        m.direction === "outbound" ? "text-white/70" : "text-slateblue"
+                        "max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-xs",
+                        isOutbound
+                          ? "ml-auto bg-electric-600 text-white rounded-br-xs"
+                          : "bg-muted text-foreground dark:bg-neutral-800 dark:text-neutral-100 rounded-bl-xs"
                       )}
                     >
-                      {formatRelative(m.at)}
-                    </p>
-                  </div>
-                ))}
+                      <p>{m.body}</p>
+                      <p
+                        className={cn(
+                          "mt-1 text-[0.68rem]",
+                          isOutbound
+                            ? "text-white/70"
+                            : "text-muted-foreground dark:text-neutral-400"
+                        )}
+                      >
+                        {formatRelative(m.at)}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
+
+              {/* Reply Box */}
               <form
-                className="border-t border-linelight p-3"
+                className="border-t border-border p-4 dark:border-neutral-800"
                 onSubmit={(e) => {
                   e.preventDefault();
                   send();
@@ -114,13 +164,13 @@ export default function ConversationsPage() {
                 noValidate
               >
                 {replyError ? (
-                  <p className="mb-2 text-[0.8rem] font-medium text-red-600" role="alert">
+                  <p className="mb-2 text-xs font-medium text-rose-500" role="alert">
                     {replyError}
                   </p>
                 ) : null}
                 <div className="flex gap-2">
                   <label className="sr-only" htmlFor="reply">
-                    Reply
+                    Type response
                   </label>
                   <input
                     id="reply"
@@ -132,29 +182,26 @@ export default function ConversationsPage() {
                       setDraft(e.target.value);
                       if (replyError) setReplyError(null);
                     }}
-                    placeholder="Type a reply…"
-                    className="h-11 min-w-0 flex-1 rounded-xl border border-linelight px-3 text-[0.88rem] outline-none focus:border-electric-600 focus:ring-4 focus:ring-electric-600/12 aria-[invalid=true]:border-red-400"
+                    placeholder="Type an omnichannel reply…"
+                    className="h-10 min-w-0 flex-1 rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none transition focus:border-electric-600 focus:ring-2 focus:ring-electric-600/20 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100"
                   />
                   <CrmButton
                     type="submit"
-                    className="border-electric-600/30 bg-electric-600 text-white hover:bg-electric-500"
+                    variant="primary"
+                    className="flex items-center gap-1.5"
                   >
+                    <Send className="size-3.5" />
                     Send
                   </CrmButton>
                 </div>
-                {replyError ? (
-                  <span id="reply-error" className="sr-only">
-                    {replyError}
-                  </span>
-                ) : null}
               </form>
             </>
           ) : (
-            <p className="p-6 text-[0.88rem] text-slateblue">
+            <div className="flex flex-1 items-center justify-center p-8 text-center text-sm text-muted-foreground dark:text-neutral-400">
               {threads.length === 0
-                ? "No conversations match this search."
-                : "Select a conversation from the list."}
-            </p>
+                ? "No conversations match this query."
+                : "Select a conversation from the sidebar to inspect or reply."}
+            </div>
           )}
         </div>
       </div>

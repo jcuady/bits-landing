@@ -26,14 +26,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useToast } from "@/components/crm/crm-toast";
+
 export default function DashboardPage() {
   const { state, updateLeadStatus } = useCrm();
-  const [toast, setToast] = React.useState<string | null>(null);
-
-  const triggerToast = (msg: string) => {
-    setToast(msg);
-    setTimeout(() => setToast(null), 3500);
-  };
+  const { showToast } = useToast();
 
   // Greeting by hour
   const greeting = React.useMemo(() => {
@@ -63,17 +60,9 @@ export default function DashboardPage() {
   }, [state.leads, state.opportunities]);
 
   return (
-    <div className="bionis-dashboard space-y-6 font-sans">
-      {/* Action Toast Feedback */}
-      {toast && (
-        <div className="fixed top-20 right-6 z-50 flex items-center gap-2.5 rounded-xl bg-neutral-900 border border-neutral-700 px-4 py-2.5 text-xs font-semibold text-white shadow-2xl animate-in fade-in slide-in-from-top-2">
-          <CheckCircle2 className="size-4 text-[#00b153] shrink-0" />
-          <span>{toast}</span>
-        </div>
-      )}
-
-      {/* Executive Welcome Banner with Bionis Aesthetics */}
-      <div className="relative overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-6 shadow-xs dark:border-[#222] dark:bg-[#141414]">
+    <div className="space-y-6 font-sans">
+      {/* Executive Welcome Banner with BITS Aesthetics */}
+      <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-xs dark:border-[#242424] dark:bg-[#141414]">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -85,17 +74,17 @@ export default function DashboardPage() {
                 <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Live Form Listener Active
               </span>
-              <span className="rounded-full bg-neutral-100 border border-neutral-200 px-2 py-0.5 text-[0.65rem] font-mono text-neutral-500 dark:bg-neutral-800 dark:border-neutral-700">
-                Bionis Engine v4.2
+              <span className="rounded-full bg-muted border border-border px-2 py-0.5 text-[0.65rem] font-mono text-muted-foreground">
+                BITS Core v4.2
               </span>
             </div>
-            <h1 className="mt-2.5 text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl dark:text-neutral-100">
-              Dashboard & Inbound Command Center
+            <h1 className="mt-2.5 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+              Dashboard &amp; Inbound Command Center
             </h1>
             <p className="text-xs font-semibold text-[#1975f2] mt-0.5">
               {greeting}, BITS RevOps Team
             </p>
-            <p className="mt-1 text-xs text-neutral-500 sm:text-sm max-w-2xl leading-relaxed">
+            <p className="mt-1 text-xs text-muted-foreground sm:text-sm max-w-2xl leading-relaxed">
               Real-time pipeline vitals for inbound leads arriving from your website contact forms, interactive CRM specimens, and partner consultations.
             </p>
           </div>
@@ -338,11 +327,28 @@ export default function DashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100 text-[0.75rem] dark:divide-neutral-800">
-              {state.leads.slice(0, 6).map((lead) => (
-                <tr
-                  key={lead.id}
-                  className="hover:bg-neutral-50/80 dark:hover:bg-neutral-800/40 transition-colors"
-                >
+              {state.leads.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="py-10 text-center">
+                    <p className="text-sm font-semibold text-foreground dark:text-neutral-200">
+                      No inbound leads captured yet
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground dark:text-neutral-400">
+                      Website form submissions and manually created leads stream directly here in real time.
+                    </p>
+                    <div className="mt-3">
+                      <Button asChild variant="outline" size="sm">
+                        <Link href="/app/leads">Create First Lead</Link>
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                state.leads.slice(0, 6).map((lead) => (
+                  <tr
+                    key={lead.id}
+                    className="hover:bg-neutral-50/80 dark:hover:bg-neutral-800/40 transition-colors"
+                  >
                   <td className="px-3 py-3">
                     <div className="flex items-center gap-2.5">
                       <div className="flex size-7 items-center justify-center rounded-lg bg-blue-50 text-[#1975f2] font-bold text-xs dark:bg-blue-950/60 dark:text-blue-400">
@@ -396,7 +402,7 @@ export default function DashboardPage() {
                         type="button"
                         onClick={() => {
                           updateLeadStatus(lead.id, "working");
-                          triggerToast(`WebRTC Softphone connected: Dialing ${lead.name} (${lead.company}).`);
+                          showToast(`WebRTC Softphone connected: Dialing ${lead.name} (${lead.company}).`);
                         }}
                         className="inline-flex items-center gap-1 rounded-lg bg-[#1975f2] px-2.5 py-1 text-xs font-bold text-white hover:bg-[#1975f2]/90 shadow-2xs active:scale-95 transition-all cursor-pointer"
                       >
@@ -407,16 +413,17 @@ export default function DashboardPage() {
                         type="button"
                         onClick={() => {
                           updateLeadStatus(lead.id, "qualified");
-                          triggerToast(`Fast-touch email template dispatched to ${lead.email}.`);
+                          showToast(`Fast-touch email template dispatched to ${lead.email}.`);
                         }}
-                        className="inline-flex items-center gap-1 rounded-lg border border-neutral-200 bg-white px-2 py-1 text-xs font-medium text-neutral-700 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 active:scale-95 transition-all cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-lg border border-border bg-card px-2 py-1 text-xs font-medium text-foreground hover:bg-muted active:scale-95 transition-all cursor-pointer"
                       >
                         <Mail className="size-3" />
                       </button>
                     </div>
                   </td>
                 </tr>
-              ))}
+              ))
+            )}
             </tbody>
           </table>
         </div>
@@ -424,12 +431,12 @@ export default function DashboardPage() {
 
       {/* AI Telemetry & Real-Time Operational Stream */}
       <div className="grid gap-5 lg:grid-cols-2">
-        {/* Bionis AI Telemetry */}
-        <section className="rounded-3xl border border-[#e5e7eb] bg-white p-5 sm:p-6 shadow-xs dark:border-[#222] dark:bg-[#141414]">
-          <div className="flex items-center justify-between pb-3 border-b border-[#eeefe9] dark:border-[#222] mb-3">
+        {/* BITSagent AI Telemetry */}
+        <section className="rounded-3xl border border-border bg-card p-5 sm:p-6 shadow-xs dark:border-[#242424] dark:bg-[#141414]">
+          <div className="flex items-center justify-between pb-3 border-b border-border/80 dark:border-[#222] mb-3">
             <div className="flex items-center gap-2">
               <Sparkles className="size-4 text-[#1975f2]" />
-              <h2 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+              <h2 className="text-sm font-bold text-foreground">
                 AI Lead Prioritization &amp; Routing
               </h2>
             </div>
@@ -472,8 +479,8 @@ export default function DashboardPage() {
         </section>
 
         {/* Live Operational Timeline */}
-        <section className="rounded-3xl border border-[#e5e7eb] bg-white p-5 sm:p-6 shadow-xs dark:border-[#222] dark:bg-[#141414]">
-          <h2 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider mb-3 pb-2 border-b border-[#eeefe9] dark:border-[#222]">
+        <section className="rounded-3xl border border-border bg-card p-5 sm:p-6 shadow-xs dark:border-[#242424] dark:bg-[#141414]">
+          <h2 className="text-sm font-bold text-foreground uppercase tracking-wider mb-3 pb-2 border-b border-border/80 dark:border-[#222]">
             Live Lead Activity &amp; Ingestion Stream
           </h2>
           <ActivityTimeline items={state.activities.slice(0, 5)} />

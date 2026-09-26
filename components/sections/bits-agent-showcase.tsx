@@ -28,10 +28,10 @@ export function BitsAgentShowcase() {
                 </span>
               </div>
               <h2 className="text-h2 text-balance font-bold leading-[1.08] text-slate-900">
-                Autonomous AI Agents Grounded in Your Floor Rules.
+                Smart AI Assistants That Follow Your Exact Business Rules.
               </h2>
               <p className="text-lede mt-5 max-w-[48ch] text-pretty text-slate-600">
-                Deploy conversational voice agents, autonomous email sequencers, and real-time QA analysis grounded strictly in your organization&apos;s approved policies and compliance guidelines.
+                Use natural AI voice callers, automated email reminders, and instant call quality reviews that strictly follow your company guidelines with zero mistakes.
               </p>
             </Reveal>
 
