@@ -12,10 +12,9 @@ export function safeAppNext(raw: string | null | undefined): string {
   if (decoded.startsWith("//")) return fallback;
   if (decoded.includes("://")) return fallback;
   if (decoded.includes("..")) return fallback;
-  if (!/^\/app(\/|$)/.test(decoded)) return fallback;
-  // Normalize trailing junk but keep query if present under /app
-  const pathOnly = decoded.split("?")[0] ?? decoded;
-  if (!/^\/app(\/|$)/.test(pathOnly)) return fallback;
+  if (!/^\/(app|demo|products|\(products\)|dashboard|pipeline|leads|cpq)(\/|$)/.test(decoded) && decoded !== "/") {
+    return fallback;
+  }
   return decoded;
 }
 

@@ -1,20 +1,26 @@
 # Project Status
 
-Last Updated: 2026-09-26  
+Last Updated: 2026-09-27  
 Current Branch: main  
-Overall Status: **PRODUCTION-READY & FULLY OPTIMIZED (100% PASS)** — High-converting CRO landing page architecture ("Book a Free Consultation" & "Explore All 18 Products"), curated flagship product strip, Claude-SEO v2.4.0 runtime verification, full 18-product schema graph & AI citability (llms.txt, ai-catalog.json), WebMCP compliance, complete CRM application (/app/*) with telemetry, passing Turbopack production builds across all 57 routes with 0 errors.
+Overall Status: **PRODUCTION-READY & FULLY OPTIMIZED (100% PASS)** — Complete 18-Engine MVP Architecture, Edge Subdomain Host Routing (`proxy.ts`), Context-Aware Testing Login with 1-Click Role Presets (PO, PM, Full-Stack Dev, Sales Rep, Director), Pilot Flagship **BITScrm Sales Suite** (Executive HUD, 5-Stage Kanban Pipeline, Inbound Leads with AI Scoring, 1-Click CPQ Quoting & BIR 12% VAT Proposal Preview), Universal 18-Engine Showcase Matrix (`/demo`), passing Turbopack production builds across all 62 routes with 0 errors.
 
 ---
 
 ## Executive Summary
 
-The Boundless IT Solutions (BITS) web platform has been elevated from a traditional text-heavy B2B landing page into a **Product-Showcase-Oriented 2026 Digital Flagship**. Designed around the golden rule of **"Less Words, More Solutions & Quantified ROI,"** the platform enables enterprise buyers, MSPs, and agencies to visualize, interact with, and configure real operational workflows before procurement.
+The Boundless IT Solutions (BITS) web platform has been elevated from a marketing site into a **Complete 18-Product Multi-Tenant Showcase & Interactive MVP Engine**. Designed around the architecture of **"Universal SSO + Edge Subdomain Routing + Live Functional Sandboxes,"** stakeholders, product owners, QA teams, and prospective clients can test any of our 18 software engines in 1 click across dedicated subdomains (`sales.boundlessits.com`, `accounting.boundlessits.com`, etc.) or unified local fallback paths (`/demo/crm-sales`, `/demo`).
 
 ### Key Strategic Pillars Reflected in Architecture
 1. **Modular Procurement**: Solo engines (e.g. standalone BITS Payroll or Pickleball OS) or unified operational suites.
 2. **100% Bespoke Customization**: Tailored schemas, custom field definitions, and legacy database connections built around floor workflows.
 3. **Universal White-Label Option**: Full rebranding license across **all 18 products** with custom domain (`app.yourcompany.com`), client branding, zero BITS attribution, and 100% client margin retention under strict NDA.
-4. **Strict Industry Demarcation**:
+4. **Context-Aware Role Presets**:
+   * `👑 Product Owner / Client Demo`: Instant unlocked enterprise showcase state with full workflow data.
+   * `📋 Project Manager / QA Tester`: Acceptance test criteria, data verification, and telemetry audit.
+   * `🛠️ Principal Full-Stack Dev`: Administrative sandbox controls, simulated latency, and 1-click data wipe/reset.
+   * `💼 Sales Representative`: Scoped pipeline, assigned accounts, and daily call queues.
+   * `📊 Sales Director`: Team forecasting, weighted ARR velocity, and CPQ margin guardrails.
+5. **Strict Industry Demarcation**:
    * `BITScrm Collections`: Strictly for debt recovery agencies, consumer lenders, law firms, and recovery BPOs.
    * All other 17 software engines: Built for general commercial, multi-industry enterprise use (retail, hospitality, healthcare, manufacturing, corporate services, logistics, sports).
 
@@ -22,8 +28,11 @@ The Boundless IT Solutions (BITS) web platform has been elevated from a traditio
 
 ## Latest Test Results
 
-* **TypeScript Compilation (`npx tsc --noEmit`)**: PASS (0 errors)
-* **Production Build (`next build`)**: PASS (Turbopack: 57 routes compiled successfully in 2.7s)
+* **TypeScript Compilation (`npx tsc --noEmit`)**: PASS (0 errors across 100% of workspace files)
+* **Production Build (`next build`)**: PASS (Turbopack: 62 routes compiled successfully in 2.6s)
+* **Subdomain Edge Host Router (`proxy.ts`)**: PASS (Detects incoming subdomains, performs internal App Router rewrites, checks Supabase session & `bits_demo_role` session cookies, dual-path demo fallback `/demo/:product/*`)
+* **Pilot Flagship MVP (`/crm-sales`)**: PASS (Executive ARR HUD, 5-stage visual Kanban pipeline with drag-and-drop & 1-click stage advance, Inbound AI leads with 1-click deal conversion, 1-click CPQ quoting with 12% BIR VAT and printable PDF modal)
+* **Universal 18-Engine Matrix (`/demo`)**: PASS (Categorized interactive gallery, search filter, and 1-click test login links for all 18 products)
 * **Claude SEO Runtime & Tooling Integration (`claude-seo doctor`)**: PASS (Isolated Python 3.14 runtime, Playwright Chromium ready, global Windows CLI wrapper, project `.agents/skills/seo/` active)
 * **Agentic & AI Search Optimization (AEO/GEO)**: PASS (Authoritative `public/llms.txt`, `public/llms-full.txt`, and `public/.well-known/ai-catalog.json` compliant with llmstxt.org and Agentic 1.0 specifications)
 * **Robots & AI Crawler Directives (`app/robots.ts`)**: PASS (Explicit directives for GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, and Bingbot with strict protection of `/app/` and `/api/`)

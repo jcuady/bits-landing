@@ -1,0 +1,450 @@
+/**
+ * Centralized 18-Product Registry for Subdomain Routing, MVPs, and Role Testing
+ * Boundless IT Solutions (BITS)
+ */
+
+export interface ProductMvpConfig {
+  id: string;
+  name: string;
+  shortName: string;
+  subdomain: string;
+  category: "crm" | "operations" | "workforce" | "supply-chain" | "venues" | "ai" | "hardware";
+  categoryLabel: string;
+  tagline: string;
+  demoPath: string; // Internal App Router path
+  marketingUrl: string; // Public marketing lander URL
+  defaultRole: string;
+  testRoles: {
+    id: string;
+    label: string;
+    description: string;
+    persona: "rep" | "manager" | "executive" | "admin";
+  }[];
+}
+
+export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
+  // ── CRM & REVENUE CLOUD ──
+  "crm-sales": {
+    id: "crm-sales",
+    name: "BITScrm Sales Suite",
+    shortName: "Sales CRM",
+    subdomain: "sales",
+    category: "crm",
+    categoryLabel: "CRM & Revenue",
+    tagline: "Visual Kanban deal pipeline, predictive win scoring, and 1-click CPQ quoting.",
+    demoPath: "/(products)/crm-sales",
+    marketingUrl: "/products/sales",
+    defaultRole: "sales_rep",
+    testRoles: [
+      {
+        id: "sales_rep",
+        label: "Sales Representative",
+        description: "Assigned active leads, personal deal pipeline, and daily quota metrics.",
+        persona: "rep",
+      },
+      {
+        id: "sales_director",
+        label: "Sales Director",
+        description: "Team revenue velocity, weighted pipeline forecasting, and CPQ margin approvals.",
+        persona: "manager",
+      },
+      {
+        id: "fullstack_admin",
+        label: "Full-Stack Dev / PO",
+        description: "Unrestricted administrative access with sandbox data reset & telemetry.",
+        persona: "admin",
+      },
+    ],
+  },
+  "crm-collections": {
+    id: "crm-collections",
+    name: "BITScrm Collections Platform",
+    shortName: "Collections Core",
+    subdomain: "collections",
+    category: "crm",
+    categoryLabel: "Debt Recovery & Dialing",
+    tagline: "WebRTC predictive dialer, Promise-to-Pay scheduling, and BSP Circulars 454/857 compliance.",
+    demoPath: "/app",
+    marketingUrl: "/bitscrm",
+    defaultRole: "recovery_agent",
+    testRoles: [
+      {
+        id: "recovery_agent",
+        label: "Recovery Collector",
+        description: "Auto-dialing debtor queue, contact window enforcement, and instant QR payment links.",
+        persona: "rep",
+      },
+      {
+        id: "floor_supervisor",
+        label: "Floor Supervisor",
+        description: "Real-time telephony HUD, audio waveform monitoring, whisper coaching, and barge-in.",
+        persona: "manager",
+      },
+      {
+        id: "fullstack_admin",
+        label: "Full-Stack Dev / PO",
+        description: "Unrestricted administrative access with call audio logs & compliance audit trail.",
+        persona: "admin",
+      },
+    ],
+  },
+  "crm-support": {
+    id: "crm-support",
+    name: "BITScrm Support Desk",
+    shortName: "Support Desk",
+    subdomain: "support",
+    category: "crm",
+    categoryLabel: "Helpdesk & Service",
+    tagline: "Omnichannel customer support with real-time P1–P4 SLA countdown HUD.",
+    demoPath: "/(products)/crm-support",
+    marketingUrl: "/products/support",
+    defaultRole: "support_agent",
+    testRoles: [
+      {
+        id: "support_agent",
+        label: "Tier 1 Support Agent",
+        description: "Ticket queue, automated responses, customer sentiment telemetry.",
+        persona: "rep",
+      },
+      {
+        id: "service_manager",
+        label: "Customer Service Manager",
+        description: "SLA breach alerts, CSAT scores, and agent workload rebalancing.",
+        persona: "manager",
+      },
+    ],
+  },
+  "crm-marketing": {
+    id: "crm-marketing",
+    name: "BITScrm Marketing Journeys",
+    shortName: "Marketing Cloud",
+    subdomain: "marketing",
+    category: "crm",
+    categoryLabel: "Marketing Automation",
+    tagline: "Multi-channel automated drip journeys via SMS, Viber, and email with attribution.",
+    demoPath: "/(products)/crm-marketing",
+    marketingUrl: "/products/marketing",
+    defaultRole: "growth_marketer",
+    testRoles: [
+      {
+        id: "growth_marketer",
+        label: "Campaign Manager",
+        description: "Visual journey builder, audience segmentation, and blast scheduling.",
+        persona: "rep",
+      },
+    ],
+  },
+  "crm-commerce": {
+    id: "crm-commerce",
+    name: "BITScrm Commerce & Billing",
+    shortName: "Commerce Engine",
+    subdomain: "commerce",
+    category: "crm",
+    categoryLabel: "Subscriptions & Billing",
+    tagline: "Tokenized PCI payments, Maya/card gateways, and smart recurring dunning.",
+    demoPath: "/(products)/crm-commerce",
+    marketingUrl: "/products/commerce",
+    defaultRole: "billing_specialist",
+    testRoles: [
+      {
+        id: "billing_specialist",
+        label: "Billing Specialist",
+        description: "Invoice batches, recurring subscription management, and payment reconciliation.",
+        persona: "rep",
+      },
+    ],
+  },
+
+  // ── FINANCIALS & WORKFORCE ──
+  "accounting": {
+    id: "accounting",
+    name: "BITS Accounting & ERP",
+    shortName: "Accounting ERP",
+    subdomain: "accounting",
+    category: "operations",
+    categoryLabel: "ERP & Financials",
+    tagline: "Audit-ready General Ledger, 3-way PO matching, and BIR CAS computerized tax filing.",
+    demoPath: "/(products)/accounting",
+    marketingUrl: "/products/accounting",
+    defaultRole: "bookkeeper",
+    testRoles: [
+      {
+        id: "bookkeeper",
+        label: "Staff Accountant",
+        description: "Accounts payable, journal vouchers, and bank reconciliation.",
+        persona: "rep",
+      },
+      {
+        id: "cfo",
+        label: "Chief Financial Officer",
+        description: "Multi-entity consolidation, trial balances, and BIR CAS audit packages.",
+        persona: "executive",
+      },
+    ],
+  },
+  "payroll": {
+    id: "payroll",
+    name: "BITS Payroll Engine",
+    shortName: "Payroll Core",
+    subdomain: "payroll",
+    category: "workforce",
+    categoryLabel: "Payroll & Tax",
+    tagline: "Automated TRAIN Law tax tables, SSS/PhilHealth/Pag-IBIG, and bank batch feeds.",
+    demoPath: "/(products)/payroll",
+    marketingUrl: "/products/payroll",
+    defaultRole: "payroll_officer",
+    testRoles: [
+      {
+        id: "payroll_officer",
+        label: "Payroll Specialist",
+        description: "Biometric time-sync, overtime, night differential, and payslips.",
+        persona: "rep",
+      },
+    ],
+  },
+  "hrms": {
+    id: "hrms",
+    name: "BITS HRMS Workforce OS",
+    shortName: "HRMS Cloud",
+    subdomain: "hrms",
+    category: "workforce",
+    categoryLabel: "HR & People",
+    tagline: "Multi-shift rosters, leave approvals, employee records, and DOLE audit readiness.",
+    demoPath: "/(products)/hrms",
+    marketingUrl: "/products/hrms",
+    defaultRole: "hr_manager",
+    testRoles: [
+      {
+        id: "hr_manager",
+        label: "HR Director",
+        description: "Shift allocation, leave matrix, onboarding checklists, and 201 filing.",
+        persona: "manager",
+      },
+    ],
+  },
+
+  // ── SUPPLY CHAIN & FIELD OPS ──
+  "logistics": {
+    id: "logistics",
+    name: "BITS Logistics Cloud",
+    shortName: "Logistics Fleet",
+    subdomain: "logistics",
+    category: "supply-chain",
+    categoryLabel: "Fleet & Dispatch",
+    tagline: "AI multi-stop route optimization, real-time GPS tracking, and driver mobile ePOD.",
+    demoPath: "/(products)/logistics",
+    marketingUrl: "/products/logistics",
+    defaultRole: "fleet_dispatcher",
+    testRoles: [
+      {
+        id: "fleet_dispatcher",
+        label: "Fleet Dispatcher",
+        description: "Live vehicle map, dispatch assigner, and delivery delay notifications.",
+        persona: "rep",
+      },
+    ],
+  },
+  "inventory": {
+    id: "inventory",
+    name: "BITS Inventory Engine",
+    shortName: "Inventory Hub",
+    subdomain: "inventory",
+    category: "supply-chain",
+    categoryLabel: "Warehouse & Stock",
+    tagline: "Multi-warehouse stock allocation, barcode/RFID scanning station, and par levels.",
+    demoPath: "/(products)/inventory",
+    marketingUrl: "/products/inventory",
+    defaultRole: "warehouse_lead",
+    testRoles: [
+      {
+        id: "warehouse_lead",
+        label: "Warehouse Supervisor",
+        description: "Stock ledger, low-stock threshold alerts, and bin locations.",
+        persona: "rep",
+      },
+    ],
+  },
+  "construction": {
+    id: "construction",
+    name: "BITS Construction Tracker",
+    shortName: "Project Tracker",
+    subdomain: "construction",
+    category: "operations",
+    categoryLabel: "Jobsite Tracking",
+    tagline: "Jobsite Gantt milestones, blueprint vault, and material cost leakage prevention.",
+    demoPath: "/(products)/construction",
+    marketingUrl: "/products/construction",
+    defaultRole: "site_engineer",
+    testRoles: [
+      {
+        id: "site_engineer",
+        label: "Project Manager",
+        description: "Milestone completion, subcontractor punch lists, and daily logs.",
+        persona: "manager",
+      },
+    ],
+  },
+
+  // ── SPORTS, VENUES & QUEUING ──
+  "pickleball": {
+    id: "pickleball",
+    name: "BITS Pickleball & Court OS",
+    shortName: "Pickleball OS",
+    subdomain: "pickleball",
+    category: "venues",
+    categoryLabel: "Sports Arenas",
+    tagline: "Digital paddle rack queue, court reservation scheduling, and live TV scoreboard feeds.",
+    demoPath: "/(products)/pickleball",
+    marketingUrl: "/products/pickleball",
+    defaultRole: "arena_manager",
+    testRoles: [
+      {
+        id: "arena_manager",
+        label: "Court Manager",
+        description: "Paddle rotation queue, court assignments, and POS tournament ticketing.",
+        persona: "manager",
+      },
+    ],
+  },
+  "sports-hub": {
+    id: "sports-hub",
+    name: "BITS Sports Arena Hub",
+    shortName: "Sports Hub",
+    subdomain: "sports",
+    category: "venues",
+    categoryLabel: "Venues & Athletics",
+    tagline: "Multi-court facility booking, tournament ladders, and live TV scoreboard displays.",
+    demoPath: "/(products)/sports-hub",
+    marketingUrl: "/products/sports-hub",
+    defaultRole: "facility_coordinator",
+    testRoles: [
+      {
+        id: "facility_coordinator",
+        label: "Facility Coordinator",
+        description: "Multi-court scheduling, tournament brackets, and locker allocation.",
+        persona: "manager",
+      },
+    ],
+  },
+  "queuing": {
+    id: "queuing",
+    name: "BITS Smart Queuing",
+    shortName: "Smart Queue",
+    subdomain: "queuing",
+    category: "venues",
+    categoryLabel: "Customer Flow",
+    tagline: "Virtual QR tickets, overhead TV chime displays, and teller counter HUD.",
+    demoPath: "/(products)/queuing",
+    marketingUrl: "/products/queuing",
+    defaultRole: "counter_teller",
+    testRoles: [
+      {
+        id: "counter_teller",
+        label: "Window Teller",
+        description: "Next ticket caller, transfer desk, and wait-time statistics.",
+        persona: "rep",
+      },
+    ],
+  },
+  "booking": {
+    id: "booking",
+    name: "BITS Booking System",
+    shortName: "Booking OS",
+    subdomain: "booking",
+    category: "venues",
+    categoryLabel: "Appointments",
+    tagline: "Online client reservations, capacity escrow deposits, and automated reminders.",
+    demoPath: "/(products)/booking",
+    marketingUrl: "/products/booking",
+    defaultRole: "desk_receptionist",
+    testRoles: [
+      {
+        id: "desk_receptionist",
+        label: "Front Desk Staff",
+        description: "Calendar slots, client confirmations, and deposit tracking.",
+        persona: "rep",
+      },
+    ],
+  },
+
+  // ── AI INFRASTRUCTURE & HARDWARE ──
+  "bitsagent": {
+    id: "bitsagent",
+    name: "BITSagent Voice AI Operations",
+    shortName: "Voice AI Agent",
+    subdomain: "agent",
+    category: "ai",
+    categoryLabel: "Conversational AI",
+    tagline: "Sub-300ms ultra-realistic conversational voice agent with zero hallucinations.",
+    demoPath: "/(products)/bitsagent",
+    marketingUrl: "/bitsagent",
+    defaultRole: "ai_architect",
+    testRoles: [
+      {
+        id: "ai_architect",
+        label: "AI Operations Lead",
+        description: "Live prompt tuning, voice telemetry, call transcripts, and RAG grounding.",
+        persona: "admin",
+      },
+    ],
+  },
+  "rag-engine": {
+    id: "rag-engine",
+    name: "BITS RAG Enterprise Knowledge",
+    shortName: "RAG Engine",
+    subdomain: "rag",
+    category: "ai",
+    categoryLabel: "Enterprise Search",
+    tagline: "Ground AI agents in proprietary PDFs, contracts, SOPs, and SQL databases.",
+    demoPath: "/(products)/rag-engine",
+    marketingUrl: "/products/rag-engine",
+    defaultRole: "knowledge_admin",
+    testRoles: [
+      {
+        id: "knowledge_admin",
+        label: "Knowledge Officer",
+        description: "Document embeddings, chunking preview, and vector search inspection.",
+        persona: "admin",
+      },
+    ],
+  },
+  "nfc-card": {
+    id: "nfc-card",
+    name: "BITS Smart NFC Card & Identity",
+    shortName: "Smart NFC Card",
+    subdomain: "nfc",
+    category: "hardware",
+    categoryLabel: "Digital Identity",
+    tagline: "Contactless NFC business identity cards with real-time analytics & dynamic link editing.",
+    demoPath: "/(products)/nfc-card",
+    marketingUrl: "/products/nfc-card",
+    defaultRole: "card_holder",
+    testRoles: [
+      {
+        id: "card_holder",
+        label: "Cardholder / Executive",
+        description: "Dynamic VCF editor, tap analytics, and link routing.",
+        persona: "rep",
+      },
+    ],
+  },
+};
+
+/**
+ * Helper to resolve a product by its subdomain key (e.g. 'sales' -> config)
+ */
+export function getProductBySubdomain(subdomain: string): ProductMvpConfig | undefined {
+  const normalized = subdomain.toLowerCase().trim();
+  return Object.values(PRODUCT_REGISTRY).find((p) => p.subdomain === normalized);
+}
+
+/**
+ * Helper to resolve a product by its ID or slug (e.g. 'crm-sales' or 'sales')
+ */
+export function getProductById(idOrSlug: string): ProductMvpConfig | undefined {
+  const normalized = idOrSlug.toLowerCase().trim();
+  if (PRODUCT_REGISTRY[normalized]) return PRODUCT_REGISTRY[normalized];
+  return Object.values(PRODUCT_REGISTRY).find(
+    (p) => p.id === normalized || p.subdomain === normalized
+  );
+}

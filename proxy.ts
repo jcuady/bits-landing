@@ -1,11 +1,62 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
+// Subdomain-to-Product-ID routing registry
+const SUBDOMAIN_PRODUCT_MAP: Record<string, string> = {
+  sales: "crm-sales",
+  collections: "crm-collections",
+  support: "crm-support",
+  marketing: "crm-marketing",
+  commerce: "crm-commerce",
+  accounting: "accounting",
+  erp: "accounting",
+  payroll: "payroll",
+  hrms: "hrms",
+  logistics: "logistics",
+  inventory: "inventory",
+  construction: "construction",
+  pickleball: "pickleball",
+  sports: "sports-hub",
+  booking: "booking",
+  queuing: "queuing",
+  agent: "bitsagent",
+  rag: "rag-engine",
+  nfc: "nfc-card",
+};
+
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
-  let response = NextResponse.next({ request });
+  const host = request.headers.get("host") || "";
 
-  // Create a Supabase client that can read/write session cookies
+  // 1. Strip RSC query param from brandbook (static HTML file)
+  if (pathname === "/brandbook.html" && request.nextUrl.searchParams.has("_rsc")) {
+    const url = request.nextUrl.clone();
+    url.searchParams.delete("_rsc");
+    return NextResponse.redirect(url, 308);
+  }
+
+  // 2. Detect Subdomain (e.g. "sales.boundlessits.com", "sales.localhost:3000")
+  let subdomain: string | null = null;
+  const cleanHost = host.split(":")[0]; // remove port
+  const parts = cleanHost.split(".");
+
+  if (parts.length > 2 && !cleanHost.includes("localhost")) {
+    subdomain = parts[0].toLowerCase();
+  } else if (cleanHost.includes("localhost") && parts.length > 1) {
+    subdomain = parts[0].toLowerCase();
+  }
+
+  // Ignore standard non-product subdomains
+  if (subdomain === "www" || subdomain === "localhost" || subdomain === "boundlessits") {
+    subdomain = null;
+  }
+
+  const productId = subdomain ? SUBDOMAIN_PRODUCT_MAP[subdomain] : null;
+
+  // 3. Supabase Auth + Demo Role Cookie Validation
+  const response = NextResponse.next({ request });
+  const demoRoleCookie = request.cookies.get("bits_demo_role")?.value;
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -15,7 +66,6 @@ export async function proxy(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          // Write refreshed session cookies to both the request and the response
           cookiesToSet.forEach(({ name, value, options }) => {
             request.cookies.set(name, value);
             response.cookies.set(name, value, options);
@@ -25,12 +75,58 @@ export async function proxy(request: NextRequest) {
     }
   );
 
-  // Always use getUser() — not getSession() — for server-side validation
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const authResult = await supabase.auth.getUser();
+    user = authResult.data.user;
+  } catch {
+    // Supabase unreachable or offline fallback
+    user = null;
+  }
 
-  // Guard /app/* routes — redirect unauthenticated users to /login
+  const isAuthenticated = Boolean(user || demoRoleCookie);
+
+  // 4. Subdomain-Specific Routing (e.g. sales.boundlessits.com)
+  if (productId) {
+    // If user is at /login on the subdomain
+    if (pathname === "/login") {
+      if (isAuthenticated) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/";
+        return NextResponse.redirect(url);
+      }
+      return response;
+    }
+
+    // Require auth or demo session to access product workspace
+    if (!isAuthenticated) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("product", productId);
+      url.searchParams.set("next", pathname);
+      return NextResponse.redirect(url);
+    }
+
+    // Rewrite internally to the product workspace directory (e.g. /crm-sales/pipeline)
+    const url = request.nextUrl.clone();
+    url.pathname = `/${productId}${pathname === "/" ? "" : pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  // 5. Dual-Path Demo Routing on Main Domain: /demo/:product/:subpath* -> /:product/:subpath*
+  if (pathname.startsWith("/demo/")) {
+    const demoSegments = pathname.split("/").filter(Boolean); // ['demo', 'crm-sales', 'pipeline']
+    const requestedProduct = demoSegments[1];
+    if (requestedProduct && SUBDOMAIN_PRODUCT_MAP[requestedProduct] || Object.values(SUBDOMAIN_PRODUCT_MAP).includes(requestedProduct)) {
+      const targetProduct = SUBDOMAIN_PRODUCT_MAP[requestedProduct] || requestedProduct;
+      const remainingPath = demoSegments.slice(2).join("/");
+      const url = request.nextUrl.clone();
+      url.pathname = `/${targetProduct}${remainingPath ? `/${remainingPath}` : ""}`;
+      return NextResponse.rewrite(url);
+    }
+  }
+
+  // 6. Traditional Core App Guard (/app/*)
   if (pathname.startsWith("/app")) {
     if (!user) {
       const url = request.nextUrl.clone();
@@ -46,24 +142,25 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  // Redirect authenticated users away from /login and /forgot-password
-  if ((pathname === "/login" || pathname === "/forgot-password") && user) {
+  // 7. Redirect authenticated users away from /login and /forgot-password on main domain
+  if ((pathname === "/login" || pathname === "/forgot-password") && isAuthenticated) {
+    const nextParam = request.nextUrl.searchParams.get("next");
+    const productParam = request.nextUrl.searchParams.get("product");
     const url = request.nextUrl.clone();
-    url.pathname = "/app/dashboard";
     url.search = "";
+    if (productParam && productParam !== "crm-collections") {
+      url.pathname = `/demo/${productParam}`;
+    } else {
+      url.pathname = nextParam && nextParam.startsWith("/app") ? nextParam : "/app/dashboard";
+    }
     return NextResponse.redirect(url);
-  }
-
-  // Strip RSC query param from brandbook (static HTML file)
-  if (pathname === "/brandbook.html" && request.nextUrl.searchParams.has("_rsc")) {
-    const url = request.nextUrl.clone();
-    url.searchParams.delete("_rsc");
-    return NextResponse.redirect(url, 308);
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ["/app/:path*", "/login", "/forgot-password", "/brandbook.html"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf)$).*)",
+  ],
 };

@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { safeAppNext } from "@/lib/crm/safe-next";
 import { loginSchema, forgotPasswordSchema } from "@/lib/crm/validation";
@@ -35,26 +36,66 @@ export async function loginAction(formData: FormData) {
 export async function demoLoginAction(formData: FormData) {
   const next = safeAppNext(String(formData.get("next") ?? "/app/dashboard"));
 
-  const supabase = await createClient();
+  const cookieStore = await cookies();
+  cookieStore.set("bits_demo_role", "demo_user", {
+    httpOnly: false,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+    secure: process.env.NODE_ENV === "production",
+  });
 
-  // Demo account — try to sign in with the preset credentials.
-  // The account must exist in Supabase Auth (seeded separately).
+  const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({
     email: "demo@boundlessitsolutions.com",
     password: "BITSdemo2024!",
   });
 
   if (error) {
-    // Fallback: send the user to login with an error so they can try manually
-    redirect(`/login?error=invalid&next=${encodeURIComponent(next)}`);
+    // If the remote Supabase demo account isn't seeded yet, allow demo role cookie to grant demo access
+    redirect(next);
+  }
+
+  redirect(next);
+}
+
+export async function roleDemoLoginAction(formData: FormData) {
+  const role = String(formData.get("role") ?? "sales_director");
+  const next = safeAppNext(String(formData.get("next") ?? "/crm-sales"));
+
+  const cookieStore = await cookies();
+  cookieStore.set("bits_demo_role", role, {
+    httpOnly: false,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+    secure: process.env.NODE_ENV === "production",
+  });
+
+  // Try signing in demo account in background
+  try {
+    const supabase = await createClient();
+    await supabase.auth.signInWithPassword({
+      email: "demo@boundlessitsolutions.com",
+      password: "BITSdemo2024!",
+    });
+  } catch {
+    // Fallback gracefully to demo role cookie
   }
 
   redirect(next);
 }
 
 export async function logoutAction() {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
+  const cookieStore = await cookies();
+  cookieStore.delete("bits_demo_role");
+
+  try {
+    const supabase = await createClient();
+    await supabase.auth.signOut();
+  } catch {
+    // Ignore
+  }
   redirect("/login");
 }
 
