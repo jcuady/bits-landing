@@ -9,7 +9,13 @@
 import {
   buildTeamNotificationEmail,
   buildClientWelcomeAutoResponder,
+  buildBookingConfirmationEmail,
+  buildRoadmapDeliveryEmail,
+  buildConsultationFollowUpEmail,
   type EmailLeadData,
+  type EmailBookingData,
+  type EmailRoadmapData,
+  type EmailFollowUpData,
 } from "./templates";
 
 export interface SendEmailOptions {
@@ -110,10 +116,10 @@ export async function sendEmailWithLog(
 }
 
 /**
- * Inbound Form Marketing Automation Flow:
- * 1. Dispatches Internal Notification to boundlessitsolutions@gmail.com
- * 2. Dispatches Client Operational Wish List Auto-Responder to lead work email
- * 3. Updates public.marketing_automations telemetry in Supabase
+ * 1. Inbound Form Marketing Automation Flow:
+ * - Dispatches Internal Notification to boundlessitsolutions@gmail.com
+ * - Dispatches Client Operational Wish List Auto-Responder to lead work email
+ * - Updates public.marketing_automations telemetry in Supabase
  */
 export async function executeInboundFormAutomation(lead: EmailLeadData): Promise<{
   teamNotification: EmailDispatchResult;
@@ -122,7 +128,7 @@ export async function executeInboundFormAutomation(lead: EmailLeadData): Promise
   const inbox = process.env.CONTACT_INBOX || "boundlessitsolutions@gmail.com";
   const verifiedSender = process.env.CONTACT_FROM || "BITS Inquiries <inquiries@boundlessits.com>";
 
-  // 1. Team Notification Email
+  // A. Team Notification Email
   const teamEmail = buildTeamNotificationEmail(lead);
   const teamResult = await sendEmailWithLog({
     to: inbox,
@@ -139,7 +145,7 @@ export async function executeInboundFormAutomation(lead: EmailLeadData): Promise
     },
   });
 
-  // 2. Client Welcome & Architecture Confirmation Email
+  // B. Client Welcome & Instant Booking Link Auto-Responder
   const clientEmail = buildClientWelcomeAutoResponder(lead);
   const clientResult = await sendEmailWithLog({
     to: lead.email,
@@ -155,12 +161,11 @@ export async function executeInboundFormAutomation(lead: EmailLeadData): Promise
     },
   });
 
-  // 3. Increment execution counts in marketing_automations table
+  // C. Increment execution counts in marketing_automations table
   try {
     const { createServiceClient } = await import("@/lib/supabase/server");
     const supabase = await createServiceClient();
 
-    // Update 'Instant OPERATIONS 360 Client Welcome'
     try {
       await supabase.rpc("increment_automation_count", {
         automation_name: "Instant OPERATIONS 360 Client Welcome",
@@ -181,4 +186,76 @@ export async function executeInboundFormAutomation(lead: EmailLeadData): Promise
     teamNotification: teamResult,
     clientWelcome: clientResult,
   };
+}
+
+/**
+ * 2. Send 20-Minute Discovery Call Confirmation
+ */
+export async function sendBookingConfirmation(
+  booking: EmailBookingData
+): Promise<EmailDispatchResult> {
+  const verifiedSender = process.env.CONTACT_FROM || "BITS Inquiries <inquiries@boundlessits.com>";
+  const email = buildBookingConfirmationEmail(booking);
+
+  return sendEmailWithLog({
+    to: booking.email,
+    from: verifiedSender,
+    replyTo: "bits_inquiries@boundlessits.com",
+    subject: email.subject,
+    html: email.html,
+    text: email.text,
+    templateType: "discovery_call_confirmation",
+    metadata: {
+      company: booking.company,
+      date: booking.date,
+      time: booking.time,
+    },
+  });
+}
+
+/**
+ * 3. Send Tailored Architecture Roadmap & Blueprint Delivery
+ */
+export async function sendRoadmapDelivery(
+  roadmap: EmailRoadmapData
+): Promise<EmailDispatchResult> {
+  const verifiedSender = process.env.CONTACT_FROM || "BITS Inquiries <inquiries@boundlessits.com>";
+  const email = buildRoadmapDeliveryEmail(roadmap);
+
+  return sendEmailWithLog({
+    to: roadmap.email,
+    from: verifiedSender,
+    replyTo: "bits_inquiries@boundlessits.com",
+    subject: email.subject,
+    html: email.html,
+    text: email.text,
+    templateType: "architecture_roadmap_delivery",
+    metadata: {
+      company: roadmap.company,
+      solutionName: roadmap.solutionName,
+    },
+  });
+}
+
+/**
+ * 4. Send Consultation Check-In & Friendly Follow-Up
+ */
+export async function sendConsultationFollowUp(
+  followUp: EmailFollowUpData
+): Promise<EmailDispatchResult> {
+  const verifiedSender = process.env.CONTACT_FROM || "BITS Inquiries <inquiries@boundlessits.com>";
+  const email = buildConsultationFollowUpEmail(followUp);
+
+  return sendEmailWithLog({
+    to: followUp.email,
+    from: verifiedSender,
+    replyTo: "bits_inquiries@boundlessits.com",
+    subject: email.subject,
+    html: email.html,
+    text: email.text,
+    templateType: "consultation_follow_up",
+    metadata: {
+      company: followUp.company,
+    },
+  });
 }
