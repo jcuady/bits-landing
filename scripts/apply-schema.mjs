@@ -139,6 +139,9 @@ async function runSQL(sql, label) {
   await runSQL(schema, "Create inbound_leads table + indexes + trigger");
   await runSQL(policies, "Create RLS policies");
 
+  // Apply marketing automations, email logs, and campaigns
+  await import("./apply-marketing-schema.mjs");
+
   console.log("\n✅ Schema applied. Now seeding data…");
   
   // Run seed

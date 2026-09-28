@@ -114,7 +114,7 @@ export async function recordInboundLead(data: {
     current_system: data.currentSystem ?? "Legacy Systems",
     primary_challenge: data.primaryChallenge ?? "Collections & Ops Automation",
     preferred_method: data.preferredMethod ?? "Executive Demo",
-    interest: data.interest ?? "BITScrm Operations Platform",
+    interest: data.interest ?? "OPERATIONS 360 Flagship Platform",
     message: data.message,
     source: data.source ?? "Website Contact Form",
     lead_score: score,

@@ -102,3 +102,115 @@ create policy "crm_users_delete_leads"
   for delete
   to authenticated
   using (true);
+
+-- ============================================================
+-- 6. Marketing Automations Table
+-- ============================================================
+create table if not exists public.marketing_automations (
+  id               uuid primary key default gen_random_uuid(),
+  name             text not null,
+  trigger_type     text not null,
+  action_type      text not null,
+  description      text,
+  conditions       jsonb default '{}'::jsonb,
+  status           text not null default 'active' check (status in ('active', 'paused', 'draft')),
+  execution_count  integer not null default 0,
+  last_executed_at timestamptz,
+  created_at       timestamptz not null default now(),
+  updated_at       timestamptz not null default now()
+);
+
+create index if not exists marketing_automations_status_idx on public.marketing_automations (status);
+alter table public.marketing_automations enable row level security;
+
+-- Policies for marketing_automations
+drop policy if exists "crm_users_read_automations" on public.marketing_automations;
+create policy "crm_users_read_automations"
+  on public.marketing_automations
+  for select
+  to authenticated
+  using (true);
+
+drop policy if exists "service_manage_automations" on public.marketing_automations;
+create policy "service_manage_automations"
+  on public.marketing_automations
+  for all
+  to service_role
+  using (true)
+  with check (true);
+
+-- ============================================================
+-- 7. Email Logs Table (Resend Telemetry & Inbound Inquiries)
+-- ============================================================
+create table if not exists public.email_logs (
+  id              uuid primary key default gen_random_uuid(),
+  resend_id       text,
+  direction       text not null default 'outbound' check (direction in ('inbound', 'outbound')),
+  recipient       text not null,
+  sender          text not null,
+  subject         text not null,
+  template        text not null,
+  status          text not null default 'sent' check (status in ('sent', 'delivered', 'failed', 'bounced')),
+  error_message   text,
+  metadata        jsonb default '{}'::jsonb,
+  sent_at         timestamptz not null default now()
+);
+
+create index if not exists email_logs_sent_at_idx on public.email_logs (sent_at desc);
+create index if not exists email_logs_recipient_idx on public.email_logs (recipient);
+alter table public.email_logs enable row level security;
+
+-- Policies for email_logs
+drop policy if exists "crm_users_read_email_logs" on public.email_logs;
+create policy "crm_users_read_email_logs"
+  on public.email_logs
+  for select
+  to authenticated
+  using (true);
+
+drop policy if exists "service_manage_email_logs" on public.email_logs;
+create policy "service_manage_email_logs"
+  on public.email_logs
+  for all
+  to service_role
+  using (true)
+  with check (true);
+
+-- ============================================================
+-- 8. Marketing Campaigns Table
+-- ============================================================
+create table if not exists public.marketing_campaigns (
+  id              uuid primary key default gen_random_uuid(),
+  name            text not null,
+  channel         text not null default 'Email',
+  subject         text,
+  status          text not null default 'active' check (status in ('draft', 'active', 'paused', 'completed')),
+  owner           text not null default 'Malcolm Cuady',
+  target_audience text not null default 'Inbound Leads',
+  sent_count      integer not null default 0,
+  delivered_count integer not null default 0,
+  open_rate       numeric(5, 2) not null default 0,
+  click_rate      numeric(5, 2) not null default 0,
+  created_at      timestamptz not null default now(),
+  updated_at      timestamptz not null default now()
+);
+
+create index if not exists marketing_campaigns_status_idx on public.marketing_campaigns (status);
+alter table public.marketing_campaigns enable row level security;
+
+-- Policies for marketing_campaigns
+drop policy if exists "crm_users_read_campaigns" on public.marketing_campaigns;
+create policy "crm_users_read_campaigns"
+  on public.marketing_campaigns
+  for select
+  to authenticated
+  using (true);
+
+drop policy if exists "service_manage_campaigns" on public.marketing_campaigns;
+create policy "service_manage_campaigns"
+  on public.marketing_campaigns
+  for all
+  to service_role
+  using (true)
+  with check (true);
+
