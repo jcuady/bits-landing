@@ -30,6 +30,21 @@ export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const host = request.headers.get("host") || "";
 
+  // 0. Fast-path bypass: never run Supabase auth or edge logic on SEO metadata & static feeds
+  if (
+    pathname === "/sitemap.xml" ||
+    pathname === "/robots.txt" ||
+    pathname === "/manifest.webmanifest" ||
+    pathname === "/brandbook" ||
+    pathname === "/brandbook.html" ||
+    pathname.startsWith("/.well-known") ||
+    pathname.endsWith(".xml") ||
+    pathname.endsWith(".txt") ||
+    pathname.endsWith(".md")
+  ) {
+    return NextResponse.next();
+  }
+
   // 1. Strip RSC query param from brandbook (static HTML file)
   if (pathname === "/brandbook.html" && request.nextUrl.searchParams.has("_rsc")) {
     const url = request.nextUrl.clone();
@@ -166,7 +181,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|llms\\.txt|llms-full\\.txt|index\\.md|bitscrm\\.md|bitsagent\\.md|brandbook\\.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|xml|txt|md|webmanifest)$).*)",
   ],
 };
 
