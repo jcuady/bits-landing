@@ -3,222 +3,238 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Magnetic } from "@/components/ui/magnetic";
 import { HeroProduct } from "@/components/sections/hero-product";
-import { ArrowUpRight, ArrowRight, Check, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
 
-// Curated flagship products across core business operational categories
-const featuredProducts = [
+// Core flagship software engines mapped across enterprise operational categories
+const coreEngines = [
   {
+    category: "Flagship Suite",
     name: "OPERATIONS 360",
-    badge: "Flagship Suite",
+    desc: "CRM, QA, Dialer, LMS & WFM",
     href: "/#operations-360",
-    dotColor: "bg-blue-600",
-    hoverBorder: "hover:border-blue-300 hover:bg-blue-50/80 hover:text-blue-700 ring-1 ring-blue-500/20",
+    isFlagship: true,
   },
   {
-    name: "BITSagent Voice AI",
-    badge: "24/7 Phone Agent",
+    category: "Autonomous AI",
+    name: "BITSagent Voice",
+    desc: "24/7 Voice & Automated QA",
     href: "/bitsagent",
-    dotColor: "bg-violet-600",
-    hoverBorder: "hover:border-violet-300 hover:bg-violet-50/80 hover:text-violet-700",
+    isFlagship: false,
   },
   {
-    name: "Accounting & BIR CAS",
-    badge: "Tax-Ready ERP",
+    category: "Statutory ERP",
+    name: "Accounting & CAS",
+    desc: "BIR Tax & General Ledger",
     href: "/products/accounting",
-    dotColor: "bg-emerald-600",
-    hoverBorder: "hover:border-emerald-300 hover:bg-emerald-50/80 hover:text-emerald-700",
+    isFlagship: false,
   },
   {
+    category: "Workforce",
     name: "DOLE Payroll",
-    badge: "TRAIN Law",
+    desc: "TRAIN Law Compliance",
     href: "/products/payroll",
-    dotColor: "bg-teal-600",
-    hoverBorder: "hover:border-teal-300 hover:bg-teal-50/80 hover:text-teal-700",
+    isFlagship: false,
   },
   {
+    category: "Supply Chain",
     name: "Logistics Cloud",
-    badge: "Fleet & Routes",
+    desc: "Fleet Dispatch & Waybills",
     href: "/products/logistics",
-    dotColor: "bg-amber-600",
-    hoverBorder: "hover:border-amber-300 hover:bg-amber-50/80 hover:text-amber-700",
+    isFlagship: false,
   },
   {
-    name: "Pickleball & Arena OS",
-    badge: "Court Queues",
-    href: "/products/pickleball",
-    dotColor: "bg-rose-600",
-    hoverBorder: "hover:border-rose-300 hover:bg-rose-50/80 hover:text-rose-700",
-  },
-  {
+    category: "Hardware & IoT",
     name: "Smart NFC Card",
-    badge: "1 Tap for Life",
+    desc: "1 Tap Enterprise Identity",
     href: "/products/nfc-card",
-    dotColor: "bg-cyan-600",
-    hoverBorder: "hover:border-cyan-300 hover:bg-cyan-50/80 hover:text-cyan-700",
+    isFlagship: false,
   },
 ];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/60 via-blue-50/20 to-white">
-      {/* Soft atmospheric background lights */}
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 pt-16 pb-12 sm:pt-20 sm:pb-16 md:pt-24 border-b border-slate-200/80">
+      {/* Subtle atmospheric gradient glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(59,130,246,0.12),transparent_70%)]" />
-        <div className="absolute -right-48 top-1/4 h-[500px] w-[500px] rounded-full bg-blue-500/[0.04] blur-[100px]" />
-        <div className="absolute -left-48 top-1/3 h-[500px] w-[500px] rounded-full bg-indigo-500/[0.03] blur-[80px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(25,117,242,0.08),transparent_75%)]" />
+        <div className="absolute right-0 top-1/4 h-[420px] w-[420px] rounded-full bg-blue-500/[0.03] blur-[120px]" />
+        <div className="absolute left-0 top-1/3 h-[420px] w-[420px] rounded-full bg-indigo-500/[0.03] blur-[120px]" />
       </div>
 
       <Container className="relative z-10">
-        <div className="flex flex-col items-center pb-12 pt-16 sm:pb-16 sm:pt-20 md:pt-24">
-          {/* Header Block: Authoritative, executive, high-converting */}
+        <div className="flex flex-col items-center">
+          {/* Header Block: Authoritative, executive, high-converting CRO */}
           <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-            {/* Trust Eyebrow Badge */}
-            <Reveal y={12}>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-white/95 px-4 py-1.5 shadow-2xs backdrop-blur-md">
-                <span className="relative flex size-2" aria-hidden>
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+            {/* Crisp Architectural Eyebrow (No icons, pure typographic precision) */}
+            <Reveal y={10}>
+              <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 shadow-2xs backdrop-blur-md">
+                <span className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-blue-700 font-mono">
+                  ENTERPRISE PLATFORM
                 </span>
-                <span className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-blue-700">
-                  Introducing OPERATIONS 360 · One System. One View. One Source of Truth.
+                <span className="h-3 w-px bg-slate-200" aria-hidden />
+                <span className="text-[0.72rem] font-bold text-slate-800">
+                  OPERATIONS 360 · One System. One View. One Source of Truth.
                 </span>
               </div>
             </Reveal>
 
-            {/* Main Headline in authoritative, memorable English */}
-            <Reveal delay={0.05} y={16}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.08] max-w-4xl text-balance">
+            {/* Main Headline: Bold, memorable, conversion-engineered */}
+            <Reveal delay={0.05} y={14}>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.08] max-w-4xl text-balance">
                 Software built for your business.{" "}
-                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+                <span className="text-blue-600 block sm:inline">
                   Not the other way around.
                 </span>
               </h1>
             </Reveal>
 
-            {/* Clear value proposition featuring OPERATIONS 360 */}
-            <Reveal delay={0.1} y={12}>
-              <p className="mt-4 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed text-pretty">
-                Move beyond fragmented systems. <strong className="text-slate-900 font-semibold">OPERATIONS 360</strong> unites your CRM, Quality Assurance, Performance Scorecards, Coaching Logs, Integrated Dialer, LMS, and Workforce Management into one cohesive operations platform.
+            {/* Executive Value Proposition */}
+            <Reveal delay={0.1} y={10}>
+              <p className="mt-5 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed text-pretty font-normal">
+                Move beyond fragmented software and disconnected spreadsheets. <strong className="text-slate-900 font-semibold">OPERATIONS 360</strong> unites your CRM, Quality Assurance, Performance Scorecards, Telephony, Coaching Logs, LMS, and Workforce Management into one cohesive operational platform.
               </p>
             </Reveal>
 
-            {/* Clear, High-Converting Action Buttons (CRO Optimized) */}
+            {/* CRO High-Intent Action Cluster (Zero icons, pristine button typography) */}
             <Reveal delay={0.15} y={10}>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
-                {/* Primary CTA: Apple Button-in-Button Architecture */}
+                {/* Primary Conversion CTA */}
                 <Magnetic className="w-full sm:w-auto">
                   <Link
                     href="/#contact"
-                    className="group relative flex h-14 w-full sm:w-auto items-center justify-between sm:justify-center gap-4 rounded-full bg-blue-600 pl-7 pr-3 font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 active:scale-[0.98]"
+                    className="inline-flex h-13 w-full sm:w-auto items-center justify-center rounded-xl bg-blue-600 px-8 text-sm font-bold text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/35 active:scale-[0.98]"
                   >
-                    <span className="text-[0.95rem]">Let&apos;s Talk About Your Operational Wish List</span>
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      <ArrowUpRight className="size-4.5" />
-                    </span>
+                    Schedule Operational Wish List Discovery
                   </Link>
                 </Magnetic>
 
-                {/* Secondary CTA: Plain English Product Suite Discovery */}
+                {/* Secondary Action */}
                 <Magnetic className="w-full sm:w-auto">
                   <Link
-                    href="/#operations-360"
-                    className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-7 font-bold text-slate-800 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-blue-600 active:scale-[0.98]"
+                    href="/demo"
+                    className="inline-flex h-13 w-full sm:w-auto items-center justify-center rounded-xl border border-slate-200/90 bg-white px-7 text-sm font-bold text-slate-800 shadow-2xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-blue-600 active:scale-[0.98]"
                   >
-                    <span className="text-[0.95rem]">Explore OPERATIONS 360</span>
-                    <span className="text-slate-400 transition-transform duration-200 group-hover:translate-x-1">→</span>
+                    Launch Live 18-Engine Matrix
                   </Link>
                 </Magnetic>
               </div>
 
-              {/* Micro-reassurance underneath CTA */}
-              <p className="mt-2.5 text-xs text-slate-500 font-medium">
-                Free 30-min discovery · Zero per-seat lock-in · Custom solution roadmap for your exact wish list
+              {/* Conversion Risk Reversal Micro-Copy */}
+              <p className="mt-3 text-xs text-slate-500 font-medium tracking-wide">
+                Direct Consultation with Senior Systems Architect · Zero Per-Seat Licensing Penalties · Bespoke Roadmap
               </p>
+            </Reveal>
 
-              {/* Stakeholder Value Matrix Pills */}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[0.72rem] text-slate-600">
-                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
-                  👔 <strong>Owners:</strong> Big Picture Data
-                </span>
-                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
-                  📊 <strong>Managers:</strong> Zero MIS Delay
-                </span>
-                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
-                  🎯 <strong>Supervisors:</strong> 1-Click Coaching
-                </span>
-                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
-                  ⚡ <strong>Agents:</strong> All Tools in 1 Place
-                </span>
+            {/* 4-Stakeholder Operational Alignment Bar (Replaces Emoji Pills with Clean Architectural Ledger) */}
+            <Reveal delay={0.2} y={12} className="w-full">
+              <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/80 rounded-2xl border border-slate-200/90 bg-white/90 p-2 sm:p-0 shadow-2xs backdrop-blur-md w-full max-w-4xl text-left">
+                <div className="p-3.5 sm:p-4">
+                  <span className="text-[0.62rem] font-extrabold uppercase tracking-wider text-slate-400 font-mono">
+                    For Business Owners
+                  </span>
+                  <div className="mt-1 text-xs font-bold text-slate-900">Big-Picture Telemetry</div>
+                  <p className="mt-0.5 text-[0.72rem] text-slate-500 leading-snug">
+                    Faster, data-backed decisions without waiting for batch reports.
+                  </p>
+                </div>
+                <div className="p-3.5 sm:p-4">
+                  <span className="text-[0.62rem] font-extrabold uppercase tracking-wider text-slate-400 font-mono">
+                    For Operations Managers
+                  </span>
+                  <div className="mt-1 text-xs font-bold text-slate-900">Zero MIS Reporting Delay</div>
+                  <p className="mt-0.5 text-[0.72rem] text-slate-500 leading-snug">
+                    Continuous operational visibility across live floor adherence &amp; queues.
+                  </p>
+                </div>
+                <div className="p-3.5 sm:p-4">
+                  <span className="text-[0.62rem] font-extrabold uppercase tracking-wider text-slate-400 font-mono">
+                    For Supervisors &amp; Leads
+                  </span>
+                  <div className="mt-1 text-xs font-bold text-slate-900">In-Flow QA &amp; Action Plans</div>
+                  <p className="mt-0.5 text-[0.72rem] text-slate-500 leading-snug">
+                    Evaluate compliance and assign micro-LMS coaching instantly.
+                  </p>
+                </div>
+                <div className="p-3.5 sm:p-4">
+                  <span className="text-[0.62rem] font-extrabold uppercase tracking-wider text-slate-400 font-mono">
+                    For Floor Agents
+                  </span>
+                  <div className="mt-1 text-xs font-bold text-slate-900">Single Pane of Glass</div>
+                  <p className="mt-0.5 text-[0.72rem] text-slate-500 leading-snug">
+                    All tools, dialer, disposition logs, and daily targets in one workspace.
+                  </p>
+                </div>
               </div>
+            </Reveal>
 
-              {/* Properly Showing Our Products: Curated Flagship Strip */}
-              <div className="mt-7 flex flex-col items-center gap-2.5 w-full max-w-4xl">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  <span>Popular Products</span>
-                  <span className="h-px w-8 bg-slate-200" aria-hidden />
+            {/* Core Software Engine Directory (Replaces Floating Pill Cloud with Structured Matrix) */}
+            <Reveal delay={0.25} y={12} className="w-full">
+              <div className="mt-7 flex flex-col items-center gap-3 w-full max-w-4xl">
+                <div className="flex items-center justify-between w-full px-1">
+                  <span className="text-[0.68rem] font-extrabold uppercase tracking-wider text-slate-400 font-mono">
+                    Modular Capability Suite
+                  </span>
                   <Link
-                    href="/#products-suite"
-                    className="inline-flex items-center gap-1 text-blue-600 hover:underline normal-case font-medium"
+                    href="/demo"
+                    className="text-xs font-bold text-blue-600 hover:text-blue-700 transition"
                   >
-                    <span>View all 18 products</span>
-                    <ArrowRight className="size-3" />
+                    View All 18 Live Software Engines
                   </Link>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[0.82rem] font-bold">
-                  {featuredProducts.map((p) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 w-full text-left">
+                  {coreEngines.map((engine) => (
                     <Link
-                      key={p.name}
-                      href={p.href}
-                      className={cn(
-                        "group inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1.5 text-slate-700 shadow-2xs backdrop-blur-xs transition-all duration-200 active:scale-[0.98]",
-                        p.hoverBorder
-                      )}
+                      key={engine.name}
+                      href={engine.href}
+                      className={
+                        engine.isFlagship
+                          ? "group rounded-xl border border-blue-600/40 bg-blue-50/60 p-2.5 transition hover:border-blue-600 hover:bg-blue-50/90 shadow-2xs"
+                          : "group rounded-xl border border-slate-200/90 bg-white/90 p-2.5 transition hover:border-slate-300 hover:bg-slate-50/80 shadow-2xs"
+                      }
                     >
-                      <span className={cn("size-2 rounded-full", p.dotColor)} />
-                      <span>{p.name}</span>
-                      <span className="text-[0.68rem] font-medium text-slate-400 group-hover:text-slate-500">
-                        {p.badge}
-                      </span>
-                      <ArrowUpRight className="size-3.5 text-slate-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <div
+                        className={
+                          engine.isFlagship
+                            ? "text-[0.6rem] font-extrabold uppercase tracking-wider text-blue-600 font-mono"
+                            : "text-[0.6rem] font-extrabold uppercase tracking-wider text-slate-400 font-mono"
+                        }
+                      >
+                        {engine.category}
+                      </div>
+                      <div
+                        className={
+                          engine.isFlagship
+                            ? "mt-0.5 text-xs font-bold text-slate-950 group-hover:text-blue-700 transition"
+                            : "mt-0.5 text-xs font-bold text-slate-900 group-hover:text-blue-600 transition"
+                        }
+                      >
+                        {engine.name}
+                      </div>
+                      <div className="text-[0.68rem] text-slate-500 truncate">
+                        {engine.desc}
+                      </div>
                     </Link>
                   ))}
-
-                  <Link
-                    href="/#products-suite"
-                    className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-dashed border-blue-300 bg-blue-50/60 px-3.5 py-1.5 text-blue-700 transition-all duration-200 hover:border-blue-400 hover:bg-blue-100/70 active:scale-[0.98]"
-                  >
-                    <Sparkles className="size-3.5 text-blue-600" />
-                    <span>+11 More Products</span>
-                    <span className="text-blue-500">→</span>
-                  </Link>
                 </div>
               </div>
+            </Reveal>
 
-              {/* Statutory & Technical Trust Signals */}
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.78rem] font-medium text-slate-500">
-                <span className="flex items-center gap-1.5 text-slate-600">
-                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Aligned with BSP &amp; NPC Data Privacy
-                </span>
-                <span className="hidden sm:inline text-slate-300">•</span>
-                <span className="flex items-center gap-1.5 text-slate-600">
-                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Managed Cloud or Sovereign On-Prem
-                </span>
-                <span className="hidden sm:inline text-slate-300">•</span>
-                <span className="flex items-center gap-1.5 text-slate-600">
-                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Zero Per-User License Penalties
-                </span>
-                <span className="hidden sm:inline text-slate-300">•</span>
-                <span className="flex items-center gap-1.5 text-slate-600">
-                  <Check className="size-3.5 text-emerald-600 shrink-0" /> Full Source Code &amp; IP Ownership Option
-                </span>
+            {/* Enterprise Governance & Sovereign Trust Ledger (Zero Clipart Checkmarks) */}
+            <Reveal delay={0.3} y={10}>
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.76rem] font-semibold text-slate-500">
+                <span className="text-slate-700">BSP &amp; NPC Data Privacy Aligned</span>
+                <span className="hidden sm:inline text-slate-300" aria-hidden>·</span>
+                <span className="text-slate-700">Managed Cloud or Sovereign On-Premises</span>
+                <span className="hidden sm:inline text-slate-300" aria-hidden>·</span>
+                <span className="text-slate-700">Zero Per-User Seat Penalties</span>
+                <span className="hidden sm:inline text-slate-300" aria-hidden>·</span>
+                <span className="text-slate-700">Full Source Code &amp; IP Ownership Option</span>
               </div>
             </Reveal>
           </div>
 
-          {/* Interactive Live Product Specimen (Direct Visual Proof Above the Fold) */}
-          <Reveal delay={0.2} y={24} className="mt-10 sm:mt-12 w-full">
+          {/* Interactive Live Product Specimen (Direct Proof Above the Fold) */}
+          <Reveal delay={0.35} y={20} className="mt-10 sm:mt-12 w-full">
             <HeroProduct />
           </Reveal>
         </div>
@@ -226,3 +242,4 @@ export function Hero() {
     </section>
   );
 }
+
