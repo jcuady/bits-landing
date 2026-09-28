@@ -15,8 +15,8 @@ export function Contact() {
   const { openModal } = useConsultationModal();
   const [quickEmail, setQuickEmail] = React.useState("");
 
-  const handleQuickSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleQuickSubmit = (e?: React.FormEvent | React.SyntheticEvent) => {
+    if (e) e.preventDefault();
     if (quickEmail.trim()) {
       openModal(`Direct Connect Inquiry (${quickEmail.trim()})`);
     } else {
