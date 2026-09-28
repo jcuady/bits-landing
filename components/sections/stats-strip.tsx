@@ -51,7 +51,7 @@ const recoveryMetrics = [
 
 export function StatsStrip() {
   return (
-    <section aria-label="Platform performance statistics" className="relative z-10 bg-slate-50/50 py-16 sm:py-20">
+    <section aria-label="Platform performance statistics" className="relative z-10 bg-gradient-to-b from-sky-50/50 via-white to-sky-50/30 py-16 sm:py-24 border-b border-sky-100">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -60,15 +60,15 @@ export function StatsStrip() {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="text-center"
         >
-          <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-4 py-1.5 backdrop-blur-md">
+          <div className="mx-auto mb-4 flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white/90 px-4 py-1.5 backdrop-blur-md shadow-2xs">
             <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
-            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+            <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700 font-mono">
               Proven Business Impact
             </span>
           </div>
-          <h2 className="mx-auto mt-4 max-w-3xl text-h2 text-balance font-bold text-slate-900">
+          <h2 className="mx-auto mt-4 max-w-3xl text-h2 text-balance font-bold text-slate-900 sm:text-4xl">
             Real Results That Drive{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
               Faster Cash Collection.
             </span>
           </h2>
@@ -85,28 +85,28 @@ export function StatsStrip() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.08 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white p-7 shadow-xs transition-all hover:border-blue-500/30 hover:shadow-md sm:p-8"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-sky-100 bg-white p-7 shadow-sm transition-all duration-300 hover:border-blue-400 hover:shadow-xl hover:shadow-sky-950/5 hover:-translate-y-1 sm:p-8"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-50/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-b from-sky-50/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               
               <div className="relative z-10">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-slate-100 px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-wider text-slate-600 transition-colors group-hover:bg-blue-100 group-hover:text-blue-700">
+                  <span className="rounded-full bg-sky-50 px-2.5 py-1 font-mono text-[0.65rem] font-bold uppercase tracking-wider text-blue-700 border border-sky-100 transition-colors group-hover:bg-blue-50">
                     {stat.badge}
                   </span>
-                  <div className="h-1 w-6 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-10 group-hover:bg-blue-400" />
+                  <div className="h-1 w-6 rounded-full bg-sky-200 transition-all duration-300 group-hover:w-10 group-hover:bg-blue-500" />
                 </div>
 
                 <div className="mt-6">
                   <AnimatedValue value={stat.value} delay={0.15 + i * 0.08} />
                 </div>
 
-                <h3 className="mt-3 text-[0.92rem] font-bold leading-snug text-slate-900">
+                <h3 className="mt-3 text-[0.92rem] font-bold leading-snug text-slate-900 group-hover:text-blue-700 transition-colors">
                   {stat.label}
                 </h3>
               </div>
 
-              <p className="relative z-10 mt-4 border-t border-slate-100 pt-3 text-[0.78rem] leading-relaxed text-slate-500">
+              <p className="relative z-10 mt-4 border-t border-sky-100 pt-3 text-[0.78rem] leading-relaxed text-slate-600">
                 {stat.subtext}
               </p>
             </motion.div>

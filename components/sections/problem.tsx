@@ -70,9 +70,9 @@ export function Problem() {
   };
 
   return (
-    <Section id="problem" className="relative overflow-hidden bg-white pt-10 md:pt-16 lg:pt-20">
+    <Section id="problem" className="relative overflow-hidden bg-gradient-to-b from-sky-50/40 via-white to-sky-50/20 pt-10 md:pt-16 lg:pt-20 border-b border-sky-100">
       {/* Premium Light Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),rgba(255,255,255,0))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.06),transparent)]" />
       
       {/* Floating Interactive Toast */}
       {toast && (

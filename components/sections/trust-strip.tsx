@@ -58,12 +58,12 @@ export function TrustStrip() {
   return (
     <section
       aria-label="Security standards and regulatory alignment"
-      className="relative z-10 border-y border-slate-200/80 bg-slate-50/80 py-12 sm:py-16"
+      className="relative z-10 border-y border-sky-100 bg-gradient-to-b from-white via-sky-50/50 to-white py-12 sm:py-16"
     >
       <Container>
         <Reveal y={12}>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-blue-500/10 bg-blue-50/80 px-3.5 py-1 backdrop-blur-md">
+            <div className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white/90 px-3.5 py-1 backdrop-blur-md shadow-2xs">
               <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
               <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
                 Security &amp; Legal Compliance
@@ -83,13 +83,13 @@ export function TrustStrip() {
               return (
                 <div
                   key={item.name}
-                  className="group flex flex-col items-center justify-between rounded-2xl border border-slate-200/80 bg-white p-4 text-center shadow-xs transition-all duration-300 hover:border-blue-500/30 hover:shadow-md hover:ring-2 hover:ring-blue-500/10"
+                  className="group flex flex-col items-center justify-between rounded-2xl border border-sky-100 bg-white p-4 text-center shadow-xs transition-all duration-300 hover:border-blue-400 hover:shadow-xl hover:shadow-sky-950/5 hover:-translate-y-0.5"
                 >
                   <div className="flex flex-col items-center">
                     <div className="relative mb-3 flex size-13 items-center justify-center transition-transform duration-300 group-hover:scale-105">
                       <LogoComponent size={52} />
                     </div>
-                    <span className="rounded-full bg-slate-100 px-2 py-0.5 font-mono text-[0.6rem] font-bold uppercase tracking-wider text-slate-600 transition-colors group-hover:bg-blue-100 group-hover:text-blue-700">
+                    <span className="rounded-full bg-sky-50 px-2 py-0.5 font-mono text-[0.6rem] font-bold uppercase tracking-wider text-blue-700 transition-colors group-hover:bg-blue-100">
                       {item.badge}
                     </span>
                     <h3 className="mt-2 text-[0.85rem] font-bold tracking-tight text-slate-900 transition-colors group-hover:text-blue-700">
@@ -99,7 +99,7 @@ export function TrustStrip() {
                       {item.standard}
                     </p>
                   </div>
-                  <p className="mt-2.5 border-t border-slate-100 pt-2 text-[0.68rem] leading-snug text-slate-400 group-hover:text-slate-500">
+                  <p className="mt-2.5 border-t border-sky-100 pt-2 text-[0.68rem] leading-snug text-slate-400 group-hover:text-slate-600">
                     {item.description}
                   </p>
                 </div>
