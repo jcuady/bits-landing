@@ -143,7 +143,7 @@ export function Footer() {
                         {isInternalPage ? (
                           <Link
                             href={link.href}
-                            className="inline-flex py-1 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-blue-400"
+                            className="inline-flex min-h-[44px] items-center py-2 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-blue-400"
                           >
                             {link.label}
                           </Link>
@@ -152,7 +152,7 @@ export function Footer() {
                             href={link.href}
                             target={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "_blank" : undefined}
                             rel={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
-                            className="inline-flex py-1 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-blue-400"
+                            className="inline-flex min-h-[44px] items-center py-2 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-blue-400"
                           >
                             {link.label}
                           </a>
@@ -176,21 +176,21 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6">
-            <Link href="/legal#privacy" className="hover:text-white transition-colors">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link href="/legal#privacy" className="inline-flex min-h-[44px] items-center hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/legal#terms" className="hover:text-white transition-colors">
+            <Link href="/legal#terms" className="inline-flex min-h-[44px] items-center hover:text-white transition-colors">
               Terms of Service
             </Link>
             <button
               type="button"
               onClick={() => openModal()}
-              className="text-blue-400 hover:text-blue-300 font-bold transition-colors cursor-pointer"
+              className="inline-flex min-h-[44px] items-center text-blue-400 hover:text-blue-300 font-bold transition-colors cursor-pointer"
             >
               Book Consultation
             </button>
-            <Link href="/login" className="font-bold text-white hover:text-blue-400 transition-colors">
+            <Link href="/login" className="inline-flex min-h-[44px] items-center font-bold text-white hover:text-blue-400 transition-colors">
               CRM Portal Sign In →
             </Link>
           </div>

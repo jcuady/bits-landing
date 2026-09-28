@@ -12,6 +12,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
 import { cn } from "@/lib/utils";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import {
   Cloud,
   Server,
@@ -36,6 +37,7 @@ import {
 } from "lucide-react";
 
 export function DeploymentModels() {
+  const { openModal } = useConsultationModal();
   const [selectedModel, setSelectedModel] = React.useState<"cloud" | "on-prem">("cloud");
   const [selectedTier, setSelectedTier] = React.useState<number>(1);
 
@@ -222,13 +224,16 @@ export function DeploymentModels() {
                   {/* CTA Action */}
                   <div className="mt-5 pt-4 border-t border-slate-200">
                     <Magnetic className="w-full">
-                      <Link
-                        href={
-                          selectedModel === "on-prem"
-                            ? "/#contact?package=on-premises"
-                            : "/#contact?package=managed-cloud"
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openModal(
+                            selectedModel === "on-prem"
+                              ? "On-Premises Dedicated Server Architecture Scoping"
+                              : "Managed Cloud VPC Infrastructure Setup"
+                          )
                         }
-                        className="group flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
+                        className="group flex h-11 min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                       >
                         <span>
                           {selectedModel === "on-prem"
@@ -236,7 +241,7 @@ export function DeploymentModels() {
                             : "Configure Your Cloud Setup"}
                         </span>
                         <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                      </Link>
+                      </button>
                     </Magnetic>
                     <p className="mt-2 text-center text-[0.68rem] text-slate-500">
                       Mutual NDA provided · Technical blueprint included
@@ -292,12 +297,13 @@ export function DeploymentModels() {
                     <span>Open Solution Stacking Studio</span>
                     <ArrowRight className="size-3.5" />
                   </Link>
-                  <Link
-                    href="/#contact?package=custom-deployment"
-                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-5 py-2.5 text-xs font-bold text-slate-200 transition-colors hover:bg-slate-700 hover:text-white"
+                  <button
+                    type="button"
+                    onClick={() => openModal("Custom Enterprise Deployment & Migration Scoping")}
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-5 py-2.5 text-xs font-bold text-slate-200 transition-colors hover:bg-slate-700 hover:text-white active:scale-[0.98]"
                   >
                     <span>Custom Deployment Scoping</span>
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -665,13 +671,14 @@ export function DeploymentModels() {
                   </div>
                 </div>
 
-                <Link
-                  href="/#contact?package=on-premises"
-                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-600/50"
+                <button
+                  type="button"
+                  onClick={() => openModal("Complimentary Hardware Audit & Rack Diagram (On-Premises)")}
+                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-600/50 active:scale-[0.98]"
                 >
                   <span>Request Hardware Audit</span>
                   <ArrowRight className="size-3.5" />
-                </Link>
+                </button>
               </div>
             </div>
           </Reveal>

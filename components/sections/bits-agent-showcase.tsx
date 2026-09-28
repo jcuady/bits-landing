@@ -8,10 +8,12 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 type UseCaseId = (typeof bitsAgentUseCases)[number]["id"];
 
 export function BitsAgentShowcase() {
+  const { openModal } = useConsultationModal();
   const [activeUseCase, setActiveUseCase] = React.useState<UseCaseId>("collections");
   const activeCase = bitsAgentUseCases.find((item) => item.id === activeUseCase) ?? bitsAgentUseCases[0];
 
@@ -83,12 +85,13 @@ export function BitsAgentShowcase() {
                 >
                   Explore AI Operations (BITSagent) →
                 </Link>
-                <Link
-                  href="/#contact"
-                  className="inline-flex h-11 items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                <button
+                  type="button"
+                  onClick={() => openModal("BITSagent Autonomous Voice & Operations AI Consultation")}
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98]"
                 >
                   Book a Consultation
-                </Link>
+                </button>
               </div>
             </Reveal>
           </div>

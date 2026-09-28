@@ -44,6 +44,7 @@ for (const viewport of viewports) {
   const audit = await page.evaluate(({ touch }) => {
     const root = document.documentElement;
     const visible = (element) => {
+      if (!element || !(element instanceof Element)) return false;
       const style = getComputedStyle(element);
       const rect = element.getBoundingClientRect();
       return (

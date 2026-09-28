@@ -1,9 +1,13 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { securityArchitecture } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { BspLogo, NpcLogo, SecLogo, Iso27001Logo } from "@/components/ui/security-logos";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 const accessMatrix = [
   { role: "Collection Agent", queue: "Assigned accounts only", pii: "Masked phone/SSN", supervisorHUD: "No" },
@@ -14,6 +18,7 @@ const accessMatrix = [
 ] as const;
 
 export function Security() {
+  const { openModal } = useConsultationModal();
   return (
     <Section id="security" className="relative overflow-hidden bg-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),transparent)]" />
@@ -56,13 +61,14 @@ export function Security() {
               </div>
 
               <div className="mt-8">
-                <Link
-                  href="/#contact"
-                  className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
+                <button
+                  type="button"
+                  onClick={() => openModal("Security Architecture & Regulatory Briefing")}
+                  className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 active:scale-[0.98]"
                 >
                   <span>Request a Security Architecture Briefing</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                </Link>
+                </button>
               </div>
             </Reveal>
           </div>

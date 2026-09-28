@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { collectionAccounts, dashboardStats } from "@/lib/marketing-specimens";
 import {
   ShieldCheck,
@@ -682,6 +683,7 @@ function AgentView({ onTriggerToast }: { onTriggerToast: (msg: string) => void }
 
 /* ── Primary Component Export ── */
 export function ProductShowcase() {
+  const { openModal } = useConsultationModal();
   const [activeTab, setActiveTab] = React.useState<TabId>("owner");
   const [toastMsg, setToastMsg] = React.useState<string | null>(null);
   const reduceMotion = useReducedMotion();
@@ -892,9 +894,10 @@ export function ProductShowcase() {
         {/* High-Converting CRO Call-to-Action Strip (Apple Button-in-Button Architecture) */}
         <Reveal delay={0.15}>
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/#contact?interest=operations-360"
-              className="group relative flex h-13 w-full sm:w-auto items-center justify-center gap-3.5 rounded-full bg-blue-600 pl-6 pr-2.5 text-[0.92rem] font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 active:scale-[0.98]"
+            <button
+              type="button"
+              onClick={() => openModal("OPERATIONS 360 Full Suite Consultation")}
+              className="group relative flex h-13 min-h-[44px] w-full sm:w-auto items-center justify-center gap-3.5 rounded-full bg-blue-600 pl-6 pr-2.5 text-[0.92rem] font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 active:scale-[0.98]"
             >
               <span>Let&apos;s Talk About Your Operational Wish List</span>
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -902,7 +905,7 @@ export function ProductShowcase() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
               </span>
-            </Link>
+            </button>
 
             <Link
               href="/app"

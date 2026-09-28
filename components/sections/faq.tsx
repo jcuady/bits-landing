@@ -7,8 +7,10 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 export function FAQ() {
+  const { openModal } = useConsultationModal();
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   const toggle = (idx: number) => {
@@ -113,16 +115,17 @@ export function FAQ() {
             Have a specific operational workflow question or integration requirement?
           </p>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-sm font-bold">
-            <Link
-              href="/#contact"
-              className="inline-flex min-h-[44px] items-center text-blue-600 hover:text-blue-700 hover:underline"
+            <button
+              type="button"
+              onClick={() => openModal("Technical Architecture Consultation (FAQ)")}
+              className="inline-flex min-h-[44px] items-center py-2 text-blue-600 hover:text-blue-700 hover:underline cursor-pointer"
             >
               Book a technical consultation →
-            </Link>
+            </button>
             <span className="text-slate-300 hidden sm:inline">•</span>
             <a
               href="mailto:bits_inquiries@boundlessits.com"
-              className="inline-flex min-h-[44px] items-center text-slate-600 hover:text-slate-900 hover:underline"
+              className="inline-flex min-h-[44px] items-center py-2 text-slate-600 hover:text-slate-900 hover:underline"
             >
               bits_inquiries@boundlessits.com
             </a>

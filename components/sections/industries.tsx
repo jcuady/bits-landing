@@ -1,8 +1,12 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { targetIndustrySectors } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 function Bezel({
   title,
@@ -129,6 +133,7 @@ const sectorSpecimens = {
 } as const;
 
 export function Industries() {
+  const { openModal } = useConsultationModal();
   return (
     <Section id="industries" className="relative overflow-hidden bg-slate-50">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_0%,rgba(59,130,246,0.05),transparent)]" />
@@ -193,13 +198,14 @@ export function Industries() {
                       </div>
 
                       <div className="mt-7">
-                        <Link
-                          href="/#contact"
-                          className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700"
+                        <button
+                          type="button"
+                          onClick={() => openModal(`Industry Solution Architecture: ${sector.name}`)}
+                          className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 active:scale-[0.98]"
                         >
                           <span>Design a {sector.name} solution</span>
                           <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                        </Link>
+                        </button>
                       </div>
                     </div>
 

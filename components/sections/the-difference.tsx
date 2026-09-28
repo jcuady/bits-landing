@@ -1,11 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { theDifference } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Check, X, ArrowRight, Sparkles } from "lucide-react";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 export function TheDifference() {
+  const { openModal } = useConsultationModal();
   return (
     <Section id="the-difference" className="relative overflow-hidden bg-slate-50 text-slate-900 py-20 sm:py-28 border-y border-slate-200/80">
       {/* Background Architectural Patterns */}
@@ -99,9 +103,10 @@ export function TheDifference() {
               Schedule a technical blueprint session to map your operational requirements.
             </p>
           </div>
-          <Link
-            href="/#contact"
-            className="group flex h-12 shrink-0 items-center justify-between gap-3.5 rounded-full bg-blue-600 pl-6 pr-2.5 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
+          <button
+            type="button"
+            onClick={() => openModal("Operational Blueprint Session (The Difference)")}
+            className="group flex h-12 shrink-0 items-center justify-between gap-3.5 rounded-full bg-blue-600 pl-6 pr-2.5 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98] cursor-pointer"
           >
             <span>Book a Consultation</span>
             <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -109,7 +114,7 @@ export function TheDifference() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </span>
-          </Link>
+          </button>
         </div>
       </Container>
     </Section>

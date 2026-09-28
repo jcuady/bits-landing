@@ -7,8 +7,10 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 export function Ecosystem() {
+  const { openModal } = useConsultationModal();
   const [activePillarId, setActivePillarId] = React.useState<string>(ecosystemPillars[0].id);
 
   const activePillar =
@@ -148,12 +150,13 @@ export function Ecosystem() {
                 <span>Explore {activePillar.title}</span>
                 <span aria-hidden="true">→</span>
               </Link>
-              <Link
-                href="/#contact"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-slate-200 px-5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
+              <button
+                type="button"
+                onClick={() => openModal(`Architecture Consultation (${activePillar.title})`)}
+                className="inline-flex h-11 items-center justify-center rounded-full border border-slate-200 px-5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900 cursor-pointer"
               >
                 Request Architecture Consultation
-              </Link>
+              </button>
             </div>
           </div>
         </div>

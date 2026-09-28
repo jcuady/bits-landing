@@ -14,7 +14,10 @@ const viewports = [
   { name: "wide-1920", width: 1920, height: 1080 },
 ];
 
-const browser = await chromium.launch({ channel: "chrome" });
+const browser = await chromium.launch({
+  headless: true,
+  channel: process.env.PW_CHANNEL || "msedge",
+});
 const results = [];
 
 for (const vp of viewports) {
@@ -61,7 +64,7 @@ for (const vp of viewports) {
   await page.locator("#contact").scrollIntoViewIfNeeded();
   await page.waitForTimeout(900);
 
-  await page.getByRole("button", { name: "Request a Demo" }).click();
+  await page.locator('#contact button[type="submit"]').click();
   await page.waitForTimeout(800);
   const errorCount = await page.locator("text=Please").count();
   await page.screenshot({ path: `${OUT}form-errors.png` });
@@ -69,10 +72,10 @@ for (const vp of viewports) {
   await page.locator("#name").fill("QA Tester");
   await page.locator("#email").fill("qa@example.com");
   await page.locator("#company").fill("QA Co");
-  await page.locator("#interest").selectOption("Core Collections");
-  await page.getByRole("button", { name: "Request a Demo" }).click();
+  await page.locator("#message").fill("Consolidation of fragmented tools testing.");
+  await page.locator('#contact button[type="submit"]').click();
   await page.waitForTimeout(1500);
-  const success = await page.locator("text=Message received.").count();
+  const success = await page.locator("text=Thank you").count();
   await page.screenshot({ path: `${OUT}form-success.png` });
   results.push({ formErrorsShown: errorCount, formSuccess: success });
   await page.close();

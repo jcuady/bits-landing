@@ -253,16 +253,25 @@ export function ConsultationModal({
               {/* Brief challenge or requirements */}
               <div>
                 <label htmlFor="modal-message" className="block text-xs font-bold text-slate-700 mb-1">
-                  What operational challenge do you want to solve?
+                  What operational challenge do you want to solve? <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   id="modal-message"
                   name="message"
+                  required
+                  minLength={10}
                   rows={2}
                   placeholder="e.g. Current dialer is disjointed from accounting, or high delinquent debt volume with manual followup..."
                   defaultValue={state.values.message || ""}
-                  className="w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20 hover:border-slate-300 resize-none"
+                  className={cn(
+                    "w-full rounded-xl border bg-white p-3 text-sm text-slate-900 transition-colors placeholder:text-slate-400",
+                    "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20 resize-none",
+                    state.errors.message ? "border-rose-400" : "border-slate-200 hover:border-slate-300"
+                  )}
                 />
+                {state.errors.message && (
+                  <p className="mt-1 text-[0.72rem] text-rose-600 font-medium">{state.errors.message[0]}</p>
+                )}
               </div>
 
               {/* Submit CTA Button */}

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 import { Sparkles, CheckCircle2, Zap, X } from "lucide-react";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
@@ -56,6 +57,7 @@ const floor = [
 ] as const;
 
 export function Problem() {
+  const { openModal } = useConsultationModal();
   const [selectedFloorRow, setSelectedFloorRow] = React.useState(0);
   const [selectedScattered, setSelectedScattered] = React.useState<number | null>(null);
   const [toast, setToast] = React.useState<string | null>(null);
@@ -144,17 +146,18 @@ export function Problem() {
             <Reveal delay={0.24} y={8}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
-                  href="#solutions"
+                  href="#products-suite"
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                 >
                   See the BITS Solution →
                 </a>
-                <a
-                  href="#contact"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                <button
+                  type="button"
+                  onClick={() => openModal("Schedule Operational Audit (Problem Section)")}
+                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900 cursor-pointer"
                 >
                   Schedule Operational Audit
-                </a>
+                </button>
               </div>
             </Reveal>
           </div>

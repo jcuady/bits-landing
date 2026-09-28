@@ -1,7 +1,11 @@
+"use client";
+
+import * as React from "react";
 import { processSteps } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 const ctaClass =
   "group mt-8 flex w-fit items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700";
@@ -14,6 +18,7 @@ const plan = [
 ] as const;
 
 export function Process() {
+  const { openModal } = useConsultationModal();
   return (
     <Section id="process" className="relative overflow-hidden bg-white">
       {/* Premium Light Background Effects */}
@@ -36,13 +41,17 @@ export function Process() {
                 Follow one connected operating loop from portfolio import through
                 campaign configuration, agent action, and management review.
               </p>
-              <a href="#contact" className="group mt-8 inline-flex min-h-[44px] items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700">
+              <button
+                type="button"
+                onClick={() => openModal("Operational Process & Demo Walkthrough")}
+                className="group mt-8 inline-flex min-h-[44px] items-center gap-3 text-[0.92rem] font-bold text-blue-600 transition-colors hover:text-blue-700 active:scale-[0.98]"
+              >
                 <span className="relative">
                   Request a Demo
                   <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full" />
                 </span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-              </a>
+              </button>
             </Reveal>
           </div>
 

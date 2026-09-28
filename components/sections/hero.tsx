@@ -21,7 +21,7 @@ export function Hero() {
             alt=""
             fill
             priority
-            quality={92}
+            quality={75}
             className="object-cover object-top select-none"
           />
         </div>

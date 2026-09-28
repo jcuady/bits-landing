@@ -110,7 +110,7 @@ export function HeroProduct({ className }: { className?: string }) {
               type="button"
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              className="hidden lg:flex size-7 items-center justify-center rounded-lg border border-slate-200/80 bg-white text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors"
+              className="hidden lg:flex size-9 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-200/80 bg-white text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors"
             >
               <svg
                 className={cn("size-3.5 transition-transform duration-200", sidebarCollapsed && "rotate-180")}
@@ -135,7 +135,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   placeholder="Search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="h-9 w-full rounded-xl border border-slate-200/80 bg-white pl-8.5 pr-8 text-xs text-slate-800 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
+                  className="h-11 min-h-[44px] w-full rounded-xl border border-slate-200/80 bg-white pl-8.5 pr-8 text-base text-slate-800 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
                 />
                 <kbd className="absolute right-2.5 rounded bg-slate-100 px-1.5 py-0.5 text-[0.62rem] font-mono text-slate-400">
                   ⌘ K
@@ -145,7 +145,7 @@ export function HeroProduct({ className }: { className?: string }) {
               <button
                 type="button"
                 onClick={() => setSidebarCollapsed(false)}
-                className="flex size-9 w-full items-center justify-center rounded-xl border border-slate-200/80 bg-white text-slate-400 hover:text-blue-600"
+                className="flex size-11 min-h-[44px] min-w-[44px] w-full items-center justify-center rounded-xl border border-slate-200/80 bg-white text-slate-400 hover:text-blue-600"
               >
                 <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -169,7 +169,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   type="button"
                   onClick={() => setActiveMenu("Dashboard")}
                   className={cn(
-                    "flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-bold transition-all text-left",
+                    "flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-bold transition-all text-left",
                     activeMenu === "Dashboard"
                       ? "bg-blue-50 text-blue-600 shadow-2xs"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -186,7 +186,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   type="button"
                   onClick={() => setActiveMenu("Reservation")}
                   className={cn(
-                    "flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all text-left",
+                    "flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all text-left",
                     activeMenu === "Reservation"
                       ? "bg-blue-50 font-bold text-blue-600"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -203,7 +203,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   <button
                     type="button"
                     onClick={() => setExpandedSubmenu(expandedSubmenu === "queues" ? null : "queues")}
-                    className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+                    className="flex w-full min-h-[44px] items-center justify-between rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
                       <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -228,21 +228,21 @@ export function HeroProduct({ className }: { className?: string }) {
                       <button
                         type="button"
                         onClick={() => setSelectedDay("Tuesday")}
-                        className="block w-full py-1 text-left text-[0.72rem] font-medium text-slate-600 hover:text-blue-600"
+                        className="flex min-h-[44px] items-center w-full py-2 text-left text-xs font-medium text-slate-600 hover:text-blue-600"
                       >
                         Bucket 1 (1–30 Days)
                       </button>
                       <button
                         type="button"
                         onClick={() => setSelectedDay("Wednesday")}
-                        className="block w-full py-1 text-left text-[0.72rem] font-medium text-slate-600 hover:text-blue-600"
+                        className="flex min-h-[44px] items-center w-full py-2 text-left text-xs font-medium text-slate-600 hover:text-blue-600"
                       >
                         Bucket 2 (31–60 Days)
                       </button>
                       <button
                         type="button"
                         onClick={() => setSelectedDay("Thursday")}
-                        className="block w-full py-1 text-left text-[0.72rem] font-medium text-slate-600 hover:text-blue-600"
+                        className="flex min-h-[44px] items-center w-full py-2 text-left text-xs font-medium text-slate-600 hover:text-blue-600"
                       >
                         Legal Escalation (60+ Days)
                       </button>
@@ -254,7 +254,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 <button
                   type="button"
                   onClick={() => setActiveMenu("Staff")}
-                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -266,7 +266,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 <button
                   type="button"
                   onClick={() => setActiveMenu("Promotions")}
-                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -278,7 +278,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 <button
                   type="button"
                   onClick={() => setActiveMenu("Reviews")}
-                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -299,7 +299,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 <button
                   type="button"
                   onClick={() => setActiveMenu("Report")}
-                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -309,7 +309,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 <button
                   type="button"
                   onClick={() => setActiveMenu("Maintenance")}
-                  className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -337,9 +337,9 @@ export function HeroProduct({ className }: { className?: string }) {
                 type="button"
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 aria-label="View notifications"
-                className="relative flex size-8 items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+                className="relative flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
               >
-                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
                 <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-blue-600 ring-2 ring-white" />
@@ -389,14 +389,14 @@ export function HeroProduct({ className }: { className?: string }) {
               <button
                 type="button"
                 onClick={() => setSelectedDay("Tuesday")}
-                className="inline-flex h-9 items-center justify-center rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-700 shadow-2xs hover:bg-slate-50 active:scale-[0.98] transition-all"
+                className="inline-flex h-11 min-h-[44px] items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-xs font-bold text-slate-700 shadow-2xs hover:bg-slate-50 active:scale-[0.98] transition-all cursor-pointer"
               >
                 Intake Lead / Case
               </button>
               <button
                 type="button"
                 onClick={() => openModal("OPERATIONS 360 — Integrated Operations Platform (Flagship)")}
-                className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 text-xs font-bold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 active:scale-[0.98] transition-all"
+                className="inline-flex h-11 min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-5 text-xs font-bold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 active:scale-[0.98] transition-all cursor-pointer"
               >
                 <span>+ New Booking</span>
               </button>
@@ -417,7 +417,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   <select
                     value={timeRange}
                     onChange={(e) => setTimeRange(e.target.value as TimeRange)}
-                    className="h-7 rounded-lg border border-slate-200 bg-slate-50 px-2 text-[0.72rem] font-bold text-slate-700 focus:outline-none focus:border-blue-600"
+                    className="h-11 min-h-[44px] rounded-lg border border-slate-200 bg-slate-50 px-3 text-base font-bold text-slate-700 focus:outline-none focus:border-blue-600"
                   >
                     <option value="weekly">Weekly ⌄</option>
                     <option value="monthly">Monthly ⌄</option>
@@ -429,10 +429,10 @@ export function HeroProduct({ className }: { className?: string }) {
                     type="button"
                     onClick={handleRefresh}
                     aria-label="Refresh metrics"
-                    className="flex size-7 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                    className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
                   >
                     <svg
-                      className={cn("size-3.5 transition-transform duration-500", isRefreshing && "rotate-180 animate-spin text-blue-600")}
+                      className={cn("size-4 transition-transform duration-500", isRefreshing && "rotate-180 animate-spin text-blue-600")}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -585,9 +585,9 @@ export function HeroProduct({ className }: { className?: string }) {
                   type="button"
                   onClick={handleRefresh}
                   aria-label="Refresh snapshot"
-                  className="flex size-7 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                  className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
                 >
-                  <svg className="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
                 </button>
@@ -670,7 +670,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   type="button"
                   onClick={() => setActiveDonutFilter(activeDonutFilter === "occupied" ? null : "occupied")}
                   className={cn(
-                    "flex items-center gap-1.5 transition-colors",
+                    "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
                     activeDonutFilter === "occupied" ? "text-blue-600 font-black" : "hover:text-slate-900"
                   )}
                 >
@@ -681,7 +681,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   type="button"
                   onClick={() => setActiveDonutFilter(activeDonutFilter === "available" ? null : "available")}
                   className={cn(
-                    "flex items-center gap-1.5 transition-colors",
+                    "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
                     activeDonutFilter === "available" ? "text-sky-600 font-black" : "hover:text-slate-900"
                   )}
                 >
@@ -692,7 +692,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   type="button"
                   onClick={() => setActiveDonutFilter(activeDonutFilter === "maintenance" ? null : "maintenance")}
                   className={cn(
-                    "flex items-center gap-1.5 transition-colors",
+                    "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
                     activeDonutFilter === "maintenance" ? "text-amber-600 font-black" : "hover:text-slate-900"
                   )}
                 >

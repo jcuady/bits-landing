@@ -13,6 +13,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
 import { cn } from "@/lib/utils";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import {
   Check,
   Sparkles,
@@ -75,6 +76,7 @@ const universalGuarantees = [
 ] as const;
 
 export function Pricing() {
+  const { openModal } = useConsultationModal();
   const [activeTierFilter, setActiveTierFilter] = React.useState<
     "all" | "starter" | "growth" | "enterprise"
   >("all");
@@ -430,10 +432,13 @@ export function Pricing() {
                     {/* High-Converting Button-in-Button CTA */}
                     <div className="shrink-0">
                       <Magnetic>
-                        <Link
-                          href={`/#contact?bundle=${encodeURIComponent(
-                            selectedProductIds.join(",")
-                          )}&deployment=${bundleDeployment}&branding=${bundleBranding}`}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            openModal(
+                              `Multi-Product Proposal: ${selectedProductIds.length} Products (${bundleDeployment} deployment, ${bundleBranding})`
+                            )
+                          }
                           className="group relative inline-flex min-h-[48px] items-center justify-between gap-3 rounded-full bg-blue-600 px-6 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-600/35 active:scale-[0.98]"
                         >
                           <span>
@@ -443,7 +448,7 @@ export function Pricing() {
                           <span className="flex size-7 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                             <ArrowRight className="size-3.5" />
                           </span>
-                        </Link>
+                        </button>
                       </Magnetic>
                     </div>
                   </div>
@@ -684,8 +689,9 @@ export function Pricing() {
                         {/* Card Bottom CTA (Button-in-Button) */}
                         <div className="mt-8 border-t border-slate-100 pt-5">
                           <Magnetic className="w-full">
-                            <Link
-                              href={pkg.ctaHref}
+                            <button
+                              type="button"
+                              onClick={() => openModal(`${pkg.title} (${pkg.tier}): ${pkg.primaryCta}`)}
                               className={cn(
                                 "group flex h-12 w-full min-h-[48px] items-center justify-between rounded-full px-5 text-xs font-bold transition-all duration-300 active:scale-[0.98]",
                                 isPopular
@@ -706,7 +712,7 @@ export function Pricing() {
                               >
                                 <ArrowRight className="size-3.5" />
                               </span>
-                            </Link>
+                            </button>
                           </Magnetic>
 
                           <p className="mt-3 text-center font-mono text-[0.68rem] text-slate-400">
@@ -746,19 +752,21 @@ export function Pricing() {
                 </div>
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-emerald-100 pt-4">
-                <Link
-                  href="/products/nfc-card"
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-emerald-300 bg-white px-4 py-2 text-xs font-bold text-emerald-800 hover:bg-emerald-50 transition-colors shadow-2xs"
+                <button
+                  type="button"
+                  onClick={() => openModal("BITS Tap NFC Smart Card Architecture & Specs")}
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-emerald-300 bg-white px-4 py-2 text-xs font-bold text-emerald-800 hover:bg-emerald-50 transition-colors shadow-2xs active:scale-[0.98]"
                 >
                   View NFC Hardware Specs
-                </Link>
-                <Link
-                  href="/#contact?package=nfc"
-                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-5 py-2 text-xs font-bold text-white hover:bg-emerald-700 transition-colors shadow-xs"
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openModal("Order Executive BITS Tap NFC Cards")}
+                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-5 py-2 text-xs font-bold text-white hover:bg-emerald-700 transition-colors shadow-xs active:scale-[0.98]"
                 >
                   <span>Order Executive Cards</span>
                   <ArrowRight className="size-3.5" />
-                </Link>
+                </button>
               </div>
             </div>
           </Reveal>
@@ -786,20 +794,22 @@ export function Pricing() {
                 </div>
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-orange-100 pt-4">
-                <Link
-                  href="/products/white-label"
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-orange-300 bg-white px-4 py-2 text-xs font-bold text-orange-800 hover:bg-orange-50 transition-colors shadow-2xs"
+                <button
+                  type="button"
+                  onClick={() => openModal("White-Label Reseller Architecture Specs")}
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-orange-300 bg-white px-4 py-2 text-xs font-bold text-orange-800 hover:bg-orange-50 transition-colors shadow-2xs active:scale-[0.98]"
                 >
                   <Palette className="size-3.5 mr-1" />
                   View White-Label Specs
-                </Link>
-                <Link
-                  href="/#contact?package=whitelabel"
-                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-5 py-2 text-xs font-bold text-white hover:bg-orange-700 transition-colors shadow-xs"
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openModal("White-Label Reseller Licensing Proposal")}
+                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-5 py-2 text-xs font-bold text-white hover:bg-orange-700 transition-colors shadow-xs active:scale-[0.98]"
                 >
                   <span>Request White-Label Proposal</span>
                   <ArrowRight className="size-3.5" />
-                </Link>
+                </button>
               </div>
             </div>
           </Reveal>
@@ -958,13 +968,14 @@ export function Pricing() {
                   <Server className="size-3.5 text-blue-600" />
                   <span>Cloud vs. On-Prem Specs</span>
                 </Link>
-                <Link
-                  href="/#contact"
+                <button
+                  type="button"
+                  onClick={() => openModal("Custom Infrastructure & Proprietary ETL Scoping")}
                   className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700 active:scale-[0.98]"
                 >
                   <span>Request Custom Quote & Demo</span>
                   <ArrowRight className="size-3.5" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>

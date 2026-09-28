@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
 import { cn } from "@/lib/utils";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import {
   ShieldCheck,
   Check,
@@ -324,6 +325,7 @@ function getProductDeepSolution(id: string): ProductDeepSolution {
 }
 
 export function ProductsSuite() {
+  const { openModal } = useConsultationModal();
   const [activeCategory, setActiveCategory] = React.useState<CategoryFilterId>("all");
   const [activeProductId, setActiveProductId] = React.useState<string>("collections");
   const [brandMode, setBrandMode] = React.useState<"bits" | "whitelabel">("bits");
@@ -842,20 +844,22 @@ export function ProductsSuite() {
               {/* CTAs */}
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Magnetic>
-                  <Link
-                    href={activeProduct.ctaHref}
-                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
+                  <button
+                    type="button"
+                    onClick={() => openModal(`${activeProduct.name} Consultation & Walkthrough`)}
+                    className="inline-flex min-h-[44px] h-12 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                   >
                     <span>{activeProduct.ctaText}</span>
                     <ArrowRight className="size-3.5" />
-                  </Link>
+                  </button>
                 </Magnetic>
-                <Link
-                  href="/#contact"
+                <button
+                  type="button"
+                  onClick={() => openModal(`Solution Walkthrough (${activeProduct.name})`)}
                   className="inline-flex min-h-[44px] items-center text-xs font-bold text-slate-600 hover:text-blue-600 transition-colors"
                 >
                   Schedule Solution Walkthrough →
-                </Link>
+                </button>
               </div>
             </div>
 
@@ -897,13 +901,14 @@ export function ProductsSuite() {
                     </button>
                   </div>
                 </div>
-                <Link
-                  href="/products/white-label"
+                <button
+                  type="button"
+                  onClick={() => openModal("White-Label Enterprise Licensing & Specs")}
                   className="text-[0.68rem] font-bold text-orange-700 hover:text-orange-800 hover:underline inline-flex items-center gap-1 min-h-[44px] px-2"
                 >
                   <span>White-Label Specs</span>
                   <ExternalLink className="size-3" />
-                </Link>
+                </button>
               </div>
 
               <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/60">
@@ -944,9 +949,13 @@ export function ProductsSuite() {
                     <span className="text-[0.72rem] text-orange-950 font-medium">
                       <strong>White-Label Option Active:</strong> Deployed with your company logo, custom domain (app.yourcompany.com), and corporate styling. Zero BITS branding or attribution under strict NDA.
                     </span>
-                    <Link href="/products/white-label" className="text-[0.68rem] font-bold text-orange-800 hover:underline shrink-0 ml-2">
+                    <button
+                      type="button"
+                      onClick={() => openModal("White-Label Licensing Architecture")}
+                      className="text-[0.68rem] font-bold text-orange-800 hover:underline shrink-0 ml-2"
+                    >
                       Licensing Details →
-                    </Link>
+                    </button>
                   </div>
                 )}
 

@@ -74,9 +74,10 @@ function DialogContent({
         {children}
         {showCloseButton && (
           <DialogPrimitive.Close
+            aria-label="Close dialog"
             className={cn(
-              "absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-full",
-              "border border-slate-200/80 bg-slate-100/80 text-slate-500 transition-colors",
+              "absolute right-4 top-4 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full",
+              "border border-slate-200/80 bg-slate-100/80 text-slate-500 transition-colors cursor-pointer",
               "hover:bg-slate-200 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600",
               "disabled:pointer-events-none"
             )}

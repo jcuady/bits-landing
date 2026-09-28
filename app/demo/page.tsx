@@ -90,7 +90,7 @@ export default function DemoMatrixHub() {
               <span>Sales CRM</span>
             </Link>
             <Button asChild size="sm" className="bg-electric-600 hover:bg-electric-500 text-xs font-semibold h-8">
-              <Link href="/contact">Book Architecture Call</Link>
+              <Link href="/#contact">Book Architecture Call</Link>
             </Button>
           </div>
         </div>
@@ -318,8 +318,8 @@ export default function DemoMatrixHub() {
           </div>
           <div className="flex items-center gap-4">
             <Link href="/" className="hover:text-slate-300 transition">Main Website</Link>
-            <Link href="/privacy" className="hover:text-slate-300 transition">Privacy</Link>
-            <Link href="/terms" className="hover:text-slate-300 transition">Terms</Link>
+            <Link href="/legal" className="hover:text-slate-300 transition">Legal &amp; Compliance</Link>
+            <Link href="/#contact" className="hover:text-slate-300 transition">Contact Solutions</Link>
           </div>
         </div>
       </footer>

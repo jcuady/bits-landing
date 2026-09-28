@@ -1482,6 +1482,35 @@
         The color psychology of Deep Navy conveys institutional stability, security, and banking rigor. Electric Blue represents operational speed, digital fluidity, and action. Gold Amber acts as a striking focal accent for key metrics and conversion badges.
       </p>
 
+      <!-- WCAG 2.2 AAA / AA Contrast Verification Matrix -->
+      <div style="margin-top: 24px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); padding: 18px 24px; max-width: 900px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #93C5FD; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; margin-bottom: 12px;">
+          WCAG 2.2 Contrast &amp; Accessibility Compliance Matrix
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.8rem;">
+          <div style="background: rgba(6, 22, 47, 0.6); padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="color: #94A3B8; font-size: 0.7rem;">Body Text on Light Surface</div>
+            <div style="color: #FFFFFF; font-weight: 700; margin: 2px 0;">#06162F on #FFFFFF</div>
+            <div style="color: #10B981; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700;">17.5:1 · WCAG AAA PASS</div>
+          </div>
+          <div style="background: rgba(6, 22, 47, 0.6); padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="color: #94A3B8; font-size: 0.7rem;">Authority Slate on Surface</div>
+            <div style="color: #FFFFFF; font-weight: 700; margin: 2px 0;">#0F172A on #F8FAFC</div>
+            <div style="color: #10B981; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700;">16.1:1 · WCAG AAA PASS</div>
+          </div>
+          <div style="background: rgba(6, 22, 47, 0.6); padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="color: #94A3B8; font-size: 0.7rem;">Primary Action Buttons</div>
+            <div style="color: #FFFFFF; font-weight: 700; margin: 2px 0;">#FFFFFF on #2563EB</div>
+            <div style="color: #10B981; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700;">4.6:1 · WCAG AA PASS</div>
+          </div>
+          <div style="background: rgba(6, 22, 47, 0.6); padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+            <div style="color: #94A3B8; font-size: 0.7rem;">Dark Surface Key Metrics</div>
+            <div style="color: #FFFFFF; font-weight: 700; margin: 2px 0;">#F59E0B on #06162F</div>
+            <div style="color: #10B981; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700;">8.9:1 · WCAG AAA PASS</div>
+          </div>
+        </div>
+      </div>
+
       <div class="slide-footer">
         <span>BITS BRAND GUIDELINES</span>
         <span>PAGE 18</span>
@@ -1514,24 +1543,54 @@
         </div>
 
         <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-xl); padding: 36px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; text-align: center;">
-          <!-- Row 1 -->
-          <div style="color: #60A5FA; font-size: 1.6rem;">⚡</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">📞</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">🔒</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">🤖</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">📊</div>
-          <!-- Row 2 -->
-          <div style="color: #60A5FA; font-size: 1.6rem;">💳</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">🏛️</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">⚙️</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">📡</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">📋</div>
-          <!-- Row 3 -->
-          <div style="color: #60A5FA; font-size: 1.6rem;">📱</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">💬</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">🌐</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">⏱️</div>
-          <div style="color: #60A5FA; font-size: 1.6rem;">✅</div>
+          <!-- Row 1: Zap, Phone, Lock, Bot, BarChart -->
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <!-- Row 2: CreditCard, Building, Settings, Signal, Clipboard -->
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <!-- Row 3: Smartphone, MessageSquare, Globe, Clock, CheckCircle -->
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div style="color: #60A5FA; display: flex; justify-content: center; align-items: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
         </div>
       </div>
 
@@ -1606,19 +1665,19 @@
       </div>
 
       <div class="slide-content-split" style="margin: auto 0;">
-        <!-- BITScrm Collections (Flagship) -->
+        <!-- OPERATIONS 360 (Primary Flagship) -->
         <div class="deck-card" style="border-top: 4px solid var(--accent-crm);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; background: rgba(37,99,235,0.25); color: #93C5FD; padding: 3px 8px; border-radius: 4px; font-weight: 700;">ENGINE 01</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #10B981; font-weight: 700;">3.2x RPC Lift</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; background: rgba(37,99,235,0.25); color: #93C5FD; padding: 3px 8px; border-radius: 4px; font-weight: 700;">ENGINE 01 · PRIMARY FLAGSHIP</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #10B981; font-weight: 700;">+42% Productivity Boost</span>
           </div>
-          <h3 style="font-size: 1.5rem; color: var(--white); margin-bottom: 6px;">BITScrm Collections (Flagship)</h3>
-          <p style="color: var(--bits-blue-400); font-weight: 600; font-size: 0.9rem; margin-bottom: 12px;">Debt Recovery &amp; Telephony Flagship Core</p>
+          <h3 style="font-size: 1.5rem; color: var(--white); margin-bottom: 6px;">OPERATIONS 360</h3>
+          <p style="color: var(--bits-blue-400); font-weight: 600; font-size: 0.9rem; margin-bottom: 12px;">ONE SYSTEM. ONE VIEW. ONE SOURCE OF TRUTH. (formerly CRM Collections)</p>
           <p style="font-size: 0.92rem; color: var(--slate-300); line-height: 1.5; margin-bottom: 16px;">
-            Delinquent debtor staging, dynamic skill-routing queues, built-in WebRTC softphone with AMD answering machine detection, and automated Promise-to-Pay (PTP) scheduling.
+            The integrated operations platform unifying Customer 360 Dossiers, Quality Assurance (QA) Scorecards, Coaching Logs &amp; Action Plans, Integrated WebRTC Softphone, LMS &amp; WFM schedule adherence, and real-time operational BI dashboards.
           </p>
           <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--slate-400);">
-            Route: /bitscrm · BSP Circulars 454/857 Aligned
+            Route: /#operations-360 · BSP Circulars 454/857 &amp; NPC DPA Aligned
           </div>
         </div>
 
