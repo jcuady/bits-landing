@@ -1,777 +1,658 @@
 "use client";
 
 import * as React from "react";
-import { Check, ShieldCheck, PhoneCall, Award, Users, BookOpen, Clock, Activity, Sparkles, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { collectionAccounts as initialRows, dashboardStats as initialStats } from "@/lib/marketing-specimens";
 
-type ModuleTab = "dashboard" | "qa" | "coaching" | "dialer" | "wfm";
 type StakeholderRole = "business_owner" | "manager" | "supervisor" | "agent";
 
-interface ModuleConfig {
-  id: ModuleTab;
+interface AccountRecord {
+  id: string;
   name: string;
-  badge: string;
-  valueProp: string;
-  benefitStat: string;
-  toolsCovered: string[];
+  category: string;
+  balance: number;
+  assignedTo: string;
+  status: "ptp_kept" | "in_call" | "ptp_alert" | "settled";
+  statusText: string;
+  ptpDate: string;
 }
 
-const MODULES: ModuleConfig[] = [
+const INITIAL_ACCOUNTS: AccountRecord[] = [
   {
-    id: "dashboard",
-    name: "Operations 360 Hub",
-    badge: "One View",
-    valueProp: "CRM & Customer Management + Live Real-Time Operational Dashboards & Reports.",
-    benefitStat: "Zero MIS Wait Time",
-    toolsCovered: ["CRM & Customer Management", "Real-Time Operational Dashboards & Reports"],
+    id: "ACC-10482",
+    name: "Metro Retail Logistics",
+    category: "Corporate Fleet",
+    balance: 64250,
+    assignedTo: "Sarah Chen · Desk 14",
+    status: "in_call",
+    statusText: "Live Call Connected",
+    ptpDate: "Today · 2:30 PM",
   },
   {
-    id: "qa",
-    name: "Quality Assurance & Scorecards",
-    badge: "100% Audit",
-    valueProp: "Standardized QA evaluations, compliance checklists & live agent scorecards.",
-    benefitStat: "100% Quality Visibility",
-    toolsCovered: ["Quality Assurance (QA)", "Performance Scorecards & Analytics"],
+    id: "ACC-10817",
+    name: "Atty. Rafael Dizon",
+    category: "Commercial Loan",
+    balance: 142800,
+    assignedTo: "Mark Ramos · Desk 08",
+    status: "ptp_kept",
+    statusText: "₱15K Payment Reconciled",
+    ptpDate: "Cleared 11:20 AM",
   },
   {
-    id: "coaching",
-    name: "Coaching Logs & LMS",
-    badge: "Action Plans",
-    valueProp: "Track 1-on-1 coaching logs, execute action plans, and assign LMS learning modules.",
-    benefitStat: "+42% Team Growth",
-    toolsCovered: ["Coaching Logs & Action Plans", "QA Coaching", "Learning Management System (LMS)"],
+    id: "ACC-11209",
+    name: "Cebu Maritime Freight",
+    category: "Revolving Line",
+    balance: 88400,
+    assignedTo: "Ana Luna · Desk 22",
+    status: "ptp_alert",
+    statusText: "Promise Broken · Follow-up",
+    ptpDate: "Overdue 2 Days",
   },
   {
-    id: "dialer",
-    name: "Integrated WebRTC Dialer",
-    badge: "Auto-Calling",
-    valueProp: "Built-in predictive dialer, supervisory whisper/barge HUD, and instant payments.",
-    benefitStat: "3.2x More Connects",
-    toolsCovered: ["Integrated Dialer", "Telephony HUD"],
-  },
-  {
-    id: "wfm",
-    name: "Workforce Management (WFM)",
-    badge: "96.8% Adherence",
-    valueProp: "Dynamic shift rosters, live schedule adherence, and zero-delay operational telemetry.",
-    benefitStat: "Instant Operations View",
-    toolsCovered: ["Workforce Management (WFM)", "Live Floor Adherence"],
+    id: "ACC-11587",
+    name: "National Steel Corp",
+    category: "Enterprise Equipment",
+    balance: 320000,
+    assignedTo: "David Cruz · Desk 03",
+    status: "settled",
+    statusText: "Full Settlement Approved",
+    ptpDate: "Final Release Paid",
   },
 ];
 
-const STAKEHOLDERS: {
+const ROLES: {
   id: StakeholderRole;
   label: string;
-  pill: string;
-  focus: string;
-  highlightModule: ModuleTab;
+  subtitle: string;
+  highlightKpi: string;
+  focusMessage: string;
 }[] = [
   {
     id: "business_owner",
-    label: "For Business Owners",
-    pill: "Owners",
-    focus: "See the big picture and make faster, data-driven decisions.",
-    highlightModule: "dashboard",
+    label: "Business Owners",
+    subtitle: "Big Picture Financials",
+    highlightKpi: "revenue",
+    focusMessage: "Real-time recovered cash flow, zero MIS reporting delay, full audit compliance.",
   },
   {
     id: "manager",
-    label: "For Managers",
-    pill: "Managers",
-    focus: "Monitor performance and operations without waiting for MIS reports.",
-    highlightModule: "wfm",
+    label: "Operations Managers",
+    subtitle: "Floor Telemetry",
+    highlightKpi: "velocity",
+    focusMessage: "Instant staffing adherence, dialer pacing at 3.2:1, zero dropped customer calls.",
   },
   {
     id: "supervisor",
-    label: "For Supervisors",
-    pill: "Supervisors",
-    focus: "Manage, coach, and develop your teams from one platform.",
-    highlightModule: "coaching",
+    label: "Floor Supervisors",
+    subtitle: "1-Click Coaching",
+    highlightKpi: "qa",
+    focusMessage: "Live call listen & whisper coaching, automated scorecards, 14-day action plans.",
   },
   {
     id: "agent",
-    label: "For Agents",
-    pill: "Agents",
-    focus: "Access the tools and information they need in one place.",
-    highlightModule: "dialer",
+    label: "Floor Agents",
+    subtitle: "Single-Screen Flow",
+    highlightKpi: "adherence",
+    focusMessage: "Integrated WebRTC dialer, customer history, and instant QR Ph payment links in 1 view.",
   },
 ];
 
 export function HeroProduct({ className }: { className?: string }) {
-  const [activeTab, setActiveTab] = React.useState<ModuleTab>("dashboard");
-  const [activeStakeholder, setActiveStakeholder] = React.useState<StakeholderRole>("business_owner");
-  const [selectedAccountId, setSelectedAccountId] = React.useState<string>("ACC-10482");
-  const [reconciledCount, setReconciledCount] = React.useState<number>(0);
-  const [coachingCount, setCoachingCount] = React.useState<number>(12);
-  const [isAutoDialing, setIsAutoDialing] = React.useState<boolean>(true);
-  const [feedbackToast, setFeedbackToast] = React.useState<string | null>(null);
+  const [role, setRole] = React.useState<StakeholderRole>("business_owner");
+  const [accounts, setAccounts] = React.useState<AccountRecord[]>(INITIAL_ACCOUNTS);
+  const [dailyCollected, setDailyCollected] = React.useState<number>(4820500);
+  const [activeCallsCount, setActiveCallsCount] = React.useState<number>(34);
+  const [qaScore, setQaScore] = React.useState<number>(98.4);
+  const [filter, setFilter] = React.useState<string>("all");
+  const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+  const [callDuration, setCallDuration] = React.useState<number>(224); // 03:44
+  const [isWhispering, setIsWhispering] = React.useState<boolean>(false);
 
-  const activeModule = MODULES.find((m) => m.id === activeTab) ?? MODULES[0];
-  const activeStakeholderObj = STAKEHOLDERS.find((s) => s.id === activeStakeholder) ?? STAKEHOLDERS[0];
+  // Live timer tick for active call realism
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCallDuration((d) => d + 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const triggerToast = (msg: string) => {
-    setFeedbackToast(msg);
-    const t = setTimeout(() => setFeedbackToast(null), 3800);
+    setToastMessage(msg);
+    const t = setTimeout(() => setToastMessage(null), 4000);
     return () => clearTimeout(t);
   };
 
-  const handleSimulatePayment = () => {
-    setReconciledCount((c) => c + 1);
-    triggerToast("✓ Instant Payment Verified (+₱15,000 via QR Ph/InstaPay). Reconciled in Operations 360 general ledger.");
+  const formatSeconds = (sec: number) => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   };
 
-  const handleToggleAutoDial = () => {
-    setIsAutoDialing((v) => !v);
+  const handleSimulatePayment = () => {
+    setDailyCollected((prev) => prev + 15000);
+    setAccounts((prev) =>
+      prev.map((acc) =>
+        acc.id === "ACC-10482"
+          ? {
+              ...acc,
+              balance: acc.balance - 15000,
+              status: "ptp_kept",
+              statusText: "₱15K InstaPay Reconciled",
+            }
+          : acc
+      )
+    );
+    triggerToast("Payment received: ₱15,000 via QR Ph / InstaPay. Ledger auto-reconciled in real time.");
+  };
+
+  const handleToggleWhisper = () => {
+    setIsWhispering((v) => !v);
     triggerToast(
-      !isAutoDialing
-        ? "▶ Integrated Dialer started: Pacing at 3.2:1 with automated right-party connect detection."
-        : "⏸ Integrated Dialer paused. Floor agents finishing active wrap-up."
+      !isWhispering
+        ? "Supervisor Whisper active on Desk 14: You are speaking directly to Sarah Chen without the customer hearing."
+        : "Supervisor Whisper disconnected. Call continuing in standard two-way mode."
     );
   };
 
-  const handleLogCoaching = () => {
-    setCoachingCount((c) => c + 1);
-    triggerToast("✓ Coaching Log & 14-day Action Plan logged for Desk 14. Micro-LMS module 'Resolution Scripts' assigned.");
-  };
-
   const handleRunQaAudit = () => {
-    triggerToast("✓ QA Scorecard Audit completed: 98.2% compliance. Automated positive reinforcement sent to agent dashboard.");
+    setQaScore(99.1);
+    triggerToast("Automated AI QA Completed: Desk 14 scored 99% on identity disclosure & negotiation compliance.");
   };
 
-  const handleCheckWfm = () => {
-    triggerToast("✓ WFM Floor Telemetry: 46 of 48 agents in adherence (96.8%). Zero MIS wait time.");
+  const handlePaceDialer = () => {
+    setActiveCallsCount((c) => (c >= 38 ? 32 : c + 4));
+    triggerToast("Telephony Pacing adjusted to 3.4:1. Connect queue re-balanced across all 48 active desks.");
   };
+
+  const filteredAccounts = React.useMemo(() => {
+    if (filter === "in_call") return accounts.filter((a) => a.status === "in_call");
+    if (filter === "ptp") return accounts.filter((a) => a.status === "ptp_kept");
+    if (filter === "alerts") return accounts.filter((a) => a.status === "ptp_alert");
+    return accounts;
+  }, [accounts, filter]);
+
+  const activeRoleConfig = ROLES.find((r) => r.id === role) ?? ROLES[0];
 
   return (
-    <figure className={cn("relative mx-auto w-full max-w-[1120px]", className)}>
-      {/* Interactive Doppelrand Outer Machine Bezel */}
-      <div className="relative rounded-[2rem] sm:rounded-[2.5rem] p-2 sm:p-3 bg-gradient-to-b from-slate-200/90 via-slate-100/70 to-slate-200/90 ring-1 ring-slate-900/[0.08] shadow-[0_25px_60px_-15px_rgba(15,23,42,0.14),0_0_0_1px_rgba(255,255,255,0.8)_inset] backdrop-blur-xl">
+    <figure className={cn("relative mx-auto w-full max-w-[1240px]", className)}>
+      {/* Outer Double-Bezel Hardware Frame (Agency Awwwards-Grade) */}
+      <div className="relative rounded-[2rem] p-2 sm:p-3 bg-gradient-to-b from-slate-200 via-slate-100 to-slate-200 ring-1 ring-slate-900/10 shadow-[0_30px_90px_-20px_rgba(6,22,47,0.22)] backdrop-blur-xl">
         {/* Inner Workstation Core */}
-        <div className="relative overflow-hidden rounded-[calc(2rem-8px)] sm:rounded-[calc(2.5rem-12px)] border border-slate-200/80 bg-white shadow-2xl">
-          {/* Top macOS Workstation Bar & Stakeholder Matrix Switcher */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-slate-50/95 px-4 py-2.5 sm:px-6">
-            <div className="flex items-center gap-2">
-              <span className="size-3 rounded-full bg-[#FF5F56] ring-1 ring-[#E0443E]/50 shadow-xs" aria-hidden />
-              <span className="size-3 rounded-full bg-[#FFBD2E] ring-1 ring-[#DEA123]/50 shadow-xs" aria-hidden />
-              <span className="size-3 rounded-full bg-[#27C93F] ring-1 ring-[#1AAB29]/50 shadow-xs" aria-hidden />
-              <span className="ml-3 hidden text-[0.78rem] font-extrabold tracking-tight text-slate-800 sm:inline">
-                OPERATIONS 360 · One System. One View. One Source of Truth.
-              </span>
-            </div>
-
-            {/* 4-Stakeholder Persona Quick Filter */}
-            <div className="flex items-center gap-1 rounded-full border border-slate-200/80 bg-white p-1 shadow-2xs">
-              {STAKEHOLDERS.map((s) => {
-                const isSelected = activeStakeholder === s.id;
-                return (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => {
-                      setActiveStakeholder(s.id);
-                      setActiveTab(s.highlightModule);
-                      triggerToast(`Switched view to ${s.label}: ${s.focus}`);
-                    }}
-                    className={cn(
-                      "rounded-full px-2.5 py-1 text-[0.68rem] font-bold transition-all cursor-pointer",
-                      isSelected
-                        ? "bg-blue-600 text-white shadow-xs"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                    )}
-                  >
-                    <span>{s.pill}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Live Operational Status */}
-            <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-2.5 py-1 text-[0.68rem] font-bold text-emerald-700">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="uppercase tracking-wider">Live · 48 Staff Connected</span>
-            </div>
-          </div>
-
-          {/* Stakeholder Value Promise Strip */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50/60 px-4 py-2 sm:px-6 text-xs">
-            <div className="flex items-center gap-2">
-              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-extrabold text-blue-900">{activeStakeholderObj.label}:</span>
-              <span className="text-[0.75rem] font-semibold text-slate-700">{activeStakeholderObj.focus}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-blue-100/80 border border-blue-200 px-2.5 py-0.5 font-mono text-[0.68rem] font-bold text-blue-800">
-                {activeModule.benefitStat}
-              </span>
-            </div>
-          </div>
-
-          {/* Workspace Body */}
-          <div className="flex min-h-[23rem] sm:min-h-[27rem] lg:min-h-[30rem]">
-            {/* Clickable Module Sidebar (Desktop & Tablet) */}
-            <aside className="hidden w-[14.5rem] shrink-0 flex-col border-r border-slate-100 bg-slate-50/60 p-3.5 md:flex">
-              <div className="mb-3 flex items-center gap-2.5 px-2">
-                <div className="flex size-7 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-black text-xs shadow-xs">
-                  360
-                </div>
-                <div>
-                  <p className="text-[0.82rem] font-extrabold text-slate-900 leading-none">OPERATIONS 360</p>
-                  <p className="text-[0.62rem] text-slate-500 mt-0.5">9 Integrated Engines</p>
-                </div>
+        <div className="relative overflow-hidden rounded-[calc(2rem-6px)] border border-slate-200/90 bg-white text-slate-900 shadow-2xl">
+          {/* Top Command Bar: Window Controls + Brand Identification + Status Telemetry */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 bg-slate-900 px-4 py-3 sm:px-6 text-white">
+            <div className="flex items-center gap-3">
+              {/* Window Capsules */}
+              <div className="flex items-center gap-1.5" aria-hidden>
+                <span className="size-2.5 rounded-full bg-[#FF5F56]" />
+                <span className="size-2.5 rounded-full bg-[#FFBD2E]" />
+                <span className="size-2.5 rounded-full bg-[#27C93F]" />
               </div>
-
-              <nav className="flex flex-col gap-1" aria-label="Operations 360 Modules">
-                {MODULES.map((m) => {
-                  const isActive = activeTab === m.id;
-                  return (
-                    <button
-                      key={m.id}
-                      type="button"
-                      onClick={() => setActiveTab(m.id)}
-                      className={cn(
-                        "group flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-[0.8rem] font-bold transition-all cursor-pointer",
-                        isActive
-                          ? "bg-white text-blue-700 shadow-xs ring-1 ring-slate-200"
-                          : "text-slate-600 hover:bg-white/80 hover:text-slate-900"
-                      )}
-                    >
-                      <span className="flex items-center gap-2">
-                        <span
-                          className={cn(
-                            "size-1.5 rounded-full transition-colors",
-                            isActive ? "bg-blue-600" : "bg-slate-300 group-hover:bg-slate-400"
-                          )}
-                        />
-                        <span className="truncate max-w-[9.5rem]">{m.name}</span>
-                      </span>
-                      <span
-                        className={cn(
-                          "rounded px-1.5 py-0.2 text-[0.6rem] font-bold shrink-0",
-                          isActive ? "bg-blue-50 text-blue-700" : "bg-slate-200/70 text-slate-600"
-                        )}
-                      >
-                        {m.badge}
-                      </span>
-                    </button>
-                  );
-                })}
-              </nav>
-
-              {/* Bottom Operational Telemetry */}
-              <div className="mt-auto border-t border-slate-200/60 pt-3 text-[0.7rem] text-slate-400">
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-slate-700">Source of Truth</span>
-                  <span className="font-mono text-emerald-600 font-bold">Synchronized</span>
-                </div>
-                <p className="font-mono text-[0.65rem] text-slate-500 mt-0.5">
-                  CRM · QA · Dialer · LMS · WFM
-                </p>
-              </div>
-            </aside>
-
-            {/* Main Interactive Screen Content */}
-            <div className="min-w-0 flex-1 bg-white">
-              {/* Mobile Module Switcher Bar (visible on < md) */}
-              <div className="flex gap-1 overflow-x-auto border-b border-slate-100 bg-slate-50/80 p-2 md:hidden">
-                {MODULES.map((m) => (
-                  <button
-                    key={m.id}
-                    type="button"
-                    onClick={() => setActiveTab(m.id)}
-                    className={cn(
-                      "min-h-11 shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold whitespace-nowrap cursor-pointer",
-                      activeTab === m.id
-                        ? "bg-white text-blue-600 shadow-xs ring-1 ring-slate-200"
-                        : "text-slate-600 hover:text-slate-900"
-                    )}
-                  >
-                    {m.name}
-                  </button>
-                ))}
-              </div>
-
-              {/* Action Toolbar Header */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-3 sm:px-6">
-                <div>
-                  <h3 className="text-[0.9rem] font-extrabold text-slate-900">
-                    {activeTab === "dashboard" && "CRM & Customer Management · Real-Time Operations"}
-                    {activeTab === "qa" && "Quality Assurance (QA) & Performance Scorecards"}
-                    {activeTab === "coaching" && "Coaching Logs, Action Plans & LMS Learning Modules"}
-                    {activeTab === "dialer" && "Integrated WebRTC Dialer & Audio Telephony HUD"}
-                    {activeTab === "wfm" && "Workforce Management (WFM) & Real-Time Dashboards"}
-                  </h3>
-                  <p className="text-[0.72rem] text-slate-500">
-                    Interactive prototype · Test live operational actions on the right
-                  </p>
-                </div>
-
-                {/* Interactive Simulator Buttons */}
-                <div className="flex flex-wrap items-center gap-2">
-                  {activeTab === "dashboard" && (
-                    <button
-                      type="button"
-                      onClick={handleSimulatePayment}
-                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-emerald-700 active:scale-[0.98] cursor-pointer"
-                    >
-                      <span>Receive Payment (+₱15k)</span>
-                    </button>
-                  )}
-
-                  {activeTab === "qa" && (
-                    <button
-                      type="button"
-                      onClick={handleRunQaAudit}
-                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-indigo-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-indigo-700 active:scale-[0.98] cursor-pointer"
-                    >
-                      <Award className="size-3.5" />
-                      <span>Audit Live Call (98.2%)</span>
-                    </button>
-                  )}
-
-                  {activeTab === "coaching" && (
-                    <button
-                      type="button"
-                      onClick={handleLogCoaching}
-                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-violet-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-violet-700 active:scale-[0.98] cursor-pointer"
-                    >
-                      <BookOpen className="size-3.5" />
-                      <span>Log Coaching Note</span>
-                    </button>
-                  )}
-
-                  {activeTab === "dialer" && (
-                    <button
-                      type="button"
-                      onClick={handleToggleAutoDial}
-                      className={cn(
-                        "inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all active:scale-[0.98] cursor-pointer",
-                        isAutoDialing ? "bg-amber-600 hover:bg-amber-700" : "bg-blue-600 hover:bg-blue-700"
-                      )}
-                    >
-                      <PhoneCall className="size-3.5" />
-                      <span>{isAutoDialing ? "Pause Calling" : "Start Auto-Dialer"}</span>
-                    </button>
-                  )}
-
-                  {activeTab === "wfm" && (
-                    <button
-                      type="button"
-                      onClick={handleCheckWfm}
-                      className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-slate-800 active:scale-[0.98] cursor-pointer"
-                    >
-                      <Clock className="size-3.5" />
-                      <span>Verify WFM Adherence</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Toast Banner */}
-              {feedbackToast && (
-                <div className="mx-5 mt-3 rounded-xl border border-emerald-300 bg-emerald-50/95 p-2.5 text-xs font-bold text-emerald-900 shadow-sm animate-fade-in flex items-center justify-between">
-                  <span>{feedbackToast}</span>
-                  <button
-                    type="button"
-                    onClick={() => setFeedbackToast(null)}
-                    className="text-emerald-700 hover:text-emerald-900 font-bold ml-2 text-sm"
-                  >
-                    ×
-                  </button>
-                </div>
-              )}
-
-              {/* Dynamic Tab Views */}
-              <div className="p-4 sm:p-5 lg:p-6">
-                {/* 1. OPERATIONS 360 HUB (CRM & Customer Management + Live Dashboard) */}
-                {activeTab === "dashboard" && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-                      {initialStats.map((stat) => {
-                        const isCollected = stat.label.toLowerCase().includes("collected");
-                        const displayVal = isCollected
-                          ? `₱${(148500 + reconciledCount * 15000).toLocaleString()}`
-                          : stat.value;
-
-                        return (
-                          <div
-                            key={stat.label}
-                            className="rounded-2xl border border-slate-100 bg-slate-50/70 p-3.5 sm:p-4 transition-all hover:border-slate-200 hover:bg-slate-50 shadow-2xs"
-                          >
-                            <p className="text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
-                              {stat.label}
-                            </p>
-                            <p className="mt-1.5 font-mono text-[1.25rem] sm:text-[1.5rem] font-extrabold tracking-tight text-slate-900">
-                              {displayVal}
-                            </p>
-                            <div className="mt-1.5 flex items-center gap-1.5">
-                              <span className={cn("text-[0.72rem] font-bold", stat.positive ? "text-emerald-600" : "text-red-600")}>
-                                {stat.positive ? "↑" : "↓"} {stat.change}
-                              </span>
-                              {isCollected && reconciledCount > 0 && (
-                                <span className="rounded bg-emerald-100 px-1 text-[0.65rem] font-bold text-emerald-800">
-                                  +{reconciledCount} verified
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Integrated Floor Accounts & Customer 360 Dossier */}
-                    <div className="overflow-hidden rounded-2xl border border-slate-100">
-                      <div className="border-b border-slate-100 bg-slate-50/90 px-4 py-2.5 flex items-center justify-between text-xs font-bold text-slate-700">
-                        <span>Customer Management 360 (Click to view full operational profile)</span>
-                        <span className="font-normal text-slate-500">Selected: {selectedAccountId}</span>
-                      </div>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left text-[0.78rem]">
-                          <thead>
-                            <tr className="border-b border-slate-100 bg-slate-50/60 text-[0.65rem] font-bold tracking-wider text-slate-500 uppercase">
-                              <th className="px-4 py-2.5">Account / Customer ID</th>
-                              <th className="px-4 py-2.5">Campaign / Service</th>
-                              <th className="px-4 py-2.5">Outstanding Balance</th>
-                              <th className="px-4 py-2.5">Operational State</th>
-                              <th className="px-4 py-2.5 text-right">Quick Action</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100">
-                            {initialRows.slice(0, 4).map((row) => {
-                              const isSelected = selectedAccountId === row.id;
-                              return (
-                                <tr
-                                  key={row.id}
-                                  onClick={() => {
-                                    setSelectedAccountId(row.id);
-                                    triggerToast(`Selected ${row.id} (${row.campaign}). Customer 360 loaded with complete interaction history.`);
-                                  }}
-                                  className={cn(
-                                    "transition-colors cursor-pointer",
-                                    isSelected ? "bg-blue-50/60 ring-1 ring-blue-500/20" : "hover:bg-slate-50/60"
-                                  )}
-                                >
-                                  <td className="whitespace-nowrap px-4 py-3 font-mono font-bold text-slate-900">
-                                    {row.id}
-                                    {isSelected && <span className="ml-1 text-blue-600 font-bold">●</span>}
-                                  </td>
-                                  <td className="px-4 py-3 font-medium text-slate-600">{row.campaign}</td>
-                                  <td className="whitespace-nowrap px-4 py-3 font-mono font-bold text-slate-900">{row.balance}</td>
-                                  <td className="px-4 py-3">
-                                    <span
-                                      className={cn(
-                                        "inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[0.68rem] font-bold",
-                                        row.status.toLowerCase().includes("ptp")
-                                          ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-500/20"
-                                          : row.status.toLowerCase().includes("call")
-                                          ? "bg-blue-50 text-blue-700 ring-1 ring-blue-500/20"
-                                          : "bg-slate-100 text-slate-700"
-                                      )}
-                                    >
-                                      {row.status}
-                                    </span>
-                                  </td>
-                                  <td className="px-4 py-3 text-right">
-                                    <button
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        triggerToast(`Dialing ${row.id} via WebRTC softphone...`);
-                                      }}
-                                      className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 min-h-[44px] inline-flex items-center justify-center text-[0.68rem] font-bold text-blue-600 hover:bg-blue-50 cursor-pointer"
-                                    >
-                                      1-Click Call
-                                    </button>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 2. QUALITY ASSURANCE (QA) & PERFORMANCE SCORECARDS */}
-                {activeTab === "qa" && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="rounded-xl border border-indigo-200 bg-indigo-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-indigo-700 uppercase tracking-wider">Floor QA Audit Rate</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">100% Audited</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">Automated speech-to-text + human calibrations</p>
-                      </div>
-                      <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-wider">Compliance Adherence</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">98.4% Passed</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">Zero regulatory or procedural violations</p>
-                      </div>
-                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-slate-700 uppercase tracking-wider">Active Scorecard Template</p>
-                        <p className="font-mono text-lg font-black text-slate-900 mt-1 truncate">Enterprise QA Rev 4.2</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">24 scoring points across soft &amp; hard skills</p>
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-slate-200 p-4 bg-slate-50/40 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-900">Live Agent QA Scorecards (Today)</span>
-                        <span className="text-[0.7rem] font-mono font-bold text-indigo-700">Real-Time Calibration Matrix</span>
-                      </div>
-                      <div className="space-y-2">
-                        {[
-                          { agent: "Maria Santos (Desk 04)", calls: 42, score: "99.1%", status: "Exceeding Target", badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-                          { agent: "John Ramos (Desk 12)", calls: 38, score: "96.4%", status: "Target Met", badge: "bg-blue-50 text-blue-700 border-blue-200" },
-                          { agent: "Aileen Cruz (Desk 19)", calls: 35, score: "89.0%", status: "Coaching Needed", badge: "bg-amber-50 text-amber-700 border-amber-200" },
-                        ].map((item) => (
-                          <div
-                            key={item.agent}
-                            className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-3 text-xs shadow-2xs"
-                          >
-                            <div>
-                              <p className="font-bold text-slate-900">{item.agent}</p>
-                              <p className="text-[0.68rem] text-slate-500 font-mono">{item.calls} audited calls today</p>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              <span className="font-mono text-sm font-extrabold text-slate-900">{item.score}</span>
-                              <span className={cn("rounded-full border px-2.5 py-0.5 text-[0.65rem] font-bold", item.badge)}>
-                                {item.status}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => triggerToast(`Opening deep QA evaluation scorecard for ${item.agent}...`)}
-                                className="rounded-lg border border-slate-200 px-2 py-1 text-[0.68rem] font-bold text-slate-700 hover:bg-slate-50 cursor-pointer"
-                              >
-                                View QA
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 3. COACHING LOGS, ACTION PLANS & LMS */}
-                {activeTab === "coaching" && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="rounded-xl border border-violet-200 bg-violet-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-violet-700 uppercase tracking-wider">Active Coaching Logs</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">{coachingCount} Sessions</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">1-on-1 supervisor records logged</p>
-                      </div>
-                      <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-blue-700 uppercase tracking-wider">Action Plan Milestones</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">91.2% On Track</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">Automated 7-day and 14-day check-ins</p>
-                      </div>
-                      <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-wider">LMS Completion Rate</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">94.8% Done</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">Self-paced agent learning modules</p>
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-slate-200 p-4 bg-slate-50/40 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-900">Recent Supervisor Action Plans &amp; LMS Modules</span>
-                        <span className="text-[0.7rem] font-mono text-violet-700 font-bold">1 Platform for QA &amp; Growth</span>
-                      </div>
-                      <div className="space-y-2">
-                        {[
-                          { title: "Objection Handling & Empathy Escalations", target: "Desk 19 (A. Cruz)", progress: "Day 6 of 14 · LMS Micro-Course 80%", type: "Coaching Action Plan" },
-                          { title: "Regulatory Compliance & Verification Protocol", target: "Desk 12 (J. Ramos)", progress: "Completed · QA Score improved to 96.4%", type: "LMS Certification" },
-                        ].map((item) => (
-                          <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-3 text-xs shadow-2xs space-y-1">
-                            <div className="flex items-center justify-between">
-                              <span className="font-extrabold text-slate-900">{item.title}</span>
-                              <span className="rounded bg-violet-50 text-violet-700 border border-violet-200 px-2 py-0.5 text-[0.65rem] font-bold">
-                                {item.type}
-                              </span>
-                            </div>
-                            <div className="flex items-center justify-between text-slate-600 text-[0.72rem]">
-                              <span>Assigned to: <strong>{item.target}</strong></span>
-                              <span className="font-mono text-emerald-700 font-semibold">{item.progress}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 4. INTEGRATED WEBRTC DIALER */}
-                {activeTab === "dialer" && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-3">
-                        <p className="text-[0.65rem] font-bold text-blue-700 uppercase">Queue Velocity</p>
-                        <p className="font-mono text-xl font-bold text-slate-900 mt-1">142 Contacts / hr</p>
-                        <p className="text-[0.65rem] text-slate-500 mt-0.5">3.2:1 Pacing algorithm active</p>
-                      </div>
-                      <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-3">
-                        <p className="text-[0.65rem] font-bold text-emerald-700 uppercase">Drop Rate SLA</p>
-                        <p className="font-mono text-xl font-bold text-slate-900 mt-1">0.12%</p>
-                        <p className="text-[0.65rem] text-slate-500 mt-0.5">Strict compliance &lt; 3.0% limit</p>
-                      </div>
-                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                        <p className="text-[0.65rem] font-bold text-slate-700 uppercase">Supervisory HUD</p>
-                        <p className="font-mono text-xl font-bold text-slate-900 mt-1">Silent Whisper</p>
-                        <p className="text-[0.65rem] text-slate-500 mt-0.5">Live audio coach to agent earpiece</p>
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-slate-200 p-4 bg-slate-50/40">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-bold text-slate-900">Live Auto-Dial Stream Monitor</span>
-                        <span className="font-mono text-xs font-bold text-emerald-600">
-                          {isAutoDialing ? "● Active Dialing Pacing" : "⏸ Dialing Paused"}
-                        </span>
-                      </div>
-                      <div className="space-y-2">
-                        {[
-                          { acc: "ACC-10817", tel: "+63 917 842 1092", state: "Live Connected", agent: "Desk 12 (MT)" },
-                          { acc: "ACC-10903", tel: "+63 920 411 9042", state: "Ringing (1.8s)", agent: "Desk 04 (RC)" },
-                          { acc: "ACC-11024", tel: "+63 918 392 0184", state: "Bypassed Voicemail", agent: "Filtered by AI" },
-                        ].map((call) => (
-                          <div
-                            key={call.acc}
-                            className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-2.5 text-xs shadow-2xs"
-                          >
-                            <div>
-                              <span className="font-mono font-bold text-slate-900">{call.acc}</span>
-                              <span className="text-slate-500 ml-2 font-mono">{call.tel}</span>
-                            </div>
-                            <span className="rounded-md bg-blue-50 text-blue-700 px-2 py-0.5 font-bold text-[0.7rem]">
-                              {call.state}
-                            </span>
-                            <span className="text-slate-500 font-medium text-[0.7rem]">{call.agent}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 5. WORKFORCE MANAGEMENT (WFM) */}
-                {activeTab === "wfm" && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-amber-800 uppercase tracking-wider">Floor Adherence Rate</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">96.8% In Adherence</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">46/48 staff on scheduled activity</p>
-                      </div>
-                      <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-blue-700 uppercase tracking-wider">MIS Report Delay</p>
-                        <p className="font-mono text-2xl font-black text-blue-700 mt-1">0.0 Seconds</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">No waiting for end-of-day spreadsheets</p>
-                      </div>
-                      <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-3.5">
-                        <p className="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-wider">Productive Hours</p>
-                        <p className="font-mono text-2xl font-black text-slate-900 mt-1">7.4 hrs / Shift</p>
-                        <p className="text-[0.68rem] text-slate-600 mt-0.5">Shrinkage reduced by 22%</p>
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-slate-200 p-4 bg-slate-50/40 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-900">Real-Time Shift Roster &amp; Adherence HUD</span>
-                        <span className="text-[0.7rem] font-mono text-slate-500 font-semibold">Shift: 08:00–17:00 PHT</span>
-                      </div>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                        <div className="p-3 bg-white rounded-xl border border-slate-200">
-                          <p className="text-[0.65rem] text-slate-500 font-bold uppercase">On Live Calls</p>
-                          <p className="font-mono text-xl font-bold text-blue-600 mt-1">32 Agents</p>
-                          <p className="text-[0.62rem] text-slate-500">66.7% occupancy</p>
-                        </div>
-                        <div className="p-3 bg-white rounded-xl border border-slate-200">
-                          <p className="text-[0.65rem] text-slate-500 font-bold uppercase">Ready in Queue</p>
-                          <p className="font-mono text-xl font-bold text-emerald-600 mt-1">10 Agents</p>
-                          <p className="text-[0.62rem] text-slate-500">Next connect &lt; 2s</p>
-                        </div>
-                        <div className="p-3 bg-white rounded-xl border border-slate-200">
-                          <p className="text-[0.65rem] text-slate-500 font-bold uppercase">In 1-on-1 Coaching</p>
-                          <p className="font-mono text-xl font-bold text-violet-600 mt-1">4 Agents</p>
-                          <p className="text-[0.62rem] text-slate-500">Scheduled QA review</p>
-                        </div>
-                        <div className="p-3 bg-white rounded-xl border border-slate-200">
-                          <p className="text-[0.65rem] text-slate-500 font-bold uppercase">Break / Meal</p>
-                          <p className="font-mono text-xl font-bold text-slate-600 mt-1">2 Agents</p>
-                          <p className="text-[0.62rem] text-slate-500">On schedule</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Interactive Companion iPhone Mockup */}
-      <div className="absolute -bottom-6 -right-4 hidden w-[220px] sm:block lg:-right-8 lg:bottom-4 lg:w-[260px]" aria-hidden>
-        <div className="rounded-[2.2rem] bg-slate-900/10 p-2 shadow-2xl shadow-blue-950/25 ring-1 ring-slate-900/10 backdrop-blur-xl">
-          <div className="overflow-hidden rounded-[calc(2.2rem-8px)] border border-slate-200/90 bg-white shadow-inner">
-            {/* iOS Dynamic Island */}
-            <div className="border-b border-slate-100 bg-slate-50/90 px-4 pt-3 pb-3">
-              <div className="mx-auto mb-2 h-3.5 w-18 rounded-full bg-slate-900 shadow-xs" />
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-[0.62rem] font-black tracking-widest text-blue-600 uppercase">OPS 360</p>
-                  <p className="text-[0.78rem] font-bold text-slate-900">Mobile Console</p>
-                </div>
-                <span className="flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-emerald-700">
-                  <span className="size-1 rounded-full bg-emerald-500 animate-pulse" />
-                  Live
+              <div className="h-4 w-px bg-slate-700" aria-hidden />
+              <div>
+                <span className="text-xs font-black tracking-wider uppercase text-white">
+                  OPERATIONS 360
+                </span>
+                <span className="ml-2 hidden text-[10px] font-mono text-slate-400 sm:inline">
+                  CORE PLATFORM · MANILA FLOOR 04
                 </span>
               </div>
             </div>
 
-            <div className="space-y-2 p-3">
-              <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2.5 shadow-2xs">
-                <p className="text-[0.6rem] font-bold uppercase tracking-wider text-slate-500">Floor Recovery Today</p>
-                <p className="mt-0.5 font-mono text-[1.12rem] font-bold tracking-tight text-emerald-600">
-                  ₱{(148500 + reconciledCount * 15000).toLocaleString()}
-                </p>
+            {/* Live Operational Status Meter */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 rounded-full bg-slate-800/90 px-3 py-1 text-[11px] font-mono text-emerald-400 border border-slate-700">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                </span>
+                <span>48 AGENTS ACTIVE · 0 QUEUE DELAY</span>
               </div>
+              <span className="hidden text-[10px] font-mono text-slate-400 md:inline">
+                LATENCY 12MS
+              </span>
+            </div>
+          </div>
 
-              <div
-                onClick={handleRunQaAudit}
-                className="rounded-xl border border-indigo-500/20 bg-indigo-50/50 p-2 shadow-2xs cursor-pointer transition-transform hover:scale-[1.02]"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[0.6rem] font-bold uppercase tracking-wider text-indigo-700">QA Alert</span>
-                  <span className="text-[0.58rem] font-mono text-indigo-600">Just now</span>
-                </div>
-                <p className="mt-0.5 text-[0.72rem] font-bold text-slate-900">Desk 04: 99.1% QA Score</p>
-                <p className="text-[0.62rem] text-slate-500">Tap to calibrate</p>
+          {/* Interactive Role Lens Controller Bar (CRO Perspective Switcher) */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 bg-slate-50 px-4 py-2.5 sm:px-6">
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 font-semibold">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400">View Lens:</span>
+              <div className="flex items-center gap-1">
+                {ROLES.map((r) => {
+                  const isCurrent = role === r.id;
+                  return (
+                    <button
+                      key={r.id}
+                      type="button"
+                      onClick={() => {
+                        setRole(r.id);
+                        triggerToast(`Switched view to ${r.label}: ${r.focusMessage}`);
+                      }}
+                      className={cn(
+                        "rounded-lg px-2.5 py-1 text-xs font-bold transition-all cursor-pointer",
+                        isCurrent
+                          ? "bg-blue-600 text-white shadow-xs"
+                          : "text-slate-600 hover:bg-slate-200/70 hover:text-slate-900"
+                      )}
+                    >
+                      {r.label}
+                    </button>
+                  );
+                })}
               </div>
+            </div>
 
-              <div
-                onClick={handleLogCoaching}
-                className="rounded-xl border border-violet-500/20 bg-violet-50/50 p-2 shadow-2xs cursor-pointer transition-transform hover:scale-[1.02]"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[0.6rem] font-bold uppercase tracking-wider text-violet-700">Coaching Log</span>
-                  <span className="rounded-full bg-violet-600 px-1.5 py-0.2 text-[0.58rem] font-bold text-white">Action</span>
-                </div>
-                <p className="mt-0.5 text-[0.72rem] font-bold text-slate-900">Desk 14 Plan Active</p>
-                <p className="text-[0.62rem] text-slate-600">14-Day check-in due</p>
+            <div className="text-right text-[11px] text-slate-500 hidden sm:block">
+              <span className="font-semibold text-slate-800">{activeRoleConfig.subtitle}:</span>{" "}
+              <span>{activeRoleConfig.focusMessage}</span>
+            </div>
+          </div>
+
+          {/* Operational Pulse: 4 High-Impact Metric Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-slate-200/80 bg-white">
+            {/* Metric 1: Cashflow / PTP Recovery */}
+            <div className={cn(
+              "border-r border-b lg:border-b-0 border-slate-200/80 p-4 transition-colors",
+              role === "business_owner" && "bg-blue-50/40"
+            )}>
+              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <span>Collections MTD</span>
+                <span className="rounded bg-emerald-100 text-emerald-800 px-1.5 py-0.2 font-mono text-[10px] font-bold">
+                  +14.2% TODAY
+                </span>
+              </div>
+              <div className="mt-1.5 flex items-baseline gap-2">
+                <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 font-mono">
+                  ₱{dailyCollected.toLocaleString()}
+                </span>
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <span>Daily Target: ₱5.0M</span>
+                <span className="font-bold text-slate-600">86% Achieved</span>
+              </div>
+              <div className="mt-1 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                <div className="h-full bg-blue-600 rounded-full" style={{ width: "86%" }} />
+              </div>
+            </div>
+
+            {/* Metric 2: Live Floor Telephony */}
+            <div className={cn(
+              "border-b lg:border-b-0 lg:border-r border-slate-200/80 p-4 transition-colors",
+              role === "manager" && "bg-blue-50/40"
+            )}>
+              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <span>Live Calls In Progress</span>
+                <span className="rounded bg-blue-100 text-blue-800 px-1.5 py-0.2 font-mono text-[10px] font-bold">
+                  3.2:1 PACING
+                </span>
+              </div>
+              <div className="mt-1.5 flex items-baseline gap-2">
+                <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 font-mono">
+                  {activeCallsCount} Connected
+                </span>
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <span>Avg Talk Time: 3m 42s</span>
+                <span className="font-bold text-emerald-600">0% Abandon</span>
+              </div>
+              <div className="mt-1 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                <div className="h-full bg-emerald-500 rounded-full" style={{ width: "74%" }} />
+              </div>
+            </div>
+
+            {/* Metric 3: Automated QA Compliance */}
+            <div className={cn(
+              "border-r border-slate-200/80 p-4 transition-colors",
+              role === "supervisor" && "bg-blue-50/40"
+            )}>
+              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <span>QA Compliance Audit</span>
+                <span className="rounded bg-emerald-100 text-emerald-800 px-1.5 py-0.2 font-mono text-[10px] font-bold">
+                  AUDITED
+                </span>
+              </div>
+              <div className="mt-1.5 flex items-baseline gap-2">
+                <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 font-mono">
+                  {qaScore}%
+                </span>
+                <span className="text-[11px] font-bold text-slate-500 font-mono">GRADE A+</span>
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <span>142 Evaluations Logged</span>
+                <span className="font-bold text-slate-600">Zero Fatal</span>
+              </div>
+              <div className="mt-1 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                <div className="h-full bg-emerald-600 rounded-full" style={{ width: "98%" }} />
+              </div>
+            </div>
+
+            {/* Metric 4: Workforce Adherence */}
+            <div className={cn(
+              "p-4 transition-colors",
+              role === "agent" && "bg-blue-50/40"
+            )}>
+              <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <span>Workforce Adherence</span>
+                <span className="rounded bg-slate-100 text-slate-700 px-1.5 py-0.2 font-mono text-[10px] font-bold">
+                  WFM SYNC
+                </span>
+              </div>
+              <div className="mt-1.5 flex items-baseline gap-2">
+                <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 font-mono">
+                  97.9%
+                </span>
+                <span className="text-[11px] font-bold text-emerald-600 font-mono">ON SCHEDULE</span>
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <span>48 / 48 Stations Manned</span>
+                <span className="font-bold text-slate-600">0 Absent</span>
+              </div>
+              <div className="mt-1 h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                <div className="h-full bg-indigo-600 rounded-full" style={{ width: "97%" }} />
               </div>
             </div>
           </div>
+
+          {/* Main Operational Split Bento */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
+            {/* Left Column (8 cols): Live Calling HUD & Active Accounts CRM */}
+            <div className="lg:col-span-8 border-b lg:border-b-0 lg:border-r border-slate-200/80 p-4 sm:p-5 flex flex-col justify-between">
+              <div>
+                {/* Active Live Call Strip (The Focal Visual Hook) */}
+                <div className="rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50/80 via-white to-blue-50/40 p-3.5 mb-4 shadow-2xs">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-blue-100 pb-2.5 mb-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex size-2.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75" />
+                        <span className="relative inline-flex size-2.5 rounded-full bg-blue-600" />
+                      </span>
+                      <span className="text-xs font-bold text-slate-900">
+                        Live Call: Desk 14 · Sarah Chen
+                      </span>
+                      <span className="rounded bg-blue-100 px-2 py-0.5 text-[10px] font-mono font-bold text-blue-700">
+                        CALL DURATION: {formatSeconds(callDuration)}
+                      </span>
+                    </div>
+
+                    {/* Supervisor Whisper / Listen In Controls */}
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={handleToggleWhisper}
+                        className={cn(
+                          "rounded-md px-2.5 py-1 text-[11px] font-bold transition-all cursor-pointer",
+                          isWhispering
+                            ? "bg-amber-500 text-white shadow-xs"
+                            : "bg-white text-slate-700 border border-slate-300 hover:bg-slate-100"
+                        )}
+                      >
+                        {isWhispering ? "Whisper Active (Mute)" : "Whisper Coach"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleRunQaAudit}
+                        className="rounded-md bg-blue-600 text-white px-2.5 py-1 text-[11px] font-bold hover:bg-blue-700 transition cursor-pointer"
+                      >
+                        Instant QA Check
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Customer Conversation Sub-row with Live Audio Visualizer */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div>
+                      <span className="text-slate-500">Speaking with:</span>{" "}
+                      <strong className="text-slate-900 font-bold">Carlos Tan (Director, Apex Logistics)</strong>
+                      <span className="ml-2 font-mono text-[11px] text-slate-400">· ACC-10482 · Balance: ₱64,250</span>
+                    </div>
+
+                    {/* Audio Waveform Bars (No icon, pure dynamic CSS bars) */}
+                    <div className="flex items-center gap-1 px-2 py-1 rounded bg-slate-900/5">
+                      <span className="text-[10px] font-mono font-bold text-slate-500 mr-1.5">VOICE STREAM</span>
+                      <span className="h-4 w-1 bg-blue-600 rounded-full animate-pulse" />
+                      <span className="h-6 w-1 bg-blue-500 rounded-full animate-pulse delay-75" />
+                      <span className="h-3 w-1 bg-blue-400 rounded-full animate-pulse delay-150" />
+                      <span className="h-5 w-1 bg-blue-600 rounded-full animate-pulse delay-100" />
+                      <span className="h-2 w-1 bg-blue-400 rounded-full" />
+                      <span className="h-4 w-1 bg-blue-500 rounded-full animate-pulse delay-200" />
+                      <span className="h-5 w-1 bg-blue-600 rounded-full animate-pulse delay-75" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Queue Filter Bar */}
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-slate-800">Priority Accounts</span>
+                    <span className="text-[11px] font-mono text-slate-400">(48 in Floor Queue)</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {[
+                      { id: "all", label: "All Records" },
+                      { id: "in_call", label: "Active Calls" },
+                      { id: "ptp", label: "PTP Kept" },
+                      { id: "alerts", label: "Action Alerts" },
+                    ].map((f) => (
+                      <button
+                        key={f.id}
+                        type="button"
+                        onClick={() => setFilter(f.id)}
+                        className={cn(
+                          "rounded-md px-2 py-0.5 text-[10px] font-bold transition cursor-pointer",
+                          filter === f.id
+                            ? "bg-slate-900 text-white"
+                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                        )}
+                      >
+                        {f.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Real-Time Account Records Table */}
+                <div className="overflow-x-auto rounded-lg border border-slate-200">
+                  <table className="w-full text-left text-xs">
+                    <thead>
+                      <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                        <th className="py-2 px-3">Account & Debtor</th>
+                        <th className="py-2 px-3">Balance</th>
+                        <th className="py-2 px-3">Assigned Desk</th>
+                        <th className="py-2 px-3">Status</th>
+                        <th className="py-2 px-3 text-right">Quick Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-sans">
+                      {filteredAccounts.map((acc) => (
+                        <tr key={acc.id} className="hover:bg-slate-50/70 transition-colors">
+                          <td className="py-2.5 px-3">
+                            <div className="font-bold text-slate-900">{acc.name}</div>
+                            <div className="text-[10px] font-mono text-slate-400">
+                              {acc.id} · {acc.category}
+                            </div>
+                          </td>
+                          <td className="py-2.5 px-3 font-mono font-bold text-slate-900">
+                            ₱{acc.balance.toLocaleString()}
+                          </td>
+                          <td className="py-2.5 px-3 text-slate-600">
+                            <span className="font-medium">{acc.assignedTo}</span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span
+                              className={cn(
+                                "inline-block rounded px-2 py-0.5 text-[10px] font-bold",
+                                acc.status === "in_call" && "bg-blue-100 text-blue-800",
+                                acc.status === "ptp_kept" && "bg-emerald-100 text-emerald-800",
+                                acc.status === "ptp_alert" && "bg-amber-100 text-amber-800",
+                                acc.status === "settled" && "bg-purple-100 text-purple-800"
+                              )}
+                            >
+                              {acc.statusText}
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3 text-right">
+                            {acc.status === "in_call" ? (
+                              <button
+                                type="button"
+                                onClick={handleSimulatePayment}
+                                className="rounded bg-emerald-600 text-white px-2 py-1 text-[10px] font-bold hover:bg-emerald-700 transition cursor-pointer"
+                              >
+                                Log ₱15K Payment
+                              </button>
+                            ) : acc.status === "ptp_alert" ? (
+                              <button
+                                type="button"
+                                onClick={() => triggerToast(`Priority Escalation triggered for ${acc.id}. Supervisor assigned.`)}
+                                className="rounded bg-amber-600 text-white px-2 py-1 text-[10px] font-bold hover:bg-amber-700 transition cursor-pointer"
+                              >
+                                Escalate
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => triggerToast(`Dialing ${acc.name} on secondary phone line...`)}
+                                className="rounded border border-slate-200 text-slate-700 px-2 py-1 text-[10px] font-bold hover:bg-slate-100 transition cursor-pointer"
+                              >
+                                Direct Call
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Bottom Quick Metric Bar */}
+              <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-mono">
+                <div>Next Automated Batch: 14 Accounts at 2:00 PM</div>
+                <div className="text-slate-700 font-bold">BSP Circular 454 Compliance Mode Active</div>
+              </div>
+            </div>
+
+            {/* Right Column (4 cols): Real-Time Supervisory QA & 1-Click Interactive Triggers */}
+            <div className="lg:col-span-4 p-4 sm:p-5 bg-slate-50/50 flex flex-col justify-between">
+              <div className="space-y-4">
+                {/* Panel 1: Live QA Scorecard & Checklist */}
+                <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-2xs">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                      Live QA Audit · Desk 14
+                    </span>
+                    <span className="rounded bg-emerald-100 text-emerald-800 font-mono font-bold text-[10px] px-1.5 py-0.2">
+                      SCORE: 98/100
+                    </span>
+                  </div>
+
+                  <div className="space-y-1.5 text-xs">
+                    <div className="flex items-center justify-between text-slate-700">
+                      <span>Identity Verification</span>
+                      <strong className="text-emerald-600 font-mono font-bold">VERIFIED</strong>
+                    </div>
+                    <div className="flex items-center justify-between text-slate-700">
+                      <span>Mandatory Disclosure</span>
+                      <strong className="text-emerald-600 font-mono font-bold">COMPLIANT</strong>
+                    </div>
+                    <div className="flex items-center justify-between text-slate-700">
+                      <span>Settlement PTP Terms</span>
+                      <strong className="text-emerald-600 font-mono font-bold">SECURED</strong>
+                    </div>
+                    <div className="flex items-center justify-between text-slate-700">
+                      <span>Professional Demeanor</span>
+                      <strong className="text-emerald-600 font-mono font-bold">100%</strong>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Panel 2: Live Coaching Log & LMS Action Plan */}
+                <div className="rounded-xl border border-slate-200 bg-white p-3.5 shadow-2xs">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                      Coaching & LMS Log
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-500 font-bold">
+                      14-DAY ACTION
+                    </span>
+                  </div>
+
+                  <div className="text-xs space-y-1">
+                    <div className="font-bold text-slate-900">Desk 08: Mark Ramos</div>
+                    <p className="text-[11px] text-slate-600 leading-normal">
+                      Focus: Re-framing payment terms on high-balance accounts. Micro-LMS module &ldquo;Corporate Negotiation&rdquo; assigned.
+                    </p>
+                    <div className="pt-1.5 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                      <span>Action Review: Tomorrow</span>
+                      <span className="text-blue-600 font-bold">IN PROGRESS</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Panel 3: Interactive Sandbox Triggers (Test the Platform Live) */}
+                <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-3.5">
+                  <span className="block text-[10px] font-mono font-bold uppercase tracking-wider text-blue-800 mb-2">
+                    Test Platform Actions (Click to Test)
+                  </span>
+
+                  <div className="space-y-2">
+                    <button
+                      type="button"
+                      onClick={handleSimulatePayment}
+                      className="w-full text-left rounded-lg bg-white border border-blue-200 px-3 py-2 text-xs font-bold text-blue-900 hover:bg-blue-600 hover:text-white transition shadow-2xs cursor-pointer flex items-center justify-between"
+                    >
+                      <span>Simulate ₱15K Payment</span>
+                      <span className="text-xs font-mono">→</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handlePaceDialer}
+                      className="w-full text-left rounded-lg bg-white border border-slate-200 px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-900 hover:text-white transition shadow-2xs cursor-pointer flex items-center justify-between"
+                    >
+                      <span>Re-Pace Auto-Dialer</span>
+                      <span className="text-xs font-mono">3.4:1</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleRunQaAudit}
+                      className="w-full text-left rounded-lg bg-white border border-slate-200 px-3 py-2 text-xs font-bold text-slate-800 hover:bg-slate-900 hover:text-white transition shadow-2xs cursor-pointer flex items-center justify-between"
+                    >
+                      <span>Run AI Compliance Audit</span>
+                      <span className="text-xs font-mono">Run</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Reassurance */}
+              <div className="mt-4 pt-3 border-t border-slate-200 text-center">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  ONE SYSTEM · ONE VIEW · ONE SOURCE OF TRUTH
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Dynamic Reactive Toast Banner */}
+          {toastMessage && (
+            <div className="border-t border-slate-200 bg-slate-900 text-white px-4 py-2.5 text-xs flex items-center justify-between animate-in fade-in slide-in-from-bottom duration-200">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
+                <span className="font-mono text-emerald-300 font-bold">SYSTEM TELEMETRY:</span>
+                <span>{toastMessage}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setToastMessage(null)}
+                className="text-slate-400 hover:text-white text-xs font-mono cursor-pointer"
+              >
+                DISMISS
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
-      <figcaption className="sr-only">
-        Interactive preview of OPERATIONS 360 integrated operations platform showcasing CRM, QA, Scorecards, Coaching Logs, Dialer, LMS, WFM, and Real-Time Dashboards.
-      </figcaption>
     </figure>
   );
 }
