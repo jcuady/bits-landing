@@ -48,10 +48,12 @@ export function ContactForm() {
     const pkg = params.get("package");
     const bundle = params.get("bundle");
     const product = params.get("product");
-    if (bundle || pkg === "custom-deployment") {
+    if (pkg === "operations-360" || pkg === "ops" || product === "operations-360") {
+      setSelectedInterest("OPERATIONS 360 — Integrated Operations Platform (Flagship)");
+    } else if (bundle || pkg === "custom-deployment") {
       setSelectedInterest("Custom Multi-Product Bundle (Combine Multiple Engines)");
     } else if (pkg === "starter") {
-      setSelectedInterest("BITScrm — Collections & Operations Core");
+      setSelectedInterest("OPERATIONS 360 — Integrated Operations Platform (Flagship)");
     } else if (pkg === "growth") {
       setSelectedInterest("BITS Suite (CRM + AI Operations)");
     } else if (pkg === "enterprise" || pkg === "on-premises") {
@@ -347,7 +349,7 @@ export function ContactForm() {
         {/* Operational Message / Requirements */}
         <div className="flex flex-col gap-1.5 sm:col-span-2">
           <label htmlFor="message" className="text-xs font-bold text-slate-700">
-            What are you looking to improve or build? <span className="text-rose-500">*</span>
+            Tell us about your operational wish list <span className="text-rose-500">*</span>
           </label>
           <textarea
             id="message"
@@ -358,7 +360,7 @@ export function ContactForm() {
             aria-invalid={!!state.errors.message}
             aria-describedby={state.errors.message ? "message-error" : undefined}
             className={cn(inputClass(!!state.errors.message), "h-auto min-h-[6.5rem] resize-y py-3 text-base")}
-            placeholder="Tell us about your portfolio volume, dialing workflows, team structure, or required system integrations..."
+            placeholder="What is your operational wish list? Tell us which fragmented tools you're looking to consolidate (CRM, QA, Integrated Dialer, Performance Scorecards, Coaching Logs, LMS, WFM, Real-Time Dashboards)..."
           />
           <FieldError id="message-error" errors={state.errors.message} />
         </div>
@@ -378,9 +380,9 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-11 w-full items-center justify-center rounded-full bg-blue-600 px-7 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-[0.98] disabled:opacity-60 sm:w-auto"
+          className="inline-flex h-12 w-full items-center justify-center rounded-full bg-blue-600 px-8 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-[0.98] disabled:opacity-60 sm:w-auto"
         >
-          {pending ? "Submitting Request…" : "Book a Free Consultation"}
+          {pending ? "Submitting Request…" : "Let's Talk About Your Operational Wish List"}
         </button>
       </div>
     </form>

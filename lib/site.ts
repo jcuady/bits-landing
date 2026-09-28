@@ -12,7 +12,7 @@ export const site = {
 export const navItems = [
   { label: "Ecosystem", href: "/#ecosystem" },
   { label: "The Difference", href: "/#the-difference" },
-  { label: "BITScrm", href: "/bitscrm" },
+  { label: "OPERATIONS 360", href: "/#operations-360" },
   { label: "AI Operations", href: "/bitsagent" },
   { label: "Industries", href: "/#industries" },
   { label: "Security", href: "/#security" },
@@ -30,10 +30,10 @@ export const navigationSections = [
       heading: "Enterprise Software Portfolio",
       items: [
         {
-          title: "BITScrm Collections",
+          title: "OPERATIONS 360",
           badge: "Primary Flagship",
-          description: "High-volume debt recovery, delinquent account staging & supervisory telephony.",
-          href: "/bitscrm",
+          description: "Integrated operations platform (formerly CRM Collections): CRM, QA, Scorecards, Coaching, Dialer, LMS, WFM & Live Dashboards.",
+          href: "/#operations-360",
           icon: "crm" as const,
         },
         {
@@ -298,32 +298,32 @@ export const theDifference = [
 export const bitsProducts = [
   {
     id: "collections",
-    name: "BITScrm Collections",
-    shortName: "Collections CRM",
+    name: "OPERATIONS 360",
+    shortName: "Operations 360",
     category: "flagship",
-    categoryLabel: "Specialized Flagship Platform",
-    badge: "Collections Agency Only",
+    categoryLabel: "Flagship Integrated Operations Suite",
+    badge: "Primary Flagship Suite",
     isFlagship: true,
-    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
+    tagline: "ONE SYSTEM. ONE VIEW. ONE SOURCE OF TRUTH.",
     description:
-      "The mission-critical debt recovery platform purpose-built exclusively for collection agencies, debt recovery law firms, consumer lending desks, and recovery BPOs. (Not a general sales CRM). Unifies delinquent account staging, aging bucket distribution, browser WebRTC softphones, automated PTP scheduling, supervisor QA HUD, and BSP Circulars 454/857 compliance.",
+      "The integrated operations platform that brings your critical operational tools and information into one system (formerly CRM Collections). Unifies CRM & Customer Management, Quality Assurance (QA), Performance Scorecards & Analytics, Coaching Logs & Action Plans, QA Coaching, Integrated Dialer, Learning Management System (LMS), Workforce Management (WFM), and Real-Time Operational Dashboards & Reports.",
     complianceBadges: [
-      "HIPAA Security Rule Aligned",
+      "Zero MIS Report Wait Time",
       "SOC 2 Type II Controls",
-      "BSP Circulars 454/857",
-      "NPC RA 10173 DPA",
+      "BSP Circulars 454/857 & NPC DPA",
+      "WFM Schedule Adherence Engine",
     ],
     capabilities: [
-      "Dynamic Debtor & Account Staging Queues",
-      "Built-in WebRTC Browser SIP Softphone & Auto-Dialer",
-      "Automated Promise-to-Pay (PTP) Scheduling Engine",
-      "Supervisor Live Listen, Whisper & Barge HUD",
-      "Standardized QA Scorecards & Audit Worklists",
-      "Granular Role-Based Access (RBAC) & WORM Logs",
+      "CRM & Customer Management with 360° Dossiers",
+      "Quality Assurance (QA) & Standardized Scorecards",
+      "Performance Scorecards, Metrics & Real-Time Analytics",
+      "Coaching Logs, Action Plans & Supervisor HUD",
+      "Integrated WebRTC Predictive Dialer & Softphone",
+      "Learning Management System (LMS) & Workforce Management (WFM)",
     ],
-    metrics: { label: "Right-Party Connect", value: "3.2x Boost" },
-    ctaText: "Explore BITScrm Collections",
-    ctaHref: "/bitscrm",
+    metrics: { label: "Operations Productivity", value: "+42% Boost" },
+    ctaText: "Explore OPERATIONS 360",
+    ctaHref: "/#operations-360",
   },
   {
     id: "ai-agent",
@@ -2004,6 +2004,7 @@ export const processSteps = [
 ] as const;
 
 export const contactInterests = [
+  "OPERATIONS 360 — Integrated Operations Platform (Flagship)",
   "Custom Multi-Product Bundle (Combine Multiple Engines)",
   "BITScrm — Collections & Operations Core",
   "BITSagent — Conversational Voice AI",
@@ -2022,7 +2023,8 @@ export const footerColumns = [
   {
     title: "Platform",
     links: [
-      { label: "BITScrm Collections (Flagship)", href: "/bitscrm" },
+      { label: "OPERATIONS 360 (Flagship)", href: "/#operations-360" },
+      { label: "BITScrm Collections", href: "/bitscrm" },
       { label: "BITScrm Support Desk", href: "/products/support" },
       { label: "BITScrm Sales Engine", href: "/products/sales" },
       { label: "BITScrm Marketing", href: "/products/marketing" },

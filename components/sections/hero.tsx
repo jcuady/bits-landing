@@ -9,11 +9,11 @@ import { cn } from "@/lib/utils";
 // Curated flagship products across core business operational categories
 const featuredProducts = [
   {
-    name: "BITScrm Collections",
-    badge: "Flagship CRM",
-    href: "/bitscrm",
+    name: "OPERATIONS 360",
+    badge: "Flagship Suite",
+    href: "/#operations-360",
     dotColor: "bg-blue-600",
-    hoverBorder: "hover:border-blue-300 hover:bg-blue-50/80 hover:text-blue-700",
+    hoverBorder: "hover:border-blue-300 hover:bg-blue-50/80 hover:text-blue-700 ring-1 ring-blue-500/20",
   },
   {
     name: "BITSagent Voice AI",
@@ -81,7 +81,7 @@ export function Hero() {
                   <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
                 </span>
                 <span className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-blue-700">
-                  Enterprise Operations Suite · Custom Deployed for Philippine Business
+                  Introducing OPERATIONS 360 · One System. One View. One Source of Truth.
                 </span>
               </div>
             </Reveal>
@@ -96,10 +96,10 @@ export function Hero() {
               </h1>
             </Reveal>
 
-            {/* Clear value proposition */}
+            {/* Clear value proposition featuring OPERATIONS 360 */}
             <Reveal delay={0.1} y={12}>
               <p className="mt-4 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed text-pretty">
-                Stop forcing your team into rigid, per-seat SaaS. BITS designs, deploys, and manages 18 custom software products—from AI-powered CRM and predictive dialers to automated ERP and payroll—tailored exactly to how you operate.
+                Move beyond fragmented systems. <strong className="text-slate-900 font-semibold">OPERATIONS 360</strong> unites your CRM, Quality Assurance, Performance Scorecards, Coaching Logs, Integrated Dialer, LMS, and Workforce Management into one cohesive operations platform.
               </p>
             </Reveal>
 
@@ -112,7 +112,7 @@ export function Hero() {
                     href="/#contact"
                     className="group relative flex h-14 w-full sm:w-auto items-center justify-between sm:justify-center gap-4 rounded-full bg-blue-600 pl-7 pr-3 font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/35 active:scale-[0.98]"
                   >
-                    <span className="text-[0.95rem]">Book a Free Consultation</span>
+                    <span className="text-[0.95rem]">Let&apos;s Talk About Your Operational Wish List</span>
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                       <ArrowUpRight className="size-4.5" />
                     </span>
@@ -122,10 +122,10 @@ export function Hero() {
                 {/* Secondary CTA: Plain English Product Suite Discovery */}
                 <Magnetic className="w-full sm:w-auto">
                   <Link
-                    href="/#products-suite"
+                    href="/#operations-360"
                     className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-7 font-bold text-slate-800 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-blue-600 active:scale-[0.98]"
                   >
-                    <span className="text-[0.95rem]">Explore All 18 Products</span>
+                    <span className="text-[0.95rem]">Explore OPERATIONS 360</span>
                     <span className="text-slate-400 transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </Link>
                 </Magnetic>
@@ -133,8 +133,24 @@ export function Hero() {
 
               {/* Micro-reassurance underneath CTA */}
               <p className="mt-2.5 text-xs text-slate-500 font-medium">
-                Free 30-min discovery · Zero obligation · Custom solution roadmap &amp; quote
+                Free 30-min discovery · Zero per-seat lock-in · Custom solution roadmap for your exact wish list
               </p>
+
+              {/* Stakeholder Value Matrix Pills */}
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[0.72rem] text-slate-600">
+                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
+                  👔 <strong>Owners:</strong> Big Picture Data
+                </span>
+                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
+                  📊 <strong>Managers:</strong> Zero MIS Delay
+                </span>
+                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
+                  🎯 <strong>Supervisors:</strong> 1-Click Coaching
+                </span>
+                <span className="rounded-full bg-slate-100 border border-slate-200/80 px-2.5 py-1 font-semibold text-slate-800">
+                  ⚡ <strong>Agents:</strong> All Tools in 1 Place
+                </span>
+              </div>
 
               {/* Properly Showing Our Products: Curated Flagship Strip */}
               <div className="mt-7 flex flex-col items-center gap-2.5 w-full max-w-4xl">

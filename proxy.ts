@@ -3,8 +3,10 @@ import { createServerClient } from "@supabase/ssr";
 
 // Subdomain-to-Product-ID routing registry
 const SUBDOMAIN_PRODUCT_MAP: Record<string, string> = {
+  ops: "operations-360",
+  operations: "operations-360",
   sales: "crm-sales",
-  collections: "crm-collections",
+  collections: "operations-360",
   support: "crm-support",
   marketing: "crm-marketing",
   commerce: "crm-commerce",

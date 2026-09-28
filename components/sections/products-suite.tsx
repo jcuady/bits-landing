@@ -74,10 +74,11 @@ type CategoryFilterId = (typeof categoryFilters)[number]["id"];
 function getProductPainPoint(id: string): { pain: string; solution: string } {
   switch (id) {
     case "collections":
+    case "operations-360":
     case "service":
       return {
-        pain: "Uncollected delinquent debt, broken promise-to-pay commitments, slow manual dialing, and manual compliance audits.",
-        solution: "Automated debtor staging queues, WebRTC predictive softphones, and supervisor QA HUD boost recovery by 3.2x.",
+        pain: "Fragmented tools, disconnected telephony, separate QA spreadsheets, lost coaching logs, and delayed MIS reports.",
+        solution: "OPERATIONS 360 brings CRM, QA, Scorecards, Coaching, Dialer, LMS, WFM & Real-Time Dashboards into one source of truth.",
       };
     case "ai-agent":
       return {
@@ -184,12 +185,13 @@ interface ProductDeepSolution {
 function getProductDeepSolution(id: string): ProductDeepSolution {
   switch (id) {
     case "collections":
+    case "operations-360":
     case "service":
       return {
-        idealFor: "Debt Recovery Agencies, Debt Purchase Funds, Consumer Lenders & Recovery BPOs",
-        whoUses: "Collection Agents, Skip Tracers, Legal Floor Supervisors & Recovery Directors",
-        coreImpact: "+38% Liquidation Recovery & 100% BSP 454/857 Audit Defense",
-        workflowStep: "Stages delinquent accounts by DPD buckets, fires predictive auto-dialer, enforces legal contact windows, and locks Promise-to-Pay dates with automated SMS payment links.",
+        idealFor: "BPOs, Contact Centers, Debt Recovery Agencies, Lending Desks & High-Throughput Operations",
+        whoUses: "Business Owners, Operations Managers, Floor Supervisors & Frontline Agents",
+        coreImpact: "Zero MIS Wait Time, 96.8% Schedule Adherence & +42% Operations Output",
+        workflowStep: "Replaces 5-8 fragmented software tools with one integrated operations suite: customer 360 management, 100% QA audits, 1-click coaching logs, auto-dialing, LMS modules, and live WFM floor adherence.",
       };
     case "ai-agent":
       return {
@@ -709,12 +711,12 @@ export function ProductsSuite() {
                 {/* Industry Scope Demarcation */}
                 <div className="mt-3">
                   {activeProduct.id === "collections" ? (
-                    <div className="flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50/90 p-2.5 text-xs text-rose-900 font-semibold shadow-2xs">
-                      <ShieldAlert className="size-4 shrink-0 text-rose-600" />
+                    <div className="flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50/90 p-2.5 text-xs text-blue-900 font-semibold shadow-2xs">
+                      <Sparkles className="size-4 shrink-0 text-blue-600" />
                       <div>
-                        <span className="font-bold text-rose-950">Industry Scope: </span>
-                        <span className="text-rose-800">
-                          Specialized for Collections Agencies, BPOs &amp; Consumer Lending Desks. (Not a general sales CRM).
+                        <span className="font-bold text-blue-950">Flagship Scope: </span>
+                        <span className="text-blue-800">
+                          Integrated operations platform (incorporates former CRM Collections). Purpose-built for Contact Centers, BPOs, Recovery Desks &amp; Complex Operations.
                         </span>
                       </div>
                     </div>
