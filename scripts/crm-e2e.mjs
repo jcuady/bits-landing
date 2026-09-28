@@ -66,13 +66,14 @@ async function main() {
     if (!page.url().includes("/login")) fail("Unauthed /app should redirect to /login");
 
     await page.goto(BASE + "/login?next=%2Fapplication");
-    await page.getByRole("button", { name: "Enter demo" }).click();
+    await page.getByRole("button", { name: /Sales Director|Enter demo/i }).first().click();
     await page.waitForURL("**/app/dashboard");
     await page.getByRole("heading", { name: /Dashboard/i }).waitFor({ timeout: 15000 });
 
     await page.getByRole("button", { name: "Notifications" }).click();
     await page.getByRole("dialog", { name: "Notifications" }).waitFor();
-    await page.getByRole("button", { name: "Dismiss" }).click();
+    await page.getByTitle("Dismiss alert").first().click();
+    await page.getByRole("button", { name: "Notifications" }).click();
 
     const routes = [
       ["Leads", "/app/leads"],
@@ -97,7 +98,7 @@ async function main() {
     }
 
     await page.goto(BASE + "/app/leads");
-    await page.locator("select").selectOption("qualified");
+    await page.getByLabel("Status", { exact: true }).selectOption("qualified");
     await page.getByText("Marcus Sterling").first().waitFor();
 
     await page.goto(BASE + "/app/leads/ld-1");
@@ -111,7 +112,7 @@ async function main() {
     await page.getByRole("button", { name: "Move" }).first().click();
 
     await page.goto(BASE + "/app/conversations");
-    await page.getByPlaceholder("Type a reply…").fill("Thanks — looping in ops.");
+    await page.getByPlaceholder(/Type an? (omnichannel )?reply/i).fill("Thanks — looping in ops.");
     await page.getByRole("button", { name: "Send" }).click();
     await page.getByText("Thanks — looping in ops.").waitFor();
 
@@ -120,15 +121,15 @@ async function main() {
     await page.getByRole("button", { name: "Publish" }).first().waitFor();
 
     await page.goto(BASE + "/app/templates");
-    await page.getByRole("button", { name: "Preview" }).first().click();
+    await page.getByRole("button", { name: /Inspect Template|Preview/i }).first().click();
     await page.getByRole("dialog").waitFor();
-    await page.getByRole("button", { name: "Close" }).click();
+    await page.getByRole("button", { name: /Close modal|Close/i }).click();
 
     await page.goto(BASE + "/app/campaigns");
     const pause = page.getByRole("button", { name: "Pause" }).first();
     if ((await pause.count()) > 0) {
       await pause.click();
-      await page.getByRole("button", { name: "Enable" }).first().waitFor();
+      await page.getByRole("button", { name: /Resume|Enable/i }).first().waitFor();
     }
 
     await page.goto(BASE + "/app/automations");
@@ -141,7 +142,7 @@ async function main() {
     const after = await sw.getAttribute("aria-checked");
     if (before === after) fail("Settings switch did not toggle");
     await page.getByLabel("Display name").fill("QA Lead");
-    await page.getByLabel("Display name").blur();
+    await page.getByRole("button", { name: "Save" }).click();
     await page.getByText("QA Lead").first().waitFor();
 
     await page.goto(BASE + "/app/team");
@@ -164,7 +165,7 @@ async function main() {
 
     await page.locator("#email").fill("not-an-email");
     await page.locator("#password").fill("123456");
-    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("button", { name: /Sign in/i }).click();
     await page.getByRole("alert").waitFor();
 
     await page.goto(BASE + "/");

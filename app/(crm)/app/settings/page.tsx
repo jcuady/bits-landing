@@ -72,11 +72,16 @@ export default function SettingsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground dark:text-neutral-200">
+              <label
+                htmlFor="display-name"
+                className="block text-xs font-semibold text-foreground dark:text-neutral-200"
+              >
                 Display Name
               </label>
               <div className="mt-1.5 flex gap-2">
                 <input
+                  id="display-name"
+                  aria-label="Display Name"
                   value={nameDraft}
                   maxLength={80}
                   aria-invalid={Boolean(nameError) || undefined}

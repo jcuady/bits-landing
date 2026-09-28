@@ -59,10 +59,16 @@ export async function proxy(request: NextRequest) {
   const response = NextResponse.next({ request });
   const demoRoleCookie = request.cookies.get("bits_demo_role")?.value;
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
+  // Safe fallback to production BITS Supabase project if environment variables are not injected
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL || "https://jvseyttzlobelrnzmfyf.supabase.co";
+  const supabaseAnonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2c2V5dHR6bG9iZWxybnptZnlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNTE2OTQsImV4cCI6MjEwNTgyNzY5NH0.DzLLo0sJgzuGmtoqlWSNAwEj_nmh_EKXG4zkYTH0aKI";
+
+  let user = null;
+  try {
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll();
@@ -74,15 +80,12 @@ export async function proxy(request: NextRequest) {
           });
         },
       },
-    }
-  );
+    });
 
-  let user = null;
-  try {
     const authResult = await supabase.auth.getUser();
-    user = authResult.data.user;
-  } catch {
-    // Supabase unreachable or offline fallback
+    user = authResult?.data?.user ?? null;
+  } catch (err) {
+    // Graceful offline / uninitialized fallback: never block public marketing routes with 500
     user = null;
   }
 
@@ -130,7 +133,7 @@ export async function proxy(request: NextRequest) {
 
   // 6. Traditional Core App Guard (/app/*)
   if (pathname.startsWith("/app")) {
-    if (!user) {
+    if (!isAuthenticated) {
       const url = request.nextUrl.clone();
       url.pathname = "/login";
       const nextPath = `${pathname}${search}`;
@@ -166,3 +169,7 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf)$).*)",
   ],
 };
+
+export { proxy as middleware };
+export default proxy;
+
