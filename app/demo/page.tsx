@@ -77,11 +77,17 @@ export default function DemoMatrixHub() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/crm-sales"
-              className="text-xs font-semibold text-electric-400 hover:text-electric-300 flex items-center gap-1 transition"
+              href="/app"
+              className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition"
             >
-              <span>Launch Pilot: BITScrm Sales</span>
+              <span>Launch Flagship: OPERATIONS 360</span>
               <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link
+              href="/crm-sales"
+              className="hidden sm:flex text-xs font-semibold text-electric-400 hover:text-electric-300 items-center gap-1 transition border-l border-slate-800 pl-3"
+            >
+              <span>Sales CRM</span>
             </Link>
             <Button asChild size="sm" className="bg-electric-600 hover:bg-electric-500 text-xs font-semibold h-8">
               <Link href="/contact">Book Architecture Call</Link>
@@ -188,13 +194,23 @@ export default function DemoMatrixHub() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((p) => {
               const liveAppPath = p.demoPath.replace("/(products)", "");
-              const isPilotFlagship = p.id === "crm-sales";
+              const isOpsFlagship = p.id === "operations-360";
+              const isSalesPilot = p.id === "crm-sales";
+              const isFeatured = isOpsFlagship || isSalesPilot;
+
+              const launchUrl = isOpsFlagship
+                ? "/app"
+                : isSalesPilot
+                ? "/crm-sales"
+                : `/login?product=${p.id}`;
 
               return (
                 <div
                   key={p.id}
                   className={`group rounded-2xl border p-5 flex flex-col justify-between transition-all backdrop-blur-sm ${
-                    isPilotFlagship
+                    isOpsFlagship
+                      ? "border-emerald-500/60 bg-gradient-to-b from-emerald-950/30 via-slate-900 to-slate-900 shadow-xl shadow-emerald-950/40 ring-1 ring-emerald-500/30"
+                      : isSalesPilot
                       ? "border-electric-500/60 bg-gradient-to-b from-electric-950/20 to-slate-900 shadow-xl shadow-electric-950/30"
                       : "border-slate-800/80 bg-slate-900/50 hover:border-slate-700 hover:bg-slate-900/80"
                   }`}
@@ -204,7 +220,11 @@ export default function DemoMatrixHub() {
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <Badge
                         variant="outline"
-                        className="border-slate-700 bg-slate-800 text-[10px] text-slate-300 font-semibold"
+                        className={
+                          isOpsFlagship
+                            ? "border-emerald-500/40 bg-emerald-500/10 text-[10px] text-emerald-300 font-semibold"
+                            : "border-slate-700 bg-slate-800 text-[10px] text-slate-300 font-semibold"
+                        }
                       >
                         {p.categoryLabel}
                       </Badge>
@@ -218,9 +238,14 @@ export default function DemoMatrixHub() {
                       <h2 className="text-base font-bold text-white group-hover:text-electric-300 transition">
                         {p.name}
                       </h2>
-                      {isPilotFlagship && (
-                        <Badge className="bg-electric-600 text-white text-[9px] font-bold px-1.5 py-0.2">
-                          FLAGSHIP PILOT
+                      {isOpsFlagship && (
+                        <Badge className="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 tracking-wider">
+                          FLAGSHIP
+                        </Badge>
+                      )}
+                      {isSalesPilot && (
+                        <Badge className="bg-electric-600 text-white text-[9px] font-bold px-1.5 py-0.5">
+                          PILOT
                         </Badge>
                       )}
                     </div>
@@ -255,13 +280,15 @@ export default function DemoMatrixHub() {
                       asChild
                       size="sm"
                       className={`text-xs font-semibold flex-1 ${
-                        isPilotFlagship
+                        isOpsFlagship
+                          ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/30"
+                          : isSalesPilot
                           ? "bg-electric-600 hover:bg-electric-500"
                           : "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700"
                       }`}
                     >
-                      <Link href={isPilotFlagship ? "/crm-sales" : `/login?product=${p.id}`}>
-                        <span>{isPilotFlagship ? "Launch Live MVP" : "Login & Test"}</span>
+                      <Link href={launchUrl}>
+                        <span>{isFeatured ? "Launch Live MVP" : "Login & Test"}</span>
                         <ArrowRight className="h-3 w-3 ml-1" />
                       </Link>
                     </Button>
