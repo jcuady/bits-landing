@@ -1,13 +1,18 @@
+"use client";
+
+import * as React from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Magnetic } from "@/components/ui/magnetic";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
 
 export function Cta() {
+  const { openModal } = useConsultationModal();
+
   return (
     <Section id="cta" className="relative overflow-hidden bg-white py-24 sm:py-32">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -43,13 +48,14 @@ export function Cta() {
           <Reveal delay={0.08}>
             <div className="mt-10 flex justify-center sm:mt-12">
               <Magnetic className="w-full sm:w-auto">
-                <a
-                  href="#contact"
-                  className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 sm:w-auto"
+                <button
+                  type="button"
+                  onClick={() => openModal()}
+                  className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-900/20 sm:w-auto cursor-pointer"
                 >
-                  Request a Demo
+                  <span>Request a Demo</span>
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </a>
+                </button>
               </Magnetic>
             </div>
           </Reveal>

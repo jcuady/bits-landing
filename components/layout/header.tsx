@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/
 import { cn } from "@/lib/utils";
 import { navigationSections } from "@/lib/site";
 import { Logo } from "@/components/ui/logo";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 /* ── Lightweight inline SVG icons for dropdown items ── */
 function NavIcon({ name, className }: { name: string; className?: string }) {
@@ -108,6 +109,7 @@ function NavIcon({ name, className }: { name: string; className?: string }) {
 
 export function Header() {
   const pathname = usePathname();
+  const { openModal } = useConsultationModal();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
@@ -345,13 +347,14 @@ export function Header() {
 
           {/* Desktop Right CTA Button */}
           <div className="hidden items-center lg:flex">
-            <Link
-              href="/#contact"
-              className="group flex h-11 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.86rem] font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98]"
+            <button
+              type="button"
+              onClick={() => openModal()}
+              className="group flex h-11 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.86rem] font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98] cursor-pointer"
             >
               <span>Book a Consultation</span>
               <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span>
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Hamburger Toggle Button */}
@@ -482,14 +485,17 @@ export function Header() {
 
               {/* Bottom Drawer Actions */}
               <div className="mt-auto pt-6">
-                <Link
-                  href="/#contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex h-13 items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-base font-bold text-white shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openModal();
+                  }}
+                  className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-base font-bold text-white shadow-lg shadow-blue-600/20 active:scale-[0.98] cursor-pointer"
                 >
                   <span>Book a Consultation</span>
                   <span aria-hidden="true">→</span>
-                </Link>
+                </button>
               </div>
             </div>
           </motion.div>

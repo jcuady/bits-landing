@@ -1,15 +1,21 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { footerColumns, site } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { NewsletterForm } from "@/components/layout/newsletter-form";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
-function SocialIcon({ d, label }: { d: string; label: string }) {
+function SocialIcon({ d, label, href = "#" }: { d: string; label: string; href?: string }) {
   return (
     <a
-      href="#"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label={label}
-      className="flex size-11 items-center justify-center rounded-full bg-slate-100 text-slate-600 ring-1 ring-slate-200 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:bg-blue-50 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600 [@media(hover:hover)_and_(pointer:fine)]:hover:ring-blue-300"
+      className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 transition-all duration-200 hover:border-blue-500/40 hover:bg-blue-600/20 hover:text-white"
     >
       <svg className="size-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
         <path d={d} />
@@ -19,31 +25,112 @@ function SocialIcon({ d, label }: { d: string; label: string }) {
 }
 
 export function Footer() {
+  const { openModal } = useConsultationModal();
+
   return (
-    <footer className="relative overflow-hidden border-t border-slate-200 bg-white text-slate-800">
-      <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-40" aria-hidden />
-      <Container className="relative">
-        <div className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1fr_2.4fr] lg:gap-14">
+    <footer className="relative overflow-hidden border-t border-slate-800 bg-[#030D1C] text-slate-300">
+      {/* Subtle atmospheric ambient glow */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[350px] w-[800px] rounded-full bg-blue-600/[0.08] blur-[120px]" />
+        <div className="bg-grid-dark absolute inset-0 opacity-20" />
+      </div>
+
+      <Container className="relative z-10">
+        {/* ── TOP PRE-FOOTER CTA CARD (Double-Bezel High-End Frame) ── */}
+        <div className="pt-16 sm:pt-20">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-8 sm:p-12 shadow-2xl backdrop-blur-xl">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3.5 py-1 text-[0.72rem] font-black uppercase tracking-[0.18em] text-blue-400">
+                  <span className="size-1.5 rounded-full bg-blue-400 animate-pulse" />
+                  <span>TRANSFORM YOUR OPERATIONS</span>
+                </div>
+                <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-tight">
+                  Ready to move from operational chaos to complete control?
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+                  Schedule a 20-minute architecture review with our principal engineers. We examine your current bottlenecks and send an actionable deployment roadmap within 24 hours.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => openModal()}
+                  className="group flex h-13 items-center justify-center gap-2.5 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-600/30 transition-all duration-200 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-600/40 active:scale-[0.98] cursor-pointer"
+                >
+                  <span>Book a Consultation</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden>→</span>
+                </button>
+                <a
+                  href="mailto:inquiries@boundlessits.com"
+                  className="flex h-13 items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 font-bold text-white hover:bg-white/10 transition-colors"
+                >
+                  Direct Email Inquiry
+                </a>
+              </div>
+            </div>
+
+            {/* Live Operational Guarantee Matrix */}
+            <div className="mt-8 border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-emerald-400" />
+                <span className="font-semibold text-slate-300">All 18 Engines Live &amp; Operational</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-blue-400" />
+                <span>NPC &amp; BSP Data Privacy Compliant</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-indigo-400" />
+                <span>Sovereign Cloud &amp; On-Premises Ready</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-sky-400" />
+                <span>99.99% Infrastructure Uptime SLA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── MAIN NAVIGATION COLUMNS & NEWSLETTER ── */}
+        <div className="grid gap-12 py-16 lg:grid-cols-[1.2fr_2.5fr] lg:gap-16 border-b border-white/10">
           <div>
-            <Logo variant="horizontal" className="h-9" />
-            <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-slate-600">
-              <strong className="font-semibold text-slate-900">Boundless IT Solutions (BITS)</strong> — {site.tagline} Custom software, workflow automation, CRM, and AI operations engineered around how your organization actually operates.
+            <div className="flex items-center gap-2">
+              <Logo variant="horizontal" className="h-8 brightness-0 invert" />
+            </div>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
+              <strong className="font-semibold text-white">Boundless IT Solutions (BITS)</strong> — {site.tagline} We engineer custom enterprise operations software, collections CRM cores, autonomous AI agents, and sovereign ERP platforms.
             </p>
 
-            {/* Newsletter signup */}
-            <div className="mt-8">
-              <p className="text-[0.8rem] font-bold uppercase tracking-wider text-slate-900">
-                Newsletter
+            <div className="mt-6 flex items-center gap-3">
+              <span className="inline-flex size-2 rounded-full bg-emerald-400 animate-ping" />
+              <span className="text-xs font-mono text-emerald-400 font-semibold tracking-wider uppercase">
+                Systems Status: 100% Operational
+              </span>
+            </div>
+
+            {/* Newsletter Subscription */}
+            <div className="mt-8 max-w-sm">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                Operations &amp; Tech Insights
               </p>
-              <NewsletterForm />
+              <p className="mt-1 text-xs text-slate-400">
+                Monthly engineering briefings on collections automation, AI calling, and enterprise architecture.
+              </p>
+              <div className="mt-3">
+                <NewsletterForm />
+              </div>
             </div>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          <nav aria-label="Footer Navigation" className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
             {footerColumns.map((col) => (
               <div key={col.title}>
-                <h3 className="text-[0.78rem] font-bold uppercase tracking-wider text-slate-900">{col.title}</h3>
-                <ul className="mt-3">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+                  {col.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
                   {col.links.map((link) => {
                     const isInternalPage =
                       link.href.startsWith("/") &&
@@ -56,7 +143,7 @@ export function Footer() {
                         {isInternalPage ? (
                           <Link
                             href={link.href}
-                            className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
+                            className="inline-flex py-1 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-blue-400"
                           >
                             {link.label}
                           </Link>
@@ -65,7 +152,7 @@ export function Footer() {
                             href={link.href}
                             target={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "_blank" : undefined}
                             rel={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
-                            className="inline-flex min-h-11 min-w-11 items-center text-[0.9rem] font-medium text-slate-600 transition-colors duration-200 [@media(hover:hover)_and_(pointer:fine)]:hover:text-blue-600"
+                            className="inline-flex py-1 text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-blue-400"
                           >
                             {link.label}
                           </a>
@@ -79,53 +166,34 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-slate-200/80 py-7 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-            <p className="text-[0.82rem] font-semibold tracking-[0.14em] text-slate-500 uppercase">
-              People × Technology × Possibilities
+        {/* ── BOTTOM LEGAL & COMPLIANCE BAR ── */}
+        <div className="flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between text-xs text-slate-400">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+            <p>© {new Date().getFullYear()} Boundless IT Solutions (BITS). All rights reserved.</p>
+            <span className="hidden sm:inline text-slate-700">|</span>
+            <p className="font-mono text-[0.72rem] text-slate-400 tracking-wider uppercase">
+              Republic of the Philippines · Global Enterprise Delivery
             </p>
-            {/* Social icons */}
-            <div className="flex gap-2">
-              <SocialIcon label="LinkedIn" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              <SocialIcon label="Twitter" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              <SocialIcon label="Facebook" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-            </div>
           </div>
 
-          <ul className="flex flex-wrap items-center gap-x-6 text-[0.85rem] text-slate-500">
-            <li>
-              <Link
-                href="/legal#privacy"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 hover:text-blue-600"
-              >
-                Privacy
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/legal#terms"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 hover:text-blue-600"
-              >
-                Terms
-              </Link>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="inline-flex min-h-11 min-w-11 items-center transition-colors duration-200 hover:text-blue-600"
-              >
-                Contact
-              </a>
-            </li>
-            <li>
-              <Link
-                href="/login"
-                className="inline-flex min-h-11 min-w-11 items-center font-bold text-blue-600 transition-colors duration-200 hover:text-blue-700"
-              >
-                CRM Sign in
-              </Link>
-            </li>
-          </ul>
+          <div className="flex flex-wrap items-center gap-6">
+            <Link href="/legal#privacy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/legal#terms" className="hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <button
+              type="button"
+              onClick={() => openModal()}
+              className="text-blue-400 hover:text-blue-300 font-bold transition-colors cursor-pointer"
+            >
+              Book Consultation
+            </button>
+            <Link href="/login" className="font-bold text-white hover:text-blue-400 transition-colors">
+              CRM Portal Sign In →
+            </Link>
+          </div>
         </div>
       </Container>
     </footer>

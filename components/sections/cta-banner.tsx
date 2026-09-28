@@ -1,11 +1,17 @@
+"use client";
+
+import * as React from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Magnetic } from "@/components/ui/magnetic";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 export function CtaBanner() {
+  const { openModal } = useConsultationModal();
+
   return (
     <Section id="cta" className="relative overflow-hidden bg-white" tight>
       <Container className="relative z-10">
@@ -36,9 +42,10 @@ export function CtaBanner() {
 
               <div className="mt-10 flex flex-col items-stretch sm:items-center justify-center gap-4 sm:flex-row">
                 <Magnetic className="w-full sm:w-auto">
-                  <Link
-                    href="/#contact"
-                    className="group relative flex h-14 w-full sm:w-auto items-center justify-between gap-4 rounded-full bg-white pl-8 pr-3 text-sm font-bold text-blue-700 shadow-xl shadow-black/15 transition-all duration-300 hover:bg-blue-50 active:scale-[0.98]"
+                  <button
+                    type="button"
+                    onClick={() => openModal()}
+                    className="group relative flex h-14 w-full sm:w-auto items-center justify-between gap-4 rounded-full bg-white pl-8 pr-3 text-sm font-bold text-blue-700 shadow-xl shadow-black/15 transition-all duration-300 hover:bg-blue-50 active:scale-[0.98] cursor-pointer"
                   >
                     <span>Book a Free Consultation</span>
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -46,7 +53,7 @@ export function CtaBanner() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
                     </span>
-                  </Link>
+                  </button>
                 </Magnetic>
                 <Magnetic className="w-full sm:w-auto">
                   <Link
@@ -58,9 +65,20 @@ export function CtaBanner() {
                 </Magnetic>
               </div>
 
-              <p className="mt-6 text-xs text-blue-100/80">
-                Direct consultation with solutions architects · Zero sales spam · Mutual NDA supported
-              </p>
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-6 border-t border-white/15 pt-8 text-xs text-blue-100 sm:gap-10">
+                <span className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-cyan-300" />
+                  Free 30-min discovery call
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-cyan-300" />
+                  No per-seat penalties
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-cyan-300" />
+                  Custom architecture roadmap
+                </span>
+              </div>
             </div>
           </div>
         </Reveal>
