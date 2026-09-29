@@ -91,19 +91,19 @@ export function Contact() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-blue-600" />
               </span>
-              <span>20 YEARS FLOOR LEADERSHIP · PRIVATE ARCHITECTURE SESSION</span>
+              <span>20 YEARS FLOOR LEADERSHIP · PRIVATE BITS OMS ARCHITECTURE SESSION</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.04}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-              Talk Directly with Systems Architects Who Ran 500+ Seat Recovery Floors.
+              Talk Directly with Systems Architects Who Ran 500+ Seat Recovery Floors on BITS OMS.
             </h2>
           </Reveal>
 
           <Reveal delay={0.08}>
             <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
-              Skip junior sales reps and generic PowerPoint decks. In 25 minutes, our operations systems lead audits your current contact rates, broken PTP ratios, and sovereign compliance readiness — and delivers a tailored technical rollout blueprint.
+              Skip junior sales reps and generic PowerPoint decks. In 25 minutes, our operations systems lead audits your current contact rates, broken PTP ratios, and sovereign compliance readiness — and delivers a tailored BITS OMS technical rollout blueprint.
             </p>
           </Reveal>
         </div>
@@ -229,7 +229,7 @@ export function Contact() {
                 <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 sm:p-8 shadow-xs">
                   <div className="mb-6">
                     <h3 className="text-lg font-bold text-slate-900">
-                      Request Your 25-Minute Architecture Blueprint
+                      Request Your 25-Minute BITS OMS Architecture Blueprint
                     </h3>
                     <p className="mt-1 text-xs text-slate-500">
                       Complete this quick form to reserve a private walkthrough with our systems lead.

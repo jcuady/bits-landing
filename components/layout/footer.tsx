@@ -60,7 +60,7 @@ const footerNavigation: FooterSection[] = [
       { label: "Collections Command Center", href: "/#features" },
       { label: "Productivity Bento", href: "/#features-bento" },
       { label: "BITSagent Voice AI", href: "/bitsagent" },
-      { label: "BITScrm Collections", href: "/bitscrm" },
+      { label: "BITS OMS Collections", href: "/bitscrm" },
     ],
   },
   {
@@ -100,40 +100,19 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-slate-950 text-slate-300">
-      {/* ── PART 1: THE ETHEREAL BOUNDLESS CLOUD HORIZON BANNER (Bright, Luminous Sunny Clouds) ── */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/50 to-white">
-        {/* Photorealistic High-Definition Sunny Clouds Background */}
+      {/* ── PART 1: PRE-FOOTER DIRECT CONNECT BANNER (Clean Luxury Light Canvas, Matching Image 1) ── */}
+      <div className="relative overflow-hidden bg-white border-t border-slate-100">
+        {/* Subtle architectural dot lattice & soft ambient sheen */}
         <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
-          <Image
-            src="/images/hero-sky-bg.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            quality={92}
-            className="object-cover object-bottom opacity-50"
-          />
-
-          {/* Top Atmospheric Dissolve: Perfectly dissolves preceding section into the sky */}
-          <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white via-white/90 via-40% to-transparent" />
-
-          {/* Central Luminous Halo: Guarantees 100% crystal-clear contrast behind all text and pills */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[400px] rounded-full bg-white/80 blur-3xl pointer-events-none" />
-
-          {/* Celestial Aurora Sky Horizon Radial Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[300px] w-[950px] rounded-full bg-gradient-to-r from-blue-400/15 via-sky-300/25 to-blue-500/15 blur-[100px]" />
-
-          {/* Precision Dot Lattice Matrix */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(14,165,233,0.12)_1px,transparent_1px)] [background-size:24px_24px] opacity-35" />
-
-          {/* Bottom Feathering: Gracefully dissolves the clouds into the deep slate-950 bedrock footer */}
-          <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-slate-950 via-slate-950/80 via-35% to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] rounded-full bg-blue-50/60 blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(15,23,42,0.04)_1px,transparent_1px)] [background-size:24px_24px] opacity-60" />
         </div>
 
-        {/* Call-to-Action Content Zone (Floating cleanly on luminous sky halo) */}
-        <Container className="relative z-10 pt-16 sm:pt-24 lg:pt-28 pb-20 sm:pb-28 lg:pb-32">
+        {/* Call-to-Action Content Zone */}
+        <Container className="relative z-10 pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-20 lg:pb-24">
           <div className="mx-auto max-w-4xl text-center">
             {/* Frosted Capsule Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
               <span className="flex size-4 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 text-white text-[9px] shadow-xs">
                 ⚡
               </span>
@@ -147,9 +126,9 @@ export function Footer() {
               Ready to Build Stronger Customer Operations?
             </h2>
 
-            {/* Subtitle Tailored to BITS Queue Management & Debt Recovery */}
-            <p className="mt-4 text-base sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
-              A smarter way to manage account queues, coordinate agent outreach, and accelerate collections with sovereign CRM tools.
+            {/* Subtitle Tailored to BITS Queue Management & Debt Recovery (Explicitly OMS, NOT CRM) */}
+            <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
+              A smarter way to manage account queues, coordinate agent outreach, and accelerate collections with sovereign BITS OMS tools.
             </p>
 
             {/* Minimal High-End Capsule Email Form (Matching Reference Mockup) */}
@@ -185,11 +164,11 @@ export function Footer() {
               </button>
             </div>
 
-            {/* Navigation Pill Links & Official Social Media Row (All High-Contrast Frosted Pills) */}
+            {/* Navigation Pill Links & Official Social Media Row */}
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-700">
               <a
                 href="#content"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Home
               </a>
@@ -201,19 +180,19 @@ export function Footer() {
               </a>
               <a
                 href="#floor-showcase"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Features
               </a>
               <a
                 href="#features-bento"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Product
               </a>
               <a
                 href="#pricing"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Pricing
               </a>
@@ -265,9 +244,31 @@ export function Footer() {
         </Container>
       </div>
 
-      {/* ── PART 2: SOVEREIGN BEDROCK FOOTER (Organized Columns & Compliance Seals) ── */}
-      <div className="relative z-10 bg-slate-950 text-slate-400 pt-12 pb-16 border-t border-slate-800/80">
-        <Container>
+      {/* ── PART 2: SOVEREIGN BEDROCK FOOTER WITH CLOUDY HORIZON (Matching Image 2 with Cloud Backdrop) ── */}
+      <div className="relative overflow-hidden bg-[#030814] text-slate-300 pt-16 pb-16 border-t border-white/10">
+        {/* Photorealistic High-Definition Cloudy Horizon Background */}
+        <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
+          {/* High-Altitude Cloud Visual Asset */}
+          <Image
+            src="/images/hero-sky-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={85}
+            className="object-cover object-bottom opacity-20 mix-blend-screen select-none"
+          />
+
+          {/* Deep Midnight Multi-Stop Celestial Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020611] via-[#040d22]/92 to-[#061838]/80" />
+
+          {/* Celestial Horizon Radial Glow */}
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[260px] w-[1100px] rounded-full bg-gradient-to-r from-blue-600/20 via-sky-400/25 to-blue-600/20 blur-[110px]" />
+
+          {/* Precision Dot Lattice Matrix */}
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] opacity-25" />
+        </div>
+
+        <Container className="relative z-10">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_2.4fr] lg:gap-14">
             {/* Brand & Mission Column */}
             <div className="space-y-4">
@@ -276,7 +277,7 @@ export function Footer() {
               </div>
 
               <p className="max-w-sm text-xs leading-relaxed text-slate-400">
-                Sovereign enterprise operations technology, collections CRM, and intelligent automation built from 20 years of floor leadership.
+                Sovereign enterprise operations technology, collections OMS (Operations Management System), and intelligent automation built from 20 years of floor leadership.
               </p>
 
               {/* Operational Status Pill */}
