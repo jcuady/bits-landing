@@ -8,36 +8,36 @@ type TimeRange = "weekly" | "monthly" | "today";
 
 interface DayData {
   day: string;
-  inbound: number;
-  resolved: number;
+  keptPtp: number;
+  newPtp: number;
   recovered: string;
 }
 
 const WEEKLY_DATA: DayData[] = [
-  { day: "Sunday", inbound: 58, resolved: 36, recovered: "₱92,400" },
-  { day: "Monday", inbound: 84, resolved: 48, recovered: "₱148,000" },
-  { day: "Tuesday", inbound: 98, resolved: 62, recovered: "₱210,500" },
-  { day: "Wednesday", inbound: 86, resolved: 54, recovered: "₱176,300" },
-  { day: "Thursday", inbound: 82, resolved: 52, recovered: "₱164,800" },
-  { day: "Friday", inbound: 68, resolved: 44, recovered: "₱129,000" },
+  { day: "Mon", keptPtp: 64, newPtp: 38, recovered: "₱192,400" },
+  { day: "Tue", keptPtp: 92, newPtp: 46, recovered: "₱284,000" },
+  { day: "Wed", keptPtp: 88, newPtp: 52, recovered: "₱268,500" },
+  { day: "Thu", keptPtp: 76, newPtp: 44, recovered: "₱218,000" },
+  { day: "Fri", keptPtp: 96, newPtp: 58, recovered: "₱312,800" },
+  { day: "Sat", keptPtp: 54, newPtp: 32, recovered: "₱152,800" },
 ];
 
 const MONTHLY_DATA: DayData[] = [
-  { day: "Week 1", inbound: 240, resolved: 170, recovered: "₱620,000" },
-  { day: "Week 2", inbound: 295, resolved: 210, recovered: "₱840,000" },
-  { day: "Week 3", inbound: 310, resolved: 245, recovered: "₱910,000" },
-  { day: "Week 4", inbound: 280, resolved: 205, recovered: "₱780,000" },
-  { day: "Week 5", inbound: 190, resolved: 140, recovered: "₱510,000" },
-  { day: "Week 6", inbound: 150, resolved: 110, recovered: "₱430,000" },
+  { day: "Week 1", keptPtp: 240, newPtp: 160, recovered: "₱920,000" },
+  { day: "Week 2", keptPtp: 310, newPtp: 190, recovered: "₱1,180,000" },
+  { day: "Week 3", keptPtp: 345, newPtp: 210, recovered: "₱1,340,000" },
+  { day: "Week 4", keptPtp: 290, newPtp: 180, recovered: "₱1,050,000" },
+  { day: "Week 5", keptPtp: 210, newPtp: 140, recovered: "₱780,000" },
+  { day: "Week 6", keptPtp: 180, newPtp: 110, recovered: "₱620,000" },
 ];
 
 const TODAY_HOURLY: DayData[] = [
-  { day: "8 AM", inbound: 14, resolved: 8, recovered: "₱24,000" },
-  { day: "10 AM", inbound: 28, resolved: 19, recovered: "₱56,000" },
-  { day: "12 PM", inbound: 36, resolved: 24, recovered: "₱78,000" },
-  { day: "2 PM", inbound: 42, resolved: 31, recovered: "₱94,000" },
-  { day: "4 PM", inbound: 30, resolved: 22, recovered: "₱68,000" },
-  { day: "6 PM", inbound: 18, resolved: 14, recovered: "₱42,000" },
+  { day: "8 AM", keptPtp: 16, newPtp: 10, recovered: "₱48,000" },
+  { day: "10 AM", keptPtp: 32, newPtp: 22, recovered: "₱96,000" },
+  { day: "12 PM", keptPtp: 42, newPtp: 28, recovered: "₱128,000" },
+  { day: "2 PM", keptPtp: 48, newPtp: 34, recovered: "₱154,000" },
+  { day: "4 PM", keptPtp: 36, newPtp: 24, recovered: "₱112,000" },
+  { day: "6 PM", keptPtp: 22, newPtp: 16, recovered: "₱64,000" },
 ];
 
 export function HeroProduct({ className }: { className?: string }) {
@@ -45,14 +45,30 @@ export function HeroProduct({ className }: { className?: string }) {
 
   // State
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
-  const [activeMenu, setActiveMenu] = React.useState("Dashboard");
+  const [activeMenu, setActiveMenu] = React.useState("Cockpit");
   const [timeRange, setTimeRange] = React.useState<TimeRange>("weekly");
-  const [selectedDay, setSelectedDay] = React.useState<string | null>("Tuesday");
+  const [selectedDay, setSelectedDay] = React.useState<string | null>("Tue");
   const [isRefreshing, setIsRefreshing] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [notificationsOpen, setNotificationsOpen] = React.useState(false);
   const [expandedSubmenu, setExpandedSubmenu] = React.useState<string | null>("queues");
   const [activeDonutFilter, setActiveDonutFilter] = React.useState<string | null>(null);
+  const [softphoneActive, setSoftphoneActive] = React.useState(true);
+  const [softphoneSeconds, setSoftphoneSeconds] = React.useState(224); // 03:44
+  const [whisperToast, setWhisperToast] = React.useState<string | null>(null);
+
+  // Softphone timer simulation
+  React.useEffect(() => {
+    if (!softphoneActive) return;
+    const interval = setInterval(() => setSoftphoneSeconds((s) => s + 1), 1000);
+    return () => clearInterval(interval);
+  }, [softphoneActive]);
+
+  const formatTimer = (sec: number) => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  };
 
   // Quick refresh animation simulation
   const handleRefresh = () => {
@@ -60,6 +76,11 @@ export function HeroProduct({ className }: { className?: string }) {
     setTimeout(() => {
       setIsRefreshing(false);
     }, 700);
+  };
+
+  const triggerToast = (msg: string) => {
+    setWhisperToast(msg);
+    setTimeout(() => setWhisperToast(null), 3500);
   };
 
   const chartData =
@@ -70,26 +91,33 @@ export function HeroProduct({ className }: { className?: string }) {
       : TODAY_HOURLY;
 
   const activeDayRecord =
-    chartData.find((d) => d.day === selectedDay) || chartData[2];
+    chartData.find((d) => d.day === selectedDay) || chartData[1];
 
   return (
     <div
       className={cn(
         "relative mx-auto w-full max-w-[1240px] overflow-hidden rounded-2xl sm:rounded-3xl",
-        "border border-white/90 bg-white/98 shadow-[0_32px_80px_-15px_rgba(0,35,90,0.32)] ring-1 ring-slate-900/5",
+        "border border-white/90 bg-white/98 shadow-[0_32px_80px_-15px_rgba(0,35,90,0.28)] ring-1 ring-slate-900/5",
         "transition-all duration-300",
         className
       )}
     >
+      {/* Toast Notification HUD */}
+      {whisperToast && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-blue-400 bg-slate-900/95 px-5 py-2.5 text-xs font-bold text-white shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2">
+          {whisperToast}
+        </div>
+      )}
+
       <div className="flex flex-col lg:flex-row min-h-[640px]">
-        {/* ── LEFT SIDEBAR (Matching reference image with collapse & submenus) ── */}
+        {/* ── LEFT SIDEBAR: BITS OMS WORKSPACE NAV ── */}
         <aside
           className={cn(
             "border-b lg:border-b-0 lg:border-r border-slate-100 bg-[#FAFBFD] transition-all duration-300 flex flex-col shrink-0",
-            sidebarCollapsed ? "lg:w-[72px]" : "lg:w-[240px]"
+            sidebarCollapsed ? "lg:w-[72px]" : "lg:w-[245px]"
           )}
         >
-          {/* Logo & Collapse Bar */}
+          {/* Logo & Operational Collapse Bar */}
           <div className="flex h-16 items-center justify-between px-4 sm:px-5 border-b border-slate-100">
             <div className="flex items-center gap-2.5 overflow-hidden">
               <div className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm shadow-blue-600/30">
@@ -99,8 +127,8 @@ export function HeroProduct({ className }: { className?: string }) {
               </div>
               {!sidebarCollapsed && (
                 <div className="flex flex-col leading-tight">
-                  <span className="font-extrabold text-slate-900 text-sm tracking-tight">BITS</span>
-                  <span className="text-[0.62rem] font-bold uppercase tracking-wider text-blue-600">Operations</span>
+                  <span className="font-extrabold text-slate-900 text-sm tracking-tight">BITS OMS</span>
+                  <span className="text-[0.62rem] font-bold uppercase tracking-wider text-blue-600">Collections CRM</span>
                 </div>
               )}
             </div>
@@ -123,7 +151,7 @@ export function HeroProduct({ className }: { className?: string }) {
             </button>
           </div>
 
-          {/* Search Box */}
+          {/* Quick Debtor & Account Search (OMS Top Lookup) */}
           <div className="p-3">
             {!sidebarCollapsed ? (
               <div className="relative flex items-center">
@@ -132,7 +160,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 </svg>
                 <input
                   type="text"
-                  placeholder="Search"
+                  placeholder="Lookup Account # / Debtor"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="h-11 min-h-[44px] w-full rounded-xl border border-slate-200/80 bg-white pl-8.5 pr-8 text-base text-slate-800 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
@@ -154,23 +182,23 @@ export function HeroProduct({ className }: { className?: string }) {
             )}
           </div>
 
-          {/* Nav List */}
+          {/* Nav List: Categorized into Core Collections, Calling, and QA/Workforce */}
           <div className="flex-1 overflow-y-auto px-3 py-2 space-y-4">
-            {/* Daily Operation */}
+            {/* 1. Daily Operations */}
             <div>
               {!sidebarCollapsed && (
                 <p className="px-2 pb-1.5 text-[0.66rem] font-black uppercase tracking-wider text-slate-400">
-                  Daily Operation
+                  Collections Core
                 </p>
               )}
               <div className="space-y-1">
-                {/* Dashboard (Active) */}
+                {/* Cockpit / Overview */}
                 <button
                   type="button"
-                  onClick={() => setActiveMenu("Dashboard")}
+                  onClick={() => setActiveMenu("Cockpit")}
                   className={cn(
                     "flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-bold transition-all text-left",
-                    activeMenu === "Dashboard"
+                    activeMenu === "Cockpit"
                       ? "bg-blue-50 text-blue-600 shadow-2xs"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                   )}
@@ -178,27 +206,10 @@ export function HeroProduct({ className }: { className?: string }) {
                   <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
-                  {!sidebarCollapsed && <span>Dashboard</span>}
+                  {!sidebarCollapsed && <span>Collections Cockpit</span>}
                 </button>
 
-                {/* Reservation / Intakes */}
-                <button
-                  type="button"
-                  onClick={() => setActiveMenu("Reservation")}
-                  className={cn(
-                    "flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all text-left",
-                    activeMenu === "Reservation"
-                      ? "bg-blue-50 font-bold text-blue-600"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                  )}
-                >
-                  <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  {!sidebarCollapsed && <span>Reservation &amp; Leads</span>}
-                </button>
-
-                {/* Manage Rooms / Debtors (Expandable) */}
+                {/* Debtor Queues & Worklists (Expandable) */}
                 <div>
                   <button
                     type="button"
@@ -209,7 +220,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
-                      {!sidebarCollapsed && <span>Debtor Queues</span>}
+                      {!sidebarCollapsed && <span>Worklists &amp; Accounts</span>}
                     </div>
                     {!sidebarCollapsed && (
                       <svg
@@ -227,538 +238,645 @@ export function HeroProduct({ className }: { className?: string }) {
                     <div className="ml-7 mt-1 space-y-1 border-l-2 border-slate-200 pl-2">
                       <button
                         type="button"
-                        onClick={() => setSelectedDay("Tuesday")}
+                        onClick={() => triggerToast("Worklist: Early Stage (1–30 DPD) loaded. 18 accounts pending follow-up.")}
                         className="flex min-h-[44px] items-center w-full py-2 text-left text-xs font-medium text-slate-600 hover:text-blue-600"
                       >
-                        Bucket 1 (1–30 Days)
+                        Bucket 1 (1–30 DPD)
                       </button>
                       <button
                         type="button"
-                        onClick={() => setSelectedDay("Wednesday")}
+                        onClick={() => triggerToast("Worklist: Mid Stage (31–60 DPD) loaded. 24 high-priority PTPs flagged.")}
                         className="flex min-h-[44px] items-center w-full py-2 text-left text-xs font-medium text-slate-600 hover:text-blue-600"
                       >
-                        Bucket 2 (31–60 Days)
+                        Bucket 2 (31–60 DPD)
                       </button>
                       <button
                         type="button"
-                        onClick={() => setSelectedDay("Thursday")}
+                        onClick={() => triggerToast("Worklist: Hard Recovery (61+ DPD) loaded. Legal escalation review active.")}
                         className="flex min-h-[44px] items-center w-full py-2 text-left text-xs font-medium text-slate-600 hover:text-blue-600"
                       >
-                        Legal Escalation (60+ Days)
+                        Hard Recovery (61+ DPD)
                       </button>
                     </div>
                   )}
                 </div>
 
-                {/* Manage Staff */}
+                {/* Softphone & Predictive Dialer */}
                 <button
                   type="button"
-                  onClick={() => setActiveMenu("Staff")}
-                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  onClick={() => {
+                    setActiveMenu("Dialer");
+                    triggerToast("Dialer Mode: Predictive active. ~0.4s screen-pop connected to WebRTC softphone.");
+                  }}
+                  className={cn(
+                    "flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all text-left",
+                    activeMenu === "Dialer"
+                      ? "bg-blue-50 font-bold text-blue-600"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                  )}
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  {!sidebarCollapsed && <span>Collector Teams</span>}
+                  {!sidebarCollapsed && <span>Softphone &amp; Dialer</span>}
                 </button>
 
-                {/* Promotions / Rules */}
+                {/* Live Calls Supervision (Listen / Whisper / Barge) */}
                 <button
                   type="button"
-                  onClick={() => setActiveMenu("Promotions")}
-                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                  onClick={() => {
+                    setActiveMenu("LiveCalls");
+                    triggerToast("Live Floor Telemetry: 18 agents on active calls. Listen, Whisper & Barge HUD ready.");
+                  }}
+                  className={cn(
+                    "flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all text-left",
+                    activeMenu === "LiveCalls"
+                      ? "bg-blue-50 font-bold text-blue-600"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                  )}
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
-                  {!sidebarCollapsed && <span>Automation Rules</span>}
-                </button>
-
-                {/* Reviews / QA */}
-                <button
-                  type="button"
-                  onClick={() => setActiveMenu("Reviews")}
-                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
-                >
-                  <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  {!sidebarCollapsed && <span>Compliance &amp; QA</span>}
+                  {!sidebarCollapsed && <span>Live Supervisor Floor</span>}
                 </button>
               </div>
             </div>
 
-            {/* Accounting */}
+            {/* 2. QA, Coaching & Workforce */}
             <div>
               {!sidebarCollapsed && (
                 <p className="px-2 pb-1.5 text-[0.66rem] font-black uppercase tracking-wider text-slate-400">
-                  Accounting &amp; Finance
+                  Performance &amp; WFM
                 </p>
               )}
               <div className="space-y-1">
+                {/* QA Checklist & Outliers */}
                 <button
                   type="button"
-                  onClick={() => setActiveMenu("Report")}
+                  onClick={() => {
+                    setActiveMenu("QA");
+                    triggerToast("QA Engine: Call audit criteria calibrated. Weighted score: 98.2%.");
+                  }}
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                >
+                  <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {!sidebarCollapsed && <span>QA &amp; Outlier Finder</span>}
+                </button>
+
+                {/* Scorecards & Coaching */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveMenu("Scorecards");
+                    triggerToast("Monthly Scorecard: 0–100 weighted index loaded across Kept PTP & RPC.");
+                  }}
                   className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
-                  {!sidebarCollapsed && <span>Collections Report</span>}
+                  {!sidebarCollapsed && <span>Agent Scorecards</span>}
                 </button>
+
+                {/* Training Mode / Practice Floor */}
                 <button
                   type="button"
-                  onClick={() => setActiveMenu("Maintenance")}
+                  onClick={() => {
+                    setActiveMenu("Training");
+                    triggerToast("Training Floor: Practice on simulated accounts with echo line. Zero real data polluted.");
+                  }}
                   className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
                 >
                   <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
-                  {!sidebarCollapsed && <span>Settlement Approvals</span>}
+                  {!sidebarCollapsed && <span>Training Floor Mode</span>}
+                </button>
+
+                {/* Workforce Aux Codes & Status */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveMenu("WFM");
+                    triggerToast("WFM: 46 of 48 staff in schedule adherence. Real-time Aux alert active.");
+                  }}
+                  className="flex w-full min-h-[44px] items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all text-left"
+                >
+                  <svg className="size-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {!sidebarCollapsed && <span>Aux Status &amp; Breaks</span>}
                 </button>
               </div>
             </div>
           </div>
         </aside>
 
-        {/* ── MAIN COCKPIT VIEWPORT ── */}
-        <main className="flex-1 bg-white p-4 sm:p-6 lg:p-7 flex flex-col">
-          {/* Top Breadcrumb & User Bar */}
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="hover:text-slate-700 cursor-pointer">Home</span>
-              <span>/</span>
-              <span className="font-bold text-slate-900">Dashboard</span>
-            </div>
+        {/* ── MAIN COCKPIT VIEWPORT: COLLECTIONS & RECOVERY OPS ── */}
+        <main className="flex-1 bg-white p-4 sm:p-6 lg:p-7 flex flex-col justify-between">
+          <div>
+            {/* Top Breadcrumb & Live Operational Badges */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <span className="hover:text-slate-700 cursor-pointer">Portfolio</span>
+                <span>/</span>
+                <span className="font-semibold text-slate-700">Metro Recoveries</span>
+                <span>/</span>
+                <span className="font-bold text-slate-900">Collections Cockpit</span>
+              </div>
 
-            <div className="flex items-center gap-3 relative">
-              {/* Notification Bell */}
-              <button
-                type="button"
-                onClick={() => setNotificationsOpen(!notificationsOpen)}
-                aria-label="View notifications"
-                className="relative flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
-              >
-                <svg className="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                </svg>
-                <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-blue-600 ring-2 ring-white" />
-              </button>
-
-              {/* Notification Dropdown Popover */}
-              {notificationsOpen && (
-                <div className="absolute right-12 top-0 z-30 w-72 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
-                    <p className="text-xs font-bold text-slate-900">Live Telemetry Alerts</p>
-                    <span className="text-[0.62rem] text-blue-600 font-bold">Mark read</span>
-                  </div>
-                  <div className="space-y-2 text-xs">
-                    <div className="rounded-lg bg-emerald-50 p-2 text-emerald-800">
-                      <p className="font-bold">₱48,500 Payment Cleared</p>
-                      <p className="text-[0.68rem] text-emerald-600">Auto-reconciled via QR Ph · Desk 04</p>
-                    </div>
-                    <div className="rounded-lg bg-blue-50 p-2 text-blue-800">
-                      <p className="font-bold">AI Dialer Pacing: 3.4 calls/sec</p>
-                      <p className="text-[0.68rem] text-blue-600">Zero dropped customer calls recorded</p>
-                    </div>
-                  </div>
+              <div className="flex items-center gap-3 relative">
+                {/* Telemetry Status Pill */}
+                <div className="hidden sm:inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/70 px-3 py-1 text-[0.68rem] font-bold text-blue-700">
+                  <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" />
+                  <span>Predictive Active · ~0.4s Screen-Pop</span>
                 </div>
-              )}
 
-              {/* User Avatar Badge */}
-              <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50/80 py-1 pl-1 pr-3">
-                <div className="flex size-7 items-center justify-center rounded-full bg-slate-900 text-[0.72rem] font-bold text-white">
-                  EV
-                </div>
-                <div className="flex flex-col text-left leading-none">
-                  <span className="text-[0.72rem] font-bold text-slate-900">Evans</span>
-                  <span className="text-[0.62rem] font-medium text-slate-500">Lead Architect</span>
+                {/* Notification Bell */}
+                <button
+                  type="button"
+                  onClick={() => setNotificationsOpen(!notificationsOpen)}
+                  aria-label="View notifications"
+                  className="relative flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  <svg className="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  </svg>
+                  <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-blue-600 ring-2 ring-white" />
+                </button>
+
+                {/* Notification Dropdown Popover */}
+                {notificationsOpen && (
+                  <div className="absolute right-12 top-0 z-30 w-72 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
+                      <p className="text-xs font-bold text-slate-900">Live Floor Notifications</p>
+                      <span className="text-[0.62rem] text-blue-600 font-bold">Mark read</span>
+                    </div>
+                    <div className="space-y-2 text-xs">
+                      <div className="rounded-lg bg-emerald-50 p-2 text-emerald-800">
+                        <p className="font-bold">₱48,500 Kept PTP Reconciled</p>
+                        <p className="text-[0.68rem] text-emerald-600">Account #9042-PH · Background file parsed</p>
+                      </div>
+                      <div className="rounded-lg bg-blue-50 p-2 text-blue-800">
+                        <p className="font-bold">Live Whisper: Supervisor on Call</p>
+                        <p className="text-[0.68rem] text-blue-600">Desk 04 coaching note linked to recording</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* User Avatar Badge */}
+                <div className="flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50/80 py-1 pl-1 pr-3">
+                  <div className="flex size-7 items-center justify-center rounded-full bg-blue-600 text-[0.72rem] font-bold text-white">
+                    MS
+                  </div>
+                  <div className="flex flex-col text-left leading-none">
+                    <span className="text-[0.72rem] font-bold text-slate-900">Maria Santos</span>
+                    <span className="text-[0.62rem] font-medium text-slate-500">Floor Lead (Desk 04)</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Page Title & Fast Action Buttons */}
-          <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h2 className="text-2xl font-black tracking-tight text-slate-900">Dashboard</h2>
-              <p className="text-xs text-slate-500">Real-time recovery operations &amp; workflow throughput</p>
+            {/* Page Title & Fast Action Buttons */}
+            <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-black tracking-tight text-slate-900">Collections Cockpit</h2>
+                <p className="text-xs text-slate-500">Real-time recovery velocity, predictive dialing &amp; PTP conversion</p>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => triggerToast("PTP Logger: Schedule promised payment with automatic hold & kept-promise evaluation.")}
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-xs font-bold text-slate-700 shadow-2xs hover:bg-slate-50 active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  + Log Promise to Pay (PTP)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openModal("OPERATIONS 360 — Integrated Operations Platform (Flagship)")}
+                  className="inline-flex h-11 min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-5 text-xs font-bold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  <span>Request Full OMS Walkthrough</span>
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <button
-                type="button"
-                onClick={() => setSelectedDay("Tuesday")}
-                className="inline-flex h-11 min-h-[44px] items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-xs font-bold text-slate-700 shadow-2xs hover:bg-slate-50 active:scale-[0.98] transition-all cursor-pointer"
-              >
-                Intake Lead / Case
-              </button>
-              <button
-                type="button"
-                onClick={() => openModal("OPERATIONS 360 — Integrated Operations Platform (Flagship)")}
-                className="inline-flex h-11 min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-5 text-xs font-bold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 active:scale-[0.98] transition-all cursor-pointer"
-              >
-                <span>+ New Booking</span>
-              </button>
-            </div>
-          </div>
+            {/* ── TOP SECTION: BAR CHART & DONUT CHART (2 Columns) ── */}
+            <div className="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-4">
+              {/* Card 1: Collections Velocity & Kept PTPs (Bar Chart) */}
+              <div className="lg:col-span-7 rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-bold text-slate-900">Collections Velocity &amp; Kept PTP Trajectory</h3>
+                  </div>
 
-          {/* ── TOP SECTION: BAR CHART & DONUT CHART (2 Columns) ── */}
-          <div className="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-4">
-            {/* Card 1: Bookings & Operations Overview (Bar Chart) */}
-            <div className="lg:col-span-7 rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-xs">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-slate-900">Bookings &amp; Operations Overview</h3>
+                  <div className="flex items-center gap-2">
+                    {/* Time range selector */}
+                    <select
+                      value={timeRange}
+                      onChange={(e) => setTimeRange(e.target.value as TimeRange)}
+                      className="h-11 min-h-[44px] rounded-lg border border-slate-200 bg-slate-50 px-3 text-base font-bold text-slate-700 focus:outline-none focus:border-blue-600"
+                    >
+                      <option value="weekly">Weekly ⌄</option>
+                      <option value="monthly">Monthly ⌄</option>
+                      <option value="today">Today ⌄</option>
+                    </select>
+
+                    {/* Refresh icon button */}
+                    <button
+                      type="button"
+                      onClick={handleRefresh}
+                      aria-label="Refresh metrics"
+                      className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
+                    >
+                      <svg
+                        className={cn("size-4 transition-transform duration-500", isRefreshing && "rotate-180 animate-spin text-blue-600")}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  {/* Time range selector */}
-                  <select
-                    value={timeRange}
-                    onChange={(e) => setTimeRange(e.target.value as TimeRange)}
-                    className="h-11 min-h-[44px] rounded-lg border border-slate-200 bg-slate-50 px-3 text-base font-bold text-slate-700 focus:outline-none focus:border-blue-600"
-                  >
-                    <option value="weekly">Weekly ⌄</option>
-                    <option value="monthly">Monthly ⌄</option>
-                    <option value="today">Today ⌄</option>
-                  </select>
+                {/* Big KPI & Legend */}
+                <div className="mt-3 flex items-baseline justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-2xl font-black text-slate-900 font-mono">₱1,428,500</span>
+                    <span className="inline-flex items-center gap-0.5 rounded-full bg-emerald-50 px-2 py-0.5 text-[0.68rem] font-bold text-emerald-700">
+                      <span>↑</span> 14.8% vs Target
+                    </span>
+                  </div>
 
-                  {/* Refresh icon button */}
+                  <div className="flex items-center gap-4 text-[0.68rem] font-bold text-slate-500">
+                    <div className="flex items-center gap-1.5">
+                      <span className="size-2 rounded-full bg-blue-600" />
+                      <span>Kept PTP (Recovered)</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="size-2 rounded-full border border-blue-400 bg-blue-100" />
+                      <span>New Promises Logged</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SVG Hatched/Striped Pattern Definition & Dual Bar Chart */}
+                <div className="mt-4 h-48 w-full">
+                  <svg className="h-full w-full overflow-visible" viewBox="0 0 460 160">
+                    <defs>
+                      <pattern
+                        id="barDiagonalHatchOms"
+                        width="6"
+                        height="6"
+                        patternTransform="rotate(45 0 0)"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <line x1="0" y1="0" x2="0" y2="6" stroke="#93C5FD" strokeWidth="2.5" />
+                      </pattern>
+                    </defs>
+
+                    {/* Horizontal Gridlines */}
+                    <g className="opacity-25" stroke="#CBD5E1" strokeDasharray="3 3">
+                      <line x1="0" y1="20" x2="460" y2="20" />
+                      <line x1="0" y1="60" x2="460" y2="60" />
+                      <line x1="0" y1="100" x2="460" y2="100" />
+                      <line x1="0" y1="140" x2="460" y2="140" />
+                    </g>
+
+                    {/* Bar Columns */}
+                    {chartData.map((d, index) => {
+                      const colWidth = 460 / chartData.length;
+                      const xCenter = index * colWidth + colWidth / 2;
+                      const isSelected = selectedDay === d.day;
+
+                      // Heights scaled to 120px max
+                      const maxVal = 100;
+                      const h1 = Math.min(120, (d.keptPtp / maxVal) * 120);
+                      const h2 = Math.min(120, (d.newPtp / maxVal) * 120);
+                      const y1 = 140 - h1;
+                      const y2 = 140 - h2;
+
+                      return (
+                        <g
+                          key={d.day}
+                          onClick={() => setSelectedDay(d.day)}
+                          className="cursor-pointer group"
+                        >
+                          {/* Day Column Hover Highlight Backdrop */}
+                          <rect
+                            x={xCenter - 26}
+                            y={10}
+                            width={52}
+                            height={132}
+                            rx={8}
+                            className={cn(
+                              "transition-colors",
+                              isSelected ? "fill-blue-50/80" : "fill-transparent group-hover:fill-slate-50"
+                            )}
+                          />
+
+                          {/* Bar 1: Solid Blue (Kept PTPs) */}
+                          <rect
+                            x={xCenter - 18}
+                            y={y1}
+                            width={16}
+                            height={h1}
+                            rx={3}
+                            fill="#1D72E8"
+                            className="transition-all duration-300 group-hover:brightness-110"
+                          />
+
+                          {/* Bar 2: Hatched Blue (New Promises) */}
+                          <rect
+                            x={xCenter + 2}
+                            y={y2}
+                            width={16}
+                            height={h2}
+                            rx={3}
+                            fill="url(#barDiagonalHatchOms)"
+                            stroke="#60A5FA"
+                            strokeWidth="1"
+                            className="transition-all duration-300 group-hover:brightness-95"
+                          />
+
+                          {/* Day Label */}
+                          <text
+                            x={xCenter}
+                            y={156}
+                            textAnchor="middle"
+                            className={cn(
+                              "text-[10px] font-bold transition-colors",
+                              isSelected ? "fill-blue-600 font-black" : "fill-slate-400 group-hover:fill-slate-700"
+                            )}
+                          >
+                            {d.day}
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </svg>
+                </div>
+
+                {/* Active Day Data Detail Strip */}
+                <div className="mt-2 flex items-center justify-between rounded-xl bg-slate-50/90 px-3 py-2 text-xs">
+                  <span className="font-bold text-slate-700">
+                    {activeDayRecord.day} Focus:
+                  </span>
+                  <div className="flex items-center gap-3 text-[0.72rem]">
+                    <span className="text-blue-700 font-bold">{activeDayRecord.keptPtp} Kept Promises</span>
+                    <span className="text-slate-400">·</span>
+                    <span className="text-sky-700 font-bold">{activeDayRecord.newPtp} New Scheduled</span>
+                    <span className="text-slate-400">·</span>
+                    <span className="text-emerald-700 font-black">{activeDayRecord.recovered} Recovered</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Portfolio DPD Aging Distribution (Donut Chart) */}
+              <div className="lg:col-span-5 rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-xs flex flex-col justify-between">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900">Portfolio Delinquency Aging (DPD)</h3>
+                    <p className="text-[0.68rem] text-slate-400">Automated queue assignment by delinquency bucket</p>
+                  </div>
                   <button
                     type="button"
                     onClick={handleRefresh}
-                    aria-label="Refresh metrics"
+                    aria-label="Refresh snapshot"
                     className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
                   >
-                    <svg
-                      className={cn("size-4 transition-transform duration-500", isRefreshing && "rotate-180 animate-spin text-blue-600")}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                    <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                   </button>
                 </div>
-              </div>
 
-              {/* Big KPI & Legend */}
-              <div className="mt-3 flex items-baseline justify-between">
-                <div className="flex items-center gap-2.5">
-                  <span className="text-2xl font-black text-slate-900">274</span>
-                  <span className="inline-flex items-center gap-0.5 rounded-full bg-rose-50 px-2 py-0.5 text-[0.68rem] font-bold text-rose-600">
-                    <span>↓</span> 3% vs last week
-                  </span>
+                {/* Interactive Donut SVG Chart */}
+                <div className="my-auto flex items-center justify-center py-4">
+                  <div className="relative size-44 sm:size-48">
+                    <svg className="size-full -rotate-90" viewBox="0 0 160 160">
+                      {/* Background track */}
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="none"
+                        stroke="#F1F5F9"
+                        strokeWidth="20"
+                      />
+
+                      {/* Segment 1: Bucket 1 (1–30 DPD, 58%) -> Blue #1D72E8 */}
+                      {/* Circumference = 376.99 */}
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="none"
+                        stroke="#1D72E8"
+                        strokeWidth="20"
+                        strokeDasharray="218.65 376.99"
+                        strokeDashoffset="0"
+                        className="cursor-pointer transition-all duration-300 hover:stroke-[23]"
+                        onClick={() => setActiveDonutFilter(activeDonutFilter === "b1" ? null : "b1")}
+                      />
+
+                      {/* Segment 2: Bucket 2 (31–60 DPD, 28%) -> Sky #60A5FA */}
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="none"
+                        stroke="#60A5FA"
+                        strokeWidth="20"
+                        strokeDasharray="105.55 376.99"
+                        strokeDashoffset="-218.65"
+                        className="cursor-pointer transition-all duration-300 hover:stroke-[23]"
+                        onClick={() => setActiveDonutFilter(activeDonutFilter === "b2" ? null : "b2")}
+                      />
+
+                      {/* Segment 3: Hard Recovery (61+ DPD, 14%) -> Amber #F59E0B */}
+                      <circle
+                        cx="80"
+                        cy="80"
+                        r="60"
+                        fill="none"
+                        stroke="#F59E0B"
+                        strokeWidth="20"
+                        strokeDasharray="52.78 376.99"
+                        strokeDashoffset="-324.20"
+                        className="cursor-pointer transition-all duration-300 hover:stroke-[23]"
+                        onClick={() => setActiveDonutFilter(activeDonutFilter === "hard" ? null : "hard")}
+                      />
+                    </svg>
+
+                    {/* Donut Center Display */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+                      <span className="text-[0.66rem] font-bold text-slate-400 uppercase tracking-wider">
+                        {activeDonutFilter === "b1" ? "1–30 DPD" : activeDonutFilter === "b2" ? "31–60 DPD" : activeDonutFilter === "hard" ? "61+ DPD" : "Portfolio Size"}
+                      </span>
+                      <span className="text-2xl font-black text-slate-900 tracking-tight font-mono">
+                        {activeDonutFilter === "b1" ? "₱10.7M" : activeDonutFilter === "b2" ? "₱5.1M" : activeDonutFilter === "hard" ? "₱2.6M" : "₱18.4M"}
+                      </span>
+                      <span className="text-[0.62rem] text-slate-400 font-medium">Under Management</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-[0.68rem] font-bold text-slate-500">
-                  <div className="flex items-center gap-1.5">
-                    <span className="size-2 rounded-full bg-blue-600" />
-                    <span>Check-ins</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="size-2 rounded-full border border-blue-400 bg-blue-100" />
-                    <span>Check-outs</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* SVG Hatched/Striped Pattern Definition & Dual Bar Chart */}
-              <div className="mt-4 h-48 w-full">
-                <svg className="h-full w-full overflow-visible" viewBox="0 0 460 160">
-                  <defs>
-                    {/* Diagonal hatch pattern matching reference image */}
-                    <pattern
-                      id="barDiagonalHatch"
-                      width="6"
-                      height="6"
-                      patternTransform="rotate(45 0 0)"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <line x1="0" y1="0" x2="0" y2="6" stroke="#93C5FD" strokeWidth="2.5" />
-                    </pattern>
-                  </defs>
-
-                  {/* Horizontal Gridlines */}
-                  <g className="opacity-25" stroke="#CBD5E1" strokeDasharray="3 3">
-                    <line x1="0" y1="20" x2="460" y2="20" />
-                    <line x1="0" y1="60" x2="460" y2="60" />
-                    <line x1="0" y1="100" x2="460" y2="100" />
-                    <line x1="0" y1="140" x2="460" y2="140" />
-                  </g>
-
-                  {/* Bar Columns */}
-                  {chartData.map((d, index) => {
-                    const colWidth = 460 / chartData.length;
-                    const xCenter = index * colWidth + colWidth / 2;
-                    const isSelected = selectedDay === d.day;
-
-                    // Heights scaled to 120px max
-                    const maxVal = 100;
-                    const h1 = Math.min(120, (d.inbound / maxVal) * 120);
-                    const h2 = Math.min(120, (d.resolved / maxVal) * 120);
-                    const y1 = 140 - h1;
-                    const y2 = 140 - h2;
-
-                    return (
-                      <g
-                        key={d.day}
-                        onClick={() => setSelectedDay(d.day)}
-                        className="cursor-pointer group"
-                      >
-                        {/* Day Column Hover Highlight Backdrop */}
-                        <rect
-                          x={xCenter - 26}
-                          y={10}
-                          width={52}
-                          height={132}
-                          rx={8}
-                          className={cn(
-                            "transition-colors",
-                            isSelected ? "fill-blue-50/80" : "fill-transparent group-hover:fill-slate-50"
-                          )}
-                        />
-
-                        {/* Bar 1: Solid Blue (Check-ins / Inbound) */}
-                        <rect
-                          x={xCenter - 18}
-                          y={y1}
-                          width={16}
-                          height={h1}
-                          rx={3}
-                          fill="#1D72E8"
-                          className="transition-all duration-300 group-hover:brightness-110"
-                        />
-
-                        {/* Bar 2: Hatched Blue (Check-outs / Resolved) */}
-                        <rect
-                          x={xCenter + 2}
-                          y={y2}
-                          width={16}
-                          height={h2}
-                          rx={3}
-                          fill="url(#barDiagonalHatch)"
-                          stroke="#60A5FA"
-                          strokeWidth="1"
-                          className="transition-all duration-300 group-hover:brightness-95"
-                        />
-
-                        {/* Day Label */}
-                        <text
-                          x={xCenter}
-                          y={156}
-                          textAnchor="middle"
-                          className={cn(
-                            "text-[10px] font-bold transition-colors",
-                            isSelected ? "fill-blue-600 font-black" : "fill-slate-400 group-hover:fill-slate-700"
-                          )}
-                        >
-                          {d.day}
-                        </text>
-                      </g>
-                    );
-                  })}
-                </svg>
-              </div>
-
-              {/* Active Day Data Detail Strip */}
-              <div className="mt-2 flex items-center justify-between rounded-xl bg-slate-50/90 px-3 py-2 text-xs">
-                <span className="font-bold text-slate-700">
-                  {activeDayRecord.day} Focus:
-                </span>
-                <div className="flex items-center gap-3 text-[0.72rem]">
-                  <span className="text-blue-700 font-bold">{activeDayRecord.inbound} Inbound Check-ins</span>
-                  <span className="text-slate-400">·</span>
-                  <span className="text-sky-700 font-bold">{activeDayRecord.resolved} Resolved</span>
-                  <span className="text-slate-400">·</span>
-                  <span className="text-emerald-700 font-black">{activeDayRecord.recovered} Recovered</span>
+                {/* Legend Row */}
+                <div className="flex items-center justify-around border-t border-slate-100 pt-3 text-[0.72rem] font-bold text-slate-600">
+                  <button
+                    type="button"
+                    onClick={() => setActiveDonutFilter(activeDonutFilter === "b1" ? null : "b1")}
+                    className={cn(
+                      "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
+                      activeDonutFilter === "b1" ? "text-blue-600 font-black" : "hover:text-slate-900"
+                    )}
+                  >
+                    <span className="size-2 rounded-full bg-[#1D72E8]" />
+                    <span>1–30 DPD (58%)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveDonutFilter(activeDonutFilter === "b2" ? null : "b2")}
+                    className={cn(
+                      "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
+                      activeDonutFilter === "b2" ? "text-sky-600 font-black" : "hover:text-slate-900"
+                    )}
+                  >
+                    <span className="size-2 rounded-full bg-[#60A5FA]" />
+                    <span>31–60 DPD (28%)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveDonutFilter(activeDonutFilter === "hard" ? null : "hard")}
+                    className={cn(
+                      "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
+                      activeDonutFilter === "hard" ? "text-amber-600 font-black" : "hover:text-slate-900"
+                    )}
+                  >
+                    <span className="size-2 rounded-full bg-[#F59E0B]" />
+                    <span>61+ DPD (14%)</span>
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Card 2: Room / Portfolio Status Snapshot (Donut Chart) */}
-            <div className="lg:col-span-5 rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-xs flex flex-col justify-between">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-sm font-bold text-slate-900">Room Status Snapshot</h3>
-                <button
-                  type="button"
-                  onClick={handleRefresh}
-                  aria-label="Refresh snapshot"
-                  className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
-                >
-                  <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Interactive Donut SVG Chart */}
-              <div className="my-auto flex items-center justify-center py-4">
-                <div className="relative size-44 sm:size-48">
-                  <svg className="size-full -rotate-90" viewBox="0 0 160 160">
-                    {/* Background track */}
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="none"
-                      stroke="#F1F5F9"
-                      strokeWidth="20"
-                    />
-
-                    {/* Segment 1: Occupied (75%) -> Blue #1D72E8 */}
-                    {/* Circumference = 2 * PI * 60 = 376.99 */}
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="none"
-                      stroke="#1D72E8"
-                      strokeWidth="20"
-                      strokeDasharray="282.74 376.99"
-                      strokeDashoffset="0"
-                      className="cursor-pointer transition-all duration-300 hover:stroke-[23]"
-                      onClick={() => setActiveDonutFilter(activeDonutFilter === "occupied" ? null : "occupied")}
-                    />
-
-                    {/* Segment 2: Available (17%) -> Sky #60A5FA */}
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="none"
-                      stroke="#60A5FA"
-                      strokeWidth="20"
-                      strokeDasharray="64.08 376.99"
-                      strokeDashoffset="-282.74"
-                      className="cursor-pointer transition-all duration-300 hover:stroke-[23]"
-                      onClick={() => setActiveDonutFilter(activeDonutFilter === "available" ? null : "available")}
-                    />
-
-                    {/* Segment 3: Maintenance (8%) -> Amber #F59E0B */}
-                    <circle
-                      cx="80"
-                      cy="80"
-                      r="60"
-                      fill="none"
-                      stroke="#F59E0B"
-                      strokeWidth="20"
-                      strokeDasharray="30.15 376.99"
-                      strokeDashoffset="-346.82"
-                      className="cursor-pointer transition-all duration-300 hover:stroke-[23]"
-                      onClick={() => setActiveDonutFilter(activeDonutFilter === "maintenance" ? null : "maintenance")}
-                    />
-                  </svg>
-
-                  {/* Donut Center Display */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
-                    <span className="text-[0.66rem] font-bold text-slate-400 uppercase tracking-wider">
-                      {activeDonutFilter ? activeDonutFilter : "Total Rooms"}
-                    </span>
-                    <span className="text-3xl font-black text-slate-900 tracking-tight">
-                      {activeDonutFilter === "occupied" ? "112" : activeDonutFilter === "available" ? "26" : activeDonutFilter === "maintenance" ? "12" : "150"}
-                    </span>
-                    <span className="text-[0.62rem] text-slate-400 font-medium">Active Nodes</span>
-                  </div>
+            {/* ── BOTTOM SECTION: 4 REAL OMS METRIC CARDS ── */}
+            <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {/* Card 1: Right-Party Contact (RPC) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.72rem] font-medium text-slate-500">Right-Party Contact (RPC)</span>
+                  <span className="text-blue-500">
+                    <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M5 3a2 2 0 00-2 2v1c0 8.284 6.716 15 15 15h1a2 2 0 002-2v-3.28a1 1 0 00-.684-.948l-4.493-1.498a1 1 0 00-1.21.502l-1.13 2.257a11.042 11.042 0 01-5.516-5.517l2.257-1.128a1 1 0 00.502-1.21L9.228 3.683A1 1 0 008.279 3H5z" />
+                    </svg>
+                  </span>
                 </div>
+                <p className="mt-2 text-xl font-black text-slate-900 font-mono">74.8%</p>
+                <p className="text-[0.62rem] text-emerald-600 font-bold mt-0.5">↑ 6.2% with Predictive Pacing</p>
               </div>
 
-              {/* Legend Row */}
-              <div className="flex items-center justify-around border-t border-slate-100 pt-3 text-[0.72rem] font-bold text-slate-600">
-                <button
-                  type="button"
-                  onClick={() => setActiveDonutFilter(activeDonutFilter === "occupied" ? null : "occupied")}
-                  className={cn(
-                    "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
-                    activeDonutFilter === "occupied" ? "text-blue-600 font-black" : "hover:text-slate-900"
-                  )}
-                >
-                  <span className="size-2 rounded-full bg-[#1D72E8]" />
-                  <span>Occupied (75%)</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveDonutFilter(activeDonutFilter === "available" ? null : "available")}
-                  className={cn(
-                    "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
-                    activeDonutFilter === "available" ? "text-sky-600 font-black" : "hover:text-slate-900"
-                  )}
-                >
-                  <span className="size-2 rounded-full bg-[#60A5FA]" />
-                  <span>Available (17%)</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveDonutFilter(activeDonutFilter === "maintenance" ? null : "maintenance")}
-                  className={cn(
-                    "flex min-h-[44px] items-center gap-1.5 px-2 py-2 transition-colors cursor-pointer",
-                    activeDonutFilter === "maintenance" ? "text-amber-600 font-black" : "hover:text-slate-900"
-                  )}
-                >
-                  <span className="size-2 rounded-full bg-[#F59E0B]" />
-                  <span>Maint (8%)</span>
-                </button>
+              {/* Card 2: Kept Promise (PTP) Rate */}
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.72rem] font-medium text-slate-500">Kept Promise Rate (PTP)</span>
+                  <span className="text-emerald-500">
+                    <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                </div>
+                <p className="mt-2 text-xl font-black text-slate-900 font-mono">86.4%</p>
+                <p className="text-[0.62rem] text-emerald-600 font-bold mt-0.5">Automated SMS/Viber hold alert</p>
+              </div>
+
+              {/* Card 3: QA & Compliance Score */}
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.72rem] font-medium text-slate-500">Floor QA &amp; Compliance</span>
+                  <span className="text-indigo-500">
+                    <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </span>
+                </div>
+                <p className="mt-2 text-xl font-black text-slate-900 font-mono">98.2%</p>
+                <p className="text-[0.62rem] text-blue-600 font-bold mt-0.5">Zero script deviance violations</p>
+              </div>
+
+              {/* Card 4: Schedule Adherence (WFM) */}
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
+                <div className="flex items-center justify-between">
+                  <span className="text-[0.72rem] font-medium text-slate-500">Agent Aux Adherence</span>
+                  <span className="text-amber-500">
+                    <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                </div>
+                <p className="mt-2 text-xl font-black text-slate-900 font-mono">46 / 48</p>
+                <p className="text-[0.62rem] text-slate-500 font-medium mt-0.5">Active staff on schedule</p>
               </div>
             </div>
           </div>
 
-          {/* ── BOTTOM SECTION: 4 KPI CARDS (Matching Reference Layout) ── */}
-          <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {/* Card 1: Total Bookings Today */}
-            <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
-              <div className="flex items-center justify-between">
-                <span className="text-[0.72rem] font-medium text-slate-500">Total Bookings Today</span>
-                <span className="text-blue-500">
-                  <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </span>
+          {/* ── DOCKED SOFTPHONE & SUPERVISOR WHISPER INTERACTION HUD ── */}
+          <div className="mt-4 rounded-2xl border border-blue-200/80 bg-gradient-to-r from-blue-50/90 via-white to-blue-50/60 p-3 sm:p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <div className="relative flex size-3 items-center justify-center shrink-0">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative size-2 rounded-full bg-emerald-500" />
               </div>
-              <p className="mt-2 text-xl font-black text-slate-900">26</p>
-              <p className="text-[0.62rem] text-emerald-600 font-bold mt-0.5">↑ 4 from morning batch</p>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black text-slate-900 truncate">
+                    Live Call: Account #9042-PH (₱48,500 Past Due)
+                  </span>
+                  <span className="font-mono text-[0.68rem] font-bold text-blue-700 bg-white border border-blue-200 px-2 py-0.5 rounded-full shrink-0">
+                    {formatTimer(softphoneSeconds)}
+                  </span>
+                </div>
+                <p className="text-[0.68rem] text-slate-500 truncate">
+                  WebRTC Softphone Active · Supervisor Mode: Listen, Whisper &amp; Barge Enabled
+                </p>
+              </div>
             </div>
 
-            {/* Card 2: Occupancy Rate */}
-            <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
-              <div className="flex items-center justify-between">
-                <span className="text-[0.72rem] font-medium text-slate-500">Occupancy Rate</span>
-                <span className="text-sky-500">
-                  <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </span>
-              </div>
-              <p className="mt-2 text-xl font-black text-slate-900">82%</p>
-              <p className="text-[0.62rem] text-slate-500 font-medium mt-0.5">Capacity target reached</p>
+            {/* Simulated Live Audio Waveform */}
+            <div className="hidden md:flex items-center gap-1 px-3">
+              {[10, 22, 34, 16, 38, 26, 12, 30, 20, 14, 28, 18].map((h, i) => (
+                <span
+                  key={i}
+                  style={{ height: softphoneActive ? `${h}px` : "6px" }}
+                  className="w-1 rounded-full bg-blue-600 transition-all duration-300"
+                />
+              ))}
             </div>
 
-            {/* Card 3: Revenue Today */}
-            <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
-              <div className="flex items-center justify-between">
-                <span className="text-[0.72rem] font-medium text-slate-500">Revenue Today</span>
-                <span className="text-emerald-500">
-                  <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span>
-              </div>
-              <p className="mt-2 text-xl font-black text-slate-900">$8,420</p>
-              <p className="text-[0.62rem] text-emerald-600 font-bold mt-0.5">+18.4% above average</p>
-            </div>
-
-            {/* Card 4: Pending Check-outs */}
-            <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs hover:shadow-xs transition-shadow">
-              <div className="flex items-center justify-between">
-                <span className="text-[0.72rem] font-medium text-slate-500">Pending Check-outs</span>
-                <span className="text-amber-500">
-                  <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span>
-              </div>
-              <p className="mt-2 text-xl font-black text-slate-900">9</p>
-              <p className="text-[0.62rem] text-amber-600 font-bold mt-0.5">3 in priority queue</p>
+            {/* Quick Action Buttons */}
+            <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+              <button
+                type="button"
+                onClick={() => triggerToast("Supervisor Whisper sent: 'Offer 2-part settlement terms before end of month.'")}
+                className="flex min-h-[44px] items-center gap-1.5 rounded-xl border border-violet-200 bg-violet-50 px-3.5 py-2 text-xs font-bold text-violet-800 hover:bg-violet-100 transition-all cursor-pointer shrink-0"
+              >
+                <span>🗣️ Whisper</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => triggerToast("PTP Agreement Locked: ₱15,000 promise recorded. Dynamic QR Ph link sent.")}
+                className="flex min-h-[44px] items-center gap-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 px-4 py-2 text-xs font-bold text-white shadow-xs transition-all cursor-pointer shrink-0"
+              >
+                <span>✓ Lock PTP (₱15,000)</span>
+              </button>
             </div>
           </div>
         </main>

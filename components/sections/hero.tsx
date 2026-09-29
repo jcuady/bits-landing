@@ -45,28 +45,28 @@ export function Hero() {
                   <span className="relative inline-flex size-2 rounded-full bg-white" />
                 </span>
                 <span className="text-[0.72rem] font-black uppercase tracking-[0.2em] text-white">
-                  ONE PLATFORM · ZERO DISCONNECTION
+                  ONE PLATFORM · ZERO DISCONNECTION · SOVEREIGN OPERATIONS
                 </span>
               </div>
             </Reveal>
 
-            {/* Main Headline: "From Chaos to Control / One Platform for Everything" */}
+            {/* Main Headline: "From Chaos to Control / One Platform for Collections & Operations" */}
             <Reveal delay={0.04} y={14}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] text-balance drop-shadow-sm">
                 From Chaos to Control <br />
                 <span className="font-serif italic font-normal text-white/95">One Platform</span>{" "}
-                <span className="font-extrabold text-white">for Everything</span>
+                <span className="font-extrabold text-white">for Collections &amp; Operations</span>
               </h1>
             </Reveal>
 
             {/* Subheading in crisp white */}
             <Reveal delay={0.08} y={10}>
               <p className="mt-5 max-w-2xl text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed font-normal text-pretty drop-shadow-2xs">
-                From high-volume debt recovery to multi-channel customer operations, we make enterprise work easier, compliant, and auditable.
+                Omnichannel collections CRM, predictive dialing, automated QA, and sovereign workforce management. Built for Philippine BPOs, recovery agencies, and enterprises with high-volume workflows.
               </p>
             </Reveal>
 
-            {/* Dual CRO Action Buttons (Matching reference image: White Pill + Vibrant Blue) */}
+            {/* Dual CRO Action Buttons */}
             <Reveal delay={0.12} y={10}>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
                 {/* Button 1: White pill button with dark text */}
@@ -95,7 +95,7 @@ export function Hero() {
 
               {/* Micro-Reassurance Line */}
               <p className="mt-3.5 text-xs text-white/80 font-medium drop-shadow-2xs">
-                Instant 20-min blueprint · Zero per-seat penalties · 100% sovereign data ownership
+                WebRTC Softphone Built-in · ~0.4s Screen-Pop · On-Premises &amp; Cloud Ready · Zero Per-Seat Penalties
               </p>
             </Reveal>
           </div>
