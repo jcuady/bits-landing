@@ -10,14 +10,13 @@ export const site = {
 
 /* ── Primary Navigation Items ── */
 export const navItems = [
-  { label: "Ecosystem", href: "/#ecosystem" },
   { label: "The Difference", href: "/#the-difference" },
-  { label: "OPERATIONS 360", href: "/#operations-360" },
-  { label: "AI Operations", href: "/bitsagent" },
+  { label: "Floor Engines", href: "/#floor-showcase" },
+  { label: "Productivity Bento", href: "/#features-bento" },
   { label: "Industries", href: "/#industries" },
   { label: "Security", href: "/#security" },
-  { label: "Methodology", href: "/#methodology" },
-  { label: "Solutions", href: "/#solutions" },
+  { label: "Deployment", href: "/#deployment" },
+  { label: "Solution Packages", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
 ] as const;
 

@@ -4,6 +4,7 @@ import { StatsStrip } from "@/components/sections/stats-strip";
 import { Problem } from "@/components/sections/problem";
 import { TheDifference } from "@/components/sections/the-difference";
 import { FeaturesHero } from "@/components/sections/features-hero";
+import { FloorShowcase } from "@/components/sections/floor-showcase";
 import { FeaturesBento } from "@/components/sections/features-bento";
 import { FeaturesAdmin } from "@/components/sections/features-admin";
 import { Industries } from "@/components/sections/industries";
@@ -35,10 +36,13 @@ export default function Home() {
       {/* 6. Collections Command Center: Hero feature with account management */}
       <FeaturesHero />
 
-      {/* 6. Feature Bento: Dialing, QA, Messaging, Analytics */}
+      {/* 7. The Recovery Floor Powerhouse: Predictive Dialer, Walled Training Mode, QA Outliers, Omnichannel, and Real-Time Analytics */}
+      <FloorShowcase />
+
+      {/* 8. Feature Bento: Modular Custom Widgets, Multi-Currency, Account Tagging, Templates */}
       <FeaturesBento />
 
-      {/* 7. Administration & Security: RBAC, audit, licensing */}
+      {/* 9. Administration & Security: RBAC, audit, licensing */}
       <FeaturesAdmin />
 
       {/* 8. Target Industries */}

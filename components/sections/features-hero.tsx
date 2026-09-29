@@ -17,6 +17,7 @@ export function FeaturesHero() {
       className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/25 to-white border-b border-slate-200/70 py-20 md:py-28 lg:py-32"
     >
       {/* Anchor alias for navbar / footer links */}
+      <div id="features-hero" className="absolute -top-24" />
       <div id="operations-360" className="absolute -top-24" />
       {/* Subtle ambient background glow */}
       <div

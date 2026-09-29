@@ -56,21 +56,21 @@ export function FeaturesBento() {
           <Reveal>
             {/* Pill Eyebrow Badge */}
             <div className="inline-flex items-center gap-1.5 rounded-full border border-sky-200/90 bg-sky-50/90 px-4 py-1 text-xs font-semibold text-sky-800 shadow-2xs mb-4">
-              Why choose us
+              MODULAR WORKFLOW · BUILT FOR OPERATIONS
             </div>
           </Reveal>
 
           <Reveal delay={0.04}>
             {/* Main Headline */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-              Features To Boost Your Productivity
+              Tools Engineered to Maximize Every Minute on the Floor.
             </h2>
           </Reveal>
 
           <Reveal delay={0.08}>
             {/* Subheading */}
-            <p className="mt-4 text-sm sm:text-base text-slate-500 font-normal leading-relaxed max-w-xl mx-auto text-pretty">
-              Manage tasks, collaborate with your team, and track progress with tools designed to simplify your workflow.
+            <p className="mt-4 text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl mx-auto text-pretty">
+              Manage accounts, configure modular widgets, collect multi-currency payments, and automate follow-ups without spreadsheet friction.
             </p>
           </Reveal>
         </div>

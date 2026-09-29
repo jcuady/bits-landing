@@ -23,11 +23,11 @@ const compactFooterSections: FooterSection[] = [
   {
     title: "Platform",
     links: [
-      { label: "OPERATIONS 360", href: "/#operations-360" },
+      { label: "Floor Powerhouse & Dialer", href: "/#floor-showcase" },
+      { label: "Collections Command Center", href: "/#features" },
+      { label: "Productivity Bento", href: "/#features-bento" },
       { label: "BITSagent Voice AI", href: "/bitsagent" },
       { label: "BITScrm Collections", href: "/bitscrm" },
-      { label: "Sales & Pipeline", href: "/products/sales" },
-      { label: "Platform Capabilities →", href: "/#features" },
     ],
   },
   {
@@ -36,8 +36,8 @@ const compactFooterSections: FooterSection[] = [
       { label: "BPO & Collections", href: "/#industries" },
       { label: "Banking & Financial", href: "/#industries" },
       { label: "Sovereign Deployment", href: "/#deployment" },
-      { label: "Commercial Pricing", href: "/#solutions" },
-      { label: "Custom Architecture", href: "/#custom-systems" },
+      { label: "Solution Packages", href: "/#pricing" },
+      { label: "Interactive Floor ROI", href: "/#the-difference" },
     ],
   },
   {
