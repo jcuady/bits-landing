@@ -22,7 +22,7 @@ const fieldOrder = [
 
 const inputClass = (invalid: boolean) =>
   cn(
-    "h-11 w-full rounded-xl border bg-white px-3.5 text-base text-slate-900 transition-all duration-200 placeholder:text-slate-400",
+    "h-9 sm:h-9.5 w-full rounded-lg border bg-white px-3 text-xs sm:text-sm text-slate-900 transition-all duration-200 placeholder:text-slate-400",
     "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20",
     invalid ? "border-rose-400" : "border-slate-200 hover:border-slate-300"
   );
@@ -30,7 +30,7 @@ const inputClass = (invalid: boolean) =>
 function FieldError({ id, errors }: { id: string; errors?: string[] }) {
   if (!errors?.length) return null;
   return (
-    <p id={id} className="mt-1 text-xs font-medium text-rose-600">
+    <p id={id} className="mt-0.5 text-[11px] font-medium text-rose-600">
       {errors[0]}
     </p>
   );
@@ -81,20 +81,20 @@ export function ContactForm() {
       <div
         role="status"
         aria-live="polite"
-        className="flex min-h-[30rem] flex-col justify-center rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-900/5 sm:p-12"
+        className="flex min-h-[20rem] flex-col justify-center rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
       >
-        <div className="flex size-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-          <svg className="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+          <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <p className="mt-5 font-mono text-xs font-bold uppercase tracking-widest text-emerald-600">
+        <p className="mt-3.5 font-mono text-[11px] font-bold uppercase tracking-widest text-emerald-600">
           Request Received
         </p>
-        <h3 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">
+        <h3 className="mt-1 text-xl font-bold tracking-tight text-slate-900">
           Thank you. We&apos;ve received your consultation request.
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600">
+        <p className="mt-2 text-xs leading-relaxed text-slate-600">
           A BITS solutions architect will review your operational requirements and reach out
           {state.values.email ? ` to ${state.values.email}` : ""} promptly with your custom blueprint.
         </p>
@@ -110,32 +110,31 @@ export function ContactForm() {
       action={formAction}
       noValidate
       aria-busy={pending}
-      className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-900/5 sm:p-8"
+      className="rounded-xl sm:rounded-2xl border border-slate-200/90 bg-slate-50/60 p-4 sm:p-5.5 shadow-2xs"
       key={`${state.values.name ?? ""}-${state.values.email ?? ""}-${Object.keys(state.errors).join(",")}-${state.formError ?? ""}`}
     >
-      <div className="border-b border-slate-100 pb-5">
-
-        <h3 className="text-xl font-bold text-slate-900">
+      <div className="border-b border-slate-200/80 pb-3">
+        <h3 className="text-sm sm:text-base font-bold text-slate-900">
           Book a Free Consultation &amp; Live Demo
         </h3>
-        <p className="mt-1 text-xs text-slate-500">
-          Fill out your organization&apos;s details below. We read every request and prepare a tailored software proposal and live demo.
+        <p className="mt-0.5 text-[11px] text-slate-500">
+          Fill out your organization details below for a tailored software proposal and live demo.
         </p>
       </div>
 
       {state.formError ? (
         <p
           role="alert"
-          className="mt-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs font-medium text-rose-700"
+          className="mt-3 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-medium text-rose-700"
         >
           {state.formError}
         </p>
       ) : null}
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="mt-3.5 grid gap-2.5 sm:grid-cols-2">
         {/* Name */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="name" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="name" className="text-[11px] font-semibold text-slate-700">
             Full Name <span className="text-rose-500">*</span>
           </label>
           <input
@@ -154,8 +153,8 @@ export function ContactForm() {
         </div>
 
         {/* Email */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="email" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="email" className="text-[11px] font-semibold text-slate-700">
             Work Email <span className="text-rose-500">*</span>
           </label>
           <input
@@ -175,9 +174,8 @@ export function ContactForm() {
         </div>
 
         {/* Company */}
-        {/* Company */}
-        <div className="flex flex-col gap-1.5 sm:col-span-2">
-          <label htmlFor="company" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1 sm:col-span-2">
+          <label htmlFor="company" className="text-[11px] font-semibold text-slate-700">
             Company Name <span className="text-rose-500">*</span>
           </label>
           <input
@@ -196,8 +194,8 @@ export function ContactForm() {
         </div>
 
         {/* Solution / Product Interest */}
-        <div className="flex flex-col gap-1.5 sm:col-span-2">
-          <label htmlFor="interest" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1 sm:col-span-2">
+          <label htmlFor="interest" className="text-[11px] font-semibold text-slate-700">
             Products &amp; Solution Scope of Interest
           </label>
           <div className="relative">
@@ -206,7 +204,7 @@ export function ContactForm() {
               name="interest"
               value={selectedInterest}
               onChange={(e) => setSelectedInterest(e.target.value)}
-              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+              className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
             >
               <option value="">Select product, bundle or consultative scope...</option>
               {contactInterests.map((interest) => (
@@ -215,15 +213,15 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+            <span className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-xs text-slate-400">
               ▾
             </span>
           </div>
         </div>
 
         {/* Company Size */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="companySize" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="companySize" className="text-[11px] font-semibold text-slate-700">
             Operational Team Size
           </label>
           <div className="relative">
@@ -231,7 +229,7 @@ export function ContactForm() {
               id="companySize"
               name="companySize"
               defaultValue={state.values.companySize ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+              className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
             >
               <option value="">Select team size</option>
               {consultationOptions.companySizes.map((size) => (
@@ -240,15 +238,15 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+            <span className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-xs text-slate-400">
               ▾
             </span>
           </div>
         </div>
 
         {/* Industry */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="industry" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="industry" className="text-[11px] font-semibold text-slate-700">
             Industry / Sector
           </label>
           <div className="relative">
@@ -256,7 +254,7 @@ export function ContactForm() {
               id="industry"
               name="industry"
               defaultValue={state.values.industry ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+              className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
             >
               <option value="">Select industry</option>
               {consultationOptions.industries.map((ind) => (
@@ -265,15 +263,15 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+            <span className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-xs text-slate-400">
               ▾
             </span>
           </div>
         </div>
 
         {/* Current System */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="currentSystem" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="currentSystem" className="text-[11px] font-semibold text-slate-700">
             Current Primary Tooling
           </label>
           <div className="relative">
@@ -281,7 +279,7 @@ export function ContactForm() {
               id="currentSystem"
               name="currentSystem"
               defaultValue={state.values.currentSystem ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+              className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
             >
               <option value="">Select current system</option>
               {consultationOptions.currentSystems.map((sys) => (
@@ -290,15 +288,15 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+            <span className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-xs text-slate-400">
               ▾
             </span>
           </div>
         </div>
 
         {/* Primary Challenge */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="primaryChallenge" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="primaryChallenge" className="text-[11px] font-semibold text-slate-700">
             Primary Operational Challenge
           </label>
           <div className="relative">
@@ -306,7 +304,7 @@ export function ContactForm() {
               id="primaryChallenge"
               name="primaryChallenge"
               defaultValue={state.values.primaryChallenge ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+              className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
             >
               <option value="">Select primary challenge</option>
               {consultationOptions.primaryChallenges.map((ch) => (
@@ -315,15 +313,15 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+            <span className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-xs text-slate-400">
               ▾
             </span>
           </div>
         </div>
 
         {/* Preferred Contact Method */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="preferredMethod" className="text-xs font-bold text-slate-700">
+        <div className="flex flex-col gap-1 sm:col-span-2">
+          <label htmlFor="preferredMethod" className="text-[11px] font-semibold text-slate-700">
             Preferred Consultation Format
           </label>
           <div className="relative">
@@ -331,7 +329,7 @@ export function ContactForm() {
               id="preferredMethod"
               name="preferredMethod"
               defaultValue={state.values.preferredMethod ?? ""}
-              className={cn(inputClass(false), "appearance-none pr-9 text-base")}
+              className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
             >
               <option value="">Select preferred method</option>
               {consultationOptions.preferredMethods.map((m) => (
@@ -340,27 +338,27 @@ export function ContactForm() {
                 </option>
               ))}
             </select>
-            <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
+            <span className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 text-xs text-slate-400">
               ▾
             </span>
           </div>
         </div>
 
         {/* Operational Message / Requirements */}
-        <div className="flex flex-col gap-1.5 sm:col-span-2">
-          <label htmlFor="message" className="text-xs font-bold text-slate-700">
-            Tell us about your operational wish list <span className="text-rose-500">*</span>
+        <div className="flex flex-col gap-1 sm:col-span-2">
+          <label htmlFor="message" className="text-[11px] font-semibold text-slate-700">
+            Operational Wish List &amp; Requirements <span className="text-rose-500">*</span>
           </label>
           <textarea
             id="message"
             name="message"
-            rows={4}
+            rows={2}
             required
             defaultValue={state.values.message ?? ""}
             aria-invalid={!!state.errors.message}
             aria-describedby={state.errors.message ? "message-error" : undefined}
-            className={cn(inputClass(!!state.errors.message), "h-auto min-h-[6.5rem] resize-y py-3 text-base")}
-            placeholder="What is your operational wish list? Tell us which fragmented tools you're looking to consolidate (CRM, QA, Integrated Dialer, Performance Scorecards, Coaching Logs, LMS, WFM, Real-Time Dashboards)..."
+            className={cn(inputClass(!!state.errors.message), "h-auto min-h-[3.75rem] resize-y py-2 text-xs sm:text-sm")}
+            placeholder="Fragmented tools you're looking to consolidate (CRM, Dialer, QA, Scorecards, LMS, WFM)..."
           />
           <FieldError id="message-error" errors={state.errors.message} />
         </div>
@@ -373,16 +371,16 @@ export function ContactForm() {
       </div>
 
       {/* Footer Submit Bar */}
-      <div className="mt-7 flex flex-col gap-4 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-[0.72rem] text-slate-500">
-          Confidential. We never share operational or customer data.
+      <div className="mt-3.5 flex flex-col gap-2.5 border-t border-slate-200/80 pt-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[10px] text-slate-500">
+          Confidential · NDA supported · Zero data sharing.
         </p>
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-12 w-full items-center justify-center rounded-full bg-blue-600 px-8 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-[0.98] disabled:opacity-60 sm:w-auto"
+          className="inline-flex h-9 sm:h-9.5 w-full items-center justify-center rounded-full bg-blue-600 px-5 text-xs font-bold text-white shadow-xs transition-all hover:bg-blue-700 active:scale-[0.98] disabled:opacity-60 sm:w-auto cursor-pointer"
         >
-          {pending ? "Submitting Request…" : "Let's Talk About Your Operational Wish List"}
+          {pending ? "Submitting Request…" : "Request Live Demo & Proposal →"}
         </button>
       </div>
     </form>
