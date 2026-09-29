@@ -14,7 +14,7 @@ export function Hero() {
     <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-32">
       {/* ── ATMOSPHERIC ANIMATED SKY & DRIFTING CLOUDS (Animation strictly in background) ── */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none [clip-path:polygon(0_0,100%_0,100%_calc(100%-80px),50%_100%,0_calc(100%-80px))]"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden
       >
         {/* Layer 1: Base High-Definition Sky Canvas with Fluid Horizontal Cloud Drift */}
@@ -50,8 +50,9 @@ export function Hero() {
         {/* Layer 4: Sky Azure Multi-Stop Color Calibration */}
         <div className="absolute inset-0 bg-gradient-to-b from-blue-600/35 via-blue-500/20 to-sky-400/15 mix-blend-multiply" />
 
-        {/* Layer 5: Soft Horizon Cloud Feathering (Nestles cards seamlessly into cloud bed) */}
-        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-slate-50 via-slate-50/85 to-transparent" />
+        {/* Layer 5: Seamless Atmospheric Feathering into White Horizon (Zero visible cut) */}
+        <div className="absolute inset-x-0 bottom-0 h-72 sm:h-96 bg-gradient-to-t from-white via-white/85 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-white pointer-events-none" />
       </div>
 
       <Container className="relative z-10">

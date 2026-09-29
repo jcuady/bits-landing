@@ -58,7 +58,7 @@ export function TrustStrip() {
   return (
     <section
       aria-label="Security standards and regulatory alignment"
-      className="relative z-10 border-y border-sky-100 bg-gradient-to-b from-white via-sky-50/50 to-white py-12 sm:py-16"
+      className="relative z-10 border-b border-sky-100 bg-gradient-to-b from-white via-sky-50/30 to-white pt-8 pb-12 sm:pb-16"
     >
       <Container>
         <Reveal y={12}>

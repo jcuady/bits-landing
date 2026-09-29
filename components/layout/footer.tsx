@@ -6,12 +6,45 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import { Mail, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+/* ── Precise Agency-Tier SVG Social Icons (24x24 viewBox) ── */
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg className={cn("size-4.5", className)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg className={cn("size-4.5", className)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg className={cn("size-4.5", className)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    </svg>
+  );
+}
+
+function TwitterXIcon({ className }: { className?: string }) {
+  return (
+    <svg className={cn("size-4.5", className)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 interface FooterLink {
   label: string;
   href: string;
-  isAction?: boolean;
 }
 
 interface FooterSection {
@@ -19,7 +52,7 @@ interface FooterSection {
   links: FooterLink[];
 }
 
-const compactFooterSections: FooterSection[] = [
+const footerNavigation: FooterSection[] = [
   {
     title: "Platform",
     links: [
@@ -41,23 +74,13 @@ const compactFooterSections: FooterSection[] = [
     ],
   },
   {
-    title: "Trust & Verification",
+    title: "Trust & Governance",
     links: [
       { label: "Security Architecture", href: "/#security" },
       { label: "BSP & NPC Alignment", href: "/#security" },
       { label: "Brand Guidelines (Brandbook)", href: "/brandbook" },
       { label: "AI Grounding (llms.txt)", href: "/llms.txt" },
       { label: "Enterprise FAQ", href: "/#faq" },
-    ],
-  },
-  {
-    title: "Connect",
-    links: [
-      { label: "Book Consultation", href: "/#contact", isAction: true },
-      { label: "CRM Portal Login", href: "/login" },
-      { label: "Direct Scoping Email", href: "mailto:bits_inquiries@boundlessits.com" },
-      { label: "Privacy Policy", href: "/legal#privacy" },
-      { label: "Terms of Service", href: "/legal#terms" },
     ],
   },
 ];
@@ -76,34 +99,57 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/30 to-slate-100 text-slate-700">
-      {/* ── PART 1: THE GROUNDED FINALE BANNER (Direct Match with Reference Design) ── */}
-      <div className="relative pt-16 sm:pt-24 lg:pt-28 overflow-hidden">
-        <Container className="relative z-10">
+    <footer className="relative overflow-hidden bg-slate-950 text-slate-300">
+      {/* ── SEAMLESS GROUND HORIZON BACKDROP (Unified full-bleed ground visual) ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none">
+        {/* The Ultra HD Grounded Hills Canvas */}
+        <Image
+          src="/images/footer-ground-bg.jpg"
+          alt="Lush green grounded hill landscape under atmospheric sky"
+          fill
+          priority={false}
+          sizes="100vw"
+          quality={90}
+          className="object-cover object-top"
+        />
+
+        {/* Top Seamless Atmospheric Feathering: Melts white page into sky with zero cut */}
+        <div className="absolute inset-x-0 top-0 h-44 sm:h-56 bg-gradient-to-b from-white via-white/80 via-35% to-transparent" />
+
+        {/* Center Atmospheric Contrast Tint */}
+        <div className="absolute inset-0 bg-radial from-transparent via-slate-900/25 to-slate-950/80" />
+
+        {/* Lower Deep Bedrock Gradient: Ensures pristine WCAG AAA contrast for footer columns */}
+        <div className="absolute inset-x-0 bottom-0 h-[62%] sm:h-[55%] bg-gradient-to-t from-slate-950 via-slate-950/95 via-45% to-transparent" />
+      </div>
+
+      {/* ── PART 1: THE GROUNDED FINALE BANNER (Floating organically over the landscape) ── */}
+      <div className="relative z-10 pt-20 sm:pt-28 lg:pt-32 pb-16 sm:pb-24">
+        <Container>
           <div className="mx-auto max-w-4xl text-center">
             {/* Pill Badge: Let's Connect */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/90 bg-sky-50/90 px-4 py-1.5 shadow-2xs backdrop-blur-md mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-white/90 px-4 py-1.5 shadow-sm backdrop-blur-md mb-6">
               <span className="relative flex size-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
                 <span className="relative inline-flex size-2.5 rounded-full bg-blue-600" />
               </span>
-              <span className="text-[0.75rem] font-bold uppercase tracking-[0.18em] text-blue-700">
+              <span className="text-[0.75rem] font-bold uppercase tracking-[0.18em] text-blue-800">
                 Let&apos;s Connect
               </span>
             </div>
 
             {/* Main Bold Headline */}
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1] text-balance">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1] text-balance drop-shadow-xs">
               Ready to Build Stronger Customer Relationships?
             </h2>
 
             {/* Subtitle */}
-            <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
+            <p className="mt-4 text-base sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed text-pretty font-medium drop-shadow-2xs">
               A smarter way to manage leads, track interactions, and grow your business with powerful CRM tools.
             </p>
 
             {/* Capsule Email Quick Form Bar */}
-            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-full border border-slate-200/90 bg-white p-1.5 sm:p-2 shadow-xl shadow-slate-200/60">
+            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 p-1.5 sm:p-2 shadow-xl shadow-slate-950/10 backdrop-blur-md">
               <div className="flex flex-1 items-center gap-3 pl-3 sm:pl-4 w-full">
                 <Mail className="size-5 text-slate-400 shrink-0" aria-hidden="true" />
                 <label htmlFor="footer-quick-email-input" className="sr-only">
@@ -128,108 +174,95 @@ export function Footer() {
               <button
                 type="button"
                 onClick={handleQuickSubmit}
-                className="group flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 px-7 py-3 font-bold text-white shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
+                className="group flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-slate-950 hover:bg-blue-600 px-7 py-3 font-bold text-white shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
               >
                 <span className="text-sm">Contact Us</span>
-                <ArrowRight className="size-4 text-slate-400 transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="size-4 text-slate-400 group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
 
-            {/* Navigation Pill Links & Social Icons Row */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-600">
+            {/* Navigation Pill Links & Social Media Icons Row */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-700">
               <a
                 href="#content"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-950 transition-colors"
               >
                 Home
               </a>
               <a
-                href="#solutions"
-                className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-white px-5 py-2 font-bold text-slate-900 border border-slate-200 shadow-2xs hover:bg-slate-50 transition-all"
+                href="#the-difference"
+                className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-white/90 px-5 py-2 font-bold text-slate-900 border border-slate-200 shadow-2xs hover:bg-white transition-all backdrop-blur-sm"
               >
                 Solutions
               </a>
               <a
-                href="#features-bento"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                href="#floor-showcase"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-950 transition-colors"
               >
                 Features
               </a>
               <a
-                href="/products/sales"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                href="#features-bento"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-950 transition-colors"
               >
                 Product
               </a>
               <a
                 href="#pricing"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-950 transition-colors"
               >
                 Pricing
               </a>
 
-              {/* Social Icon Pills (>= 44x44px Touch Targets) */}
-              <div className="flex items-center gap-1.5 ml-1 sm:ml-3">
+              {/* Verified Official Social Media Pills (With exact verified URLs) */}
+              <div className="flex items-center gap-2 ml-1 sm:ml-3">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61594430590134"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Boundless IT Solutions on Facebook"
+                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white/95 text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98] backdrop-blur-sm"
+                >
+                  <FacebookIcon />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/company/boundless-it-solutions-opc/?viewAsMember=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Connect with Boundless IT Solutions on LinkedIn"
+                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white/95 text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98] backdrop-blur-sm"
+                >
+                  <LinkedInIcon />
+                </a>
+
+                <a
+                  href="https://www.instagram.com/boundlessitsolutions/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Boundless IT Solutions on Instagram"
+                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white/95 text-slate-700 hover:text-rose-600 hover:border-rose-300 shadow-2xs transition-all active:scale-[0.98] backdrop-blur-sm"
+                >
+                  <InstagramIcon />
+                </a>
+
                 <a
                   href="https://x.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="X (formerly Twitter)"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all active:scale-[0.98]"
+                  aria-label="Follow BITS on X"
+                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white/95 text-slate-700 hover:text-slate-950 hover:border-slate-400 shadow-2xs transition-all active:scale-[0.98] backdrop-blur-sm"
                 >
-                  <span className="font-bold text-xs">𝕏</span>
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all font-mono font-bold text-xs active:scale-[0.98]"
-                >
-                  in
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all font-bold text-xs active:scale-[0.98]"
-                >
-                  IG
-                </a>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all font-bold text-xs active:scale-[0.98]"
-                >
-                  fb
+                  <TwitterXIcon />
                 </a>
               </div>
             </div>
           </div>
         </Container>
-
-        {/* ── THE GROUNDED LANDSCAPE GRAPHIC (Directly anchoring footer base) ── */}
-        <div className="relative mt-8 sm:mt-12 h-[280px] sm:h-[380px] lg:h-[460px] w-full overflow-hidden">
-          <Image
-            src="/images/grounded-hills-mound.jpg"
-            alt="Lush green grounded hill landscape under clear sky"
-            fill
-            priority={false}
-            sizes="100vw"
-            className="object-cover object-[center_35%] select-none transition-transform duration-700 hover:scale-102"
-          />
-          {/* Soft atmospheric horizon feathering at top */}
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white via-white/40 to-transparent pointer-events-none" />
-          {/* Feathering into the lower bedrock footer */}
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent pointer-events-none" />
-        </div>
       </div>
 
       {/* ── PART 2: SOVEREIGN BEDROCK FOOTER (Organized Columns & Compliance Seals) ── */}
-      <div className="relative bg-slate-950 text-slate-400 pt-12 pb-16 border-t border-slate-800">
+      <div className="relative z-10 pt-12 pb-16 border-t border-slate-800/80 bg-slate-950/70 backdrop-blur-md">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.1fr_2.4fr] lg:gap-14">
             {/* Brand & Mission Column */}
@@ -248,106 +281,75 @@ export function Footer() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
                 </span>
-                <span className="text-[0.68rem] font-mono text-emerald-400 font-bold tracking-wider uppercase">
-                  100% Operational · Sovereign On-Prem &amp; Cloud
+                <span className="text-[11px] font-semibold text-emerald-300">
+                  All Systems Operational · 99.9% Uptime
                 </span>
               </div>
 
-              {/* BSP & NPC Alignment Note */}
-              <p className="text-[11px] text-slate-500 font-mono">
-                Republic of the Philippines · BSP Circular 808 &amp; NPC Data Privacy Aligned
-              </p>
+              <div className="text-[11px] text-slate-500 space-y-1">
+                <p>Boundless IT Solutions OPC · Manila, Philippines</p>
+                <p>
+                  Direct Scoping:{" "}
+                  <a
+                    href="mailto:bits_inquiries@boundlessits.com"
+                    className="text-blue-400 hover:underline"
+                  >
+                    bits_inquiries@boundlessits.com
+                  </a>
+                </p>
+              </div>
             </div>
 
-            {/* Symmetrical 4-Column Navigation */}
-            <nav aria-label="Footer Navigation" className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:gap-8">
-              {compactFooterSections.map((sec) => (
-                <div key={sec.title}>
-                  <h3 className="text-[0.72rem] font-black uppercase tracking-wider text-white">
+            {/* Navigation Grid (3 Clear Categorical Columns; CRM portal login hidden) */}
+            <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+              {footerNavigation.map((sec) => (
+                <div key={sec.title} className="space-y-3">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-200">
                     {sec.title}
-                  </h3>
-                  <ul className="mt-3.5 space-y-1">
-                    {sec.links.map((link) => {
-                      if (link.isAction) {
-                        return (
-                          <li key={link.label}>
-                            <button
-                              type="button"
-                              onClick={() => openModal("Enterprise Consultation")}
-                              className="inline-flex min-h-[36px] items-center py-1 text-xs font-medium text-sky-400 transition-colors duration-150 hover:text-sky-300 cursor-pointer"
-                            >
-                              {link.label}
-                            </button>
-                          </li>
-                        );
-                      }
-
-                      const isInternalPage =
-                        link.href.startsWith("/") &&
-                        !link.href.endsWith(".html") &&
-                        !link.href.endsWith(".pdf") &&
-                        !link.href.includes(".xml");
-
-                      return (
-                        <li key={link.label}>
-                          {isInternalPage ? (
-                            <Link
-                              href={link.href}
-                              className="inline-flex min-h-[36px] items-center py-1 text-xs font-medium text-slate-400 transition-colors duration-150 hover:text-white"
-                            >
-                              {link.label}
-                            </Link>
-                          ) : (
-                            <a
-                              href={link.href}
-                              target={
-                                link.href.endsWith(".html") ||
-                                link.href.endsWith(".pdf") ||
-                                link.href.endsWith(".txt")
-                                  ? "_blank"
-                                  : undefined
-                              }
-                              rel={
-                                link.href.endsWith(".html") ||
-                                link.href.endsWith(".pdf") ||
-                                link.href.endsWith(".txt")
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                              className="inline-flex min-h-[36px] items-center py-1 text-xs font-medium text-slate-400 transition-colors duration-150 hover:text-white"
-                            >
-                              {link.label}
-                            </a>
-                          )}
-                        </li>
-                      );
-                    })}
+                  </p>
+                  <ul className="space-y-2 text-xs">
+                    {sec.links.map((link) => (
+                      <li key={link.label}>
+                        <Link
+                          href={link.href}
+                          className="text-slate-400 hover:text-white transition-colors duration-150 inline-block py-0.5"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               ))}
-            </nav>
+            </div>
           </div>
 
-          {/* Legal & Copyright Sub-Bar */}
-          <div className="mt-10 pt-6 border-t border-slate-800/80 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-xs text-slate-500">
-            <p>© {new Date().getFullYear()} Boundless IT Solutions (BITS). All rights reserved.</p>
+          {/* Bottom Bar: Regulatory Governance & Copyright */}
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800/80 pt-8 sm:flex-row text-xs text-slate-500">
+            <p>© {new Date().getFullYear()} Boundless IT Solutions OPC. All rights reserved.</p>
 
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-              <Link href="/legal#privacy" className="hover:text-slate-300 transition-colors">
+            {/* Regulatory Alignment Chips */}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                <ShieldCheck className="size-3.5 text-blue-400" />
+                BSP Circular 808 Aligned
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                <CheckCircle2 className="size-3.5 text-emerald-400" />
+                NPC RA 10173 DPA Compliant
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                <CheckCircle2 className="size-3.5 text-sky-400" />
+                SEC MC 18 Aligned
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4 text-[11px]">
+              <Link href="/legal#privacy" className="text-slate-400 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/legal#terms" className="hover:text-slate-300 transition-colors">
+              <Link href="/legal#terms" className="text-slate-400 hover:text-white transition-colors">
                 Terms of Service
-              </Link>
-              <button
-                type="button"
-                onClick={() => openModal("Footer Blueprint Consultation")}
-                className="text-sky-400 hover:text-sky-300 font-bold transition-colors cursor-pointer"
-              >
-                Book Consultation
-              </button>
-              <Link href="/login" className="font-bold text-white hover:text-sky-300 transition-colors">
-                CRM Portal Sign In →
               </Link>
             </div>
           </div>
