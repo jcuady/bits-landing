@@ -243,91 +243,251 @@ export function Header() {
                           exit={{ opacity: 0, y: 6, scale: 0.98 }}
                           transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}
                           className={cn(
-                            "absolute left-1/2 top-full mt-2.5 -translate-x-1/2 rounded-2xl border border-slate-200/90 bg-white/95 p-3.5 shadow-2xl shadow-blue-950/15 backdrop-blur-xl",
-                            section.dropdown.items.length > 4 ? "w-[720px]" : "w-[380px]"
+                            "absolute left-1/2 top-full mt-2.5 -translate-x-1/2 rounded-2xl border border-slate-200/90 bg-white/98 shadow-2xl shadow-blue-950/15 backdrop-blur-2xl ring-1 ring-slate-900/5",
+                            section.id === "platform"
+                              ? "w-[820px] max-w-[calc(100vw-32px)] p-4"
+                              : "w-[390px] p-3"
                           )}
                           onMouseEnter={() => handleMouseEnter(section.id)}
                         >
-                          <div className="mb-2 flex items-center justify-between border-b border-slate-100 px-2 pb-2">
-                            <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
-                              {section.dropdown.heading}
-                            </span>
-                            <span className="size-1 rounded-full bg-blue-500" />
-                          </div>
-
-                          <div
-                            className={cn(
-                              "grid gap-1.5",
-                              section.dropdown.items.length > 4 ? "grid-cols-2" : "grid-cols-1"
-                            )}
-                          >
-                            {section.dropdown.items.map((item) => {
-                              const isItemActive = pathname === item.href;
-                              return (
-                                <Link
-                                  key={`${section.id}-${item.title}`}
-                                  href={item.href}
-                                  onClick={() => setActiveDropdown(null)}
-                                  className={cn(
-                                    "group flex items-start gap-3 rounded-xl p-2.5 transition-all duration-150",
-                                    isItemActive
-                                      ? "bg-blue-50/80 ring-1 ring-blue-500/20"
-                                      : "hover:bg-slate-50 hover:ring-1 hover:ring-slate-200/70"
-                                  )}
-                                >
-                                  <div
-                                    className={cn(
-                                      "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors",
-                                      isItemActive
-                                        ? "bg-blue-600 text-white"
-                                        : "bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700"
-                                    )}
-                                  >
-                                    <NavIcon name={item.icon} />
-                                  </div>
-                                  <div className="min-w-0 flex-1">
+                          {section.id === "platform" && "flagships" in section.dropdown ? (
+                            <div>
+                              <div className="grid grid-cols-2 gap-4">
+                                {/* ── LEFT: CORE PLATFORMS & AUTONOMOUS AI ── */}
+                                <div className="space-y-1.5">
+                                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-100 px-1">
                                     <div className="flex items-center gap-1.5">
-                                      <span
+                                      <span className="relative flex size-2">
+                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
+                                        <span className="relative inline-flex size-2 rounded-full bg-blue-600" />
+                                      </span>
+                                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-800">
+                                        Core Platforms &amp; AI
+                                      </span>
+                                    </div>
+                                    <span className="rounded bg-blue-50 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-700">
+                                      Flagships
+                                    </span>
+                                  </div>
+
+                                  <div className="space-y-1">
+                                    {section.dropdown.flagships.map((item) => {
+                                      const isItemActive = pathname === item.href;
+                                      const isOps360 = item.title.startsWith("OPERATIONS 360");
+                                      return (
+                                        <Link
+                                          key={item.title}
+                                          href={item.href}
+                                          onClick={() => setActiveDropdown(null)}
+                                          className={cn(
+                                            "group flex items-start gap-2.5 rounded-xl p-2 transition-all duration-150 border",
+                                            isOps360
+                                              ? "bg-blue-50/60 border-blue-200/70 hover:bg-blue-50 hover:border-blue-300"
+                                              : isItemActive
+                                              ? "bg-blue-50/80 border-blue-300 ring-1 ring-blue-500/20"
+                                              : "border-transparent hover:bg-slate-50 hover:border-slate-200/70"
+                                          )}
+                                        >
+                                          <div
+                                            className={cn(
+                                              "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors",
+                                              isOps360
+                                                ? "bg-blue-600 text-white shadow-xs"
+                                                : isItemActive
+                                                ? "bg-blue-600 text-white"
+                                                : "bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700"
+                                            )}
+                                          >
+                                            <NavIcon name={item.icon} />
+                                          </div>
+                                          <div className="min-w-0 flex-1">
+                                            <div className="flex items-center gap-1.5">
+                                              <span
+                                                className={cn(
+                                                  "text-xs font-bold transition-colors",
+                                                  isOps360
+                                                    ? "text-blue-950 font-extrabold"
+                                                    : isItemActive
+                                                    ? "text-blue-900"
+                                                    : "text-slate-900 group-hover:text-blue-600"
+                                                )}
+                                              >
+                                                {item.title}
+                                              </span>
+                                              {item.badge && (
+                                                <span className="rounded bg-blue-100 px-1.5 py-0.2 text-[9px] font-bold uppercase text-blue-700">
+                                                  {item.badge}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <p className="mt-0.5 text-[11px] text-slate-500 leading-snug line-clamp-1">
+                                              {item.description}
+                                            </p>
+                                          </div>
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+
+                                {/* ── RIGHT: ENTERPRISE BUSINESS ENGINES ── */}
+                                <div className="space-y-1.5 border-l border-slate-100 pl-4">
+                                  <div className="flex items-center justify-between pb-1.5 border-b border-slate-100 px-1">
+                                    <div className="flex items-center gap-1.5">
+                                      <span className="size-2 rounded-full bg-slate-400" />
+                                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-800">
+                                        Enterprise Business Engines
+                                      </span>
+                                    </div>
+                                    <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-600">
+                                      Operations
+                                    </span>
+                                  </div>
+
+                                  <div className="space-y-1">
+                                    {section.dropdown.operations.map((item) => {
+                                      const isItemActive = pathname === item.href;
+                                      return (
+                                        <Link
+                                          key={item.title}
+                                          href={item.href}
+                                          onClick={() => setActiveDropdown(null)}
+                                          className={cn(
+                                            "group flex items-start gap-2.5 rounded-xl p-2 transition-all duration-150 border",
+                                            isItemActive
+                                              ? "bg-blue-50/80 border-blue-300 ring-1 ring-blue-500/20"
+                                              : "border-transparent hover:bg-slate-50 hover:border-slate-200/70"
+                                          )}
+                                        >
+                                          <div
+                                            className={cn(
+                                              "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors",
+                                              isItemActive
+                                                ? "bg-blue-600 text-white"
+                                                : "bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700"
+                                            )}
+                                          >
+                                            <NavIcon name={item.icon} />
+                                          </div>
+                                          <div className="min-w-0 flex-1">
+                                            <div className="flex items-center gap-1.5">
+                                              <span
+                                                className={cn(
+                                                  "text-xs font-bold transition-colors",
+                                                  isItemActive
+                                                    ? "text-blue-900"
+                                                    : "text-slate-900 group-hover:text-blue-600"
+                                                )}
+                                              >
+                                                {item.title}
+                                              </span>
+                                              {item.badge && (
+                                                <span className="rounded bg-slate-100 px-1.5 py-0.2 text-[9px] font-bold uppercase text-slate-600">
+                                                  {item.badge}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <p className="mt-0.5 text-[11px] text-slate-500 leading-snug line-clamp-1">
+                                              {item.description}
+                                            </p>
+                                          </div>
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* ── FOOTER ACTION BAR ── */}
+                              <div className="mt-3 -mx-4 -mb-4 flex flex-col gap-2 rounded-b-2xl border-t border-slate-100 bg-slate-50/90 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between text-xs">
+                                <div className="flex items-center gap-2 text-slate-600">
+                                  <span className="flex size-1.5 rounded-full bg-emerald-500" />
+                                  <span className="text-[11px] text-slate-600">
+                                    Sovereign cloud or air-gapped on-premises. White-label ready.
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-3 shrink-0">
+                                  <Link
+                                    href="/products/crm"
+                                    onClick={() => setActiveDropdown(null)}
+                                    className="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition-colors"
+                                  >
+                                    View All 18 Products →
+                                  </Link>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setActiveDropdown(null);
+                                      openModal();
+                                    }}
+                                    className="rounded-full bg-blue-600 px-3 py-1 text-[11px] font-bold text-white shadow-2xs hover:bg-blue-700 active:scale-[0.98] transition-all cursor-pointer"
+                                  >
+                                    Request Blueprint
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            /* Standard 1-column dropdown for Industries & Governance */
+                            <div>
+                              <div className="mb-2 flex items-center justify-between border-b border-slate-100 px-2 pb-1.5">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                  {section.dropdown.heading}
+                                </span>
+                                <span className="size-1 rounded-full bg-blue-500" />
+                              </div>
+
+                              <div className="grid gap-1">
+                                {section.dropdown.items.map((item) => {
+                                  const isItemActive = pathname === item.href;
+                                  return (
+                                    <Link
+                                      key={`${section.id}-${item.title}`}
+                                      href={item.href}
+                                      onClick={() => setActiveDropdown(null)}
+                                      className={cn(
+                                        "group flex items-start gap-2.5 rounded-xl p-2 transition-all duration-150 border",
+                                        isItemActive
+                                          ? "bg-blue-50/80 border-blue-300 ring-1 ring-blue-500/20"
+                                          : "border-transparent hover:bg-slate-50 hover:border-slate-200/70"
+                                      )}
+                                    >
+                                      <div
                                         className={cn(
-                                          "text-xs font-bold transition-colors",
+                                          "mt-0.5 flex size-7.5 shrink-0 items-center justify-center rounded-lg transition-colors",
                                           isItemActive
-                                            ? "text-blue-900"
-                                            : "text-slate-900 group-hover:text-blue-600"
+                                            ? "bg-blue-600 text-white"
+                                            : "bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700"
                                         )}
                                       >
-                                        {item.title}
-                                      </span>
-                                      {item.badge && (
-                                        <span className="rounded bg-blue-100 px-1.5 py-0.2 text-[0.6rem] font-bold text-blue-700 uppercase">
-                                          {item.badge}
-                                        </span>
-                                      )}
-                                    </div>
-                                    <p className="mt-0.5 text-[0.72rem] text-slate-500 line-clamp-1">
-                                      {item.description}
-                                    </p>
-                                  </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
-
-                          {section.id === "platform" && (
-                            <div className="mt-3 flex items-center justify-between rounded-xl border border-blue-100 bg-gradient-to-r from-blue-50/90 via-indigo-50/40 to-blue-50/80 px-3.5 py-2.5 text-xs">
-                              <div className="flex items-center gap-2">
-                                <span className="flex size-2 rounded-full bg-blue-600 animate-pulse" />
-                                <span className="text-[0.72rem] font-semibold text-slate-800">
-                                  Looking for all 4 CRM variants unified?
-                                </span>
+                                        <NavIcon name={item.icon} />
+                                      </div>
+                                      <div className="min-w-0 flex-1">
+                                        <div className="flex items-center gap-1.5">
+                                          <span
+                                            className={cn(
+                                              "text-xs font-bold transition-colors",
+                                              isItemActive
+                                                ? "text-blue-900"
+                                                : "text-slate-900 group-hover:text-blue-600"
+                                            )}
+                                          >
+                                            {item.title}
+                                          </span>
+                                          {item.badge && (
+                                            <span className="rounded bg-blue-100 px-1.5 py-0.2 text-[9px] font-bold uppercase text-blue-700">
+                                              {item.badge}
+                                            </span>
+                                          )}
+                                        </div>
+                                        <p className="mt-0.5 text-[11px] text-slate-500 leading-snug line-clamp-1">
+                                          {item.description}
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  );
+                                })}
                               </div>
-                              <Link
-                                href="/products/crm"
-                                onClick={() => setActiveDropdown(null)}
-                                className="inline-flex min-h-[36px] items-center gap-1 text-[0.72rem] font-bold text-blue-700 hover:text-blue-900 transition-colors"
-                              >
-                                <span>Explore CRM Architecture Hub</span>
-                                <span>→</span>
-                              </Link>
                             </div>
                           )}
                         </motion.div>
@@ -440,36 +600,105 @@ export function Header() {
                         </button>
 
                         {isExpanded && (
-                          <div className="space-y-1 border-t border-slate-100 bg-slate-50/50 p-2.5">
-                            {section.dropdown.items.map((item) => (
-                              <Link
-                                key={item.title}
-                                href={item.href}
-                                onClick={() => setMobileOpen(false)}
-                                className="flex items-center justify-between rounded-xl p-3 transition-colors hover:bg-white"
-                              >
-                                <div className="flex items-center gap-3">
-                                  <div className="flex size-7 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
-                                    <NavIcon name={item.icon} />
-                                  </div>
-                                  <div>
-                                    <p className="text-sm font-bold text-slate-900">{item.title}</p>
-                                    <p className="text-[0.72rem] text-slate-500">{item.description}</p>
+                          <div className="space-y-3 border-t border-slate-100 bg-slate-50/50 p-2.5">
+                            {section.id === "platform" && "flagships" in section.dropdown ? (
+                              <>
+                                <div>
+                                  <p className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                                    Core Platforms &amp; AI
+                                  </p>
+                                  <div className="space-y-1">
+                                    {section.dropdown.flagships.map((item) => (
+                                      <Link
+                                        key={item.title}
+                                        href={item.href}
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center justify-between rounded-xl p-2.5 transition-colors hover:bg-white border border-transparent hover:border-slate-200/60"
+                                      >
+                                        <div className="flex items-center gap-2.5">
+                                          <div className="flex size-7 items-center justify-center rounded-lg bg-blue-50 text-blue-600 shrink-0">
+                                            <NavIcon name={item.icon} />
+                                          </div>
+                                          <div className="min-w-0">
+                                            <p className="text-xs font-bold text-slate-900">{item.title}</p>
+                                            <p className="text-[11px] text-slate-500 line-clamp-1">{item.description}</p>
+                                          </div>
+                                        </div>
+                                        {item.badge && (
+                                          <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[9px] font-bold text-blue-700 shrink-0 ml-2">
+                                            {item.badge}
+                                          </span>
+                                        )}
+                                      </Link>
+                                    ))}
                                   </div>
                                 </div>
-                                <span className="rounded-full bg-slate-200/70 px-2 py-0.5 text-[0.62rem] font-bold text-slate-600">
-                                  {item.badge}
-                                </span>
-                              </Link>
-                            ))}
+
+                                <div className="pt-2 border-t border-slate-200/70">
+                                  <p className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                                    Enterprise Business Engines
+                                  </p>
+                                  <div className="space-y-1">
+                                    {section.dropdown.operations.map((item) => (
+                                      <Link
+                                        key={item.title}
+                                        href={item.href}
+                                        onClick={() => setMobileOpen(false)}
+                                        className="flex items-center justify-between rounded-xl p-2.5 transition-colors hover:bg-white border border-transparent hover:border-slate-200/60"
+                                      >
+                                        <div className="flex items-center gap-2.5">
+                                          <div className="flex size-7 items-center justify-center rounded-lg bg-slate-100 text-slate-600 shrink-0">
+                                            <NavIcon name={item.icon} />
+                                          </div>
+                                          <div className="min-w-0">
+                                            <p className="text-xs font-bold text-slate-900">{item.title}</p>
+                                            <p className="text-[11px] text-slate-500 line-clamp-1">{item.description}</p>
+                                          </div>
+                                        </div>
+                                        {item.badge && (
+                                          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-bold text-slate-600 shrink-0 ml-2">
+                                            {item.badge}
+                                          </span>
+                                        )}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              </>
+                            ) : (
+                              section.dropdown.items.map((item) => (
+                                <Link
+                                  key={item.title}
+                                  href={item.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="flex items-center justify-between rounded-xl p-2.5 transition-colors hover:bg-white border border-transparent hover:border-slate-200/60"
+                                >
+                                  <div className="flex items-center gap-2.5">
+                                    <div className="flex size-7 items-center justify-center rounded-lg bg-blue-50 text-blue-600 shrink-0">
+                                      <NavIcon name={item.icon} />
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-xs font-bold text-slate-900">{item.title}</p>
+                                      <p className="text-[11px] text-slate-500 line-clamp-1">{item.description}</p>
+                                    </div>
+                                  </div>
+                                  {item.badge && (
+                                    <span className="rounded-full bg-slate-200/70 px-2 py-0.5 text-[9px] font-bold text-slate-600 shrink-0 ml-2">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </Link>
+                              ))
+                            )}
+
                             {section.id === "platform" && (
-                              <div className="mt-2 pt-2 border-t border-slate-200/70">
+                              <div className="pt-2 border-t border-slate-200/80">
                                 <Link
                                   href="/products/crm"
                                   onClick={() => setMobileOpen(false)}
-                                  className="flex items-center justify-between rounded-xl bg-blue-50/90 p-3 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors"
+                                  className="flex items-center justify-between rounded-xl bg-blue-50/90 p-2.5 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors"
                                 >
-                                  <span>Explore CRM Architecture Hub</span>
+                                  <span>View All 18 Software Products</span>
                                   <span>→</span>
                                 </Link>
                               </div>
