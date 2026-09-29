@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { HeroProduct } from "@/components/sections/hero-product";
@@ -9,28 +10,64 @@ import { useConsultationModal } from "@/components/modals/consultation-modal-con
 
 export function Hero() {
   const { openModal } = useConsultationModal();
+  const heroRef = React.useRef<HTMLElement>(null);
+
+  // Scroll-linked parallax for multi-layered cloud depth
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const cloudParallaxSlow = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const cloudParallaxFast = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const skyScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-28">
-      {/* ── ATMOSPHERIC SKY & CLOUD BACKGROUND (Matching user's reference image) ── */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
-        {/* Photorealistic High-Res Sky & Clouds Image */}
-        <div className="absolute inset-0">
+    <section ref={heroRef} className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-28">
+      {/* ── ATMOSPHERIC ANIMATED SKY & CLOUD SYSTEM (Multi-strata motion) ── */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none" aria-hidden>
+        {/* Layer 1: Base Sky Canvas with Scroll Parallax & Organic Breathing */}
+        <motion.div
+          style={{
+            y: cloudParallaxSlow,
+            scale: skyScale,
+          }}
+          className="absolute inset-0"
+        >
+          <div className="relative size-full animate-cloud-drift">
+            <Image
+              src="/images/hero-sky-bg.jpg"
+              alt=""
+              fill
+              priority
+              quality={85}
+              className="object-cover object-top select-none scale-105"
+            />
+          </div>
+        </motion.div>
+
+        {/* Layer 2: Drifting Atmospheric Cloud Mist (Counter-harmonic pan) */}
+        <motion.div
+          style={{ y: cloudParallaxFast }}
+          className="absolute inset-0 opacity-40 mix-blend-screen animate-cloud-drift-reverse"
+        >
           <Image
             src="/images/hero-sky-bg.jpg"
             alt=""
             fill
-            priority
-            quality={75}
-            className="object-cover object-top select-none"
+            quality={65}
+            className="object-cover object-center select-none scale-110 filter blur-[1px]"
           />
-        </div>
+        </motion.div>
 
-        {/* Vibrancy Boost Overlay Gradient (Sky Azure #1872F0) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-600/40 via-blue-500/25 to-sky-400/20 mix-blend-multiply" />
+        {/* Layer 3: Celestial Radial Sunbreak Bloom */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(255,255,255,0.22),rgba(56,189,248,0.14)_35%,transparent_70%)] animate-pulse-glow" />
 
-        {/* Soft bottom cloud fade into page content */}
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent" />
+        {/* Layer 4: Sky Azure Multi-Stop Color Calibration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-600/35 via-blue-500/20 to-sky-400/15 mix-blend-multiply" />
+
+        {/* Layer 5: Soft Horizon Cloud Feathering (Nestles cards into cloud bed) */}
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-slate-50 via-slate-50/85 to-transparent" />
       </div>
 
       <Container className="relative z-10">
