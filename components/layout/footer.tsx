@@ -100,32 +100,40 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-slate-950 text-slate-300">
-      {/* ── PART 1: THE LUMINOUS GROUNDED HORIZON BANNER (Light, Sunny, Clean Luxury Aesthetic matching Image 2) ── */}
-      <div className="relative overflow-hidden bg-white min-h-[660px] sm:min-h-[740px] lg:min-h-[820px] flex flex-col justify-between">
-        {/* Full-Bleed High-Definition Grounded Landscape (Bright, Sunny Green Hill Mound) */}
-        <div className="absolute inset-0 z-0 pointer-events-none select-none">
+      {/* ── PART 1: THE ETHEREAL BOUNDLESS CLOUD HORIZON BANNER (Bright, Luminous Sunny Clouds) ── */}
+      <div className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/50 to-white">
+        {/* Photorealistic High-Definition Sunny Clouds Background */}
+        <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
           <Image
-            src="/images/grounded-hills.jpg"
-            alt="Lush green grounded hill landscape under clear sunny sky"
+            src="/images/hero-sky-bg.jpg"
+            alt=""
             fill
-            priority={false}
             sizes="100vw"
-            quality={95}
-            className="object-cover object-[center_68%]"
+            quality={92}
+            className="object-cover object-bottom opacity-50"
           />
 
-          {/* Top Atmospheric Luminous Feather: Perfectly dissolves the preceding white section into the light sky */}
-          <div className="absolute inset-x-0 top-0 h-64 sm:h-80 bg-gradient-to-b from-white via-white/90 via-45% to-transparent pointer-events-none" />
+          {/* Top Atmospheric Dissolve: Perfectly dissolves preceding section into the sky */}
+          <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white via-white/90 via-40% to-transparent" />
 
-          {/* Bottom Feathering: Gracefully transitions the green grassy terrain into the bedrock footer */}
-          <div className="absolute inset-x-0 bottom-0 h-32 sm:h-44 bg-gradient-to-t from-slate-950 via-slate-950/75 via-40% to-transparent pointer-events-none" />
+          {/* Central Luminous Halo: Guarantees 100% crystal-clear contrast behind all text and pills */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[400px] rounded-full bg-white/80 blur-3xl pointer-events-none" />
+
+          {/* Celestial Aurora Sky Horizon Radial Glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[300px] w-[950px] rounded-full bg-gradient-to-r from-blue-400/15 via-sky-300/25 to-blue-500/15 blur-[100px]" />
+
+          {/* Precision Dot Lattice Matrix */}
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(14,165,233,0.12)_1px,transparent_1px)] [background-size:24px_24px] opacity-35" />
+
+          {/* Bottom Feathering: Gracefully dissolves the clouds into the deep slate-950 bedrock footer */}
+          <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-slate-950 via-slate-950/80 via-35% to-transparent" />
         </div>
 
-        {/* Call-to-Action Content (Floating Cleanly in the Airy Sky Above the Hill Mound) */}
-        <Container className="relative z-10 pt-16 sm:pt-24 lg:pt-28">
+        {/* Call-to-Action Content Zone (Floating cleanly on luminous sky halo) */}
+        <Container className="relative z-10 pt-16 sm:pt-24 lg:pt-28 pb-20 sm:pb-28 lg:pb-32">
           <div className="mx-auto max-w-4xl text-center">
-            {/* Frosted Capsule Eyebrow Badge (Matching Reference Mockup) */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-4 py-1.5 shadow-sm backdrop-blur-md mb-6">
+            {/* Frosted Capsule Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
               <span className="flex size-4 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 text-white text-[9px] shadow-xs">
                 ⚡
               </span>
@@ -134,18 +142,18 @@ export function Footer() {
               </span>
             </div>
 
-            {/* Main Headline Tailored to BITS Floor Operations & Relationships */}
+            {/* Main Headline Tailored to BITS Operations & Relationships */}
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
               Ready to Build Stronger Customer Operations?
             </h2>
 
             {/* Subtitle Tailored to BITS Queue Management & Debt Recovery */}
-            <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
+            <p className="mt-4 text-base sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
               A smarter way to manage account queues, coordinate agent outreach, and accelerate collections with sovereign CRM tools.
             </p>
 
             {/* Minimal High-End Capsule Email Form (Matching Reference Mockup) */}
-            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 p-1.5 sm:p-2 shadow-xl shadow-slate-900/5 backdrop-blur-md">
+            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-2xl sm:rounded-full border border-slate-200/90 bg-white p-2 shadow-xl shadow-slate-900/5 backdrop-blur-md">
               <div className="flex flex-1 items-center gap-3 pl-3 sm:pl-4 w-full">
                 <Mail className="size-5 text-slate-400 shrink-0" aria-hidden="true" />
                 <label htmlFor="footer-quick-email-input" className="sr-only">
@@ -163,61 +171,61 @@ export function Footer() {
                     }
                   }}
                   placeholder="Enter Your Email Address"
-                  className="w-full h-11 bg-transparent text-sm sm:text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                  className="w-full h-11 sm:h-12 bg-transparent text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
                 />
               </div>
 
               <button
                 type="button"
                 onClick={handleQuickSubmit}
-                className="group flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#111827] hover:bg-blue-600 px-7 py-3 font-bold text-white shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
+                className="group flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#111827] hover:bg-blue-600 px-7 py-3 font-bold text-white shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
               >
                 <span className="text-sm">Contact Us</span>
                 <ArrowRight className="size-4 text-slate-400 group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
 
-            {/* Navigation Pill Links & Official Social Media Row (Direct Match with Reference Mockup) */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-600">
+            {/* Navigation Pill Links & Official Social Media Row (All High-Contrast Frosted Pills) */}
+            <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-700">
               <a
                 href="#content"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Home
               </a>
               <a
                 href="#the-difference"
-                className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-white px-5 py-2 font-bold text-slate-900 border border-slate-200/90 shadow-2xs hover:bg-slate-50 transition-all"
+                className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 font-bold text-white shadow-sm shadow-blue-500/25 border border-blue-600 hover:bg-blue-700 transition-all"
               >
                 Solutions
               </a>
               <a
                 href="#floor-showcase"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Features
               </a>
               <a
                 href="#features-bento"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Product
               </a>
               <a
                 href="#pricing"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white/90 hover:bg-white px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Pricing
               </a>
 
-              {/* Verified Official Social Media Pills (With exact verified company URLs) */}
+              {/* Verified Official Social Media Pills (44x44px touch targets) */}
               <div className="flex items-center gap-2 ml-1 sm:ml-3">
                 <a
                   href="https://x.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow BITS on X"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-slate-950 hover:border-slate-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-slate-950 hover:border-slate-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <TwitterXIcon />
                 </a>
@@ -227,7 +235,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Connect with Boundless IT Solutions on LinkedIn"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <LinkedInIcon />
                 </a>
@@ -237,7 +245,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow Boundless IT Solutions on Instagram"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-rose-600 hover:border-rose-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-rose-600 hover:border-rose-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <InstagramIcon />
                 </a>
@@ -247,7 +255,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow Boundless IT Solutions on Facebook"
-                  className="flex size-10 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <FacebookIcon />
                 </a>
@@ -255,9 +263,6 @@ export function Footer() {
             </div>
           </div>
         </Container>
-
-        {/* Organic Landscape Vista (Allows the vibrant green grassy hill mound and wildflowers to breathe cleanly) */}
-        <div className="h-28 sm:h-44 lg:h-56 pointer-events-none" aria-hidden="true" />
       </div>
 
       {/* ── PART 2: SOVEREIGN BEDROCK FOOTER (Organized Columns & Compliance Seals) ── */}

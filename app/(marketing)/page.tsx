@@ -14,6 +14,7 @@ import { DeploymentModels } from "@/components/sections/deployment-models";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
+import { CloudBranding } from "@/components/sections/cloud-branding";
 
 export default function Home() {
   return (
@@ -65,6 +66,9 @@ export default function Home() {
 
       {/* 14. Executive Consultation & Floor Architecture Diagnostic */}
       <Contact />
+
+      {/* 15. Boundless Sovereign Cloud: Enterprise Cloud Infrastructure & Branding */}
+      <CloudBranding />
     </main>
   );
 }
