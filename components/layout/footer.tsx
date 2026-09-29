@@ -2,38 +2,108 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { footerColumns, site } from "@/lib/site";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { NewsletterForm } from "@/components/layout/newsletter-form";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
+const compactFooterSections: FooterSection[] = [
+  {
+    title: "Platform",
+    links: [
+      { label: "OPERATIONS 360", href: "/#operations-360" },
+      { label: "BITSagent Voice AI", href: "/bitsagent" },
+      { label: "BITScrm Collections", href: "/bitscrm" },
+      { label: "Sales & Pipeline", href: "/products/sales" },
+      { label: "All 18 Software Engines →", href: "/#products-suite" },
+    ],
+  },
+  {
+    title: "Solutions",
+    links: [
+      { label: "BPO & Collections", href: "/#industries" },
+      { label: "Banking & Financial", href: "/#industries" },
+      { label: "Sovereign Deployment", href: "/#deployment" },
+      { label: "Commercial Pricing", href: "/#solutions" },
+      { label: "Custom Architecture", href: "/#custom-systems" },
+    ],
+  },
+  {
+    title: "Trust & Verification",
+    links: [
+      { label: "Security Architecture", href: "/#security" },
+      { label: "BSP & NPC Alignment", href: "/#security" },
+      { label: "Brand Guidelines (Brandbook)", href: "/brandbook" },
+      { label: "AI Grounding (llms.txt)", href: "/llms.txt" },
+      { label: "Enterprise FAQ", href: "/#faq" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "Book Consultation", href: "/#contact" },
+      { label: "CRM Portal Login", href: "/login" },
+      { label: "Direct Scoping Email", href: "mailto:bits_inquiries@boundlessits.com" },
+      { label: "Privacy Policy", href: "/legal#privacy" },
+      { label: "Terms of Service", href: "/legal#terms" },
+    ],
+  },
+];
+
 export function Footer() {
   const { openModal } = useConsultationModal();
 
   return (
-    <footer className="relative overflow-hidden border-t border-slate-800/80 bg-[#040914] text-slate-400">
-      {/* ── ATMOSPHERIC CLOUD HORIZON AMBIENT GLOW ── */}
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#030814] text-slate-400">
+      {/* ── ATMOSPHERIC CLOUDY HORIZON BACKGROUND ── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[200px] w-[900px] rounded-full bg-gradient-to-r from-blue-600/10 via-sky-400/15 to-blue-600/10 blur-[90px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03]" />
+        {/* Photorealistic High-Res Cloudy Horizon Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-sky-bg.jpg"
+            alt=""
+            fill
+            quality={65}
+            className="object-cover object-bottom select-none opacity-20 mix-blend-screen"
+          />
+        </div>
+
+        {/* Multi-Stop Horizon Vignette Gradient: Seamlessly anchors sky into deep bedrock */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020611] via-[#040c1e]/94 to-[#06162f]/85" />
+
+        {/* Celestial Sky Horizon Radial Glow */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[220px] w-[1000px] rounded-full bg-gradient-to-r from-blue-600/15 via-sky-400/20 to-blue-600/15 blur-[100px]" />
+
+        {/* Subdued Tech Database Dot Lattice */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
       </div>
 
       <Container className="relative z-10">
-        {/* ── MAIN COMPACT NAVIGATION & NEWSLETTER ── */}
+        {/* ── COMPACT MAIN FOOTER CONTENT ── */}
         <div className="grid gap-10 pt-12 pb-10 lg:grid-cols-[1.1fr_2.4fr] lg:gap-14 border-b border-white/[0.08]">
-          {/* Brand Column */}
-          <div className="space-y-5">
+          {/* Brand & Briefings Column */}
+          <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Logo variant="horizontal" className="h-7.5 brightness-0 invert" />
             </div>
 
-            <p className="max-w-sm text-xs leading-relaxed text-slate-400">
-              <strong className="font-semibold text-white">Boundless IT Solutions (BITS)</strong> — Omnichannel Collections CRM, Predictive Telephony &amp; Sovereign Enterprise Infrastructure for Philippine BPOs and recovery agencies.
+            <p className="max-w-sm text-xs leading-relaxed text-slate-300">
+              Sovereign enterprise infrastructure, collections CRM, and intelligent automation built with boundless scale.
             </p>
 
-            {/* Live Operational Status Badge */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
+            {/* Operational Status Pill */}
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
@@ -45,11 +115,11 @@ export function Footer() {
 
             {/* Compact Newsletter Subscription */}
             <div className="pt-2 max-w-sm">
-              <p className="text-[0.7rem] font-bold uppercase tracking-wider text-slate-300">
+              <p className="text-[0.7rem] font-bold uppercase tracking-wider text-slate-200">
                 Operations &amp; Architecture Briefings
               </p>
-              <p className="mt-0.5 text-xs text-slate-500">
-                Monthly engineering insights on collections automation and sovereign deployments.
+              <p className="mt-0.5 text-xs text-slate-400">
+                Engineering insights on collections automation and sovereign deployments.
               </p>
               <div className="mt-2.5">
                 <NewsletterForm />
@@ -57,15 +127,15 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Navigation Columns (Compact 5-col Grid) */}
-          <nav aria-label="Footer Navigation" className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-            {footerColumns.map((col) => (
-              <div key={col.title}>
+          {/* Symmetrical 4-Column Navigation */}
+          <nav aria-label="Footer Navigation" className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:gap-8">
+            {compactFooterSections.map((sec) => (
+              <div key={sec.title}>
                 <h3 className="text-[0.72rem] font-black uppercase tracking-wider text-white">
-                  {col.title}
+                  {sec.title}
                 </h3>
-                <ul className="mt-3.5 space-y-1">
-                  {col.links.map((link) => {
+                <ul className="mt-3.5 space-y-0.5">
+                  {sec.links.map((link) => {
                     const isInternalPage =
                       link.href.startsWith("/") &&
                       !link.href.endsWith(".html") &&
@@ -77,16 +147,16 @@ export function Footer() {
                         {isInternalPage ? (
                           <Link
                             href={link.href}
-                            className="inline-flex min-h-[44px] items-center py-1.5 text-xs font-medium text-slate-400 transition-colors duration-200 hover:text-sky-300"
+                            className="inline-flex min-h-[44px] items-center py-1 text-xs font-medium text-slate-400 transition-colors duration-150 hover:text-sky-300"
                           >
                             {link.label}
                           </Link>
                         ) : (
                           <a
                             href={link.href}
-                            target={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "_blank" : undefined}
-                            rel={link.href.endsWith(".html") || link.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
-                            className="inline-flex min-h-[44px] items-center py-1.5 text-xs font-medium text-slate-400 transition-colors duration-200 hover:text-sky-300"
+                            target={link.href.endsWith(".html") || link.href.endsWith(".pdf") || link.href.endsWith(".txt") ? "_blank" : undefined}
+                            rel={link.href.endsWith(".html") || link.href.endsWith(".pdf") || link.href.endsWith(".txt") ? "noopener noreferrer" : undefined}
+                            className="inline-flex min-h-[44px] items-center py-1 text-xs font-medium text-slate-400 transition-colors duration-150 hover:text-sky-300"
                           >
                             {link.label}
                           </a>
@@ -101,11 +171,11 @@ export function Footer() {
         </div>
 
         {/* ── BOTTOM COMPACT LEGAL & REGULATORY BAR ── */}
-        <div className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between text-xs text-slate-400">
+        <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between text-xs text-slate-400">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
             <p>© {new Date().getFullYear()} Boundless IT Solutions (BITS). All rights reserved.</p>
             <span className="hidden sm:inline text-slate-700">·</span>
-            <p className="font-mono text-[0.68rem] text-slate-500 uppercase tracking-wider">
+            <p className="font-mono text-[0.68rem] text-slate-400 uppercase tracking-wider">
               Republic of the Philippines · BSP &amp; NPC Aligned
             </p>
           </div>
