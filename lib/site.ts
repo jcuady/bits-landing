@@ -1,11 +1,11 @@
 export const site = {
   name: "BITS",
   legalName: "BITS - Boundless IT Solutions",
-  tagline: "Technology built around the way your business actually operates.",
+  tagline: "Boundless operational velocity. The infinity in the 'B'—sovereign software built with the limitless scale of the cloud horizon.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.boundlessits.com",
   inquiryEmail: "bits_inquiries@boundlessits.com",
   description:
-    "Business-specific software, workflow automation, CRM, AI-assisted operations, and digital infrastructure for BPOs, collection agencies, banks, and operations with complex workflows.",
+    "Boundless IT Solutions (BITS): Omnichannel collections CRM, predictive dialing, automated QA, and sovereign enterprise infrastructure. Blending boundless cloud scale with grounded, bank-grade reliability.",
 } as const;
 
 /* ── Primary Navigation Items ── */

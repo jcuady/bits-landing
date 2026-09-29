@@ -49,7 +49,7 @@
 ## Documentation & Deep Context
 
 - [Full Architectural & Entity Dossier](https://www.boundlessits.com/llms-full.txt): Comprehensive technical specifications, compliance matrices, API contracts, and module breakdown for AI models and search systems.
-- [Brand Identity & Guidelines](https://www.boundlessits.com/brandbook): Official design tokens, typography, brand marks, and voice guidelines.
+- [Brand Identity & Guidelines](https://www.boundlessits.com/brandbook): Official design tokens, typography, the Infinity 'B' mark anatomy, and atmospheric cloud horizon guidelines.
 - [Legal & Privacy Policy](https://www.boundlessits.com/legal): Terms of service, data processing agreements, and security compliance statements.
 
 ## Contact & Consultation
