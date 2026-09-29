@@ -1,981 +1,344 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import {
-  solutionPackages,
-  pricingComparisonMatrix,
-  bitsProducts,
-  suiteBundlePresets,
-} from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-import { Magnetic } from "@/components/ui/magnetic";
-import { cn } from "@/lib/utils";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import {
-  Check,
-  Sparkles,
-  ShieldCheck,
-  Activity,
-  Lock,
-  Headphones,
-  Sliders,
-  ChevronDown,
-  ChevronUp,
-  ArrowRight,
-  Server,
-  Cloud,
-  Palette,
-  Layers,
-  Radio,
-  Boxes,
-  CheckCircle2,
-  Workflow,
-  Cpu,
-} from "lucide-react";
+import { Check, Sparkles, Shield, Building2, PhoneCall, Users, ArrowRight } from "lucide-react";
 
-const universalGuarantees = [
+interface OmsTier {
+  id: string;
+  name: string;
+  badge?: string;
+  highlight?: boolean;
+  scaleBadge: string;
+  description: string;
+  indicativeModel: string;
+  modelDetail: string;
+  features: string[];
+  ctaLabel: string;
+  ctaSubject: string;
+}
+
+const omsTiers: OmsTier[] = [
   {
-    icon: Cloud,
-    label: "Flexible Deployment",
-    detail: "Cloud (Recommended) or On-Prem",
-    subtext: "Fast cloud or office servers",
+    id: "starter",
+    name: "Starter Floor",
+    scaleBadge: "1 – 15 Agents",
+    description:
+      "For boutique recovery teams and emerging operations replacing disorganized spreadsheets with a structured collections CRM and automated calling.",
+    indicativeModel: "Tailored Floor Quote",
+    modelDetail: "Sized to initial seat count · Zero per-seat lock-in penalties",
+    features: [
+      "Full debt account management with live DPD delinquency aging",
+      "Promise-to-Pay (PTP) tracking & automated broken-payment alerts",
+      "WebRTC in-browser softphone (Manual & Preview dialing)",
+      "Standard QA evaluation scorecards with synchronized call audio",
+      "Debtor SMS & email payment reminder templates",
+      "Daily collections performance reports & automated CSV imports",
+    ],
+    ctaLabel: "Request Starter Quote",
+    ctaSubject: "OMS Pricing: Starter Floor (1-15 Seats)",
   },
   {
-    icon: Sparkles,
-    label: "Continuous Evolution",
-    detail: "Security & Tech Updates",
-    subtext: "Bespoke requests on demand*",
+    id: "growth",
+    name: "Growth Floor",
+    badge: "Most Popular for Scaling Floors",
+    highlight: true,
+    scaleBadge: "16 – 75+ Floor Seats",
+    description:
+      "For scaling contact centers requiring automated predictive pacing, omnichannel messaging blasts, and live supervisor coaching to maximize floor recovery.",
+    indicativeModel: "Volume-Tiered License",
+    modelDetail: "Flexible monthly operational scope · Dedicated onboarding specialist",
+    features: [
+      "Everything in Starter Floor, plus:",
+      "Predictive & Progressive auto-dialer pacing (~0.4s call hand-off)",
+      "Live Supervisor HUD: silent listen, whisper coaching & barge-in",
+      "QA Outlier Finder & automated monthly agent scorecards",
+      "Omnichannel Messaging: SMS, Viber Business & WhatsApp blasts",
+      "Real-time floor velocity dashboard & live agent leaderboards",
+      "Statutory quiet-hours compliance & carrier-aware number scrubbing",
+    ],
+    ctaLabel: "Request Growth Quote",
+    ctaSubject: "OMS Pricing: Growth Floor (16-75+ Seats)",
   },
   {
-    icon: Activity,
-    label: "High-Availability SLA",
-    detail: "99.9% Telephony Uptime",
-    subtext: "Carrier-grade SIP routing",
+    id: "enterprise",
+    name: "Enterprise & Banking",
+    badge: "Sovereign & Dedicated SLA",
+    scaleBadge: "75+ to Unlimited Seats",
+    description:
+      "For BPO enterprises, financial institutions, and multi-campaign agencies requiring bank-grade security, dedicated infrastructure, and custom workflows.",
+    indicativeModel: "Enterprise Master Scope",
+    modelDetail: "Private Cloud or On-Premises · Bespoke SLA & compliance audit",
+    features: [
+      "Everything in Growth Floor, plus:",
+      "Strict client & campaign portfolio tenant isolation",
+      "Six-tier role-based permission matrix (RBAC) & immutable audit trail",
+      "Private Virtual Cloud (VPC) or On-Premises server deployment",
+      "Core banking data ingestion & custom bi-directional API webhooks",
+      "99.9% Telephony uptime Service Level Agreement (SLA)",
+      "Direct senior engineering access & quarterly on-site operational review",
+    ],
+    ctaLabel: "Request Enterprise Scope",
+    ctaSubject: "OMS Pricing: Enterprise & Banking Floor",
   },
-  {
-    icon: ShieldCheck,
-    label: "Statutory Alignment",
-    detail: "BSP & NPC DPA Principles",
-    subtext: "Circulars 454/857, RA 10173",
-  },
-  {
-    icon: Lock,
-    label: "Granular Security",
-    detail: "Strict RBAC Permissions",
-    subtext: "Supervisor separation of duties",
-  },
-  {
-    icon: Headphones,
-    label: "Assisted Rollout",
-    detail: "Migration & Training",
-    subtext: "Direct engineering support",
-  },
-] as const;
+];
+
+const otherProducts = [
+  { name: "BITSagent Voice AI", category: "Autonomous Calling" },
+  { name: "BITScrm Sales & Deals", category: "Revenue Engine" },
+  { name: "BITS Accounting & ERP", category: "BIR CAS Core" },
+  { name: "BITS HRMS & 24/7 Roster", category: "Workforce" },
+  { name: "BITS Logistics & Fleet", category: "Route Optimization" },
+  { name: "White-Label Partner", category: "Reseller Program" },
+];
 
 export function Pricing() {
   const { openModal } = useConsultationModal();
-  const [activeTierFilter, setActiveTierFilter] = React.useState<
-    "all" | "starter" | "growth" | "enterprise"
-  >("all");
-  const [showMatrix, setShowMatrix] = React.useState(false);
-
-  // Multi-Product Bundle Builder State
-  const [selectedProductIds, setSelectedProductIds] = React.useState<string[]>([
-    "collections",
-    "ai-agent",
-    "rag-engine",
-  ]);
-  const [activePreset, setActivePreset] = React.useState<string>("collections-bpo");
-  const [bundleDeployment, setBundleDeployment] = React.useState<"cloud" | "on-prem">("cloud");
-  const [bundleBranding, setBundleBranding] = React.useState<"native" | "whitelabel">("native");
-
-  // Handle preset selection
-  const handleSelectPreset = (presetId: string) => {
-    setActivePreset(presetId);
-    const preset = suiteBundlePresets.find((p) => p.id === presetId);
-    if (preset) {
-      setSelectedProductIds([...preset.productIds]);
-    }
-  };
-
-  // Toggle individual product selection
-  const handleToggleProduct = (productId: string) => {
-    setActivePreset("custom");
-    setSelectedProductIds((prev) => {
-      if (prev.includes(productId)) {
-        if (prev.length === 1) return prev; // Keep at least one selected
-        return prev.filter((id) => id !== productId);
-      }
-      return [...prev, productId];
-    });
-  };
-
-  // Product categories for the bundling matrix
-  const productGroups = [
-    {
-      group: "CRM & Telephony",
-      products: bitsProducts.filter((p) =>
-        ["collections", "sales", "support", "marketing", "commerce"].includes(p.id)
-      ),
-    },
-    {
-      group: "Autonomous AI",
-      products: bitsProducts.filter((p) =>
-        ["ai-agent", "rag-engine"].includes(p.id)
-      ),
-    },
-    {
-      group: "ERP & Operations",
-      products: bitsProducts.filter((p) =>
-        ["accounting", "hrms", "payroll", "construction", "inventory", "logistics"].includes(p.id)
-      ),
-    },
-    {
-      group: "Venues, Hubs & Identity",
-      products: bitsProducts.filter((p) =>
-        ["pickleball", "sports-hub", "booking", "queuing", "nfc-card"].includes(p.id)
-      ),
-    },
-  ];
 
   return (
-    <Section id="solutions" className="relative overflow-hidden bg-[#F8FAFC] py-20 sm:py-28">
-      {/* Anchor alias for backwards compatibility */}
-      <div id="pricing" className="sr-only" />
+    <Section
+      id="pricing"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/25 to-white py-20 md:py-28 lg:py-32 border-b border-slate-200/80"
+    >
+      {/* Anchor alias for solutions navigation */}
+      <div id="solutions" className="sr-only" />
 
-      {/* Subtle architectural ambient background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(59,130,246,0.08),transparent_75%)]" />
-        <div className="absolute left-1/2 -top-24 size-[700px] -translate-x-1/2 rounded-full bg-blue-500/[0.035] blur-3xl" />
-        <div className="absolute inset-0 bg-grid-light opacity-60" />
-      </div>
+      {/* Subtle Ambient Illumination */}
+      <div
+        className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[850px] h-[380px] bg-gradient-to-b from-sky-200/30 to-transparent blur-3xl rounded-full"
+        aria-hidden="true"
+      />
 
-      <Container className="relative z-10">
+      <Container>
         {/* Section Header */}
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-3xl text-center mb-16 sm:mb-20">
           <Reveal>
-            <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-white/90 px-4 py-1.5 shadow-2xs backdrop-blur-md">
-              <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
-              <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                Modular Enterprise Investment · Flexible Scoping
-              </span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/70 bg-sky-50/90 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-blue-700 shadow-2xs mb-5">
+              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
+              <span>OPERATIONS MANAGEMENT SYSTEM (OMS) PRICING</span>
             </div>
-            <h2 className="text-h2 font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              Technology Sized to Your Operation
+          </Reveal>
+
+          <Reveal delay={0.04}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15] text-balance">
+              Predictable Investment Sized for Your Floor Scale
             </h2>
-            <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
-              Choose a single product or combine multiple tools into one system. No rigid user-seat penalties or hidden fees. Every solution is sized fairly to your team size and actual daily volume.
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              Transparent, floor-based licensing tailored to your active team size and operational volume. Zero punitive per-seat markups, zero hidden fees, and full onboarding assistance.
             </p>
           </Reveal>
         </div>
 
-        {/* ── FEATURE 1: INTERACTIVE PRODUCT COMBINATION & SOLUTION BUILDER ── */}
-        <div className="mx-auto mt-12 max-w-6xl">
-          <Reveal delay={0.08}>
-            {/* Outer Doppelrand Shell */}
-            <div className="relative rounded-[2.5rem] bg-gradient-to-b from-slate-200/90 via-slate-100/70 to-slate-200/90 p-2 sm:p-3 ring-1 ring-slate-900/[0.08] shadow-2xl backdrop-blur-xl">
-              {/* Inner Workstation Core */}
-              <div className="overflow-hidden rounded-[calc(2.5rem-8px)] sm:rounded-[calc(2.5rem-12px)] border border-slate-200/90 bg-white p-5 sm:p-8 shadow-xs">
-                {/* Workstation Header Bar */}
-                <div className="flex flex-col gap-4 border-b border-slate-100 pb-6 md:flex-row md:items-center md:justify-between">
+        {/* ── 3 OMS PRICING TIERS (GRID: 1 COL MOBILE → 3 COLS DESKTOP) ── */}
+        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-3 mb-16 sm:mb-20">
+          {omsTiers.map((tier, index) => (
+            <Reveal key={tier.id} delay={index * 0.06} className="h-full">
+              {/* Outer Double-Bezel Shell */}
+              <div
+                className={`h-full flex flex-col justify-between rounded-[2.25rem] p-2 sm:p-2.5 transition-all duration-300 ${
+                  tier.highlight
+                    ? "p-[3px] bg-gradient-to-b from-blue-600 via-indigo-600 to-sky-400 shadow-2xl shadow-blue-600/20 ring-4 ring-blue-500/10"
+                    : "bg-gradient-to-b from-slate-100 via-slate-200/50 to-slate-100 border border-slate-200/90 shadow-xl shadow-slate-950/[0.04] hover:shadow-2xl hover:border-slate-300"
+                }`}
+              >
+                {/* Inner Core */}
+                <div
+                  className={`h-full flex flex-col justify-between rounded-[calc(2.25rem-0.375rem)] p-7 sm:p-8 bg-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)]`}
+                >
+                  {/* Top Content */}
                   <div>
-                    <div className="flex items-center gap-2">
-                      <span className="size-2.5 rounded-full bg-[#FF5F56]" aria-hidden />
-                      <span className="size-2.5 rounded-full bg-[#FFBD2E]" aria-hidden />
-                      <span className="size-2.5 rounded-full bg-[#27C93F]" aria-hidden />
-                      <span className="ml-2 font-mono text-xs font-bold text-slate-900 uppercase tracking-wider">
-                        BITS Modular Architecture &amp; Solution Stacking Studio
+                    {/* Synchronized Eyebrow Badge Bar */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      {tier.badge ? (
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                            tier.highlight
+                              ? "bg-blue-600 text-white shadow-2xs"
+                              : "border border-indigo-200 bg-indigo-50 text-indigo-700"
+                          }`}
+                        >
+                          <Sparkles className="size-3" />
+                          <span>{tier.badge}</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-600">
+                          <Users className="size-3" />
+                          <span>Standard Floor</span>
+                        </span>
+                      )}
+
+                      <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-bold text-slate-700">
+                        {tier.scaleBadge}
                       </span>
                     </div>
-                    <p className="mt-1.5 text-xs text-slate-600">
-                      Click any product below to combine into your organization&apos;s custom operational stack.
+
+                    {/* Tier Name */}
+                    <h3 className="text-2xl font-extrabold tracking-tight text-slate-900 mb-2">
+                      {tier.name}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+                      {tier.description}
                     </p>
-                  </div>
 
-                  {/* Dual Controls: Branding Option + Deployment Choice */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    {/* Branding Option Toggle */}
-                    <div className="flex items-center gap-1 rounded-2xl border border-slate-200 bg-slate-50 p-1">
-                      <button
-                        type="button"
-                        onClick={() => setBundleBranding("native")}
-                        className={cn(
-                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
-                          bundleBranding === "native"
-                            ? "bg-white text-blue-700 shadow-xs ring-1 ring-slate-200"
-                            : "text-slate-600 hover:text-slate-900"
-                        )}
-                        title="Deploy with native BITS branding"
-                      >
-                        <ShieldCheck className="size-3.5 text-blue-600" />
-                        <span>BITS Native</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setBundleBranding("whitelabel")}
-                        className={cn(
-                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
-                          bundleBranding === "whitelabel"
-                            ? "bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-xs"
-                            : "text-slate-600 hover:text-slate-900"
-                        )}
-                        title="Universal White-Label Option: Your logo & custom domain"
-                      >
-                        <Palette className="size-3.5" />
-                        <span>White-Label Option</span>
-                      </button>
+                    {/* Clear Indicative Price Box (No Real Arbitrary Price) */}
+                    <div className="rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 mb-6">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500 mb-1">
+                        Pricing Model
+                      </div>
+                      <div className="text-lg font-extrabold text-slate-900">
+                        {tier.indicativeModel}
+                      </div>
+                      <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                        {tier.modelDetail}
+                      </p>
                     </div>
 
-                    {/* Deployment Choice Toggle */}
-                    <div className="flex items-center gap-1 rounded-2xl border border-slate-200 bg-slate-50 p-1">
-                      <button
-                        type="button"
-                        onClick={() => setBundleDeployment("cloud")}
-                        className={cn(
-                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
-                          bundleDeployment === "cloud"
-                            ? "bg-blue-600 text-white shadow-xs"
-                            : "text-slate-600 hover:text-slate-900"
-                        )}
-                      >
-                        <Cloud className="size-3.5" />
-                        <span>Managed Cloud</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setBundleDeployment("on-prem")}
-                        className={cn(
-                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all",
-                          bundleDeployment === "on-prem"
-                            ? "bg-blue-600 text-white shadow-xs"
-                            : "text-slate-600 hover:text-slate-900"
-                        )}
-                      >
-                        <Server className="size-3.5" />
-                        <span>On-Premises</span>
-                      </button>
+                    {/* Features List */}
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                      Included Capabilities:
                     </div>
+                    <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 mb-8">
+                      {tier.features.map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-start gap-2.5">
+                          <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black">
+                            <Check className="size-2.5" />
+                          </span>
+                          <span className="leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
 
-                {/* Quick Presets Strip */}
-                <div className="mt-6">
-                  <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <span className="font-mono text-[0.7rem] font-bold uppercase tracking-wider text-slate-400">
-                      Quick Solution Presets:
-                    </span>
-                    <span className="text-[0.68rem] text-blue-700 font-semibold">
-                      Click to load proven industry stacks
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {suiteBundlePresets.map((preset) => (
-                      <button
-                        key={preset.id}
-                        type="button"
-                        onClick={() => handleSelectPreset(preset.id)}
-                        className={cn(
-                          "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all",
-                          activePreset === preset.id
-                            ? "border-blue-600 bg-blue-50/90 text-blue-700 shadow-2xs ring-1 ring-blue-500/20"
-                            : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                        )}
-                      >
-                        <Workflow className="size-3 text-blue-600" />
-                        <span>{preset.name}</span>
-                        <span className="rounded-full bg-slate-100 px-1.5 py-0.2 text-[0.62rem] font-mono text-slate-600">
-                          {preset.productIds.length}
-                        </span>
-                      </button>
-                    ))}
+                  {/* Bottom Action Button */}
+                  <div className="pt-4 border-t border-slate-100">
                     <button
                       type="button"
-                      onClick={() => {
-                        setActivePreset("all-18");
-                        setSelectedProductIds(bitsProducts.map((p) => p.id));
-                      }}
-                      className={cn(
-                        "inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all",
-                        activePreset === "all-18"
-                          ? "border-indigo-600 bg-indigo-50/90 text-indigo-700 shadow-2xs ring-1 ring-indigo-500/20"
-                          : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                      )}
+                      onClick={() => openModal(tier.ctaSubject)}
+                      className={`group w-full inline-flex min-h-[46px] items-center justify-between gap-3 rounded-full pl-6 pr-2 py-2 text-sm font-bold shadow-md transition-all duration-300 active:scale-[0.98] cursor-pointer ${
+                        tier.highlight
+                          ? "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/25"
+                          : "bg-slate-950 hover:bg-slate-800 text-white shadow-slate-950/10"
+                      }`}
                     >
-                      <Boxes className="size-3 text-indigo-600" />
-                      <span>Full Sovereign Platform (All 18)</span>
+                      <span>{tier.ctaLabel}</span>
+                      <span className="size-8 rounded-full bg-white/20 flex items-center justify-center text-xs group-hover:translate-x-0.5 transition-transform duration-300 font-bold">
+                        →
+                      </span>
                     </button>
                   </div>
                 </div>
-
-                {/* 18 Products Interactive Selection Grid */}
-                <div className="mt-8 space-y-6">
-                  {productGroups.map((group) => (
-                    <div key={group.group}>
-                      <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                        <span className="font-mono text-[0.7rem] font-bold uppercase tracking-wider text-slate-500">
-                          {group.group}
-                        </span>
-                        <span className="text-[0.65rem] text-slate-400">
-                          ({group.products.length} Modular Engines)
-                        </span>
-                      </div>
-                      <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
-                        {group.products.map((product) => {
-                          const isSelected = selectedProductIds.includes(product.id);
-                          return (
-                            <button
-                              key={product.id}
-                              type="button"
-                              onClick={() => handleToggleProduct(product.id)}
-                              className={cn(
-                                "group relative flex min-h-[58px] cursor-pointer flex-col justify-between rounded-xl border p-3 text-left transition-all duration-200",
-                                isSelected
-                                  ? "border-blue-600 bg-blue-50/50 shadow-2xs ring-1 ring-blue-500/20"
-                                  : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50"
-                              )}
-                            >
-                              <div className="flex items-start justify-between gap-1.5">
-                                <div className="flex items-center gap-2">
-                                  <div
-                                    className={cn(
-                                      "flex size-4.5 shrink-0 items-center justify-center rounded-md border text-white transition-colors",
-                                      isSelected
-                                        ? "border-blue-600 bg-blue-600"
-                                        : "border-slate-300 bg-white group-hover:border-slate-400"
-                                    )}
-                                  >
-                                    {isSelected && <Check className="size-3 stroke-[3]" />}
-                                  </div>
-                                  <span className="text-xs font-bold text-slate-900 leading-tight">
-                                    {product.name}
-                                  </span>
-                                </div>
-                              </div>
-                              <p className="mt-1 text-[0.68rem] text-slate-500 line-clamp-1">
-                                {product.tagline}
-                              </p>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Live Solution Architecture HUD & Direct Consultative CTA Bar */}
-                <div className="mt-8 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/50 to-white p-5 sm:p-6 shadow-sm">
-                  <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-blue-600 px-3 py-1 font-mono text-[0.7rem] font-bold text-white shadow-2xs">
-                          {selectedProductIds.length} Products Active in Stack
-                        </span>
-                        <span className="font-mono text-xs font-semibold text-blue-700">
-                          Unified Single Sign-On (SSO) &amp; Shared Data Model
-                        </span>
-                        <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-800 border border-emerald-200">
-                          {bundleDeployment === "cloud" ? "Managed Cloud" : "On-Premises Bare-Metal"}
-                        </span>
-                        {bundleBranding === "whitelabel" ? (
-                          <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[0.65rem] font-bold text-orange-900 border border-orange-300 flex items-center gap-1">
-                            <Palette className="size-3 text-orange-600" />
-                            <span>100% White-Label Brand (app.yourcompany.com)</span>
-                          </span>
-                        ) : (
-                          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.65rem] font-bold text-slate-700 border border-slate-200 flex items-center gap-1">
-                            <ShieldCheck className="size-3 text-blue-600" />
-                            <span>BITS Native Brand</span>
-                          </span>
-                        )}
-                      </div>
-
-                      {/* White-Label Add-on Informative Spec Strip if enabled */}
-                      {bundleBranding === "whitelabel" && (
-                        <div className="mt-3 rounded-xl border border-orange-200 bg-orange-50/90 p-3 text-xs text-orange-950">
-                          <div className="flex items-center gap-2 font-bold text-orange-900">
-                            <Palette className="size-4 text-orange-600 shrink-0" />
-                            <span>White-Label Option Active on Selected Stack:</span>
-                          </div>
-                          <p className="mt-1 text-[0.72rem] text-orange-900/90 leading-relaxed">
-                            Deploys all {selectedProductIds.length} selected engines completely rebranded under your own corporate identity, custom logo, custom domain (app.yourcompany.com), and custom email sender with zero BITS attribution. Full reseller margin ownership under strict NDA.
-                          </p>
-                        </div>
-                      )}
-
-                      <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-700 font-medium">
-                        <div className="flex items-center gap-1.5">
-                          <CheckCircle2 className="size-3.5 text-emerald-600 shrink-0" />
-                          <span>Zero per-seat penalties</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <CheckCircle2 className="size-3.5 text-emerald-600 shrink-0" />
-                          <span>Inter-engine automated webhooks</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <CheckCircle2 className="size-3.5 text-emerald-600 shrink-0" />
-                          <span>99.9% Telephony &amp; API SLA</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <CheckCircle2 className="size-3.5 text-emerald-600 shrink-0" />
-                          <span>Continuous security &amp; CVE patches</span>
-                        </div>
-                      </div>
-
-                      <p className="mt-2 text-xs text-slate-500">
-                        <strong>Investment Model:</strong> Modular consultative licensing based on your operational volume, floor headcount, and deployment tier.
-                      </p>
-                    </div>
-
-                    {/* High-Converting Button-in-Button CTA */}
-                    <div className="shrink-0">
-                      <Magnetic>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            openModal(
-                              `Multi-Product Proposal: ${selectedProductIds.length} Products (${bundleDeployment} deployment, ${bundleBranding})`
-                            )
-                          }
-                          className="group relative inline-flex min-h-[48px] items-center justify-between gap-3 rounded-full bg-blue-600 px-6 py-2.5 text-xs font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-600/35 active:scale-[0.98]"
-                        >
-                          <span>
-                            Request Proposal ({selectedProductIds.length} Products
-                            {bundleBranding === "whitelabel" ? " + White-Label" : ""})
-                          </span>
-                          <span className="flex size-7 items-center justify-center rounded-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                            <ArrowRight className="size-3.5" />
-                          </span>
-                        </button>
-                      </Magnetic>
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          ))}
         </div>
 
-        {/* ── FEATURE 2: CONSULTATIVE SOLUTION TIERS CARDS ── */}
-        <div className="mx-auto mt-20 max-w-6xl">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-              Turnkey Baseline Tiers
-            </h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Select an indicative deployment scope below, or combine custom capabilities above.
-            </p>
-          </div>
-
-          {/* Operational Audience Filter Tabs */}
-          <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-2">
-            {(["all", "starter", "growth", "enterprise"] as const).map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setActiveTierFilter(tab)}
-                className={cn(
-                  "inline-flex min-h-[44px] items-center cursor-pointer rounded-full px-4 py-2 text-xs font-bold transition-all duration-200",
-                  activeTierFilter === tab
-                    ? "bg-slate-900 text-white shadow-xs"
-                    : "border border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
-                )}
-              >
-                {tab === "all"
-                  ? "All Packages"
-                  : tab === "starter"
-                  ? "1 – 15 Seats (Starter)"
-                  : tab === "growth"
-                  ? "16 – 100+ Floor (Growth)"
-                  : "Enterprise / Banks"}
-              </button>
-            ))}
-          </div>
-
-          {/* 3 Solution Tiers Grid with Strict Alignment & Spacing */}
-          <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 items-stretch gap-8 lg:grid-cols-3">
-            {solutionPackages
-              .filter((pkg) => pkg.id !== "whitelabel")
-              .map((pkg, i) => {
-                const isPopular = pkg.popular;
-                const isEnterprise = pkg.id === "enterprise";
-                const isDimmed = activeTierFilter !== "all" && activeTierFilter !== pkg.id;
-
-                return (
-                  <Reveal
-                    key={pkg.id}
-                    delay={0.06 * i}
-                    className={cn(
-                      "flex flex-col transition-all duration-300",
-                      isDimmed ? "opacity-30 scale-[0.98]" : "opacity-100 scale-100"
-                    )}
-                  >
-                    {/* Outer wrapper: For popular card, radiant gradient border; standard for others */}
-                    <div
-                      className={cn(
-                        "flex h-full flex-col rounded-[2.25rem] transition-all duration-300",
-                        isPopular
-                          ? "p-[2px] bg-gradient-to-b from-blue-600 via-indigo-600 to-blue-400 shadow-[0_20px_50px_-12px_rgba(37,99,235,0.22)] ring-4 ring-blue-500/10"
-                          : "border border-slate-200/90 bg-white shadow-sm hover:border-slate-300 hover:shadow-xl hover:shadow-slate-950/5"
-                      )}
-                    >
-                      <article
-                        className={cn(
-                          "relative flex h-full flex-col justify-between rounded-[2.125rem] p-7 transition-colors sm:p-8",
-                          isPopular
-                            ? "bg-gradient-to-b from-blue-50/50 via-white to-white"
-                            : "bg-white"
-                        )}
-                      >
-                        {/* Top Content Area */}
-                        <div>
-                          {/* Synchronized Top Banner for 100% Horizontal Parity */}
-                          {isPopular ? (
-                            <div className="mb-4 flex items-center justify-between rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 px-3.5 py-1.5 text-white shadow-xs">
-                              <div className="flex items-center gap-1.5">
-                                <Sparkles className="size-3.5 text-cyan-200" />
-                                <span className="text-[0.68rem] font-bold uppercase tracking-wider">
-                                  Recommended for Scaling Teams
-                                </span>
-                              </div>
-                              <span className="size-1.5 rounded-full bg-white animate-pulse" />
-                            </div>
-                          ) : isEnterprise ? (
-                            <div className="mb-4 flex items-center justify-between rounded-xl border border-indigo-200 bg-indigo-50/80 px-3.5 py-1.5 text-indigo-900 shadow-2xs">
-                              <div className="flex items-center gap-1.5">
-                                <ShieldCheck className="size-3.5 text-indigo-600" />
-                                <span className="text-[0.68rem] font-bold uppercase tracking-wider text-indigo-800">
-                                  Sovereign &amp; Dedicated SLA
-                                </span>
-                              </div>
-                              <span className="font-mono text-[0.65rem] font-semibold text-indigo-700">
-                                Bank-Grade
-                              </span>
-                            </div>
-                          ) : (
-                            <div className="mb-4 flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-100/90 px-3.5 py-1.5 text-slate-700">
-                              <div className="flex items-center gap-1.5">
-                                <span className="size-1.5 rounded-full bg-blue-500" />
-                                <span className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-700">
-                                  Core Operational Baseline
-                                </span>
-                              </div>
-                              <span className="font-mono text-[0.65rem] font-semibold text-slate-500">
-                                Boutique
-                              </span>
-                            </div>
-                          )}
-
-                          {/* Header Row: Tier Indicator & Team Scope Pill */}
-                          <div className="flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-2">
-                              <span
-                                className={cn(
-                                  "size-2 rounded-full",
-                                  isPopular
-                                    ? "bg-blue-600 animate-pulse"
-                                    : isEnterprise
-                                    ? "bg-indigo-600"
-                                    : "bg-slate-400"
-                                )}
-                                aria-hidden
-                              />
-                              <span
-                                className={cn(
-                                  "font-mono text-[0.75rem] font-bold uppercase tracking-wider",
-                                  isPopular
-                                    ? "text-blue-600"
-                                    : isEnterprise
-                                    ? "text-indigo-700"
-                                    : "text-slate-600"
-                                )}
-                              >
-                                {pkg.tier}
-                              </span>
-                            </div>
-
-                            <span className="shrink-0 rounded-full border border-slate-200/90 bg-slate-100/90 px-3 py-1 font-mono text-[0.68rem] font-semibold text-slate-700">
-                              {pkg.teamScope}
-                            </span>
-                          </div>
-
-                          {/* Tier Title */}
-                          <h4 className="mt-4 flex min-h-[3.25rem] items-center text-xl font-bold tracking-tight text-slate-900 sm:text-[1.35rem]">
-                            {pkg.title}
-                          </h4>
-
-                          {/* Tagline / Audience */}
-                          <p className="mt-2 min-h-[2.75rem] text-xs leading-relaxed text-slate-600">
-                            {pkg.tagline}
-                          </p>
-
-                          {/* Consultative Investment & Scoping Scope Block (No Numeric Prices) */}
-                          <div
-                            className={cn(
-                              "mt-5 rounded-2xl border p-4 transition-colors",
-                              isPopular
-                                ? "border-blue-200/90 bg-blue-50/70"
-                                : "border-slate-150 bg-slate-50/80"
-                            )}
-                          >
-                            <div className="flex items-center justify-between gap-2">
-                              <p className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-500">
-                                Licensing &amp; Investment Scope
-                              </p>
-                              <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] font-semibold text-emerald-700">
-                                <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                Transparent ROI
-                              </span>
-                            </div>
-
-                            <div className="mt-2">
-                              <span className="font-mono text-lg font-bold tracking-tight text-slate-900 sm:text-xl block">
-                                {pkg.investmentModel}
-                              </span>
-                              <span className="text-[0.75rem] font-medium text-slate-500 block mt-0.5">
-                                {pkg.billingCadence}
-                              </span>
-                            </div>
-
-                            <div className="mt-2 flex items-center gap-1.5 border-t border-slate-200/60 pt-2 text-[0.72rem] font-medium text-slate-600">
-                              <Sparkles className="size-3 text-blue-600 shrink-0" />
-                              <span className="leading-tight">{pkg.roiBenchmark}</span>
-                            </div>
-
-                            <div className="mt-2 flex items-center gap-2 border-t border-slate-200/60 pt-2 text-[0.72rem] font-medium text-slate-700">
-                              <span className="size-1.5 rounded-full bg-blue-500 shrink-0" />
-                              <span className="truncate">{pkg.deployment}</span>
-                            </div>
-
-                            <div className="mt-2 flex items-center justify-between gap-1 border-t border-slate-200/60 pt-2 text-[0.72rem] font-medium text-slate-700">
-                              <span className="flex items-center gap-1.5">
-                                <Palette className="size-3 text-orange-600 shrink-0" />
-                                <span>Branding:</span>
-                              </span>
-                              <span className="font-semibold text-slate-800 text-[0.7rem]">
-                                Native BITS or White-Label Option
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Feature Highlights List */}
-                          <div className="mt-6 border-t border-slate-100 pt-5">
-                            <p className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400">
-                              Included Capabilities &amp; Deliverables
-                            </p>
-                            <ul className="mt-3.5 space-y-3">
-                              {pkg.highlights.map((item) => (
-                                <li key={item} className="flex items-start gap-3 text-xs text-slate-700">
-                                  <span
-                                    className={cn(
-                                      "mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full text-[0.68rem]",
-                                      isPopular
-                                        ? "bg-blue-600 text-white shadow-2xs"
-                                        : "bg-blue-50 text-blue-700 border border-blue-200/60"
-                                    )}
-                                    aria-hidden="true"
-                                  >
-                                    <Check className="size-3 stroke-[2.5]" />
-                                  </span>
-                                  <span className="font-medium leading-snug">{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
-                        {/* Card Bottom CTA (Button-in-Button) */}
-                        <div className="mt-8 border-t border-slate-100 pt-5">
-                          <Magnetic className="w-full">
-                            <button
-                              type="button"
-                              onClick={() => openModal(`${pkg.title} (${pkg.tier}): ${pkg.primaryCta}`)}
-                              className={cn(
-                                "group flex h-12 w-full min-h-[48px] items-center justify-between rounded-full px-5 text-xs font-bold transition-all duration-300 active:scale-[0.98]",
-                                isPopular
-                                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 hover:bg-blue-700 hover:shadow-blue-600/35"
-                                  : isEnterprise
-                                  ? "bg-slate-900 text-white shadow-md shadow-slate-950/20 hover:bg-slate-800"
-                                  : "border border-slate-300 bg-white text-slate-800 shadow-2xs hover:border-blue-600 hover:bg-blue-50/50 hover:text-blue-700"
-                              )}
-                            >
-                              <span>{pkg.primaryCta}</span>
-                              <span
-                                className={cn(
-                                  "flex size-7 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
-                                  isPopular || isEnterprise
-                                    ? "bg-white/20 text-white"
-                                    : "bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white"
-                                )}
-                              >
-                                <ArrowRight className="size-3.5" />
-                              </span>
-                            </button>
-                          </Magnetic>
-
-                          <p className="mt-3 text-center font-mono text-[0.68rem] text-slate-400">
-                            {pkg.pricingSubtext}
-                          </p>
-                        </div>
-                      </article>
-                    </div>
-                  </Reveal>
-                );
-              })}
-          </div>
-        </div>
-
-        {/* ── BITS TAP NFC & WHITE LABEL RESELLER ADD-ONS ── */}
-        <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* BITS Tap NFC Card Callout */}
-          <Reveal delay={0.1}>
-            <div className="flex h-full flex-col justify-between rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50/70 via-teal-50/40 to-white p-6 sm:p-7 shadow-sm">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-emerald-700">
-                    Hardware + Digital Smart Card Solution
-                  </span>
-                </div>
-                <h4 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
-                  BITS Tap™ Encrypted Smart NFC Cards — Single or Corporate Batch
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  Replace traditional paper business cards with cryptographic titanium or matte smart cards. Single tap displays your live verified executive profile with 1-click vCard download, meeting schedulers, and payment links. Remote freeze available instantly if misplaced.
-                </p>
-                <div className="mt-3.5 rounded-xl border border-emerald-200/80 bg-white/80 p-3 text-xs">
-                  <p className="font-semibold text-emerald-900">
-                    <strong>Investment Model:</strong> Turnkey hardware provisioning with centralized cloud directory admin for teams. Zero recurring monthly individual fees.
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-emerald-100 pt-4">
-                <button
-                  type="button"
-                  onClick={() => openModal("BITS Tap NFC Smart Card Architecture & Specs")}
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-emerald-300 bg-white px-4 py-2 text-xs font-bold text-emerald-800 hover:bg-emerald-50 transition-colors shadow-2xs active:scale-[0.98]"
-                >
-                  View NFC Hardware Specs
-                </button>
-                <button
-                  type="button"
-                  onClick={() => openModal("Order Executive BITS Tap NFC Cards")}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-5 py-2 text-xs font-bold text-white hover:bg-emerald-700 transition-colors shadow-xs active:scale-[0.98]"
-                >
-                  <span>Order Executive Cards</span>
-                  <ArrowRight className="size-3.5" />
-                </button>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* White-Label Reseller Callout */}
-          <Reveal delay={0.14}>
-            <div className="flex h-full flex-col justify-between rounded-3xl border border-orange-200 bg-gradient-to-br from-orange-50/70 via-amber-50/40 to-white p-6 sm:p-7 shadow-sm">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-orange-500 animate-pulse" />
-                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-orange-700">
-                    Master Branding Option · Not a Standalone Software Product
-                  </span>
-                </div>
-                <h4 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
-                  Universal White-Label Option — Deploy Any BITS Engine Under Your Brand
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                  White-label is an overarching branding license add-on available for any of our 18 software products or custom suites. Purchase at wholesale infrastructure rates, deploy on your custom domain (app.yourbrand.com) with your corporate logo and styling, and resell to your clients at 100% margin retention under strict NDA.
-                </p>
-                <div className="mt-3.5 rounded-xl border border-orange-200/80 bg-white/80 p-3 text-xs">
-                  <p className="font-semibold text-orange-950">
-                    <strong>Key Inclusions:</strong> Custom Domain &amp; SSL · Client Logo &amp; HEX Colors · Branded Notification Senders · Zero BITS Attribution · 100% Reseller Margin Ownership.
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-orange-100 pt-4">
-                <button
-                  type="button"
-                  onClick={() => openModal("White-Label Reseller Architecture Specs")}
-                  className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-orange-300 bg-white px-4 py-2 text-xs font-bold text-orange-800 hover:bg-orange-50 transition-colors shadow-2xs active:scale-[0.98]"
-                >
-                  <Palette className="size-3.5 mr-1" />
-                  View White-Label Specs
-                </button>
-                <button
-                  type="button"
-                  onClick={() => openModal("White-Label Reseller Licensing Proposal")}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-5 py-2 text-xs font-bold text-white hover:bg-orange-700 transition-colors shadow-xs active:scale-[0.98]"
-                >
-                  <span>Request White-Label Proposal</span>
-                  <ArrowRight className="size-3.5" />
-                </button>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* ── INTERACTIVE FEATURE MATRIX TOGGLE ── */}
-        <Reveal delay={0.16}>
-          <div className="mx-auto mt-12 max-w-6xl text-center">
-            <button
-              type="button"
-              onClick={() => setShowMatrix(!showMatrix)}
-              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full border border-slate-300/80 bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-2xs transition-all hover:border-blue-400 hover:text-blue-600 hover:shadow-sm active:scale-[0.98]"
-            >
-              <Sliders className="size-3.5 text-blue-600" />
-              <span>
-                {showMatrix
-                  ? "Hide Detailed Capability Comparison Matrix"
-                  : "Compare All 21 Capabilities & SLA Specifications Side-by-Side"}
-              </span>
-              {showMatrix ? <ChevronUp className="size-3.5" /> : <ChevronDown className="size-3.5" />}
-            </button>
-          </div>
-        </Reveal>
-
-        {/* Detailed Side-by-Side Comparison Matrix */}
-        {showMatrix && (
-          <Reveal delay={0.05}>
-            <div className="mx-auto mt-8 max-w-6xl overflow-hidden rounded-3xl border border-slate-200/90 bg-white shadow-xl shadow-slate-950/5">
-              <div className="border-b border-slate-200 bg-slate-50/90 px-6 py-5 text-slate-900">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h4 className="text-base font-bold text-slate-900 sm:text-lg">
-                      Full Capability &amp; Statutory SLA Comparison
-                    </h4>
-                    <p className="text-xs text-slate-600">
-                      Transparent technical evaluation for Operations Heads, CTOs, and Compliance Directors.
-                    </p>
-                  </div>
-                  <span className="w-fit rounded-full bg-blue-50 px-3 py-1 font-mono text-[0.7rem] font-bold text-blue-700 border border-blue-200">
-                    21 Scoped Deliverables
-                  </span>
-                </div>
-              </div>
-
-              {/* Matrix Table */}
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse text-left text-xs">
-                  <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
-                      <th className="p-4 pl-6 font-bold uppercase tracking-wider text-[0.7rem] text-slate-400">
-                        Operational Capability
-                      </th>
-                      <th className="p-4 font-bold text-slate-900 w-1/4">
-                        Starter Tier
-                        <span className="block font-mono text-[0.65rem] font-normal text-slate-500">1–15 Seats</span>
-                      </th>
-                      <th className="p-4 font-bold text-blue-600 w-1/4 bg-blue-50/40">
-                        Growth Tier
-                        <span className="block font-mono text-[0.65rem] font-normal text-blue-500">16–100+ Seats</span>
-                      </th>
-                      <th className="p-4 pr-6 font-bold text-slate-900 w-1/4">
-                        Enterprise Tier
-                        <span className="block font-mono text-[0.65rem] font-normal text-slate-500">100+ Seats / Sovereign</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-150 text-slate-700">
-                    {pricingComparisonMatrix.map((section) => (
-                      <React.Fragment key={section.category}>
-                        <tr className="bg-slate-100/70">
-                          <td
-                            colSpan={4}
-                            className="px-6 py-2.5 font-bold uppercase tracking-wider text-[0.68rem] text-slate-500"
-                          >
-                            {section.category}
-                          </td>
-                        </tr>
-                        {section.features.map((feat) => (
-                          <tr key={feat.name} className="transition-colors hover:bg-slate-50/70">
-                            <td className="p-4 pl-6 font-medium text-slate-800">{feat.name}</td>
-                            <td className="p-4 text-slate-600">{feat.starter}</td>
-                            <td className="p-4 font-semibold text-blue-700 bg-blue-50/20">{feat.growth}</td>
-                            <td className="p-4 pr-6 font-semibold text-slate-900">{feat.enterprise}</td>
-                          </tr>
-                        ))}
-                      </React.Fragment>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </Reveal>
-        )}
-
-        {/* Universal Technical Guarantees Strip */}
-        <Reveal delay={0.2}>
-          <div className="mx-auto mt-14 max-w-6xl rounded-3xl border border-slate-200/90 bg-white p-6 shadow-xs sm:p-7">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="size-4 text-blue-600" />
-                <span className="text-[0.72rem] font-bold uppercase tracking-widest text-slate-500">
-                  Universal Technical Standards in Every BITS Deployment
+        {/* ── 4 UNIVERSAL OPERATIONAL COMMITMENTS ── */}
+        <Reveal delay={0.12}>
+          <div className="rounded-[2rem] border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="flex items-start gap-3.5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <Users className="size-5" />
                 </span>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">Zero Per-Seat Lock-In</h4>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    Scale your floor capacity freely. Never pay punitive fees for staff turnover or shifting shifts.
+                  </p>
+                </div>
               </div>
-              <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 font-mono text-[0.68rem] font-semibold text-emerald-700 border border-emerald-200/60">
-                100% Policy-Enforced
-              </span>
-            </div>
 
-            <div className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
-              {universalGuarantees.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} className="space-y-1">
-                    <div className="flex items-center gap-1.5 text-blue-600">
-                      <Icon className="size-3.5 shrink-0" />
-                      <p className="text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 truncate">
-                        {item.label}
-                      </p>
-                    </div>
-                    <p className="text-xs font-bold text-slate-900">{item.detail}</p>
-                    <p className="text-[0.68rem] text-slate-500">{item.subtext}</p>
-                  </div>
-                );
-              })}
+              <div className="flex items-start gap-3.5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Shield className="size-5" />
+                </span>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">BSP &amp; NPC Compliant</h4>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    Designed around BSP Circulars 454/857 and RA 10173 data privacy rules for Philippine finance.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+                  <PhoneCall className="size-5" />
+                </span>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">Zero Extra Hardware</h4>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    100% browser-based WebRTC softphone. Agents only need a standard headset and internet connection.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Building2 className="size-5" />
+                </span>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">Full Data Migration</h4>
+                  <p className="mt-1 text-xs text-slate-600 leading-relaxed">
+                    Our team sanitizes, formats, and imports your existing debtor spreadsheets and trains your staff.
+                  </p>
+                </div>
+              </div>
             </div>
-            <p className="mt-4 border-t border-slate-100 pt-3 text-center text-[0.68rem] text-slate-500">
-              * Continuous system improvements and proactive security updates included in every plan. Custom bespoke feature requests and specialized ERP connectors scoped upon request (costs vary by complexity).
-            </p>
           </div>
         </Reveal>
 
-        {/* Final Consultative Architecture Callout */}
-        <Reveal delay={0.24}>
-          <div className="mx-auto mt-8 max-w-6xl rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50/90 via-indigo-50/60 to-white p-6 text-slate-900 shadow-xl shadow-blue-900/5 sm:p-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-                  <span className="font-mono text-[0.7rem] font-bold uppercase tracking-widest text-blue-700">
-                    Custom Sovereign &amp; Multi-Product Architecture
-                  </span>
+        {/* ── DEDICATED CTA: CHECK PRICING FOR OUR OTHER PRODUCTS ── */}
+        <Reveal delay={0.16}>
+          <div className="relative rounded-[2.25rem] p-2 sm:p-2.5 bg-gradient-to-b from-slate-100 to-slate-200/50 border border-slate-200 shadow-xl shadow-slate-950/5">
+            <div className="rounded-[calc(2.25rem-0.375rem)] bg-white p-7 sm:p-10 border border-slate-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)]">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                {/* Left: Message & Product Pills */}
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700 mb-3">
+                    Broad Enterprise Portfolio
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-snug">
+                    Looking for Pricing on Our Other Software Engines?
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                    BITS also engineers standalone and bundled enterprise solutions across Autonomous Voice AI, Sales CRM, ERP Accounting, HRMS, and Field Logistics.
+                  </p>
+
+                  {/* Available Product Badges */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {otherProducts.map((p) => (
+                      <span
+                        key={p.name}
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-700"
+                      >
+                        <span className="size-1.5 rounded-full bg-blue-600" />
+                        <span>{p.name}</span>
+                        <span className="text-[10px] text-slate-400 font-normal">({p.category})</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h4 className="mt-2 text-lg font-bold text-slate-900 sm:text-xl">
-                  Require private cloud data residency, custom banking ETLs, or bespoke CRM schemas?
-                </h4>
-                <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600">
-                  Our engineering team works under mutual NDA to design custom digital infrastructure, proprietary scoring workflows, and dedicated telco interconnects tailored to your exact stack.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3 shrink-0">
-                <Link
-                  href="/#deployment"
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 text-xs font-bold text-blue-700 shadow-2xs transition-all hover:bg-blue-50 active:scale-[0.98]"
-                >
-                  <Server className="size-3.5 text-blue-600" />
-                  <span>Cloud vs. On-Prem Specs</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => openModal("Custom Infrastructure & Proprietary ETL Scoping")}
-                  className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:bg-blue-700 active:scale-[0.98]"
-                >
-                  <span>Request Custom Quote & Demo</span>
-                  <ArrowRight className="size-3.5" />
-                </button>
+
+                {/* Right: Island CTA Button */}
+                <div className="shrink-0 flex flex-col sm:flex-row items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => openModal("Inquiry: Pricing for Other BITS Software Products")}
+                    className="group w-full sm:w-auto inline-flex min-h-[48px] items-center justify-center gap-3 rounded-full bg-slate-950 hover:bg-blue-600 pl-6 pr-2 py-2 text-sm font-bold text-white shadow-lg shadow-slate-950/10 hover:shadow-blue-600/25 transition-all duration-300 active:scale-[0.98] cursor-pointer"
+                  >
+                    <span>Check Pricing for Other Products</span>
+                    <span className="size-8 rounded-full bg-white/15 flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:bg-white/25 transition-all duration-300 font-bold">
+                      <ArrowRight className="size-3.5" />
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -375,10 +375,10 @@ export function CrmVariantsExplorer() {
                   </Link>
                 </Magnetic>
                 <Link
-                  href="/#products-suite"
+                  href="/#features"
                   className="text-xs font-bold text-slate-600 hover:text-blue-600 transition-colors"
                 >
-                  View All 15 BITS Products →
+                  Explore Platform Capabilities →
                 </Link>
               </div>
             </div>

@@ -146,7 +146,7 @@ export function Problem() {
             <Reveal delay={0.24} y={8}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
-                  href="#products-suite"
+                  href="#features"
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-blue-600 px-6 text-xs font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 active:scale-[0.98]"
                 >
                   See the BITS Solution →

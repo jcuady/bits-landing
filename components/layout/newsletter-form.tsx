@@ -7,7 +7,7 @@ export function NewsletterForm() {
 
   if (submitted) {
     return (
-      <p className="mt-3 text-[0.85rem] font-bold text-emerald-400">
+      <p className="mt-3 text-[0.85rem] font-bold text-emerald-700">
         Thanks for subscribing!
       </p>
     );
@@ -31,12 +31,12 @@ export function NewsletterForm() {
         required
         placeholder="Enter work email"
         aria-label="Work email for newsletter"
-        className="h-11 flex-1 rounded-full border border-white/15 bg-white/[0.06] px-4 text-base text-white placeholder:text-slate-400 focus:border-sky-400 focus:bg-white/[0.1] focus:outline-none focus:ring-2 focus:ring-sky-400/25 backdrop-blur-sm transition-all"
+        className="h-11 flex-1 rounded-full border border-slate-200/90 bg-white/95 px-4 text-base text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 shadow-2xs transition-all"
       />
 
       <button
         type="submit"
-        className="h-11 shrink-0 cursor-pointer rounded-full bg-blue-600 hover:bg-blue-500 px-5 text-[0.82rem] font-bold text-white transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98]"
+        className="h-11 min-h-[44px] shrink-0 cursor-pointer rounded-full bg-slate-950 hover:bg-slate-800 px-5 text-xs font-bold text-white shadow-xs transition-all duration-200 hover:shadow-md active:scale-[0.98]"
       >
         Subscribe
       </button>

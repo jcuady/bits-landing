@@ -81,13 +81,51 @@
 }
 
 @keyframes cloud-drift {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.02); }
-  50% { transform: translate3d(-2.5%, -1%, 0) scale(1.06); }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
+  50% {
+    transform: translate3d(-3.5%, -1.2%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
+}
+
+@-webkit-keyframes cloud-drift {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0) scale(1.02);
+  }
+  50% {
+    -webkit-transform: translate3d(-3.5%, -1.2%, 0) scale(1.06);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0) scale(1.02);
+  }
 }
 
 @keyframes cloud-drift-reverse {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.04); }
-  50% { transform: translate3d(2.5%, 1%, 0) scale(1.01); }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.04);
+  }
+  50% {
+    transform: translate3d(3.5%, 1%, 0) scale(1.01);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.04);
+  }
+}
+
+@-webkit-keyframes cloud-drift-reverse {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0) scale(1.04);
+  }
+  50% {
+    -webkit-transform: translate3d(3.5%, 1%, 0) scale(1.01);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0) scale(1.04);
+  }
 }
 
 @keyframes stripe-slide {

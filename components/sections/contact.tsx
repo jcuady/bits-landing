@@ -1,239 +1,244 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { site } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { ContactForm } from "@/components/sections/contact-form";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import { Mail, ArrowRight, ShieldCheck } from "lucide-react";
+import {
+  ShieldCheck,
+  Headphones,
+  CheckCircle2,
+  Clock,
+  Building2,
+  UserCheck,
+  TrendingUp,
+  FileCheck,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+type FloorRole = "ops" | "cio" | "collections" | "compliance";
+
+interface RoleDetails {
+  title: string;
+  badge: string;
+  bullets: string[];
+}
+
+const ROLE_DATA: Record<FloorRole, RoleDetails> = {
+  ops: {
+    title: "For Floor Operations Directors",
+    badge: "Floor Velocity & WFM",
+    bullets: [
+      "Eliminate auxiliary idle time with automated progressive/predictive dialer pacing.",
+      "Live supervisor dashboard with silent listen, whisper, and barge-in capabilities.",
+      "Workforce leaderboards, automated KPI scoring, and zero spreadsheet reconciliations.",
+    ],
+  },
+  cio: {
+    title: "For CIOs & Infrastructure Leaders",
+    badge: "Sovereign Architecture",
+    bullets: [
+      "100% on-premise air-gapped or private cloud deployment with zero foreign data egress.",
+      "Native WebRTC browser softphone — eliminates external PBX licenses and desktop DLLs.",
+      "Zero per-seat licensing penalties — scale from 50 to 5,000 agents with predictable cost.",
+    ],
+  },
+  collections: {
+    title: "For Heads of Credit & Recovery",
+    badge: "PTP Yield Optimization",
+    bullets: [
+      "Automated Promise-to-Pay (PTP) grace period tracking and real-time broken commitment alerts.",
+      "Omnichannel dispatch (SMS, Viber, WhatsApp, Email) with dynamic customer merge fields.",
+      "Automated skip-trace and field visit prioritization for high-value delinquent accounts.",
+    ],
+  },
+  compliance: {
+    title: "For Risk & Compliance Officers",
+    badge: "Statutory Governance",
+    bullets: [
+      "Full alignment with BSP Circular 808 and NPC Data Privacy Act standards.",
+      "100% call audio recording, permanent cryptographic timestamping, and immutable audit trails.",
+      "Automated quiet-hour safeguards and frequency caps prevent statutory collection penalties.",
+    ],
+  },
+};
 
 export function Contact() {
   const { openModal } = useConsultationModal();
-  const [quickEmail, setQuickEmail] = React.useState("");
+  const [selectedRole, setSelectedRole] = React.useState<FloorRole>("ops");
 
-  const handleQuickSubmit = (e?: React.FormEvent | React.SyntheticEvent) => {
-    if (e) e.preventDefault();
-    if (quickEmail.trim()) {
-      openModal(`Direct Connect Inquiry (${quickEmail.trim()})`);
-    } else {
-      openModal("Direct Connect Consultation");
-    }
-  };
+  const currentRole = ROLE_DATA[selectedRole];
 
   return (
     <Section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/30 to-white pt-16 pb-16 sm:pt-24 sm:pb-24 border-t border-sky-100"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white py-20 sm:py-28 lg:py-32 border-t border-slate-100"
     >
-      {/* Background Architectural Atmosphere */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(59,130,246,0.05),transparent)]" />
-        <div className="absolute left-1/2 -top-24 size-[600px] -translate-x-1/2 rounded-full bg-sky-400/[0.03] blur-3xl" />
+      {/* Background Architectural Glow */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[800px] rounded-full bg-blue-100/30 blur-3xl" />
       </div>
 
-      <Container className="relative z-10 space-y-16 sm:space-y-20">
-        {/* ── PART 1: ENTERPRISE CONSULTATION & CUSTOM BLUEPRINT SCOPING ── */}
-        <div className="overflow-hidden rounded-[2.5rem] border border-sky-200/80 bg-white p-6 sm:p-10 lg:p-12 shadow-xl shadow-sky-950/5">
-          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-blue-700">
-                <ShieldCheck className="size-3.5 text-blue-600" />
-                <span>Enterprise Consultation</span>
-              </div>
-
-              <h3 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 leading-snug">
-                Let&apos;s Build Technology Around How Your Floor Actually Works.
-              </h3>
-
-              <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600">
-                Tell us how you manage your operations, customer outreach, or team today. Our solutions team will review your workflows and prepare a tailored software proposal and live demo across our 18 enterprise engines.
-              </p>
-
-              <a
-                href={`mailto:${site.inquiryEmail}`}
-                className="mt-6 inline-flex min-h-[44px] items-center text-sm font-bold text-blue-600 underline decoration-blue-600/30 underline-offset-4 transition-colors hover:text-blue-700"
-              >
-                {site.inquiryEmail}
-              </a>
-
-              <dl className="mt-8 space-y-4 border-t border-sky-100 pt-6 text-xs text-slate-600">
-                <div>
-                  <dt className="font-bold uppercase tracking-wider text-slate-700">
-                    What Happens Next
-                  </dt>
-                  <dd className="mt-1 leading-relaxed">
-                    We review your team size and operational scope, prepare a tailored proposal across our platform engines, and schedule a private 30-minute walkthrough.
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-bold uppercase tracking-wider text-slate-700">
-                    Fast Response Guaranteed
-                  </dt>
-                  <dd className="mt-1 leading-relaxed">
-                    You will receive a dedicated response promptly from our solutions team within 24 hours. Zero sales pressure.
-                  </dd>
-                </div>
-              </dl>
+      <Container className="relative z-10">
+        {/* ── SECTION HEADER ── */}
+        <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-sky-50/90 px-4 py-1.5 text-xs font-semibold text-sky-800 shadow-2xs mb-4">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-blue-600" />
+              </span>
+              <span>20 YEARS FLOOR LEADERSHIP · PRIVATE ARCHITECTURE SESSION</span>
             </div>
+          </Reveal>
 
-            <ContactForm />
-          </div>
+          <Reveal delay={0.04}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
+              Talk Directly with Systems Architects Who Ran 500+ Seat Recovery Floors.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
+              Skip junior sales reps and generic PowerPoint decks. In 25 minutes, our operations systems lead audits your current contact rates, broken PTP ratios, and sovereign compliance readiness — and delivers a tailored technical rollout blueprint.
+            </p>
+          </Reveal>
         </div>
 
-        {/* ── PART 2: THE GRAND GROUNDED FINALE CARD (Directly matching reference mockup) ── */}
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[2.5rem] lg:rounded-[3rem] border border-slate-200/90 bg-gradient-to-b from-sky-100/60 via-sky-50/40 to-white shadow-2xl shadow-slate-900/5">
-            {/* Architectural Concentric Wave Rings (Matching mockup top arcs) */}
-            <div className="pointer-events-none absolute -top-44 left-1/2 -translate-x-1/2 size-[680px] rounded-full border border-sky-200/50" aria-hidden="true" />
-            <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 size-[520px] rounded-full border border-sky-200/60" aria-hidden="true" />
-            <div className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 size-[360px] rounded-full border border-sky-200/70" aria-hidden="true" />
+        {/* ── DOUBLE-BEZEL EXECUTIVE CONSULTATION CONSOLE ── */}
+        <Reveal delay={0.12}>
+          <div className="rounded-[2.25rem] lg:rounded-[2.75rem] p-2 sm:p-3 bg-gradient-to-b from-blue-50/70 via-slate-100/50 to-blue-50/40 border border-blue-100/90 shadow-2xl shadow-blue-950/[0.04]">
+            <div className="rounded-[calc(2.25rem-0.5rem)] lg:rounded-[calc(2.75rem-0.75rem)] bg-white border border-slate-100 p-6 sm:p-10 lg:p-12 shadow-[inset_0_1px_1px_rgba(255,255,255,0.95)]">
+              <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 items-start">
+                {/* ── LEFT COLUMN: INTERACTIVE ROLE-BASED BLUEPRINT ── */}
+                <div className="space-y-6">
+                  {/* Eyebrow Label */}
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-700">
+                    <Building2 className="size-3.5" />
+                    <span>Select Your Role for a Tailored Agenda</span>
+                  </div>
 
-            {/* Upper Content Hero */}
-            <div className="relative z-10 px-6 pt-12 sm:pt-16 pb-2 text-center">
-              {/* Frosted Pill Badge with Pulsing Blue Orb */}
-              <div className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-sky-200/90 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md">
-                <span className="relative flex size-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
-                  <span className="relative inline-flex size-2.5 rounded-full bg-blue-600" />
-                </span>
-                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-700 font-mono">
-                  Let&apos;s Connect
-                </span>
-              </div>
+                  {/* Role Selector Chips */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedRole("ops")}
+                      className={cn(
+                        "rounded-xl px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        selectedRole === "ops"
+                          ? "bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-500/30"
+                          : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
+                      )}
+                    >
+                      Floor Operations
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedRole("cio")}
+                      className={cn(
+                        "rounded-xl px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        selectedRole === "cio"
+                          ? "bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-500/30"
+                          : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
+                      )}
+                    >
+                      CIO &amp; IT Head
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedRole("collections")}
+                      className={cn(
+                        "rounded-xl px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        selectedRole === "collections"
+                          ? "bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-500/30"
+                          : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
+                      )}
+                    >
+                      Recovery &amp; Credit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedRole("compliance")}
+                      className={cn(
+                        "rounded-xl px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        selectedRole === "compliance"
+                          ? "bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-500/30"
+                          : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
+                      )}
+                    >
+                      Risk &amp; Compliance
+                    </button>
+                  </div>
 
-              {/* Bold Headline */}
-              <h2 className="text-display font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl max-w-3xl mx-auto leading-[1.12]">
-                Ready to Build Stronger Customer Relationships?
-              </h2>
+                  {/* Active Role Discussion Blueprint Box */}
+                  <div className="rounded-2xl border border-blue-100 bg-gradient-to-b from-blue-50/50 via-sky-50/20 to-transparent p-5 sm:p-6 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                        {currentRole.title}
+                      </h3>
+                      <span className="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-blue-800">
+                        {currentRole.badge}
+                      </span>
+                    </div>
 
-              {/* Clear Subtitle */}
-              <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600 font-normal">
-                A smarter way to manage leads, track interactions, and grow your business with powerful CRM tools.
-              </p>
+                    <ul className="space-y-3">
+                      {currentRole.bullets.map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700">
+                          <CheckCircle2 className="size-4 text-blue-600 shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-              {/* Capsule Email Quick Form Bar */}
-              <div className="mt-8 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-full border border-slate-200/90 bg-white p-1.5 sm:p-2 shadow-xl shadow-slate-200/50">
-                <div className="flex flex-1 items-center gap-3 pl-3 sm:pl-4 w-full">
-                  <Mail className="size-5 text-slate-400 shrink-0" aria-hidden="true" />
-                  <label htmlFor="quick-email-input" className="sr-only">
-                    Enter Your Email Address
-                  </label>
-                  <input
-                    id="quick-email-input"
-                    type="email"
-                    value={quickEmail}
-                    onChange={(e) => setQuickEmail(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        handleQuickSubmit();
-                      }
-                    }}
-                    placeholder="Enter Your Email Address"
-                    className="w-full h-11 bg-transparent text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
-                  />
+                  {/* 3 Value Pillars */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-3.5">
+                      <Clock className="size-4 text-blue-600 mb-1.5" />
+                      <div className="text-xs font-bold text-slate-900">2-Hour SLA</div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">Guaranteed prompt response.</div>
+                    </div>
+                    <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-3.5">
+                      <ShieldCheck className="size-4 text-blue-600 mb-1.5" />
+                      <div className="text-xs font-bold text-slate-900">BSP Aligned</div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">Air-gapped on-prem options.</div>
+                    </div>
+                    <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-3.5">
+                      <TrendingUp className="size-4 text-blue-600 mb-1.5" />
+                      <div className="text-xs font-bold text-slate-900">Zero Markup</div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">No per-seat penalty traps.</div>
+                    </div>
+                  </div>
+
+                  {/* Direct Contact Email */}
+                  <div className="pt-2 text-xs text-slate-500">
+                    Need a custom NDA or enterprise RFP response first? Email our executive lead directly at{" "}
+                    <a
+                      href={`mailto:${site.inquiryEmail}`}
+                      className="font-bold text-blue-600 underline decoration-blue-600/30 hover:text-blue-800"
+                    >
+                      {site.inquiryEmail}
+                    </a>
+                  </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={handleQuickSubmit}
-                  className="group flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-slate-950 hover:bg-slate-800 px-7 py-3 font-bold text-white shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
-                >
-                  <span className="text-sm">Contact Us</span>
-                  <ArrowRight className="size-4 text-slate-400 transition-transform duration-200 group-hover:translate-x-1" />
-                </button>
-              </div>
+                {/* ── RIGHT COLUMN: FAST BLUEPRINT REQUEST FORM ── */}
+                <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 sm:p-8 shadow-xs">
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-slate-900">
+                      Request Your 25-Minute Architecture Blueprint
+                    </h3>
+                    <p className="mt-1 text-xs text-slate-500">
+                      Complete this quick form to reserve a private walkthrough with our systems lead.
+                    </p>
+                  </div>
 
-              {/* Navigation Pill Links & Social Media Icons Row */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-sm font-semibold text-slate-600">
-                <a
-                  href="#content"
-                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
-                >
-                  Home
-                </a>
-                <a
-                  href="#solutions"
-                  className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-white px-5 py-2 font-bold text-slate-900 border border-slate-200 shadow-2xs hover:bg-slate-50 transition-all"
-                >
-                  Solutions
-                </a>
-                <a
-                  href="#ecosystem"
-                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
-                >
-                  Features
-                </a>
-                <a
-                  href="#products-suite"
-                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
-                >
-                  Product
-                </a>
-                <a
-                  href="#pricing"
-                  className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center px-4 py-2 hover:text-slate-900 transition-colors"
-                >
-                  Pricing
-                </a>
-
-                {/* Social Icon Pills (>= 44x44px Touch Targets) */}
-                <div className="flex items-center gap-1.5 ml-0 sm:ml-2">
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X (formerly Twitter)"
-                    className="flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all active:scale-[0.98]"
-                  >
-                    <span className="font-bold text-xs">𝕏</span>
-                  </a>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all font-mono font-bold text-xs active:scale-[0.98]"
-                  >
-                    in
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                    className="flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all font-bold text-xs active:scale-[0.98]"
-                  >
-                    IG
-                  </a>
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook"
-                    className="flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition-all font-bold text-xs active:scale-[0.98]"
-                  >
-                    fb
-                  </a>
+                  <ContactForm />
                 </div>
               </div>
-            </div>
-
-            {/* ── THE GROUNDED LANDSCAPE GRAPHIC (Directly anchoring bottom of card) ── */}
-            <div className="relative mt-6 sm:mt-10 h-[320px] sm:h-[440px] lg:h-[520px] w-full overflow-hidden">
-              <Image
-                src="/images/grounded-hills-mound.jpg"
-                alt="Lush green grounded hill landscape under clear sky"
-                fill
-                priority={false}
-                sizes="(max-width: 1024px) 100vw, 1280px"
-                className="object-cover object-[center_35%] select-none transition-transform duration-700 hover:scale-102"
-              />
-              {/* Soft ethereal sky blending gradient from top */}
-              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/95 via-white/50 to-transparent pointer-events-none" />
             </div>
           </div>
         </Reveal>
