@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import { Mail, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { Mail, ArrowRight, ShieldCheck, CheckCircle2, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* ── Precise Agency-Tier SVG Social Icons (24x24 viewBox) ── */
@@ -38,6 +38,14 @@ function TwitterXIcon({ className }: { className?: string }) {
   return (
     <svg className={cn("size-4.5", className)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg className={cn("size-4.5", className)} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
     </svg>
   );
 }
@@ -238,86 +246,178 @@ export function Footer() {
                 >
                   <FacebookIcon />
                 </a>
+
+                <a
+                  href="https://github.com/jcuady/bits-landing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View BITS on GitHub"
+                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-purple-600 hover:border-purple-300 shadow-2xs transition-all active:scale-[0.98]"
+                >
+                  <GitHubIcon />
+                </a>
               </div>
             </div>
           </div>
         </Container>
       </div>
 
-      {/* ── PART 2: SOVEREIGN BEDROCK FOOTER WITH CLOUDY HORIZON (Matching Image 2 with Cloud Backdrop) ── */}
-      <div className="relative overflow-hidden bg-[#030814] text-slate-300 pt-16 pb-16 border-t border-white/10">
-        {/* Photorealistic High-Definition Cloudy Horizon Background */}
+      {/* ── PART 2: SOVEREIGN BEDROCK FOOTER WITH REALISTIC CLOUD DRIFT BACKGROUND ── */}
+      <div className="relative overflow-hidden bg-[#020614] text-slate-200 pt-16 sm:pt-20 pb-12 sm:pb-16 border-t border-sky-400/30 shadow-[0_-4px_30px_rgba(56,189,248,0.15)]">
+        {/* Atmospheric Animated Drifting Clouds Canvas (Matching Hero Aesthetic) */}
         <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
-          {/* High-Altitude Cloud Visual Asset */}
-          <Image
-            src="/images/hero-sky-bg.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            quality={85}
-            className="object-cover object-bottom opacity-20 mix-blend-screen select-none"
-          />
+          {/* Layer 1: High-Definition Sky & Cloud Horizon with Fluid Drift */}
+          <div className="absolute inset-0">
+            <div className="relative size-full animate-cloud-drift will-change-transform transform-gpu">
+              <Image
+                src="/images/hero-sky-bg.jpg"
+                alt=""
+                fill
+                sizes="100vw"
+                quality={90}
+                className="object-cover object-bottom opacity-55 scale-105 select-none"
+              />
+            </div>
+          </div>
 
-          {/* Deep Midnight Multi-Stop Celestial Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020611] via-[#040d22]/92 to-[#061838]/80" />
+          {/* Layer 2: Counter-Harmonic Cloud Mist Flow */}
+          <div className="absolute inset-0 opacity-35 mix-blend-screen">
+            <div className="relative size-full animate-cloud-drift-reverse will-change-transform transform-gpu">
+              <Image
+                src="/images/hero-sky-bg.jpg"
+                alt=""
+                fill
+                sizes="100vw"
+                quality={75}
+                className="object-cover object-center select-none scale-110 filter blur-[1px]"
+              />
+            </div>
+          </div>
 
-          {/* Celestial Horizon Radial Glow */}
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[260px] w-[1100px] rounded-full bg-gradient-to-r from-blue-600/20 via-sky-400/25 to-blue-600/20 blur-[110px]" />
+          {/* Layer 3: Celestial Radiant Sunbreak / Horizon Glow */}
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[320px] w-[1200px] rounded-full bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.35),rgba(37,99,235,0.22)_40%,transparent_75%)] blur-[90px]" />
 
-          {/* Precision Dot Lattice Matrix */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:24px_24px] opacity-25" />
+          {/* Layer 4: Deep Multi-Stop Nocturnal Calibration Gradient for 100% Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#061838]/70 via-[#030d22]/85 to-[#01040d]/96" />
+
+          {/* Layer 5: Precision Architectural Matrix Grid */}
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:24px_24px] opacity-25" />
         </div>
 
         <Container className="relative z-10">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_2.4fr] lg:gap-14">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_2.4fr] lg:gap-14">
             {/* Brand & Mission Column */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <Logo variant="reverse" className="h-8.5 w-auto" />
+              {/* Elevated Logo with Cloud Mark Ambient Glow */}
+              <div className="relative inline-block">
+                <div className="absolute -top-2 -left-2 size-24 rounded-full bg-blue-500/25 blur-xl pointer-events-none" />
+                <Logo variant="reverse" className="h-9 sm:h-10 w-auto relative z-10 drop-shadow-md" />
               </div>
 
-              <p className="max-w-sm text-xs leading-relaxed text-slate-400">
+              <p className="max-w-sm text-xs leading-relaxed text-slate-300 font-normal">
                 Sovereign enterprise operations technology, collections OMS (Operations Management System), and intelligent automation built from 20 years of floor leadership.
               </p>
 
               {/* Operational Status Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-950/60 px-3 py-1">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-                </span>
-                <span className="text-[11px] font-semibold text-emerald-300">
-                  All Systems Operational · 99.9% Uptime
-                </span>
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-950/70 px-3.5 py-1 backdrop-blur-md shadow-xs shadow-emerald-950/40">
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                  </span>
+                  <span className="text-[11px] font-semibold text-emerald-300">
+                    All Systems Operational · 99.9% Uptime
+                  </span>
+                </div>
               </div>
 
-              <div className="text-[11px] text-slate-500 space-y-1">
-                <p>Boundless IT Solutions OPC · Manila, Philippines</p>
-                <p>
-                  Direct Scoping:{" "}
+              {/* Company Headquarters & Direct Scoping */}
+              <div className="text-xs text-slate-300 space-y-1.5 pt-1">
+                <div className="flex items-center gap-2">
+                  <MapPin className="size-3.5 text-sky-400 shrink-0" />
+                  <span>Boundless IT Solutions OPC · Manila, Philippines</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="size-3.5 text-sky-400 shrink-0" />
+                  <span className="text-slate-400">Direct Scoping:</span>
                   <a
                     href="mailto:bits_inquiries@boundlessits.com"
-                    className="text-blue-400 hover:underline"
+                    className="font-semibold text-sky-300 hover:text-white underline decoration-sky-400/40 hover:decoration-white transition-all"
                   >
                     bits_inquiries@boundlessits.com
                   </a>
+                </div>
+              </div>
+
+              {/* ── OFFICIAL VERIFIED SOCIAL MEDIA ROW ── */}
+              <div className="pt-2">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                  Official Channels
                 </p>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://www.linkedin.com/company/boundless-it-solutions-opc/?viewAsMember=true"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Connect with Boundless IT Solutions on LinkedIn"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-blue-600/40 hover:border-blue-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                  <a
+                    href="https://x.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow BITS on X"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-slate-800/80 hover:border-white/30 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                  >
+                    <TwitterXIcon />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61594430590134"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow Boundless IT Solutions on Facebook"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-blue-600/40 hover:border-blue-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                  >
+                    <FacebookIcon />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/boundlessitsolutions/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow Boundless IT Solutions on Instagram"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-rose-600/40 hover:border-rose-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                  >
+                    <InstagramIcon />
+                  </a>
+                  <a
+                    href="https://github.com/jcuady/bits-landing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View BITS on GitHub"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-purple-600/40 hover:border-purple-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                  >
+                    <GitHubIcon />
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Navigation Grid (3 Clear Categorical Columns; CRM portal login hidden) */}
+            {/* Navigation Grid (3 Clear Categorical Columns with High-Contrast Typography) */}
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
               {footerNavigation.map((sec) => (
                 <div key={sec.title} className="space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-200">
-                    {sec.title}
+                  <p className="text-xs font-extrabold uppercase tracking-wider text-white/90 flex items-center gap-1.5">
+                    <span className="size-1 rounded-full bg-sky-400" />
+                    <span>{sec.title}</span>
                   </p>
                   <ul className="space-y-2 text-xs">
                     {sec.links.map((link) => (
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="text-slate-400 hover:text-white transition-colors duration-150 inline-block py-0.5"
+                          className="text-slate-300 hover:text-white hover:translate-x-0.5 transition-all duration-150 inline-block py-0.5"
                         >
                           {link.label}
                         </Link>
@@ -330,31 +430,34 @@ export function Footer() {
           </div>
 
           {/* Bottom Bar: Regulatory Governance & Copyright */}
-          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800/80 pt-8 sm:flex-row text-xs text-slate-500">
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row text-xs text-slate-400">
             <p>© {new Date().getFullYear()} Boundless IT Solutions OPC. All rights reserved.</p>
 
-            {/* Regulatory Alignment Chips */}
+            {/* Regulatory Alignment Chips with Rich Contrast */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/25 bg-blue-950/40 px-3 py-1 text-[11px] text-blue-200 backdrop-blur-xs">
                 <ShieldCheck className="size-3.5 text-blue-400" />
                 BSP Circular 808 Aligned
               </span>
-              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-950/40 px-3 py-1 text-[11px] text-emerald-200 backdrop-blur-xs">
                 <CheckCircle2 className="size-3.5 text-emerald-400" />
                 NPC RA 10173 DPA Compliant
               </span>
-              <span className="inline-flex items-center gap-1 text-[11px] text-slate-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/25 bg-sky-950/40 px-3 py-1 text-[11px] text-sky-200 backdrop-blur-xs">
                 <CheckCircle2 className="size-3.5 text-sky-400" />
                 SEC MC 18 Aligned
               </span>
             </div>
 
             <div className="flex items-center gap-4 text-[11px]">
-              <Link href="/legal#privacy" className="text-slate-400 hover:text-white transition-colors">
+              <Link href="/legal#privacy" className="text-slate-300 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/legal#terms" className="text-slate-400 hover:text-white transition-colors">
+              <Link href="/legal#terms" className="text-slate-300 hover:text-white transition-colors">
                 Terms of Service
+              </Link>
+              <Link href="/brandbook" className="text-sky-400 hover:text-sky-300 transition-colors">
+                Brandbook
               </Link>
             </div>
           </div>
