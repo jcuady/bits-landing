@@ -10,7 +10,7 @@ export function Logo({
   className,
   priority = false,
 }: {
-  variant?: "horizontal" | "reverse" | "tile";
+  variant?: "horizontal" | "reverse" | "tile" | "stacked" | "stacked-reverse" | "mark" | "auto";
   className?: string;
   priority?: boolean;
 }) {
@@ -22,8 +22,62 @@ export function Logo({
         width={512}
         height={512}
         priority={priority}
-        className={cn("h-9 w-auto rounded-[10px]", className)}
+        unoptimized
+        className={cn("h-9 w-auto rounded-[10px] object-contain", className)}
       />
+    );
+  }
+
+  if (variant === "mark") {
+    return (
+      <Image
+        src="/brand/mark.png"
+        alt="BITS - Boundless IT Solutions Cloud Mark"
+        width={512}
+        height={512}
+        priority={priority}
+        unoptimized
+        className={cn("h-8 w-auto object-contain", className)}
+      />
+    );
+  }
+
+  if (variant === "stacked" || variant === "stacked-reverse") {
+    return (
+      <Image
+        src={variant === "stacked-reverse" ? "/brand/logo-stacked-reverse.png" : "/brand/logo-stacked.png"}
+        alt="BITS - Boundless IT Solutions"
+        width={800}
+        height={907}
+        priority={priority}
+        unoptimized
+        className={cn("h-16 w-auto object-contain", className)}
+      />
+    );
+  }
+
+  if (variant === "auto") {
+    return (
+      <span className="inline-flex items-center">
+        <Image
+          src="/brand/logo-horizontal.png"
+          alt="BITS - Boundless IT Solutions"
+          width={1400}
+          height={482}
+          priority={priority}
+          unoptimized
+          className={cn("h-8 w-auto object-contain dark:hidden", className)}
+        />
+        <Image
+          src="/brand/logo-reverse.png"
+          alt="BITS - Boundless IT Solutions"
+          width={1400}
+          height={482}
+          priority={priority}
+          unoptimized
+          className={cn("hidden h-8 w-auto object-contain dark:block", className)}
+        />
+      </span>
     );
   }
 
@@ -33,9 +87,10 @@ export function Logo({
       src={isReverse ? "/brand/logo-reverse.png" : "/brand/logo-horizontal.png"}
       alt="BITS - Boundless IT Solutions"
       width={1400}
-      height={isReverse ? 408 : 404}
+      height={482}
       priority={priority}
-      className={cn("h-8 w-auto", className)}
+      unoptimized
+      className={cn("h-8 w-auto object-contain", className)}
     />
   );
 }

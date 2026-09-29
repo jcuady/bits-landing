@@ -175,7 +175,12 @@ export function Header() {
               setActiveDropdown(null);
               setMobileOpen(false);
             }}
-            className="relative z-10 inline-flex min-h-11 min-w-11 shrink-0 items-center rounded-md transition-opacity hover:opacity-90"
+            className={cn(
+              "relative z-10 inline-flex min-h-11 shrink-0 items-center rounded-2xl transition-all duration-200",
+              solid
+                ? "px-1.5 py-1 hover:opacity-90"
+                : "border border-white/80 bg-white/85 px-3 py-1.5 shadow-sm shadow-blue-950/5 backdrop-blur-md hover:bg-white hover:shadow-md"
+            )}
           >
             <span className="hidden min-[400px]:inline-block">
               <Logo variant="horizontal" priority className="h-7 md:h-8" />
@@ -364,7 +369,12 @@ export function Header() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-full text-slate-900 transition-colors hover:bg-slate-100 lg:hidden"
+            className={cn(
+              "relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-2xl transition-all duration-200 lg:hidden",
+              solid
+                ? "text-slate-900 hover:bg-slate-100"
+                : "border border-white/80 bg-white/85 text-slate-900 shadow-sm shadow-blue-950/5 backdrop-blur-md hover:bg-white hover:shadow-md"
+            )}
           >
             <span className="relative block h-3.5 w-[18px]" aria-hidden>
               <span

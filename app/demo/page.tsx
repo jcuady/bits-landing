@@ -65,7 +65,7 @@ export default function DemoMatrixHub() {
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link href="/" className="hover:opacity-90 transition">
-              <Logo variant="horizontal" className="h-8 invert" />
+              <Logo variant="reverse" className="h-8" />
             </Link>
             <div className="hidden md:flex items-center gap-2 border-l border-slate-800 pl-4 text-xs text-slate-400">
               <Badge variant="outline" className="border-electric-500/40 bg-electric-500/10 text-electric-400 font-semibold text-[10px]">

@@ -176,7 +176,7 @@ export default function SettingsPage() {
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-border bg-muted/30 p-4 dark:border-neutral-800 dark:bg-neutral-900/50">
             <div className="flex items-center gap-4">
               <div className="rounded-lg bg-card p-2 shadow-sm dark:bg-neutral-800">
-                <Logo variant="horizontal" className="h-7" />
+                <Logo variant="auto" className="h-7" />
               </div>
               <div>
                 <p className="text-sm font-semibold text-foreground dark:text-neutral-100">
