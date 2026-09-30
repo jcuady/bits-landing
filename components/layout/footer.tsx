@@ -107,24 +107,24 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#061735] text-slate-300">
-      {/* ── PART 1: PRE-FOOTER DIRECT CONNECT BANNER (Clean Luxury Light Canvas, Matching Image 1) ── */}
-      <div className="relative overflow-hidden bg-white border-t border-slate-100">
+    <footer className="relative overflow-hidden bg-[#124294] text-slate-100">
+      {/* ── PART 1: PRE-FOOTER DIRECT CONNECT BANNER (Clean Luxury Light Canvas) ── */}
+      <div className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/50 to-sky-100/70 border-t border-sky-100">
         {/* Subtle architectural dot lattice & soft ambient sheen */}
         <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] rounded-full bg-blue-50/60 blur-3xl pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(15,23,42,0.04)_1px,transparent_1px)] [background-size:24px_24px] opacity-60" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] rounded-full bg-sky-200/40 blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(18,66,148,0.05)_1px,transparent_1px)] [background-size:24px_24px] opacity-70" />
         </div>
 
         {/* Call-to-Action Content Zone */}
         <Container className="relative z-10 pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-20 lg:pb-24">
           <div className="mx-auto max-w-4xl text-center">
             {/* Frosted Capsule Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
               <span className="flex size-4 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 text-white text-[9px] shadow-xs">
                 ⚡
               </span>
-              <span className="text-[0.78rem] font-bold text-slate-800 tracking-tight">
+              <span className="text-[0.78rem] font-bold text-blue-950 tracking-tight">
                 Let&apos;s Connect
               </span>
             </div>
@@ -140,9 +140,9 @@ export function Footer() {
             </p>
 
             {/* Minimal High-End Capsule Email Form (Matching Reference Mockup) */}
-            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-2xl sm:rounded-full border border-slate-200/90 bg-white p-2 shadow-xl shadow-slate-900/5 backdrop-blur-md">
+            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-2xl sm:rounded-full border border-sky-200 bg-white p-2 shadow-xl shadow-blue-900/5 backdrop-blur-md">
               <div className="flex flex-1 items-center gap-3 pl-3 sm:pl-4 w-full">
-                <Mail className="size-5 text-slate-400 shrink-0" aria-hidden="true" />
+                <Mail className="size-5 text-blue-500 shrink-0" aria-hidden="true" />
                 <label htmlFor="footer-quick-email-input" className="sr-only">
                   Enter Your Email Address
                 </label>
@@ -165,10 +165,10 @@ export function Footer() {
               <button
                 type="button"
                 onClick={handleQuickSubmit}
-                className="group flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#111827] hover:bg-blue-600 px-7 py-3 font-bold text-white shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
+                className="group flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3 font-bold text-white shadow-lg shadow-blue-600/30 transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
               >
                 <span className="text-sm">Contact Us</span>
-                <ArrowRight className="size-4 text-slate-400 group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="size-4 text-white/80 group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
 
@@ -176,7 +176,7 @@ export function Footer() {
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-700">
               <a
                 href="#content"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Home
               </a>
@@ -188,19 +188,19 @@ export function Footer() {
               </a>
               <a
                 href="#floor-showcase"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Features
               </a>
               <a
                 href="#features-bento"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Product
               </a>
               <a
                 href="#pricing"
-                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 px-4.5 py-2 text-slate-800 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Pricing
               </a>
@@ -212,7 +212,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow BITS on X"
-                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-900 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-sky-200 bg-white text-slate-700 hover:text-blue-900 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <TwitterXIcon />
                 </a>
@@ -222,7 +222,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Connect with Boundless IT Solutions on LinkedIn"
-                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-sky-200 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <LinkedInIcon />
                 </a>
@@ -232,7 +232,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow Boundless IT Solutions on Instagram"
-                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-rose-600 hover:border-rose-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-sky-200 bg-white text-slate-700 hover:text-rose-600 hover:border-rose-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <InstagramIcon />
                 </a>
@@ -242,7 +242,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow Boundless IT Solutions on Facebook"
-                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-sky-200 bg-white text-slate-700 hover:text-blue-600 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <FacebookIcon />
                 </a>
@@ -252,7 +252,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="View BITS on GitHub"
-                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-purple-600 hover:border-purple-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-sky-200 bg-white text-slate-700 hover:text-purple-600 hover:border-purple-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <GitHubIcon />
                 </a>
@@ -262,8 +262,8 @@ export function Footer() {
         </Container>
       </div>
 
-      {/* ── PART 2: SOVEREIGN BEDROCK FOOTER WITH REALISTIC CLOUD DRIFT BACKGROUND ── */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#0e3271] via-[#092350] to-[#061735] text-slate-100 pt-16 sm:pt-20 pb-12 sm:pb-16 border-t border-sky-400/40 shadow-[0_-8px_40px_rgba(37,99,235,0.25)]">
+      {/* ── PART 2: SOVEREIGN CLOUD HORIZON FOOTER WITH HERO LIGHT BLUE CLOUD CANVAS ── */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#124294] via-[#1b55c6] to-[#2563eb] text-white pt-16 sm:pt-20 pb-12 sm:pb-16 border-t border-sky-300/40 shadow-[0_-8px_40px_rgba(37,99,235,0.25)]">
         {/* Atmospheric Animated Drifting Clouds Canvas (Matching Hero Aesthetic) */}
         <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
           {/* Layer 1: High-Definition Sky & Cloud Horizon with Fluid Drift */}
@@ -275,7 +275,7 @@ export function Footer() {
                 fill
                 sizes="100vw"
                 quality={90}
-                className="object-cover object-bottom opacity-65 scale-105 select-none"
+                className="object-cover object-top opacity-85 scale-105 select-none"
               />
             </div>
           </div>
@@ -295,13 +295,13 @@ export function Footer() {
           </div>
 
           {/* Layer 3: Celestial Radiant Sunbreak / Horizon Glow */}
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[320px] w-[1200px] rounded-full bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.45),rgba(37,99,235,0.3)_40%,transparent_75%)] blur-[80px]" />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[340px] w-[1200px] rounded-full bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.45),rgba(56,189,248,0.3)_40%,transparent_75%)] blur-[80px]" />
 
           {/* Layer 4: Royal Azure Color Calibration Gradient (Hero Blue, Zero Black) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-600/30 via-blue-800/60 to-[#071d42]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-600/30 via-blue-500/20 to-sky-400/25 mix-blend-multiply" />
 
           {/* Layer 5: Precision Architectural Matrix Grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
         </div>
 
         <Container className="relative z-10">
@@ -310,39 +310,39 @@ export function Footer() {
             <div className="space-y-4">
               {/* Elevated Logo with Cloud Mark Ambient Glow */}
               <div className="relative inline-block">
-                <div className="absolute -top-2 -left-2 size-24 rounded-full bg-blue-500/25 blur-xl pointer-events-none" />
+                <div className="absolute -top-2 -left-2 size-24 rounded-full bg-white/20 blur-xl pointer-events-none" />
                 <Logo variant="reverse" className="h-9 sm:h-10 w-auto relative z-10 drop-shadow-md" />
               </div>
 
-              <p className="max-w-sm text-xs leading-relaxed text-slate-300 font-normal">
+              <p className="max-w-sm text-xs leading-relaxed text-sky-100 font-normal">
                 Sovereign enterprise operations technology, collections OMS (Operations Management System), and intelligent automation built from 20 years of floor leadership.
               </p>
 
               {/* Operational Status Pill */}
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-950/70 px-3.5 py-1 backdrop-blur-md shadow-xs shadow-emerald-950/40">
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300/40 bg-emerald-500/20 px-3.5 py-1 backdrop-blur-md shadow-xs shadow-blue-950/20">
                   <span className="relative flex size-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
                   </span>
-                  <span className="text-[11px] font-semibold text-emerald-300">
+                  <span className="text-[11px] font-bold text-white">
                     All Systems Operational · 99.9% Uptime
                   </span>
                 </div>
               </div>
 
               {/* Company Headquarters & Direct Scoping */}
-              <div className="text-xs text-slate-300 space-y-1.5 pt-1">
+              <div className="text-xs text-sky-100 space-y-1.5 pt-1">
                 <div className="flex items-center gap-2">
-                  <MapPin className="size-3.5 text-sky-400 shrink-0" />
+                  <MapPin className="size-3.5 text-sky-300 shrink-0" />
                   <span>Boundless IT Solutions OPC · Manila, Philippines</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Mail className="size-3.5 text-sky-400 shrink-0" />
-                  <span className="text-slate-400">Direct Scoping:</span>
+                  <Mail className="size-3.5 text-sky-300 shrink-0" />
+                  <span className="text-sky-200">Direct Scoping:</span>
                   <a
                     href="mailto:bits_inquiries@boundlessits.com"
-                    className="font-semibold text-sky-300 hover:text-white underline decoration-sky-400/40 hover:decoration-white transition-all"
+                    className="font-bold text-white hover:text-sky-200 underline decoration-white/40 hover:decoration-white transition-all"
                   >
                     bits_inquiries@boundlessits.com
                   </a>
@@ -351,7 +351,7 @@ export function Footer() {
 
               {/* ── OFFICIAL VERIFIED SOCIAL MEDIA ROW ── */}
               <div className="pt-2">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-sky-200 mb-2">
                   Official Channels
                 </p>
                 <div className="flex items-center gap-2">
@@ -360,7 +360,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Connect with Boundless IT Solutions on LinkedIn"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-blue-600/40 hover:border-blue-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <LinkedInIcon />
                   </a>
@@ -369,7 +369,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow BITS on X"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-slate-800/80 hover:border-white/30 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <TwitterXIcon />
                   </a>
@@ -378,7 +378,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow Boundless IT Solutions on Facebook"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-blue-600/40 hover:border-blue-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <FacebookIcon />
                   </a>
@@ -387,7 +387,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow Boundless IT Solutions on Instagram"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-rose-600/40 hover:border-rose-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-rose-600 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <InstagramIcon />
                   </a>
@@ -396,7 +396,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View BITS on GitHub"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/15 bg-white/[0.07] text-slate-200 hover:text-white hover:bg-purple-600/40 hover:border-purple-400/60 shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-purple-600 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <GitHubIcon />
                   </a>
@@ -408,8 +408,8 @@ export function Footer() {
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
               {footerNavigation.map((sec) => (
                 <div key={sec.title} className="space-y-3">
-                  <p className="text-xs font-extrabold uppercase tracking-wider text-white/90 flex items-center gap-1.5">
-                    <span className="size-1 rounded-full bg-sky-400" />
+                  <p className="text-xs font-extrabold uppercase tracking-wider text-white flex items-center gap-1.5 drop-shadow-xs">
+                    <span className="size-1.5 rounded-full bg-sky-300" />
                     <span>{sec.title}</span>
                   </p>
                   <ul className="space-y-2 text-xs">
@@ -417,7 +417,7 @@ export function Footer() {
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="text-slate-300 hover:text-white hover:translate-x-0.5 transition-all duration-150 inline-block py-0.5"
+                          className="text-sky-100 hover:text-white font-medium hover:translate-x-0.5 transition-all duration-150 inline-block py-0.5"
                         >
                           {link.label}
                         </Link>
@@ -430,33 +430,33 @@ export function Footer() {
           </div>
 
           {/* Bottom Bar: Regulatory Governance & Copyright */}
-          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row text-xs text-slate-400">
+          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-8 sm:flex-row text-xs text-sky-100/90">
             <p>© {new Date().getFullYear()} Boundless IT Solutions OPC. All rights reserved.</p>
 
             {/* Regulatory Alignment Chips with Rich Contrast */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/25 bg-blue-950/40 px-3 py-1 text-[11px] text-blue-200 backdrop-blur-xs">
-                <ShieldCheck className="size-3.5 text-blue-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] text-white font-semibold backdrop-blur-xs">
+                <ShieldCheck className="size-3.5 text-sky-200" />
                 BSP Circular 808 Aligned
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-emerald-950/40 px-3 py-1 text-[11px] text-emerald-200 backdrop-blur-xs">
-                <CheckCircle2 className="size-3.5 text-emerald-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] text-white font-semibold backdrop-blur-xs">
+                <CheckCircle2 className="size-3.5 text-emerald-300" />
                 NPC RA 10173 DPA Compliant
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/25 bg-sky-950/40 px-3 py-1 text-[11px] text-sky-200 backdrop-blur-xs">
-                <CheckCircle2 className="size-3.5 text-sky-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] text-white font-semibold backdrop-blur-xs">
+                <CheckCircle2 className="size-3.5 text-sky-200" />
                 SEC MC 18 Aligned
               </span>
             </div>
 
             <div className="flex items-center gap-4 text-[11px]">
-              <Link href="/legal#privacy" className="text-slate-300 hover:text-white transition-colors">
+              <Link href="/legal#privacy" className="text-sky-100 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/legal#terms" className="text-slate-300 hover:text-white transition-colors">
+              <Link href="/legal#terms" className="text-sky-100 hover:text-white transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/brandbook" className="text-sky-400 hover:text-sky-300 transition-colors">
+              <Link href="/brandbook" className="text-white font-bold hover:text-sky-200 underline decoration-white/40 transition-colors">
                 Brandbook
               </Link>
             </div>

@@ -23,7 +23,7 @@ async function capture() {
   console.log("✓ Captured newlogo/screenshot_footer_full.png");
 
   // 2. Bedrock Footer (Part 2 with clouds, logo, socials)
-  const bedrock = footer.locator("div.relative.overflow-hidden.bg-\\[\\#020614\\]").first();
+  const bedrock = footer.locator("div.relative.overflow-hidden").last();
   if (await bedrock.count() > 0) {
     await bedrock.screenshot({
       path: "newlogo/screenshot_footer_bedrock.png",
@@ -42,8 +42,19 @@ async function capture() {
   });
   console.log("✓ Captured newlogo/screenshot_footer_mobile.png");
 
+  // 4. Products CRM page verification
+  console.log("Navigating to http://localhost:3847/products/crm ...");
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("http://localhost:3847/products/crm", { waitUntil: "networkidle" });
+  await page.waitForTimeout(600);
+  await page.screenshot({
+    path: "newlogo/screenshot_product_crm.png",
+    fullPage: false,
+  });
+  console.log("✓ Captured newlogo/screenshot_product_crm.png");
+
   await browser.close();
-  console.log("All footer captures completed.");
+  console.log("All captures completed.");
 }
 
 capture().catch(console.error);

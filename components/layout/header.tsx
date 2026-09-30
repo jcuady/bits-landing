@@ -151,7 +151,8 @@ export function Header() {
     }, 140);
   };
 
-  const solid = scrolled || mobileOpen;
+  const isHome = pathname === "/";
+  const solid = scrolled || mobileOpen || !isHome;
 
   return (
     <>
