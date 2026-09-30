@@ -224,7 +224,7 @@ export function Pricing() {
                       className={`group w-full inline-flex min-h-[46px] items-center justify-between gap-3 rounded-full pl-6 pr-2 py-2 text-sm font-bold shadow-md transition-all duration-300 active:scale-[0.98] cursor-pointer ${
                         tier.highlight
                           ? "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/25"
-                          : "bg-slate-950 hover:bg-slate-800 text-white shadow-slate-950/10"
+                          : "bg-[#124294] hover:bg-blue-600 text-white shadow-blue-900/15"
                       }`}
                     >
                       <span>{tier.ctaLabel}</span>
@@ -331,10 +331,10 @@ export function Pricing() {
                   <button
                     type="button"
                     onClick={() => openModal("Inquiry: Pricing for Other BITS Software Products")}
-                    className="group w-full sm:w-auto inline-flex min-h-[48px] items-center justify-center gap-3 rounded-full bg-slate-950 hover:bg-blue-600 pl-6 pr-2 py-2 text-sm font-bold text-white shadow-lg shadow-slate-950/10 hover:shadow-blue-600/25 transition-all duration-300 active:scale-[0.98] cursor-pointer"
+                    className="group w-full sm:w-auto inline-flex min-h-[48px] items-center justify-center gap-3 rounded-full bg-blue-600 hover:bg-blue-500 pl-6 pr-2 py-2 text-sm font-bold text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-500/35 transition-all duration-300 active:scale-[0.98] cursor-pointer"
                   >
                     <span>Check Pricing for Other Products</span>
-                    <span className="size-8 rounded-full bg-white/15 flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:bg-white/25 transition-all duration-300 font-bold">
+                    <span className="size-8 rounded-full bg-white/20 flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:bg-white/30 transition-all duration-300 font-bold">
                       <ArrowRight className="size-3.5" />
                     </span>
                   </button>

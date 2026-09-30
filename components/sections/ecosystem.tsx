@@ -89,7 +89,7 @@ export function Ecosystem() {
         {dispatchedNotice && (
           <div
             role="status"
-            className="fixed top-24 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center gap-2.5 rounded-2xl border border-blue-200 bg-slate-900/95 px-5 py-3 text-xs text-white shadow-2xl backdrop-blur-md animate-in fade-in"
+            className="fixed top-24 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center gap-2.5 rounded-2xl border border-sky-400/40 bg-[#0a2a66]/95 px-5 py-3 text-xs text-white shadow-2xl backdrop-blur-md animate-in fade-in"
           >
             <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
             <span className="flex-1 font-medium">{dispatchedNotice}</span>

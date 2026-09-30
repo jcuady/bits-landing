@@ -107,7 +107,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-slate-950 text-slate-300">
+    <footer className="relative overflow-hidden bg-[#061735] text-slate-300">
       {/* ── PART 1: PRE-FOOTER DIRECT CONNECT BANNER (Clean Luxury Light Canvas, Matching Image 1) ── */}
       <div className="relative overflow-hidden bg-white border-t border-slate-100">
         {/* Subtle architectural dot lattice & soft ambient sheen */}
@@ -212,7 +212,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Follow BITS on X"
-                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-slate-950 hover:border-slate-300 shadow-2xs transition-all active:scale-[0.98]"
+                  className="flex size-11 items-center justify-center rounded-xl border border-slate-200/90 bg-white text-slate-700 hover:text-blue-900 hover:border-blue-300 shadow-2xs transition-all active:scale-[0.98]"
                 >
                   <TwitterXIcon />
                 </a>
@@ -263,7 +263,7 @@ export function Footer() {
       </div>
 
       {/* ── PART 2: SOVEREIGN BEDROCK FOOTER WITH REALISTIC CLOUD DRIFT BACKGROUND ── */}
-      <div className="relative overflow-hidden bg-[#020614] text-slate-200 pt-16 sm:pt-20 pb-12 sm:pb-16 border-t border-sky-400/30 shadow-[0_-4px_30px_rgba(56,189,248,0.15)]">
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#0e3271] via-[#092350] to-[#061735] text-slate-100 pt-16 sm:pt-20 pb-12 sm:pb-16 border-t border-sky-400/40 shadow-[0_-8px_40px_rgba(37,99,235,0.25)]">
         {/* Atmospheric Animated Drifting Clouds Canvas (Matching Hero Aesthetic) */}
         <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
           {/* Layer 1: High-Definition Sky & Cloud Horizon with Fluid Drift */}
@@ -275,13 +275,13 @@ export function Footer() {
                 fill
                 sizes="100vw"
                 quality={90}
-                className="object-cover object-bottom opacity-55 scale-105 select-none"
+                className="object-cover object-bottom opacity-65 scale-105 select-none"
               />
             </div>
           </div>
 
           {/* Layer 2: Counter-Harmonic Cloud Mist Flow */}
-          <div className="absolute inset-0 opacity-35 mix-blend-screen">
+          <div className="absolute inset-0 opacity-45 mix-blend-screen">
             <div className="relative size-full animate-cloud-drift-reverse will-change-transform transform-gpu">
               <Image
                 src="/images/hero-sky-bg.jpg"
@@ -295,13 +295,13 @@ export function Footer() {
           </div>
 
           {/* Layer 3: Celestial Radiant Sunbreak / Horizon Glow */}
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[320px] w-[1200px] rounded-full bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.35),rgba(37,99,235,0.22)_40%,transparent_75%)] blur-[90px]" />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[320px] w-[1200px] rounded-full bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.45),rgba(37,99,235,0.3)_40%,transparent_75%)] blur-[80px]" />
 
-          {/* Layer 4: Deep Multi-Stop Nocturnal Calibration Gradient for 100% Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#061838]/70 via-[#030d22]/85 to-[#01040d]/96" />
+          {/* Layer 4: Royal Azure Color Calibration Gradient (Hero Blue, Zero Black) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-600/30 via-blue-800/60 to-[#071d42]/85" />
 
           {/* Layer 5: Precision Architectural Matrix Grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:24px_24px] opacity-25" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
         </div>
 
         <Container className="relative z-10">

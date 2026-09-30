@@ -396,22 +396,22 @@ export function StatsStrip() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-12 sm:mt-16 rounded-3xl border border-sky-200/80 bg-gradient-to-r from-blue-900 via-[#0a234f] to-slate-950 p-6 sm:p-8 text-white shadow-xl shadow-blue-950/10 relative overflow-hidden"
+          className="mt-12 sm:mt-16 rounded-3xl border border-sky-300/40 bg-gradient-to-r from-[#124294] via-[#1b55c6] to-[#2563eb] p-6 sm:p-8 text-white shadow-xl shadow-blue-950/20 relative overflow-hidden"
         >
           {/* Subtle Ambient Sheen */}
-          <div className="pointer-events-none absolute -right-20 -top-20 size-80 rounded-full bg-blue-500/20 blur-3xl" />
-          <div className="pointer-events-none absolute -left-20 -bottom-20 size-80 rounded-full bg-sky-400/15 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 -top-20 size-80 rounded-full bg-sky-300/25 blur-3xl" />
+          <div className="pointer-events-none absolute -left-20 -bottom-20 size-80 rounded-full bg-white/20 blur-3xl" />
 
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-mono font-semibold text-sky-200 border border-white/10">
-                <ShieldCheck className="size-3.5 text-sky-400" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-mono font-semibold text-sky-100 border border-white/20">
+                <ShieldCheck className="size-3.5 text-sky-300" />
                 <span>20-Year Recovery Floor Origin</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
                 How Does Your Floor Compare to These Benchmarks?
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-sky-100/90 max-w-2xl leading-relaxed">
                 Schedule a confidential 25-minute architecture walkthrough. We audit your live contact rates, broken promise ratios, and carrier telephony costs with real recovery leadership.
               </p>
             </div>
@@ -419,10 +419,10 @@ export function StatsStrip() {
             <button
               type="button"
               onClick={() => openModal("Floor Telemetry Benchmark Consultation")}
-              className="group flex min-h-[48px] shrink-0 items-center justify-center gap-2 rounded-full bg-white hover:bg-sky-50 px-7 py-3 text-sm font-bold text-slate-900 shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer"
+              className="group flex min-h-[48px] shrink-0 items-center justify-center gap-2 rounded-full bg-white hover:bg-sky-50 px-7 py-3 text-sm font-extrabold text-blue-950 shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer"
             >
               <span>Audit Your Floor Benchmarks</span>
-              <ArrowRight className="size-4 text-slate-600 group-hover:text-blue-600 transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight className="size-4 text-blue-700 group-hover:text-blue-900 transition-transform duration-200 group-hover:translate-x-1" />
             </button>
           </div>
         </motion.div>

@@ -36,7 +36,7 @@ export function NewsletterForm() {
 
       <button
         type="submit"
-        className="h-11 min-h-[44px] shrink-0 cursor-pointer rounded-full bg-slate-950 hover:bg-slate-800 px-5 text-xs font-bold text-white shadow-xs transition-all duration-200 hover:shadow-md active:scale-[0.98]"
+        className="h-11 min-h-[44px] shrink-0 cursor-pointer rounded-full bg-blue-600 hover:bg-blue-500 px-5 text-xs font-bold text-white shadow-sm shadow-blue-600/25 transition-all duration-200 hover:shadow-md active:scale-[0.98]"
       >
         Subscribe
       </button>

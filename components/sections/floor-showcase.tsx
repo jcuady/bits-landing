@@ -248,7 +248,7 @@ export function FloorShowcase() {
                   className={cn(
                     "group flex items-center gap-2.5 rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 shrink-0 cursor-pointer border select-none",
                     isActive
-                      ? "bg-slate-950 text-white border-slate-950 shadow-lg shadow-slate-950/15"
+                      ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-600/25"
                       : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
                   )}
                 >
@@ -321,10 +321,10 @@ export function FloorShowcase() {
                       <button
                         type="button"
                         onClick={() => openModal(`Live Demo: ${currentTab.label}`)}
-                        className="group inline-flex min-h-[46px] items-center gap-3 rounded-full bg-slate-950 hover:bg-blue-600 pl-6 pr-2 py-2 text-sm font-bold text-white shadow-lg shadow-slate-950/10 hover:shadow-blue-600/25 transition-all duration-300 active:scale-[0.98] cursor-pointer"
+                        className="group inline-flex min-h-[46px] items-center gap-3 rounded-full bg-blue-600 hover:bg-blue-500 pl-6 pr-2 py-2 text-sm font-bold text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-500/35 transition-all duration-300 active:scale-[0.98] cursor-pointer"
                       >
                         <span>Schedule Live Floor Demo</span>
-                        <span className="size-8 rounded-full bg-white/15 flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:bg-white/25 transition-all duration-300 font-bold">
+                        <span className="size-8 rounded-full bg-white/20 flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:bg-white/30 transition-all duration-300 font-bold">
                           →
                         </span>
                       </button>
@@ -398,13 +398,13 @@ export function FloorShowcase() {
                           </div>
 
                           {/* Interactive Practice Echo-Line Softphone Mockup */}
-                          <div className="rounded-xl border border-slate-200 bg-slate-900 text-white p-4 shadow-md">
-                            <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-800">
+                          <div className="rounded-xl border border-blue-400/30 bg-gradient-to-br from-[#0c2e6b] to-[#124294] text-white p-4 shadow-md">
+                            <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
                               <div className="flex items-center gap-2">
                                 <Logo variant="tile" className="size-5 rounded-md object-contain" />
                                 <span className="text-xs font-bold tracking-tight text-white">BITS Training Softphone</span>
                               </div>
-                              <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-800">
+                              <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/60 px-2 py-0.5 rounded-full border border-emerald-500/40">
                                 Local Echo Line
                               </span>
                             </div>

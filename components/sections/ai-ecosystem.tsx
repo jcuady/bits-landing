@@ -112,7 +112,7 @@ export function AiEcosystem() {
         <div
           role="status"
           aria-live="polite"
-          className="fixed top-24 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center gap-2.5 rounded-xl border border-blue-200 bg-slate-900/95 px-4 py-3 text-xs text-white shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2"
+          className="fixed top-24 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center gap-2.5 rounded-xl border border-sky-400/40 bg-[#0a2a66]/95 px-4 py-3 text-xs text-white shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2"
         >
           <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
           <p className="flex-1 font-medium">{toastMessage}</p>

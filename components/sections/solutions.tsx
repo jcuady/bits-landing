@@ -125,7 +125,7 @@ function CrmSpecimen() {
   return (
     <div className="bionis-dashboard relative font-sans">
       {toast && (
-        <div className="absolute -top-12 left-1/2 z-40 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-xl bg-neutral-900 px-3.5 py-2 text-xs font-semibold text-white shadow-xl animate-in fade-in">
+        <div className="absolute -top-12 left-1/2 z-40 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-xl bg-[#0a2a66] border border-sky-400/40 px-3.5 py-2 text-xs font-semibold text-white shadow-xl animate-in fade-in">
           <CheckCircle2 className="size-4 text-[#00b153] shrink-0" />
           <p className="flex-1 truncate">{toast}</p>
         </div>

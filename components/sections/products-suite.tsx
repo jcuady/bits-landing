@@ -1197,7 +1197,7 @@ function CollectionsBoard({
               className={cn(
                 "rounded-lg px-3 py-2 text-[0.68rem] font-bold capitalize transition-all min-h-[44px] inline-flex items-center justify-center",
                 filter === f
-                  ? "bg-slate-900 text-white"
+                  ? "bg-blue-600 text-white shadow-sm shadow-blue-600/25"
                   : "text-slate-600 hover:bg-slate-100"
               )}
             >
@@ -1459,7 +1459,7 @@ function SupportBoard({
               className={cn(
                 "rounded-lg px-3 py-2 text-[0.68rem] font-bold capitalize transition-all min-h-[44px] inline-flex items-center justify-center",
                 filter === f
-                  ? "bg-slate-900 text-white"
+                  ? "bg-blue-600 text-white shadow-sm shadow-blue-600/25"
                   : "text-slate-600 hover:bg-slate-100"
               )}
             >
@@ -4057,7 +4057,7 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
       {activeTab === "simulator" && (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
           {/* Left: Physical Smart Card Mockup */}
-          <div className="lg:col-span-6 flex flex-col justify-between rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-5 text-white shadow-md">
+          <div className="lg:col-span-6 flex flex-col justify-between rounded-2xl border border-blue-400/40 bg-gradient-to-br from-[#0a2761] via-[#0f388a] to-[#124294] p-5 text-white shadow-xl shadow-blue-950/20">
             <div>
               {/* Card Header with Contactless Symbol & Brand */}
               <div className="flex items-center justify-between">
@@ -4131,7 +4131,7 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
                   "cursor-pointer rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-[44px] inline-flex items-center justify-center",
                   tapped
                     ? "bg-emerald-500 text-white shadow-md scale-95"
-                    : "bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-sm"
+                    : "bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-extrabold shadow-sm"
                 )}
               >
                 {tapped ? "Tapped Phone!" : "Simulate Tap"}

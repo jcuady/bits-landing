@@ -9,45 +9,43 @@ async function capture() {
     deviceScaleFactor: 2,
   });
 
-  console.log("Navigating to http://localhost:3847/#hardware-scoping ...");
-  await page.goto("http://localhost:3847/#hardware-scoping", { waitUntil: "networkidle" });
-  await page.waitForTimeout(800);
-
-  const hardwareSection = page.locator("#hardware-scoping").first();
-  await hardwareSection.scrollIntoViewIfNeeded();
+  console.log("Navigating to http://localhost:3847/#deployment ...");
+  await page.goto("http://localhost:3847/#deployment", { waitUntil: "networkidle" });
   await page.waitForTimeout(600);
 
-  // 1. Capture Full Hardware Scoping Section (Desktop)
-  await hardwareSection.screenshot({
-    path: "newlogo/screenshot_hardware_scoping_desktop.png",
-  });
-  console.log("✓ Captured newlogo/screenshot_hardware_scoping_desktop.png");
-
-  // 2. Click Tier 2 (Enterprise) and capture interactive state
-  const enterpriseButton = page.locator('button:has-text("100+ Seats")').first();
-  if (await enterpriseButton.count() > 0) {
-    await enterpriseButton.click();
+  // Locate the new cloud hardware scoping container
+  const scopingSection = page.locator("div.relative.overflow-hidden.rounded-\\[2\\.5rem\\]").first();
+  if (await scopingSection.count() > 0) {
+    await scopingSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(400);
-    await hardwareSection.screenshot({
-      path: "newlogo/screenshot_hardware_scoping_enterprise_active.png",
+    await scopingSection.screenshot({
+      path: "newlogo/screenshot_hardware_scoping_cloud.png",
     });
-    console.log("✓ Captured newlogo/screenshot_hardware_scoping_enterprise_active.png");
+    console.log("✓ Captured newlogo/screenshot_hardware_scoping_cloud.png");
+  } else {
+    console.log("Scoping container not found, taking full page screenshot");
+    await page.screenshot({ path: "newlogo/screenshot_hardware_fallback.png" });
   }
 
-  // 3. Mobile Viewport (iPhone 14 / 390x844)
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("http://localhost:3847/#hardware-scoping", { waitUntil: "networkidle" });
-  await page.waitForTimeout(600);
-  await hardwareSection.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(400);
-
-  await hardwareSection.screenshot({
-    path: "newlogo/screenshot_hardware_scoping_mobile.png",
+  // Also capture the Header unscrolled & scrolled
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(300);
+  await page.screenshot({
+    path: "newlogo/screenshot_header_glass_top.png",
+    clip: { x: 0, y: 0, width: 1440, height: 120 },
   });
-  console.log("✓ Captured newlogo/screenshot_hardware_scoping_mobile.png");
+  console.log("✓ Captured newlogo/screenshot_header_glass_top.png");
+
+  await page.evaluate(() => window.scrollTo(0, 400));
+  await page.waitForTimeout(300);
+  await page.screenshot({
+    path: "newlogo/screenshot_header_glass_scrolled.png",
+    clip: { x: 0, y: 0, width: 1440, height: 120 },
+  });
+  console.log("✓ Captured newlogo/screenshot_header_glass_scrolled.png");
 
   await browser.close();
-  console.log("Hardware section captures completed successfully.");
+  console.log("All captures completed.");
 }
 
 capture().catch(console.error);

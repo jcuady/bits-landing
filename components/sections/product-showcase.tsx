@@ -247,7 +247,7 @@ function OwnerView({ onTriggerToast }: { onTriggerToast: (msg: string) => void }
             <circle cx="220" cy="50" r="4" fill="#2563eb" stroke="#ffffff" strokeWidth="2" />
             <circle cx="500" cy="10" r="5" fill="#10b981" stroke="#ffffff" strokeWidth="2" />
           </svg>
-          <div className="absolute top-2 right-4 rounded-lg bg-slate-900 px-2.5 py-1 text-[0.68rem] font-bold text-white shadow-md">
+          <div className="absolute top-2 right-4 rounded-lg bg-[#124294] px-2.5 py-1 text-[0.68rem] font-bold text-white shadow-md">
             Productivity: +42% vs Legacy Systems
           </div>
         </div>
@@ -352,7 +352,7 @@ function ManagerView({ onTriggerToast }: { onTriggerToast: (msg: string) => void
           <button
             type="button"
             onClick={() => onTriggerToast("Queue pacing recalibrated to 3.4:1 to absorb peak 2:00 PM caller volume.")}
-            className="flex min-h-[44px] items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white shadow-xs transition-all hover:bg-slate-800 cursor-pointer"
+            className="flex min-h-[44px] items-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2 text-xs font-bold text-white shadow-xs transition-all hover:bg-blue-500 cursor-pointer"
           >
             <span>⚡ Recalibrate Queue Pacing</span>
           </button>
@@ -606,7 +606,7 @@ function AgentView({ onTriggerToast }: { onTriggerToast: (msg: string) => void }
                 setPtpConfirmed(true);
                 onTriggerToast(`Resolution commitment confirmed for ${selectedAcc.id}: ₱15,000 scheduled. SMS payment link sent.`);
               }}
-              className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-xs font-bold text-white transition-all hover:bg-slate-800 active:scale-[0.98] cursor-pointer"
+              className="flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-xs font-bold text-white transition-all hover:bg-blue-500 active:scale-[0.98] shadow-sm shadow-blue-600/20 cursor-pointer"
             >
               <span>{ptpConfirmed ? "✓ Resolution Scheduled (₱15,000)" : "Lock Resolution Agreement (₱15,000)"}</span>
             </button>

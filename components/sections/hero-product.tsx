@@ -90,7 +90,7 @@ export function HeroProduct({ className }: { className?: string }) {
     >
       {/* Toast Notification HUD */}
       {toastMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 rounded-full border border-sky-400 bg-slate-900/95 px-5 py-2.5 text-xs font-bold text-white shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2">
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 rounded-full border border-sky-400/50 bg-[#0a2a66]/95 px-5 py-2.5 text-xs font-bold text-white shadow-2xl backdrop-blur-md animate-in fade-in slide-in-from-top-2">
           {toastMessage}
         </div>
       )}

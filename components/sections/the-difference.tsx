@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
@@ -165,32 +166,46 @@ export function TheDifference() {
 
         {/* ── 2. INTERACTIVE FLOOR ROI & COST-SAVINGS CALCULATOR ── */}
         <Reveal delay={0.14} className="mt-14 sm:mt-18">
-          <div className="rounded-[2.25rem] lg:rounded-[2.75rem] p-2 sm:p-3 bg-gradient-to-b from-blue-600 via-indigo-600 to-blue-700 shadow-2xl shadow-blue-600/25 text-white">
-            <div className="rounded-[calc(2.25rem-0.5rem)] lg:rounded-[calc(2.75rem-0.75rem)] bg-slate-950 p-6 sm:p-10 lg:p-12 border border-blue-400/20">
+          <div className="relative overflow-hidden rounded-[2.25rem] lg:rounded-[2.75rem] p-2 sm:p-3 bg-gradient-to-br from-blue-600 via-indigo-600 to-sky-500 shadow-2xl shadow-blue-600/30 text-white border border-sky-300/30">
+            {/* Drifting Cloud Backdrop */}
+            <div className="pointer-events-none absolute inset-0 select-none overflow-hidden" aria-hidden="true">
+              <div className="relative size-full animate-cloud-drift will-change-transform transform-gpu opacity-35 mix-blend-screen">
+                <Image
+                  src="/images/hero-sky-bg.jpg"
+                  alt=""
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  quality={75}
+                  className="object-cover object-center scale-110 select-none"
+                />
+              </div>
+            </div>
+
+            <div className="relative z-10 rounded-[calc(2.25rem-0.5rem)] lg:rounded-[calc(2.75rem-0.75rem)] bg-gradient-to-br from-[#0c2f6d]/92 via-[#113d8c]/90 to-[#184ea8]/92 p-6 sm:p-10 lg:p-12 border border-white/20 backdrop-blur-xl">
               <div className="grid lg:grid-cols-[1.1fr_1.1fr] gap-8 lg:gap-14 items-center">
                 {/* Left: Interactive Controls */}
                 <div className="space-y-6">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-500/20 px-3.5 py-1 text-xs font-bold text-sky-300">
-                    <Calculator className="size-3.5" />
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3.5 py-1 text-xs font-bold text-white shadow-sm backdrop-blur-md">
+                    <Calculator className="size-3.5 text-sky-300" />
                     <span>INTERACTIVE FLOOR SAVINGS CALCULATOR</span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug drop-shadow-sm">
                     Calculate Your Floor&apos;s Annual Licensing &amp; Time Savings
                   </h3>
 
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-blue-100/90 leading-relaxed font-normal">
                     Adjust your active calling seat count to see estimated licensing savings and productivity hours recovered compared to US per-seat platforms.
                   </p>
 
                   {/* Seat Count Slider */}
                   <div className="space-y-3 pt-2">
                     <div className="flex items-center justify-between">
-                      <label htmlFor="agent-seat-slider" className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                      <label htmlFor="agent-seat-slider" className="text-xs font-extrabold uppercase tracking-wider text-sky-200">
                         Active Calling / Recovery Seats
                       </label>
                       <span className="text-2xl font-black text-white font-mono tabular-nums">
-                        {seatCount} <span className="text-xs text-sky-400 font-sans font-normal">Agents</span>
+                        {seatCount} <span className="text-xs text-sky-300 font-sans font-normal">Agents</span>
                       </span>
                     </div>
 
@@ -202,10 +217,10 @@ export function TheDifference() {
                       step={5}
                       value={seatCount}
                       onChange={(e) => setSeatCount(Number(e.target.value))}
-                      className="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                      className="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white"
                     />
 
-                    <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                    <div className="flex justify-between text-[10px] text-blue-200 font-mono">
                       <span>10 Seats</span>
                       <span>50 Seats</span>
                       <span>100 Seats</span>
@@ -215,7 +230,7 @@ export function TheDifference() {
 
                   {/* Current Tool Stack Toggle */}
                   <div className="space-y-2 pt-1">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+                    <span className="text-xs font-extrabold uppercase tracking-wider text-sky-200 block">
                       Current Operational Baseline
                     </span>
                     <div className="grid grid-cols-3 gap-2">
@@ -225,8 +240,8 @@ export function TheDifference() {
                         className={cn(
                           "rounded-xl px-2.5 py-2 text-[11px] font-bold transition-all border text-center cursor-pointer",
                           currentTool === "us_saas"
-                            ? "bg-blue-600 text-white border-blue-500 shadow-sm"
-                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white"
+                            ? "bg-white text-blue-950 border-white shadow-md font-extrabold"
+                            : "bg-white/10 border-white/20 text-blue-100 hover:bg-white/20 hover:text-white"
                         )}
                       >
                         US Per-Seat CRM
@@ -237,8 +252,8 @@ export function TheDifference() {
                         className={cn(
                           "rounded-xl px-2.5 py-2 text-[11px] font-bold transition-all border text-center cursor-pointer",
                           currentTool === "legacy_pbx"
-                            ? "bg-blue-600 text-white border-blue-500 shadow-sm"
-                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white"
+                            ? "bg-white text-blue-950 border-white shadow-md font-extrabold"
+                            : "bg-white/10 border-white/20 text-blue-100 hover:bg-white/20 hover:text-white"
                         )}
                       >
                         Separate PBX
@@ -249,8 +264,8 @@ export function TheDifference() {
                         className={cn(
                           "rounded-xl px-2.5 py-2 text-[11px] font-bold transition-all border text-center cursor-pointer",
                           currentTool === "spreadsheets"
-                            ? "bg-blue-600 text-white border-blue-500 shadow-sm"
-                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white"
+                            ? "bg-white text-blue-950 border-white shadow-md font-extrabold"
+                            : "bg-white/10 border-white/20 text-blue-100 hover:bg-white/20 hover:text-white"
                         )}
                       >
                         Spreadsheets
@@ -260,38 +275,38 @@ export function TheDifference() {
                 </div>
 
                 {/* Right: Dynamic Calculated Impact Display */}
-                <div className="rounded-2xl border border-blue-500/30 bg-gradient-to-b from-blue-950/60 via-slate-900 to-slate-950 p-6 sm:p-8 space-y-6 shadow-xl">
+                <div className="rounded-2xl border border-white/25 bg-white/[0.12] backdrop-blur-xl p-6 sm:p-8 space-y-6 shadow-2xl">
                   <div className="space-y-1">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-sky-400">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-sky-200">
                       Estimated Annual Floor Licensing Savings
                     </span>
                     <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-mono tracking-tight tabular-nums">
                       ~₱{estimatedSavingsPhp.toLocaleString()}
                     </div>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-blue-100/90 font-normal">
                       Versus ~${genericAnnualUsd.toLocaleString()} USD in recurring generic per-seat subscriptions.
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/20">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-sky-200">
                         Monthly Hours Saved
                       </span>
                       <div className="text-xl sm:text-2xl font-black text-white font-mono tabular-nums mt-0.5">
                         {hoursSavedMonthly.toLocaleString()} hrs
                       </div>
-                      <span className="text-[10px] text-emerald-400">Via 0.4s screen pop</span>
+                      <span className="text-[10px] text-emerald-300 font-semibold">Via 0.4s screen pop</span>
                     </div>
 
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-sky-200">
                         PTP Realization Lift
                       </span>
-                      <div className="text-xl sm:text-2xl font-black text-emerald-400 font-mono tabular-nums mt-0.5">
+                      <div className="text-xl sm:text-2xl font-black text-emerald-300 font-mono tabular-nums mt-0.5">
                         {ptpRealizationLift}
                       </div>
-                      <span className="text-[10px] text-slate-400">Via automated reminders</span>
+                      <span className="text-[10px] text-blue-100/80">Via automated reminders</span>
                     </div>
                   </div>
 
@@ -303,13 +318,13 @@ export function TheDifference() {
                         `Floor Savings Calculator: ${seatCount} Seats (${currentTool})`
                       )
                     }
-                    className="w-full flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
+                    className="w-full flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-white hover:bg-blue-50 active:scale-[0.98] text-blue-950 font-extrabold text-sm shadow-xl shadow-blue-950/20 transition-all cursor-pointer"
                   >
                     <span>Claim Your {seatCount}-Seat Operations Blueprint</span>
                     <span>→</span>
                   </button>
 
-                  <p className="text-center text-[10px] text-slate-400">
+                  <p className="text-center text-[10px] text-blue-100/80">
                     Confidential 25-minute architecture walkthrough · Zero per-seat markup · BSP Circular 808 aligned
                   </p>
                 </div>

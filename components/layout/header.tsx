@@ -157,17 +157,17 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
           solid
-            ? "border-b border-slate-200/70 bg-white/90 shadow-xs backdrop-blur-xl"
-            : "border-b border-transparent bg-transparent"
+            ? "border-b border-sky-400/25 bg-[#082252]/88 shadow-xl shadow-blue-950/20 backdrop-blur-2xl text-white"
+            : "border-b border-white/15 bg-white/[0.08] shadow-xs shadow-blue-950/5 backdrop-blur-xl text-white"
         )}
       >
         <nav
           aria-label="Primary"
           className="mx-auto flex h-16 w-full max-w-[1320px] items-center justify-between gap-4 px-5 sm:px-8 md:h-[72px] lg:px-10"
         >
-          {/* Logo */}
+          {/* Logo - Always default white logo on luxury glassmorphism */}
           <Link
             href="/"
             aria-label="BITS - Boundless IT Solutions, home"
@@ -175,24 +175,19 @@ export function Header() {
               setActiveDropdown(null);
               setMobileOpen(false);
             }}
-            className={cn(
-              "relative z-10 inline-flex min-h-11 shrink-0 items-center rounded-2xl transition-all duration-200",
-              solid
-                ? "px-1.5 py-1 hover:opacity-90"
-                : "border border-white/80 bg-white/85 px-3 py-1.5 shadow-sm shadow-blue-950/5 backdrop-blur-md hover:bg-white hover:shadow-md"
-            )}
+            className="relative z-10 inline-flex min-h-11 shrink-0 items-center rounded-2xl px-2 py-1 transition-all duration-200 hover:opacity-90"
           >
             <span className="hidden min-[400px]:inline-block">
-              <Logo variant="horizontal" priority className="h-7 md:h-8" />
+              <Logo variant="reverse" priority className="h-7 md:h-8" />
             </span>
             <span className="inline-block min-[400px]:hidden">
-              <Logo variant="tile" priority className="h-9" />
+              <Logo variant="reverse" priority className="h-7" />
             </span>
           </Link>
 
           {/* Desktop Navigation Pill with Subsections */}
           <ul
-            className="hidden items-center gap-1 rounded-full border border-slate-200/80 bg-slate-50/80 p-1.5 shadow-xs backdrop-blur-md lg:flex"
+            className="hidden items-center gap-1 rounded-full border border-white/20 bg-white/15 p-1.5 shadow-xs backdrop-blur-md lg:flex"
             onMouseLeave={handleMouseLeave}
           >
             {navigationSections.map((section) => {
@@ -216,15 +211,15 @@ export function Header() {
                       className={cn(
                         "inline-flex min-h-11 items-center gap-1.5 rounded-full px-3.5 py-1 text-[0.84rem] font-bold transition-all duration-200",
                         isOpen || isPageActive
-                          ? "bg-white text-blue-600 shadow-xs ring-1 ring-slate-200/80"
-                          : "text-slate-600 hover:bg-white/80 hover:text-blue-600"
+                          ? "bg-white text-blue-950 shadow-xs ring-1 ring-white/40"
+                          : "text-white/90 hover:bg-white/20 hover:text-white"
                       )}
                     >
                       <span>{section.label}</span>
                       <svg
                         className={cn(
-                          "size-3.5 text-slate-400 transition-transform duration-200",
-                          isOpen && "rotate-180 text-blue-600"
+                          "size-3.5 transition-transform duration-200",
+                          isOpen ? "rotate-180 text-blue-950" : "text-white/70"
                         )}
                         fill="none"
                         viewBox="0 0 24 24"
@@ -501,7 +496,7 @@ export function Header() {
                 <li key={section.id}>
                   <Link
                     href={section.href}
-                    className="inline-flex min-h-11 items-center rounded-full px-3.5 py-1 text-[0.84rem] font-bold text-slate-600 transition-all duration-200 hover:bg-white/80 hover:text-blue-600"
+                    className="inline-flex min-h-11 items-center rounded-full px-3.5 py-1 text-[0.84rem] font-bold text-white/90 transition-all duration-200 hover:bg-white/20 hover:text-white"
                   >
                     {section.label}
                   </Link>
@@ -515,7 +510,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => openModal()}
-              className="group flex h-11 items-center justify-center gap-2 rounded-full bg-blue-600 px-5 text-[0.86rem] font-bold text-white shadow-md shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98] cursor-pointer"
+              className="group flex h-11 items-center justify-center gap-2 rounded-full bg-white hover:bg-blue-50 px-5 text-[0.86rem] font-extrabold text-blue-900 shadow-md shadow-blue-950/20 transition-all hover:shadow-lg active:scale-[0.98] cursor-pointer"
             >
               <span>Book a Consultation</span>
               <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span>
@@ -529,23 +524,18 @@ export function Header() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className={cn(
-              "relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-2xl transition-all duration-200 lg:hidden",
-              solid
-                ? "text-slate-900 hover:bg-slate-100"
-                : "border border-white/80 bg-white/85 text-slate-900 shadow-sm shadow-blue-950/5 backdrop-blur-md hover:bg-white hover:shadow-md"
-            )}
+            className="relative z-10 inline-flex size-11 min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/15 text-white shadow-sm backdrop-blur-md hover:bg-white/25 transition-all lg:hidden"
           >
             <span className="relative block h-3.5 w-[18px]" aria-hidden>
               <span
                 className={cn(
-                  "absolute left-0 h-[2px] w-full rounded-full bg-slate-900 transition-transform duration-200 ease-in-out",
+                  "absolute left-0 h-[2px] w-full rounded-full bg-white transition-transform duration-200 ease-in-out",
                   mobileOpen ? "top-[6px] rotate-45" : "top-0"
                 )}
               />
               <span
                 className={cn(
-                  "absolute left-0 h-[2px] w-full rounded-full bg-slate-900 transition-transform duration-200 ease-in-out",
+                  "absolute left-0 h-[2px] w-full rounded-full bg-white transition-transform duration-200 ease-in-out",
                   mobileOpen ? "top-[6px] -rotate-45" : "top-[12px]"
                 )}
               />
