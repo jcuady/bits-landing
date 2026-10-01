@@ -10,6 +10,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { submitContact, type ContactState } from "@/app/actions/contact";
+import { FormTermsConsent } from "@/components/ui/form-terms-consent";
 import { cn } from "@/lib/utils";
 
 const initialContactState: ContactState = { ok: false, errors: {}, values: {} };
@@ -272,6 +273,11 @@ export function ConsultationModal({
                 {state.errors.message && (
                   <p className="mt-1 text-[0.72rem] text-rose-600 font-medium">{state.errors.message[0]}</p>
                 )}
+              </div>
+
+              {/* Terms and Privacy Consent */}
+              <div className="pt-1">
+                <FormTermsConsent id="modal-terms-consent" variant="light" />
               </div>
 
               {/* Submit CTA Button */}

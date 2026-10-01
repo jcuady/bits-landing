@@ -15,6 +15,12 @@ export interface CookiePreferences {
 
 const STORAGE_KEY = "bits_cookie_consent_v1";
 
+export function openCookiePreferences() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("bits_open_cookie_preferences"));
+  }
+}
+
 export function CookieConsent() {
   const [mounted, setMounted] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -42,6 +48,14 @@ export function CookieConsent() {
       // In case localStorage is disabled or corrupted
       setIsOpen(true);
     }
+  }, []);
+
+  React.useEffect(() => {
+    const handleOpenModal = () => {
+      setIsModalOpen(true);
+    };
+    window.addEventListener("bits_open_cookie_preferences", handleOpenModal);
+    return () => window.removeEventListener("bits_open_cookie_preferences", handleOpenModal);
   }, []);
 
   const saveConsent = (prefs: CookiePreferences) => {

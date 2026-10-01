@@ -4,6 +4,7 @@ import * as React from "react";
 import { useActionState } from "react";
 import { consultationOptions, contactInterests, site } from "@/lib/site";
 import { submitContact, type ContactState } from "@/app/actions/contact";
+import { FormTermsConsent } from "@/components/ui/form-terms-consent";
 import { cn } from "@/lib/utils";
 
 const initialContactState: ContactState = { ok: false, errors: {}, values: {} };
@@ -368,6 +369,11 @@ export function ContactForm() {
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      {/* Terms and Privacy Consent */}
+      <div className="mt-3">
+        <FormTermsConsent id="contact-form-terms" variant="light" />
       </div>
 
       {/* Footer Submit Bar */}

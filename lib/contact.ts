@@ -13,6 +13,7 @@ export const contactSchema = z.object({
   primaryChallenge: z.string().optional(),
   preferredMethod: z.string().optional(),
   interest: z.string().optional(),
+  termsConsent: z.string().optional(),
   message: z
     .string()
     .trim()
