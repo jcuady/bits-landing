@@ -84,6 +84,8 @@ const footerNavigation: FooterSection[] = [
   {
     title: "Trust & Governance",
     links: [
+      { label: "Industry Research & Blog", href: "/blog" },
+      { label: "Cookie Policy & Audit", href: "/cookies" },
       { label: "Security Architecture", href: "/#security" },
       { label: "BSP & NPC Alignment", href: "/#security" },
       { label: "Brand Guidelines (Brandbook)", href: "/brandbook" },
@@ -204,6 +206,13 @@ export function Footer() {
               >
                 Pricing
               </a>
+              <Link
+                href="/blog"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
+              >
+                Research
+              </Link>
+
 
               {/* Verified Official Social Media Pills (44x44px touch targets) */}
               <div className="flex items-center gap-2 ml-1 sm:ml-3">
@@ -449,12 +458,15 @@ export function Footer() {
               </span>
             </div>
 
-            <div className="flex items-center gap-4 text-[11px]">
+            <div className="flex flex-wrap items-center gap-4 text-[11px]">
               <Link href="/legal#privacy" className="text-sky-100 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
               <Link href="/legal#terms" className="text-sky-100 hover:text-white transition-colors">
                 Terms of Service
+              </Link>
+              <Link href="/cookies" className="text-sky-100 hover:text-white transition-colors">
+                Cookie Policy
               </Link>
               <Link href="/brandbook" className="text-white font-bold hover:text-sky-200 underline decoration-white/40 transition-colors">
                 Brandbook

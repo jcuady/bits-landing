@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { agents, site } from "@/lib/site";
+import { CookieConsent } from "@/components/ui/cookie-consent";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -218,6 +219,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-clip">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

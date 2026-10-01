@@ -229,7 +229,13 @@ export const navigationSections = [
     label: "Solutions & Pricing",
     href: "/#solutions",
   },
+  {
+    id: "research",
+    label: "Research",
+    href: "/blog",
+  },
 ] as const;
+
 
 /* ── Hero Benchmarks ── */
 export const heroStats = [
