@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
@@ -158,12 +159,70 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+          "fixed inset-x-0 top-0 z-50 transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] text-white",
           solid
-            ? "border-b border-sky-400/25 bg-[#082252]/88 shadow-xl shadow-blue-950/20 backdrop-blur-2xl text-white"
-            : "border-b border-white/15 bg-white/[0.08] shadow-xs shadow-blue-950/5 backdrop-blur-xl text-white"
+            ? "border-b border-sky-300/35 shadow-lg shadow-sky-950/15"
+            : "border-b border-white/20 shadow-xs shadow-blue-950/5"
         )}
       >
+        {/* ── ATMOSPHERIC CLOUD LIGHT BLUE BACKGROUND CANVAS (Matches Hero Sky) ── */}
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none"
+          aria-hidden
+        >
+          {/* Base Sky Blue Multi-Stop Gradient Canvas */}
+          <div
+            className={cn(
+              "absolute inset-0 transition-all duration-300",
+              solid
+                ? "bg-gradient-to-r from-[#155ec4]/94 via-[#1d6be3]/90 to-[#38bdf8]/85 backdrop-blur-2xl"
+                : "bg-gradient-to-r from-[#175ec2]/45 via-[#1e6be3]/40 to-[#38bdf8]/35 backdrop-blur-xl"
+            )}
+          />
+
+          {/* Layer 1: Drifting Clouds Base */}
+          <div
+            className={cn(
+              "absolute inset-0 mix-blend-screen transition-opacity duration-300",
+              solid ? "opacity-55" : "opacity-35"
+            )}
+          >
+            <div className="relative size-full animate-cloud-drift will-change-transform transform-gpu">
+              <Image
+                src="/images/hero-sky-bg.jpg"
+                alt=""
+                fill
+                priority
+                quality={70}
+                className="object-cover object-top scale-125 filter blur-[0.5px]"
+              />
+            </div>
+          </div>
+
+          {/* Layer 2: Counter-Harmonic Cloud Mist */}
+          <div
+            className={cn(
+              "absolute inset-0 mix-blend-screen transition-opacity duration-300",
+              solid ? "opacity-45" : "opacity-25"
+            )}
+          >
+            <div className="relative size-full animate-cloud-drift-reverse will-change-transform transform-gpu">
+              <Image
+                src="/images/hero-sky-bg.jpg"
+                alt=""
+                fill
+                quality={70}
+                className="object-cover object-center scale-125"
+              />
+            </div>
+          </div>
+
+          {/* Layer 3: Sky Sunbreak Radiance / Cyan Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(56,189,248,0.45),transparent_75%)]" />
+
+          {/* Layer 4: Delicate Top Frost Accent Line */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+        </div>
         <nav
           aria-label="Primary"
           className="mx-auto flex h-16 w-full max-w-[1320px] items-center justify-between gap-4 px-5 sm:px-8 md:h-[72px] lg:px-10"
