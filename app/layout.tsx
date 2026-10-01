@@ -12,8 +12,8 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Boundless IT Solutions (BITS) — Enterprise Operations Software, Collections CRM & AI Infrastructure",
-    template: "%s | Boundless IT Solutions (BITS)",
+    default: "BITS | Sovereign Enterprise Operations, Collections OMS & AI Systems",
+    template: "%s | BITS",
   },
   description:
     "Boundless IT Solutions (BITS) engineers custom enterprise operations software, BITScrm collections core, autonomous voice AI agents (BITSagent), and compliance-ready ERP tailored to real-world workflows in the Philippines and globally.",
@@ -66,8 +66,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/icon-48.png", type: "image/png", sizes: "48x48" },
       { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [
       { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
@@ -78,14 +79,14 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.legalName,
-    title: "Boundless IT Solutions (BITS) — Enterprise Operations Software, Collections CRM & AI Infrastructure",
+    title: "BITS | Sovereign Enterprise Operations, Collections OMS & AI Systems",
     description:
       "Boundless IT Solutions (BITS) engineers custom enterprise operations software, BITScrm collections core, autonomous voice AI agents (BITSagent), and compliance-ready ERP tailored to real-world workflows.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Boundless IT Solutions (BITS) Enterprise Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boundless IT Solutions (BITS) — Enterprise Operations Software, Collections CRM & AI Infrastructure",
+    title: "BITS | Sovereign Enterprise Operations, Collections OMS & AI Systems",
     description:
       "Boundless IT Solutions (BITS) engineers custom enterprise operations software, BITScrm collections core, autonomous voice AI agents (BITSagent), and compliance-ready ERP tailored to real-world workflows.",
     images: ["/og.png"],
@@ -93,7 +94,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#06162F",
+  themeColor: "#124294",
   width: "device-width",
   initialScale: 1,
 };
@@ -117,8 +118,8 @@ const jsonLd = {
         "Boundless IT",
       ],
       url: site.url,
-      logo: `${site.url}/brand/logo-horizontal.png`,
-      image: `${site.url}/og.png`,
+      logo: `${site.url}/brand/logo-google.png`,
+      image: `${site.url}/brand/logo-horizontal.png`,
       description: site.description,
       slogan: site.tagline,
       areaServed: {

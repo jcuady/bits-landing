@@ -5,6 +5,7 @@ import { CrmProvider } from "@/lib/crm/store";
 import { AppShellClient } from "@/components/crm/app-shell-client";
 
 export const metadata: Metadata = {
+  title: "BITScrm Operations Workspace",
   robots: {
     index: false,
     follow: false,

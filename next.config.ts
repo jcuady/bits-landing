@@ -60,7 +60,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/(og.png|icon.png|icon-192.png|icon-512.png|apple-icon.png|favicon.ico)",
+        source: "/(og.png|icon.png|icon-48.png|icon-192.png|icon-512.png|apple-icon.png|favicon.ico|favicon.png)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],

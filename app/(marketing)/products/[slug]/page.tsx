@@ -55,7 +55,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
-  const title = `${product.name} — ${product.tagline} | Boundless IT Solutions (BITS)`;
+  const shortLabel = product.shortName || "Enterprise Platform";
+  const title = `${product.name} — ${shortLabel}`;
   const description = `${product.description.slice(0, 150)}... Custom enterprise software engineered by Boundless IT Solutions (BITS).`;
 
   return {
@@ -72,7 +73,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       "Boundless IT Solutions Philippines",
       "BITS",
       "BITScrm",
-      product.categoryLabel,
+      "categoryLabel" in product ? product.categoryLabel : "Enterprise Software",
       ...product.complianceBadges,
       `${product.shortName} software Philippines`,
       "enterprise operations software",
@@ -84,7 +85,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       canonical: `${site.url}/products/${product.id}`,
     },
     openGraph: {
-      title,
+      title: `${product.name} — ${shortLabel} | BITS`,
       description,
       url: `${site.url}/products/${product.id}`,
       type: "website",
@@ -93,7 +94,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${product.name} — ${shortLabel} | BITS`,
       description,
       images: ["/og.png"],
     },

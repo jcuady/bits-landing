@@ -11,7 +11,7 @@ import { CrmVariantsExplorer } from "@/components/sections/crm-variants-explorer
 import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
+  title: "BITScrm — Enterprise Collections CRM & Dialer",
   description:
     "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring. Sovereign cloud or on-premise.",
   keywords: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     canonical: `${site.url}/bitscrm`,
   },
   openGraph: {
-    title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
+    title: "BITScrm — Enterprise Collections CRM & Dialer | BITS",
     description:
       "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring.",
     url: `${site.url}/bitscrm`,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITScrm — Enterprise Collections CRM & Contact Center Platform | Boundless IT Solutions",
+    title: "BITScrm — Enterprise Collections CRM & Dialer | BITS",
     description:
       "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring.",
     images: ["/og.png"],

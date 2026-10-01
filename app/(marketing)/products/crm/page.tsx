@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BITScrm Suite — Flagship Collections, Support, Sales, Marketing & Commerce Cloud | Boundless IT Solutions",
+  title: "BITScrm Suite — Enterprise CRM Platform & Variants",
   description:
     "Explore the 5 purpose-built CRM variants by Boundless IT Solutions: Flagship Collections, Support Desk, Sales, Marketing, and Commerce. Unified on a single sovereign data schema with native AI automation, zero replatforming, and cloud or on-premises deployment.",
   keywords: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     canonical: `${site.url}/products/crm`,
   },
   openGraph: {
-    title: "BITScrm Suite — Flagship Collections, Support, Sales, Marketing & Commerce Cloud",
+    title: "BITScrm Suite — Enterprise CRM Platform & Variants | BITS",
     description:
       "Five purpose-built CRM variants on one sovereign data schema: Collections (Flagship), Support, Sales, Marketing, and Commerce. Zero vendor lock-in, zero data replatforming.",
     url: `${site.url}/products/crm`,
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITScrm Suite — Flagship Collections, Support, Sales, Marketing & Commerce Cloud",
+    title: "BITScrm Suite — Enterprise CRM Platform & Variants | BITS",
     description:
       "Five purpose-built CRM variants on one sovereign data schema: Collections (Flagship), Support, Sales, Marketing, and Commerce. Zero vendor lock-in, zero data replatforming.",
     images: ["/og.png"],

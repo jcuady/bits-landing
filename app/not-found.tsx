@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 import { ArrowLeft, Home, Compass, PhoneCall } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "404 — Page Not Found | Boundless IT Solutions (BITS)",
+  title: "404 — Page Not Found",
   description: "The requested enterprise resource could not be found. Return to Boundless IT Solutions homepage or explore our core software engines.",
   robots: {
     index: false,
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white flex flex-col justify-center items-center px-4 py-20 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-[#0c2e6b] via-[#124294] to-[#1e5ec2] text-white flex flex-col justify-center items-center px-4 py-20 relative overflow-hidden">
       {/* Background radial gradient */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_40%,rgba(37,99,235,0.15),transparent)]" aria-hidden />
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_40%,rgba(56,189,248,0.25),transparent)]" aria-hidden />
 
       <Container className="relative z-10 max-w-2xl text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-6">

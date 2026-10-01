@@ -3,11 +3,11 @@ import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Privacy & Terms | ${site.legalName}`,
+  title: "Compliance, Privacy & Terms",
   description: "Official Privacy notice, Data Privacy Act compliance, and terms of use for Boundless IT Solutions (BITS).",
   alternates: { canonical: `${site.url}/legal` },
   openGraph: {
-    title: `Privacy & Terms | ${site.legalName}`,
+    title: "Compliance, Privacy & Terms | BITS",
     description: "Official Privacy notice, Data Privacy Act compliance, and terms of use for Boundless IT Solutions (BITS).",
     url: `${site.url}/legal`,
     siteName: site.legalName,

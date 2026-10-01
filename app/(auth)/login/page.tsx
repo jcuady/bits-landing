@@ -8,7 +8,7 @@ import { getProductById } from "@/lib/products/registry";
 import { ShieldCheck, UserCheck, Sparkles, Terminal, ArrowRight, Layers } from "lucide-react";
 
 export const metadata = {
-  title: "Sign in | BITS Enterprise Platform",
+  title: "Sign in to BITS Enterprise",
   robots: { index: false, follow: false },
 };
 

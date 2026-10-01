@@ -684,7 +684,7 @@ export function FeaturesBento() {
                       </div>
 
                       {/* App Node 2: Notion (Left Center) */}
-                      <div className="absolute left-10 top-[50px] size-7 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-xs font-serif text-xs font-bold">
+                      <div className="absolute left-10 top-[50px] size-7 rounded-lg bg-[#0e3271] text-white flex items-center justify-center shadow-xs font-serif text-xs font-bold">
                         N
                       </div>
 

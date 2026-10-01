@@ -5,7 +5,7 @@ import { SalesProvider } from "@/lib/products/crm-sales/store";
 import { ProductShell } from "@/components/products/product-shell";
 
 export const metadata: Metadata = {
-  title: "BITScrm Sales Suite | Live Enterprise MVP Showcase",
+  title: "BITScrm Sales Suite — Enterprise Demo",
   description: "Visual Kanban deal pipeline, AI lead velocity, and 1-click CPQ quoting for Philippine enterprises.",
   robots: { index: false, follow: false },
 };

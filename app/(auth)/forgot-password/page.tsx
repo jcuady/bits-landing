@@ -5,7 +5,7 @@ import { forgotPasswordAction } from "@/app/actions/auth";
 import { emailSchema } from "@/lib/crm/validation";
 
 export const metadata = {
-  title: "Forgot password | BITS CRM",
+  title: "Reset Password",
   robots: { index: false, follow: false },
 };
 
