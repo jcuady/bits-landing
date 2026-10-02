@@ -19,7 +19,7 @@ const productFamilies = [
     title: "Customer Operations",
     problem: "Run collections, contact centers, and customer relationships",
     products: ["Operations 360", "BITScrm Suite", "BITSagent AI"],
-    href: "/#floor-showcase",
+    href: "/#operations-360",
     accent: "from-blue-600 to-indigo-600",
     lightAccent: "bg-blue-50 border-blue-200 text-blue-700",
   },

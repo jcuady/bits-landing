@@ -12,7 +12,7 @@ const discoveryRoutes = [
     goal: "Run a collections or contact center",
     product: "Operations 360",
     description: "Integrated CRM, dialer, QA, scorecards, coaching, LMS, and WFM in one platform.",
-    href: "/#floor-showcase",
+    href: "/#operations-360",
     icon: (
       <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="14" height="14" rx="2" />
