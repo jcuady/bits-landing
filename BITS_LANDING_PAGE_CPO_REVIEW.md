@@ -197,6 +197,7 @@ To ensure BITS shows up when prospects search for CRM, collections, and operatio
 | **Blog CRO** | Quick Table of Contents jump bar on all blog articles | ✅ Passed | Added in `app/(marketing)/blog/[slug]/page.tsx` |
 | **Form UX** | Straightforward, non-intimidating contact form for non-tech buyers | ✅ Passed | `components/sections/contact-form.tsx` redesigned with 3 clear steps & quick chips |
 | **Form UX** | Direct consultation modal simplified with interactive chips & fast-track | ✅ Passed | `components/modals/consultation-modal.tsx` redesigned with canonical families & cal.com link |
+| **Pricing UX** | Transparent multi-track pricing with unclipped scroll offset & modern cards | ✅ Passed | `components/sections/pricing.tsx` redesigned with 3 tracks, `scroll-mt-36` & unclipped headline |
 | **Technical SEO** | Sitemaps include all 18 product pages and all 5 blog articles | ✅ Passed | `app/sitemap.ts` dynamically generates entries for all products and posts |
 | **Technical SEO** | Structured Data (JSON-LD) validated on all pages | ✅ Passed | `CollectionPage`, `ItemList`, `SoftwareApplication`, `BlogPosting`, `FAQPage`, `BreadcrumbList` |
 | **TypeScript** | Codebase passes TypeScript compilation with 0 errors | ✅ Passed | `npx tsc --noEmit` verified with 0 errors |

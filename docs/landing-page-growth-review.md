@@ -104,7 +104,7 @@ The BITS web application compiles cleanly to **72 routes** (including internal C
 | 9 | **Industries** | `industries.tsx` | Medium | **8.5/10** | Focuses on 4 target sectors: BPO/Contact Centers, Debt Collection Agencies, Banks/Financial Institutions, and Growing Businesses. | ✅ Optimal |
 | 10 | **Security** | `security.tsx` | High | **9.0/10** | Granular RBAC matrix, immutable audit logs, air-gapped encryption, and BSP data sovereignty. Crucial for financial CIO sign-off. | ✅ Optimal |
 | 11 | **Deployment Models**| `deployment-models.tsx` | High | **9.0/10** | Cloud vs On-Premises architecture breakdown. Explains the financial and legal benefits of running software on office servers. | ✅ Optimal |
-| 12 | **Pricing** | `pricing.tsx` | High | **9.0/10** | 3 transparent OMS tiers (Starter 1-15, Growth 16-75, Enterprise 75+) plus dedicated CTA for other product pricing. | ✅ Optimal |
+| 12 | **Pricing** | `pricing.tsx` | Critical | **9.8/10** | Completely redesigned with 3 interactive product tracks (Operations 360, BITScrm, Custom Bundles), unclipped header scroll offset (`scroll-mt-36`), sleek modern glassmorphic cards, and zero per-seat penalty messaging. | ✅ Optimal |
 | 13 | **FAQ** | `faq.tsx` | Medium | **9.0/10** | 10 concrete, objection-handling FAQs addressing data migration, hardware requirements, pricing, and custom integrations. | ✅ Optimal |
 | 14 | **Contact & Intake** | `contact.tsx` + `contact-form.tsx` | Critical | **9.8/10** | Redesigned with 1-click product chips, plain-language wording, optional advanced drawer, 2-hour SLA badge, and Cal.com fast-track. | ✅ Optimal |
 
