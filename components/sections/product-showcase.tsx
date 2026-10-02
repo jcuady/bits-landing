@@ -714,7 +714,7 @@ export function ProductShowcase() {
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/90 px-3.5 py-1.5 shadow-2xs backdrop-blur-md">
               <span className="size-2 rounded-full bg-blue-600 animate-pulse" aria-hidden />
               <span className="text-[0.72rem] font-extrabold uppercase tracking-[0.2em] text-blue-700">
-                Flagship Operational Platform · Former CRM Collections
+                Flagship Operational Platform · Operations 360
               </span>
             </div>
 

@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: `${site.url}/products`,
+      lastModified,
+      changeFrequency: "daily" as const,
+      priority: 0.95,
+    },
+    {
       url: `${site.url}/bitscrm`,
       lastModified,
       changeFrequency: "weekly" as const,

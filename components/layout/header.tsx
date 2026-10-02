@@ -463,7 +463,7 @@ export function Header() {
                                 </div>
                                 <div className="flex items-center gap-3 shrink-0">
                                   <Link
-                                    href="/products/crm"
+                                    href="/products"
                                     onClick={() => setActiveDropdown(null)}
                                     className="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition-colors"
                                   >
@@ -744,7 +744,7 @@ export function Header() {
                             {section.id === "platform" && (
                               <div className="pt-2 border-t border-slate-200/80">
                                 <Link
-                                  href="/products/crm"
+                                  href="/products"
                                   onClick={() => setMobileOpen(false)}
                                   className="flex items-center justify-between rounded-xl bg-blue-50/90 p-2.5 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors"
                                 >

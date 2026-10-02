@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
 import { blogPosts } from "@/lib/blog-data";
+import { BlogExplorer } from "@/components/blog/blog-explorer";
 import {
   Sparkles,
   ArrowRight,
@@ -20,14 +21,25 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Enterprise Software Benchmarks, OMS & CRM Guides | BITS Intelligence Labs",
+  title: "Best CRM, Collections OMS & AI Architecture Guides | BITS Intelligence Labs",
   description:
-    "Authoritative benchmarks, architecture comparisons, and buyer guides for enterprise Collections OMS, sovereign CRM platforms, Autonomous Voice AI, and on-premises datacenter blueprints.",
+    "Authoritative benchmarks, architecture comparisons, and buyer guides for the best CRM software, CRM for collections & debt recovery OMS, Autonomous Voice AI, and private datacenters.",
   alternates: { canonical: `${site.url}/blog` },
+  keywords: [
+    "best crm",
+    "best crm software",
+    "crm for collections",
+    "best collections oms",
+    "debt collection software",
+    "operations management system",
+    "best oms",
+    "voice ai call center",
+    "enterprise crm philippines",
+  ],
   openGraph: {
-    title: "BITS Intelligence Labs | Enterprise Software Benchmarks & Industry Guides",
+    title: "Best CRM & Operations Software Guides | BITS Intelligence Labs",
     description:
-      "Independent benchmarks and technical guides on Collections OMS, sovereign CRM architectures, voice AI telephony, and bare-metal datacenters.",
+      "Independent benchmarks and buyer guides comparing the best CRM software, collections OMS, voice AI, and enterprise operations systems.",
     url: `${site.url}/blog`,
     siteName: site.legalName,
     type: "website",
@@ -216,7 +228,7 @@ export default function BlogIndexPage() {
                     #1
                   </div>
                   <div>
-                    <h3 className="text-sm font-extrabold text-white">BITScrm Collections OMS</h3>
+                    <h3 className="text-sm font-extrabold text-white">Operations 360 (OMS)</h3>
                     <p className="text-xs text-sky-200">Sub-350ms predictive dialer · Sovereign on-prem</p>
                   </div>
                 </div>
@@ -234,60 +246,8 @@ export default function BlogIndexPage() {
           </div>
         )}
 
-        {/* Regular Articles Grid */}
-        <div className="mb-10 flex items-center justify-between border-b border-white/15 pb-4">
-          <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-            <BookOpen className="size-5 text-sky-300" />
-            All Architectural Guides &amp; Market Reviews
-          </h2>
-          <span className="text-xs text-sky-200">{blogPosts.length} Technical Briefs Available</span>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {regularPosts.map((post) => (
-            <article
-              key={post.slug}
-              className="flex flex-col justify-between rounded-3xl border border-white/15 bg-white/[0.10] p-6 backdrop-blur-xl shadow-xl hover:border-sky-300/50 hover:bg-white/[0.15] transition-all group"
-            >
-              <div>
-                {/* Meta details */}
-                <div className="flex items-center justify-between text-xs text-sky-200 pb-3">
-                  <span className="rounded-full bg-blue-500/25 border border-sky-300/30 px-2.5 py-0.5 font-semibold text-sky-200">
-                    {post.category}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="size-3 text-sky-300" />
-                    {post.readTime}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <Link href={`/blog/${post.slug}`}>
-                  <h3 className="mt-3 text-lg font-bold text-white group-hover:text-sky-200 transition-colors leading-snug">
-                    {post.title}
-                  </h3>
-                </Link>
-
-                {/* Excerpt */}
-                <p className="mt-3 text-xs text-sky-100/80 leading-relaxed line-clamp-3">
-                  {post.heroSnippet}
-                </p>
-              </div>
-
-              {/* Footer with Author and CTA */}
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="text-sky-200 font-medium">By {post.author.name.split(",")[0]}</span>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="inline-flex items-center gap-1 font-bold text-white group-hover:text-sky-200 group-hover:underline"
-                >
-                  <span>Read Article</span>
-                  <ArrowRight className="size-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        {/* Interactive Blog Explorer with Search & Category Filters */}
+        <BlogExplorer posts={blogPosts} featuredPostSlug={featuredPost?.slug || ""} />
 
         {/* Bottom High-Converting Newsletter / Lead Box */}
         <div className="mt-20 rounded-3xl border border-sky-400/40 bg-gradient-to-r from-blue-900/60 via-blue-800/50 to-sky-900/60 p-8 text-center backdrop-blur-2xl shadow-2xl">

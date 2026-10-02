@@ -243,7 +243,7 @@ export function StatsStrip() {
               <span className="relative inline-flex size-2.5 rounded-full bg-blue-600" />
             </span>
             <span className="text-[0.75rem] font-bold uppercase tracking-[0.16em] text-blue-900 font-mono">
-              Proven Floor Telemetry · BITS OMS Benchmarks
+              Operations 360 · Flagship Platform Benchmarks
             </span>
           </motion.div>
 
@@ -255,9 +255,9 @@ export function StatsStrip() {
             transition={{ duration: 0.55, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.16] text-balance"
           >
-            Real Floor Results That Drive{" "}
+            Operations 360: The Metrics That Matter{" "}
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
-              Faster Cash Collection.
+              on the Floor.
             </span>
           </motion.h2>
 
@@ -269,7 +269,7 @@ export function StatsStrip() {
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 sm:mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal"
           >
-            Built to replace messy spreadsheets and disconnected legacy phone systems with real-time agent pacing, automated payment tracking, and higher cash recovery.
+            Operations 360 — our flagship integrated platform — combines CRM, predictive dialing, QA, scorecards, coaching, and workforce management into a single operational cockpit.
           </motion.p>
         </div>
 
@@ -409,10 +409,10 @@ export function StatsStrip() {
                 <span>20-Year Recovery Floor Origin</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
-                How Does Your Floor Compare to These Benchmarks?
+                Interested in Operations 360 for Your Floor?
               </h3>
               <p className="text-xs sm:text-sm text-sky-100/90 max-w-2xl leading-relaxed">
-                Schedule a confidential 25-minute architecture walkthrough. We audit your live contact rates, broken promise ratios, and carrier telephony costs with real recovery leadership.
+                Schedule a confidential 25-minute architecture walkthrough. We audit your current operational workflow and show you how Operations 360 maps to your specific team structure.
               </p>
             </div>
 

@@ -49,7 +49,7 @@ interface CrmVariantData {
 const CRM_VARIANTS: CrmVariantData[] = [
   {
     id: "collections",
-    name: "BITScrm Collections",
+    name: "Operations 360",
     badge: "Primary Flagship Platform",
     isFlagship: true,
     tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
@@ -226,7 +226,7 @@ export function CrmVariantsExplorer() {
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-2xl text-pretty text-slate-600">
-              While our flagship <strong className="text-slate-900">BITScrm Collections</strong> powers mission-critical
+              While our flagship <strong className="text-slate-900">Operations 360</strong> powers mission-critical
               debt recovery and contact center operations, BITS provides specialized variants for support, sales, marketing, and commerce—all
               sharing the same unified sovereign data layer and AI automation.
             </p>

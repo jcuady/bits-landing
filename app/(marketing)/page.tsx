@@ -1,15 +1,13 @@
 import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
+import { ProductFamilies } from "@/components/sections/product-families";
+import { SolutionFinder } from "@/components/sections/solution-finder";
 import { StatsStrip } from "@/components/sections/stats-strip";
-import { Problem } from "@/components/sections/problem";
 import { TheDifference } from "@/components/sections/the-difference";
 import { FeaturesHero } from "@/components/sections/features-hero";
 import { FloorShowcase } from "@/components/sections/floor-showcase";
-import { FeaturesBento } from "@/components/sections/features-bento";
-import { FeaturesAdmin } from "@/components/sections/features-admin";
 import { Industries } from "@/components/sections/industries";
 import { Security } from "@/components/sections/security";
-import { Process } from "@/components/sections/process";
 import { DeploymentModels } from "@/components/sections/deployment-models";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
@@ -18,52 +16,56 @@ import { Contact } from "@/components/sections/contact";
 export default function Home() {
   return (
     <main id="content">
-      {/* 1. Hero: Value proposition & product architecture */}
+      {/* ═══ PHASE 1: ESTABLISH BITS (Who we are) ═══ */}
+
+      {/* 1. Hero: Company-level value proposition — WHO is BITS, WHAT does it build */}
       <Hero />
 
-      {/* 2. Trust & Statutory Governance */}
+      {/* 2. Trust & Statutory Governance — Social proof and credibility */}
       <TrustStrip />
 
-      {/* 3. Platform Benchmarks */}
-      <StatsStrip />
+      {/* ═══ PHASE 2: SHOW THE PORTFOLIO (What we offer) ═══ */}
 
-      {/* 4. The Problem: Friction of generic software & disconnected spreadsheets */}
-      <Problem />
+      {/* 3. Product Families: 4 connected product families overview (CPO Rec #3) */}
+      <ProductFamilies />
 
-      {/* 5. The Operational Advantage: 20-Year Ops Lead vs Generic CRM & Interactive Floor ROI Calculator */}
+      {/* 4. Solution Finder: Problem-based discovery — "What are you trying to improve?" (CPO Rec #8) */}
+      <SolutionFinder />
+
+      {/* ═══ PHASE 3: FLAGSHIP DEEP DIVE (Operations 360) ═══ */}
+
+      {/* 5. The Operational Advantage: Why BITS over generic software */}
       <TheDifference />
 
-      {/* 6. Collections Command Center: Hero feature with account management */}
+      {/* 6. Operations 360 Benchmarks: Flagship platform metrics */}
+      <StatsStrip />
+
+      {/* 7. Collections Command Center: Hero feature with account management */}
       <FeaturesHero />
 
-      {/* 7. The Recovery Floor Powerhouse: Predictive Dialer, Walled Training Mode, QA Outliers, Omnichannel, and Real-Time Analytics */}
+      {/* 8. The Recovery Floor Powerhouse: Predictive Dialer, QA, Omnichannel */}
       <FloorShowcase />
 
-      {/* 8. Feature Bento: Modular Custom Widgets, Multi-Currency, Account Tagging, Templates */}
-      <FeaturesBento />
+      {/* ═══ PHASE 4: TRUST & FIT (Can it work for me?) ═══ */}
 
-      {/* 9. Administration & Security: RBAC, audit, licensing */}
-      <FeaturesAdmin />
-
-      {/* 8. Target Industries */}
+      {/* 9. Target Industries */}
       <Industries />
 
-      {/* 9. Security: BSP/NPC-aligned enterprise security */}
+      {/* 10. Security: BSP/NPC-aligned enterprise security */}
       <Security />
-
-      {/* 10. Methodology */}
-      <Process />
 
       {/* 11. Deployment Architecture */}
       <DeploymentModels />
 
-      {/* 12. Solution Packages */}
+      {/* ═══ PHASE 5: CONVERT (How do I get started?) ═══ */}
+
+      {/* 12. Solution Packages & Pricing */}
       <Pricing />
 
       {/* 13. FAQ */}
       <FAQ />
 
-      {/* 14. Executive Consultation & Floor Architecture Diagnostic */}
+      {/* 14. Executive Consultation */}
       <Contact />
     </main>
   );

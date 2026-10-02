@@ -620,7 +620,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         "@type": "ListItem",
         position: 2,
         name: "Products",
-        item: `${site.url}/#products-suite`,
+        item: `${site.url}/products`,
       },
       {
         "@type": "ListItem",
@@ -738,7 +738,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </Link>
                 <span className="text-[0.72rem] text-slate-400">/</span>
                 <Link
-                  href="/#products-suite"
+                  href="/products"
                   className="text-[0.72rem] font-bold text-slate-500 hover:text-blue-600 transition-colors"
                 >
                   Products
@@ -1219,10 +1219,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 Request Architecture Consultation
               </Link>
               <Link
-                href="/#products-suite"
+                href="/products"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-bold text-slate-800 shadow-xs transition-colors hover:bg-slate-50 active:scale-[0.98]"
               >
-                Explore All 18 Engines
+                Explore All 18 Products
               </Link>
             </div>
           </div>

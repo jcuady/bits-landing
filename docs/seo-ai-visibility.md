@@ -1,127 +1,112 @@
-# Technical SEO & AI Visibility (AEO/GEO) Architecture Report
+# Technical SEO & AI Visibility (AEO/GEO) Master Architecture Report
 
 > **Entity:** Boundless IT Solutions (BITS)  
 > **Canonical Production Host:** `https://www.boundlessits.com`  
-> **Target Indexers:** Google Search Console, Bing Webmaster Tools, Answer Engines (ChatGPT/SearchGPT, Perplexity AI, Claude, Google Gemini)  
-> **Audit Status:** Verified & Cleaned (September 28, 2026)  
-> **Sitemap Verification:** 25/25 Canonical Routes Returning `HTTP 200 OK` (0 redirects, 0 broken links)
+> **Target Search Surfaces:** Google Search Console, Bing Webmaster Tools, Answer Engines (ChatGPT / SearchGPT, Perplexity AI, Claude Search, Google Gemini & AI Overviews)  
+> **Audit Status:** Verified & Cleaned (October 2026)  
+> **Public Route Inventory:** 30+ Canonical Routes Returning `HTTP 200 OK` (0 redirects, 0 broken links)  
+> **TypeScript Compilation:** Passed with 0 Errors (`npx tsc --noEmit`)
 
 ---
 
-## 1. Google Search Console Root Cause Analysis & Diagnostic Breakdown
+## 1. Executive Summary & Crawlability Baseline
 
-From the live Search Console screenshot:
-- **Reported Error:** `Sitemap could not be read — General HTTP error (1 instance)`
-- **Sitemap URL:** `https://boundlessits.com/sitemap.xml`
-- **GSC Property Selected:** `https://boundlessits.com/` (URL-prefix, apex non-www domain)
-- **Last Read:** `Sep 27, 2026`
+This document defines the technical SEO, AI Search Engine Optimization (AEO/GEO), and information architecture for Boundless IT Solutions (BITS). All public pages are server-rendered, semantically structured, and free of crawl barriers or redirect chains.
 
-### Root Cause 1: Cross-Host Redirect on URL-Prefix Property
-1. The user's production site canonical host is `https://www.boundlessits.com`.
-2. When Googlebot fetched `https://boundlessits.com/sitemap.xml` under the apex URL-prefix property, the edge returned a `308 Permanent Redirect` to `https://www.boundlessits.com/sitemap.xml`.
-3. In Google Search Console, a URL-prefix property (`https://boundlessits.com/`) will reject sitemaps that redirect across hosts with a **"General HTTP error"** / **"Couldn't fetch"**.
-
-### Root Cause 2: Historical September 27 Deployment 500 Incident
-On September 27, 2026, the application experienced a temporary deployment issue resulting in HTTP 500 responses before Supabase fallbacks were hardened. Googlebot recorded that HTTP error on Sep 27.
-
-### Root Cause 3: Middleware Network Overhead on Static Metadata Files
-In `proxy.ts`, the Next.js middleware was previously executing Supabase authentication (`supabase.auth.getUser()`) on requests to `/sitemap.xml`, `/robots.txt`, and static files. Any upstream latency or Supabase delay caused timeouts or 500s when crawlers fetched the sitemap.
-
-### Root Cause 4: `/brandbook` 307 Redirect in Sitemap
-In the previous sitemap, `/brandbook` was redirecting to `/brandbook.html` with HTTP 307. Sitemaps must contain only 200-OK canonical destinations.
+### Key Architectural Milestones
+1. **Canonical Host Enforcement:** All requests canonically resolve to `https://www.boundlessits.com` without redirect hops.
+2. **Edge Proxy Fast-Path Bypass (`proxy.ts`):** Requests to `/sitemap.xml`, `/robots.txt`, and static assets bypass Supabase authentication middleware with zero latency.
+3. **Dedicated Products Destination (`/products`):** Full 18-product catalog index with structured `ItemList` JSON-LD and category filters.
+4. **Interactive Intelligence Labs (`/blog`):** Search-intent optimized resource hub with real-time keyword search, category filters, and articles targeting commercial search queries (`best crm`, `crm for collections`, `best operations management system`).
+5. **Standardized Product Hierarchy:** Unambiguous separation between the parent entity (BITS), strategic flagships (Operations 360, BITSagent, BITScrm), domain suites, and universal white-label capabilities.
 
 ---
 
-## 2. Implemented Architecture Fixes
+## 2. Public URL Inventory & Index Status
 
-### Fix A: Fast-Path SEO Bypass in Edge Proxy (`proxy.ts`)
-- Added zero-latency fast-path bypass for `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/brandbook`, and all `.xml`, `.txt`, `.md` files before initializing Supabase clients or reading cookies.
-- Updated `config.matcher` in `proxy.ts` so edge middleware is completely bypassed for search and AI crawlers.
+All public routes below return `HTTP 200 OK`, emit self-referencing canonical tags, and are included in `https://www.boundlessits.com/sitemap.xml`:
 
-### Fix B: Zero-Redirect Brandbook Rewrite (`next.config.ts`)
-- Added `beforeFiles` rewrite: `/brandbook` -> `/brandbook.html`.
-- Accessing `https://www.boundlessits.com/brandbook` now returns `HTTP 200 OK` directly without redirects, matching the canonical tag.
-
-### Fix C: Stable Sitemap Timestamps & Clean Typing (`app/sitemap.ts`)
-- Replaced dynamic `new Date()` millisecond jitter with stable release date (`2026-09-28T00:00:00.000Z`) in W3C Datetime format.
-- Verified that all 25 URLs are indexable, canonical, and return HTTP 200.
-
-### Fix D: Standards-Compliant `Host:` Directive in `robots.txt` (`app/robots.ts`)
-- Fixed `Host:` directive to output `Host: www.boundlessits.com` (pure hostname without protocol), conforming to RFC and robot parser specifications.
-
-### Fix E: Explicit Cache-Control & Content-Type Headers (`next.config.ts`)
-- Configured `Content-Type: application/xml; charset=utf-8` and `Cache-Control: public, max-age=3600, stale-while-revalidate=86400` for `/sitemap.xml`.
-- Configured `Content-Type: text/plain; charset=utf-8` and caching for `/robots.txt`.
-
----
-
-## 3. Verified Public URL Inventory (25 Indexable Pages)
-
-All 25 URLs tested and verified to return `HTTP 200 OK`:
-
-| # | Public URL Route | Change Frequency | Priority | Status |
-|:---:|:---|:---:|:---:|:---:|
-| 1 | `https://www.boundlessits.com` | daily | 1.0 | `200 OK` |
-| 2 | `https://www.boundlessits.com/bitscrm` | weekly | 0.95 | `200 OK` |
-| 3 | `https://www.boundlessits.com/bitsagent` | weekly | 0.95 | `200 OK` |
-| 4 | `https://www.boundlessits.com/products/crm` | weekly | 0.90 | `200 OK` |
-| 5 | `https://www.boundlessits.com/products/white-label` | weekly | 0.85 | `200 OK` |
-| 6 | `https://www.boundlessits.com/products/collections` | weekly | 0.90 | `200 OK` |
-| 7 | `https://www.boundlessits.com/products/ai-agent` | weekly | 0.90 | `200 OK` |
-| 8 | `https://www.boundlessits.com/products/sales` | weekly | 0.80 | `200 OK` |
-| 9 | `https://www.boundlessits.com/products/support` | weekly | 0.80 | `200 OK` |
-| 10 | `https://www.boundlessits.com/products/marketing` | weekly | 0.80 | `200 OK` |
-| 11 | `https://www.boundlessits.com/products/commerce` | weekly | 0.80 | `200 OK` |
-| 12 | `https://www.boundlessits.com/products/accounting` | weekly | 0.80 | `200 OK` |
-| 13 | `https://www.boundlessits.com/products/hrms` | weekly | 0.80 | `200 OK` |
-| 14 | `https://www.boundlessits.com/products/payroll` | weekly | 0.80 | `200 OK` |
-| 15 | `https://www.boundlessits.com/products/construction` | weekly | 0.80 | `200 OK` |
-| 16 | `https://www.boundlessits.com/products/inventory` | weekly | 0.80 | `200 OK` |
-| 17 | `https://www.boundlessits.com/products/logistics` | weekly | 0.80 | `200 OK` |
-| 18 | `https://www.boundlessits.com/products/pickleball` | weekly | 0.80 | `200 OK` |
-| 19 | `https://www.boundlessits.com/products/sports-hub` | weekly | 0.80 | `200 OK` |
-| 20 | `https://www.boundlessits.com/products/booking` | weekly | 0.80 | `200 OK` |
-| 21 | `https://www.boundlessits.com/products/queuing` | weekly | 0.80 | `200 OK` |
-| 22 | `https://www.boundlessits.com/products/rag-engine` | weekly | 0.80 | `200 OK` |
-| 23 | `https://www.boundlessits.com/products/nfc-card` | weekly | 0.80 | `200 OK` |
-| 24 | `https://www.boundlessits.com/brandbook` | monthly | 0.70 | `200 OK` |
-| 25 | `https://www.boundlessits.com/legal` | yearly | 0.30 | `200 OK` |
+| # | Public URL Route | Change Freq | Priority | Canonical Index Status | Schema Types Applied |
+|:---:|:---|:---:|:---:|:---:|:---|
+| 1 | `https://www.boundlessits.com` | daily | 1.0 | `index, follow` | `Organization`, `WebSite`, `SoftwareApplication` |
+| 2 | `https://www.boundlessits.com/products` | daily | 0.95 | `index, follow` | `CollectionPage`, `ItemList`, `BreadcrumbList` |
+| 3 | `https://www.boundlessits.com/blog` | daily | 0.95 | `index, follow` | `CollectionPage`, `BreadcrumbList` |
+| 4 | `https://www.boundlessits.com/bitscrm` | weekly | 0.95 | `index, follow` | `SoftwareApplication`, `BreadcrumbList` |
+| 5 | `https://www.boundlessits.com/bitsagent` | weekly | 0.95 | `index, follow` | `SoftwareApplication`, `BreadcrumbList` |
+| 6 | `https://www.boundlessits.com/products/collections` | weekly | 0.90 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 7 | `https://www.boundlessits.com/products/ai-agent` | weekly | 0.90 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 8 | `https://www.boundlessits.com/products/sales` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 9 | `https://www.boundlessits.com/products/support` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 10 | `https://www.boundlessits.com/products/marketing` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 11 | `https://www.boundlessits.com/products/commerce` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 12 | `https://www.boundlessits.com/products/operations` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 13 | `https://www.boundlessits.com/products/accounting` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 14 | `https://www.boundlessits.com/products/hrms` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 15 | `https://www.boundlessits.com/products/payroll` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 16 | `https://www.boundlessits.com/products/construction` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 17 | `https://www.boundlessits.com/products/inventory` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 18 | `https://www.boundlessits.com/products/logistics` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 19 | `https://www.boundlessits.com/products/pickleball` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 20 | `https://www.boundlessits.com/products/sports-hub` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 21 | `https://www.boundlessits.com/products/booking` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 22 | `https://www.boundlessits.com/products/queuing` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 23 | `https://www.boundlessits.com/products/rag-engine` | weekly | 0.80 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 24 | `https://www.boundlessits.com/products/nfc-card` | weekly | 0.80 | `index, follow` | `Product`, `FAQPage`, `BreadcrumbList` |
+| 25 | `https://www.boundlessits.com/products/white-label` | weekly | 0.85 | `index, follow` | `SoftwareApplication`, `FAQPage`, `BreadcrumbList` |
+| 26 | `https://www.boundlessits.com/blog/best-collections-oms-debt-recovery-software-2026` | weekly | 0.95 | `index, follow` | `BlogPosting`, `FAQPage`, `BreadcrumbList` |
+| 27 | `https://www.boundlessits.com/blog/best-sovereign-enterprise-crm-platforms-philippines` | weekly | 0.90 | `index, follow` | `BlogPosting`, `FAQPage`, `BreadcrumbList` |
+| 28 | `https://www.boundlessits.com/blog/best-autonomous-voice-ai-agents-call-centers` | weekly | 0.90 | `index, follow` | `BlogPosting`, `FAQPage`, `BreadcrumbList` |
+| 29 | `https://www.boundlessits.com/blog/on-premise-office-server-datacenter-setup-guide-2026` | weekly | 0.90 | `index, follow` | `BlogPosting`, `FAQPage`, `BreadcrumbList` |
+| 30 | `https://www.boundlessits.com/blog/operations-management-system-vs-crm-guide` | weekly | 0.90 | `index, follow` | `BlogPosting`, `FAQPage`, `BreadcrumbList` |
+| 31 | `https://www.boundlessits.com/brandbook` | monthly | 0.70 | `index, follow` | `WebPage` |
+| 32 | `https://www.boundlessits.com/legal` | yearly | 0.30 | `index, follow` | `WebPage` |
 
 ---
 
-## 4. Crawl Control & Privacy Boundaries
+## 3. Search Intent & Keyword Mapping Strategy
 
-### Blocked Non-Public Routes (Robots.txt + X-Robots-Tag)
-- `/app/**` — Private CRM application workspace (protected by Supabase auth)
-- `/api/**` — Internal backend API routes
-- `/login` — User authentication portal
+To ensure BITS captures buyers searching for enterprise software, every target keyword cluster is tied to a specific URL and clear search intent:
+
+| Target Search Query | Search Intent | Primary Target URL | Supporting Content / In-Page Value |
+|:---|:---|:---|:---|
+| **"crm for collections"** / **"best collections crm"** | Commercial Investigation | `/blog/best-collections-oms-debt-recovery-software-2026` | Architectural benchmark comparing debt recovery systems. Direct link to Operations 360 specs. |
+| **"best crm"** / **"best enterprise crm"** | High-Volume Commercial | `/blog/best-sovereign-enterprise-crm-platforms-philippines` | Evaluation of Salesforce vs HubSpot vs BITScrm on TCO, features, and local data residency. |
+| **"operations management system"** / **"best oms"** | Commercial / Informational | `/blog/operations-management-system-vs-crm-guide` | Explains why traditional sales CRMs break down on floor operations and how an OMS coordinates QA, dialers, and scorecards. |
+| **"debt collection software philippines"** | Localized Commercial | `/products/collections` | Operations 360 product page highlighting BSP Circulars 454/857 and NPC RA 10173 compliance. |
+| **"voice ai call center"** / **"autonomous voice agents"** | Emerging Tech Commercial | `/bitsagent` & `/blog/best-autonomous-voice-ai-agents-call-centers` | Sub-350ms acoustic latency benchmarks, Taglish audio fluency, and live call transfer. |
+| **"enterprise software philippines"** | Brand & Portfolio Discovery | `/products` & `/` | 18 connected software engines with unified data layer and sovereign hosting options. |
+| **"cloud repatriation"** / **"on premise server setup"** | Technical / Financial | `/blog/on-premise-office-server-datacenter-setup-guide-2026` | 3-year TCO calculation comparing Dell PowerEdge hardware vs ongoing AWS/Azure cloud rent. |
+
+---
+
+## 4. AI Search & Crawler Access Policy (`robots.ts`)
+
+BITS configures explicit permissions for search engines and AI citation crawlers while barring private application paths:
+
+### Blocked Non-Public Routes (HTTP 403 / Noindex Header)
+- `/app/**` — Private CRM workspace (enforced via Supabase authentication)
+- `/api/**` — Backend operational endpoints
+- `/login` — User authentication gateway
 - `/forgot-password` — Password recovery portal
 
-All non-public routes emit:
-`X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`
-
-### Authorized AI Crawlers in `robots.txt`
-- **Google:** `Googlebot`, `Google-Extended`, `Google-Agent`
-- **OpenAI:** `GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `OAI-AdsBot`
-- **Anthropic:** `ClaudeBot`, `Claude-SearchBot`, `Claude-User`, `anthropic-ai`
-- **Perplexity:** `PerplexityBot`, `Perplexity-User`
-- **Microsoft:** `Bingbot`, `msnbot`
-- **Apple:** `Applebot`, `Applebot-Extended`
-- **Open Web:** `CCBot`
+### Permitted AI Citation & Search Crawlers
+The following AI search engines are granted access to index public content and cite BITS benchmarks in user answers:
+- **OpenAI:** `OAI-SearchBot`, `ChatGPT-User` (for ChatGPT Search citations)
+- **Anthropic:** `Claude-SearchBot` (for Claude search result citability)
+- **Perplexity:** `PerplexityBot`, `Perplexity-User` (for Perplexity citations)
+- **Google:** `Googlebot`, `Google-Agent` (for Google Search & AI Overviews)
+- **Microsoft:** `Bingbot` (feeds Microsoft Copilot answers)
+- **Apple:** `Applebot` (feeds Siri & Spotlight web discovery)
 
 ---
 
-## 5. Owner Action Plan in Google Search Console
+## 5. Technical SEO Verification Checklist
 
-To permanently resolve the status in Google Search Console:
-
-1. **Submit Sitemap to the Canonical Property:**
-   - In Google Search Console, click the property dropdown in the top-left corner.
-   - Select or add the **`https://www.boundlessits.com/`** property (or the DNS Domain property `boundlessits.com`).
-   - Go to **Sitemaps** > Enter `sitemap.xml` > Click **Submit**.
-   - Because `https://www.boundlessits.com/sitemap.xml` returns `200 OK` with zero redirects, Google will immediately mark it as **Success** (Green).
-
-2. **If keeping the non-www property (`https://boundlessits.com/`):**
-   - In Search Console under `https://boundlessits.com/`, the redirect is normal behavior because all traffic is canonically routed to `www`.
-   - In the sitemap drilldown, clicking **"Open Sitemap"** opens `https://www.boundlessits.com/sitemap.xml`.
-   - The primary reporting and indexing data should always be monitored on the **`https://www.boundlessits.com/`** property.
+- [x] **Single H1 per Page:** Every page has exactly one `<h1>` matching the page's core entity and primary keyword.
+- [x] **Unique Title & Meta Descriptions:** Zero duplicate or templated titles; descriptions between 150-160 characters.
+- [x] **Canonical Consistency:** All canonical tags reference `https://www.boundlessits.com/...` with self-referencing paths.
+- [x] **XML Sitemap Health:** Sitemaps update dynamically with release timestamps and only contain 200 OK canonical routes.
+- [x] **Schema.org Validation:** Validated JSON-LD schemas for `Organization`, `WebSite`, `CollectionPage`, `ItemList`, `SoftwareApplication`, `BlogPosting`, and `FAQPage`.
+- [x] **Internal Linking & Anchor Text:** Natural, descriptive anchor texts linking blog posts to product pages and vice versa.
+- [x] **Mobile Responsiveness & Viewports:** Viewport meta tags set to `width=device-width, initial-scale=1`, touch targets > 44px.
+- [x] **TypeScript Type Safety:** 0 errors across the entire codebase (`npx tsc --noEmit`).

@@ -718,7 +718,7 @@ export function ProductsSuite() {
                       <div>
                         <span className="font-bold text-blue-950">Flagship Scope: </span>
                         <span className="text-blue-800">
-                          Integrated operations platform (incorporates former CRM Collections). Purpose-built for Contact Centers, BPOs, Recovery Desks &amp; Complex Operations.
+                          Integrated operations platform — Operations 360. Purpose-built for Contact Centers, BPOs, Recovery Desks &amp; Complex Operations.
                         </span>
                       </div>
                     </div>

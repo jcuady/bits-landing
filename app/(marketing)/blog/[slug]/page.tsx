@@ -80,6 +80,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+  const productLink =
+    post.category === "Collections OMS" || post.slug === "operations-management-system-vs-crm-guide"
+      ? { href: "/products/collections", label: "Explore Operations 360 (OMS)", shortLabel: "Operations 360" }
+      : post.category === "Enterprise CRM"
+      ? { href: "/products/crm", label: "Explore BITScrm Suite", shortLabel: "BITScrm" }
+      : post.category === "Voice AI Agents"
+      ? { href: "/bitsagent", label: "Explore BITSagent Voice AI", shortLabel: "BITSagent" }
+      : { href: "/products", label: "Explore All Products", shortLabel: "BITS Products" };
+
   // Structured Data Schemas
   const articleSchema = {
     "@context": "https://schema.org",
@@ -256,8 +265,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </header>
 
+        {/* Quick Table of Contents Jump Bar */}
+        <div className="mb-8 flex flex-wrap items-center gap-2 rounded-2xl border border-white/15 bg-white/[0.08] p-3 text-xs backdrop-blur-xl">
+          <span className="font-bold text-sky-200 px-2">Jump to:</span>
+          <a href="#summary" className="rounded-xl bg-white/10 px-3 py-1.5 font-medium text-sky-100 hover:bg-white/20 hover:text-white transition-colors">
+            Executive Summary
+          </a>
+          <a href="#matrix" className="rounded-xl bg-white/10 px-3 py-1.5 font-medium text-sky-100 hover:bg-white/20 hover:text-white transition-colors">
+            Comparison Matrix
+          </a>
+          <a href="#criteria" className="rounded-xl bg-white/10 px-3 py-1.5 font-medium text-sky-100 hover:bg-white/20 hover:text-white transition-colors">
+            Evaluation Criteria
+          </a>
+          <a href="#reviews" className="rounded-xl bg-white/10 px-3 py-1.5 font-medium text-sky-100 hover:bg-white/20 hover:text-white transition-colors">
+            In-Depth Reviews
+          </a>
+          {post.faqs.length > 0 && (
+            <a href="#faqs" className="rounded-xl bg-white/10 px-3 py-1.5 font-medium text-sky-100 hover:bg-white/20 hover:text-white transition-colors">
+              FAQs
+            </a>
+          )}
+        </div>
+
         {/* Executive Summary Callout Box */}
-        <section aria-labelledby="exec-summary-heading" className="mb-12 rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-500/15 via-blue-900/30 to-blue-800/40 p-7 shadow-xl backdrop-blur-xl">
+        <section id="summary" aria-labelledby="exec-summary-heading" className="mb-12 rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-500/15 via-blue-900/30 to-blue-800/40 p-7 shadow-xl backdrop-blur-xl">
           <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-300 pb-3 border-b border-white/10">
             <Sparkles className="size-4 text-amber-300 animate-pulse" />
             <h2 id="exec-summary-heading">Executive Summary &amp; Fast Verdict</h2>
@@ -268,7 +299,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
 
         {/* Comparison Matrix Table */}
-        <section aria-labelledby="comparison-matrix-heading" className="mb-14">
+        <section id="matrix" aria-labelledby="comparison-matrix-heading" className="mb-14">
           <div className="mb-4 flex items-center justify-between">
             <h2 id="comparison-matrix-heading" className="text-xl font-bold text-white flex items-center gap-2">
               <Award className="size-5 text-sky-300" />
@@ -334,7 +365,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
 
         {/* Evaluation Criteria Section */}
-        <section aria-labelledby="criteria-heading" className="mb-14">
+        <section id="criteria" aria-labelledby="criteria-heading" className="mb-14">
           <h2 id="criteria-heading" className="text-xl font-bold text-white mb-6 flex items-center gap-2">
             <ShieldCheck className="size-5 text-sky-300" />
             Key Evaluation &amp; Benchmarking Criteria
@@ -353,7 +384,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
 
         {/* Detailed Reviews Breakdown */}
-        <section aria-labelledby="detailed-reviews-heading" className="mb-16 space-y-8">
+        <section id="reviews" aria-labelledby="detailed-reviews-heading" className="mb-16 space-y-8">
           <div className="border-b border-white/15 pb-4">
             <h2 id="detailed-reviews-heading" className="text-2xl font-black text-white">
               In-Depth Platform Reviews &amp; Architectural Breakdown
@@ -465,16 +496,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {rev.isBits && (
                 <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-sky-400/40 bg-blue-600/40 p-4">
                   <div className="text-xs">
-                    <strong className="block text-white font-bold">Deploy the #1 Ranked Platform</strong>
+                    <strong className="block text-white font-bold">Deploy the #1 Ranked Platform: {rev.name}</strong>
                     <span className="text-sky-200">Zero per-seat recurring penalties · 100% sovereign deployment</span>
                   </div>
-                  <Link
-                    href="/#contact"
-                    className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wider text-blue-950 shadow-lg hover:bg-sky-50 transition-all hover:scale-105"
-                  >
-                    <span>Request Live Demo &amp; Audit</span>
-                    <ArrowRight className="size-3.5" />
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Link
+                      href={productLink.href}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-white/30 bg-white/15 px-4 py-2 text-xs font-bold text-white hover:bg-white/25 transition-all shadow-sm"
+                    >
+                      <span>{productLink.label}</span>
+                      <ArrowRight className="size-3" />
+                    </Link>
+                    <Link
+                      href="/#contact"
+                      className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-blue-950 shadow-lg hover:bg-sky-50 transition-all hover:scale-105"
+                    >
+                      <span>Request Live Demo</span>
+                      <ArrowRight className="size-3.5" />
+                    </Link>
+                  </div>
                 </div>
               )}
             </article>
@@ -483,7 +523,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* FAQs Section */}
         {post.faqs.length > 0 && (
-          <section aria-labelledby="faqs-heading" className="mb-16">
+          <section id="faqs" aria-labelledby="faqs-heading" className="mb-16">
             <div className="mb-6 flex items-center gap-2">
               <HelpCircle className="size-5 text-sky-300" />
               <h2 id="faqs-heading" className="text-xl font-bold text-white">
@@ -513,10 +553,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <p className="text-sm text-sky-100/90 leading-relaxed sm:text-base">
               {post.ctaText}
             </p>
-            <div className="pt-2">
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href={productLink.href}
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-sky-300/40 bg-white/10 px-6 py-4 text-xs font-bold text-white shadow-xl hover:bg-white/20 transition-all"
+              >
+                <span>{productLink.label}</span>
+                <ArrowRight className="size-4" />
+              </Link>
               <Link
                 href="/#contact"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-4 text-xs font-black uppercase tracking-wider text-blue-950 shadow-2xl hover:bg-sky-50 transition-all hover:scale-[1.03]"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 text-xs font-black uppercase tracking-wider text-blue-950 shadow-2xl hover:bg-sky-50 transition-all hover:scale-[1.03]"
               >
                 <span>{post.ctaButtonText}</span>
                 <ArrowRight className="size-4" />
