@@ -31,7 +31,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       // Google Gemini, Search & Agents
       {
-        userAgent: ["Google-Extended", "Google-Agent", "Googlebot"],
+        userAgent: ["Google-Extended", "Google-Agent", "Googlebot", "Googlebot-Image"],
         allow: "/",
         disallow: disallowedPaths,
       },

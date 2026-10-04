@@ -9,7 +9,6 @@ const appDir = path.join(rootDir, "app");
 
 // Helper to construct a standard multi-resolution ICO file containing PNG streams
 function buildIcoFile(imageBuffers) {
-  // imageBuffers: Array of { width: number, height: number, buffer: Buffer }
   const count = imageBuffers.length;
   const header = Buffer.alloc(6);
   header.writeUInt16LE(0, 0); // reserved
@@ -37,58 +36,65 @@ function buildIcoFile(imageBuffers) {
 }
 
 async function run() {
-  console.log("=== Generating BITS Brand Favicons, App Icons & Google Logo Assets ===");
+  console.log("=== Generating BITS Ultra-HD Brand Favicons for Google Search Console & Web ===");
 
-  // 1. Source Emblem: Trimmed high-resolution BITS Cloud & Infinity Ribbon Emblem
-  const emblemSourcePath = path.join(rootDir, "newlogo", "pure_brand_emblem_trimmed.png");
-  const emblemBuf = await fs.readFile(emblemSourcePath);
-  const emblemMeta = await sharp(emblemBuf).metadata();
-  console.log(`Loaded source emblem: ${emblemMeta.width}x${emblemMeta.height}`);
+  // 1. Source: Master APP ICON.png (1254x1254)
+  const appIconPath = path.join(rootDir, "APP ICON.png");
+  const appIconBuf = await fs.readFile(appIconPath);
 
-  // 2. Generate Square Transparent Icon Generator Function
-  async function createTransparentSquare(targetSize, innerRatio = 0.88) {
-    const targetInnerSize = Math.round(targetSize * innerRatio);
-    const resizedEmblem = await sharp(emblemBuf)
-      .resize({
-        width: targetInnerSize,
-        height: targetInnerSize,
-        fit: "inside",
-      })
-      .toBuffer({ resolveWithObject: true });
+  // Extract the squircle: bounds left=113, top=118, size=1028
+  const cropped = await sharp(appIconBuf)
+    .extract({ left: 113, top: 118, width: 1028, height: 1028 })
+    .resize(1024, 1024)
+    .toBuffer();
 
-    const left = Math.round((targetSize - resizedEmblem.info.width) / 2);
-    const top = Math.round((targetSize - resizedEmblem.info.height) / 2);
+  // Antialiased squircle mask (Apple superellipse ratio: rx=224, ry=224)
+  const maskSvg = Buffer.from(`
+    <svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1024" height="1024" rx="224" ry="224" fill="#ffffff" />
+    </svg>
+  `);
 
-    return sharp({
-      create: {
-        width: targetSize,
-        height: targetSize,
-        channels: 4,
-        background: { r: 0, g: 0, b: 0, alpha: 0 },
-      },
-    })
-      .composite([{ input: resizedEmblem.data, left, top }])
+  const masterSquircle = await sharp(cropped)
+    .composite([{ input: maskSvg, blend: "dest-in" }])
+    .png({ quality: 100, compressionLevel: 9 })
+    .toBuffer();
+
+  // Save master 1024x1024 squircle to public/brand/
+  await fs.writeFile(path.join(brandDir, "brand-icon-1024.png"), masterSquircle);
+  console.log("✓ Created master squircle asset: public/brand/brand-icon-1024.png (1024x1024)");
+
+  // Helper to generate resized PNG
+  async function generateSize(size) {
+    return sharp(masterSquircle)
+      .resize(size, size, { kernel: "lanczos3" })
       .png({ quality: 100, compressionLevel: 9 })
       .toBuffer();
   }
 
-  // 3. Generate resolutions: 512, 192, 48, 32, 16
-  const icon512 = await createTransparentSquare(512, 0.88);
-  const icon192 = await createTransparentSquare(192, 0.88);
-  const icon48 = await createTransparentSquare(48, 0.90);
-  const icon32 = await createTransparentSquare(32, 0.92);
-  const icon16 = await createTransparentSquare(16, 0.92);
+  // 2. Generate Google Search Console & Web sizes (multiples of 48px required by Google)
+  const icon512 = await generateSize(512);
+  const icon192 = await generateSize(192);
+  const icon144 = await generateSize(144);
+  const icon96 = await generateSize(96);
+  const icon48 = await generateSize(48);
+  const icon32 = await generateSize(32);
+  const icon16 = await generateSize(16);
 
-  // Write PNG icons
+  // 3. Write web standard & Googlebot sizes to public/
   await fs.writeFile(path.join(publicDir, "icon.png"), icon512);
   await fs.writeFile(path.join(publicDir, "icon-512.png"), icon512);
   await fs.writeFile(path.join(publicDir, "icon-192.png"), icon192);
+  await fs.writeFile(path.join(publicDir, "icon-144.png"), icon144);
+  await fs.writeFile(path.join(publicDir, "icon-96.png"), icon96);
   await fs.writeFile(path.join(publicDir, "icon-48.png"), icon48);
   await fs.writeFile(path.join(publicDir, "favicon.png"), icon48);
-  await fs.writeFile(path.join(appDir, "icon.png"), icon512);
-  console.log("✓ Generated icon.png, icon-512.png, icon-192.png, icon-48.png, favicon.png");
 
-  // 4. Generate Multi-Resolution favicon.ico (16, 32, 48)
+  // 4. Write Next.js App Router app/icon.png (Next.js automatically renders <link rel="icon" ...>)
+  await fs.writeFile(path.join(appDir, "icon.png"), icon512);
+  console.log("✓ Generated app/icon.png & public/icon-*.png (48, 96, 144, 192, 512px)");
+
+  // 5. Generate Multi-Resolution favicon.ico (16, 32, 48px)
   const icoBuffer = buildIcoFile([
     { width: 48, height: 48, buffer: icon48 },
     { width: 32, height: 32, buffer: icon32 },
@@ -98,80 +104,22 @@ async function run() {
   await fs.writeFile(path.join(appDir, "favicon.ico"), icoBuffer);
   console.log("✓ Generated multi-resolution favicon.ico (16px, 32px, 48px) in public/ and app/");
 
-  // 5. Generate Apple Touch Icon (180x180) - Solid Apple Squircle with Hero Sky Blue & Cyan Glow
-  // Note: iOS does not support transparency on home screen icons. We use the hero sky canvas.
-  const appleSize = 180;
-  const svgAppleBg = `
-    <svg width="${appleSize}" height="${appleSize}" viewBox="0 0 ${appleSize} ${appleSize}" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="appleSky" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#124294" />
-          <stop offset="50%" stop-color="#1b5bc6" />
-          <stop offset="100%" stop-color="#2563eb" />
-        </linearGradient>
-        <radialGradient id="appleBloom" cx="50%" cy="25%" r="65%">
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45" />
-          <stop offset="60%" stop-color="#2563eb" stop-opacity="0.15" />
-          <stop offset="100%" stop-color="#124294" stop-opacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="${appleSize}" height="${appleSize}" fill="url(#appleSky)" />
-      <rect width="${appleSize}" height="${appleSize}" fill="url(#appleBloom)" />
-    </svg>
-  `;
-  const appleBg = await sharp(Buffer.from(svgAppleBg)).png().toBuffer();
-  // For the Apple icon, use the white cloud mark (from public/brand/mark.png) for high-contrast luxury feel
-  const markWhiteBuf = await fs.readFile(path.join(brandDir, "mark.png"));
-  const appleMark = await sharp(markWhiteBuf)
-    .resize({ width: 130, height: 130, fit: "inside" })
-    .toBuffer({ resolveWithObject: true });
-  const appleLeft = Math.round((appleSize - appleMark.info.width) / 2);
-  const appleTop = Math.round((appleSize - appleMark.info.height) / 2);
-
-  const appleIconFinal = await sharp(appleBg)
-    .composite([{ input: appleMark.data, left: appleLeft, top: appleTop }])
+  // 6. Generate Apple Touch Icon (180x180)
+  // iOS Apple Touch Icon: Needs solid background (no transparent corners) or standard squircle
+  const appleIcon = await sharp(cropped)
+    .resize(180, 180, { kernel: "lanczos3" })
     .png({ quality: 100 })
     .toBuffer();
+  await fs.writeFile(path.join(publicDir, "apple-icon.png"), appleIcon);
+  await fs.writeFile(path.join(appDir, "apple-icon.png"), appleIcon);
+  console.log("✓ Generated Apple Touch Icon (180x180) in public/ and app/");
 
-  await fs.writeFile(path.join(publicDir, "apple-icon.png"), appleIconFinal);
-  await fs.writeFile(path.join(appDir, "apple-icon.png"), appleIconFinal);
-  console.log("✓ Generated iOS Apple Touch Icon (180x180) in public/ and app/");
+  // 7. Update public/brand/mark-tile.png (512x512)
+  await fs.writeFile(path.join(brandDir, "mark-tile.png"), icon512);
+  console.log("✓ Updated public/brand/mark-tile.png (512x512)");
 
-  // 6. Generate Android PWA Maskable Icon & mark-tile.png (512x512)
-  const tileBg = await sharp(Buffer.from(`
-    <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="pwaSky" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#124294" />
-          <stop offset="55%" stop-color="#1b5ec4" />
-          <stop offset="100%" stop-color="#2563eb" />
-        </linearGradient>
-        <radialGradient id="pwaGlow" cx="50%" cy="30%" r="70%">
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45" />
-          <stop offset="100%" stop-color="#124294" stop-opacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="512" height="512" rx="114" ry="114" fill="url(#pwaSky)" />
-      <rect width="512" height="512" rx="114" ry="114" fill="url(#pwaGlow)" />
-    </svg>
-  `)).png().toBuffer();
-
-  const tileMark = await sharp(markWhiteBuf)
-    .resize({ width: 340, height: 340, fit: "inside" })
-    .toBuffer({ resolveWithObject: true });
-  const tileLeft = Math.round((512 - tileMark.info.width) / 2);
-  const tileTop = Math.round((512 - tileMark.info.height) / 2);
-
-  const finalTile = await sharp(tileBg)
-    .composite([{ input: tileMark.data, left: tileLeft, top: tileTop }])
-    .png({ quality: 100 })
-    .toBuffer();
-
-  await fs.writeFile(path.join(brandDir, "mark-tile.png"), finalTile);
-  console.log("✓ Generated public/brand/mark-tile.png (512x512)");
-
-  // 7. Generate Google Search Console & Knowledge Panel Organization Logo (logo-google.png)
-  // Google recommends a 512x512 square with high contrast on white background
+  // 8. Generate Google Search Console & Schema.org Organization Logo (512x512)
+  // Google recommends a 512x512 square with high contrast
   const googleLogoBg = await sharp({
     create: {
       width: 512,
@@ -181,26 +129,25 @@ async function run() {
     },
   }).png().toBuffer();
 
-  // Emblem + BITS text centered on white background
-  const emblemForGoogle = await sharp(emblemBuf)
-    .resize({ width: 300, height: 300, fit: "inside" })
+  const squircleForGoogle = await sharp(masterSquircle)
+    .resize(310, 310, { kernel: "lanczos3" })
     .toBuffer({ resolveWithObject: true });
 
-  const emblemGLeft = Math.round((512 - emblemForGoogle.info.width) / 2);
-  const emblemGTop = 64;
+  const gLeft = Math.round((512 - squircleForGoogle.info.width) / 2);
+  const gTop = 50;
 
   const svgBitsText = `
     <svg width="512" height="120" viewBox="0 0 512 120" xmlns="http://www.w3.org/2000/svg">
-      <text x="256" y="60" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="900" font-size="52" fill="#0A1E4A" letter-spacing="4">BITS</text>
-      <text x="256" y="94" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="600" font-size="18" fill="#1D4ED8" letter-spacing="6">BOUNDLESS IT SOLUTIONS</text>
+      <text x="256" y="55" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="50" fill="#071126" letter-spacing="4">BITS</text>
+      <text x="256" y="90" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="16" fill="#1D4ED8" letter-spacing="5">BOUNDLESS IT SOLUTIONS</text>
     </svg>
   `;
-  const bitsTextBuf = await sharp(Buffer.from(svgBitsText)).png().toBuffer();
+  const textBuf = await sharp(Buffer.from(svgBitsText)).png().toBuffer();
 
   const googleLogo = await sharp(googleLogoBg)
     .composite([
-      { input: emblemForGoogle.data, left: emblemGLeft, top: emblemGTop },
-      { input: bitsTextBuf, left: 0, top: 350 },
+      { input: squircleForGoogle.data, left: gLeft, top: gTop },
+      { input: textBuf, left: 0, top: 370 },
     ])
     .png({ quality: 100 })
     .toBuffer();
@@ -208,7 +155,7 @@ async function run() {
   await fs.writeFile(path.join(brandDir, "logo-google.png"), googleLogo);
   console.log("✓ Generated public/brand/logo-google.png (512x512) for Google Search Console");
 
-  console.log("=== All Favicons, App Icons, and Google Assets Generated Successfully! ===");
+  console.log("=== Favicon generation completed successfully! ===");
 }
 
 run().catch((err) => {

@@ -7,84 +7,84 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 
-const discoveryRoutes = [
+interface DiscoveryRoute {
+  track: string;
+  category: string;
+  goal: string;
+  product: string;
+  description: string;
+  href: string;
+  badge: string;
+  accentBorder: string;
+  glowColor: string;
+}
+
+const discoveryRoutes: DiscoveryRoute[] = [
   {
-    goal: "Run a collections or contact center",
+    track: "01",
+    category: "COLLECTIONS // CRM",
+    goal: "Run high-throughput debt recovery and contact center floors",
     product: "Operations 360",
-    description: "Integrated CRM, dialer, QA, scorecards, coaching, LMS, and WFM in one platform.",
+    description: "Integrated CRM, predictive dialer, QA scorecards, supervisor monitoring, LMS & WFM.",
     href: "/#operations-360",
-    icon: (
-      <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="14" height="14" rx="2" />
-        <path d="M3 8h14M8 3v14" />
-      </svg>
-    ),
-    accent: "bg-blue-600",
+    badge: "Recovery Flagship",
+    accentBorder: "group-hover:border-blue-500/40",
+    glowColor: "from-blue-600/10 to-transparent",
   },
   {
-    goal: "Automate calls, email, or customer conversations",
+    track: "02",
+    category: "VOICE AI // AUTONOMY",
+    goal: "Automate calls, email negotiations, and debtor conversations",
     product: "BITSagent AI",
-    description: "Sub-300ms voice AI, autonomous email agents, and RAG knowledge grounding.",
+    description: "Sub-300ms latency voice AI, autonomous email responders, and RAG knowledge grounding.",
     href: "/bitsagent",
-    icon: (
-      <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 10c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6" />
-        <path d="M10 4v6l3 2" />
-      </svg>
-    ),
-    accent: "bg-indigo-600",
+    badge: "Sub-300ms Voice",
+    accentBorder: "group-hover:border-indigo-500/40",
+    glowColor: "from-indigo-600/10 to-transparent",
   },
   {
-    goal: "Manage sales, support, or marketing",
+    track: "03",
+    category: "REVENUE // PIPELINE",
+    goal: "Scale enterprise deal pipelines, ticketing, and recurring billing",
     product: "BITScrm Suite",
-    description: "Sales pipelines, support ticketing, marketing automation, and commerce billing.",
+    description: "Deal stages, CPQ automated quotations, customer support desk & billing lifecycle.",
     href: "/products/crm",
-    icon: (
-      <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M5 10l3 3 7-7" />
-        <circle cx="10" cy="10" r="8" />
-      </svg>
-    ),
-    accent: "bg-sky-600",
+    badge: "Sales & Support",
+    accentBorder: "group-hover:border-sky-500/40",
+    glowColor: "from-sky-600/10 to-transparent",
   },
   {
-    goal: "Connect finance and workforce operations",
+    track: "04",
+    category: "LEDGER // TRAIN LAW",
+    goal: "Synchronize company finance, biometric shifts, and compliant payroll",
     product: "Accounting, HRMS & Payroll",
-    description: "BIR CAS-ready ERP, biometric attendance, TRAIN law payroll, and bank batch feeds.",
+    description: "BIR CAS-ready ERP, biometric timekeeping, Philippine TRAIN law calculations & bank feeds.",
     href: "/products/accounting",
-    icon: (
-      <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="5" width="12" height="10" rx="1" />
-        <path d="M4 9h12M9 5v10" />
-      </svg>
-    ),
-    accent: "bg-emerald-600",
+    badge: "BIR CAS Aligned",
+    accentBorder: "group-hover:border-emerald-500/40",
+    glowColor: "from-emerald-600/10 to-transparent",
   },
   {
-    goal: "Manage inventory and delivery operations",
+    track: "05",
+    category: "DISPATCH // INVENTORY",
+    goal: "Track multi-warehouse stock, vehicle fleets, and verified delivery",
     product: "Inventory & Logistics",
-    description: "Multi-warehouse stock control, barcode scanning, GPS fleet tracking, and ePOD.",
+    description: "Live GPS fleet tracking, barcode bin scanning, AI dispatch routes, and electronic POD.",
     href: "/products/inventory",
-    icon: (
-      <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 16l6-12 6 12" />
-        <path d="M6.5 12h7" />
-      </svg>
-    ),
-    accent: "bg-teal-600",
+    badge: "Fleet & Warehouse",
+    accentBorder: "group-hover:border-teal-500/40",
+    glowColor: "from-teal-600/10 to-transparent",
   },
   {
-    goal: "Coordinate appointments, visitors, or venues",
+    track: "06",
+    category: "IDENTITY // VENUES",
+    goal: "Orchestrate appointments, virtual queues, courts, and smart tap cards",
     product: "Booking, Queuing & Sports Hub",
-    description: "Online reservations, virtual QR queuing, court rotations, and TV displays.",
+    description: "Dynamic capacity calendar, SMS virtual queuing, court rotations, and encrypted BITS Tap NFC.",
     href: "/products/booking",
-    icon: (
-      <svg className="size-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="4" width="12" height="12" rx="2" />
-        <path d="M4 8h12M8 4v12" />
-      </svg>
-    ),
-    accent: "bg-amber-600",
+    badge: "Venue & Smart NFC",
+    accentBorder: "group-hover:border-amber-500/40",
+    glowColor: "from-amber-600/10 to-transparent",
   },
 ];
 
@@ -92,73 +92,100 @@ export function SolutionFinder() {
   return (
     <Section
       id="solution-finder"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white py-16 sm:py-20 lg:py-24 border-y border-slate-100"
+      className="relative overflow-hidden bg-white py-20 sm:py-24 border-y border-slate-100/80"
     >
-      <Container>
+      {/* Background Architectural Mesh Grid */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
+
+      <Container className="relative">
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center mb-10 sm:mb-14">
+        <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
           <Reveal>
-            <div className="mx-auto mb-3 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 shadow-2xs">
-              <span className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-slate-600 font-mono">
-                Product Discovery
+            <div className="mx-auto mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-slate-50/80 px-3.5 py-1 shadow-2xs">
+              <span className="size-1.5 rounded-full bg-blue-600" />
+              <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-slate-700 font-mono">
+                Direct Operational Discovery
               </span>
             </div>
           </Reveal>
+
           <Reveal delay={0.04}>
-            <h2 className="text-2xl sm:text-3xl lg:text-[2.5rem] font-extrabold tracking-tight text-slate-900 leading-[1.15] text-balance">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-black tracking-tight text-slate-900 leading-[1.14] text-balance">
               What Are You Trying to{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
                 Improve?
               </span>
             </h2>
           </Reveal>
+
           <Reveal delay={0.06}>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto text-pretty">
-              Tell us your goal. We&apos;ll point you to the right product — no browsing 18 names required.
+            <p className="mt-3.5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto text-pretty font-normal">
+              Select your organization&apos;s current operational priority. We will route you directly to the engineered architecture — no browsing 18 product specifications required.
             </p>
           </Reveal>
         </div>
 
-        {/* Discovery Grid */}
-        <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Discovery Routing Grid — Double-Bezel Precision Cards */}
+        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {discoveryRoutes.map((route, idx) => (
-            <Reveal key={route.goal} delay={0.06 + idx * 0.03}>
+            <Reveal key={route.track} delay={0.05 + idx * 0.03}>
               <Link
                 href={route.href}
-                className="group relative flex flex-col rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-blue-200 hover:-translate-y-0.5"
+                className={cn(
+                  "group relative flex flex-col justify-between rounded-2xl p-2",
+                  "bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100/80 dark:from-slate-800 dark:to-slate-900",
+                  "border border-slate-200 dark:border-slate-800",
+                  "shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all duration-200",
+                  "hover:shadow-[0_16px_32px_-10px_rgba(18,66,148,0.12)] hover:-translate-y-0.5",
+                  route.accentBorder
+                )}
               >
-                {/* Icon + Goal */}
-                <div className="flex items-start gap-3.5">
-                  <div className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-lg text-white shadow-sm",
-                    route.accent
-                  )}>
-                    {route.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-slate-900 leading-snug">
+                {/* Inner Core Container */}
+                <div className="relative flex flex-col justify-between h-full rounded-xl bg-white dark:bg-slate-950 p-5 sm:p-6 overflow-hidden border border-white/80 dark:border-slate-850">
+                  {/* Atmospheric Glow */}
+                  <div
+                    className={cn(
+                      "pointer-events-none absolute -top-16 -right-16 size-36 rounded-full bg-gradient-to-br blur-2xl opacity-40 transition-opacity duration-300 group-hover:opacity-80",
+                      route.glowColor
+                    )}
+                  />
+
+                  {/* Header Meta Track & Badge */}
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.18em] text-slate-400">
+                        {route.category}
+                      </span>
+                      <span className="inline-flex items-center rounded-full bg-slate-50 border border-slate-200 px-2 py-0.5 font-mono text-[0.62rem] font-bold text-slate-600">
+                        {route.badge}
+                      </span>
+                    </div>
+
+                    {/* Operational Goal Statement */}
+                    <h3 className="text-base sm:text-[1.05rem] font-extrabold text-slate-900 dark:text-white leading-snug">
                       &ldquo;{route.goal}&rdquo;
+                    </h3>
+                  </div>
+
+                  {/* Recommended Product & Capability */}
+                  <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-850">
+                    <div className="flex items-baseline justify-between mb-1">
+                      <span className="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+                        Recommended Engine
+                      </span>
+                      <span className="font-mono text-xs font-bold text-slate-400 group-hover:text-blue-600 transition-colors">
+                        0{route.track} ↗
+                      </span>
+                    </div>
+
+                    <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                      {route.product}
+                    </p>
+
+                    <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+                      {route.description}
                     </p>
                   </div>
-                </div>
-
-                {/* Recommendation */}
-                <div className="mt-4 pt-3.5 border-t border-slate-100">
-                  <p className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">
-                    Recommended
-                  </p>
-                  <p className="text-sm font-semibold text-slate-900">
-                    {route.product}
-                  </p>
-                  <p className="mt-1 text-xs text-slate-500 leading-relaxed">
-                    {route.description}
-                  </p>
-                </div>
-
-                {/* Arrow */}
-                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-blue-600 group-hover:text-blue-700 transition-colors">
-                  <span>Explore</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>
               </Link>
             </Reveal>
