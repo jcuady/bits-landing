@@ -72,17 +72,17 @@ export function Hero() {
               </div>
             </Reveal>
 
-            {/* Main Headline: Company-level, answers WHO and WHAT */}
+            {/* Main Headline: Clear, plain-English hook */}
             <Reveal delay={0.04} y={14}>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] text-balance drop-shadow-sm">
-                Enterprise Software Built Around How You Actually Operate.
+                Stop Juggling Spreadsheets. Run Your Operations in One Connected Platform.
               </h1>
             </Reveal>
 
-            {/* Subheading: Portfolio breadth + differentiation */}
+            {/* Subheading: Straightforward, layman-friendly ecosystem explanation */}
             <Reveal delay={0.08} y={10}>
               <p className="mt-5 max-w-2xl text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed font-normal text-pretty drop-shadow-2xs">
-                BITS — Boundless IT Solutions — engineers connected CRM, operations, finance, workforce, logistics, and AI products for organizations that have outgrown spreadsheets and disconnected software. Start with one product, expand as you grow.
+                From collection calls and field agents to payroll, accounting, and AI voice assistants. BITS connects all your daily business tools in one place so your team gets more done in less time. Start with what you need today, and add more as you grow.
               </p>
             </Reveal>
 
@@ -98,7 +98,7 @@ export function Hero() {
                   }}
                   className="group flex h-12 w-full sm:w-auto min-w-[180px] items-center justify-center gap-2.5 rounded-full bg-white px-7 font-bold text-slate-900 shadow-xl shadow-blue-950/20 transition-all duration-200 hover:bg-slate-50 hover:shadow-2xl active:scale-[0.98] cursor-pointer"
                 >
-                  <span className="text-[0.92rem]">Explore BITS Products</span>
+                  <span className="text-[0.92rem]">Explore All Products</span>
                   <span className="size-6 rounded-full bg-slate-100 flex items-center justify-center text-xs text-slate-700 transition-transform duration-200 group-hover:translate-y-0.5 font-bold">
                     ↓
                   </span>
@@ -117,9 +117,64 @@ export function Hero() {
                 </button>
               </div>
 
+              {/* Fast Jump Glass Pills — Easy Self-Qualification for Buyers */}
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+                <span className="text-xs font-semibold text-white/75">Quick jump:</span>
+                <a
+                  href="#cockpit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("cockpit")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
+                >
+                  Collections &amp; Dialer
+                </a>
+                <a
+                  href="#cockpit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("cockpit")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
+                >
+                  Field Agents App
+                </a>
+                <a
+                  href="#product-families"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("product-families")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
+                >
+                  Payroll &amp; HR
+                </a>
+                <a
+                  href="#product-families"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("product-families")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
+                >
+                  Accounting &amp; ERP
+                </a>
+                <a
+                  href="#product-families"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById("product-families")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
+                >
+                  Voice AI
+                </a>
+              </div>
+
               {/* Micro-Reassurance Line — Company-level trust signals */}
-              <p className="mt-3.5 text-xs text-white/80 font-medium drop-shadow-2xs">
-                18 Software Products · Modular Procurement · 100% Customizable · Cloud or On-Premises · White-Label Available
+              <p className="mt-4 text-xs text-white/80 font-medium drop-shadow-2xs">
+                18 Connected Software Products · Easy Setup · 100% Customizable · Cloud or On-Premises
               </p>
             </Reveal>
           </div>

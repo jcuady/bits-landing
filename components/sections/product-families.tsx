@@ -36,19 +36,20 @@ const productFamilies: ProductFamily[] = [
     id: "customer-operations",
     code: "FAMILY 01 // RECOVERY & VOICE",
     title: "Customer Operations",
-    problem: "Run collections, contact centers, and customer relationships",
+    problem: "Collect debt faster, automate calls, and track field reps on the ground",
     summary:
-      "High-concurrency recovery floor engine combining collections CRM, predictive dialing, and sub-300ms voice AI agents with supervisory monitoring.",
+      "All-in-one operations system: call center CRM, automatic dialer, live mobile GPS app for field agents with visit timestamps, and sub-300ms voice AI.",
     visual: "/images/families/customer-operations.webp",
     alt: "BITS Customer Operations 3D telemetry and voice AI core",
-    capabilityTag: "Collections CRM · Dialer · Voice AI",
-    benchmark: "99.98% Telephony SLA · Sub-300ms Voice Latency",
+    capabilityTag: "Collections CRM · Field App · Dialer · Voice AI",
+    benchmark: "99.98% Telephony Uptime · Live GPS & Timestamps",
     pulseColor: "bg-blue-500",
-    glowColor: "from-blue-600/10 via-sky-500/5 to-transparent",
-    accentBorder: "group-hover:border-blue-500/30",
+    glowColor: "from-blue-500/15 via-sky-400/10 to-transparent",
+    accentBorder: "hover:border-blue-400/50",
     href: "/#operations-360",
     products: [
       { name: "Operations 360", badge: "Flagship CRM & Dialer", href: "/#operations-360" },
+      { name: "Field Agents App", badge: "Live GPS & Timestamps", href: "/#operations-360" },
       { name: "BITScrm Suite", badge: "Sales & Support", href: "/products/crm" },
       { name: "BITSagent AI", badge: "Autonomous Voice & Email", href: "/bitsagent" },
     ],
@@ -57,16 +58,16 @@ const productFamilies: ProductFamily[] = [
     id: "business-operations",
     code: "FAMILY 02 // FINANCIAL & WORKFORCE",
     title: "Business Operations",
-    problem: "Connect finance, workforce, and supply chain",
+    problem: "Connect company accounting, staff payroll, and fleet inventory",
     summary:
-      "Enterprise accounting with General Ledger and AP/AR 3-way match, 24/7 BPO biometric shift rosters, and compliant Philippine TRAIN law payroll.",
+      "Complete business back-office: BIR CAS-aligned General Ledger, 24/7 biometric shift tracking, Philippine TRAIN law payroll, and warehouse fleet delivery routing.",
     visual: "/images/families/business-operations.webp",
     alt: "BITS Business Operations 3D financial prism and ledger matrix",
     capabilityTag: "ERP Ledger · TRAIN Payroll · Logistics",
-    benchmark: "BIR CAS Aligned · 100% Statutory Compliance",
+    benchmark: "BIR CAS Aligned · 100% Tax & Labor Compliant",
     pulseColor: "bg-emerald-500",
-    glowColor: "from-emerald-600/10 via-teal-500/5 to-transparent",
-    accentBorder: "group-hover:border-emerald-500/30",
+    glowColor: "from-emerald-500/15 via-teal-400/10 to-transparent",
+    accentBorder: "hover:border-emerald-400/50",
     href: "/products/accounting",
     products: [
       { name: "Accounting & ERP", badge: "GL · AP/AR · Multi-Entity", href: "/products/accounting" },
@@ -78,16 +79,16 @@ const productFamilies: ProductFamily[] = [
     id: "customer-experience",
     code: "FAMILY 03 // VENUE & SMART IDENTITY",
     title: "Customer Experience",
-    problem: "Manage bookings, queues, venues, and dynamic identity",
+    problem: "Manage bookings, customer queues, venues, and smart cards",
     summary:
-      "Unified dynamic capacity scheduling, real-time venue and tournament management, SMS queuing displays, and encrypted NFC smart tap identity.",
+      "Customer-facing tools: live calendar booking, SMS queuing screens, sports club court schedules, and encrypted contactless smart tap NFC business cards.",
     visual: "/images/families/customer-experience.webp",
     alt: "BITS Customer Experience 3D smart NFC card and venue telemetry",
     capabilityTag: "Dynamic Booking · Queue · Smart NFC",
     benchmark: "Sub-Second NFC Tap · Real-Time Venue Sync",
     pulseColor: "bg-amber-500",
-    glowColor: "from-amber-600/10 via-orange-500/5 to-transparent",
-    accentBorder: "group-hover:border-amber-500/30",
+    glowColor: "from-amber-500/15 via-orange-400/10 to-transparent",
+    accentBorder: "hover:border-amber-400/50",
     href: "/products/booking",
     products: [
       { name: "Booking System", badge: "Dynamic Capacity & Deposits", href: "/products/booking" },
@@ -100,16 +101,16 @@ const productFamilies: ProductFamily[] = [
     id: "platform-ai",
     code: "FAMILY 04 // PRIVATE SOVEREIGN FABRIC",
     title: "Platform & AI",
-    problem: "Ground AI in your data, integrate systems, deploy anywhere",
+    problem: "Connect AI to your company data, deploy on your own servers",
     summary:
-      "Enterprise RAG knowledge engine grounding LLMs in proprietary SOPs, multi-tenant white-label SaaS infrastructure, and bespoke custom engineering.",
+      "Enterprise AI knowledge engine that answers customer questions using your exact company manuals, plus private server deployment and custom software builds.",
     visual: "/images/families/platform-ai.webp",
     alt: "BITS Platform & AI 3D sovereign neural polyhedron core",
     capabilityTag: "RAG Engine · Sovereign Cloud · Custom Stack",
     benchmark: "Private On-Prem Inference · Zero Data Leaks",
     pulseColor: "bg-violet-500",
-    glowColor: "from-violet-600/10 via-purple-500/5 to-transparent",
-    accentBorder: "group-hover:border-violet-500/30",
+    glowColor: "from-violet-500/15 via-purple-400/10 to-transparent",
+    accentBorder: "hover:border-violet-400/50",
     href: "/products/rag-engine",
     products: [
       { name: "RAG Knowledge Engine", badge: "Vector SOP Grounding", href: "/products/rag-engine" },
@@ -173,16 +174,18 @@ export function ProductFamilies() {
             <Reveal key={family.id} delay={0.06 + idx * 0.05}>
               <div
                 className={cn(
-                  "group relative rounded-[2rem] sm:rounded-[2.25rem] p-2.5 sm:p-3",
-                  "bg-gradient-to-b from-slate-200/90 via-slate-150 to-slate-200/60 dark:from-slate-800 dark:to-slate-900",
-                  "border border-slate-300/70 dark:border-slate-800",
-                  "shadow-[0_10px_30px_-15px_rgba(0,0,0,0.06)] transition-all duration-300",
-                  "hover:shadow-[0_24px_48px_-16px_rgba(18,66,148,0.14)] hover:-translate-y-1",
+                  "group relative rounded-[2.25rem] sm:rounded-[2.5rem] p-3 sm:p-3.5",
+                  "bg-white/75 backdrop-blur-xl border border-white/85",
+                  "shadow-xl shadow-blue-950/5 transition-all duration-300",
+                  "hover:shadow-2xl hover:shadow-blue-600/15 hover:-translate-y-1",
                   family.accentBorder
                 )}
               >
                 {/* Inner Core Container (Concentric Doppelrand) */}
-                <div className="relative flex h-full flex-col justify-between rounded-[1.55rem] sm:rounded-[1.8rem] bg-white dark:bg-slate-950 p-6 sm:p-8 overflow-hidden border border-white/80 dark:border-white/5">
+                <div className="relative flex h-full flex-col justify-between rounded-[1.75rem] sm:rounded-[2rem] bg-white/90 backdrop-blur-2xl p-6 sm:p-8 overflow-hidden border border-white/90 shadow-sm">
+                  {/* Subtle Inner Highlight Refraction */}
+                  <div className="absolute inset-0 rounded-[1.75rem] sm:rounded-[2rem] ring-1 ring-inset ring-white/95 shadow-[inset_0_1px_2px_rgba(255,255,255,0.95)] pointer-events-none" />
+
                   {/* Atmospheric Brand Glow */}
                   <div
                     className={cn(
@@ -195,7 +198,7 @@ export function ProductFamilies() {
                   <div>
                     <div className="flex items-start gap-4 sm:gap-5">
                       {/* Bespoke Ultra-HD 3D Visual Art Badge */}
-                      <div className="relative size-18 sm:size-22 rounded-2xl overflow-hidden shadow-md ring-1 ring-black/10 shrink-0 bg-slate-950 transition-transform duration-300 group-hover:scale-[1.04]">
+                      <div className="relative size-18 sm:size-22 rounded-2xl overflow-hidden shadow-md ring-1 ring-slate-900/10 shrink-0 bg-slate-900 transition-transform duration-300 group-hover:scale-[1.04]">
                         <Image
                           src={family.visual}
                           alt={family.alt}
@@ -209,40 +212,40 @@ export function ProductFamilies() {
                       {/* Header Meta & Title */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <span className="font-mono text-[0.66rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                          <span className="font-mono text-[0.66rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.18em] text-blue-700">
                             {family.code}
                           </span>
                         </div>
 
-                        <h3 className="mt-1 text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
+                        <h3 className="mt-1 text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug">
                           {family.title}
                         </h3>
 
-                        <p className="mt-1 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
+                        <p className="mt-1 text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
                           {family.problem}
                         </p>
                       </div>
                     </div>
 
                     {/* Operational Telemetry Benchmark Strip */}
-                    <div className="mt-4 sm:mt-5 flex items-center gap-2 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 px-3 py-2 text-[0.72rem] font-semibold text-slate-700 dark:text-slate-300">
+                    <div className="mt-4 sm:mt-5 flex items-center gap-2 rounded-xl bg-slate-50/90 border border-slate-200/80 px-3 py-2 text-[0.72rem] font-semibold text-slate-700">
                       <span className={cn("size-2 rounded-full shrink-0 animate-pulse", family.pulseColor)} />
                       <span className="font-mono uppercase tracking-wider">{family.benchmark}</span>
                     </div>
 
                     {/* Architectural Narrative Description */}
-                    <p className="mt-3.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="mt-3.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                       {family.summary}
                     </p>
                   </div>
 
                   {/* Product Ecosystem Section */}
-                  <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80">
+                  <div className="mt-6 pt-5 border-t border-slate-100">
                     <div className="mb-2.5 flex items-center justify-between">
                       <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.16em] text-slate-400">
                         Connected Modules
                       </span>
-                      <span className="text-[0.65rem] font-medium text-slate-400">
+                      <span className="text-[0.65rem] font-semibold text-blue-700">
                         {family.products.length} Products Included
                       </span>
                     </div>
@@ -255,14 +258,14 @@ export function ProductFamilies() {
                           className="group/pill flex flex-col justify-between rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-white hover:border-blue-500/40 hover:shadow-xs p-2.5 transition-all duration-150"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-bold text-slate-900 dark:text-white group-hover/pill:text-blue-700 transition-colors">
+                            <span className="text-xs font-bold text-slate-900 group-hover/pill:text-blue-700 transition-colors">
                               {prod.name}
                             </span>
                             <span className="text-slate-400 text-xs font-bold group-hover/pill:text-blue-600 transition-transform group-hover/pill:translate-x-0.5">
                               ↗
                             </span>
                           </div>
-                          <span className="mt-1 text-[0.68rem] font-medium text-slate-500 dark:text-slate-400">
+                          <span className="mt-1 text-[0.68rem] font-medium text-slate-500">
                             {prod.badge}
                           </span>
                         </Link>
@@ -272,7 +275,7 @@ export function ProductFamilies() {
                     {/* Primary Family Deep-Dive Button */}
                     <Link
                       href={family.href}
-                      className="mt-4 flex w-full items-center justify-between rounded-xl bg-slate-900 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-xs transition-all duration-200 hover:bg-blue-600 hover:shadow-md active:scale-[0.99]"
+                      className="mt-4 flex w-full items-center justify-between rounded-xl bg-blue-600 hover:bg-blue-500 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:shadow-lg active:scale-[0.99]"
                     >
                       <span>Explore {family.title} Ecosystem</span>
                       <span className="font-mono text-base transition-transform duration-200 group-hover:translate-x-1">
@@ -288,12 +291,12 @@ export function ProductFamilies() {
 
         {/* Global Portfolio Navigation Strip */}
         <Reveal delay={0.28}>
-          <div className="mt-14 sm:mt-16 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs">
+          <div className="mt-14 sm:mt-16 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-3xl border border-white/80 bg-white/80 backdrop-blur-xl p-6 sm:p-7 shadow-xl shadow-blue-950/5">
             <div>
-              <p className="text-sm font-bold text-slate-900 dark:text-white">
+              <p className="text-base font-bold text-slate-900">
                 Looking for the complete architecture breakdown?
               </p>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
                 Explore all 18 enterprise products, sovereign on-prem deployment, or white-label options.
               </p>
             </div>
@@ -301,14 +304,14 @@ export function ProductFamilies() {
             <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
               <Link
                 href="/products"
-                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 text-xs sm:text-sm font-bold text-white shadow-xs transition-all duration-200 hover:bg-blue-700 hover:shadow-md"
+                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:shadow-lg"
               >
                 <span>Browse All 18 Products</span>
                 <span>→</span>
               </Link>
               <Link
                 href="/#contact"
-                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs sm:text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-slate-100 hover:border-slate-300"
+                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 px-4 text-xs sm:text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300"
               >
                 <span>Book Scoping</span>
               </Link>

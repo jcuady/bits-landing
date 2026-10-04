@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
-type ActiveTab = "cockpit" | "softphone" | "qa";
+type ActiveTab = "cockpit" | "field" | "softphone" | "qa";
 type TimeFilter = "weekly" | "monthly" | "today";
 
 interface DayMetric {
@@ -136,6 +136,25 @@ export function HeroProduct({ className }: { className?: string }) {
           <button
             type="button"
             onClick={() => {
+              setActiveTab("field");
+              triggerToast("Field Agents App: Real-time GPS timestamps, photo proof & offline sync.");
+            }}
+            className={cn(
+              "inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-4 text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap",
+              activeTab === "field"
+                ? "bg-white text-blue-700 shadow-xs shadow-slate-900/5"
+                : "text-slate-600 hover:text-slate-900 hover:bg-white/50"
+            )}
+          >
+            <span>Field Agents App</span>
+            <span className="rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 text-[0.62rem] font-bold">
+              GPS &amp; Timestamps
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
               setActiveTab("softphone");
               triggerToast("Predictive Telephony: ~0.4s screen-pop & active supervisor listen/whisper.");
             }}
@@ -193,21 +212,27 @@ export function HeroProduct({ className }: { className?: string }) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <span className="inline-block text-[10px] font-bold uppercase tracking-[0.18em] text-blue-700 mb-1">
-                  {activeTab === "softphone"
+                  {activeTab === "field"
+                    ? "OPERATIONS 360 // FIELD MOBILE APP"
+                    : activeTab === "softphone"
                     ? "TELEPHONY CORE"
                     : activeTab === "qa"
                     ? "AUDIT & COMPLIANCE"
                     : "COLLECTIONS CORE · ZERO DRIFT"}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                  {activeTab === "softphone"
+                  {activeTab === "field"
+                    ? "Field Agent Live Visit HUD"
+                    : activeTab === "softphone"
                     ? "Live Call Screen-Pop"
                     : activeTab === "qa"
                     ? "QA & Compliance Score"
                     : "Recovery Velocity"}
                 </h3>
                 <p className="mt-0.5 text-xs font-medium text-slate-500">
-                  {activeTab === "softphone"
+                  {activeTab === "field"
+                    ? "Officer: Ronald Santos · Account #PH-89412 · Pasig City"
+                    : activeTab === "softphone"
                     ? "WebRTC Softphone · Account #9042-PH"
                     : activeTab === "qa"
                     ? "Weighted KPI Index · Zero Script Deviance"
@@ -219,7 +244,11 @@ export function HeroProduct({ className }: { className?: string }) {
               <button
                 type="button"
                 onClick={() =>
-                  triggerToast("Full settlement audit report available in client portal.")
+                  triggerToast(
+                    activeTab === "field"
+                      ? "Field visit telemetry and geotagged logs synced to head office."
+                      : "Full settlement audit report available in client portal."
+                  )
                 }
                 aria-label="Inspect recovery details"
                 className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200/80 bg-white/90 text-slate-700 shadow-2xs transition-all hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 cursor-pointer"
@@ -231,7 +260,9 @@ export function HeroProduct({ className }: { className?: string }) {
             {/* Main Headline Metric Display */}
             <div className="mt-6 flex flex-wrap items-baseline gap-3">
               <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 font-sans">
-                {activeTab === "softphone"
+                {activeTab === "field"
+                  ? "10:14:02 AM"
+                  : activeTab === "softphone"
                   ? "₱48,500 Past Due"
                   : activeTab === "qa"
                   ? "98.2% Score"
@@ -239,16 +270,32 @@ export function HeroProduct({ className }: { className?: string }) {
               </span>
 
               {/* Growth Pill Badge */}
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/25 bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-bold",
+                  activeTab === "field"
+                    ? "border-blue-500/25 bg-blue-50 text-blue-700"
+                    : "border-emerald-500/25 bg-emerald-50 text-emerald-700"
+                )}
+              >
                 <span>
-                  {activeTab === "softphone"
+                  {activeTab === "field"
+                    ? "Arrival GPS Stamped"
+                    : activeTab === "softphone"
                     ? "Call Active"
                     : activeTab === "qa"
                     ? "Script Aligned"
                     : "+18.4%"}
                 </span>
-                <span className="text-[0.7rem] font-medium text-emerald-600">
-                  {activeTab === "softphone"
+                <span
+                  className={cn(
+                    "text-[0.7rem] font-medium",
+                    activeTab === "field" ? "text-blue-600" : "text-emerald-600"
+                  )}
+                >
+                  {activeTab === "field"
+                    ? "Geofence 8m"
+                    : activeTab === "softphone"
                     ? "Inbound Match"
                     : activeTab === "qa"
                     ? "Zero Violations"
@@ -261,14 +308,18 @@ export function HeroProduct({ className }: { className?: string }) {
             <div className="mt-6 space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-slate-500">
-                  {activeTab === "softphone"
+                  {activeTab === "field"
+                    ? "Daily Route Target: 14 Accounts"
+                    : activeTab === "softphone"
                     ? "PTP Grace Window: 3 Days"
                     : activeTab === "qa"
                     ? "Target Threshold: 95.0%"
                     : "Target ₱2,000,000"}
                 </span>
                 <span className="font-bold text-blue-700">
-                  {activeTab === "softphone"
+                  {activeTab === "field"
+                    ? "9 Completed (64.3%)"
+                    : activeTab === "softphone"
                     ? "₱15,000 Proposed"
                     : activeTab === "qa"
                     ? "98.2% Achieved"
@@ -282,7 +333,9 @@ export function HeroProduct({ className }: { className?: string }) {
                 <div
                   style={{
                     width:
-                      activeTab === "softphone"
+                      activeTab === "field"
+                        ? "64.3%"
+                        : activeTab === "softphone"
                         ? "55%"
                         : activeTab === "qa"
                         ? "98.2%"
@@ -293,96 +346,162 @@ export function HeroProduct({ className }: { className?: string }) {
               </div>
             </div>
 
-            {/* Teaser Advantage Highlights (Immediate Operations Lead Value) */}
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-5 border-t border-slate-100 text-xs">
-              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
-                <span className="font-bold text-slate-900 block mb-0.5">PTP Auto-Alerts</span>
-                <span className="text-[11px] text-slate-500 leading-tight">Flags broken promises in seconds</span>
-              </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
-                <span className="font-bold text-slate-900 block mb-0.5">Zero Lost Handoffs</span>
-                <span className="text-[11px] text-slate-500 leading-tight">Shared single debtor history</span>
-              </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
-                <span className="font-bold text-slate-900 block mb-0.5">Auto-SMS Reminders</span>
-                <span className="text-[11px] text-slate-500 leading-tight">Dispatches payment links</span>
-              </div>
-            </div>
-
-            {/* Interactive Daily Trajectory Mini Bar Chart */}
-            <div className="mt-6 border-t border-slate-100 pt-4">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Daily Velocity Trajectory
-                </span>
-                <div className="flex items-center gap-1.5">
-                  {(["weekly", "monthly", "today"] as TimeFilter[]).map((f) => (
-                    <button
-                      key={f}
-                      type="button"
-                      onClick={() => {
-                        setTimeFilter(f);
-                        setSelectedDay(f === "weekly" ? "Tue" : f === "monthly" ? "W2" : "11 AM");
-                      }}
-                      className={cn(
-                        "min-h-[44px] px-2.5 rounded-lg text-[0.68rem] font-bold capitalize transition-colors cursor-pointer inline-flex items-center",
-                        timeFilter === f
-                          ? "bg-blue-600 text-white shadow-2xs"
-                          : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
-                      )}
-                    >
-                      {f}
-                    </button>
-                  ))}
+            {/* Teaser Advantage Highlights */}
+            {activeTab === "field" ? (
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-5 border-t border-slate-100 text-xs">
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Tamper-Proof Time</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">GPS satellite locked timestamps</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Photo &amp; E-Sign</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Geotagged proof + debtor signature</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Offline Auto-Sync</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Zero data lost in signal dead zones</span>
                 </div>
               </div>
+            ) : (
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-5 border-t border-slate-100 text-xs">
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">PTP Auto-Alerts</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Flags broken promises in seconds</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Field Reps Mobile App</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">GPS timestamps &amp; photo proof</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Auto-SMS Reminders</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Dispatches payment links</span>
+                </div>
+              </div>
+            )}
 
-              {/* Mini interactive bars */}
-              <div className="grid grid-cols-6 gap-2 sm:gap-3 items-end h-20 pt-1">
-                {currentDataset.slice(0, 6).map((item) => {
-                  const isSelected = item.day === selectedDay;
-                  const maxVal = Math.max(...currentDataset.map((x) => x.keptPtp), 100);
-                  const pct = Math.min(100, Math.round((item.keptPtp / maxVal) * 100));
+            {/* Trajectory or Chronological Visit Log */}
+            {activeTab === "field" ? (
+              <div className="mt-6 border-t border-slate-100 pt-4">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Live Visit Timestamps Log · Pasig Route
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[0.68rem] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200/80">
+                    <span className="size-1.5 rounded-full bg-blue-600 animate-ping" />
+                    <span>Real-Time Sync</span>
+                  </span>
+                </div>
 
-                  return (
-                    <div
-                      key={item.day}
-                      onClick={() => setSelectedDay(item.day)}
-                      className="group/bar flex flex-col items-center justify-end h-full gap-1.5 cursor-pointer select-none"
-                    >
-                      <div className="w-full flex-1 flex items-end justify-center rounded-xl bg-slate-50 p-1 group-hover/bar:bg-blue-50/50 transition-colors">
-                        <div
-                          style={{ height: `${pct}%` }}
-                          className={cn(
-                            "w-full rounded-lg transition-all duration-300",
-                            isSelected
-                              ? "bg-blue-600 shadow-md shadow-blue-500/30"
-                              : "bg-blue-200 group-hover/bar:bg-blue-400"
-                          )}
-                        />
-                      </div>
-                      <span
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-left">
+                  <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2.5">
+                    <span className="text-[0.65rem] font-bold uppercase text-slate-400 block">1. Arrival</span>
+                    <span className="text-xs font-black text-slate-900 block mt-0.5">10:14:02 AM</span>
+                    <span className="text-[0.62rem] text-emerald-600 font-semibold">Geofence Verified</span>
+                  </div>
+                  <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2.5">
+                    <span className="text-[0.65rem] font-bold uppercase text-slate-400 block">2. In-Person</span>
+                    <span className="text-xs font-black text-slate-900 block mt-0.5">10:16:30 AM</span>
+                    <span className="text-[0.62rem] text-slate-500 font-medium">Debtor Present</span>
+                  </div>
+                  <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2.5">
+                    <span className="text-[0.65rem] font-bold uppercase text-slate-400 block">3. PTP Settled</span>
+                    <span className="text-xs font-black text-blue-700 block mt-0.5">10:24:18 AM</span>
+                    <span className="text-[0.62rem] text-emerald-700 font-bold">₱15,000 Receipt</span>
+                  </div>
+                  <div className="rounded-xl border border-slate-100 bg-slate-50/80 p-2.5">
+                    <span className="text-[0.65rem] font-bold uppercase text-slate-400 block">4. Departure</span>
+                    <span className="text-xs font-black text-slate-900 block mt-0.5">10:28:45 AM</span>
+                    <span className="text-[0.62rem] text-blue-600 font-semibold">E-Sign Captured</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="mt-6 border-t border-slate-100 pt-4">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    Daily Velocity Trajectory
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {(["weekly", "monthly", "today"] as TimeFilter[]).map((f) => (
+                      <button
+                        key={f}
+                        type="button"
+                        onClick={() => {
+                          setTimeFilter(f);
+                          setSelectedDay(f === "weekly" ? "Tue" : f === "monthly" ? "W2" : "11 AM");
+                        }}
                         className={cn(
-                          "text-[0.68rem] font-bold transition-colors",
-                          isSelected ? "text-blue-700 font-extrabold" : "text-slate-400"
+                          "min-h-[44px] px-2.5 rounded-lg text-[0.68rem] font-bold capitalize transition-colors cursor-pointer inline-flex items-center",
+                          timeFilter === f
+                            ? "bg-blue-600 text-white shadow-2xs"
+                            : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
                         )}
                       >
-                        {item.day}
-                      </span>
-                    </div>
-                  );
-                })}
+                        {f}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mini interactive bars */}
+                <div className="grid grid-cols-6 gap-2 sm:gap-3 items-end h-20 pt-1">
+                  {currentDataset.slice(0, 6).map((item) => {
+                    const isSelected = item.day === selectedDay;
+                    const maxVal = Math.max(...currentDataset.map((x) => x.keptPtp), 100);
+                    const pct = Math.min(100, Math.round((item.keptPtp / maxVal) * 100));
+
+                    return (
+                      <div
+                        key={item.day}
+                        onClick={() => setSelectedDay(item.day)}
+                        className="group/bar flex flex-col items-center justify-end h-full gap-1.5 cursor-pointer select-none"
+                      >
+                        <div className="w-full flex-1 flex items-end justify-center rounded-xl bg-slate-50 p-1 group-hover/bar:bg-blue-50/50 transition-colors">
+                          <div
+                            style={{ height: `${pct}%` }}
+                            className={cn(
+                              "w-full rounded-lg transition-all duration-300",
+                              isSelected
+                                ? "bg-blue-600 shadow-md shadow-blue-500/30"
+                                : "bg-blue-200 group-hover/bar:bg-blue-400"
+                            )}
+                          />
+                        </div>
+                        <span
+                          className={cn(
+                            "text-[0.68rem] font-bold transition-colors",
+                            isSelected ? "text-blue-700 font-extrabold" : "text-slate-400"
+                          )}
+                        >
+                          {item.day}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
-          {/* Selected Day Recovery Footnote */}
+          {/* Selected Day or Field Rep Footnote */}
           <div className="mt-5 rounded-2xl bg-blue-50/60 border border-blue-100/80 p-3.5 text-xs flex items-center justify-between">
-            <span className="font-bold text-slate-700">{activeMetric.day} Snapshot:</span>
+            <span className="font-bold text-slate-700">
+              {activeTab === "field" ? "Officer #04 Status:" : `${activeMetric.day} Snapshot:`}
+            </span>
             <div className="flex items-center gap-2.5 text-slate-600">
-              <span className="font-semibold text-blue-700">{activeMetric.keptPtp} Kept Promises</span>
-              <span>·</span>
-              <span className="font-black text-emerald-700">{activeMetric.recovered} Collected</span>
+              {activeTab === "field" ? (
+                <>
+                  <span className="font-semibold text-blue-700">9 of 14 Completed</span>
+                  <span>·</span>
+                  <span className="font-black text-emerald-700">₱145,000 Field Collected Today</span>
+                </>
+              ) : (
+                <>
+                  <span className="font-semibold text-blue-700">{activeMetric.keptPtp} Kept Promises</span>
+                  <span>·</span>
+                  <span className="font-black text-emerald-700">{activeMetric.recovered} Collected</span>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -399,13 +518,17 @@ export function HeroProduct({ className }: { className?: string }) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <span className="inline-block text-[10px] font-bold uppercase tracking-[0.18em] text-blue-700 mb-1">
-                  PREDICTIVE PACING · ZERO DESK PHONES
+                  {activeTab === "field"
+                    ? "FIELD RECOVERY · ZERO FAKED VISITS"
+                    : "PREDICTIVE PACING · ZERO DESK PHONES"}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                  Contact Efficiency
+                  {activeTab === "field" ? "Route & Fleet Telemetry" : "Contact Efficiency"}
                 </h3>
                 <p className="mt-0.5 text-xs font-medium text-slate-500">
-                  4 In-Browser Dialer Modes · ~0.4s Answered Hand-off
+                  {activeTab === "field"
+                    ? "14 Field Officers Active in Metro Manila · Live GPS Feed"
+                    : "4 In-Browser Dialer Modes · ~0.4s Answered Hand-off"}
                 </p>
               </div>
 
@@ -413,7 +536,11 @@ export function HeroProduct({ className }: { className?: string }) {
               <button
                 type="button"
                 onClick={() =>
-                  triggerToast("Predictive dialer configuration ready for deployment review.")
+                  triggerToast(
+                    activeTab === "field"
+                      ? "Field officer GPS radar view and route dispatcher ready."
+                      : "Predictive dialer configuration ready for deployment review."
+                  )
                 }
                 aria-label="Inspect contact efficiency"
                 className="flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200/80 bg-white/90 text-slate-700 shadow-2xs transition-all hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 cursor-pointer"
@@ -422,7 +549,7 @@ export function HeroProduct({ className }: { className?: string }) {
               </button>
             </div>
 
-            {/* Ultra HD Semicircular Speedometer Dial Gauge (Matching User Reference Image) */}
+            {/* Ultra HD Semicircular Speedometer Dial Gauge */}
             <div className="relative mt-5 flex flex-col items-center justify-center py-2">
               <div className="relative size-52 sm:size-60">
                 <svg
@@ -459,64 +586,87 @@ export function HeroProduct({ className }: { className?: string }) {
                 <div className="absolute inset-x-0 bottom-4 flex flex-col items-center justify-center text-center">
                   <div className="mb-1 inline-flex items-center gap-1.5 rounded-full border border-sky-300/60 bg-sky-50 px-2.5 py-0.5 text-[0.68rem] font-bold text-blue-700 shadow-2xs">
                     <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" />
-                    <span>51.2% Conversion</span>
+                    <span>{activeTab === "field" ? "100% Geofenced" : "51.2% Conversion"}</span>
                   </div>
                   <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 font-sans">
-                    3.2x
+                    {activeTab === "field" ? "94.8%" : "3.2x"}
                   </div>
                   <span className="text-[0.72rem] font-bold text-slate-500">
-                    Live Talk Time vs. Manual
+                    {activeTab === "field" ? "Route On-Time Compliance" : "Live Talk Time vs. Manual"}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Dual Big Metric Counters (Matching Reference Image) */}
+            {/* Dual Big Metric Counters */}
             <div className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5 text-center">
               <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3.5">
                 <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-                  44,280
+                  {activeTab === "field" ? "₱418,200" : "44,280"}
                 </div>
                 <div className="mt-0.5 text-xs font-semibold text-slate-500">
-                  Accounts Contacted
+                  {activeTab === "field" ? "Field Collected Today" : "Accounts Contacted"}
                 </div>
               </div>
 
               <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3.5">
                 <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-                  21,120
+                  {activeTab === "field" ? "128" : "21,120"}
                 </div>
                 <div className="mt-0.5 text-xs font-semibold text-slate-500">
-                  Promises Kept
+                  {activeTab === "field" ? "Verified In-Person Visits" : "Promises Kept"}
                 </div>
               </div>
             </div>
 
-            {/* Teaser Advantage Highlights (Immediate Operations Lead Value) */}
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 border-t border-slate-100 text-xs">
-              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
-                <span className="font-bold text-slate-900 block mb-0.5">Zero Desk Phones</span>
-                <span className="text-[11px] text-slate-500 leading-tight">100% WebRTC in browser</span>
+            {/* Teaser Advantage Highlights */}
+            {activeTab === "field" ? (
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 border-t border-slate-100 text-xs">
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Live Radar HUD</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Supervisor live map of all reps</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Anti-Tamper Lock</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Blocks mock GPS &amp; fake clock</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Instant HQ Sync</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Floor CRM updates in 0.2s</span>
+                </div>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
-                <span className="font-bold text-slate-900 block mb-0.5">Supervisor HUD</span>
-                <span className="text-[11px] text-slate-500 leading-tight">Listen, whisper &amp; barge</span>
+            ) : (
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 border-t border-slate-100 text-xs">
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Zero Desk Phones</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">100% WebRTC in browser</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Supervisor HUD</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">Listen, whisper &amp; barge</span>
+                </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
+                  <span className="font-bold text-slate-900 block mb-0.5">Auto-Caller Match</span>
+                  <span className="text-[11px] text-slate-500 leading-tight">0.4s screen-pop on ring</span>
+                </div>
               </div>
-              <div className="rounded-xl border border-slate-100 bg-slate-50/70 p-2.5">
-                <span className="font-bold text-slate-900 block mb-0.5">Auto-Caller Match</span>
-                <span className="text-[11px] text-slate-500 leading-tight">0.4s screen-pop on ring</span>
-              </div>
-            </div>
+            )}
           </div>
 
-          {/* Telephony Status Footnote */}
+          {/* Telephony or Field Fleet Status Footnote */}
           <div className="mt-5 rounded-2xl bg-sky-50/60 border border-sky-100/80 p-3.5 text-xs flex items-center justify-between">
-            <span className="font-bold text-slate-700">Telephony Engine:</span>
+            <span className="font-bold text-slate-700">
+              {activeTab === "field" ? "Field Operations Engine:" : "Telephony Engine:"}
+            </span>
             <div className="flex items-center gap-2 text-slate-600">
               <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-bold text-blue-700">99.8% SIP Uptime</span>
+              <span className="font-bold text-blue-700">
+                {activeTab === "field" ? "14 Officers Active" : "99.8% SIP Uptime"}
+              </span>
               <span>·</span>
-              <span className="font-semibold text-slate-700">Carrier-Grade Routing</span>
+              <span className="font-semibold text-slate-700">
+                {activeTab === "field" ? "Offline SQLite Cache & Sync" : "Carrier-Grade Routing"}
+              </span>
             </div>
           </div>
         </div>

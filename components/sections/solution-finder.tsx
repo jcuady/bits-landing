@@ -22,69 +22,69 @@ interface DiscoveryRoute {
 const discoveryRoutes: DiscoveryRoute[] = [
   {
     track: "01",
-    category: "COLLECTIONS // CRM",
-    goal: "Run high-throughput debt recovery and contact center floors",
-    product: "Operations 360",
-    description: "Integrated CRM, predictive dialer, QA scorecards, supervisor monitoring, LMS & WFM.",
+    category: "COLLECTIONS & FIELD // OPERATIONS",
+    goal: "Collect payments faster, automate calls, and track field reps on the road",
+    product: "Operations 360 & Field App",
+    description: "Call center CRM, predictive dialer, QA scorecards, plus mobile field app with live GPS visit timestamps and offline logging.",
     href: "/#operations-360",
     badge: "Recovery Flagship",
-    accentBorder: "group-hover:border-blue-500/40",
-    glowColor: "from-blue-600/10 to-transparent",
+    accentBorder: "hover:border-blue-400/50",
+    glowColor: "from-blue-500/15 via-sky-400/10 to-transparent",
   },
   {
     track: "02",
     category: "VOICE AI // AUTONOMY",
-    goal: "Automate calls, email negotiations, and debtor conversations",
+    goal: "Automate customer phone calls, SMS follow-ups, and negotiation emails",
     product: "BITSagent AI",
-    description: "Sub-300ms latency voice AI, autonomous email responders, and RAG knowledge grounding.",
+    description: "Realistic human-sounding voice AI that handles calls and customer inquiries around the clock with zero wait times.",
     href: "/bitsagent",
     badge: "Sub-300ms Voice",
-    accentBorder: "group-hover:border-indigo-500/40",
-    glowColor: "from-indigo-600/10 to-transparent",
+    accentBorder: "hover:border-indigo-400/50",
+    glowColor: "from-indigo-500/15 via-blue-400/10 to-transparent",
   },
   {
     track: "03",
-    category: "REVENUE // PIPELINE",
-    goal: "Scale enterprise deal pipelines, ticketing, and recurring billing",
+    category: "SALES // PIPELINE",
+    goal: "Track sales deals, send instant price quotes, and manage support tickets",
     product: "BITScrm Suite",
-    description: "Deal stages, CPQ automated quotations, customer support desk & billing lifecycle.",
+    description: "Visual sales pipelines, automated client quotations, customer help desk, and recurring billing all in one CRM.",
     href: "/products/crm",
     badge: "Sales & Support",
-    accentBorder: "group-hover:border-sky-500/40",
-    glowColor: "from-sky-600/10 to-transparent",
+    accentBorder: "hover:border-sky-400/50",
+    glowColor: "from-sky-500/15 via-blue-400/10 to-transparent",
   },
   {
     track: "04",
-    category: "LEDGER // TRAIN LAW",
-    goal: "Synchronize company finance, biometric shifts, and compliant payroll",
+    category: "LEDGER // PAYROLL",
+    goal: "Automate company accounting, staff timekeeping, and Philippine payroll",
     product: "Accounting, HRMS & Payroll",
-    description: "BIR CAS-ready ERP, biometric timekeeping, Philippine TRAIN law calculations & bank feeds.",
+    description: "BIR CAS-ready bookkeeping, biometric clock-in integration, automated 13th-month & TRAIN tax calculations.",
     href: "/products/accounting",
     badge: "BIR CAS Aligned",
-    accentBorder: "group-hover:border-emerald-500/40",
-    glowColor: "from-emerald-600/10 to-transparent",
+    accentBorder: "hover:border-emerald-400/50",
+    glowColor: "from-emerald-500/15 via-teal-400/10 to-transparent",
   },
   {
     track: "05",
     category: "DISPATCH // INVENTORY",
-    goal: "Track multi-warehouse stock, vehicle fleets, and verified delivery",
+    goal: "Track multi-warehouse inventory, company vehicles, and verified delivery",
     product: "Inventory & Logistics",
-    description: "Live GPS fleet tracking, barcode bin scanning, AI dispatch routes, and electronic POD.",
+    description: "Live GPS vehicle tracking, barcode scanning, driver route optimization, and digital proof-of-delivery signatures.",
     href: "/products/inventory",
     badge: "Fleet & Warehouse",
-    accentBorder: "group-hover:border-teal-500/40",
-    glowColor: "from-teal-600/10 to-transparent",
+    accentBorder: "hover:border-teal-400/50",
+    glowColor: "from-teal-500/15 via-emerald-400/10 to-transparent",
   },
   {
     track: "06",
-    category: "IDENTITY // VENUES",
-    goal: "Orchestrate appointments, virtual queues, courts, and smart tap cards",
+    category: "BOOKING // SMART NFC",
+    goal: "Book appointments, manage customer lines, and issue smart tap cards",
     product: "Booking, Queuing & Sports Hub",
-    description: "Dynamic capacity calendar, SMS virtual queuing, court rotations, and encrypted BITS Tap NFC.",
+    description: "Live online appointment booking, SMS queue alerts, court reservations, and contactless BITS Tap NFC business cards.",
     href: "/products/booking",
     badge: "Venue & Smart NFC",
-    accentBorder: "group-hover:border-amber-500/40",
-    glowColor: "from-amber-600/10 to-transparent",
+    accentBorder: "hover:border-amber-400/50",
+    glowColor: "from-amber-500/15 via-orange-400/10 to-transparent",
   },
 ];
 
@@ -92,18 +92,18 @@ export function SolutionFinder() {
   return (
     <Section
       id="solution-finder"
-      className="relative overflow-hidden bg-white py-20 sm:py-24 border-y border-slate-100/80"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/40 to-slate-50/60 py-20 sm:py-24 border-y border-slate-100/80"
     >
       {/* Background Architectural Mesh Grid */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:26px_26px] opacity-25" />
 
       <Container className="relative">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
           <Reveal>
-            <div className="mx-auto mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-slate-50/80 px-3.5 py-1 shadow-2xs">
-              <span className="size-1.5 rounded-full bg-blue-600" />
-              <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-slate-700 font-mono">
+            <div className="mx-auto mb-3.5 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1 shadow-2xs">
+              <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" />
+              <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-900 font-mono">
                 Direct Operational Discovery
               </span>
             </div>
@@ -125,27 +125,29 @@ export function SolutionFinder() {
           </Reveal>
         </div>
 
-        {/* Discovery Routing Grid — Double-Bezel Precision Cards */}
-        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Discovery Routing Grid — Luminous Frosted White Glass Double-Bezel Cards */}
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {discoveryRoutes.map((route, idx) => (
             <Reveal key={route.track} delay={0.05 + idx * 0.03}>
               <Link
                 href={route.href}
                 className={cn(
-                  "group relative flex flex-col justify-between rounded-2xl p-2",
-                  "bg-gradient-to-b from-slate-100 via-slate-50 to-slate-100/80 dark:from-slate-800 dark:to-slate-900",
-                  "border border-slate-200 dark:border-slate-800",
-                  "shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all duration-200",
-                  "hover:shadow-[0_16px_32px_-10px_rgba(18,66,148,0.12)] hover:-translate-y-0.5",
+                  "group relative flex flex-col justify-between rounded-3xl p-2.5 sm:p-3",
+                  "bg-white/75 backdrop-blur-xl border border-white/85",
+                  "shadow-lg shadow-blue-950/5 transition-all duration-300",
+                  "hover:shadow-2xl hover:shadow-blue-600/15 hover:-translate-y-1",
                   route.accentBorder
                 )}
               >
                 {/* Inner Core Container */}
-                <div className="relative flex flex-col justify-between h-full rounded-xl bg-white dark:bg-slate-950 p-5 sm:p-6 overflow-hidden border border-white/80 dark:border-slate-850">
+                <div className="relative flex flex-col justify-between h-full rounded-2xl bg-white/90 backdrop-blur-2xl p-6 sm:p-7 overflow-hidden border border-white/90 shadow-sm">
+                  {/* Subtle Inner Highlight Refraction */}
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/95 shadow-[inset_0_1px_2px_rgba(255,255,255,0.95)] pointer-events-none" />
+
                   {/* Atmospheric Glow */}
                   <div
                     className={cn(
-                      "pointer-events-none absolute -top-16 -right-16 size-36 rounded-full bg-gradient-to-br blur-2xl opacity-40 transition-opacity duration-300 group-hover:opacity-80",
+                      "pointer-events-none absolute -top-16 -right-16 size-40 rounded-full bg-gradient-to-br blur-2xl opacity-50 transition-opacity duration-300 group-hover:opacity-100",
                       route.glowColor
                     )}
                   />
@@ -153,24 +155,24 @@ export function SolutionFinder() {
                   {/* Header Meta Track & Badge */}
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.18em] text-slate-400">
+                      <span className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.18em] text-blue-700">
                         {route.category}
                       </span>
-                      <span className="inline-flex items-center rounded-full bg-slate-50 border border-slate-200 px-2 py-0.5 font-mono text-[0.62rem] font-bold text-slate-600">
+                      <span className="inline-flex items-center rounded-full bg-blue-50/90 border border-blue-200/80 px-2.5 py-0.5 font-mono text-[0.62rem] font-bold text-blue-700">
                         {route.badge}
                       </span>
                     </div>
 
                     {/* Operational Goal Statement */}
-                    <h3 className="text-base sm:text-[1.05rem] font-extrabold text-slate-900 dark:text-white leading-snug">
+                    <h3 className="text-base sm:text-[1.05rem] font-extrabold text-slate-900 leading-snug">
                       &ldquo;{route.goal}&rdquo;
                     </h3>
                   </div>
 
                   {/* Recommended Product & Capability */}
-                  <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-850">
+                  <div className="mt-6 pt-4 border-t border-slate-100">
                     <div className="flex items-baseline justify-between mb-1">
-                      <span className="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+                      <span className="font-mono text-[0.62rem] font-bold uppercase tracking-[0.16em] text-blue-700">
                         Recommended Engine
                       </span>
                       <span className="font-mono text-xs font-bold text-slate-400 group-hover:text-blue-600 transition-colors">
@@ -178,11 +180,11 @@ export function SolutionFinder() {
                       </span>
                     </div>
 
-                    <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                    <p className="text-base font-extrabold text-slate-900 group-hover:text-blue-700 transition-colors">
                       {route.product}
                     </p>
 
-                    <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+                    <p className="mt-1.5 text-xs text-slate-600 leading-relaxed font-normal">
                       {route.description}
                     </p>
                   </div>

@@ -24,10 +24,11 @@ import {
   ArrowRight,
   Headphones,
   Zap,
+  MapPin,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type ShowcaseTab = "dialer" | "training" | "qa" | "messaging" | "analytics";
+type ShowcaseTab = "dialer" | "field" | "training" | "qa" | "messaging" | "analytics";
 
 interface TabMeta {
   id: ShowcaseTab;
@@ -66,6 +67,27 @@ const TABS: TabMeta[] = [
     ],
     imageSrc: "/images/features/predictive-dialer.jpg",
     imageAlt: "BITS Predictive Dialer & Softphone — live calls monitoring, agent dispositions, and connected rate gauge",
+  },
+  {
+    id: "field",
+    label: "Field Agents Mobile App",
+    badge: "GPS & Visit Timestamps",
+    badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    icon: MapPin,
+    headline: "Track Field Visits with Live GPS, Timestamps & Zero Fake Logs.",
+    subhead:
+      "Give your field collection agents and reps a dedicated mobile app that works offline. Automatically record arrival timestamps, geofence visits, photo proof, and debtor signatures with instant cloud sync.",
+    bullets: [
+      "Tamper-Proof Timestamps: Arrival and departure times are locked from server-verified GPS satellite pings, preventing manipulated reports.",
+      "Geofence Verification: Reps can only submit visit reports when their GPS matches the borrower or client address within 10 meters.",
+      "Photo Proof & Collateral Upload: Snap geotagged photos of premises, demand letters, or collateral with automatic coordinate watermarks.",
+      "Digital Signatures & Offline Mode: Capture debtor e-signatures on-site; continues working in basement parking or rural dead zones with automatic background sync.",
+    ],
+    metrics: [
+      { label: "GPS Accuracy", value: "< 10m" },
+      { label: "Fake Visit Rate", value: "0%" },
+      { label: "Offline Sync", value: "Instant" },
+    ],
   },
   {
     id: "training",
@@ -220,16 +242,16 @@ export function FloorShowcase() {
 
           <Reveal delay={0.04}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-              The 5 Engines That Power{" "}
+              The 6 Engines That Power{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                High-Velocity Recovery Floors.
+                High-Velocity Operations.
               </span>
             </h2>
           </Reveal>
 
           <Reveal delay={0.08}>
             <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
-              Every tool your supervisors, agents, and QA auditors need—integrated into a unified workspace built from 20 years of hands-on operations experience.
+              Every tool your supervisors, call center collectors, field agents, and QA auditors need—integrated into a unified workspace built from 20 years of hands-on operations experience.
             </p>
           </Reveal>
         </div>
@@ -333,7 +355,110 @@ export function FloorShowcase() {
 
                   {/* Right Column: High-End Visual with Authentic BITS Brand Overlay or Interactive Simulator */}
                   <div className="lg:col-span-7">
-                    {currentTab.id === "training" ? (
+                    {currentTab.id === "field" ? (
+                      /* ── TAB: FIELD AGENTS MOBILE APP INTERACTIVE HUD ── */
+                      <div className="relative rounded-2xl border border-cyan-200/80 bg-gradient-to-b from-cyan-50/30 via-slate-50/50 to-white p-5 sm:p-7 shadow-xl shadow-cyan-950/5 overflow-hidden">
+                        {/* Header Lockup */}
+                        <div className="flex items-center justify-between gap-3 pb-4 mb-4 border-b border-cyan-100">
+                          <div className="flex items-center gap-2">
+                            <Logo variant="tile" className="size-7 rounded-lg object-contain shadow-xs" />
+                            <div>
+                              <div className="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                                <span>BITS FIELD AGENT MOBILE APP</span>
+                                <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                              </div>
+                              <p className="text-[11px] text-slate-500 font-medium">
+                                Officer Ronald Santos (#04) · Metro Manila Sector · GPS Locked
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-1.5 bg-cyan-100/80 text-cyan-800 text-[11px] font-bold px-3 py-1 rounded-full border border-cyan-200">
+                            <span>100% Geofenced</span>
+                          </div>
+                        </div>
+
+                        {/* Active Account Field Inspection Card */}
+                        <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                              Active Borrower Visit · Route Stop #9 of 14
+                            </span>
+                            <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                              Account #PH-89412
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div>
+                              <span className="text-slate-400 block text-[10px]">Debtor Name</span>
+                              <span className="font-bold text-slate-800 text-sm">Corazon M. Dela Cruz</span>
+                              <span className="text-[11px] text-slate-500 block mt-0.5">Emerald Ave, Ortigas, Pasig City</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 block text-[10px]">GPS Geofence Match</span>
+                              <span className="font-bold text-emerald-700 flex items-center gap-1">
+                                <span className="size-1.5 rounded-full bg-emerald-500" />
+                                14.5832° N, 121.0615° E (8m away)
+                              </span>
+                              <span className="text-[11px] text-slate-500 block mt-0.5">Accuracy: ±4m · Verified by Satellite</span>
+                            </div>
+                          </div>
+
+                          {/* 4 Chronological Server Timestamps */}
+                          <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                              Tamper-Proof Audit Timestamps
+                            </span>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                              <div className="bg-white p-2 rounded-lg border border-slate-200/70">
+                                <span className="text-[9px] uppercase text-slate-400 block">1. Arrived</span>
+                                <span className="font-extrabold text-slate-900 block mt-0.5">10:14:02 AM</span>
+                                <span className="text-[10px] text-emerald-600 font-medium">GPS Auto-Clock</span>
+                              </div>
+                              <div className="bg-white p-2 rounded-lg border border-slate-200/70">
+                                <span className="text-[9px] uppercase text-slate-400 block">2. In-Person</span>
+                                <span className="font-extrabold text-slate-900 block mt-0.5">10:16:30 AM</span>
+                                <span className="text-[10px] text-slate-600 font-medium">Debtor Present</span>
+                              </div>
+                              <div className="bg-white p-2 rounded-lg border border-slate-200/70">
+                                <span className="text-[9px] uppercase text-slate-400 block">3. Settled</span>
+                                <span className="font-extrabold text-blue-700 block mt-0.5">10:24:18 AM</span>
+                                <span className="text-[10px] text-emerald-700 font-bold">₱15,000 Receipt</span>
+                              </div>
+                              <div className="bg-white p-2 rounded-lg border border-slate-200/70">
+                                <span className="text-[9px] uppercase text-slate-400 block">4. Departed</span>
+                                <span className="font-extrabold text-slate-900 block mt-0.5">10:28:45 AM</span>
+                                <span className="text-[10px] text-blue-600 font-semibold">E-Sign Saved</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Verification Proof Strip */}
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] pt-1">
+                            <div className="flex items-center gap-2 p-2 rounded-lg bg-emerald-50/80 border border-emerald-200/60 text-emerald-800">
+                              <span className="font-bold">✓ Photo Proof:</span>
+                              <span className="text-emerald-700">Watermarked</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-2 rounded-lg bg-blue-50/80 border border-blue-200/60 text-blue-800">
+                              <span className="font-bold">✓ E-Signature:</span>
+                              <span className="text-blue-700">Screen Signed</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-2 rounded-lg bg-indigo-50/80 border border-indigo-200/60 text-indigo-800">
+                              <span className="font-bold">✓ Offline Sync:</span>
+                              <span className="text-indigo-700">0.2s Upload</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Reassurance Footer */}
+                        <div className="mt-4 flex items-center justify-between text-[11px] text-slate-500">
+                          <span>✓ Impossible to Fake Location</span>
+                          <span>✓ Network Satellite Clock</span>
+                          <span>✓ Works 100% Offline</span>
+                        </div>
+                      </div>
+                    ) : currentTab.id === "training" ? (
                       /* ── TAB 2: SPECIAL INTERACTIVE TRAINING FLOOR SIMULATOR ── */
                       <div className="relative rounded-2xl border border-emerald-200/80 bg-gradient-to-b from-emerald-50/30 via-slate-50/50 to-white p-5 sm:p-7 shadow-xl shadow-emerald-950/5 overflow-hidden">
                         {/* Walled Sandbox Watermark Banner */}

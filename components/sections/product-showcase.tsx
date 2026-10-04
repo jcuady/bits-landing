@@ -28,6 +28,7 @@ import {
   CalendarCheck,
   Headphones,
   FileSpreadsheet,
+  MapPin,
 } from "lucide-react";
 
 /* ── Precision SVG Micro-Icons (Bespoke 1.5px Geometry) ── */
@@ -110,6 +111,12 @@ const NINE_ENGINES = [
     desc: "WebRTC browser softphone, predictive pacing queues & supervisor whisper HUD.",
     icon: PhoneCall,
     color: "text-amber-600 bg-amber-50 border-amber-200",
+  },
+  {
+    name: "Field Agents Mobile App",
+    desc: "Live GPS geofencing, tamper-proof visit timestamps, photo proof, digital signatures & offline sync.",
+    icon: MapPin,
+    color: "text-cyan-600 bg-cyan-50 border-cyan-200",
   },
   {
     name: "Learning Management System (LMS)",
