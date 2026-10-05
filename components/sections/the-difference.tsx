@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import { Check, X, Sparkles, TrendingUp, Calculator, ShieldCheck, Zap, PhoneCall } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DifferencePoint {
@@ -79,7 +78,6 @@ export function TheDifference() {
         <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-sky-50/90 px-4 py-1.5 text-xs font-semibold text-sky-800 shadow-2xs mb-4">
-              <Sparkles className="size-3.5 text-blue-600" />
               <span>THE 20-YEAR OPERATIONAL ADVANTAGE</span>
             </div>
           </Reveal>
@@ -138,7 +136,7 @@ export function TheDifference() {
                     <div className="rounded-xl border border-rose-100 bg-rose-50/40 p-3 sm:col-span-4 sm:border-0 sm:bg-transparent sm:p-0">
                       <div className="flex items-start gap-2.5">
                         <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-600">
-                          <X className="size-2.5 text-rose-600 stroke-[3]" />
+                          <span className="size-1.5 rounded-full bg-rose-500" />
                         </span>
                         <p className="text-xs leading-relaxed text-slate-600 sm:text-[0.88rem]">
                           {item.generic}
@@ -150,7 +148,7 @@ export function TheDifference() {
                     <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-3 sm:col-span-5 sm:border-0 sm:bg-transparent sm:p-0">
                       <div className="flex items-start gap-2.5">
                         <span className="mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-700">
-                          <Check className="size-2.5 text-blue-700 stroke-[3]" />
+                          <span className="size-1.5 rounded-full bg-blue-600" />
                         </span>
                         <p className="text-xs leading-relaxed font-semibold text-slate-800 sm:text-[0.9rem]">
                           {item.bits}
@@ -186,7 +184,6 @@ export function TheDifference() {
                 {/* Left: Interactive Controls */}
                 <div className="space-y-6">
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3.5 py-1 text-xs font-bold text-white shadow-sm backdrop-blur-md">
-                    <Calculator className="size-3.5 text-sky-300" />
                     <span>INTERACTIVE FLOOR SAVINGS CALCULATOR</span>
                   </div>
 

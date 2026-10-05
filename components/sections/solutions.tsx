@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { Sparkles, CheckCircle2, ShieldCheck, PhoneCall, Send, FileCheck, ArrowUpRight, Activity, Zap } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 
 const ctaClass =
@@ -126,7 +125,7 @@ function CrmSpecimen() {
     <div className="bionis-dashboard relative font-sans">
       {toast && (
         <div className="absolute -top-12 left-1/2 z-40 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-xl bg-[#0a2a66] border border-sky-400/40 px-3.5 py-2 text-xs font-semibold text-white shadow-xl animate-in fade-in">
-          <CheckCircle2 className="size-4 text-[#00b153] shrink-0" />
+          <span className="size-2 rounded-full bg-[#00b153] shrink-0" />
           <p className="flex-1 truncate">{toast}</p>
         </div>
       )}
@@ -217,7 +216,7 @@ function CrmSpecimen() {
           {/* AI Prediction Callout */}
           <div className="mt-2.5 flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50/70 px-3 py-2 text-xs dark:border-blue-900/50 dark:bg-blue-950/30">
             <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
-              <Sparkles className="size-3.5 text-[#1975f2] shrink-0" />
+              <span className="size-1.5 rounded-full bg-[#1975f2] shrink-0" />
               <span className="font-medium text-[0.7rem]">
                 <strong className="font-bold text-[#1975f2]">BITS Telemetry: </strong>
                 Auto-assigned 14 broken commitments to prime call window. PTP probability elevated +34%.
@@ -350,7 +349,7 @@ function FinanceSpecimen() {
     <div className="relative">
       {toast && (
         <div className="absolute -top-10 left-1/2 z-30 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs text-white shadow-lg animate-in fade-in">
-          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+          <span className="size-2 rounded-full bg-emerald-400 shrink-0" />
           <p className="flex-1 truncate">{toast}</p>
         </div>
       )}
@@ -358,7 +357,7 @@ function FinanceSpecimen() {
       <Bezel title="Recovery Strategies &amp; PTP Engine" kicker="Automated Commitments · BSP Protected">
         <div className="m-2 flex items-center justify-between rounded-xl border border-indigo-100 bg-indigo-50/60 px-3 py-2 text-xs">
           <div className="flex items-center gap-1.5 text-slate-800">
-            <Sparkles className="size-3.5 text-indigo-600 shrink-0" />
+            <span className="size-1.5 rounded-full bg-indigo-600 shrink-0" />
             <span className="font-semibold text-[0.68rem]">
               Converts verbal promises into verified cash with pre-due automated reminders.
             </span>
@@ -466,7 +465,7 @@ function AiSpecimen() {
     <div className="relative">
       {toast && (
         <div className="absolute -top-10 left-1/2 z-30 flex w-[94%] -translate-x-1/2 items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs text-white shadow-lg animate-in fade-in">
-          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+          <span className="size-2 rounded-full bg-emerald-400 shrink-0" />
           <p className="flex-1 truncate">{toast}</p>
         </div>
       )}
@@ -474,7 +473,7 @@ function AiSpecimen() {
       <Bezel title="Omnichannel Communication &amp; Telephony History" kicker="WebRTC · Telco Gateways · WORM Audited">
         <div className="m-2 flex items-center justify-between rounded-xl border border-violet-100 bg-violet-50/60 px-3 py-2 text-xs">
           <div className="flex items-center gap-1.5 text-slate-800">
-            <Sparkles className="size-3.5 text-violet-600 shrink-0" />
+            <span className="size-1.5 rounded-full bg-violet-600 shrink-0" />
             <span className="font-semibold text-[0.68rem]">
               Dispatches verified payment links instantly upon verbal phone negotiation.
             </span>

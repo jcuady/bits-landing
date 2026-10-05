@@ -6,7 +6,6 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
-import { Sparkles, CheckCircle2, Zap, X } from "lucide-react";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
 const HERO_LANDSCAPE = "/brand/hero-landscape.svg";
@@ -81,7 +80,7 @@ export function Problem() {
           aria-live="polite"
           className="fixed top-24 left-1/2 z-50 flex w-[90%] max-w-md -translate-x-1/2 items-center gap-2.5 rounded-xl border border-sky-400/40 bg-[#0a2a66]/95 px-4 py-3 text-xs text-white shadow-2xl backdrop-blur-md animate-in fade-in"
         >
-          <CheckCircle2 className="size-4 shrink-0 text-emerald-400" />
+          <span className="size-2 rounded-full bg-emerald-400 shrink-0" />
           <p className="flex-1 font-medium">{toast}</p>
           <button
             type="button"
@@ -89,7 +88,7 @@ export function Problem() {
             className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
             aria-label="Dismiss toast"
           >
-            <X className="size-3.5" />
+            <span className="font-mono text-sm leading-none flex items-center justify-center">&times;</span>
           </button>
         </div>
       )}

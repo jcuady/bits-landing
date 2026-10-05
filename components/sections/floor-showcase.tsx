@@ -7,25 +7,6 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import {
-  PhoneCall,
-  Award,
-  MessageSquare,
-  BarChart3,
-  GraduationCap,
-  Sparkles,
-  ShieldCheck,
-  CheckCircle2,
-  Clock,
-  Users,
-  Mic,
-  Volume2,
-  Lock,
-  ArrowRight,
-  Headphones,
-  Zap,
-  MapPin,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type ShowcaseTab = "dialer" | "field" | "training" | "qa" | "messaging" | "analytics";
@@ -35,7 +16,6 @@ interface TabMeta {
   label: string;
   badge: string;
   badgeColor: string;
-  icon: React.ComponentType<{ className?: string }>;
   headline: string;
   subhead: string;
   bullets: string[];
@@ -50,7 +30,6 @@ const TABS: TabMeta[] = [
     label: "Predictive Dialer & Softphone",
     badge: "Telephony Engine",
     badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
-    icon: PhoneCall,
     headline: "Zero Dead Air. No Desk Phones. Predictive Calling at ~0.4s.",
     subhead:
       "The browser is your softphone. BITS dials ahead, detects answered lines, drops silent connections, and hands connected debtors to free agents in under half a second.",
@@ -73,7 +52,6 @@ const TABS: TabMeta[] = [
     label: "Field Agents Mobile App",
     badge: "GPS & Visit Timestamps",
     badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    icon: MapPin,
     headline: "Track Field Visits with Live GPS, Timestamps & Zero Fake Logs.",
     subhead:
       "Give your field collection agents and reps a dedicated mobile app that works offline. Automatically record arrival timestamps, geofence visits, photo proof, and debtor signatures with instant cloud sync.",
@@ -94,7 +72,6 @@ const TABS: TabMeta[] = [
     label: "Walled Training Floor",
     badge: "The Unfair Advantage",
     badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    icon: GraduationCap,
     headline: "Rookies Practice on Real Screens. Zero Risk to Live Portfolios.",
     subhead:
       "The #1 reason collection agencies get fined is new agents making mistakes on live accounts. BITS isolates rookie agents on a separate Training Floor with dummy accounts and echo-line practice numbers that never dial real debtors.",
@@ -115,7 +92,6 @@ const TABS: TabMeta[] = [
     label: "QA Scorecards & Outliers",
     badge: "Statutory Governance",
     badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
-    icon: Award,
     headline: "Spot Underperforming Agents Before the Bank Audits You.",
     subhead:
       "Standardize call evaluations across customized weighted checklists. Jump to synchronized audio waveforms in one click, and automatically surface outlier agents who need immediate coaching.",
@@ -138,7 +114,6 @@ const TABS: TabMeta[] = [
     label: "Omnichannel Messaging & SMS",
     badge: "Customer Engagement",
     badgeColor: "bg-violet-50 text-violet-700 border-violet-200",
-    icon: MessageSquare,
     headline: "Reach Debtors Where They Answer: SMS, Viber & WhatsApp.",
     subhead:
       "Send automated payment reminders, payment links, and bulk message blasts with dynamic customer merge fields. Plug into local GoIP GSM gateways or enterprise messaging providers.",
@@ -161,7 +136,6 @@ const TABS: TabMeta[] = [
     label: "Floor Velocity & Aging Buckets",
     badge: "Live Telemetry",
     badgeColor: "bg-amber-50 text-amber-700 border-amber-200",
-    icon: BarChart3,
     headline: "Real-Time Floor Recovery in Philippine Pesos. Zero MIS Delay.",
     subhead:
       "Stop waiting until 8:00 PM for MIS analysts to paste spreadsheets together. Monitor total collected amounts, kept-promise rates, and delinquency aging buckets updated every second.",
@@ -235,7 +209,6 @@ export function FloorShowcase() {
         <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-sky-50/90 px-4 py-1.5 text-xs font-semibold text-sky-800 shadow-2xs mb-4">
-              <Sparkles className="size-3.5 text-blue-600" />
               <span>THE RECOVERY FLOOR POWERHOUSE</span>
             </div>
           </Reveal>
@@ -260,7 +233,6 @@ export function FloorShowcase() {
         <Reveal delay={0.1}>
           <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 sm:pb-6 gap-2 sm:gap-3 scrollbar-none no-scrollbar">
             {TABS.map((tab) => {
-              const Icon = tab.icon;
               const isActive = activeTab === tab.id;
               return (
                 <button
@@ -274,12 +246,6 @@ export function FloorShowcase() {
                       : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
                   )}
                 >
-                  <Icon
-                    className={cn(
-                      "size-4 transition-colors",
-                      isActive ? "text-blue-400" : "text-slate-500 group-hover:text-blue-600"
-                    )}
-                  />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -316,7 +282,7 @@ export function FloorShowcase() {
                     <div className="space-y-3">
                       {currentTab.bullets.map((bullet, idx) => (
                         <div key={idx} className="flex items-start gap-3">
-                          <CheckCircle2 className="size-4 text-blue-600 shrink-0 mt-0.5" />
+                          <span className="size-1.5 rounded-full bg-blue-600 shrink-0 mt-2" />
                           <span className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                             {bullet}
                           </span>
@@ -464,9 +430,6 @@ export function FloorShowcase() {
                         {/* Walled Sandbox Watermark Banner */}
                         <div className="flex items-center justify-between gap-3 pb-4 mb-4 border-b border-emerald-100">
                           <div className="flex items-center gap-2">
-                            <div className="size-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shadow-xs">
-                              <Lock className="size-4" />
-                            </div>
                             <div>
                               <div className="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-2">
                                 <span>WALLED TRAINING MODE: ACTIVE</span>
@@ -536,9 +499,6 @@ export function FloorShowcase() {
 
                             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                               <div className="flex items-center gap-2.5">
-                                <div className="size-8 rounded-full bg-blue-600/30 border border-blue-400 flex items-center justify-center text-blue-300">
-                                  <Mic className="size-4" />
-                                </div>
                                 <div>
                                   <div className="font-bold text-white">Audio Loopback Check</div>
                                   <div className="text-[11px] text-slate-400">Speak into headset to verify tone & clarity</div>
@@ -555,7 +515,6 @@ export function FloorShowcase() {
                                     : "bg-blue-600 hover:bg-blue-500 text-white"
                                 )}
                               >
-                                <Volume2 className="size-3.5" />
                                 <span>{echoAudioPlaying ? "Simulating Practice Call..." : "Test Ringing Sound"}</span>
                               </button>
                             </div>
