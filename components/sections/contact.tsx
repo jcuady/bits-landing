@@ -7,16 +7,6 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { ContactForm } from "@/components/sections/contact-form";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import {
-  ShieldCheck,
-  Headphones,
-  CheckCircle2,
-  Clock,
-  Building2,
-  UserCheck,
-  TrendingUp,
-  FileCheck,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type FloorRole = "ops" | "cio" | "collections" | "compliance";
@@ -117,7 +107,7 @@ export function Contact() {
                 <div className="space-y-3.5">
                   {/* Eyebrow Label */}
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-blue-700">
-                    <Building2 className="size-3" />
+                    <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
                     <span>Select Your Role for a Tailored Agenda</span>
                   </div>
 
@@ -187,7 +177,7 @@ export function Contact() {
                     <ul className="space-y-2">
                       {currentRole.bullets.map((bullet, idx) => (
                         <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
-                          <CheckCircle2 className="size-3.5 text-blue-600 shrink-0 mt-0.5" />
+                          <span className="size-3.5 flex items-center justify-center text-blue-600 shrink-0 mt-0.5 font-black text-[10px]">✓</span>
                           <span className="leading-snug">{bullet}</span>
                         </li>
                       ))}
@@ -197,17 +187,17 @@ export function Contact() {
                   {/* 3 Value Pillars */}
                   <div className="grid grid-cols-3 gap-2 pt-1">
                     <div className="rounded-lg border border-slate-200/70 bg-slate-50/70 p-2.5 text-center sm:text-left">
-                      <Clock className="size-3.5 text-blue-600 mb-1 sm:mb-1.5 mx-auto sm:mx-0" />
+                      <span className="font-mono text-[10px] font-black text-blue-600 mb-1 sm:mb-1.5 block">2hr</span>
                       <div className="text-[11px] font-bold text-slate-900">2-Hour SLA</div>
                       <div className="text-[10px] text-slate-500 mt-0.5 leading-tight">Guaranteed prompt response.</div>
                     </div>
                     <div className="rounded-lg border border-slate-200/70 bg-slate-50/70 p-2.5 text-center sm:text-left">
-                      <ShieldCheck className="size-3.5 text-blue-600 mb-1 sm:mb-1.5 mx-auto sm:mx-0" />
+                      <span className="font-mono text-[10px] font-black text-blue-600 mb-1 sm:mb-1.5 block">BSP</span>
                       <div className="text-[11px] font-bold text-slate-900">BSP Aligned</div>
                       <div className="text-[10px] text-slate-500 mt-0.5 leading-tight">Air-gapped on-prem options.</div>
                     </div>
                     <div className="rounded-lg border border-slate-200/70 bg-slate-50/70 p-2.5 text-center sm:text-left">
-                      <TrendingUp className="size-3.5 text-blue-600 mb-1 sm:mb-1.5 mx-auto sm:mx-0" />
+                      <span className="font-mono text-[10px] font-black text-blue-600 mb-1 sm:mb-1.5 block">₱0</span>
                       <div className="text-[11px] font-bold text-slate-900">Zero Markup</div>
                       <div className="text-[10px] text-slate-500 mt-0.5 leading-tight">No per-seat penalty traps.</div>
                     </div>

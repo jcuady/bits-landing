@@ -17,12 +17,12 @@ export function AppSidebar({ className }: { className?: string }) {
   return (
     <aside
       className={cn(
-        "flex h-full w-[260px] shrink-0 flex-col border-r border-border bg-card dark:border-[#222] dark:bg-[#111] transition-all",
+        "flex h-full w-[260px] shrink-0 flex-col border-r border-linelight/60 bg-cloud/70 backdrop-blur-3xl shadow-[4px_0_24px_-12px_rgba(0,0,0,0.08)] z-10 transition-all",
         className
       )}
     >
       {/* Workspace / Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-border dark:border-[#222] px-4">
+      <div className="flex h-16 items-center justify-between border-b border-white/20 dark:border-white/10 px-4">
         <Link
           href="/app/dashboard"
           className="flex items-center gap-2.5 rounded-lg py-1 transition-opacity hover:opacity-90"
@@ -45,30 +45,7 @@ export function AppSidebar({ className }: { className?: string }) {
 
       {/* Main Navigation */}
       <nav aria-label="CRM" className="flex-1 overflow-y-auto px-3 py-4 space-y-5 no-scrollbar">
-        {/* Quick BITS Telemetry Highlight Link */}
-        <div>
-          <p className="mb-2 px-2 text-[0.66rem] font-semibold tracking-wider text-muted-foreground uppercase">
-            Platform HUD
-          </p>
-          <Link
-            href="/app/telemetry"
-            aria-current={pathname === "/app/telemetry" ? "page" : undefined}
-            className={cn(
-              "flex h-11 cursor-pointer items-center justify-between rounded-xl border px-3 text-[0.85rem] font-medium transition-all active:scale-[0.98]",
-              pathname === "/app/telemetry"
-                ? "border-border bg-background text-foreground shadow-[1px_2px_12px_rgba(158,158,158,0.08)] dark:border-transparent dark:bg-neutral-800"
-                : "border-transparent text-muted-foreground hover:bg-neutral-200/50 hover:text-foreground dark:hover:bg-neutral-800/60"
-            )}
-          >
-            <div className="flex items-center gap-2.5">
-              <Activity className="size-4 text-[#1975f2]" />
-              <span>BITS Platform Vitals</span>
-            </div>
-            <span className="rounded bg-[#1975f2] px-1.5 py-0.5 text-[0.62rem] font-bold text-white shadow-2xs">
-              Live
-            </span>
-          </Link>
-        </div>
+
 
         {crmNav.map((section) => (
           <div key={section.title}>
@@ -89,8 +66,8 @@ export function AppSidebar({ className }: { className?: string }) {
                       className={cn(
                         "group flex h-10 cursor-pointer items-center justify-between rounded-xl border px-3 text-[0.84rem] transition-all active:scale-[0.98]",
                         active
-                          ? "border-border bg-background font-medium text-foreground shadow-[1px_2px_12px_rgba(158,158,158,0.08)] dark:border-transparent dark:bg-neutral-800"
-                          : "border-transparent text-muted-foreground hover:bg-neutral-200/50 hover:text-foreground dark:hover:bg-neutral-800/60"
+                          ? "border-white/50 bg-white/70 font-medium text-foreground shadow-[0_2px_12px_rgba(0,0,0,0.06)] dark:border-white/10 dark:bg-white/[0.08]"
+                          : "border-transparent text-muted-foreground hover:bg-white/40 hover:text-foreground dark:hover:bg-white/5"
                       )}
                     >
                       <div className="flex items-center gap-2.5 truncate">
@@ -116,8 +93,8 @@ export function AppSidebar({ className }: { className?: string }) {
       </nav>
 
       {/* BITS Copilot Hardware & Engine Status Card */}
-      <div className="p-3 border-t border-border dark:border-[#222]">
-        <div className="relative overflow-hidden rounded-xl border border-blue-200/70 bg-gradient-to-br from-blue-50/80 to-indigo-50/40 p-3 dark:border-blue-900/40 dark:from-blue-950/30 dark:to-neutral-900">
+      <div className="p-3 border-t border-white/20 dark:border-white/10">
+        <div className="relative overflow-hidden rounded-xl border border-white/40 bg-gradient-to-br from-blue-50/50 to-indigo-50/30 p-3 shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] backdrop-blur-md dark:border-white/10 dark:from-white/[0.05] dark:to-white/[0.02] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
               <Sparkles className="size-3.5 text-[#1975f2]" />
@@ -128,7 +105,7 @@ export function AppSidebar({ className }: { className?: string }) {
           <p className="mt-1 text-[0.68rem] text-muted-foreground leading-relaxed">
             Real-time pipeline vitals, collections predictive pacing &amp; telephony AI synced.
           </p>
-          <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-blue-200/50 dark:border-blue-900/40">
+          <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-blue-200/40 dark:border-white/10">
             <span className="text-[0.64rem] font-mono font-medium text-muted-foreground">
               Latency: 14ms
             </span>

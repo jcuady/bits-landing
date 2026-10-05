@@ -53,7 +53,7 @@ export function CrmModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -65,11 +65,11 @@ export function CrmModal({
         aria-modal="true"
         aria-labelledby="modal-title"
         className={cn(
-          "w-full rounded-2xl border border-border bg-card p-6 text-foreground shadow-2xl animate-in zoom-in-95 duration-200 dark:border-[#262626] dark:bg-[#141414]",
+          "w-full rounded-2xl border border-white/40 bg-white/70 backdrop-blur-3xl p-6 text-foreground shadow-2xl animate-in zoom-in-95 duration-200 dark:border-white/10 dark:bg-black/60",
           maxWidthClasses[maxWidth]
         )}
       >
-        <div className="flex items-start justify-between pb-3 border-b border-border/80 dark:border-[#222]">
+        <div className="flex items-start justify-between pb-3 border-b border-white/40 dark:border-white/10">
           <div>
             <h2 id="modal-title" className="text-base font-bold text-foreground">
               {title}

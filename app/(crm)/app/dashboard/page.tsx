@@ -109,7 +109,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Top 5 Bionis KPI Metric Cards */}
+      {/* Top 5 BITS KPI Metric Cards */}
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
         <KpiStat
           label="Total Inbound Leads"
@@ -153,7 +153,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Middle Section: Lead Intake Velocity & Bionis Score Donut */}
+      {/* Middle Section: Lead Intake Velocity & BITS Score Donut */}
       <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
         {/* Left: Lead Sources & Intake Funnel */}
         <section className="rounded-3xl border border-[#e5e7eb] bg-white p-5 sm:p-6 shadow-xs dark:border-[#222] dark:bg-[#141414]">
@@ -217,7 +217,7 @@ export default function DashboardPage() {
           </div>
         </section>
 
-        {/* Right: Bionis Conversion Velocity Score Donut */}
+        {/* Right: BITS Conversion Velocity Score Donut */}
         <section className="rounded-3xl border border-[#e5e7eb] bg-white p-5 sm:p-6 shadow-xs dark:border-[#222] dark:bg-[#141414] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-[#eeefe9] dark:border-[#222]">

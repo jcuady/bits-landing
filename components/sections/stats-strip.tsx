@@ -4,18 +4,6 @@ import * as React from "react";
 import { motion, useInView } from "motion/react";
 import { Container } from "@/components/ui/container";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import {
-  PhoneCall,
-  TrendingUp,
-  Activity,
-  Sparkles,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
-  Clock,
-  Layers,
-  Zap,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* ── Interactive Metric Card Definition ── */
@@ -29,7 +17,7 @@ interface MetricItem {
   description: string;
   floorProofLabel: string;
   floorProofValue: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: string;
 }
 
 const metrics: MetricItem[] = [
@@ -44,7 +32,7 @@ const metrics: MetricItem[] = [
       "Predictive pacing skips answering machines, dead numbers, and busy tones—feeding only live debtors directly into active agent headsets.",
     floorProofLabel: "Floor Talk-Time Utilization",
     floorProofValue: "48m / hr (vs 14m legacy)",
-    icon: PhoneCall,
+    icon: "01",
   },
   {
     id: "ptp-recovery",
@@ -57,7 +45,7 @@ const metrics: MetricItem[] = [
       "Automated omnichannel SMS, Viber, and instant QR payment links keep debtors on schedule before accounts lapse into secondary default.",
     floorProofLabel: "Monthly Recovered / 100 Seats",
     floorProofValue: "₱18.4M Average Cash",
-    icon: TrendingUp,
+    icon: "02",
   },
   {
     id: "telephony-sla",
@@ -70,7 +58,7 @@ const metrics: MetricItem[] = [
       "Direct tier-1 carrier interconnects with sub-second failover prevent dropped transfers and dead air during peak daytime calling windows.",
     floorProofLabel: "Carrier-Level Packet Loss",
     floorProofValue: "<0.01% Jitter / 0 Drops",
-    icon: Activity,
+    icon: "03",
   },
   {
     id: "turnkey-onboarding",
@@ -83,7 +71,7 @@ const metrics: MetricItem[] = [
       "Senior systems architects clean and migrate your debtor portfolio, configure sovereign queues, and certify your floor staff at no extra cost.",
     floorProofLabel: "Average Campaign Cutover",
     floorProofValue: "14 Business Days",
-    icon: Sparkles,
+    icon: "04",
   },
 ];
 
@@ -192,11 +180,11 @@ function TurnkeyCutoverWidget() {
       </div>
       <div className="space-y-1 text-[10.5px] text-slate-700 font-medium">
         <div className="flex items-center gap-1.5">
-          <CheckCircle2 className="size-3 text-emerald-600 shrink-0" />
+          <span className="font-mono text-[9px] font-bold text-emerald-600 bg-emerald-100 rounded px-1.2 py-0.5 shrink-0">OK</span>
           <span>Debtor CSV schemas mapped &amp; cleansed</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <CheckCircle2 className="size-3 text-emerald-600 shrink-0" />
+          <span className="font-mono text-[9px] font-black text-emerald-600 bg-emerald-100 rounded px-1.2 py-0.5 shrink-0">✓</span>
           <span>Supervisors &amp; agents certified in 72 hours</span>
         </div>
       </div>
@@ -276,8 +264,6 @@ export function StatsStrip() {
         {/* ── 4 Bespoke Telemetry Bento Cards ── */}
         <div className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {metrics.map((metric, i) => {
-            const Icon = metric.icon;
-
             return (
               <motion.div
                 key={metric.id}
@@ -332,7 +318,7 @@ export function StatsStrip() {
                     </span>
 
                     <div className="flex size-9 items-center justify-center rounded-xl bg-slate-50 border border-slate-200/80 text-slate-700 group-hover:text-blue-600 group-hover:bg-blue-50/80 group-hover:border-blue-200 transition-colors shadow-2xs">
-                      <Icon className="size-4.5" />
+                      <span className="font-mono font-bold text-sm">{metric.icon}</span>
                     </div>
                   </div>
 
@@ -405,7 +391,7 @@ export function StatsStrip() {
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-mono font-semibold text-sky-100 border border-white/20">
-                <ShieldCheck className="size-3.5 text-sky-300" />
+                <span className="size-1.5 rounded-full bg-sky-300 shrink-0" aria-hidden />
                 <span>20-Year Recovery Floor Origin</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
@@ -422,7 +408,7 @@ export function StatsStrip() {
               className="group flex min-h-[48px] shrink-0 items-center justify-center gap-2 rounded-full bg-white hover:bg-sky-50 px-7 py-3 text-sm font-extrabold text-blue-950 shadow-md transition-all duration-200 active:scale-[0.98] cursor-pointer"
             >
               <span>Audit Your Floor Benchmarks</span>
-              <ArrowRight className="size-4 text-blue-700 group-hover:text-blue-900 transition-transform duration-200 group-hover:translate-x-1" />
+              <span className="size-7 rounded-full bg-blue-600 flex items-center justify-center text-xs text-white font-black group-hover:translate-x-1 transition-transform duration-200">→</span>
             </button>
           </div>
         </motion.div>

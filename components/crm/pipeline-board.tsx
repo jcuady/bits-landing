@@ -23,7 +23,7 @@ export function PipelineBoard() {
         return (
           <div
             key={stage.id}
-            className="flex w-[280px] shrink-0 flex-col rounded-2xl border border-border bg-muted/40 p-3"
+            className="flex w-[280px] shrink-0 flex-col rounded-2xl border border-white/20 bg-white/30 backdrop-blur-md shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] p-3 dark:border-white/10 dark:bg-black/30"
           >
             {/* Stage Header */}
             <div className="mb-3 px-1">
@@ -31,7 +31,7 @@ export function PipelineBoard() {
                 <span className="text-xs font-bold uppercase tracking-wider text-foreground">
                   {stage.label}
                 </span>
-                <span className="rounded-full bg-background border border-border px-2 py-0.5 text-[0.68rem] font-bold text-muted-foreground tabular-nums">
+                <span className="rounded-full bg-white/60 border border-white/40 px-2 py-0.5 text-[0.68rem] font-bold text-muted-foreground tabular-nums dark:bg-black/50 dark:border-white/10">
                   {cards.length}
                 </span>
               </div>
@@ -51,7 +51,7 @@ export function PipelineBoard() {
                 />
               ))}
               {cards.length === 0 ? (
-                <li className="rounded-xl border border-dashed border-border/80 bg-background/50 px-3 py-8 text-center text-xs text-muted-foreground">
+                <li className="rounded-xl border border-dashed border-white/40 bg-white/20 px-3 py-8 text-center text-xs text-muted-foreground dark:border-white/10 dark:bg-white/5">
                   No active deals in stage
                 </li>
               ) : null}
@@ -77,7 +77,7 @@ function PipelineCard({
   const isTerminal = opp.stage === "closed_won" || opp.stage === "closed_lost";
 
   return (
-    <li className="group rounded-xl border border-border bg-background p-3.5 shadow-xs transition-all hover:border-[#1975f2]/40 hover:shadow-md">
+    <li className="group rounded-xl border border-white/40 bg-white/60 backdrop-blur-xl p-3.5 shadow-sm transition-all hover:border-[#1975f2]/40 hover:shadow-md dark:border-white/10 dark:bg-black/50">
       <Link href={`/app/opportunities/${opp.id}`} className="block cursor-pointer">
         <div className="flex items-start justify-between gap-2">
           <p className="text-sm font-semibold text-foreground leading-snug group-hover:text-[#1975f2] transition-colors">

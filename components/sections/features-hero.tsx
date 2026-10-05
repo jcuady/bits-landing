@@ -15,11 +15,7 @@ import {
   CalendarCheck,
   ShieldCheck,
   Sliders,
-  CheckCircle2,
-  ArrowRight,
   PhoneForwarded,
-  Sparkles,
-  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 

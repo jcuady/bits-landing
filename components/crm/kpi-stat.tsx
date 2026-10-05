@@ -17,7 +17,7 @@ export function KpiStat({
   target?: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm transition-all hover:shadow-md hover:border-border/80">
+    <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/40 backdrop-blur-xl p-4 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] transition-all hover:shadow-md hover:border-white/40 dark:border-white/10 dark:bg-black/40">
       <div className="flex items-center justify-between gap-2">
         <span className="text-[0.72rem] font-semibold tracking-wider text-muted-foreground uppercase">
           {label}
@@ -43,7 +43,7 @@ export function KpiStat({
         </p>
       </div>
 
-      <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-border/60 text-xs">
+      <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-white/20 dark:border-white/10 text-xs">
         <span className="text-[0.72rem] text-muted-foreground truncate">{context}</span>
         {target && (
           <span className="text-[0.68rem] font-mono text-muted-foreground shrink-0">

@@ -100,7 +100,7 @@ export function AppTopbar({
   };
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-border bg-background px-4 md:h-18 md:px-6 dark:border-[#222]">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-linelight/60 bg-cloud/70 backdrop-blur-3xl px-4 md:h-18 md:px-6 shadow-[0_4px_24px_-12px_rgba(0,0,0,0.08)] z-10 relative">
       {/* Left: Mobile trigger & Page Identity */}
       <div className="flex items-center gap-3 min-w-0">
         <button
@@ -118,14 +118,14 @@ export function AppTopbar({
             BITS RevOps Engine
           </span>
           <span className="text-xs text-muted-foreground hidden md:inline-block">
-            · Real-Time Telemetry
+            · Command Center
           </span>
         </div>
       </div>
 
       {/* Middle: Search Bar */}
       <div className="hidden md:flex max-w-sm flex-1 px-4">
-        <InputGroup className="h-10 w-full rounded-xl border-border bg-muted/60 px-2.5">
+        <InputGroup className="h-10 w-full rounded-xl border-white/40 bg-white/50 backdrop-blur-md px-2.5 shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
           <InputGroupAddon className="text-muted-foreground pl-0">
             <Search className="size-4" />
           </InputGroupAddon>
@@ -135,7 +135,7 @@ export function AppTopbar({
             onChange={(e) => setSearchQuery(e.target.value)}
             className="text-xs"
           />
-          <kbd className="pointer-events-none rounded bg-background px-1.5 py-0.5 text-[0.65rem] font-mono font-medium text-muted-foreground shadow-2xs border border-border">
+          <kbd className="pointer-events-none rounded bg-white/80 px-1.5 py-0.5 text-[0.65rem] font-mono font-medium text-muted-foreground shadow-sm border border-white/40 dark:bg-white/10 dark:border-white/10">
             ⌘K
           </kbd>
         </InputGroup>
@@ -144,7 +144,7 @@ export function AppTopbar({
       {/* Right: Timeline Selector, Notifications, Theme, Profile */}
       <div className="flex items-center gap-2">
         {/* Timeline Pill Selector */}
-        <div className="hidden xl:flex items-center rounded-xl border border-border bg-muted/40 p-1">
+        <div className="hidden xl:flex items-center rounded-xl border border-white/30 bg-white/40 backdrop-blur-md p-1 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
           {(["today", "7d", "30d", "90d"] as const).map((t) => (
             <button
               key={t}
@@ -152,7 +152,7 @@ export function AppTopbar({
               onClick={() => setTimeline(t)}
               className={`rounded-lg px-2.5 py-1 text-xs font-semibold capitalize transition-all cursor-pointer ${
                 timeline === t
-                  ? "bg-background text-foreground shadow-xs"
+                  ? "bg-white/80 text-foreground shadow-sm dark:bg-white/10"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -168,7 +168,7 @@ export function AppTopbar({
           size="icon-sm"
           onClick={toggleTheme}
           aria-label="Toggle theme"
-          className="size-9 rounded-xl border-border cursor-pointer hover:bg-muted"
+          className="size-9 rounded-xl border-white/30 bg-white/40 backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer hover:bg-white/60 dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
         >
           {isDark ? (
             <Sun className="size-4 text-amber-500" />
@@ -184,7 +184,7 @@ export function AppTopbar({
             variant="outline"
             size="icon-sm"
             onClick={() => setAlertsOpen((v) => !v)}
-            className="relative size-9 rounded-xl border-border cursor-pointer hover:bg-muted"
+            className="relative size-9 rounded-xl border-white/30 bg-white/40 backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer hover:bg-white/60 dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
             aria-label="Notifications"
             aria-expanded={alertsOpen}
             aria-controls="crm-alerts"
@@ -200,7 +200,7 @@ export function AppTopbar({
               id="crm-alerts"
               role="dialog"
               aria-label="Notifications"
-              className="absolute top-[calc(100%+8px)] right-0 z-50 w-84 rounded-2xl border border-border bg-card p-3 shadow-2xl animate-in fade-in zoom-in-95 dark:border-[#262626] dark:bg-[#141414]"
+              className="absolute top-[calc(100%+8px)] right-0 z-50 w-84 rounded-2xl border border-white/40 bg-white/70 backdrop-blur-3xl p-3 shadow-2xl animate-in fade-in zoom-in-95 dark:border-white/10 dark:bg-black/60"
             >
               <div className="flex items-center justify-between pb-2 border-b border-border mb-2 px-1">
                 <div className="flex items-center gap-1.5">
@@ -292,7 +292,7 @@ export function AppTopbar({
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="flex items-center gap-2 rounded-xl border border-border bg-card p-1 pr-2.5 transition hover:bg-accent cursor-pointer"
+              className="flex items-center gap-2 rounded-xl border border-white/30 bg-white/40 backdrop-blur-md p-1 pr-2.5 transition shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] hover:bg-white/60 cursor-pointer dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
             >
               <div className="flex size-7 items-center justify-center rounded-lg bg-[#1975f2] text-xs font-bold text-white shadow-2xs">
                 {userName.charAt(0).toUpperCase()}
@@ -321,12 +321,7 @@ export function AppTopbar({
                 Settings &amp; Workspace
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/app/telemetry" className="cursor-pointer flex items-center justify-between">
-                <span>BITS Platform Vitals</span>
-                <span className="text-[0.62rem] font-bold text-[#1975f2] uppercase">Live</span>
-              </Link>
-            </DropdownMenuItem>
+
             <DropdownMenuSeparator />
             <DropdownMenuItem
               variant="destructive"
@@ -345,7 +340,7 @@ export function AppTopbar({
             type="submit"
             variant="ghost"
             size="sm"
-            className="h-9 gap-1.5 rounded-xl border border-border px-3 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
+            className="h-9 gap-1.5 rounded-xl border border-white/30 bg-white/40 backdrop-blur-md px-3 text-xs font-semibold shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] text-muted-foreground hover:bg-white/60 hover:text-foreground cursor-pointer dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
           >
             <LogOut className="size-3.5" aria-hidden />
             <span className="hidden sm:inline">Log out</span>

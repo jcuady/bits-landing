@@ -5,16 +5,6 @@ import {
   Users,
   Building2,
   Target,
-  Kanban,
-  CheckSquare,
-  MessagesSquare,
-  Megaphone,
-  Workflow,
-  Filter,
-  FileInput,
-  FileText,
-  BarChart3,
-  UserCog,
   Settings,
 } from "lucide-react";
 
@@ -44,23 +34,8 @@ export const crmNav: NavSection[] = [
     ],
   },
   {
-    title: "RevOps",
-    items: [
-      { href: "/app/pipelines", label: "Pipelines", icon: Kanban },
-      { href: "/app/tasks", label: "Tasks", icon: CheckSquare },
-      { href: "/app/conversations", label: "Conversations", icon: MessagesSquare },
-      { href: "/app/campaigns", label: "Campaigns", icon: Megaphone },
-      { href: "/app/automations", label: "Automations", icon: Workflow },
-      { href: "/app/funnels", label: "Funnels", icon: Filter },
-      { href: "/app/forms", label: "Forms", icon: FileInput },
-      { href: "/app/templates", label: "Templates", icon: FileText },
-    ],
-  },
-  {
     title: "Admin",
     items: [
-      { href: "/app/reports", label: "Reports", icon: BarChart3 },
-      { href: "/app/team", label: "Team", icon: UserCog },
       { href: "/app/settings", label: "Settings", icon: Settings },
     ],
   },

@@ -41,7 +41,7 @@ export function FilterBar({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
-            className="h-10 w-full cursor-text rounded-xl border border-border bg-card pr-3 pl-9 text-[0.84rem] text-foreground outline-none transition focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 placeholder:text-muted-foreground"
+            className="h-10 w-full cursor-text rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] pr-3 pl-9 text-[0.84rem] text-foreground outline-none transition focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] dark:text-neutral-100 placeholder:text-muted-foreground"
           />
         </span>
       </label>

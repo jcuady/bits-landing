@@ -8,7 +8,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import { MessageSquareText, Sparkles, ArrowRight, ShieldCheck, Headphones } from "lucide-react";
+
 
 export function FAQ() {
   const { openModal } = useConsultationModal();
@@ -48,7 +48,7 @@ export function FAQ() {
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <div className="mx-auto mb-2.5 inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3 py-1 backdrop-blur-md shadow-2xs">
-              <Sparkles className="size-3 text-blue-600" />
+              <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
               <span className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-blue-700 font-mono">
                 Operational Clarity
               </span>
@@ -80,7 +80,7 @@ export function FAQ() {
                   <div>
                     {/* Icon Bubble */}
                     <div className="flex size-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-white shadow-inner mb-4">
-                      <MessageSquareText className="size-5" />
+                      <span className="font-mono font-black text-lg">?</span>
                     </div>
 
                     <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
@@ -94,11 +94,11 @@ export function FAQ() {
                     {/* Quick highlights */}
                     <div className="mt-4 space-y-2 border-t border-white/20 pt-4 text-xs text-blue-50">
                       <div className="flex items-center gap-2">
-                        <ShieldCheck className="size-3.5 text-cyan-300 shrink-0" />
+                        <span className="size-1.5 rounded-full bg-cyan-300 shrink-0" />
                         <span>BSP Circulars 454 &amp; 857 compliance review</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Headphones className="size-3.5 text-cyan-300 shrink-0" />
+                        <span className="size-1.5 rounded-full bg-cyan-300 shrink-0" />
                         <span>Direct talk with senior solution architects</span>
                       </div>
                     </div>
@@ -111,7 +111,7 @@ export function FAQ() {
                       className="group/btn flex h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 font-bold text-slate-900 shadow-lg shadow-blue-950/20 transition-all duration-200 hover:bg-slate-50 hover:shadow-xl active:scale-[0.98] cursor-pointer"
                     >
                       <span className="text-xs font-bold">Book a Consultation</span>
-                      <ArrowRight className="size-3.5 text-slate-500 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                      <span className="text-xs font-bold text-slate-500 transition-transform duration-200 group-hover/btn:translate-x-1">→</span>
                     </button>
 
                     <p className="mt-2 text-center text-[0.7rem] text-blue-100/80">

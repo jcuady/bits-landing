@@ -5,21 +5,6 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import {
-  Check,
-  Sparkles,
-  Shield,
-  Building2,
-  PhoneCall,
-  Users,
-  ArrowRight,
-  Layers,
-  Bot,
-  Zap,
-  Lock,
-  Globe,
-  SlidersHorizontal,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type PricingTrack = "oms" | "crm" | "bundle";
@@ -299,7 +284,7 @@ export function Pricing() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <Zap className="size-3.5" />
+                <span className="size-1.5 rounded-full bg-blue-600" />
                 <span>Operations 360 (OMS Flagship)</span>
               </button>
 
@@ -313,7 +298,7 @@ export function Pricing() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <SlidersHorizontal className="size-3.5" />
+                <span className="size-1.5 rounded-full bg-indigo-600" />
                 <span>BITScrm &amp; Revenue Cloud</span>
               </button>
 
@@ -327,7 +312,7 @@ export function Pricing() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <Layers className="size-3.5" />
+                <span className="size-1.5 rounded-full bg-cyan-600" />
                 <span>Multi-Product &amp; Custom Bundles</span>
               </button>
             </div>
@@ -357,12 +342,12 @@ export function Pricing() {
                   <div className="flex items-center justify-between gap-2 mb-4">
                     {tier.badge ? (
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-xs">
-                        <Sparkles className="size-3" />
+                        <span className="size-1 rounded-full bg-white/80" />
                         <span>{tier.badge}</span>
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-600">
-                        <Users className="size-3" />
+                        <span className="size-1.5 rounded-full bg-slate-400" />
                         <span>Standard Scope</span>
                       </span>
                     )}
@@ -402,7 +387,7 @@ export function Pricing() {
                     {tier.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-2.5">
                         <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black">
-                          <Check className="size-2.5 stroke-[3]" />
+                          <span className="size-1.5 rounded-full bg-emerald-500" />
                         </span>
                         <span className="leading-relaxed">{feature}</span>
                       </li>
@@ -439,7 +424,7 @@ export function Pricing() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="flex items-start gap-3.5">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 shadow-2xs">
-                  <Users className="size-5" />
+                  <span className="font-bold font-mono">01</span>
                 </span>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">Zero Per-Seat Penalty</h4>
@@ -451,7 +436,7 @@ export function Pricing() {
 
               <div className="flex items-start gap-3.5">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-2xs">
-                  <Shield className="size-5" />
+                  <span className="font-bold font-mono">02</span>
                 </span>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">BSP &amp; NPC Sovereignty</h4>
@@ -463,7 +448,7 @@ export function Pricing() {
 
               <div className="flex items-start gap-3.5">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-600 shadow-2xs">
-                  <PhoneCall className="size-5" />
+                  <span className="font-bold font-mono">03</span>
                 </span>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">Zero PBX Markup</h4>
@@ -475,7 +460,7 @@ export function Pricing() {
 
               <div className="flex items-start gap-3.5">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 shadow-2xs">
-                  <Building2 className="size-5" />
+                  <span className="font-bold font-mono">04</span>
                 </span>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">Turnkey Migration</h4>
@@ -529,7 +514,7 @@ export function Pricing() {
                 >
                   <span>Request Custom Software Quote</span>
                   <span className="size-8 rounded-full bg-white/20 flex items-center justify-center text-xs group-hover:translate-x-1 transition-transform duration-200 font-bold">
-                    <ArrowRight className="size-3.5" />
+                    →
                   </span>
                 </button>
               </div>

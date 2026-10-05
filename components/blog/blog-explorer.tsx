@@ -2,17 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import {
-  Search,
-  BookOpen,
-  Calendar,
-  Clock,
-  ArrowRight,
-  Sparkles,
-  Tag,
-  CheckCircle2,
-  SlidersHorizontal,
-} from "lucide-react";
 import { type BlogPost } from "@/lib/blog-data";
 import { cn } from "@/lib/utils";
 
@@ -23,11 +12,22 @@ interface BlogExplorerProps {
 
 const categories = [
   { id: "all", label: "All Guides & Benchmarks" },
-  { id: "Collections OMS", label: "Collections & Recovery (OMS)" },
+  { id: "Collections OMS", label: "Collections & Debt Recovery (OMS)" },
   { id: "Enterprise CRM", label: "Enterprise CRM" },
   { id: "Operations Strategy", label: "Operations Strategy (OMS)" },
   { id: "Voice AI Agents", label: "Voice AI & Telephony" },
-  { id: "Datacenter Architecture", label: "Cloud & Datacenter" },
+  { id: "Datacenter Architecture", label: "Cloud Repatriation & Datacenter" },
+];
+
+const popularSearches = [
+  "best crm collections agency",
+  "crm collections agency",
+  "crm for collections agency",
+  "best crm 2026",
+  "crm for finance",
+  "salesforce alternative",
+  "best oms",
+  "voice ai call center",
 ];
 
 export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
@@ -60,41 +60,38 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
 
   return (
     <div className="space-y-8">
-      {/* Search & Filter Bar */}
-      <div className="rounded-3xl border border-sky-300/30 bg-white/[0.12] p-6 shadow-2xl backdrop-blur-2xl sm:p-8">
+      {/* Search & Filter Double-Bezel Glass Console */}
+      <div className="rounded-3xl border border-sky-300/35 bg-white/[0.12] p-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.30)] backdrop-blur-2xl sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          {/* Search Input Box */}
-          <div className="relative flex-1 max-w-lg">
-            <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-sky-200" />
+          {/* Search Input Box with Monospace Tag */}
+          <div className="relative flex-1 max-w-xl">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 rounded-md bg-white/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-sky-200 uppercase">
+              QUERY
+            </span>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by topic, e.g. 'crm for collections', 'best crm', 'dialer'..."
-              className="w-full rounded-2xl border border-sky-200/30 bg-blue-950/50 py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-sky-200/60 focus:border-sky-300 focus:bg-blue-950/80 focus:outline-none focus:ring-2 focus:ring-sky-400/40 transition-all"
+              placeholder="Search e.g. 'best crm collections agency', 'salesforce', 'dialer'..."
+              className="w-full rounded-2xl border border-sky-200/30 bg-blue-950/60 py-3.5 pl-20 pr-16 text-sm text-white placeholder:text-sky-200/60 focus:border-sky-300 focus:bg-blue-950/80 focus:outline-none focus:ring-2 focus:ring-sky-400/40 transition-all min-h-[48px]"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-sky-200 hover:text-white"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded-lg bg-white/10 px-2.5 py-1 text-xs font-bold text-sky-200 hover:bg-white/20 hover:text-white transition-all min-h-[32px]"
               >
-                Clear
+                Clear ✕
               </button>
             )}
           </div>
 
           {/* Quick Search Intent Badges */}
           <div className="flex flex-wrap items-center gap-1.5 text-xs text-sky-200">
-            <span className="font-semibold text-sky-300/80 mr-1 flex items-center gap-1">
-              <SlidersHorizontal className="size-3" /> Popular searches:
+            <span className="font-mono text-[11px] font-semibold text-sky-300/90 mr-1 uppercase tracking-wider">
+              Popular Tags:
             </span>
-            {[
-              "crm for collections",
-              "best crm",
-              "best oms",
-              "voice ai",
-            ].map((tag) => (
+            {popularSearches.map((tag) => (
               <button
                 key={tag}
                 type="button"
@@ -103,10 +100,10 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
                   setSelectedCategory("all");
                 }}
                 className={cn(
-                  "rounded-full border px-2.5 py-1 text-[11px] font-medium transition-all",
+                  "rounded-full border px-3 py-1 font-mono text-[11px] font-medium transition-all min-h-[32px] flex items-center",
                   searchQuery.toLowerCase() === tag
-                    ? "border-amber-300 bg-amber-400 text-blue-950 font-bold"
-                    : "border-sky-300/30 bg-white/10 text-sky-100 hover:bg-white/20 hover:text-white"
+                    ? "border-amber-300 bg-amber-400 text-blue-950 font-bold shadow-md scale-105"
+                    : "border-sky-300/30 bg-white/10 text-sky-100 hover:bg-white/20 hover:text-white hover:border-white/40"
                 )}
               >
                 #{tag}
@@ -123,10 +120,10 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
               className={cn(
-                "rounded-full px-4 py-2 text-xs font-bold transition-all shadow-xs",
+                "rounded-full px-4 py-2 text-xs font-bold transition-all shadow-xs min-h-[40px] flex items-center",
                 selectedCategory === cat.id
-                  ? "bg-white text-blue-950 shadow-md scale-[1.02]"
-                  : "bg-white/10 text-sky-100 hover:bg-white/20 hover:text-white border border-white/10"
+                  ? "bg-white text-blue-950 shadow-lg scale-[1.02] border border-white"
+                  : "bg-white/10 text-sky-100 hover:bg-white/20 hover:text-white border border-white/15"
               )}
             >
               {cat.label}
@@ -137,12 +134,16 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
 
       {/* Results Header */}
       <div className="flex items-center justify-between px-2 pt-2">
-        <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-          <BookOpen className="size-5 text-sky-300" />
-          {selectedCategory === "all"
-            ? "All Architectural Guides & Market Reviews"
-            : `${selectedCategory} Guides`}
-        </h2>
+        <div className="flex items-center gap-2">
+          <span className="rounded-md bg-sky-400/20 px-2 py-0.5 font-mono text-[11px] font-bold text-sky-200 uppercase">
+            ARCHIVE
+          </span>
+          <h2 className="text-xl font-bold tracking-tight text-white">
+            {selectedCategory === "all"
+              ? "All Architectural Guides & Market Reviews"
+              : `${selectedCategory} Guides`}
+          </h2>
+        </div>
         <span className="text-xs text-sky-200 font-mono">
           Showing {filteredPosts.length} {filteredPosts.length === 1 ? "article" : "articles"}
         </span>
@@ -151,23 +152,22 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
       {/* Grid of Posts */}
       {filteredPosts.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPosts.map((post) => (
+          {filteredPosts.map((post, idx) => (
             <article
               key={post.slug}
-              className="flex flex-col justify-between rounded-3xl border border-white/15 bg-white/[0.10] p-6 backdrop-blur-xl shadow-xl hover:border-sky-300/50 hover:bg-white/[0.15] transition-all group hover:-translate-y-0.5"
+              className="flex flex-col justify-between rounded-3xl border border-white/20 bg-white/[0.11] p-6 backdrop-blur-2xl shadow-xl hover:border-sky-300/60 hover:bg-white/[0.17] transition-all group hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between text-xs text-sky-200">
-                  <span className="rounded-full bg-blue-500/30 border border-sky-300/30 px-3 py-0.5 font-bold uppercase tracking-wider text-sky-200 text-[10px]">
+                  <span className="rounded-full bg-blue-500/30 border border-sky-300/30 px-3 py-0.5 font-mono font-bold uppercase tracking-wider text-sky-200 text-[10px]">
                     {post.category}
                   </span>
-                  <span className="flex items-center gap-1 font-mono text-[11px]">
-                    <Clock className="size-3 text-sky-300" />
-                    {post.readTime}
+                  <span className="font-mono text-[11px] text-sky-300">
+                    ● {post.readTime}
                   </span>
                 </div>
 
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug}`} className="block focus:outline-none focus:ring-2 focus:ring-sky-300 rounded-lg">
                   <h3 className="mt-4 text-lg font-bold text-white group-hover:text-sky-200 transition-colors leading-snug">
                     {post.title}
                   </h3>
@@ -178,19 +178,18 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
                 </p>
 
                 {/* Plain-Language Takeaway Badge */}
-                <div className="mt-4 rounded-xl bg-blue-950/40 border border-white/10 p-2.5 text-[11px] text-sky-200">
-                  <span className="font-bold text-white block mb-0.5 flex items-center gap-1">
-                    <CheckCircle2 className="size-3 text-emerald-400" /> Plain-English Takeaway:
+                <div className="mt-4 rounded-xl bg-blue-950/50 border border-white/10 p-3 text-[11px] text-sky-200">
+                  <span className="font-bold text-white block mb-1 font-mono text-[10px] uppercase tracking-wider text-emerald-300">
+                    ✓ PLAIN-ENGLISH TAKEAWAY
                   </span>
-                  <span className="line-clamp-2 text-sky-100/90">
+                  <span className="line-clamp-2 text-sky-100/90 leading-relaxed">
                     {post.executiveSummary.slice(0, 140)}...
                   </span>
                 </div>
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="flex items-center gap-1 text-sky-200/80">
-                  <Calendar className="size-3" />
+                <span className="font-mono text-[11px] text-sky-200/80">
                   {new Date(post.modifiedDate).toLocaleDateString("en-US", {
                     month: "short",
                     year: "numeric",
@@ -198,17 +197,17 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
                 </span>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="font-bold text-sky-200 group-hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-all"
+                  className="font-bold text-sky-200 group-hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-all py-1 min-h-[44px]"
                 >
                   <span>Read Guide</span>
-                  <ArrowRight className="size-3.5" />
+                  <span aria-hidden="true" className="font-bold">→</span>
                 </Link>
               </div>
             </article>
           ))}
         </div>
       ) : (
-        <div className="rounded-3xl border border-white/15 bg-white/10 p-12 text-center backdrop-blur-xl">
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-12 text-center backdrop-blur-2xl">
           <p className="text-base text-sky-100">
             No guides found matching &quot;{searchQuery}&quot;.
           </p>
@@ -218,9 +217,9 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
               setSearchQuery("");
               setSelectedCategory("all");
             }}
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-bold text-blue-950 shadow-md hover:bg-sky-50 transition-all"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-bold text-blue-950 shadow-md hover:bg-sky-50 transition-all min-h-[44px]"
           >
-            Reset Filters
+            Reset Filters ↺
           </button>
         </div>
       )}

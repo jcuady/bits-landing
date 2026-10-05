@@ -131,10 +131,10 @@ export function Hero() {
                   Collections &amp; Dialer
                 </a>
                 <a
-                  href="#cockpit"
+                  href="/#operations-360"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById("cockpit")?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("operations-360")?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
                 >
@@ -161,11 +161,7 @@ export function Hero() {
                   Accounting &amp; ERP
                 </a>
                 <a
-                  href="#product-families"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("product-families")?.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  href="/bitsagent"
                   className="rounded-full bg-white/15 hover:bg-white/25 px-3 py-1 text-xs font-semibold text-white border border-white/20 backdrop-blur-sm transition-all"
                 >
                   Voice AI

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { cn } from "@/lib/utils";
 
 interface DiscoveryRoute {
@@ -89,6 +90,7 @@ const discoveryRoutes: DiscoveryRoute[] = [
 ];
 
 export function SolutionFinder() {
+  const { openModal } = useConsultationModal();
   return (
     <Section
       id="solution-finder"
@@ -131,6 +133,16 @@ export function SolutionFinder() {
             <Reveal key={route.track} delay={0.05 + idx * 0.03}>
               <Link
                 href={route.href}
+                onClick={(e) => {
+                  if (route.href.startsWith("/#") || route.href.startsWith("#")) {
+                    const targetId = route.href.replace(/^\/?#/, "");
+                    const el = document.getElementById(targetId);
+                    if (el) {
+                      e.preventDefault();
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }
+                }}
                 className={cn(
                   "group relative flex flex-col justify-between rounded-3xl p-2.5 sm:p-3",
                   "bg-white/75 backdrop-blur-xl border border-white/85",
@@ -193,6 +205,24 @@ export function SolutionFinder() {
             </Reveal>
           ))}
         </div>
+
+        {/* Closing CTA Strip */}
+        <Reveal delay={0.22}>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-blue-200/80 bg-blue-50/60 backdrop-blur-sm px-6 py-5">
+            <div>
+              <p className="text-sm font-bold text-slate-900">Not sure which fits your workflow?</p>
+              <p className="text-xs text-slate-600 mt-0.5">Book a free 20-min technical call — no sales pitch, just honest architecture scoping.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => openModal("Solution Finder — Free Technical Scoping Call")}
+              className="group shrink-0 inline-flex min-h-[44px] items-center gap-3 rounded-full bg-blue-600 hover:bg-blue-700 pl-5 pr-2 py-2 text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+            >
+              <span>Book Free 20-Min Call</span>
+              <span className="size-7 rounded-full bg-white/20 flex items-center justify-center text-xs group-hover:translate-x-0.5 transition-transform duration-200 font-bold">→</span>
+            </button>
+          </div>
+        </Reveal>
       </Container>
     </Section>
   );

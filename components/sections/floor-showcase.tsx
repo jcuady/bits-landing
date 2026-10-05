@@ -198,6 +198,10 @@ export function FloorShowcase() {
       id="floor-showcase"
       className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white py-20 sm:py-28 lg:py-32 border-b border-slate-100"
     >
+      {/* Anchor aliases for navigation links */}
+      <div id="floor" className="absolute -top-24" />
+      <div id="dialer" className="absolute -top-24" />
+
       {/* Background Radial Ambiance */}
       <div
         className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-blue-100/40 via-sky-100/20 to-transparent blur-3xl rounded-full"

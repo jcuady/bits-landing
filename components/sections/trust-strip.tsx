@@ -57,8 +57,9 @@ const securityStandards = [
 export function TrustStrip() {
   return (
     <section
+      id="trust-strip"
       aria-label="Security standards and regulatory alignment"
-      className="relative z-10 border-b border-sky-100 bg-gradient-to-b from-white via-sky-50/30 to-white pt-8 pb-12 sm:pb-16"
+      className="relative z-10 scroll-mt-20 border-b border-sky-100 bg-gradient-to-b from-white via-sky-50/30 to-white pt-8 pb-12 sm:pb-16"
     >
       <Container>
         <Reveal y={12}>

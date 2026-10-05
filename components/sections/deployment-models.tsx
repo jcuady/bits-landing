@@ -14,28 +14,7 @@ import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
 import { cn } from "@/lib/utils";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-import {
-  Cloud,
-  Server,
-  Cpu,
-  HardDrive,
-  ShieldCheck,
-  Check,
-  ArrowRight,
-  Sparkles,
-  Layers,
-  Network,
-  Terminal,
-  Activity,
-  Zap,
-  Sliders,
-  Users,
-  CheckCircle2,
-  Search,
-  Boxes,
-  Workflow,
-  Database,
-} from "lucide-react";
+
 
 export function DeploymentModels() {
   const { openModal } = useConsultationModal();
@@ -88,7 +67,16 @@ export function DeploymentModels() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <Cloud className={cn("size-4", selectedModel === "cloud" ? "text-white" : "text-slate-500")} />
+                <span
+                  className={cn(
+                    "font-mono text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wider",
+                    selectedModel === "cloud"
+                      ? "bg-white/20 text-white"
+                      : "bg-sky-100 text-blue-700"
+                  )}
+                >
+                  Cloud
+                </span>
                 <span>Managed Cloud</span>
                 <span
                   className={cn(
@@ -112,7 +100,16 @@ export function DeploymentModels() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <Server className={cn("size-4", selectedModel === "on-prem" ? "text-white" : "text-slate-500")} />
+                <span
+                  className={cn(
+                    "font-mono text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wider",
+                    selectedModel === "on-prem"
+                      ? "bg-white/20 text-white"
+                      : "bg-slate-200 text-slate-700"
+                  )}
+                >
+                  On-Prem
+                </span>
                 <span>Your Own Office Servers</span>
               </button>
             </div>
@@ -154,10 +151,10 @@ export function DeploymentModels() {
                       {activeData.advantages.map((adv) => (
                         <li key={adv} className="flex items-start gap-3 text-xs text-slate-700">
                           <span
-                            className="mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-[0.65rem] font-bold"
+                            className="mt-0.5 flex size-4.5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 font-mono text-[10px] font-bold"
                             aria-hidden
                           >
-                            <Check className="size-3 stroke-[2.5]" />
+                            ✓
                           </span>
                           <span className="leading-snug">{adv}</span>
                         </li>
@@ -195,7 +192,7 @@ export function DeploymentModels() {
                     {/* Investment & Setup Fee Model */}
                     <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50/60 p-4">
                       <div className="flex items-center gap-2">
-                        <Zap className="size-3.5 text-blue-600 fill-blue-600" />
+                        <span className="font-mono text-[11px] font-black text-blue-600">⚡</span>
                         <span className="text-[0.68rem] font-bold uppercase tracking-wider text-blue-800">
                           {activeData.financialModel.type}
                         </span>
@@ -241,7 +238,7 @@ export function DeploymentModels() {
                             ? "Plan Your Office Server Setup"
                             : "Configure Your Cloud Setup"}
                         </span>
-                        <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                        <span className="text-xs font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
                       </button>
                     </Magnetic>
                     <p className="mt-2 text-center text-[0.68rem] text-slate-500">
@@ -265,7 +262,7 @@ export function DeploymentModels() {
               <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                 <div className="max-w-3xl">
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-sky-100 backdrop-blur-xs">
-                    <Boxes className="size-3.5 text-sky-200" />
+                    <span className="font-mono text-[10px] font-black text-sky-200">[01/18]</span>
                     <span>Multi-Product Modular Architecture</span>
                   </div>
                   <h3 className="mt-2.5 text-xl font-bold tracking-tight text-white sm:text-2xl">
@@ -275,20 +272,20 @@ export function DeploymentModels() {
                     Our modular engines share a single database layer, unified event streaming, and role-based permissions. Whether running our high-throughput predictive dialer alongside ERP payroll or deploying a full 18-product sovereign operational suite, there is zero duplicate server footprint and zero custom glue code required.
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-                    <span className="inline-flex items-center gap-1 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
-                      <Check className="size-3 text-emerald-300 shrink-0" />
+                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
+                      <span className="font-mono text-emerald-300 font-bold text-[10px]">✓</span>
                       Shared PostgreSQL &amp; Redis Bus
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
-                      <Check className="size-3 text-emerald-300 shrink-0" />
+                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
+                      <span className="font-mono text-emerald-300 font-bold text-[10px]">✓</span>
                       Centralized SSO &amp; RBAC
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
-                      <Check className="size-3 text-emerald-300 shrink-0" />
+                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
+                      <span className="font-mono text-emerald-300 font-bold text-[10px]">✓</span>
                       Zero Duplicated Infrastructure
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
-                      <Check className="size-3 text-emerald-300 shrink-0" />
+                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
+                      <span className="font-mono text-emerald-300 font-bold text-[10px]">✓</span>
                       Hybrid Cloud/On-Prem Ready
                     </span>
                   </div>
@@ -300,7 +297,7 @@ export function DeploymentModels() {
                     className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-xs font-extrabold text-blue-950 shadow-md transition-all hover:bg-sky-50 active:scale-[0.98]"
                   >
                     <span>Open Solution Stacking Studio</span>
-                    <ArrowRight className="size-3.5 text-blue-700" />
+                    <span className="text-blue-700 font-bold text-xs">→</span>
                   </Link>
                   <button
                     type="button"
@@ -322,7 +319,7 @@ export function DeploymentModels() {
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-blue-100 pb-6">
                 <div>
                   <div className="inline-flex items-center gap-2 rounded-full border border-blue-300/80 bg-white px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-blue-700 shadow-2xs">
-                    <Sparkles className="size-3 text-blue-600" />
+                    <span className="size-1.5 rounded-full bg-blue-600 animate-pulse" />
                     <span>Continuous Evolution Guarantee</span>
                   </div>
                   <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
@@ -343,9 +340,9 @@ export function DeploymentModels() {
               {/* 3 Pillars: Continuous Security, Tech Evolution, Bespoke Requests */}
               <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
-                  <div className="flex items-center gap-2.5 text-blue-600">
-                    <div className="flex size-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
-                      <ShieldCheck className="size-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-blue-50 text-blue-700 font-mono text-xs font-black shadow-2xs">
+                      01
                     </div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
                       Automatic Security Updates
@@ -355,14 +352,14 @@ export function DeploymentModels() {
                     Regular security patches, automatic data protection, and strict privacy controls to keep your customer records safe at all times.
                   </p>
                   <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.65rem] font-semibold text-slate-700">
-                    <Check className="size-3 text-emerald-600" /> Proactively patched
+                    <span className="font-mono text-emerald-600 font-bold text-[10px]">✓</span> Proactively patched
                   </div>
                 </div>
 
                 <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
-                  <div className="flex items-center gap-2.5 text-blue-600">
-                    <div className="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-                      <Zap className="size-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-700 font-mono text-xs font-black shadow-2xs">
+                      02
                     </div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
                       Modern AI &amp; Speed Upgrades
@@ -372,14 +369,14 @@ export function DeploymentModels() {
                     As newer voice tools, faster speech processing, and better calling technology emerge, BITS automatically updates your system so you stay ahead.
                   </p>
                   <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-0.5 text-[0.65rem] font-semibold text-slate-700">
-                    <Check className="size-3 text-emerald-600" /> Continuous engine upgrades
+                    <span className="font-mono text-emerald-600 font-bold text-[10px]">✓</span> Continuous engine upgrades
                   </div>
                 </div>
 
                 <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-2xs">
-                  <div className="flex items-center gap-2.5 text-blue-600">
-                    <div className="flex size-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
-                      <Sliders className="size-4" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-amber-50 text-amber-700 font-mono text-xs font-black shadow-2xs">
+                      03
                     </div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
                       Custom Features On Demand
@@ -389,7 +386,7 @@ export function DeploymentModels() {
                     Need custom reports, special approval steps, or a direct link to your existing software? Our team builds tailored features for your exact business.
                   </p>
                   <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-[0.65rem] font-semibold text-blue-700">
-                    <span>Tailored scope & engineering</span>
+                    <span>Tailored scope &amp; engineering</span>
                   </div>
                 </div>
               </div>
@@ -462,7 +459,7 @@ export function DeploymentModels() {
                   </div>
 
                   <div className="flex items-center gap-2.5 text-xs font-bold text-emerald-200 bg-emerald-950/40 px-4 py-2.5 rounded-2xl border border-emerald-400/30 backdrop-blur-md shadow-sm">
-                    <ShieldCheck className="size-4.5 text-emerald-400 shrink-0" />
+                    <span className="font-mono text-[10px] font-black text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-400/40">✓ PASS</span>
                     <span>Zero Hardware Waste Guarantee</span>
                   </div>
                 </div>
@@ -547,7 +544,7 @@ export function DeploymentModels() {
 
                     <div className="flex items-center gap-2">
                       <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/20 px-3 py-1 font-mono text-[0.72rem] font-bold text-white shadow-xs">
-                        <Users className="size-3.5 text-sky-200" />
+                        <span className="size-1.5 rounded-full bg-emerald-400" />
                         <span>Target: {activeScopingTier.floorSize}</span>
                       </span>
                     </div>
@@ -556,14 +553,14 @@ export function DeploymentModels() {
                   {/* Certified Hardware Ecosystem Strip */}
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-white/[0.05] px-6 py-2.5 text-xs text-white/90">
                     <div className="flex flex-wrap items-center gap-1.5 font-medium">
-                      <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
+                      <span className="font-mono text-emerald-400 font-bold text-xs">✓</span>
                       <span>Hardware Compatibility Certified:</span>
                       <span className="font-bold text-white">
                         Dell PowerEdge · HPE ProLiant · Supermicro · Cisco UCS · Proxmox VE · VMware ESXi
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5 font-mono text-[0.7rem] text-sky-200">
-                      <Zap className="size-3 text-amber-300" />
+                      <span className="font-mono text-[11px] text-amber-300">⚡</span>
                       <span>QoS &amp; SIP Sizing v4.2</span>
                     </div>
                   </div>
@@ -575,8 +572,8 @@ export function DeploymentModels() {
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-sky-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
-                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs">
-                              <Cpu className="size-4.5 text-sky-300" />
+                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-sky-300">
+                              CPU
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
                               Compute (CPU)
@@ -598,8 +595,8 @@ export function DeploymentModels() {
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
-                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs">
-                              <Layers className="size-4.5 text-indigo-300" />
+                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-indigo-300">
+                              RAM
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
                               System Memory (RAM)
@@ -621,8 +618,8 @@ export function DeploymentModels() {
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-emerald-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
-                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs">
-                              <HardDrive className="size-4.5 text-emerald-300" />
+                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-emerald-300">
+                              SSD
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
                               Storage Array (NVMe / SAS)
@@ -644,8 +641,8 @@ export function DeploymentModels() {
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-cyan-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
-                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs">
-                              <Network className="size-4.5 text-cyan-300" />
+                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-cyan-300">
+                              QOS
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
                               Networking &amp; Voice QoS
@@ -667,8 +664,8 @@ export function DeploymentModels() {
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-amber-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
-                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs">
-                              <Activity className="size-4.5 text-amber-300" />
+                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-amber-300">
+                              SIP
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
                               Telephony Interconnect
@@ -690,8 +687,8 @@ export function DeploymentModels() {
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-blue-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
-                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs">
-                              <Server className="size-4.5 text-sky-300" />
+                            <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-sky-300">
+                              OS
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
                               Hypervisor / OS Support
@@ -714,8 +711,8 @@ export function DeploymentModels() {
                   {/* Cockpit Bottom Action Bar */}
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/15 bg-white/[0.08] px-6 py-5">
                     <div className="flex items-center gap-3.5">
-                      <div className="flex size-10 items-center justify-center rounded-xl bg-white/20 border border-white/30 text-white shrink-0 shadow-xs">
-                        <ShieldCheck className="size-5 text-emerald-300" />
+                      <div className="flex size-10 items-center justify-center rounded-xl bg-white/20 border border-white/30 text-emerald-300 font-mono text-xs font-black shrink-0 shadow-xs">
+                        NDA
                       </div>
                       <div>
                         <p className="text-sm font-bold text-white">
@@ -733,7 +730,7 @@ export function DeploymentModels() {
                       className="group inline-flex min-h-[46px] shrink-0 cursor-pointer items-center justify-center gap-2.5 rounded-full bg-white hover:bg-blue-50 px-6 py-2.5 text-xs sm:text-sm font-extrabold text-blue-900 shadow-xl shadow-blue-950/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <span>Request Hardware Audit</span>
-                      <ArrowRight className="size-4 text-blue-700 transition-transform duration-200 group-hover:translate-x-1" />
+                      <span className="text-blue-700 font-bold text-sm transition-transform duration-200 group-hover:translate-x-1">→</span>
                     </button>
                   </div>
                 </div>
@@ -765,11 +762,8 @@ export function DeploymentModels() {
                             <span className="inline-flex items-center justify-center rounded-lg bg-white/20 px-2.5 py-1 font-mono text-xs font-bold text-white border border-white/30">
                               STEP {step.step}
                             </span>
-                            <div className="flex size-7 items-center justify-center rounded-md bg-white/20 text-white group-hover:bg-white group-hover:text-blue-900 transition-colors">
-                              {idx === 0 && <Search className="size-3.5" />}
-                              {idx === 1 && <Cpu className="size-3.5" />}
-                              {idx === 2 && <Terminal className="size-3.5" />}
-                              {idx === 3 && <CheckCircle2 className="size-3.5" />}
+                            <div className="flex size-7 items-center justify-center rounded-md bg-white/20 font-mono text-xs font-black text-white group-hover:bg-white group-hover:text-blue-900 transition-colors">
+                              0{idx + 1}
                             </div>
                           </div>
 

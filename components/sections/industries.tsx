@@ -225,6 +225,34 @@ export function Industries() {
             );
           })}
         </div>
+
+        {/* Universal Industry Architecture Closing Strip */}
+        <Reveal delay={0.25}>
+          <div className="mt-14 sm:mt-18 flex flex-col sm:flex-row items-center justify-between gap-5 rounded-3xl border border-sky-200/80 bg-gradient-to-r from-blue-50/80 via-sky-50/60 to-white p-6 sm:p-8 shadow-lg shadow-sky-950/5">
+            <div className="max-w-xl">
+              <span className="font-mono text-[0.68rem] font-bold uppercase tracking-wider text-blue-700">
+                Custom Industry Workflows
+              </span>
+              <h4 className="mt-1 text-base sm:text-lg font-bold text-slate-900">
+                Operating in another sector or multi-entity group?
+              </h4>
+              <p className="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Whether you manage healthcare clinics, construction jobsites, retail logistics, or sports arenas, BITS engines configure to your exact operational SOPs.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => openModal("Custom Sector & Multi-Entity Architecture Scoping")}
+                className="group inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-700 px-6 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+              >
+                <span>Request Custom Industry Blueprint</span>
+                <span className="text-white font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </button>
+            </div>
+          </div>
+        </Reveal>
       </Container>
     </Section>
   );

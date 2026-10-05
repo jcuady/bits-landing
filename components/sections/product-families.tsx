@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { cn } from "@/lib/utils";
 
 interface ProductModule {
@@ -121,6 +122,7 @@ const productFamilies: ProductFamily[] = [
 ];
 
 export function ProductFamilies() {
+  const { openModal } = useConsultationModal();
   return (
     <Section
       id="product-families"
@@ -255,6 +257,16 @@ export function ProductFamilies() {
                         <Link
                           key={prod.name}
                           href={prod.href}
+                          onClick={(e) => {
+                            if (prod.href.startsWith("/#") || prod.href.startsWith("#")) {
+                              const targetId = prod.href.replace(/^\/?#/, "");
+                              const el = document.getElementById(targetId);
+                              if (el) {
+                                e.preventDefault();
+                                el.scrollIntoView({ behavior: "smooth" });
+                              }
+                            }
+                          }}
                           className="group/pill flex flex-col justify-between rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-white hover:border-blue-500/40 hover:shadow-xs p-2.5 transition-all duration-150"
                         >
                           <div className="flex items-center justify-between">
@@ -275,6 +287,16 @@ export function ProductFamilies() {
                     {/* Primary Family Deep-Dive Button */}
                     <Link
                       href={family.href}
+                      onClick={(e) => {
+                        if (family.href.startsWith("/#") || family.href.startsWith("#")) {
+                          const targetId = family.href.replace(/^\/?#/, "");
+                          const el = document.getElementById(targetId);
+                          if (el) {
+                            e.preventDefault();
+                            el.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }
+                      }}
                       className="mt-4 flex w-full items-center justify-between rounded-xl bg-blue-600 hover:bg-blue-500 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:shadow-lg active:scale-[0.99]"
                     >
                       <span>Explore {family.title} Ecosystem</span>
@@ -309,12 +331,13 @@ export function ProductFamilies() {
                 <span>Browse All 18 Products</span>
                 <span>→</span>
               </Link>
-              <Link
-                href="/#contact"
-                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 px-4 text-xs sm:text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300"
+              <button
+                type="button"
+                onClick={() => openModal("Product Portfolio Scoping — All 18 Products")}
+                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 px-4 text-xs sm:text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 cursor-pointer"
               >
                 <span>Book Scoping</span>
-              </Link>
+              </button>
             </div>
           </div>
         </Reveal>

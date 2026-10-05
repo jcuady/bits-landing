@@ -5,7 +5,7 @@ import { blogPosts } from "@/lib/blog-data";
 export default function sitemap(): MetadataRoute.Sitemap {
   // Stable release / update date for search engines (W3C Datetime format)
   // Prevents invalidating Google's crawl cache on every millisecond fetch
-  const lastModified = new Date("2026-09-30T00:00:00.000Z");
+  const lastModified = new Date("2026-10-05T12:00:00.000Z");
 
   const productEntries: MetadataRoute.Sitemap = bitsProducts.map((p) => ({
     url: `${site.url}/products/${p.id}`,

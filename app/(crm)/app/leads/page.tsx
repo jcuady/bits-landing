@@ -13,6 +13,8 @@ import { CrmModal } from "@/components/crm/crm-modal";
 import { useCrm } from "@/lib/crm/store";
 import { formatDate } from "@/lib/crm/selectors";
 import { useToast } from "@/components/crm/crm-toast";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import type { LeadStatus } from "@/lib/crm/types";
 
 export default function LeadsPage() {
@@ -242,13 +244,13 @@ export default function LeadsPage() {
               <label className="block text-xs font-semibold text-foreground mb-1">
                 Full Name *
               </label>
-              <input
+              <Input
                 required
                 type="text"
                 placeholder="e.g. Atty. Rafael Dizon"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="h-9 w-full rounded-xl border border-border bg-card px-3 text-xs text-foreground outline-none focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-neutral-800 dark:bg-neutral-900"
+                className="h-9 w-full rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] px-3 text-xs text-foreground outline-none focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
               />
             </div>
 
@@ -256,7 +258,7 @@ export default function LeadsPage() {
               <label className="block text-xs font-semibold text-foreground mb-1">
                 Email Address *
               </label>
-              <input
+              <Input
                 required
                 type="email"
                 placeholder="e.g. r.dizon@eastwestcredit.ph"
@@ -272,7 +274,7 @@ export default function LeadsPage() {
               <label className="block text-xs font-semibold text-foreground mb-1">
                 Company / Institution *
               </label>
-              <input
+              <Input
                 required
                 type="text"
                 placeholder="e.g. EastWest Credit Corp"
@@ -286,7 +288,7 @@ export default function LeadsPage() {
               <label className="block text-xs font-semibold text-foreground mb-1">
                 Designation / Title
               </label>
-              <input
+              <Input
                 type="text"
                 placeholder="e.g. VP Legal & Collections"
                 value={formData.title}
@@ -304,7 +306,7 @@ export default function LeadsPage() {
               <select
                 value={formData.source}
                 onChange={(e) => setFormData({ ...formData, source: e.target.value })}
-                className="h-9 w-full rounded-xl border border-border bg-card px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900 cursor-pointer"
+                className="h-9 w-full rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] cursor-pointer"
               >
                 <option value="Website Contact Form">Website Contact Form</option>
                 <option value="BITScrm Specimen">BITScrm Specimen</option>
@@ -318,13 +320,13 @@ export default function LeadsPage() {
               <label className="block text-xs font-semibold text-foreground mb-1">
                 Lead Score (1-100)
               </label>
-              <input
+              <Input
                 type="number"
                 min={1}
                 max={100}
                 value={formData.score}
                 onChange={(e) => setFormData({ ...formData, score: Number(e.target.value) })}
-                className="h-9 w-full rounded-xl border border-border bg-card px-3 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900"
+                className="h-9 w-full rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] px-3 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
               />
             </div>
 
@@ -349,16 +351,16 @@ export default function LeadsPage() {
             <label className="block text-xs font-semibold text-foreground mb-1">
               Requirements &amp; Technical Notes
             </label>
-            <textarea
+            <Textarea
               rows={3}
               placeholder="e.g. 150 floor seats requirement, WebRTC softphone integration, BSP 454 compliance..."
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-              className="w-full rounded-xl border border-border bg-card p-3 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900"
+              className="w-full rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] p-3 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-border/80 dark:border-[#222]">
+          <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-white/40 dark:border-white/10">
             <CrmButton type="button" onClick={() => setIsModalOpen(false)}>
               Cancel
             </CrmButton>

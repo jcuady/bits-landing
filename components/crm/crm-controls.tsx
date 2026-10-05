@@ -25,7 +25,7 @@ export function CrmButton({
         "inline-flex min-h-10 cursor-pointer items-center justify-center gap-1.5 rounded-xl border px-3.5 text-[0.82rem] font-semibold transition duration-150 active:scale-[0.98]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1975f2]",
         (variant === "default" || variant === "outline") &&
-          "border-border bg-card text-foreground hover:bg-muted hover:text-foreground dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-800",
+          "border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] text-foreground hover:bg-white/70 hover:text-foreground dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] dark:text-neutral-100 dark:hover:bg-white/10",
         variant === "primary" &&
           "border-[#1975f2] bg-[#1975f2] text-white hover:bg-[#1975f2]/90 shadow-xs",
         variant === "destructive" &&
@@ -58,7 +58,7 @@ export function StatusFilter({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label={label}
-        className="h-10 w-full min-w-[160px] cursor-pointer rounded-xl border border-border bg-card px-3 text-[0.84rem] text-foreground outline-none transition focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 sm:w-auto"
+        className="h-10 w-full min-w-[160px] cursor-pointer rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] px-3 text-[0.84rem] text-foreground outline-none transition focus:border-[#1975f2] focus:ring-2 focus:ring-[#1975f2]/20 dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] dark:text-neutral-100 sm:w-auto"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
