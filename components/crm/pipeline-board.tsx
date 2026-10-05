@@ -23,7 +23,7 @@ export function PipelineBoard() {
         return (
           <div
             key={stage.id}
-            className="flex w-[280px] shrink-0 flex-col rounded-2xl border border-white/20 bg-white/30 backdrop-blur-md shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] p-3 dark:border-white/10 dark:bg-black/30"
+            className="flex w-[280px] shrink-0 flex-col rounded-2xl border border-linelight/60 bg-cloud/70 backdrop-blur-3xl shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] p-3 dark:border-white/10 dark:bg-black/30"
           >
             {/* Stage Header */}
             <div className="mb-3 px-1">
@@ -77,7 +77,7 @@ function PipelineCard({
   const isTerminal = opp.stage === "closed_won" || opp.stage === "closed_lost";
 
   return (
-    <li className="group rounded-xl border border-white/40 bg-white/60 backdrop-blur-xl p-3.5 shadow-sm transition-all hover:border-[#1975f2]/40 hover:shadow-md dark:border-white/10 dark:bg-black/50">
+    <li className="group rounded-xl border border-linelight/60 bg-cloud/70 backdrop-blur-3xl p-3.5 shadow-sm transition-all hover:border-[#1975f2]/40 hover:shadow-md dark:border-white/10 dark:bg-black/50">
       <Link href={`/app/opportunities/${opp.id}`} className="block cursor-pointer">
         <div className="flex items-start justify-between gap-2">
           <p className="text-sm font-semibold text-foreground leading-snug group-hover:text-[#1975f2] transition-colors">

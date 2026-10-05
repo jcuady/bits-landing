@@ -20,10 +20,10 @@ export function DataTable<T extends { id: string }>({
   className?: string;
 }) {
   return (
-    <div className={cn("overflow-x-auto rounded-2xl border border-white/20 bg-white/40 backdrop-blur-xl shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] dark:border-white/10 dark:bg-black/40", className)}>
+    <div className={cn("overflow-x-auto rounded-2xl border border-linelight/60 bg-cloud/70 backdrop-blur-3xl shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)]", className)}>
       <table className="w-full min-w-[640px] border-collapse text-left text-xs">
         <thead>
-          <tr className="border-b border-white/20 bg-white/30 dark:border-white/10 dark:bg-white/5">
+          <tr className="border-b border-linelight/40 bg-cloud/50 dark:border-white/10 dark:bg-white/5">
             {columns.map((col) => (
               <th
                 key={col.key}
@@ -41,7 +41,7 @@ export function DataTable<T extends { id: string }>({
           {rows.map((row) => (
             <tr
               key={row.id}
-              className="hover:bg-white/40 dark:hover:bg-white/5 transition-colors"
+              className="hover:bg-cloud/60 dark:hover:bg-white/5 transition-colors"
             >
               {columns.map((col) => (
                 <td key={col.key} className={cn("px-4 py-3 text-foreground", col.className)}>

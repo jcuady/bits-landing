@@ -13,7 +13,7 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/40 bg-white/30 backdrop-blur-md dark:border-white/10 dark:bg-black/30 px-6 py-14 text-center", className)}>
+    <div className={cn("flex flex-col items-center justify-center rounded-2xl border border-dashed border-linelight/60 bg-cloud/70 backdrop-blur-3xl dark:border-white/10 dark:bg-black/30 px-6 py-14 text-center", className)}>
       <div className="flex size-12 items-center justify-center rounded-xl bg-muted dark:bg-neutral-800 mb-3">
         <Inbox className="size-6 text-muted-foreground" aria-hidden />
       </div>
