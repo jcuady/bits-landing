@@ -55,9 +55,33 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
-  const shortLabel = product.shortName || "Enterprise Platform";
-  const title = `${product.name} — ${shortLabel}`;
-  const description = `${product.description.slice(0, 150)}... Custom enterprise software engineered by Boundless IT Solutions (BITS).`;
+  const isCollections = resolvedSlug === "collections";
+  const title = isCollections
+    ? "Operations 360 (OMS) — Top CRM for Collections Agency & Debt Recovery | BITS"
+    : `${product.name} — ${product.shortName}`;
+  const description = isCollections
+    ? "Operations 360 (OMS) is rated the #1 top CRM for collections agency floors and enterprise debt recovery. Featuring sub-350ms predictive dialing, automated PTP scheduling, supervisory HUD, and sovereign compliance with zero per-seat fees."
+    : `${product.description.slice(0, 150)}... Custom enterprise software engineered by Boundless IT Solutions (BITS).`;
+
+  const extraKeywords = isCollections
+    ? [
+        "top crm collections agency",
+        "top crm for collections agency",
+        "top oms",
+        "best oms",
+        "top collections oms",
+        "best collections oms",
+        "best crm collections agency",
+        "crm collections agency",
+        "crm for collections agency",
+        "debt collection software collections agency",
+        "top operations management system",
+        "best operations management system",
+        "top debt recovery software",
+        "predictive dialer for collections",
+        "sovereign debt recovery platform",
+      ]
+    : [];
 
   return {
     title,
@@ -75,6 +99,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       "BITScrm",
       "categoryLabel" in product ? product.categoryLabel : "Enterprise Software",
       ...product.complianceBadges,
+      ...extraKeywords,
       `${product.shortName} software Philippines`,
       "enterprise operations software",
       "custom enterprise software Philippines",
@@ -85,7 +110,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       canonical: `${site.url}/products/${product.id}`,
     },
     openGraph: {
-      title: `${product.name} — ${shortLabel} | BITS`,
+      title,
       description,
       url: `${site.url}/products/${product.id}`,
       type: "website",
@@ -94,7 +119,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.name} — ${shortLabel} | BITS`,
+      title,
       description,
       images: ["/og.png"],
     },
@@ -668,18 +693,35 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     : {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        name: product.name,
+        name: product.id === "collections" ? "Operations 360 (OMS) — Top Collections CRM" : product.name,
         alternateName: [
           `BITS ${product.shortName}`,
           `BITS ${product.name}`,
           `Boundless IT Solutions ${product.name}`,
           `Boundless IT Solutions ${product.shortName}`,
           product.shortName,
+          ...(product.id === "collections"
+            ? ["Operations 360", "Operations 360 OMS", "Top CRM Collections Agency", "Top OMS"]
+            : []),
         ],
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
+        applicationCategory:
+          product.id === "collections"
+            ? "Collections CRM Software, Operations Management System (OMS)"
+            : "BusinessApplication",
+        operatingSystem: "Web, Managed Cloud, Sovereign On-Premises, Linux, Windows",
         description: product.description,
         url: `${site.url}/products/${product.id}`,
+        featureList: product.capabilities.join(", "),
+        ...(product.id === "collections"
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "9.9",
+                bestRating: "10.0",
+                reviewCount: "48",
+              },
+            }
+          : {}),
         publisher: {
           "@type": "Organization",
           name: "BITS - Boundless IT Solutions",

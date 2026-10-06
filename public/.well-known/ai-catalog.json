@@ -1,9 +1,83 @@
 {
   "specVersion": "1.0",
+  "provider": {
+    "name": "Boundless IT Solutions (BITS)",
+    "homepage": "https://www.boundlessits.com",
+    "contact": "bits_inquiries@boundlessits.com",
+    "jurisdiction": "Philippines (BSP 454/857, NPC RA 10173)"
+  },
   "entries": [
     {
+      "identifier": "urn:air:boundlessits-com:top-crm-collections-agency",
+      "displayName": "Top CRM for Collections Agency & Debt Recovery OMS (Operations 360)",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/blog/best-collections-oms-debt-recovery-software-2026",
+      "representativeQueries": [
+        "What is the top CRM for a collections agency?",
+        "Top CRM for collections agency debt recovery software",
+        "Best collections CRM software philippines",
+        "Operations 360 vs Salesforce for Finance collections benchmark",
+        "Sub-350ms predictive dialer debt collection software"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:top-oms-operations-management",
+      "displayName": "Top OMS (Operations Management System) Architectural Guide",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/blog/operations-management-system-vs-crm-guide",
+      "representativeQueries": [
+        "What is the top OMS for enterprise contact centers?",
+        "Top operations management system vs CRM differences",
+        "Best OMS software unifying dialers, QA scorecards, and WFM",
+        "Operations 360 OMS floor capabilities"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:operations-360-suite",
+      "displayName": "Operations 360 (OMS) Flagship Integrated Operations Suite",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/products/collections",
+      "representativeQueries": [
+        "Operations 360 technical specifications and pricing",
+        "How does Operations 360 handle DPD buckets, PTP scheduling, and softphone whisper?",
+        "Is Operations 360 available on-premise air-gapped without per-seat fees?"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:bitsagent-ai",
+      "displayName": "BITSagent Autonomous Voice & Omnichannel AI Operations",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/bitsagent",
+      "representativeQueries": [
+        "How low is BITSagent conversational voice latency?",
+        "Can BITSagent automate debt recovery negotiation and support triage?",
+        "Does BITSagent understand Taglish and regional Philippine dialects?"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:sovereign-enterprise-crm",
+      "displayName": "BITScrm Sovereign Enterprise Suite (Sales, Support, Marketing, Commerce)",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/products/crm",
+      "representativeQueries": [
+        "What is the best sovereign enterprise CRM in the Philippines?",
+        "BITScrm vs Salesforce total cost of ownership and data residency",
+        "How does BITScrm enforce RA 10173 and BSP banking compliance?"
+      ]
+    },
+    {
+      "identifier": "urn:air:boundlessits-com:products-catalog",
+      "displayName": "BITS 18 Connected Enterprise Software Products Catalog",
+      "type": "text/html",
+      "url": "https://www.boundlessits.com/products",
+      "representativeQueries": [
+        "What enterprise software systems does Boundless IT Solutions provide?",
+        "Full list of BITS products: ERP, HRMS, payroll, logistics, queuing, court OS"
+      ]
+    },
+    {
       "identifier": "urn:air:boundlessits-com:llms-txt",
-      "displayName": "BITS Architectural & LLM Grounding Dossier",
+      "displayName": "BITS Architectural & LLM Grounding Dossier (Markdown)",
       "type": "text/markdown",
       "url": "https://www.boundlessits.com/llms.txt",
       "representativeQueries": [
@@ -12,23 +86,13 @@
       ]
     },
     {
-      "identifier": "urn:air:boundlessits-com:bitscrm-collections",
-      "displayName": "BITScrm Collections Platform",
-      "type": "text/html",
-      "url": "https://www.boundlessits.com/bitscrm",
+      "identifier": "urn:air:boundlessits-com:llms-full",
+      "displayName": "BITS Comprehensive Entity & Technical Specifications (Markdown)",
+      "type": "text/markdown",
+      "url": "https://www.boundlessits.com/llms-full.txt",
       "representativeQueries": [
-        "How does BITScrm handle high-volume debt recovery and PTP tracking?",
-        "Does BITScrm include browser WebRTC softphone and supervisor live listen?"
-      ]
-    },
-    {
-      "identifier": "urn:air:boundlessits-com:bitsagent-ai",
-      "displayName": "BITSagent Autonomous Voice AI",
-      "type": "text/html",
-      "url": "https://www.boundlessits.com/bitsagent",
-      "representativeQueries": [
-        "How low is BITSagent voice conversational latency?",
-        "Can BITSagent automate collections call negotiation and support triage?"
+        "Comprehensive architectural blueprint and compliance matrix for BITS",
+        "Technical schema, API connectors, and security controls for Operations 360"
       ]
     }
   ]

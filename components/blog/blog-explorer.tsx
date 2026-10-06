@@ -20,13 +20,15 @@ const categories = [
 ];
 
 const popularSearches = [
+  "top crm collections agency",
+  "top oms",
   "best crm collections agency",
   "crm collections agency",
   "crm for collections agency",
+  "best oms",
   "best crm 2026",
   "crm for finance",
   "salesforce alternative",
-  "best oms",
   "voice ai call center",
 ];
 
@@ -72,7 +74,7 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search e.g. 'best crm collections agency', 'salesforce', 'dialer'..."
+              placeholder="Search e.g. 'top crm collections agency', 'top oms', 'salesforce'..."
               className="w-full rounded-2xl border border-sky-200/30 bg-blue-950/60 py-3.5 pl-20 pr-16 text-sm text-white placeholder:text-sky-200/60 focus:border-sky-300 focus:bg-blue-950/80 focus:outline-none focus:ring-2 focus:ring-sky-400/40 transition-all min-h-[48px]"
             />
             {searchQuery && (

@@ -13,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       // OpenAI ChatGPT, SearchGPT & Operators
       {
-        userAgent: ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "OAI-AdsBot"],
+        userAgent: ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "OAI-AdsBot", "Operator"],
         allow: "/",
         disallow: disallowedPaths,
       },
@@ -37,13 +37,25 @@ export default function robots(): MetadataRoute.Robots {
       },
       // Microsoft Bing & Copilot
       {
-        userAgent: ["Bingbot", "msnbot"],
+        userAgent: ["Bingbot", "msnbot", "BingPreview"],
         allow: "/",
         disallow: disallowedPaths,
       },
       // Apple Intelligence & Siri Web Search
       {
         userAgent: ["Applebot", "Applebot-Extended"],
+        allow: "/",
+        disallow: disallowedPaths,
+      },
+      // Meta & Social AI Agents
+      {
+        userAgent: ["Meta-ExternalAgent", "FacebookBot"],
+        allow: "/",
+        disallow: disallowedPaths,
+      },
+      // Cohere, Mistral & Amazon
+      {
+        userAgent: ["cohere-ai", "Amazonbot", "Bytespider", "DuckAssistBot"],
         allow: "/",
         disallow: disallowedPaths,
       },

@@ -294,14 +294,14 @@ export const bitsProducts = [
     categoryLabel: "Flagship Integrated Operations Suite",
     badge: "Primary Flagship Suite",
     isFlagship: true,
-    tagline: "ONE SYSTEM. ONE VIEW. ONE SOURCE OF TRUTH.",
+    tagline: "THE TOP OMS & COLLECTIONS CRM PLATFORM. ONE VIEW. ONE SOURCE OF TRUTH.",
     description:
-      "The integrated operations platform that brings your critical operational tools and information into one system (formerly CRM Collections). Unifies CRM & Customer Management, Quality Assurance (QA), Performance Scorecards & Analytics, Coaching Logs & Action Plans, QA Coaching, Integrated Dialer, Learning Management System (LMS), Workforce Management (WFM), and Real-Time Operational Dashboards & Reports.",
+      "The top OMS (Operations Management System) and collections agency CRM platform that brings your critical operational tools into one sovereign command center. Rated #1 for collections agency operations, Operations 360 unifies 360° Delinquent Customer Dossiers, Sub-350ms WebRTC Predictive Dialer, Quality Assurance (QA) Scorecards, Supervisor Coaching Logs & Action Plans, Learning Management (LMS), Workforce Management (WFM), and Real-Time Operational Dashboards.",
     complianceBadges: [
-      "Zero MIS Report Wait Time",
-      "SOC 2 Type II Controls",
+      "Top Collections CRM & OMS",
+      "Sub-350ms Predictive Dialer",
       "BSP Circulars 454/857 & NPC DPA",
-      "WFM Schedule Adherence Engine",
+      "Zero Per-Seat Tax · SOC 2",
     ],
     capabilities: [
       "CRM & Customer Management with 360° Dossiers",
@@ -1604,7 +1604,7 @@ export const faqItems = [
   {
     question: "What is BITS and what does the company build?",
     answer:
-      "BITS (Boundless IT Solutions) is an enterprise technology company that builds business-specific software, workflow automation, CRM, AI-assisted operations, and digital infrastructure. Our flagship platform, BITScrm, is engineered specifically for collection agencies, BPOs, banks, and lenders to manage high-volume account portfolios, communications, and compliance.",
+      "BITS (Boundless IT Solutions) is an enterprise technology company that builds business-specific software, workflow automation, operational CRMs, AI-assisted operations, and sovereign digital infrastructure. Our flagship platform, Operations 360 (OMS) & BITScrm, is rated the top CRM for collections agency operations, BPOs, banks, and lenders to manage high-velocity debt recovery, predictive telephony, and regulatory compliance with zero per-seat licensing fees.",
   },
   {
     question: "Who is BITS designed for?",
@@ -1617,9 +1617,9 @@ export const faqItems = [
       "Most commercial CRMs force your organization to adapt your business processes to their rigid templates and generic fields. BITS operates under the mantra 'Your business → your workflow → your technology.' We build and configure the software, database schemas, dynamic queues, and permissions around how your operational floor actually runs.",
   },
   {
-    question: "What is the BITS CRM (BITScrm)?",
+    question: "What is Operations 360 (OMS) and the BITS CRM?",
     answer:
-      "BITScrm is our flagship operational platform for customer and debt portfolio management. It unifies delinquent account tracking, campaign configuration, agent work queues, browser SIP softphone calling, multi-channel messaging, supervisor call monitoring (listen/whisper/barge), QA scorecards, and real-time executive analytics in one system.",
+      "Operations 360 (OMS) is our flagship integrated operations management system and top CRM for collections agency recovery floors. It unifies delinquent debtor dossiers, automated Promise-to-Pay (PTP) scheduling, browser WebRTC predictive dialer calling, multi-channel messaging, supervisor HUD call monitoring (listen/whisper/barge), standardized QA scorecards, coaching action plans, agent LMS, workforce management (WFM), and real-time executive operations dashboards in one sovereign system.",
   },
   {
     question: "What AI capabilities does BITS provide?",

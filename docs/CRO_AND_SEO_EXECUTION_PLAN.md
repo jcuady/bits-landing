@@ -79,7 +79,7 @@ Top SaaS websites generate up to 70% of their organic qualified pipeline through
 2. **Search-Intent Target Articles:**
    - **Target Query: "crm for collections" / "best collections crm"**
      - *URL:* `/blog/best-collections-oms-debt-recovery-software-2026`
-     - *Title:* Top 7 CRM for Collections & Enterprise Debt Recovery OMS in 2026 (Ranked & Reviewed)
+     - *Title:* Top CRM for Collections Agency & Enterprise Debt Recovery OMS in 2026 (Ranked & Reviewed)
      - *In-Page CRO:* Explains why generic sales CRMs fail on collections floors and highlights Operations 360 with sub-350ms predictive dialing.
    - **Target Query: "best crm" / "best crm software" / "best crm philippines"**
      - *URL:* `/blog/best-sovereign-enterprise-crm-platforms-philippines`

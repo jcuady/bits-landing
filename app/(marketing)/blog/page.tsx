@@ -7,11 +7,19 @@ import { blogPosts } from "@/lib/blog-data";
 import { BlogExplorer } from "@/components/blog/blog-explorer";
 
 export const metadata: Metadata = {
-  title: "Best CRM, Collections Agency Software & AI Guides | BITS Intelligence Labs",
+  title: "Top CRM, Collections Agency Software & Top OMS Guides | BITS Intelligence Labs",
   description:
-    "Authoritative benchmarks, architecture comparisons, and buyer guides for the best CRM for collections agency operations, sovereign enterprise CRM, autonomous voice AI, and private datacenters.",
+    "Authoritative benchmarks, architecture comparisons, and buyer guides for the top CRM for collections agency operations, top OMS operations management systems, sovereign enterprise CRM, autonomous voice AI, and private datacenters.",
   alternates: { canonical: `${site.url}/blog` },
   keywords: [
+    "top crm collections agency",
+    "top crm for collections agency",
+    "top oms",
+    "best oms",
+    "top collections oms",
+    "best collections oms",
+    "top operations management system",
+    "top debt recovery software",
     "best crm collections agency",
     "best crm for collections agency",
     "crm collections agency",
@@ -22,15 +30,14 @@ export const metadata: Metadata = {
     "debt collection software collections agency",
     "crm for finance regulatory compliance",
     "operations management system",
-    "best oms",
     "salesforce alternative collections agency",
     "voice ai call center",
     "enterprise crm philippines",
   ],
   openGraph: {
-    title: "Best CRM & Operations Software Guides | BITS Intelligence Labs",
+    title: "Top CRM, Collections Agency Software & Top OMS Guides | BITS Intelligence Labs",
     description:
-      "Independent benchmarks and buyer guides comparing the best CRM software, collections agency OMS, voice AI, and enterprise operations systems.",
+      "Independent benchmarks and buyer guides comparing the top CRM software for collections agencies, enterprise recovery OMS, voice AI, and operations systems.",
     url: `${site.url}/blog`,
     siteName: site.legalName,
     type: "website",
@@ -255,7 +262,7 @@ export default function BlogIndexPage() {
                     href={`/blog/${featuredPost.slug}`}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3.5 text-xs font-mono font-black uppercase tracking-wider text-blue-950 shadow-lg hover:bg-sky-50 transition-all min-h-[44px]"
                   >
-                    <span>Read Full 7-Platform Benchmark</span>
+                    <span>Read Full Collections OMS Benchmark &amp; Audit</span>
                     <span aria-hidden="true" className="font-bold text-sm">→</span>
                   </Link>
                 </div>
