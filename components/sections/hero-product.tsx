@@ -14,14 +14,12 @@ import {
   ShieldCheck,
   TrendingUp,
   ArrowRight,
-  Sparkles,
   CheckCircle2,
   Clock,
   FileCheck,
   Mic,
   Smartphone,
   Laptop,
-  ExternalLink,
   AlertTriangle,
   Radio,
   WifiOff,
@@ -1143,40 +1141,6 @@ export function HeroProduct({ className }: { className?: string }) {
           </motion.div>
         )}
       </AnimatePresence>
-      </div>
-
-      {/* ── BOTTOM CONVERSION BAR: STRAIGHTFORWARD CTAS ── */}
-      <div className="mt-8 sm:mt-12 rounded-3xl border border-white/90 bg-white/90 p-5 sm:px-8 sm:py-6 shadow-xl shadow-blue-950/5 backdrop-blur-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-20">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <Sparkles className="size-4 text-blue-600" />
-            <h4 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
-              Ready to modernize your collections floor with OPERATIONS 360?
-            </h4>
-          </div>
-          <p className="text-xs text-slate-500 font-medium max-w-xl">
-            See how predictive telephony, field agent GPS verification, and automated QA work on your exact debt portfolio.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3 shrink-0">
-          <button
-            type="button"
-            onClick={() => openModal("Cockpit Bottom Bar Consultation")}
-            className="group flex h-11 items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-6 font-bold text-white shadow-md shadow-blue-600/25 transition-all active:scale-[0.98] cursor-pointer text-xs"
-          >
-            <span>Book a Consultation</span>
-            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-          </button>
-
-          <Link
-            href="/demo"
-            className="flex h-11 items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 px-5 font-bold text-slate-800 shadow-2xs transition-all active:scale-[0.98] text-xs"
-          >
-            <span>Launch Sandbox Demo</span>
-            <ExternalLink className="size-3 text-slate-400" />
-          </Link>
-        </div>
       </div>
     </div>
   );
