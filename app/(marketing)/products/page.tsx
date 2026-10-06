@@ -339,7 +339,7 @@ export default function ProductsIndexPage() {
                     href="/#contact"
                     className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 text-xs font-black uppercase tracking-wider text-blue-950 shadow-xl hover:bg-sky-50 transition-all hover:scale-105"
                   >
-                    <span>Talk to a Solutions Architect</span>
+                    <span>Book a Consultation</span>
                     <ArrowRight className="size-4" />
                   </Link>
                   <Link

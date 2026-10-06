@@ -569,10 +569,10 @@ export function Header() {
           <div className="hidden items-center lg:flex">
             <button
               type="button"
-              onClick={() => openModal()}
+              onClick={() => openModal("Contact Us")}
               className="group flex h-11 items-center justify-center gap-2 rounded-full bg-white hover:bg-blue-50 px-5 text-[0.86rem] font-extrabold text-blue-900 shadow-md shadow-blue-950/20 transition-all hover:shadow-lg active:scale-[0.98] cursor-pointer"
             >
-              <span>Book a Consultation</span>
+              <span>Contact Us</span>
               <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span>
             </button>
           </div>
@@ -778,11 +778,11 @@ export function Header() {
                   type="button"
                   onClick={() => {
                     setMobileOpen(false);
-                    openModal();
+                    openModal("Contact Us");
                   }}
                   className="flex h-13 w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 text-base font-bold text-white shadow-lg shadow-blue-600/20 active:scale-[0.98] cursor-pointer"
                 >
-                  <span>Book a Consultation</span>
+                  <span>Contact Us</span>
                   <span aria-hidden="true">→</span>
                 </button>
               </div>

@@ -100,13 +100,13 @@ export function AppTopbar({
   };
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-linelight/60 bg-cloud/70 backdrop-blur-3xl px-4 md:h-18 md:px-6 shadow-[0_4px_24px_-12px_rgba(0,0,0,0.08)] z-10 relative">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-blue-100/80 bg-white/75 backdrop-blur-2xl px-4 md:h-18 md:px-6 shadow-[0_4px_20px_-10px_rgba(0,102,255,0.06)] z-10 relative dark:border-white/10 dark:bg-[#070e1c]/90 dark:backdrop-blur-2xl dark:shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
       {/* Left: Mobile trigger & Page Identity */}
       <div className="flex items-center gap-3 min-w-0">
         <button
           type="button"
           onClick={onMenuClick}
-          className="inline-flex size-10 items-center justify-center rounded-xl border border-border text-foreground transition hover:bg-muted lg:hidden cursor-pointer"
+          className="inline-flex size-10 items-center justify-center rounded-xl border border-blue-100/80 bg-white/80 text-slate-800 transition hover:bg-white lg:hidden cursor-pointer dark:border-white/10 dark:bg-black/30 dark:text-white"
           aria-label="Open navigation"
         >
           <Menu className="size-4" />
@@ -114,10 +114,10 @@ export function AppTopbar({
 
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-[#00b153] animate-pulse" />
-          <span className="text-sm font-semibold text-foreground tracking-tight hidden sm:inline-block">
+          <span className="text-sm font-bold text-slate-900 dark:text-white tracking-tight hidden sm:inline-block">
             BITS RevOps Engine
           </span>
-          <span className="text-xs text-muted-foreground hidden md:inline-block">
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400 hidden md:inline-block">
             · Command Center
           </span>
         </div>
@@ -125,17 +125,17 @@ export function AppTopbar({
 
       {/* Middle: Search Bar */}
       <div className="hidden md:flex max-w-sm flex-1 px-4">
-        <InputGroup className="h-10 w-full rounded-xl border-white/40 bg-white/50 backdrop-blur-md px-2.5 shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-          <InputGroupAddon className="text-muted-foreground pl-0">
+        <InputGroup className="h-10 w-full rounded-xl border-blue-100/80 bg-white/80 backdrop-blur-md px-2.5 shadow-xs dark:border-white/10 dark:bg-black/40">
+          <InputGroupAddon className="text-slate-400 dark:text-slate-500 pl-0">
             <Search className="size-4" />
           </InputGroupAddon>
           <InputGroupInput
             placeholder="Search deals, accounts, vitals..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="text-xs"
+            className="text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
           />
-          <kbd className="pointer-events-none rounded bg-white/80 px-1.5 py-0.5 text-[0.65rem] font-mono font-medium text-muted-foreground shadow-sm border border-white/40 dark:bg-white/10 dark:border-white/10">
+          <kbd className="pointer-events-none rounded bg-slate-100 px-1.5 py-0.5 text-[0.65rem] font-mono font-medium text-slate-500 border border-slate-200 dark:bg-white/10 dark:border-white/10 dark:text-slate-400">
             ⌘K
           </kbd>
         </InputGroup>
@@ -144,16 +144,16 @@ export function AppTopbar({
       {/* Right: Timeline Selector, Notifications, Theme, Profile */}
       <div className="flex items-center gap-2">
         {/* Timeline Pill Selector */}
-        <div className="hidden xl:flex items-center rounded-xl border border-white/30 bg-white/40 backdrop-blur-md p-1 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+        <div className="hidden xl:flex items-center rounded-xl border border-blue-100/80 bg-white/80 backdrop-blur-md p-1 shadow-xs dark:border-white/10 dark:bg-black/40">
           {(["today", "7d", "30d", "90d"] as const).map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setTimeline(t)}
-              className={`rounded-lg px-2.5 py-1 text-xs font-semibold capitalize transition-all cursor-pointer ${
+              className={`rounded-lg px-2.5 py-1 text-xs font-bold capitalize transition-all cursor-pointer ${
                 timeline === t
-                  ? "bg-white/80 text-foreground shadow-sm dark:bg-white/10"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-white text-blue-700 shadow-xs dark:bg-white/10 dark:text-white"
+                  : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
               }`}
             >
               {t}
@@ -168,10 +168,10 @@ export function AppTopbar({
           size="icon-sm"
           onClick={toggleTheme}
           aria-label="Toggle theme"
-          className="size-9 rounded-xl border-white/30 bg-white/40 backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer hover:bg-white/60 dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+          className="size-9 rounded-xl border-blue-100/80 bg-white/80 backdrop-blur-md shadow-xs cursor-pointer hover:bg-white text-slate-700 dark:border-white/10 dark:bg-black/40 dark:hover:bg-white/10 dark:text-slate-200"
         >
           {isDark ? (
-            <Sun className="size-4 text-amber-500" />
+            <Sun className="size-4 text-amber-400" />
           ) : (
             <Moon className="size-4 text-slate-700" />
           )}
@@ -184,14 +184,14 @@ export function AppTopbar({
             variant="outline"
             size="icon-sm"
             onClick={() => setAlertsOpen((v) => !v)}
-            className="relative size-9 rounded-xl border-white/30 bg-white/40 backdrop-blur-md shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer hover:bg-white/60 dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+            className="relative size-9 rounded-xl border-blue-100/80 bg-white/80 backdrop-blur-md shadow-xs cursor-pointer hover:bg-white text-slate-700 dark:border-white/10 dark:bg-black/40 dark:hover:bg-white/10 dark:text-slate-200"
             aria-label="Notifications"
             aria-expanded={alertsOpen}
             aria-controls="crm-alerts"
           >
-            <Bell className="size-4 text-muted-foreground" />
+            <Bell className="size-4 text-slate-500 dark:text-slate-400" />
             {unreadCount > 0 && (
-              <span className="absolute top-1 right-1 flex size-2.5 items-center justify-center rounded-full bg-[#1975f2] ring-2 ring-background" />
+              <span className="absolute top-1 right-1 flex size-2.5 items-center justify-center rounded-full bg-blue-600 ring-2 ring-white dark:ring-slate-900" />
             )}
           </Button>
 
@@ -200,13 +200,13 @@ export function AppTopbar({
               id="crm-alerts"
               role="dialog"
               aria-label="Notifications"
-              className="absolute top-[calc(100%+8px)] right-0 z-50 w-84 rounded-2xl border border-white/40 bg-white/70 backdrop-blur-3xl p-3 shadow-2xl animate-in fade-in zoom-in-95 dark:border-white/10 dark:bg-black/60"
+              className="absolute top-[calc(100%+8px)] right-0 z-50 w-84 rounded-2xl border border-blue-100 bg-white/95 backdrop-blur-3xl p-3 shadow-2xl animate-in fade-in zoom-in-95 dark:border-white/10 dark:bg-[#0b1324]/95 text-slate-900 dark:text-white"
             >
-              <div className="flex items-center justify-between pb-2 border-b border-border mb-2 px-1">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-white/10 mb-2 px-1">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-foreground">Operational Alerts</span>
+                  <span className="text-xs font-bold text-slate-900 dark:text-white">Operational Alerts</span>
                   {unreadCount > 0 && (
-                    <span className="rounded-full bg-[#1975f2]/10 px-2 py-0.5 text-[0.65rem] font-bold text-[#1975f2]">
+                    <span className="rounded-full bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 text-[0.65rem] font-bold text-blue-700 dark:text-blue-300">
                       {unreadCount} New
                     </span>
                   )}
@@ -279,7 +279,7 @@ export function AppTopbar({
               <button
                 type="button"
                 onClick={() => setAlertsOpen(false)}
-                className="mt-2.5 w-full rounded-xl border border-border bg-muted/60 py-2 text-xs font-bold text-foreground hover:bg-muted transition-colors cursor-pointer"
+                className="mt-2.5 w-full rounded-xl border border-blue-100 bg-slate-50 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10"
               >
                 Close
               </button>
@@ -292,37 +292,37 @@ export function AppTopbar({
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="flex items-center gap-2 rounded-xl border border-white/30 bg-white/40 backdrop-blur-md p-1 pr-2.5 transition shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] hover:bg-white/60 cursor-pointer dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+              className="flex items-center gap-2 rounded-xl border border-blue-100/80 bg-white/80 backdrop-blur-md p-1 pr-2.5 transition shadow-xs hover:bg-white cursor-pointer dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10"
             >
-              <div className="flex size-7 items-center justify-center rounded-lg bg-[#1975f2] text-xs font-bold text-white shadow-2xs">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-blue-600 text-xs font-bold text-white shadow-2xs">
                 {userName.charAt(0).toUpperCase()}
               </div>
               <div className="hidden sm:flex flex-col text-left">
-                <span className="text-xs font-bold text-foreground leading-tight truncate max-w-[100px]">
+                <span className="text-xs font-bold text-slate-900 dark:text-white leading-tight truncate max-w-[100px]">
                   {userName}
                 </span>
-                <span className="text-[0.65rem] text-muted-foreground leading-tight truncate max-w-[100px]">
+                <span className="text-[0.65rem] text-slate-500 dark:text-slate-400 leading-tight truncate max-w-[100px]">
                   {userEmail}
                 </span>
               </div>
-              <ChevronDown className="size-3 text-muted-foreground" />
+              <ChevronDown className="size-3 text-slate-400 dark:text-slate-500" />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-[#0b1324] border-blue-100 dark:border-white/10 text-slate-900 dark:text-white shadow-xl">
             <DropdownMenuLabel>
               <div className="flex flex-col">
-                <span className="font-bold text-foreground">{userName}</span>
-                <span className="text-xs text-muted-foreground">{userEmail}</span>
+                <span className="font-bold text-slate-900 dark:text-white">{userName}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">{userEmail}</span>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-slate-100 dark:bg-white/10" />
             <DropdownMenuItem asChild>
-              <Link href="/app/settings" className="cursor-pointer">
+              <Link href="/app/settings" className="cursor-pointer text-slate-700 dark:text-slate-200 hover:text-blue-600">
                 Settings &amp; Workspace
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-slate-100 dark:bg-white/10" />
             <DropdownMenuItem
               variant="destructive"
               className="cursor-pointer"
@@ -340,7 +340,7 @@ export function AppTopbar({
             type="submit"
             variant="ghost"
             size="sm"
-            className="h-9 gap-1.5 rounded-xl border border-white/30 bg-white/40 backdrop-blur-md px-3 text-xs font-semibold shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] text-muted-foreground hover:bg-white/60 hover:text-foreground cursor-pointer dark:border-white/10 dark:bg-black/30 dark:hover:bg-white/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+            className="h-9 gap-1.5 rounded-xl border border-blue-100/80 bg-white/80 backdrop-blur-md px-3 text-xs font-semibold shadow-xs text-slate-600 hover:bg-white hover:text-slate-900 cursor-pointer dark:border-white/10 dark:bg-black/30 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
           >
             <LogOut className="size-3.5" aria-hidden />
             <span className="hidden sm:inline">Log out</span>

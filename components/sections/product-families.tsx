@@ -40,7 +40,7 @@ const productFamilies: ProductFamily[] = [
     problem: "Collect debt faster, automate calls, and track field reps on the ground",
     summary:
       "All-in-one operations system: call center CRM, automatic dialer, live mobile GPS app for field agents with visit timestamps, and sub-300ms voice AI.",
-    visual: "/images/families/customer-operations.webp",
+    visual: "/brand/families/family-customer-operations.webp",
     alt: "BITS Customer Operations 3D telemetry and voice AI core",
     capabilityTag: "Collections CRM · Field App · Dialer · Voice AI",
     benchmark: "99.98% Telephony Uptime · Live GPS & Timestamps",
@@ -62,7 +62,7 @@ const productFamilies: ProductFamily[] = [
     problem: "Connect company accounting, staff payroll, and fleet inventory",
     summary:
       "Complete business back-office: BIR CAS-aligned General Ledger, 24/7 biometric shift tracking, Philippine TRAIN law payroll, and warehouse fleet delivery routing.",
-    visual: "/images/families/business-operations.webp",
+    visual: "/brand/families/family-business-operations.webp",
     alt: "BITS Business Operations 3D financial prism and ledger matrix",
     capabilityTag: "ERP Ledger · TRAIN Payroll · Logistics",
     benchmark: "BIR CAS Aligned · 100% Tax & Labor Compliant",
@@ -83,7 +83,7 @@ const productFamilies: ProductFamily[] = [
     problem: "Manage bookings, customer queues, venues, and smart cards",
     summary:
       "Customer-facing tools: live calendar booking, SMS queuing screens, sports club court schedules, and encrypted contactless smart tap NFC business cards.",
-    visual: "/images/families/customer-experience.webp",
+    visual: "/brand/families/family-customer-experience.webp",
     alt: "BITS Customer Experience 3D smart NFC card and venue telemetry",
     capabilityTag: "Dynamic Booking · Queue · Smart NFC",
     benchmark: "Sub-Second NFC Tap · Real-Time Venue Sync",
@@ -105,7 +105,7 @@ const productFamilies: ProductFamily[] = [
     problem: "Connect AI to your company data, deploy on your own servers",
     summary:
       "Enterprise AI knowledge engine that answers customer questions using your exact company manuals, plus private server deployment and custom software builds.",
-    visual: "/images/families/platform-ai.webp",
+    visual: "/brand/families/family-platform-ai.webp",
     alt: "BITS Platform & AI 3D sovereign neural polyhedron core",
     capabilityTag: "RAG Engine · Sovereign Cloud · Custom Stack",
     benchmark: "Private On-Prem Inference · Zero Data Leaks",
@@ -199,16 +199,18 @@ export function ProductFamilies() {
                   {/* Top Bar: Bespoke Visual Emblem + Title Block */}
                   <div>
                     <div className="flex items-start gap-4 sm:gap-5">
-                      {/* Bespoke Ultra-HD 3D Visual Art Badge */}
-                      <div className="relative size-18 sm:size-22 rounded-2xl overflow-hidden shadow-md ring-1 ring-slate-900/10 shrink-0 bg-slate-900 transition-transform duration-300 group-hover:scale-[1.04]">
-                        <Image
-                          src={family.visual}
-                          alt={family.alt}
-                          fill
-                          sizes="(max-width: 640px) 72px, 88px"
-                          className="object-cover"
-                          priority={idx < 2}
-                        />
+                      {/* Bespoke Ultra-HD 3D Cloud Logo Emblem */}
+                      <div className="relative size-18 sm:size-22 rounded-2xl p-2 shrink-0 bg-gradient-to-br from-white/95 via-sky-50/70 to-white/90 border border-white/95 shadow-md shadow-blue-950/5 ring-1 ring-slate-900/5 backdrop-blur-xl transition-all duration-300 group-hover:scale-[1.08] group-hover:shadow-lg group-hover:shadow-blue-500/15 flex items-center justify-center">
+                        <div className="relative size-full">
+                          <Image
+                            src={family.visual}
+                            alt={family.alt}
+                            fill
+                            sizes="(max-width: 640px) 72px, 88px"
+                            className="object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
+                            priority={idx < 2}
+                          />
+                        </div>
                       </div>
 
                       {/* Header Meta & Title */}

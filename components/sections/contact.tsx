@@ -81,19 +81,19 @@ export function Contact() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-blue-600" />
               </span>
-              <span>20 YEARS FLOOR LEADERSHIP · PRIVATE BITS OMS ARCHITECTURE SESSION</span>
+              <span>20 YEARS FLOOR LEADERSHIP · PRIVATE OPERATIONS 360 CONSULTATION</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.04}>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-extrabold tracking-tight text-slate-900 leading-[1.18] text-balance">
-              Talk Directly with Systems Architects Who Ran 500+ Seat Recovery Floors on BITS OMS.
+              Book a Consultation with Recovery Floor Leaders.
             </h2>
           </Reveal>
 
           <Reveal delay={0.08}>
             <p className="mt-2.5 text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
-              Skip junior sales reps and generic PowerPoint decks. In 25 minutes, our operations systems lead audits your current contact rates, broken PTP ratios, and sovereign compliance readiness — and delivers a tailored BITS OMS technical rollout blueprint.
+              Get an honest 25-minute audit of your collection contact rates, broken PTP ratios, and compliance workflows. We deliver a custom OPERATIONS 360 rollout blueprint tailored to your agency.
             </p>
           </Reveal>
         </div>
@@ -117,7 +117,7 @@ export function Contact() {
                       type="button"
                       onClick={() => setSelectedRole("ops")}
                       className={cn(
-                        "rounded-lg px-3 py-2 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        "min-h-[44px] rounded-lg px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border flex items-center",
                         selectedRole === "ops"
                           ? "bg-blue-600 text-white border-blue-600 shadow-xs"
                           : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
@@ -129,7 +129,7 @@ export function Contact() {
                       type="button"
                       onClick={() => setSelectedRole("cio")}
                       className={cn(
-                        "rounded-lg px-3 py-2 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        "min-h-[44px] rounded-lg px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border flex items-center",
                         selectedRole === "cio"
                           ? "bg-blue-600 text-white border-blue-600 shadow-xs"
                           : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
@@ -141,7 +141,7 @@ export function Contact() {
                       type="button"
                       onClick={() => setSelectedRole("collections")}
                       className={cn(
-                        "rounded-lg px-3 py-2 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        "min-h-[44px] rounded-lg px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border flex items-center",
                         selectedRole === "collections"
                           ? "bg-blue-600 text-white border-blue-600 shadow-xs"
                           : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
@@ -153,7 +153,7 @@ export function Contact() {
                       type="button"
                       onClick={() => setSelectedRole("compliance")}
                       className={cn(
-                        "rounded-lg px-3 py-2 text-xs font-bold text-left transition-all duration-200 cursor-pointer border",
+                        "min-h-[44px] rounded-lg px-3.5 py-2.5 text-xs font-bold text-left transition-all duration-200 cursor-pointer border flex items-center",
                         selectedRole === "compliance"
                           ? "bg-blue-600 text-white border-blue-600 shadow-xs"
                           : "bg-slate-50 border-slate-200/80 text-slate-700 hover:bg-slate-100"
@@ -205,7 +205,7 @@ export function Contact() {
                 </div>
 
                 {/* Direct Contact Email */}
-                <div className="text-[11px] text-slate-500 pt-1">
+                <p className="text-[11px] text-slate-500 pt-1">
                   Need a custom NDA or enterprise RFP response first? Email our executive lead directly at{" "}
                   <a
                     href={`mailto:${site.inquiryEmail}`}
@@ -213,7 +213,7 @@ export function Contact() {
                   >
                     {site.inquiryEmail}
                   </a>
-                </div>
+                </p>
               </div>
 
               {/* ── RIGHT COLUMN: FAST BLUEPRINT REQUEST FORM (7 cols) ── */}

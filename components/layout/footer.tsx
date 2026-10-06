@@ -369,7 +369,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Connect with Boundless IT Solutions on LinkedIn"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-11 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <LinkedInIcon />
                   </a>
@@ -378,7 +378,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow BITS on X"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-11 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <TwitterXIcon />
                   </a>
@@ -387,7 +387,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow Boundless IT Solutions on Facebook"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-11 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-blue-900 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <FacebookIcon />
                   </a>
@@ -396,7 +396,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow Boundless IT Solutions on Instagram"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-rose-600 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-11 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-rose-600 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <InstagramIcon />
                   </a>
@@ -405,7 +405,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View BITS on GitHub"
-                    className="flex size-9.5 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-purple-600 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
+                    className="flex size-11 items-center justify-center rounded-xl border border-white/25 bg-white/15 text-white hover:text-purple-600 hover:bg-white shadow-sm backdrop-blur-md transition-all duration-200 active:scale-95 cursor-pointer"
                   >
                     <GitHubIcon />
                   </a>

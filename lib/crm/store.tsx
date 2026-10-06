@@ -163,29 +163,21 @@ export function CrmProvider({
   initialName: string;
   userEmail: string;
 }) {
-  const [state, setState] = React.useState<CrmState>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) return JSON.parse(saved);
-      } catch {
-        // fallback
-      }
-    }
-    return cloneSeed();
-  });
+  const [state, setState] = React.useState<CrmState>(cloneSeed);
 
-  const [notifications, setNotifications] = React.useState<NotificationItem[]>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = localStorage.getItem(NOTIFS_KEY);
-        if (saved) return JSON.parse(saved);
-      } catch {
-        // fallback
-      }
+  const [notifications, setNotifications] = React.useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
+
+  // Hydrate from localStorage on mount
+  React.useEffect(() => {
+    try {
+      const savedState = localStorage.getItem(STORAGE_KEY);
+      if (savedState) setState(JSON.parse(savedState));
+      const savedNotifs = localStorage.getItem(NOTIFS_KEY);
+      if (savedNotifs) setNotifications(JSON.parse(savedNotifs));
+    } catch {
+      // ignore
     }
-    return INITIAL_NOTIFICATIONS;
-  });
+  }, []);
 
   const [displayName, setDisplayNameState] = React.useState(initialName);
 

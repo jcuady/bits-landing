@@ -20,15 +20,15 @@ export function DataTable<T extends { id: string }>({
   className?: string;
 }) {
   return (
-    <div className={cn("overflow-x-auto rounded-2xl border border-linelight/60 bg-cloud/70 backdrop-blur-3xl shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)]", className)}>
+    <div className={cn("overflow-x-auto rounded-2xl border border-blue-100/80 bg-white/80 backdrop-blur-xl shadow-xs dark:border-white/10 dark:bg-[#0b1324]/85", className)}>
       <table className="w-full min-w-[640px] border-collapse text-left text-xs">
         <thead>
-          <tr className="border-b border-linelight/40 bg-cloud/50 dark:border-white/10 dark:bg-white/5">
+          <tr className="border-b border-blue-100/70 bg-blue-50/60 dark:border-white/10 dark:bg-white/5">
             {columns.map((col) => (
               <th
                 key={col.key}
                 className={cn(
-                  "px-4 py-3 text-[0.68rem] font-bold tracking-wider text-muted-foreground uppercase",
+                  "px-4 py-3 text-[0.68rem] font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase",
                   col.className
                 )}
               >
@@ -37,16 +37,16 @@ export function DataTable<T extends { id: string }>({
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-white/20 dark:divide-white/10">
+        <tbody className="divide-y divide-slate-100 dark:divide-white/10">
           {rows.map((row) => (
             <tr
               key={row.id}
-              className="hover:bg-cloud/60 dark:hover:bg-white/5 transition-colors"
+              className="hover:bg-blue-50/40 dark:hover:bg-white/5 transition-colors"
             >
               {columns.map((col) => (
-                <td key={col.key} className={cn("px-4 py-3 text-foreground", col.className)}>
+                <td key={col.key} className={cn("px-4 py-3 text-slate-800 dark:text-slate-200", col.className)}>
                   {href ? (
-                    <Link href={href(row)} className="block text-foreground hover:text-[#1975f2] transition-colors">
+                    <Link href={href(row)} className="block text-slate-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">
                       {col.cell(row)}
                     </Link>
                   ) : (

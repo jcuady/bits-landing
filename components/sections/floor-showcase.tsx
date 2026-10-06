@@ -44,7 +44,7 @@ const TABS: TabMeta[] = [
       { label: "Connect Rate Lift", value: "+38%" },
       { label: "Hardware Cost", value: "₱0" },
     ],
-    imageSrc: "/images/features/predictive-dialer.jpg",
+    imageSrc: "/images/features/predictive-dialer.webp",
     imageAlt: "BITS Predictive Dialer & Softphone — live calls monitoring, agent dispositions, and connected rate gauge",
   },
   {
@@ -106,7 +106,7 @@ const TABS: TabMeta[] = [
       { label: "Compliance Pass", value: "99.2%" },
       { label: "Audited Calls", value: "100%" },
     ],
-    imageSrc: "/images/features/qa-scorecard.jpg",
+    imageSrc: "/images/features/qa-scorecard.webp",
     imageAlt: "BITS QA Evaluation Scorecard — outlier agent finder, call recording audio player, and monthly performance scorecards",
   },
   {
@@ -128,7 +128,7 @@ const TABS: TabMeta[] = [
       { label: "PTP Response Rate", value: "+44%" },
       { label: "Providers", value: "Pluggable" },
     ],
-    imageSrc: "/images/features/messaging-channels.jpg",
+    imageSrc: "/images/features/messaging-channels.webp",
     imageAlt: "BITS Omnichannel Messaging — WhatsApp, Viber, SMS blast builder, and real-time delivery logs",
   },
   {
@@ -150,7 +150,7 @@ const TABS: TabMeta[] = [
       { label: "Kept PTP Rate", value: "86.4%" },
       { label: "Query Speed", value: "<100ms" },
     ],
-    imageSrc: "/images/features/analytics-dashboard.jpg",
+    imageSrc: "/images/features/analytics-dashboard.webp",
     imageAlt: "BITS Floor Velocity Dashboard — collections over time, DPD aging buckets, and agent recovery leaderboards",
   },
 ];
@@ -552,22 +552,6 @@ export function FloorShowcase() {
                             priority
                           />
                         )}
-
-                        {/* ── AUTHENTIC BITS BRAND OVERLAY (Directly Covers Generic Names like 'Dialer Pro' or 'Logo') ── */}
-                        <div className="absolute top-[2%] left-[1.5%] z-20 flex items-center gap-2 bg-white/95 px-3 py-1.5 rounded-xl shadow-sm border border-slate-200/90 backdrop-blur-md">
-                          <Logo variant="tile" className="size-6 sm:size-7 rounded-lg object-contain shadow-2xs" />
-                          <div className="flex flex-col">
-                            <span className="font-extrabold text-[12px] sm:text-[13px] text-slate-900 tracking-tight leading-none">
-                              {currentTab.id === "dialer" && "BITS Softphone & Dialer"}
-                              {currentTab.id === "qa" && "BITS QA & Outlier Scorecard"}
-                              {currentTab.id === "messaging" && "BITS Omnichannel Hub"}
-                              {currentTab.id === "analytics" && "BITS Floor Analytics"}
-                            </span>
-                            <span className="text-[9px] font-bold text-slate-500 tracking-wider uppercase mt-0.5">
-                              Sovereign Recovery OMS · v3.4
-                            </span>
-                          </div>
-                        </div>
 
                         {/* Live Telemetry Pill Floating in Bottom Right */}
                         <div className="absolute bottom-3 right-3 z-10 hidden sm:flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3.5 py-1.5 text-xs font-semibold text-slate-800 shadow-md backdrop-blur-md">

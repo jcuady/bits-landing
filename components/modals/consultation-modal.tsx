@@ -191,7 +191,7 @@ export function ConsultationModal({
                     placeholder="e.g. Alex Reyes"
                     defaultValue={state.values.name || ""}
                     className={cn(
-                      "h-9.5 w-full rounded-xl border bg-white px-3 text-xs sm:text-sm text-slate-900 transition-colors placeholder:text-slate-400",
+                      "h-10 w-full rounded-xl border bg-white px-3 text-base text-slate-900 transition-colors placeholder:text-slate-400",
                       "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20",
                       state.errors.name ? "border-rose-400 bg-rose-50/20" : "border-slate-200 hover:border-slate-300"
                     )}
@@ -213,7 +213,7 @@ export function ConsultationModal({
                     placeholder="alex@company.com"
                     defaultValue={state.values.email || ""}
                     className={cn(
-                      "h-9.5 w-full rounded-xl border bg-white px-3 text-xs sm:text-sm text-slate-900 transition-colors placeholder:text-slate-400",
+                      "h-10 w-full rounded-xl border bg-white px-3 text-base text-slate-900 transition-colors placeholder:text-slate-400",
                       "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20",
                       state.errors.email ? "border-rose-400 bg-rose-50/20" : "border-slate-200 hover:border-slate-300"
                     )}
@@ -238,7 +238,7 @@ export function ConsultationModal({
                     placeholder="e.g. Apex Operations Group"
                     defaultValue={state.values.company || ""}
                     className={cn(
-                      "h-9.5 w-full rounded-xl border bg-white px-3 text-xs sm:text-sm text-slate-900 transition-colors placeholder:text-slate-400",
+                      "h-10 w-full rounded-xl border bg-white px-3 text-base text-slate-900 transition-colors placeholder:text-slate-400",
                       "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20",
                       state.errors.company ? "border-rose-400 bg-rose-50/20" : "border-slate-200 hover:border-slate-300"
                     )}
@@ -257,7 +257,7 @@ export function ConsultationModal({
                       id="modal-companySize"
                       name="companySize"
                       defaultValue={state.values.companySize || "16 - 50 seats"}
-                      className="h-9.5 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20 appearance-none pr-8"
+                      className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-base text-slate-900 focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20 appearance-none pr-8"
                     >
                       <option value="1 - 15 seats">1 – 15 Team Members</option>
                       <option value="16 - 50 seats">16 – 50 Team Members</option>
@@ -286,7 +286,7 @@ export function ConsultationModal({
                   placeholder="e.g. We want to replace manual spreadsheets, automate follow-up calls, or connect accounting with operations..."
                   defaultValue={state.values.message || ""}
                   className={cn(
-                    "w-full rounded-xl border bg-white p-3 text-xs sm:text-sm text-slate-900 transition-colors placeholder:text-slate-400",
+                    "w-full rounded-xl border bg-white p-3 text-base text-slate-900 transition-colors placeholder:text-slate-400",
                     "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20 resize-none",
                     state.errors.message ? "border-rose-400 bg-rose-50/20" : "border-slate-200 hover:border-slate-300"
                   )}

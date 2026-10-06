@@ -6,6 +6,8 @@
 @import "tailwindcss";
 @import "../components/bionis/dashboard.css";
 
+@variant dark (&:where(.dark, .dark *));
+
 /*
   BITS design tokens — v2.0.
   Shape system: interactive elements rounded-xl (12px), surfaces rounded-2xl/3xl,
@@ -43,6 +45,31 @@
   /* Success / Warning / Accent */
   --color-emerald-500: #10b981;
   --color-amber-500: #f59e0b;
+
+  /* Semantic UI Tokens for Theme & Tailwind v4 Synchronization */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
 
   --shadow-card: 0 1px 2px rgb(6 22 47 / 0.05), 0 16px 40px -16px rgb(6 22 47 / 0.16);
   --shadow-lift: 0 2px 6px rgb(6 22 47 / 0.06), 0 28px 56px -20px rgb(6 22 47 / 0.28);

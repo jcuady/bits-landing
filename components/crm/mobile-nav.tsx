@@ -35,16 +35,16 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
         aria-label="Close menu"
         onClick={onClose}
       />
-      <div className="absolute inset-y-0 left-0 flex w-[min(100%,300px)] flex-col bg-background text-foreground border-r border-border shadow-2xl">
-        <div className="flex h-16 items-center justify-between border-b border-border px-4">
+      <div className="absolute inset-y-0 left-0 flex w-[min(100%,300px)] flex-col bg-white/95 backdrop-blur-2xl text-slate-900 border-r border-blue-100 shadow-2xl dark:bg-[#070e1c]/95 dark:text-white dark:border-white/10">
+        <div className="flex h-16 items-center justify-between border-b border-blue-100/70 dark:border-white/10 px-4">
           <div className="flex items-center gap-2">
             <Logo variant="tile" className="size-6 rounded-md shadow-xs" />
-            <span className="text-sm font-bold tracking-tight text-foreground">BITScrm · Enterprise</span>
+            <span className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">BITScrm · Enterprise</span>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+            className="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
             aria-label="Close navigation"
           >
             <X className="size-4" />
@@ -52,33 +52,9 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
         </div>
 
         <nav aria-label="Mobile CRM" className="flex-1 overflow-y-auto px-3 py-4 space-y-4 no-scrollbar">
-          <div>
-            <p className="mb-2 px-2 text-[0.66rem] font-semibold tracking-wider text-muted-foreground uppercase">
-              Platform HUD
-            </p>
-            <Link
-              href="/app/telemetry"
-              onClick={onClose}
-              className={cn(
-                "flex h-11 items-center justify-between rounded-xl border px-3 text-sm font-medium transition-all",
-                pathname === "/app/telemetry"
-                  ? "border-border bg-card text-foreground font-semibold shadow-xs"
-                  : "border-transparent text-muted-foreground hover:bg-muted"
-              )}
-            >
-              <div className="flex items-center gap-2.5">
-                <Activity className="size-4 text-[#1975f2]" />
-                <span>BITS Platform Vitals</span>
-              </div>
-              <span className="rounded bg-[#1975f2] px-1.5 py-0.5 text-[0.62rem] font-bold text-white">
-                Live
-              </span>
-            </Link>
-          </div>
-
           {crmNav.map((section) => (
             <div key={section.title}>
-              <p className="mb-2 px-2 text-[0.66rem] font-semibold tracking-wider text-muted-foreground uppercase">
+              <p className="mb-2 px-2 text-[0.66rem] font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">
                 {section.title}
               </p>
               <ul className="space-y-1">
@@ -95,8 +71,8 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                         className={cn(
                           "flex h-10 items-center justify-between rounded-xl border px-3 text-sm transition-all",
                           active
-                            ? "border-border bg-card font-medium text-foreground shadow-xs"
-                            : "border-transparent text-muted-foreground hover:bg-muted hover:text-foreground"
+                            ? "border-blue-200/80 bg-white font-bold text-blue-700 shadow-xs dark:border-white/15 dark:bg-white/[0.08] dark:text-white"
+                            : "border-transparent text-slate-600 hover:bg-blue-50/50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100"
                         )}
                       >
                         <div className="flex items-center gap-2.5">

@@ -1,4 +1,4 @@
-﻿# dependencies
+# dependencies
 node_modules/
 
 # next.js
@@ -30,6 +30,12 @@ Thumbs.db
 
 # local QA artifacts
 qa/
+public/screenshots/
+public/images/test_field_mockup_screenshot.png
+.audit/
+.claude/
+.h3-source/
+agent/
 
 # original oversized brand source files (optimized copies live in public/brand)
 APP ICON.png

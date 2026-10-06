@@ -133,19 +133,12 @@ export function FeaturesAdmin() {
             <div className="relative rounded-[2.25rem] p-2 sm:p-3 bg-gradient-to-b from-slate-100 via-slate-200/60 to-slate-100 border border-slate-200/90 shadow-xl shadow-slate-950/5">
               <div className="relative aspect-[16/11] overflow-hidden rounded-[calc(2.25rem-0.5rem)] border border-slate-200 bg-white">
                 <Image
-                  src="/images/features/admin-security.jpg"
+                  src="/images/features/admin-security.webp"
                   alt="BITS Administration — role permissions matrix, module toggles, immutable audit log, and system diagnostics"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center"
                 />
-                {/* Authentic BITS Logo Brand Overlay */}
-                <div className="absolute top-[2%] left-[1.5%] z-20 flex items-center gap-1.5 bg-white p-1 rounded-xl shadow-xs border border-slate-200/90">
-                  <Logo variant="tile" className="size-6 sm:size-7 rounded-lg object-contain" />
-                  <span className="hidden sm:inline-block font-extrabold text-[11px] text-slate-900 tracking-tight pr-1.5">
-                    BITS Admin
-                  </span>
-                </div>
 
                 {/* Subtle Inner Glass Glare */}
                 <div className="absolute inset-0 rounded-[calc(2.25rem-0.5rem)] ring-1 ring-inset ring-slate-950/5 pointer-events-none" />

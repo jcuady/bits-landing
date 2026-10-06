@@ -56,7 +56,7 @@ const QUICK_SOLUTIONS = [
 
 const inputClass = (invalid: boolean) =>
   cn(
-    "h-10 w-full rounded-xl border bg-white px-3.5 text-xs sm:text-sm text-slate-900 transition-all duration-200 placeholder:text-slate-400",
+    "h-10 w-full rounded-xl border bg-white px-3.5 text-base text-slate-900 transition-all duration-200 placeholder:text-slate-400",
     "focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/20",
     invalid ? "border-rose-400 bg-rose-50/20" : "border-slate-200 hover:border-slate-300"
   );
@@ -260,7 +260,7 @@ export function ContactForm() {
                 name="interest"
                 value={selectedInterest}
                 onChange={(e) => setSelectedInterest(e.target.value)}
-                className="h-8 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-700 focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-600/20 appearance-none pr-6"
+                className="h-10 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-base text-slate-700 focus-visible:border-blue-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-600/20 appearance-none pr-8"
               >
                 {contactInterests.map((interest) => (
                   <option key={interest} value={interest}>
@@ -352,7 +352,7 @@ export function ContactForm() {
                   id="companySize"
                   name="companySize"
                   defaultValue={state.values.companySize ?? "16 - 50 seats"}
-                  className={cn(inputClass(false), "appearance-none pr-8 text-xs sm:text-sm")}
+                  className={cn(inputClass(false), "appearance-none pr-8 text-base")}
                 >
                   {consultationOptions.companySizes.map((size) => (
                     <option key={size} value={size}>
@@ -383,7 +383,7 @@ export function ContactForm() {
             aria-describedby={state.errors.message ? "message-error" : undefined}
             className={cn(
               inputClass(!!state.errors.message),
-              "h-auto min-h-[4.5rem] resize-y py-2.5 text-xs sm:text-sm leading-relaxed"
+              "h-auto min-h-[4.5rem] resize-y py-2.5 text-base leading-relaxed"
             )}
             placeholder="Tell us what you want to automate, consolidate, or replace (e.g., replacing manual spreadsheets, setting up automated voice follow-ups, or connecting operations with accounting)..."
           />
@@ -395,7 +395,7 @@ export function ContactForm() {
           <button
             type="button"
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="flex w-full items-center justify-between text-left text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer"
+            className="flex w-full items-center justify-between text-left text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer min-h-[44px] py-2.5"
           >
             <span className="flex items-center gap-1.5">
               <span>{showAdvanced ? "▼" : "▶"}</span>
@@ -419,7 +419,7 @@ export function ContactForm() {
                     id="industry"
                     name="industry"
                     defaultValue={state.values.industry ?? ""}
-                    className={cn(inputClass(false), "h-9 text-xs appearance-none pr-8")}
+                    className={cn(inputClass(false), "h-10 text-base appearance-none pr-8")}
                   >
                     <option value="">Select industry</option>
                     {consultationOptions.industries.map((ind) => (
@@ -444,7 +444,7 @@ export function ContactForm() {
                     id="currentSystem"
                     name="currentSystem"
                     defaultValue={state.values.currentSystem ?? ""}
-                    className={cn(inputClass(false), "h-9 text-xs appearance-none pr-8")}
+                    className={cn(inputClass(false), "h-10 text-base appearance-none pr-8")}
                   >
                     <option value="">Select current system</option>
                     {consultationOptions.currentSystems.map((sys) => (
@@ -469,7 +469,7 @@ export function ContactForm() {
                     id="primaryChallenge"
                     name="primaryChallenge"
                     defaultValue={state.values.primaryChallenge ?? ""}
-                    className={cn(inputClass(false), "h-9 text-xs appearance-none pr-8")}
+                    className={cn(inputClass(false), "h-10 text-base appearance-none pr-8")}
                   >
                     <option value="">Select primary challenge</option>
                     {consultationOptions.primaryChallenges.map((ch) => (
@@ -494,7 +494,7 @@ export function ContactForm() {
                     id="preferredMethod"
                     name="preferredMethod"
                     defaultValue={state.values.preferredMethod ?? "Video Consultation (Google Meet)"}
-                    className={cn(inputClass(false), "h-9 text-xs appearance-none pr-8")}
+                    className={cn(inputClass(false), "h-10 text-base appearance-none pr-8")}
                   >
                     {consultationOptions.preferredMethods.map((m) => (
                       <option key={m} value={m}>

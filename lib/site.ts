@@ -1951,7 +1951,7 @@ export const agents = [
 export const industries = [
   { index: "01", id: "bpo" as const, name: "BPO & Contact Centers", copy: "Multi-client campaigns, tenant isolation, supervisor monitoring, and high-volume customer workflows.", tags: ["Multi-Campaign", "Softphone & Dialer", "Agent QA", "SLA Reporting", "Client Portals"], cta: "Book a Consultation" },
   { index: "02", id: "collections" as const, name: "Collection Agencies", copy: "Delinquency tracking, Promise-to-Pay enforcement, broken PTP reallocation, and automated outreach.", tags: ["DPD Tracking", "PTP Enforcement", "Auto-Dialing", "Payment Receipts", "Performance Analytics"], cta: "Design Your Solution" },
-  { index: "03", id: "financial" as const, name: "Banks & Financial Institutions", copy: "Security-conscious operational workflows with granular RBAC, immutable audit trails, and on-premises options.", tags: ["Granular RBAC", "Immutable Audits", "BSP/NPC Alignment", "Data Isolation", "Private Cloud / On-Prem"], cta: "Talk to Solutions Architect" },
+  { index: "03", id: "financial" as const, name: "Banks & Financial Institutions", copy: "Security-conscious operational workflows with granular RBAC, immutable audit trails, and on-premises options.", tags: ["Granular RBAC", "Immutable Audits", "BSP/NPC Alignment", "Data Isolation", "Private Cloud / On-Prem"], cta: "Book a Consultation" },
   { index: "04", id: "growing" as const, name: "Growing Operational Businesses", copy: "Custom operational software, workflow automation, and proprietary systems designed around your real processes.", tags: ["Custom Software", "Workflow Automation", "Legacy Modernization", "BI Dashboards", "API Integrations"], cta: "Explore Custom Systems" },
 ] as const;
 

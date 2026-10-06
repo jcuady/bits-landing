@@ -13,13 +13,13 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col items-center justify-center rounded-2xl border border-dashed border-linelight/60 bg-cloud/70 backdrop-blur-3xl dark:border-white/10 dark:bg-black/30 px-6 py-14 text-center", className)}>
-      <div className="flex size-12 items-center justify-center rounded-xl bg-muted dark:bg-neutral-800 mb-3">
-        <Inbox className="size-6 text-muted-foreground" aria-hidden />
+    <div className={cn("flex flex-col items-center justify-center rounded-2xl border border-dashed border-blue-200/80 bg-white/70 backdrop-blur-xl dark:border-white/10 dark:bg-[#0b1324]/60 px-6 py-14 text-center", className)}>
+      <div className="flex size-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-white/10 dark:text-blue-400 mb-3">
+        <Inbox className="size-6" aria-hidden />
       </div>
-      <p className="text-[0.95rem] font-bold text-foreground">{title}</p>
+      <p className="text-[0.95rem] font-bold text-slate-900 dark:text-white">{title}</p>
       {description ? (
-        <p className="mt-1 max-w-sm text-xs text-muted-foreground leading-relaxed">
+        <p className="mt-1 max-w-sm text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
           {description}
         </p>
       ) : null}

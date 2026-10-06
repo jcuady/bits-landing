@@ -37,16 +37,27 @@ export function ThemeProvider({
   defaultTheme = 'light',
   storageKey = 'bionis-theme',
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return defaultTheme
-    const stored = localStorage.getItem(storageKey) as Theme | null
-    return stored ?? defaultTheme
-  })
+  const [theme, setThemeState] = useState<Theme>(defaultTheme)
+  const [mounted, setMounted] = useState(false)
 
-  const resolvedTheme = useMemo(
-    () => (theme === 'system' ? getSystemTheme() : theme),
-    [theme],
-  )
+  // Hydrate from localStorage on mount
+  useEffect(() => {
+    setMounted(true)
+    try {
+      const stored = localStorage.getItem(storageKey) as Theme | null
+      if (stored) setThemeState(stored)
+    } catch {
+      // ignore
+    }
+  }, [storageKey])
+
+  const resolvedTheme = useMemo(() => {
+    if (!mounted) {
+      // Match server render initially
+      return defaultTheme === 'system' ? 'light' : (defaultTheme as 'dark' | 'light')
+    }
+    return theme === 'system' ? getSystemTheme() : theme
+  }, [theme, mounted, defaultTheme])
 
   useEffect(() => {
     if (typeof window === 'undefined') return

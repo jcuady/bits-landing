@@ -221,14 +221,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} overflow-x-clip`}>
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} overflow-x-clip`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-clip">
+      <body suppressHydrationWarning className="min-h-screen bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-clip">
         {children}
         <CookieConsent />
       </body>
