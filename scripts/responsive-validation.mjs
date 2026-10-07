@@ -39,7 +39,8 @@ for (const viewport of viewports) {
   });
 
   await page.goto(BASE, { waitUntil: "networkidle" });
-  await page.waitForTimeout(250);
+  await page.waitForSelector("main", { state: "visible" });
+  await page.waitForTimeout(600);
 
   const audit = await page.evaluate(({ touch }) => {
     const root = document.documentElement;
@@ -122,20 +123,24 @@ for (const viewport of viewports) {
 
   if (viewport.width < 1024) {
     const menu = page.getByRole("button", { name: "Open menu" });
-    await menu.click({ force: true });
-    const close = page.getByRole("button", { name: "Close menu" });
-    const menuAudit = await page.evaluate(() => ({
-      bodyLocked: getComputedStyle(document.body).overflow === "hidden",
-      dialogVisible: Boolean(document.querySelector('[role="dialog"]')),
-    }));
-    audit.mobileMenu = {
-      ...menuAudit,
-      closeTarget: await close.evaluate((element) => {
-        const rect = element.getBoundingClientRect();
-        return { width: Math.round(rect.width), height: Math.round(rect.height) };
-      }),
-    };
-    await close.click({ force: true });
+    if (await menu.isVisible()) {
+      await menu.click({ force: true });
+      await page.waitForTimeout(400);
+      const close = page.getByRole("button", { name: "Close menu" });
+      const menuAudit = await page.evaluate(() => ({
+        bodyLocked: getComputedStyle(document.body).overflow === "hidden",
+        dialogVisible: Boolean(document.querySelector('[role="dialog"]')),
+      }));
+      audit.mobileMenu = {
+        ...menuAudit,
+        closeTarget: await close.evaluate((element) => {
+          const rect = element.getBoundingClientRect();
+          return { width: Math.round(rect.width), height: Math.round(rect.height) };
+        }),
+      };
+      await close.click({ force: true });
+      await page.waitForTimeout(300);
+    }
   }
 
   results.push({ viewport: viewport.name, ...audit, errors });

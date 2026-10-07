@@ -7,87 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { cn } from "@/lib/utils";
-
-interface DiscoveryRoute {
-  track: string;
-  category: string;
-  goal: string;
-  product: string;
-  description: string;
-  href: string;
-  badge: string;
-  accentBorder: string;
-  glowColor: string;
-}
-
-const discoveryRoutes: DiscoveryRoute[] = [
-  {
-    track: "01",
-    category: "COLLECTIONS & FIELD // OPERATIONS",
-    goal: "Collect payments faster, automate calls, and track field reps on the road",
-    product: "Operations 360 & Field App",
-    description: "Call center CRM, predictive dialer, QA scorecards, plus mobile field app with live GPS visit timestamps and offline logging.",
-    href: "/#operations-360",
-    badge: "Recovery Flagship",
-    accentBorder: "hover:border-blue-400/50",
-    glowColor: "from-blue-500/15 via-sky-400/10 to-transparent",
-  },
-  {
-    track: "02",
-    category: "VOICE AI // AUTONOMY",
-    goal: "Automate customer phone calls, SMS follow-ups, and negotiation emails",
-    product: "BITSagent AI",
-    description: "Realistic human-sounding voice AI that handles calls and customer inquiries around the clock with zero wait times.",
-    href: "/bitsagent",
-    badge: "Sub-300ms Voice",
-    accentBorder: "hover:border-indigo-400/50",
-    glowColor: "from-indigo-500/15 via-blue-400/10 to-transparent",
-  },
-  {
-    track: "03",
-    category: "SALES // PIPELINE",
-    goal: "Track sales deals, send instant price quotes, and manage support tickets",
-    product: "BITScrm Suite",
-    description: "Visual sales pipelines, automated client quotations, customer help desk, and recurring billing all in one CRM.",
-    href: "/products/crm",
-    badge: "Sales & Support",
-    accentBorder: "hover:border-sky-400/50",
-    glowColor: "from-sky-500/15 via-blue-400/10 to-transparent",
-  },
-  {
-    track: "04",
-    category: "LEDGER // PAYROLL",
-    goal: "Automate company accounting, staff timekeeping, and Philippine payroll",
-    product: "Accounting, HRMS & Payroll",
-    description: "BIR CAS-ready bookkeeping, biometric clock-in integration, automated 13th-month & TRAIN tax calculations.",
-    href: "/products/accounting",
-    badge: "BIR CAS Aligned",
-    accentBorder: "hover:border-emerald-400/50",
-    glowColor: "from-emerald-500/15 via-teal-400/10 to-transparent",
-  },
-  {
-    track: "05",
-    category: "DISPATCH // INVENTORY",
-    goal: "Track multi-warehouse inventory, company vehicles, and verified delivery",
-    product: "Inventory & Logistics",
-    description: "Live GPS vehicle tracking, barcode scanning, driver route optimization, and digital proof-of-delivery signatures.",
-    href: "/products/inventory",
-    badge: "Fleet & Warehouse",
-    accentBorder: "hover:border-teal-400/50",
-    glowColor: "from-teal-500/15 via-emerald-400/10 to-transparent",
-  },
-  {
-    track: "06",
-    category: "BOOKING // SMART NFC",
-    goal: "Book appointments, manage customer lines, and issue smart tap cards",
-    product: "Booking, Queuing & Sports Hub",
-    description: "Live online appointment booking, SMS queue alerts, court reservations, and contactless BITS Tap NFC business cards.",
-    href: "/products/booking",
-    badge: "Venue & Smart NFC",
-    accentBorder: "hover:border-amber-400/50",
-    glowColor: "from-amber-500/15 via-orange-400/10 to-transparent",
-  },
-];
+import { solutionTracks } from "@/lib/solutions-data";
 
 export function SolutionFinder() {
   const { openModal } = useConsultationModal();
@@ -129,7 +49,7 @@ export function SolutionFinder() {
 
         {/* Discovery Routing Grid — Luminous Frosted White Glass Double-Bezel Cards */}
         <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {discoveryRoutes.map((route, idx) => (
+          {solutionTracks.map((route, idx) => (
             <Reveal key={route.track} delay={0.05 + idx * 0.03}>
               <Link
                 href={route.href}

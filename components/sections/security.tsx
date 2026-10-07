@@ -3,19 +3,12 @@
 import * as React from "react";
 import Link from "next/link";
 import { securityArchitecture } from "@/lib/site";
+import { accessMatrix } from "@/lib/security-data";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { BspLogo, NpcLogo, SecLogo, Iso27001Logo } from "@/components/ui/security-logos";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
-
-const accessMatrix = [
-  { role: "Collection Agent", queue: "Assigned accounts only", pii: "Masked phone/SSN", supervisorHUD: "No" },
-  { role: "Team Supervisor", queue: "Campaign team accounts", pii: "Operational view", supervisorHUD: "Listen / Whisper" },
-  { role: "QA Auditor", queue: "Audit evaluation worklist", pii: "Full with audit log", supervisorHUD: "Recorded sessions" },
-  { role: "Operations Manager", queue: "All agency campaigns", pii: "Scoped export", supervisorHUD: "Full Barge HUD" },
-  { role: "System Administrator", queue: "Infrastructure & configuration", pii: "Restricted", supervisorHUD: "Access Audit Log" },
-] as const;
 
 export function Security() {
   const { openModal } = useConsultationModal();

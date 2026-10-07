@@ -180,41 +180,21 @@ export function Header() {
             )}
           />
 
-          {/* Layer 1: Drifting Clouds Base */}
+          {/* Static Ambient Cloud Texture (Matches Static Hero Sky) */}
           <div
             className={cn(
-              "absolute inset-0 mix-blend-screen transition-opacity duration-300",
-              solid ? "opacity-55" : "opacity-35"
-            )}
-          >
-            <div className="relative size-full animate-cloud-drift will-change-transform transform-gpu">
-              <Image
-                src="/images/hero-sky-bg.jpg"
-                alt=""
-                fill
-                priority
-                quality={70}
-                className="object-cover object-top scale-125 filter blur-[0.5px]"
-              />
-            </div>
-          </div>
-
-          {/* Layer 2: Counter-Harmonic Cloud Mist */}
-          <div
-            className={cn(
-              "absolute inset-0 mix-blend-screen transition-opacity duration-300",
+              "absolute inset-0 mix-blend-screen transition-opacity duration-300 pointer-events-none select-none",
               solid ? "opacity-45" : "opacity-25"
             )}
           >
-            <div className="relative size-full animate-cloud-drift-reverse will-change-transform transform-gpu">
-              <Image
-                src="/images/hero-sky-bg.jpg"
-                alt=""
-                fill
-                quality={70}
-                className="object-cover object-center scale-125"
-              />
-            </div>
+            <Image
+              src="/images/hero-sky-bg.jpg"
+              alt=""
+              fill
+              priority
+              quality={75}
+              className="object-cover object-top filter blur-[0.5px]"
+            />
           </div>
 
           {/* Layer 3: Sky Sunbreak Radiance / Cyan Glow */}
@@ -238,10 +218,10 @@ export function Header() {
             className="relative z-10 inline-flex min-h-11 shrink-0 items-center rounded-2xl px-2 py-1 transition-all duration-200 hover:opacity-90"
           >
             <span className="hidden min-[400px]:inline-block">
-              <Logo variant="reverse" priority className="h-7 md:h-8" />
+              <Logo variant="reverse" priority className="h-8.5 md:h-9.5" />
             </span>
             <span className="inline-block min-[400px]:hidden">
-              <Logo variant="reverse" priority className="h-7" />
+              <Logo variant="reverse" priority className="h-8" />
             </span>
           </Link>
 

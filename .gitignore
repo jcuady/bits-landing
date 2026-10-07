@@ -32,6 +32,9 @@ Thumbs.db
 qa/
 public/screenshots/
 public/images/test_field_mockup_screenshot.png
+newlogo/preview_*
+newlogo/test_*
+scripts/debug-sky-scroll.mjs
 .audit/
 .claude/
 .h3-source/

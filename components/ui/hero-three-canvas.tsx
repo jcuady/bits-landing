@@ -283,13 +283,16 @@ export function HeroThreeCanvas() {
 
     // ── 5. BUTTER-SMOOTH ANIMATION LOOP (FLUID VOLUMETRIC MOTION) ──
     let animId: number;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
+    const startTime = lastTime;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
 
-      const delta = Math.min(clock.getDelta(), 0.1);
-      const elapsed = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      const elapsed = (now - startTime) / 1000;
 
       // Damped smooth mouse tracking (spring lerp)
       currentMouseX += (targetMouseX - currentMouseX) * 0.04;

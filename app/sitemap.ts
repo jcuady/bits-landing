@@ -41,6 +41,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: `${site.url}/solutions`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/pricing`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/security`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    },
+    {
       url: `${site.url}/bitscrm`,
       lastModified,
       changeFrequency: "weekly" as const,

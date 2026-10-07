@@ -32,9 +32,9 @@ export function Logo({
     return (
       <Image
         src="/brand/mark.png"
-        alt="BITS - Boundless IT Solutions Cloud Mark"
-        width={512}
-        height={512}
+        alt="BITS - Boundless IT Solutions Cloud Ribbon Mark"
+        width={1070}
+        height={950}
         priority={priority}
         unoptimized
         className={cn("h-8 w-auto object-contain", className)}
@@ -47,8 +47,8 @@ export function Logo({
       <Image
         src={variant === "stacked-reverse" ? "/brand/logo-stacked-reverse.png" : "/brand/logo-stacked.png"}
         alt="BITS - Boundless IT Solutions"
-        width={800}
-        height={907}
+        width={1081}
+        height={1227}
         priority={priority}
         unoptimized
         className={cn("h-16 w-auto object-contain", className)}
@@ -62,8 +62,8 @@ export function Logo({
         <Image
           src="/brand/logo-horizontal.png"
           alt="BITS - Boundless IT Solutions"
-          width={1400}
-          height={482}
+          width={2067}
+          height={713}
           priority={priority}
           unoptimized
           className={cn("h-8 w-auto object-contain dark:hidden", className)}
@@ -71,8 +71,8 @@ export function Logo({
         <Image
           src="/brand/logo-reverse.png"
           alt="BITS - Boundless IT Solutions"
-          width={1400}
-          height={482}
+          width={2067}
+          height={713}
           priority={priority}
           unoptimized
           className={cn("hidden h-8 w-auto object-contain dark:block", className)}
@@ -86,8 +86,8 @@ export function Logo({
     <Image
       src={isReverse ? "/brand/logo-reverse.png" : "/brand/logo-horizontal.png"}
       alt="BITS - Boundless IT Solutions"
-      width={1400}
-      height={482}
+      width={2067}
+      height={713}
       priority={priority}
       unoptimized
       className={cn("h-8 w-auto object-contain", className)}

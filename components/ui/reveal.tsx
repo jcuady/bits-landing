@@ -1,11 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion, MotionConfig } from "motion/react";
 
 /**
  * Standard entrance: subtle rise + fade, once, ease-out-expo.
- * `initial` stays the same on server and client so reduced-motion
- * does not cause a hydration mismatch.
+ *
+ * Hydration-safe: `initial` is always a static value so server-rendered
+ * HTML and the first client paint match exactly. `MotionConfig reducedMotion="user"`
+ * overrides the animation at runtime if the OS preference is set — no
+ * runtime branching on `initial` required.
  */
 export function Reveal({
   children,
@@ -20,21 +23,21 @@ export function Reveal({
   y?: number;
   amount?: number;
 }) {
-  const reduce = useReducedMotion();
-
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount, margin: "0px 0px -20px 0px" }}
-      transition={{
-        duration: reduce === true ? 0 : 0.45,
-        delay: reduce === true ? 0 : delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-    >
-      {children}
-    </motion.div>
+    <MotionConfig reducedMotion="user">
+      <motion.div
+        className={className}
+        initial={{ opacity: 0, y }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount, margin: "0px 0px -20px 0px" }}
+        transition={{
+          duration: 0.45,
+          delay,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+      >
+        {children}
+      </motion.div>
+    </MotionConfig>
   );
 }
