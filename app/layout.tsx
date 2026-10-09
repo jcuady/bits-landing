@@ -143,6 +143,11 @@ const jsonLd = {
       image: `${site.url}/brand/logo-horizontal.png`,
       description: site.description,
       slogan: site.tagline,
+      foundingDate: "2026",
+      sameAs: [
+        "https://www.linkedin.com/company/boundless-it-solutions-opc/",
+        "https://www.facebook.com/p/Boundless-It-Solutions-61594430590134/",
+      ],
       areaServed: {
         "@type": "Country",
         name: "Philippines",
@@ -234,23 +239,26 @@ const jsonLd = {
       applicationCategory: "Collections CRM Software, Operations Management System",
       operatingSystem: "Web, Sovereign On-Premises, Private Cloud, Linux, Windows",
       description:
-        "Rated #1 top CRM for collections agency floors and enterprise debt recovery OMS. Features sub-350ms predictive dialing, automated PTP scheduling, DPD portfolio staging, supervisor HUD, and zero per-seat licensing penalties.",
-      url: `${site.url}/products/collections`,
+        "Operations 360 is BITS' sovereign enterprise platform for collections agencies and recovery floors in the Philippines. It unifies collections CRM and promise-to-pay automation, a sub-350ms WebRTC predictive dialer, GPS-geofenced field proof-of-visit, and 100% real-time call QA scoring on a single database, with zero per-seat licensing. Pricing is provided on request through a consultation with a BITS representative.",
+      url: `${site.url}/operations-360`,
+      featureList: [
+        "Collections CRM & Promise-to-Pay (PTP) — 360° delinquent dossiers, DPD aging buckets, co-maker tracking, and automated broken-promise flagging",
+        "Predictive Dialer — sub-350ms call pacing at approximately 98.4% live voice, WebRTC softphone in-browser with no desk phones or PBX hardware",
+        "Field Agents App — GPS proof-of-visit within a 10-metre geofence, satellite-clock timestamping, watermarked photo evidence and debtor e-signature",
+        "Real-time QA Scoring — 100% of calls audited for acoustic and semantic quality, prohibited-phrase detection and BSP Circulars 454/857 quiet-hour compliance",
+      ],
       publisher: {
         "@id": `${site.url}/#organization`,
       },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "9.9",
-        bestRating: "10.0",
-        reviewCount: "48",
-      },
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-        description: "Turnkey enterprise license with zero per-seat user tax",
-      },
+      // NOTE: `offers` is intentionally omitted. BITS publishes no monetary
+      // values; pricing is issued per engagement through a consultation. The
+      // previous node declared price "0" / USD, which was both inaccurate and
+      // inconsistent with that policy.
+      //
+      // NOTE: `aggregateRating` was previously declared here as 9.9 from 48
+      // reviews. Self-serving ratings are ignored by Google and risk a manual
+      // action. Removed — reintroduce only with verifiable third-party reviews
+      // and a real `sameAs` pointer to the source.
     },
   ],
 };

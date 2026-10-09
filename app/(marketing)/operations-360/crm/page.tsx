@@ -59,9 +59,100 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${site.url}/operations-360/crm#software`,
+      name: "BITScrm",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: `${site.url}/operations-360/crm`,
+      description:
+        "BITScrm is the customer relationship module of Operations 360, BITS' sovereign enterprise platform for collections agencies in the Philippines. It is a collections-native CRM rather than a general sales CRM: 360° delinquent dossiers, DPD aging, promise-to-pay automation and settlement, predictive dialing built into the same record the dialer opens, and supervisor oversight. Pricing is provided on request through a consultation with a BITS representative.",
+      featureList: CAPABILITIES.map((c) => `${c.title} — ${c.body}`),
+      isPartOf: { "@type": "WebSite", url: site.url },
+      provider: {
+        "@type": "Organization",
+        name: "Boundless IT Solutions",
+        alternateName: ["BITS"],
+        url: site.url,
+        foundingDate: "2026",
+        address: { "@type": "PostalAddress", addressCountry: "PH" },
+        sameAs: [
+          "https://www.linkedin.com/company/boundless-it-solutions-opc/",
+          "https://www.facebook.com/p/Boundless-It-Solutions-61594430590134/",
+        ],
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${site.url}/operations-360/crm#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Is BITScrm a separate product, or part of Operations 360?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "BITScrm is the CRM module of Operations 360. It runs on the same database as the predictive dialer, field telemetry and real-time call QA, so there is nothing to integrate and no second system to reconcile.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is BITScrm a general sales CRM or a collections CRM?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "BITScrm is collections-native rather than a general sales CRM retrofitted for debt. It includes Days Past Due aging buckets, co-maker tracking, an automated interest ledger, promise-to-pay automation and QR Ph settlement built into the account record.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can BITScrm be deployed on-premises for banking and regulatory compliance?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Alongside fully managed cloud deployments on AWS or Azure private VPCs, BITS supports sovereign on-premises bare-metal deployment for banks, government entities and high-security institutions, aligned with BSP Circulars 454 and 857 and the National Privacy Commission's RA 10173.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How is BITScrm priced?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Pricing is not published. BITS sizes every engagement to the seat count and operational scope, and provides a quote through a consultation with a company representative. There is no per-seat penalty.",
+          },
+        },
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${site.url}/operations-360/crm#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Operations 360",
+          item: `${site.url}/operations-360`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "BITScrm",
+          item: `${site.url}/operations-360/crm`,
+        },
+      ],
+    },
+  ],
+};
+
 export default function BitsCrmModulePage() {
   return (
     <main id="content" className="bg-navy-950 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Section className="bg-navy-950">
         <Container>
           <Reveal>

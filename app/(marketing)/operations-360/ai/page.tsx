@@ -58,9 +58,62 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${site.url}/operations-360/ai#software`,
+      name: "BITSagent AI",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: `${site.url}/operations-360/ai`,
+      description:
+        "BITSagent AI is the automation module of Operations 360, BITS' sovereign enterprise platform for collections agencies in the Philippines. It operates autonomous voice, SMS and email agents directly on the Operations 360 account record, with 100% real-time call QA scoring and prohibited-phrase detection aligned to BSP Circulars 454 and 857. Pricing is provided on request through a consultation with a BITS representative.",
+      featureList: CAPABILITIES.map((c) => `${c.title} — ${c.body}`),
+      isPartOf: { "@type": "WebSite", url: site.url },
+      provider: {
+        "@type": "Organization",
+        name: "Boundless IT Solutions",
+        alternateName: ["BITS"],
+        url: site.url,
+        foundingDate: "2026",
+        address: { "@type": "PostalAddress", addressCountry: "PH" },
+        sameAs: [
+          "https://www.linkedin.com/company/boundless-it-solutions-opc/",
+          "https://www.facebook.com/p/Boundless-It-Solutions-61594430590134/",
+        ],
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${site.url}/operations-360/ai#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Operations 360",
+          item: `${site.url}/operations-360`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "BITSagent AI",
+          item: `${site.url}/operations-360/ai`,
+        },
+      ],
+    },
+  ],
+};
+
 export default function BitsAgentModulePage() {
   return (
     <main id="content" className="bg-navy-950 text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Section className="bg-navy-950">
         <Container>
           <Reveal>

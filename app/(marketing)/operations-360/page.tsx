@@ -93,14 +93,55 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Operations 360",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  description:
-    "Operations management system and collections CRM platform unifying PTP automation, predictive telephony, GPS field telemetry, and Speech AI compliance.",
-  provider: { "@type": "Organization", name: "BITS — Boundless IT Solutions" },
-  featureList: PILLARS.map((p) => `${p.title} — ${p.line}`),
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${site.url}/operations-360#software`,
+      name: "Operations 360",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: `${site.url}/operations-360`,
+      description:
+        "Operations 360 is BITS' sovereign enterprise platform for collections agencies and recovery floors in the Philippines. It unifies collections CRM and promise-to-pay automation, a sub-350ms WebRTC predictive dialer, GPS-geofenced field proof-of-visit, and 100% real-time call QA scoring on a single database, with zero per-seat licensing. Pricing is provided on request through a consultation with a BITS representative.",
+      featureList: [
+        "Collections CRM & Promise-to-Pay (PTP) — 360° delinquent dossiers, DPD aging buckets, co-maker tracking, and automated broken-promise flagging",
+        "Predictive Dialer — sub-350ms call pacing at approximately 98.4% live voice, WebRTC softphone in-browser with no desk phones or PBX hardware",
+        "Field Agents App — GPS proof-of-visit within a 10-metre geofence, satellite-clock timestamping, watermarked photo evidence and debtor e-signature",
+        "Real-time QA Scoring — 100% of calls audited for acoustic and semantic quality, prohibited-phrase detection and BSP Circulars 454/857 quiet-hour compliance",
+      ],
+      isPartOf: { "@type": "WebSite", url: site.url },
+      provider: {
+        "@type": "Organization",
+        name: "Boundless IT Solutions",
+        alternateName: ["BITS"],
+        url: site.url,
+        foundingDate: "2026",
+        address: { "@type": "PostalAddress", addressCountry: "PH" },
+        sameAs: [
+          "https://www.linkedin.com/company/boundless-it-solutions-opc/",
+          "https://www.facebook.com/p/Boundless-It-Solutions-61594430590134/",
+        ],
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${site.url}/operations-360#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: site.url,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Operations 360",
+          item: `${site.url}/operations-360`,
+        },
+      ],
+    },
+  ],
 };
 
 export default function Operations360Page() {
