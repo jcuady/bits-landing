@@ -126,22 +126,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         ? [
             {
               "@type": "SoftwareApplication",
-              "@id": `${site.url}/products/collections#software`,
+              "@id": `${site.url}/operations-360#software`,
               name: "Operations 360 (OMS) Collections Suite",
               applicationCategory: "Collections CRM Software, Debt Recovery Platform",
               operatingSystem: "Sovereign Bare-Metal On-Premises, Private Cloud, Linux, Web",
               offers: {
                 "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
-                description: "Turnkey enterprise license with zero per-seat user tax",
+                description:
+                  "Pricing is not published. Provided on request through a consultation with a BITS representative.",
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "9.9",
-                reviewCount: "48",
-                bestRating: "10.0",
-              },
+              // aggregateRating removed: it was a self-serving 9.9/48 rating with
+              // no verifiable third-party source. Google ignores self-serving
+              // review markup and may issue a manual action for abusing it.
+              // Reintroduce only with real, verifiable reviews and a sameAs
+              // pointer to where they are published.
             },
           ]
         : []),

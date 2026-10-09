@@ -683,9 +683,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         },
         offers: {
           "@type": "Offer",
-          priceCurrency: "PHP",
-          price: "1499",
-          priceValidUntil: "2027-12-31",
+        description: "Pricing is not published. Provided on request through a consultation with a BITS representative.",
           availability: "https://schema.org/InStock",
           url: `${site.url}/products/${product.id}`,
         },
@@ -712,16 +710,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         description: product.description,
         url: `${site.url}/products/${product.id}`,
         featureList: product.capabilities.join(", "),
-        ...(product.id === "collections"
-          ? {
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "9.9",
-                bestRating: "10.0",
-                reviewCount: "48",
-              },
-            }
-          : {}),
+        // aggregateRating removed — it was a self-serving 9.9/48 rating with no
+        // verifiable third-party source. Google ignores self-serving review
+        // markup and may issue a manual action. Reintroduce only with real
+        // reviews and a sameAs pointer to where they are published.
         publisher: {
           "@type": "Organization",
           name: "BITS - Boundless IT Solutions",
@@ -735,9 +727,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         },
         offers: {
           "@type": "Offer",
-          priceCurrency: "PHP",
-          price: "28500",
-          priceValidUntil: "2027-12-31",
+        description: "Pricing is not published. Provided on request through a consultation with a BITS representative.",
           availability: "https://schema.org/InStock",
           url: `${site.url}/products/${product.id}`,
         },

@@ -242,14 +242,10 @@ export default function CrmMasterPage() {
       name: "Boundless IT Solutions",
       alternateName: "BITS",
     },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "PHP",
-      price: "35000",
-      priceValidUntil: "2027-12-31",
-      availability: "https://schema.org/InStock",
-      url: `${site.url}/products/crm`,
-    },
+    // `offers` removed: it published price 35000 PHP in machine-readable form,
+    // which contradicted the no-published-prices policy and could be quoted
+    // verbatim by AI answer engines. Pricing is issued per engagement through a
+    // consultation with a BITS representative.
   };
 
   const faqSchema = {

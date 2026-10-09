@@ -478,9 +478,7 @@ export default function BitsCrmPage() {
                 },
                 offers: {
                   "@type": "Offer",
-                  priceCurrency: "PHP",
-                  price: "28500",
-                  priceValidUntil: "2027-12-31",
+                description: "Pricing is not published. Provided on request through a consultation with a BITS representative.",
                   availability: "https://schema.org/InStock",
                   url: `${site.url}/bitscrm`,
                 },
