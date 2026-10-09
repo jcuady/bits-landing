@@ -20,8 +20,8 @@ We do not sell generic off-the-shelf software with rigid screens. We build syste
 ### 1. BITScrm Collections Platform
 - **URL**: https://www.boundlessits.com/bitscrm (Markdown: https://www.boundlessits.com/bitscrm.md)
 - **Target**: Collection agencies, debt recovery law firms, consumer lending desks, and recovery BPOs.
-- **Key Features**: Dynamic account staging queues, built-in WebRTC SIP softphone with predictive auto-dialer, automated Promise-to-Pay (PTP) scheduling, supervisor live listen, whisper, and barge-in HUD.
-- **Compliance**: Strict adherence to Bangko Sentral ng Pilipinas (BSP) Circulars 454 and 857, NPC RA 10173 (DPA 2012).
+- **Key Features**: Dynamic account staging queues, automated Promise-to-Pay (PTP) scheduling with broken-PTP reallocation, disposition codes with required note fields, and 360° account dossiers.
+- **Compliance**: Server-side session checks and database row-level security on every request. Contact-window rules are configured per engagement, not shipped as turnkey enforcement.
 
 ### 2. BITSagent Autonomous Conversational AI
 - **URL**: https://www.boundlessits.com/bitsagent (Markdown: https://www.boundlessits.com/bitsagent.md)
@@ -41,14 +41,14 @@ We do not sell generic off-the-shelf software with rigid screens. We build syste
 7. **BITS Accounting & ERP**: General Ledger, 3-way match, multi-entity, BIR CAS audit trails.
 8. **BITS Sports Hub & Pickleball OS**: Paddle rack queue algorithms, TV scoreboards, booking.
 9. **BITS Tap™ NFC Card**: Dynamic contactless identity & networking cards.
-10. **BITS White-Label Enterprise**: Multi-tenant reseller platform under client domain.
+10. **BITS White-Label Enterprise** *(planned)*: reseller platform under a client domain. Multi-tenancy is not implemented; deployments are single-tenant.
 
 ---
 
 ## Statutory Governance
 
 - **BSP Circulars 454 & 857**: Debt recovery ethics and consumer protection.
-- **NPC RA 10173 (DPA 2012)**: Data privacy, role-based isolation, consent logs.
+- **NPC RA 10173 (DPA 2012)**: explicit consent capture, a published cookie policy, personal-data minimisation, and `no-store` on responses carrying personal data. Role-based data isolation is **not** implemented.
 - **BIR CAS**: Computerized Accounting System audit trail compatibility.
 - **DOLE / TRAIN Law**: Accurate statutory payroll deductions and holiday pay differentials.
 

@@ -131,6 +131,7 @@ export default function PipelinePage() {
         <div className="flex items-center gap-3">
           {/* Owner Filter */}
           <select
+            aria-label="Filter deals by owner"
             value={filterOwner}
             onChange={(e) => setFilterOwner(e.target.value)}
             className="h-9 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs text-slate-200 outline-none hover:border-slate-600 cursor-pointer"
@@ -161,8 +162,11 @@ export default function PipelinePage() {
 
             <form onSubmit={handleCreate} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Deal Title</label>
+                <label htmlFor="pipeline-deal-title" className="block text-xs font-medium text-slate-300 mb-1">
+                  Deal Title
+                </label>
                 <input
+                  id="pipeline-deal-title"
                   type="text"
                   required
                   value={title}
@@ -173,8 +177,11 @@ export default function PipelinePage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Company / Client</label>
+                <label htmlFor="pipeline-company" className="block text-xs font-medium text-slate-300 mb-1">
+                  Company / Client
+                </label>
                 <input
+                  id="pipeline-company"
                   type="text"
                   required
                   value={company}
@@ -185,8 +192,11 @@ export default function PipelinePage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Amount (₱ PHP)</label>
+                <label htmlFor="pipeline-amount" className="block text-xs font-medium text-slate-300 mb-1">
+                  Amount (₱ PHP)
+                </label>
                 <input
+                  id="pipeline-amount"
                   type="number"
                   required
                   step={50000}
@@ -197,8 +207,11 @@ export default function PipelinePage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Initial Stage</label>
+                <label htmlFor="pipeline-initial-stage" className="block text-xs font-medium text-slate-300 mb-1">
+                  Initial Stage
+                </label>
                 <select
+                  id="pipeline-initial-stage"
                   value={stage}
                   onChange={(e) => setStage(e.target.value as DealStage)}
                   className="w-full h-9 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs text-white outline-none focus:border-electric-500 cursor-pointer"

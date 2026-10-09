@@ -87,10 +87,14 @@ export default function CPQPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label
+                  htmlFor="cpq-client-company"
+                  className="block text-xs font-medium text-slate-300 mb-1"
+                >
                   Enterprise Client Account
                 </label>
                 <input
+                  id="cpq-client-company"
                   type="text"
                   value={cpqClientCompany}
                   onChange={(e) => setCpqClientCompany(e.target.value)}
@@ -101,7 +105,7 @@ export default function CPQPage() {
 
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="block text-xs font-medium text-slate-300">
+                  <label htmlFor="cpq-licensed-seats" className="block text-xs font-medium text-slate-300">
                     Licensed User Seats
                   </label>
                   <span className="font-mono font-bold text-electric-400 text-xs">
@@ -109,6 +113,7 @@ export default function CPQPage() {
                   </span>
                 </div>
                 <input
+                  id="cpq-licensed-seats"
                   type="range"
                   min={5}
                   max={250}
@@ -146,6 +151,7 @@ export default function CPQPage() {
                   <div className="flex items-start gap-3">
                     <input
                       type="checkbox"
+                      aria-label={`Include module ${item.name}`}
                       checked={item.selected}
                       onChange={() => {}} // Handled by container onClick
                       className="mt-1 h-4 w-4 rounded border-slate-700 accent-electric-600 cursor-pointer"
@@ -197,6 +203,7 @@ export default function CPQPage() {
             </div>
 
             <input
+              aria-label="Executive volume discount percentage"
               type="range"
               min={0}
               max={30}

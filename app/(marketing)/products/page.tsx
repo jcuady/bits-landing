@@ -3,12 +3,12 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-import { bitsProducts, whiteLabelBrandingOption, site } from "@/lib/site";
+import { bitsProducts, whiteLabelBrandingOption, site, PRODUCT_COUNT } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Building2, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Products Catalog — 18 Enterprise Software Products | BITS",
+  title: "Products Catalog — 18 Enterprise Software Products",
   description:
     "Explore the full BITS enterprise software portfolio: Operations 360 (OMS), BITSagent AI, Sales CRM, Support CRM, Accounting ERP, HRMS, Payroll, Logistics, Booking, Queuing, and more. Start with one product, expand as you grow.",
   keywords: [
@@ -213,9 +213,9 @@ export default function ProductsIndexPage() {
                   {products.map((product, idx) => {
                     const productHref =
                       product.id === "ai-agent"
-                        ? "/bitsagent"
+                        ? "/operations-360/ai"
                         : product.id === "collections"
-                        ? "/products/collections"
+                        ? "/operations-360"
                         : `/products/${product.id}`;
 
                     return (
@@ -306,7 +306,7 @@ export default function ProductsIndexPage() {
                     {whiteLabelBrandingOption.name}
                   </h3>
                   <p className="mt-2 text-sm text-slate-600 max-w-2xl leading-relaxed">
-                    {whiteLabelBrandingOption.tagline}. Deploy any of the 18 BITS products fully rebranded under your own corporate identity, custom domain, and logo with zero mention of BITS.
+                    {whiteLabelBrandingOption.tagline}. Deploy any of the {PRODUCT_COUNT} BITS products fully rebranded under your own corporate identity, custom domain, and logo with zero mention of BITS.
                   </p>
                 </div>
                 <Link

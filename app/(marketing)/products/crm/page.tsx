@@ -72,19 +72,19 @@ const CRM_VARIANTS_OVERVIEW = [
     name: "BITScrm Collections",
     shortName: "Collections Flagship",
     badge: "Primary Flagship Platform",
-    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
+    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisor Oversight",
     icon: PhoneCall,
     color: "blue",
     description:
-      "Engineered for debt recovery agencies, BPO contact centers, and financial lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in HUD.",
+      "Engineered for debt recovery agencies, BPO contact centers, and financial lenders. Centralizes delinquent portfolio staging, automated Promise-to-Pay (PTP) tracking, and account dashboards. There is no telephony in this build.",
     metric: { value: "3.2x Boost", label: "Right-Party Connect" },
-    href: "/bitscrm",
-    productHref: "/bitscrm",
+    href: "/operations-360/crm",
+    productHref: "/operations-360/crm",
     keyFeatures: [
       "Dynamic Debtor & Account Staging Queues",
-      "WebRTC In-Browser SIP Softphone & Auto-Dialer",
+      "Roadmap: in-browser calling (no telephony ships in this build)",
       "Automated Promise-to-Pay (PTP) Scheduling Engine",
-      "Supervisor Listen, Whisper & Barge-in HUD",
+      "Roadmap: supervisor listen, whisper and barge HUD (no telephony ships)",
     ],
   },
   {
@@ -187,7 +187,7 @@ const ARCHITECTURE_COMPARISONS = [
   },
   {
     dimension: "Data Sovereignty",
-    fragmented: "Locked into US multi-tenant clouds with unpredictable vendor price hikes",
+    fragmented: "Competitor tools: lock you into shared US clouds with unpredictable vendor price hikes",
     bits: "Deployable on private cloud VPC or sovereign on-premises with local compliance",
   },
   {
@@ -208,7 +208,7 @@ const CRM_FAQS = [
   },
   {
     q: "Can BITScrm be deployed on-premises for banking and regulatory compliance?",
-    a: "Yes. While we provide fully managed secure cloud deployments on AWS/Azure private VPCs, we also support full sovereign on-premises bare-metal deployments for banks, government entities, and high-security institutions aligned with BSP Circulars 454/857 and NPC RA 10173.",
+    a: "Yes. While we provide fully managed secure cloud deployments on AWS/Azure private VPCs, we also support full sovereign on-premises bare-metal deployments for banks, government entities, and high-security institutions. No BSP or NPC compliance handling is built into this deployment today, and no audit against those standards has been performed.",
   },
   {
     q: "Does BITScrm integrate with BITSagent Conversational Voice AI?",
@@ -279,7 +279,7 @@ export default function CrmMasterPage() {
         "@type": "ListItem",
         position: 2,
         name: "Products",
-        item: `${site.url}/#products-suite`,
+        item: `${site.url}/#product-families`,
       },
       {
         "@type": "ListItem",
@@ -327,7 +327,7 @@ export default function CrmMasterPage() {
                 </Link>
                 <span className="text-[0.72rem] text-slate-400">/</span>
                 <Link
-                  href="/#products-suite"
+                  href="/#product-families"
                   className="text-[0.72rem] font-bold text-slate-500 hover:text-blue-600 transition-colors"
                 >
                   Products
@@ -346,7 +346,7 @@ export default function CrmMasterPage() {
                   Variants:
                 </span>
                 <Link
-                  href="/bitscrm"
+                  href="/operations-360/crm"
                   className="inline-flex min-h-[36px] items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-white hover:text-slate-900 transition-all"
                 >
                   Collections (Flagship)
@@ -458,7 +458,7 @@ export default function CrmMasterPage() {
                 3.2x Boost
               </div>
               <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Contact Resolution</p>
-              <p className="text-[0.72rem] text-slate-500">Service softphone telemetry</p>
+              <p className="text-[0.72rem] text-slate-500">Specimen telemetry — no telephony ships in this build</p>
             </div>
             <div className="text-center">
               <div className="font-mono text-3xl font-bold tracking-tight text-indigo-600 sm:text-4xl">
@@ -648,7 +648,9 @@ export default function CrmMasterPage() {
               </div>
               <h3 className="mt-4 text-sm font-bold text-slate-900">Collections Recovers Delinquent Portfolios</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Overdue balances trigger automated delinquent staging queues in Collections. WebRTC predictive dialers connect right parties while recording PTP schedules and enforcing BSP quiet hours.
+                Overdue balances trigger automated delinquent staging queues in Collections.
+                PTP commitments are tracked with grace periods and supervisor
+                re-queue on broken promises.
               </p>
             </div>
           </div>

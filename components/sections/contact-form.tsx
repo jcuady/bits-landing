@@ -253,7 +253,9 @@ export function ContactForm() {
 
           {/* Fallback full select dropdown for any other specific engine */}
           <div className="mt-2 flex items-center gap-2">
-            <span className="text-[11px] text-slate-500">Or choose specific engine:</span>
+            <label htmlFor="interest" className="text-[11px] text-slate-500">
+              Or choose specific engine:
+            </label>
             <div className="relative flex-1">
               <select
                 id="interest"

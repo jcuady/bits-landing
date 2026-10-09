@@ -95,10 +95,10 @@ export default function OpportunityDetailPage() {
             ))}
           </div>
           <Link
-            href="/app/pipelines"
+            href="/app/opportunities"
             className="mt-6 inline-flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-electric-600 hover:text-electric-500"
           >
-            Open Kanban Pipeline Board →
+            View all opportunities →
           </Link>
         </section>
       </div>

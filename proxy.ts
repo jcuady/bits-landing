@@ -1,7 +1,13 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { PRODUCT_REGISTRY } from "@/lib/products/registry";
 
-// Subdomain-to-Product-ID routing registry
+// Subdomain-to-Product-ID routing registry.
+//
+// NOTE: most of these products are roadmap entries with no sandbox route yet.
+// They are still listed so the host is recognised, but `resolveProductPath`
+// below refuses to rewrite to a path that would 404 — it sends the visitor to
+// the CRM workspace instead.
 const SUBDOMAIN_PRODUCT_MAP: Record<string, string> = {
   ops: "operations-360",
   operations: "operations-360",
@@ -26,6 +32,31 @@ const SUBDOMAIN_PRODUCT_MAP: Record<string, string> = {
   nfc: "nfc-card",
 };
 
+/**
+ * Products that have a real sandbox route under `app/(products)/<id>`.
+ * Anything not listed here has no sandbox — routing to it would 404.
+ */
+const IMPLEMENTED_PRODUCT_ROUTES = new Set([
+  "crm-sales",
+  "crm-support",
+  "crm-marketing",
+  "crm-commerce",
+]);
+
+/** OPERATIONS 360 ships as the authenticated CRM workspace at `/app`. */
+const WORKSPACE_PRODUCT_IDS = new Set(["operations-360", "crm-collections"]);
+
+/**
+ * Resolve a product id to the real path that serves it.
+ * Returns `/app` for the workspace products, the `/<product>` sandbox when it
+ * exists, and null when the product has no route (caller should not rewrite).
+ */
+function resolveProductPath(productId: string): string | null {
+  if (WORKSPACE_PRODUCT_IDS.has(productId)) return "/app";
+  if (IMPLEMENTED_PRODUCT_ROUTES.has(productId)) return `/${productId}`;
+  return null;
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const host = request.headers.get("host") || "";
@@ -36,7 +67,6 @@ export async function proxy(request: NextRequest) {
     pathname === "/robots.txt" ||
     pathname === "/manifest.webmanifest" ||
     pathname === "/brandbook" ||
-    pathname === "/brandbook.html" ||
     pathname.startsWith("/.well-known") ||
     pathname.endsWith(".xml") ||
     pathname.endsWith(".txt") ||
@@ -45,14 +75,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 1. Strip RSC query param from brandbook (static HTML file)
-  if (pathname === "/brandbook.html" && request.nextUrl.searchParams.has("_rsc")) {
-    const url = request.nextUrl.clone();
-    url.searchParams.delete("_rsc");
-    return NextResponse.redirect(url, 308);
-  }
-
-  // 2. Detect Subdomain (e.g. "sales.boundlessits.com", "sales.localhost:3000")
+  // 1. Detect Subdomain (e.g. "sales.boundlessits.com", "sales.localhost:3000")
   let subdomain: string | null = null;
   const cleanHost = host.split(":")[0]; // remove port
   const parts = cleanHost.split(".");
@@ -70,11 +93,11 @@ export async function proxy(request: NextRequest) {
 
   const productId = subdomain ? SUBDOMAIN_PRODUCT_MAP[subdomain] : null;
 
-  // 3. Supabase Auth + Demo Role Cookie Validation
+  // 3. Supabase Auth Validation
   const response = NextResponse.next({ request });
-  const demoRoleCookie = request.cookies.get("bits_demo_role")?.value;
 
-  // Safe fallback to production BITS Supabase project if environment variables are not injected
+  // Safe fallback to the public project URL/anon key if environment variables
+  // are not injected (see lib/supabase/server.ts for the rationale).
   const supabaseUrl =
     process.env.NEXT_PUBLIC_SUPABASE_URL || "https://jvseyttzlobelrnzmfyf.supabase.co";
   const supabaseAnonKey =
@@ -104,7 +127,14 @@ export async function proxy(request: NextRequest) {
     user = null;
   }
 
-  const isAuthenticated = Boolean(user || demoRoleCookie);
+  // SECURITY: Authorization is based ONLY on a verified Supabase session.
+  //
+  // The `bits_demo_role` cookie is intentionally NOT treated as proof of
+  // identity. It is written `httpOnly: true` (app/actions/auth.ts), so a visitor
+  // cannot forge it from the console, and the role is constrained to the
+  // registry's known demo personas. It is still excluded from authorization:
+  // it is a marketing-demo persona hint and nothing more.
+  const isAuthenticated = Boolean(user);
 
   // 4. Subdomain-Specific Routing (e.g. sales.boundlessits.com)
   if (productId) {
@@ -128,8 +158,19 @@ export async function proxy(request: NextRequest) {
     }
 
     // Rewrite internally to the product workspace directory (e.g. /crm-sales/pipeline)
+    const base = resolveProductPath(productId);
+    if (!base) {
+      // Product is a roadmap entry with no sandbox yet — send to the CRM
+      // workspace rather than rewriting to a path that would 404.
+      const url = request.nextUrl.clone();
+      url.pathname = "/app";
+      url.search = "";
+      return NextResponse.redirect(url);
+    }
+
     const url = request.nextUrl.clone();
-    url.pathname = `/${productId}${pathname === "/" ? "" : pathname}`;
+    const suffix = pathname === "/" || pathname === `/${productId}` ? "" : pathname;
+    url.pathname = `${base}${suffix}`;
     return NextResponse.rewrite(url);
   }
 
@@ -137,12 +178,29 @@ export async function proxy(request: NextRequest) {
   if (pathname.startsWith("/demo/")) {
     const demoSegments = pathname.split("/").filter(Boolean); // ['demo', 'crm-sales', 'pipeline']
     const requestedProduct = demoSegments[1];
-    if (requestedProduct && SUBDOMAIN_PRODUCT_MAP[requestedProduct] || Object.values(SUBDOMAIN_PRODUCT_MAP).includes(requestedProduct)) {
-      const targetProduct = SUBDOMAIN_PRODUCT_MAP[requestedProduct] || requestedProduct;
-      const remainingPath = demoSegments.slice(2).join("/");
+
+    // Recognise a product by subdomain alias OR by its registry id. Reading the
+    // id list from PRODUCT_REGISTRY (rather than repeating it here) is what stops
+    // this proxy drifting out of sync with the catalogue again.
+    const targetProduct = requestedProduct
+      ? SUBDOMAIN_PRODUCT_MAP[requestedProduct] ?? requestedProduct
+      : undefined;
+
+    if (targetProduct && PRODUCT_REGISTRY[targetProduct]) {
+      const base = resolveProductPath(targetProduct);
+      if (base) {
+        const remainingPath = demoSegments.slice(2).join("/");
+        const url = request.nextUrl.clone();
+        url.pathname = `${base}${remainingPath ? `/${remainingPath}` : ""}`;
+        return NextResponse.rewrite(url);
+      }
+      // Recognised roadmap product with no sandbox yet. Falling through would
+      // leave the request at `/demo/<id>`, which has no page — i.e. a 404. Send
+      // the visitor to the showcase, which lists the engine as "planned".
       const url = request.nextUrl.clone();
-      url.pathname = `/${targetProduct}${remainingPath ? `/${remainingPath}` : ""}`;
-      return NextResponse.rewrite(url);
+      url.pathname = "/demo";
+      url.search = "";
+      return NextResponse.redirect(url);
     }
   }
 
@@ -181,7 +239,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|llms\\.txt|llms-full\\.txt|index\\.md|bitscrm\\.md|bitsagent\\.md|brandbook\\.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|xml|txt|md|webmanifest)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|llms\\.txt|llms-full\\.txt|index\\.md|bitscrm\\.md|bitsagent\\.md|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|xml|txt|md|webmanifest)$).*)",
   ],
 };
 

@@ -13,7 +13,7 @@ import { DeploymentModels } from "@/components/sections/deployment-models";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
-import { faqItems, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "BITS — Top CRM for Collections Agency, Operations OMS & Enterprise Software",
@@ -62,13 +62,16 @@ export const metadata: Metadata = {
 const homePageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
+    // Organization and WebSite are defined once, site-wide, in app/layout.tsx.
+    // Declaring a second node with the same @id here would produce conflicting
+    // entity data for search and AI engines.
     {
       "@type": "WebPage",
       "@id": `${site.url}/#homepage`,
       url: site.url,
-      name: "BITS — Top CRM for Collections Agency, Operations OMS & Enterprise Software",
+      name: "BITS — Operations 360: Top CRM & OMS for Collections Agencies",
       description:
-        "Boundless IT Solutions (BITS) powers top collections agency floors and enterprise operations with Operations 360 (OMS), sub-350ms predictive dialing, and 18 connected business engines.",
+        "Boundless IT Solutions (BITS) builds Operations 360, the sovereign platform for collections agency floors: collections CRM and promise-to-pay automation, a sub-350ms predictive dialer, GPS field telemetry, and 100% real-time call QA scoring.",
       inLanguage: "en-PH",
       isPartOf: {
         "@type": "WebSite",
@@ -91,17 +94,20 @@ const homePageJsonLd = {
       ],
     },
     {
-      "@type": "FAQPage",
-      "@id": `${site.url}/#faq`,
-      mainEntity: faqItems.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
+      "@type": "BreadcrumbList",
+      "@id": `${site.url}/#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: site.url,
         },
-      })),
+      ],
     },
+    // FAQPage is emitted by components/sections/faq.tsx, which renders the same
+    // faqItems the visitor sees. Declaring it here as well produced two
+    // identical FAQPage nodes on one page.
   ],
 };
 

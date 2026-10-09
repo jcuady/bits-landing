@@ -5,17 +5,30 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [70, 75, 90],
   },
-  async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: "/brandbook",
-          destination: "/brandbook.html",
-        },
-      ],
-      afterFiles: [],
-      fallback: [],
-    };
+  /**
+   * CPO Rev 2 — flagship canonicalisation.
+   *
+   * Operations 360 is the platform; BITScrm and BITSagent AI are modules
+   * inside it. These 301s move the flagship onto an obvious URL and demote
+   * the two standalone product pages to modules.
+   *
+   * DELIBERATELY NOT REDIRECTED YET (needs a separate decision):
+   *   /products/crm, /products/sales, /products/support,
+   *   /products/marketing, /products/commerce
+   * These are genuine catalogue products. Redirecting them would retire
+   * catalogue entries, which conflicts with the "keep all 22" instruction.
+   * They remain the main source of self-cannibalisation (see CPO doc C2).
+   *
+   * /crm-sales/* is live product demo — never redirect.
+   */
+  async redirects() {
+    return [
+      // Flagship: the platform now owns the head term
+      { source: "/products/collections", destination: "/operations-360", permanent: true },
+      // Modules: CRM and AI are no longer rival products
+      { source: "/bitscrm", destination: "/operations-360/crm", permanent: true },
+      { source: "/bitsagent", destination: "/operations-360/ai", permanent: true },
+    ];
   },
   async headers() {
     return [

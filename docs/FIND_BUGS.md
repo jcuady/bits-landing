@@ -1,5 +1,19 @@
 # Find-bugs report — CRM mock (2026-09-13)
 
+> **Historical record — do not read the file list as current state.** This report
+> was written against commit `76576d8` on 2026-09-13, long before the Supabase
+> work in `SYSTEM_AUDIT.md` §16. Verified 8 October 2026, two of the paths it
+> names no longer exist:
+>
+> | Listed here | Now |
+> |---|---|
+> | `middleware.ts` | **`proxy.ts`** — Next.js 16 renamed it |
+> | `lib/crm/auth.ts` | Does not exist; auth helpers are in `lib/crm/api-auth.ts` |
+>
+> The findings themselves were real when written and were acted on. The
+> architecture has moved substantially since. Current state lives in
+> `SYSTEM_AUDIT.md`.
+
 Scope: QA/UI/security hardening on `main` vs `origin/main` (`76576d8`). Reviewed auth, middleware, CRM store, interactive pages, validation helpers, and UI controls.
 
 **Note:** base branch is `main` (no `master`).

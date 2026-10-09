@@ -31,9 +31,7 @@ async function run() {
   // Demo Light Mode Cards
   await page.emulateMedia({ colorScheme: "light" });
   await page.evaluate(() => {
-    localStorage.setItem("bits_theme", "light");
-    localStorage.setItem("bionis-theme", "light");
-    document.documentElement.classList.remove("dark");
+    localStorage.setItem("bits_theme", "light");    document.documentElement.classList.remove("dark");
     window.scrollBy(0, 380);
   });
   await page.waitForTimeout(600);
@@ -47,9 +45,7 @@ async function run() {
   // Demo Dark Mode Cards
   await page.emulateMedia({ colorScheme: "dark" });
   await page.evaluate(() => {
-    localStorage.setItem("bits_theme", "dark");
-    localStorage.setItem("bionis-theme", "dark");
-    document.documentElement.classList.add("dark");
+    localStorage.setItem("bits_theme", "dark");    document.documentElement.classList.add("dark");
   });
   await page.waitForTimeout(600);
 

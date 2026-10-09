@@ -1,5 +1,23 @@
 # Session / prompt progress log
 
+> **SYSTEM_AUDIT.md §64 — historical record, read with these corrections.**
+>
+> This log describes the **mock** CRM as it stood on 2026-09-12/13 (commit `76576d8`).
+> The mock has since been replaced by the real, Supabase-backed application, and
+> three of the things recorded here no longer exist:
+>
+> - the **mock store** (data is now persisted — `lib/crm/store.tsx` fetches
+>   `/api/crm/leads` from the live `inbound_leads` table);
+> - the **e2e harness** (there is no `e2e/` directory; `package.json` ships
+>   `test:crm`, `test:responsive`, `test:keyboard`, `test:api` and `test:seo` node
+>   scripts instead);
+> - the **pages** listed at lines 16, 17, 19 and 31 — conversations, forms,
+>   templates, campaigns, automations and team. The application now has six routes:
+>   `dashboard`, `leads`, `contacts`, `companies`, `opportunities`, `settings`.
+>
+> Entries are left as written rather than rewritten. A session log that is edited to
+> match the present stops being evidence of what happened.
+
 ## 2026-09-12 — CRM mock implementation
 
 - Built route groups, middleware auth, full `/app/*` page map, mock store, e2e smoke.
@@ -17,7 +35,10 @@
 4. Forms/templates had no actions → Publish toggle + Preview modal.
 5. Settings name hardcoded, not linked to top bar → `displayName` in store.
 6. No status filters on leads/opps/tasks → StatusFilter.
-7. Team invite was missing → soft role-gated Invite.
+7. Team invite was missing → soft role-gated Invite. **§64: this created a durable
+   impression that the CRM has roles. It does not.** `requireCrmUser()`
+   (`lib/crm/api-auth.ts`) authenticates and never authorizes; Rep/Manager/Admin is a
+   client-side display concept, and any authenticated user can read every record.
 8. Activity used lead id not name → fixed.
 9. Touch/cursor consistency → `CrmButton` + larger switches.
 
@@ -28,6 +49,9 @@
 ## 2026-09-13 — UI consistency (buttons / filters / spacing)
 
 - Unified `CrmButton` (44px min, pressed state) + `FilterBar` spacing
+  — **§64: `CrmButton` is now `min-h-10` (40px), verified in
+  `components/crm/crm-controls.tsx`. 40px still clears WCAG 2.2 SC 2.5.8 (24×24);
+  the 44px figure was Apple HIG guidance, not a requirement.**
 - Filters on campaigns, automations, forms, templates, team, conversations
 - Sidebar/mobile nav cursor + min heights; settings switches enlarged
 - `docs/UI_STANDARDS.md`

@@ -130,7 +130,9 @@ export function AppTopbar({
             <Search className="size-4" />
           </InputGroupAddon>
           <InputGroupInput
+            id="crm-global-search"
             placeholder="Search deals, accounts, vitals..."
+            aria-label="Search deals, accounts and workspace vitals"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"

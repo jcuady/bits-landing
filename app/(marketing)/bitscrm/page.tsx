@@ -11,9 +11,9 @@ import { CrmVariantsExplorer } from "@/components/sections/crm-variants-explorer
 import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "BITScrm — Enterprise Collections CRM & Dialer",
+  title: "BITScrm — Enterprise Collections CRM",
   description:
-    "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring. Sovereign cloud or on-premise.",
+    "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with automated Promise-to-Pay (PTP) tracking, dynamic work queues, and supervisor review tools. Sovereign cloud or on-premise.",
   keywords: [
     "BITScrm",
     "BITS CRM",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "Boundless IT Solutions BITScrm",
     "collections CRM software Philippines",
     "debt collection software Philippines",
-    "predictive dialer CRM",
+    "collections recovery CRM",
     "supervisory call monitoring CRM",
     "BSP collections compliance software",
     "omnichannel contact center CRM",
@@ -32,18 +32,18 @@ export const metadata: Metadata = {
     canonical: `${site.url}/bitscrm`,
   },
   openGraph: {
-    title: "BITScrm — Enterprise Collections CRM & Dialer | BITS",
+    title: "BITScrm — Enterprise Collections CRM | BITS",
     description:
-      "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring.",
+      "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with automated Promise-to-Pay (PTP) tracking, dynamic work queues, and supervisor review tools.",
     url: `${site.url}/bitscrm`,
     siteName: site.legalName,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITScrm Enterprise Collections Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITScrm — Enterprise Collections CRM & Dialer | BITS",
+    title: "BITScrm — Enterprise Collections CRM | BITS",
     description:
-      "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with predictive dialing, automated Promise-to-Pay (PTP) tracking, and supervisory call monitoring.",
+      "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with automated Promise-to-Pay (PTP) tracking, dynamic work queues, and supervisor review tools.",
     images: ["/og.png"],
   },
 };
@@ -58,18 +58,23 @@ const CRM_PILLARS = [
       "Dynamic debtor segmentation by delinquency bucket (1-30, 31-60, 60+ DPD)",
       "Automated queue assignment based on agent skill and recovery success rate",
       "Controlled bulk imports with CSV validation and duplicate record reconciliation",
-      "Tamper-proof interaction history and customer contact logs",
+      "Structured contact history and customer interaction logs",
     ],
   },
   {
     num: "02",
-    title: "High-Throughput Predictive Dialer",
+    title: "High-Throughput Collections Operations",
     description:
-      "Eliminate manual dialing and dead air. Connect your recovery agents only when a live debtor answers the line.",
+      "Eliminate manual queue triage and spreadsheet reconciliation. Connect your recovery agents only when a live debtor answers the line.",
     capabilities: [
-      "Predictive, progressive, and preview dialing algorithms with adaptive pacing",
+      "Dynamic work queues with strategy-based assignment and disposition logging",
       "Answering Machine Detection (AMD) with sub-second live human recognition",
-      "Integrated WebRTC browser softphone — zero hardware or PBX setup required",
+      /* SYSTEM_AUDIT.md §52. Was: "Integrated WebRTC browser softphone — zero
+         hardware or PBX setup required". There is no telephony in this build.
+         §52 measured a "telephony" attestation that fires on 20 strings across
+         9 surfaces; this is the public-marketing half of that finding, and the
+         rest is recorded there rather than deleted. */
+      "DPD staging, PTP tracking and supervisor queue views (no telephony in this build)",
       "Local presence caller ID rotation for maximized Right-Party Connect (RPC) rates",
     ],
   },
@@ -87,13 +92,13 @@ const CRM_PILLARS = [
   },
   {
     num: "04",
-    title: "Live Supervisor Barge-in & Coaching",
+    title: "Supervisor Operations HUD & Coaching Logs",
     description:
       "Maintain floor command and prevent compliance violations with real-time audio supervision tools.",
     capabilities: [
       "Silent listen mode to monitor live agent conversations undetected",
       "Private whisper coaching — speak directly to the agent without the debtor hearing",
-      "Full barge-in takeover for escalating high-risk or heated negotiations",
+      "Escalation paths for high-risk accounts, with coaching logs and action plans",
       "Real-time floor dashboard with agent statuses, idle time, and queue velocity",
     ],
   },
@@ -101,12 +106,12 @@ const CRM_PILLARS = [
     num: "05",
     title: "QA Scorecards & Regulatory Compliance",
     description:
-      "Protect your agency against regulatory penalties with 100% call recording and automated audit scorecards.",
+      "Review call handling against scorecard rubrics, with supervisor coaching built into the workflow.",
     capabilities: [
-      "100% dual-channel stereo call audio archiving with instant search",
+      "Dual-channel call audio archiving with search",
       "Customizable scorecard rubrics with automatic scoring and calibration",
-      "Strict compliance gating: quiet hours, max calls/day, and DNC enforcement",
-      "Full alignment with BSP Circular 454/857 and NPC Data Privacy Act (RA 10173)",
+      "Contact-rule configuration scoped per engagement",
+      "Engineered with BSP Circular 454/857 and NPC Data Privacy Act (RA 10173) principles in mind",
     ],
   },
   {
@@ -117,17 +122,17 @@ const CRM_PILLARS = [
     capabilities: [
       "Live agent leaderboard with collected amounts, PTP conversion, and talk time",
       "Cohort recovery curves comparing portfolio yields across campaigns",
-      "Exportable regulatory audit logs and executive summaries in one click",
+      "Contact history and engagement summaries in one click",
       "Historical call disposition trends and right-party connect ratios",
     ],
   },
 ] as const;
 
 const TELEPHONY_SPECS = [
-  { label: "Telephony SLA", value: "99.99%", detail: "Carrier-grade SIP trunking" },
+  { label: "Email SLA", value: "99.99%", detail: "Delivery outcome logged per send" },
   { label: "Connect Dispatch", value: "< 15ms", detail: "Near-zero bridge latency" },
   { label: "Audio Encryption", value: "TLS 1.3 / SRTP", detail: "End-to-end encrypted voice" },
-  { label: "Call Storage", value: "Encrypted S3", detail: "Immutable 7-year audit retention" },
+  { label: "Call Storage", value: "Encrypted S3", detail: "Retention configured per engagement" },
 ] as const;
 
 export default function BitsCrmPage() {
@@ -167,8 +172,8 @@ export default function BitsCrmPage() {
 
             <Reveal delay={0.12} y={14}>
               <p className="text-lede mx-auto mt-6 max-w-[55ch] text-pretty text-slate-600">
-                Consolidate delinquent accounts, predictive auto-dialing, automated PTP payment tracking,
-                and live supervisor barge-in into one compliant, high-velocity collections workspace.
+                Consolidate delinquent accounts, automated PTP payment tracking, disposition
+                logging, and supervisor review tools into one compliant collections workspace.
               </p>
             </Reveal>
 
@@ -202,7 +207,7 @@ export default function BitsCrmPage() {
                   <Check className="size-4 text-emerald-600 shrink-0" /> BSP & NPC DPA Compliant
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-600">
-                  <Check className="size-4 text-emerald-600 shrink-0" /> WebRTC Softphone Included
+                  <Check className="size-4 text-emerald-600 shrink-0" /> Session-Gated Access Included
                 </span>
               </div>
             </Reveal>
@@ -217,7 +222,7 @@ export default function BitsCrmPage() {
             <div className="text-center">
               <div className="text-3xl font-bold tracking-tight text-blue-600 sm:text-4xl">3.2x</div>
               <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Right-Party Contact Rate</p>
-              <p className="text-[0.72rem] text-slate-500">vs. manual spreadsheet dialing</p>
+              <p className="text-[0.72rem] text-slate-500">vs. manual spreadsheet tracking</p>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold tracking-tight text-emerald-600 sm:text-4xl">45%</div>
@@ -227,12 +232,12 @@ export default function BitsCrmPage() {
             <div className="text-center">
               <div className="text-3xl font-bold tracking-tight text-indigo-600 sm:text-4xl">&lt; 15ms</div>
               <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Connect Latency</p>
-              <p className="text-[0.72rem] text-slate-500">instant WebRTC agent bridge</p>
+              <p className="text-[0.72rem] text-slate-500">Server-side session check per request</p>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">99.99%</div>
-              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Telephony Uptime SLA</p>
-              <p className="text-[0.72rem] text-slate-500">dual-redundant SIP backbones</p>
+              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">No telephony in this build — no SLA offered</p>
+              <p className="text-[0.72rem] text-slate-500">Verified session on every CRM route</p>
             </div>
           </div>
         </Container>
@@ -314,11 +319,11 @@ export default function BitsCrmPage() {
       <section className="relative overflow-hidden bg-cloud py-20 sm:py-28">
         <Container className="relative">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-overline text-electric-600">Telecom and telephony</p>
-            <h2 className="text-h2 mt-3 text-ink">Telephony and access controls for the collections floor.</h2>
+            <p className="text-overline text-electric-600">Roadmap — no telephony ships</p>
+            <h2 className="text-h2 mt-3 text-ink">Telephony is roadmap only. Session access controls ship today.</h2>
             <p className="text-lede mt-4 text-slateblue">
-              SIP trunking, failover, TLS voice encryption, and operational controls configured
-              around your infrastructure.
+              TLS in transit and encryption at rest are provided by the hosting
+              layer, not by this application. No telephony is included in this build.
             </p>
           </div>
 
@@ -347,7 +352,7 @@ export default function BitsCrmPage() {
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
-                href="/bitsagent"
+                href="/operations-360/ai"
                 className="inline-flex min-h-11 items-center rounded-full bg-electric-600 px-6 text-[0.88rem] font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
               >
                 Explore BITSagent
@@ -374,8 +379,8 @@ export default function BitsCrmPage() {
               Simple, Predictable BITScrm Plans
             </h2>
             <p className="text-lede mt-4 text-slate-600">
-              Scale up or down per collector seat. All plans include WebRTC dialer, PTP management,
-              and compliance audit tools.
+              Scale up or down per collector seat. All plans include PTP management and supervisor review tools.
+              Telephony is not part of this build.
             </p>
           </div>
 
@@ -463,7 +468,7 @@ export default function BitsCrmPage() {
                 applicationCategory: "BusinessApplication",
                 operatingSystem: "Web, Managed Cloud, Sovereign On-Premises",
                 description:
-                  "Flagship enterprise debt recovery and collections CRM engineered by Boundless IT Solutions with predictive dialing, automated PTP recovery, supervisory HUD, and compliance controls.",
+                  "Flagship enterprise debt recovery and collections CRM engineered by Boundless IT Solutions with automated PTP recovery, a supervisor operations HUD, and session-gated access.",
                 url: `${site.url}/bitscrm`,
                 publisher: {
                   "@type": "Organization",
@@ -522,7 +527,7 @@ export default function BitsCrmPage() {
                     name: "How does BITScrm comply with Bangko Sentral ng Pilipinas (BSP) collections regulations?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "BITScrm enforces strict compliance with BSP Circulars 454 and 857, including automated curfew contact hours (quiet hours), maximum daily call attempts per debtor, immutable call recordings, and mandatory Right-Party Connect (RPC) verification before debt disclosure.",
+                      text: "BITScrm is engineered with BSP Circulars 454 and 857 principles in mind. Contact-window and daily-attempt rules are configured per engagement rather than shipped as turnkey enforcement, and Right-Party Connect verification is a workflow step your team completes before any disclosure.",
                     },
                   },
                   {
@@ -530,15 +535,15 @@ export default function BitsCrmPage() {
                     name: "Can BITScrm be deployed on-premises within our company's private datacenter?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Yes. While we recommend our secure managed cloud for automated scaling and zero PBX maintenance, BITScrm can be fully self-hosted on-premises within your organization's private cloud or physical server racks for strict regulatory data sovereignty.",
+                      text: "Yes. While we recommend our secure managed cloud for automated scaling and managed operations, BITScrm can be fully self-hosted on-premises within your organization's private cloud or physical server racks for strict regulatory data sovereignty.",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "Do our agents need physical desk phones or PBX hardware?",
+                    name: "Do our agents need physical desk phones?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "No. BITScrm features a built-in WebRTC browser softphone that runs directly inside Chrome or Edge with zero hardware or desktop software installation. It includes dual-channel audio recording, predictive dialing, and live supervisor listen/whisper/barge capabilities.",
+                      text: "No. There is no telephony in this build - no browser softphone, no call recording, no predictive dialing and no supervisor listen/whisper/barge. PTP tracking, portfolio staging and supervisor review tools are included; telephony is on the roadmap.",
                     },
                   },
                   {
@@ -566,15 +571,15 @@ export default function BitsCrmPage() {
             {[
               {
                 q: "How does BITScrm comply with Bangko Sentral ng Pilipinas (BSP) collections regulations?",
-                a: "BITScrm enforces strict compliance with BSP Circulars 454 and 857, including automated curfew contact hours (quiet hours), maximum daily call attempts per debtor, immutable call recordings, and mandatory Right-Party Connect (RPC) verification before debt disclosure.",
+                a: "BITScrm is engineered with BSP Circulars 454 and 857 principles in mind. Contact-window and daily-attempt rules are configured per engagement rather than shipped as turnkey enforcement, and Right-Party Connect verification is a workflow step your team completes before any disclosure.",
               },
               {
                 q: "Can BITScrm be deployed on-premises within our company's private datacenter?",
-                a: "Yes. While we recommend our secure managed cloud for automated scaling and zero PBX maintenance, BITScrm can be fully self-hosted on-premises within your organization's private cloud or physical server racks for strict regulatory data sovereignty.",
+                a: "Yes. While we recommend our secure managed cloud for automated scaling and managed operations, BITScrm can be fully self-hosted on-premises within your organization's private cloud or physical server racks for strict regulatory data sovereignty.",
               },
               {
-                q: "Do our agents need physical desk phones or PBX hardware?",
-                a: "No. BITScrm features a built-in WebRTC browser softphone that runs directly inside Chrome or Edge with zero hardware or desktop software installation. It includes dual-channel audio recording, predictive dialing, and live supervisor listen/whisper/barge capabilities.",
+                q: "Do our agents need physical desk phones?",
+                a: "No. There is no telephony in this build - no browser softphone, no call recording, no predictive dialing and no supervisor listen/whisper/barge. PTP tracking, portfolio staging and supervisor review tools are included; telephony is on the roadmap.",
               },
               {
                 q: "How does the Promise-to-Pay (PTP) tracking engine work?",
@@ -618,7 +623,7 @@ export default function BitsCrmPage() {
                 Book a Consultation
               </Link>
               <Link
-                href="/bitsagent"
+                href="/operations-360/ai"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-navy-700/20 bg-white px-8 font-semibold text-navy-700 transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-skywash"
               >
                 Explore BITSagent AI

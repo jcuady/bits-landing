@@ -21,9 +21,9 @@ const differencePoints: DifferencePoint[] = [
     bits: "Engineered from 20 years on real floor leadership — purpose-built for high-velocity queues, agent speed, and compliance.",
   },
   {
-    category: "Telephony & Softphone",
-    generic: "Requires third-party PBX licenses, external hardware, desktop plugins, and per-minute carrier markup fees.",
-    bits: "Native WebRTC softphone built into the CRM — manual, preview, progressive, and predictive pacing with ~0.4s screen-pop.",
+    category: "Calling & Contact",
+    generic: "Competitor tools: require third-party phone-system licences, external hardware, desktop plugins, and per-minute carrier markup fees.",
+    bits: "Account work queues with Promise-to-Pay state and disposition history. There is no telephony in this build — no softphone, no dialer, no screen-pop.",
   },
   {
     category: "Payment Promises (PTP)",
@@ -37,8 +37,16 @@ const differencePoints: DifferencePoint[] = [
   },
   {
     category: "Data Sovereignty & Security",
-    generic: "Data stored in multi-tenant US/EU clouds that violate BSP Circular 808 and Philippine statutory data residency.",
-    bits: "100% sovereign deployment: air-gapped on-premises or private local cloud with cryptographic audit trails and full DB ownership.",
+    generic: "Competitor tools: store data in shared US/EU clouds that can conflict with BSP Circular 808 and Philippine statutory data residency.",
+    /* SYSTEM_AUDIT.md §50. Was: "100% sovereign deployment: air-gapped
+       on-premises or private local cloud with cryptographic audit trails and
+       full DB ownership." There is no cryptographic audit trail — no audit
+       store of any kind — and the deployment-model claims alongside it are
+       design options, not verified configurations. The `generic` line opposite
+       is correct and was left alone: it describes COMPETITORS, which is why
+       `claim-coverage.mjs` still lists this file and why §49.6 says do not
+       "fix" that half. */
+    bits: "Your own Supabase project: you hold the credentials, the rows and the RLS policies.",
   },
   {
     category: "Licensing & Total Cost",
@@ -253,7 +261,7 @@ export function TheDifference() {
                             : "bg-white/10 border-white/20 text-blue-100 hover:bg-white/20 hover:text-white"
                         )}
                       >
-                        Separate PBX
+                        Separate Phone System
                       </button>
                       <button
                         type="button"

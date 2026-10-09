@@ -43,7 +43,7 @@ export const solutionTracks: SolutionTrack[] = [
       "Mobile field app with GPS-tagged visits, photos, and disposition logging",
     ],
     product: "Operations 360 & Field App",
-    href: "/products/collections",
+    href: "/operations-360",
     description:
       "Call center CRM, predictive dialer, QA scorecards, plus a mobile field app with live GPS visit timestamps and offline logging.",
     badge: "Recovery Flagship",
@@ -64,7 +64,7 @@ export const solutionTracks: SolutionTrack[] = [
       "Warm transfer to a live agent with the full account already on screen",
     ],
     product: "BITSagent AI",
-    href: "/bitsagent",
+    href: "/operations-360/ai",
     description:
       "Realistic human-sounding voice AI that handles calls and customer inquiries around the clock with zero wait times.",
     badge: "Sub-300ms Voice",

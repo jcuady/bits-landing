@@ -178,15 +178,15 @@ export default function ContactDetailPage() {
             </h2>
             <div className="flex flex-col gap-2.5">
               <Button asChild variant="outline" size="sm" className="w-full justify-start gap-2">
-                <Link href="/app/conversations">
+                <Link href="/app/leads">
                   <Mail className="size-4 text-electric-600" />
-                  <span>Open Omnichannel Inbox</span>
+                  <span>View Related Leads</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm" className="w-full justify-start gap-2">
-                <Link href="/app/tasks">
+                <Link href="/app/opportunities">
                   <Clock className="size-4 text-emerald-600" />
-                  <span>Schedule Task / Follow-up</span>
+                  <span>View Open Opportunities</span>
                 </Link>
               </Button>
             </div>

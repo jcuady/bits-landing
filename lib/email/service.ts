@@ -45,14 +45,52 @@ export async function sendEmailWithLog(
   const from = options.from || process.env.CONTACT_FROM || "BITS Inquiries <inquiries@boundlessits.com>";
   const recipients = Array.isArray(options.to) ? options.to : [options.to];
 
-  if (!apiKey) {
-    console.warn(`[email-service] RESEND_API_KEY missing — skipping live send to ${recipients.join(", ")}`);
-    return { ok: false, error: "RESEND_API_KEY not configured" };
-  }
-
   let resendId: string | undefined;
   let status: "sent" | "failed" = "sent";
   let errorMessage: string | undefined;
+
+  // Log the outcome to Supabase BEFORE returning in every path, including the
+  // "not configured" early return below. Previously a missing RESEND_API_KEY
+  // returned early and wrote nothing at all, so the one failure mode most
+  // likely to affect every lead was the one with zero observability.
+  const logOutcome = async (s: "sent" | "failed", err?: string) => {
+    try {
+      const { createServiceClient } = await import("@/lib/supabase/server");
+      const supabase = await createServiceClient();
+
+      const { error: logError } = await supabase.from("email_logs").insert({
+        resend_id: resendId,
+        direction: "outbound",
+        recipient: recipients.join(", "),
+        sender: from,
+        subject: options.subject,
+        template: options.templateType,
+        status: s,
+        error_message: err ?? null,
+        metadata: options.metadata ?? {},
+      });
+
+      // supabase-js RESOLVES with { error } on a failed insert; it does not
+      // throw. Without checking `error`, a schema drift or RLS change would
+      // silently drop every log row and this catch would never fire.
+      if (logError) {
+        console.error(
+          "[email-service] email_logs insert rejected (no exception thrown):",
+          logError.message
+        );
+      }
+    } catch (dbErr) {
+      // Non-blocking DB log failure (e.g. the service client itself is unusable)
+      console.error("[email-service] Failed to persist email_log to Supabase:", dbErr);
+    }
+  };
+
+  if (!apiKey) {
+    console.warn(`[email-service] RESEND_API_KEY missing — skipping live send to ${recipients.join(", ")}`);
+    errorMessage = "RESEND_API_KEY not configured";
+    await logOutcome("failed", errorMessage);
+    return { ok: false, error: errorMessage };
+  }
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -87,26 +125,7 @@ export async function sendEmailWithLog(
     console.error("[email-service] Network error during send:", err);
   }
 
-  // Asynchronously log to Supabase email_logs
-  try {
-    const { createServiceClient } = await import("@/lib/supabase/server");
-    const supabase = await createServiceClient();
-
-    await supabase.from("email_logs").insert({
-      resend_id: resendId,
-      direction: "outbound",
-      recipient: recipients.join(", "),
-      sender: from,
-      subject: options.subject,
-      template: options.templateType,
-      status: status,
-      error_message: errorMessage,
-      metadata: options.metadata ?? {},
-    });
-  } catch (dbErr) {
-    // Non-blocking DB log failure
-    console.error("[email-service] Failed to persist email_log to Supabase:", dbErr);
-  }
+  await logOutcome(status, errorMessage);
 
   return {
     ok: status === "sent",

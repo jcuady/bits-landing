@@ -47,6 +47,7 @@ export default function LeadsPage() {
 
         <div className="flex items-center gap-3">
           <select
+            aria-label="Filter leads by status"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="h-9 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs text-slate-200 outline-none hover:border-slate-600 cursor-pointer"
@@ -67,9 +68,9 @@ export default function LeadsPage() {
             <Sparkles className="h-4 w-4 text-amber-400" />
           </div>
           <div>
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+            <h2 className="text-xs font-bold text-white uppercase tracking-wider">
               BITS Predictive AI Scoring Logic
-            </h3>
+            </h2>
             <p className="text-xs text-slate-400 mt-0.5">
               Scores are calculated based on corporate domain authority, executive title verification, stated budget in Philippine Pesos, and urgency.
             </p>

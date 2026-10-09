@@ -13,14 +13,14 @@ import {
 import { deploymentModels, securityArchitecture, site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Security, Compliance & Deployment | BITS",
+  title: "Security, Compliance & Deployment",
   description:
-    "Role-based access control, campaign data isolation, immutable audit trails, and statutory contact controls — aligned to BSP, NPC, SEC, and ISO principles. Deploy on our managed cloud or on your own servers.",
+    "Session-authenticated access to every CRM route, no-store responses for personal data, rate-limited public write paths, and cloud or on-premises deployment. Role-based record isolation is roadmap, not shipped.",
   alternates: { canonical: `${site.url}/security` },
   openGraph: {
     title: "BITS Security, Compliance & Deployment",
     description:
-      "Role-based access control, campaign isolation, immutable audit trails, and cloud or on-premises deployment for regulated Philippine businesses.",
+      "Session-checked access on every CRM route, no-store personal-data responses, rate-limited public write paths, and cloud or on-premises deployment. Per-role record isolation is roadmap, not shipped.",
     url: `${site.url}/security`,
     siteName: site.legalName,
     type: "website",
@@ -43,7 +43,7 @@ export default function SecurityPage() {
         url: `${site.url}/security`,
         name: "BITS Security, Compliance & Deployment",
         description:
-          "Access control, data isolation, audit trails, statutory contact controls, and cloud or on-premises deployment options.",
+          "Access control, data residency, consent handling, and cloud or on-premises deployment options.",
         publisher: { "@type": "Organization", name: site.legalName, url: site.url },
       },
       {
@@ -83,10 +83,21 @@ export default function SecurityPage() {
             </Reveal>
             <Reveal delay={0.06}>
               <p className="text-lede mx-auto mt-6 max-w-[58ch] text-slateblue text-pretty">
-                Customer records, financial transactions, and call audio are protected by strict
-                role permissions, campaign-level data isolation, and tamper-evident activity logs.
-                Run it on our managed cloud or on your own servers — the controls do not change.
+                Every CRM page and API endpoint checks a verified session on the server
+                before any privileged database client is touched, personal-data responses
+                are served no-store, and public write paths are rate limited and schema
+                validated. Run it on our managed cloud or on your own servers — the
+                session and data-handling controls are the same in both.
               </p>
+              {/*
+                SYSTEM_AUDIT.md §29. This hero previously read: "Customer records,
+                financial transactions, and call audio are protected by strict role
+                permissions, campaign-level data isolation, and tamper-evident activity
+                logs." None of the three exist: every RLS policy is `using (true)` for
+                authenticated, the application is single-tenant, and there is no
+                audit-log table. This contradicted section 3 of the same page, which
+                had already been corrected.
+              */}
             </Reveal>
             <Reveal delay={0.08}>
               <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -115,8 +126,10 @@ export default function SecurityPage() {
               <p className="text-overline text-electric-600">How it is protected</p>
               <h2 className="text-h2 mt-4 text-ink text-balance">Six Controls That Do the Work</h2>
               <p className="text-lede mt-5 text-slateblue text-pretty">
-                These are not policy documents. Each one is enforced in the product, and each one
-                leaves a record.
+                These are not policy documents. Each one is enforced in code, and each one can be
+                shown to you. They are also the whole list — this build does not yet
+                enforce per-role authorization or record an audit trail, and the next
+                section says so plainly.
               </p>
             </Reveal>
           </div>
@@ -150,16 +163,41 @@ export default function SecurityPage() {
               <Reveal>
                 <p className="text-overline text-electric-600">Access control</p>
                 <h2 className="text-h2 mt-4 text-ink text-balance">
-                  Every Role Sees a Different System
+                  Authentication Is Enforced on the Server
                 </h2>
+                {/*
+                  This section previously read: "Permissions are enforced on the
+                  server, not hidden in the interface. A user who is not authorised
+                  for an account receives a refusal — they never receive the
+                  record."
+
+                  That was false, and it was the most consequential claim in the
+                  repository. `requireCrmUser()` (lib/crm/api-auth.ts) resolves a
+                  Supabase session and checks that a user EXISTS — it never reads
+                  a role. Any authenticated user can read every lead, contact,
+                  company and email log. The Rep/Manager/Admin role is a
+                  client-side display concept only; see SYSTEM_AUDIT.md §17.2
+                  and §22.
+
+                  Corrected 8 Oct 2026 to state the real boundary. Role-based
+                  authorization is a roadmap item, not a shipped control.
+                */}
                 <p className="text-lede mt-5 text-slateblue text-pretty">
-                  Permissions are enforced on the server, not hidden in the interface. A user who
-                  is not authorised for an account receives a refusal — they never receive the
-                  record.
+                  Every CRM page and API endpoint requires a verified Supabase
+                  session, and the check runs server-side before any privileged
+                  database client is touched. An anonymous or forged request is
+                  refused before it can reach customer data.
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-slate-600">
-                  The same applies to the mobile field app: a field agent signed into one account
-                  cannot reach another, even from a saved link or an old session.
+                  <strong className="font-semibold text-ink">
+                    What we do not claim:
+                  </strong>{" "}
+                  authentication is not authorization. Roles in this build are a
+                  display concept, not a server-enforced boundary — a signed-in
+                  user can currently read every CRM record. Per-role,
+                  per-action authorization is on the roadmap. If your compliance
+                  requirements depend on record-level isolation, treat that as
+                  unimplemented until we confirm it in writing.
                 </p>
               </Reveal>
             </div>
@@ -171,17 +209,17 @@ export default function SecurityPage() {
                     <div>
                       <p className="text-sm font-bold text-ink">Role boundary matrix</p>
                       <p className="text-xs text-slate-500">
-                        Sample scoping — final permissions are set during deployment
+                        Illustrative target scoping — not enforced by this build
                       </p>
                     </div>
-                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-emerald-700">
-                      Server-enforced
+                    <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-amber-700">
+                      Roadmap
                     </span>
                   </div>
 
                   <div className="overflow-x-auto overscroll-x-contain p-2">
                     <table className="w-full min-w-[26rem] text-left text-xs">
-                      <caption className="sr-only">Role-based access control matrix</caption>
+                      <caption className="sr-only">Target role model for a configured deployment</caption>
                       <thead>
                         <tr className="border-b border-linelight bg-slate-50/80 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
                           <th scope="col" className="px-4 py-3">Role</th>
@@ -210,8 +248,8 @@ export default function SecurityPage() {
                     </table>
                   </div>
                 </div>
-                <figcaption className="mt-3 text-center text-xs text-slate-400">
-                  Concrete permissions are customised during deployment.
+                <figcaption className="mt-3 text-center text-xs text-slate-500">
+                  Target model only. This build does not enforce per-role access — any authenticated operator can read every CRM record today.
                 </figcaption>
               </figure>
             </Reveal>
@@ -227,8 +265,8 @@ export default function SecurityPage() {
               <p className="text-overline text-electric-600">Data handling</p>
               <h2 className="text-h2 mt-4 text-ink text-balance">What Happens to Your Data</h2>
               <p className="text-lede mt-5 text-slateblue text-pretty">
-                A plain statement of what is stored, who can reach it, and what leaves a record
-                behind.
+                A plain statement of what is stored, who can reach it, and what is sent to a
+                browser cache.
               </p>
             </Reveal>
           </div>
@@ -293,7 +331,8 @@ export default function SecurityPage() {
               <h2 className="text-h2 mt-4 text-ink text-balance">Two Ways to Run It</h2>
               <p className="text-lede mt-5 text-slateblue text-pretty">
                 Choose based on your data residency requirements and how much infrastructure you
-                want to own. The security controls above apply identically in both.
+                want to own. The session, consent and data-handling controls described above are
+                identical in both.
               </p>
             </Reveal>
           </div>

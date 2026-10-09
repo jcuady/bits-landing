@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { Magnetic } from "@/components/ui/magnetic";
-import { bitsProducts, pricingTiers, site, whiteLabelBrandingOption } from "@/lib/site";
+import { bitsProducts, pricingTiers, site, whiteLabelBrandingOption, PRODUCT_COUNT } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ProductMockupBoard } from "@/components/sections/products-suite";
 import {
@@ -51,16 +51,16 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   if (!product) {
     return {
-      title: "Product Not Found | BITS",
+      title: "Product Not Found",
     };
   }
 
   const isCollections = resolvedSlug === "collections";
   const title = isCollections
-    ? "Operations 360 (OMS) — Top CRM for Collections Agency & Debt Recovery | BITS"
+    ? "Operations 360 (OMS) — Top CRM for Collections Agency"
     : `${product.name} — ${product.shortName}`;
   const description = isCollections
-    ? "Operations 360 (OMS) is rated the #1 top CRM for collections agency floors and enterprise debt recovery. Featuring sub-350ms predictive dialing, automated PTP scheduling, supervisory HUD, and sovereign compliance with zero per-seat fees."
+    ? "Operations 360 (OMS) is rated the #1 top CRM for collections agency floors and enterprise debt recovery. It ships automated PTP scheduling, DPD portfolio staging, QA scorecards and supervisor coaching logs, deploys as managed cloud or a self-hosted instance in your own data centre, and is licensed per site rather than per seat. No telephony ships in this build: no dialer, softphone, whisper, barge-in or call recording. No regulatory certification is claimed; BSP obligations remain yours as the data controller."
     : `${product.description.slice(0, 150)}... Custom enterprise software engineered by Boundless IT Solutions (BITS).`;
 
   const extraKeywords = isCollections
@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
         "top operations management system",
         "best operations management system",
         "top debt recovery software",
-        "predictive dialer for collections",
+        "collections crm promise to pay automation",
         "sovereign debt recovery platform",
       ]
     : [];
@@ -139,7 +139,7 @@ function getProductProblems(product: ProductItem) {
             "Managing large borrower portfolios on static spreadsheets causes high-priority past-due accounts to slip through the cracks, leading to broken promises to pay and lower portfolio yields.",
         },
         {
-          title: "Manual Dialing Fatigue & Slow Connect Rates",
+          title: "Floor pain point: Manual Dialing Fatigue & Slow Connect Rates",
           description:
             "Collectors manually punching numbers into desk phones waste up to 45 minutes of every hour on busy signals, answering machines, and disconnected lines.",
         },
@@ -270,7 +270,7 @@ function getProductProblems(product: ProductItem) {
             "Billing enterprise clients with custom usage meters or milestone deposits on spreadsheets creates cash collection delays and payment mismatches.",
         },
         {
-          title: "PCI-DSS Security Vulnerabilities",
+          title: "Floor pain point: PCI-DSS Security Vulnerabilities",
           description:
             "Storing raw customer payment information on internal servers exposes organizations to catastrophic breach liabilities and regulatory shutdown.",
         },
@@ -468,7 +468,7 @@ function getProductProblems(product: ProductItem) {
             "Generic off-the-shelf software forces your operators to change how they work to fit the tool, creating friction and shadow workarounds on the floor.",
         },
         {
-          title: "Lack of Auditable Compliance & RBAC",
+          title: "Floor pain point: Lack of Auditable Compliance & RBAC",
           description:
             "Without granular role-based permissions and immutable activity logs, operations remain vulnerable to regulatory non-compliance and data security risks.",
         },
@@ -549,7 +549,7 @@ function getBespokeFaqQuestion(id: string, name: string) {
     case "service":
       return {
         q: "How does BITScrm Collections enforce compliance with BSP Circulars 454 and 857?",
-        a: "BITScrm Collections includes automated contact window enforcement that locks outgoing calls and SMS outside of legally permitted hours (6:00 AM to 10:00 PM), records dual-channel audio for 7-year retention, and logs all Promise-to-Pay arrangements to an immutable audit trail.",
+        a: "It does not, yet. This build enforces no contact-window rules, records no audio, and writes to no immutable audit store. What it does ship is the record: debtor accounts, DPD staging, Promise-to-Pay arrangements and QA scorecards, in a database you control. BSP Circular 454/857 compliance obligations remain yours as the data controller.",
       };
     case "logistics":
       return {
@@ -571,7 +571,7 @@ function getBespokeFaqQuestion(id: string, name: string) {
 
 function getCrmSynergy(currentId: string, siblingId: string): string {
   if (siblingId === "collections" || siblingId === "service") {
-    return "Shares real-time delinquent account staging, DPD aging brackets, and supervisor softphone whisper logs directly with your account records.";
+    return "Shares real-time delinquent account staging, DPD aging brackets, and supervisor coaching logs directly with your account records. No softphone or telephony ships in this build.";
   }
   if (siblingId === "support") {
     return "Connects omnichannel ticket histories, multi-tier P1–P4 SLA countdowns, and real-time CSAT telemetry directly to customer records.";
@@ -583,9 +583,9 @@ function getCrmSynergy(currentId: string, siblingId: string): string {
     return "Triggers automated omnichannel SMS, Viber, and email sequences based on account status, DPD aging, or deal milestones.";
   }
   if (siblingId === "commerce") {
-    return "Instantly bills enterprise retainers, licenses, and metered usage via PCI-DSS tokenized card or Maya gateways with automated dunning.";
+    return "Instantly bills enterprise retainers, licenses, and metered usage via tokenized card or Maya gateways with automated dunning.";
   }
-  return "Natively synchronizes customer accounts, interactions, and operational audit trails on one shared database schema.";
+  return "Natively synchronizes customer accounts, interactions, and customer and account records on one shared database schema.";
 }
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
@@ -611,7 +611,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       p.id !== product.id
   );
   const crmVariantsList = [
-    { id: "collections", label: "Collections (Flagship)", href: "/bitscrm" },
+    { id: "collections", label: "Collections (Flagship)", href: "/operations-360/crm" },
     { id: "support", label: "Support Desk", href: "/products/support" },
     { id: "sales", label: "Sales Pipeline", href: "/products/sales" },
     { id: "marketing", label: "Marketing Journeys", href: "/products/marketing" },
@@ -712,16 +712,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         description: product.description,
         url: `${site.url}/products/${product.id}`,
         featureList: product.capabilities.join(", "),
-        ...(product.id === "collections"
-          ? {
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "9.9",
-                bestRating: "10.0",
-                reviewCount: "48",
-              },
-            }
-          : {}),
+        // SYSTEM_AUDIT.md §30.3 — aggregateRating removed.
+        //
+        // This block asserted 9.9/10 from 48 reviews. No review text, star
+        // rating or review source exists anywhere on this site, and the entity
+        // being rated is the site publishing the rating. Google's review-snippet
+        // guidance states the marked-up rating must be visible on the same page
+        // and must not be fake; violations can trigger a structured-data manual
+        // action that removes rich-result eligibility.
+        //
+        // Re-add it only alongside real, on-page review content. Do not restore
+        // the number alone.
         publisher: {
           "@type": "Organization",
           name: "BITS - Boundless IT Solutions",
@@ -928,10 +929,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
             <div className="text-center">
               <div className="font-mono text-3xl font-bold tracking-tight text-indigo-600 sm:text-4xl">
-                0-Day
+                Session
               </div>
-              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Audit Trail Latency</p>
-              <p className="text-[0.72rem] text-slate-500">Immutable WORM activity logs</p>
+              <p className="mt-1 text-[0.8rem] font-semibold text-slate-700">Access Model</p>
+              {/* SYSTEM_AUDIT.md §48. Previously: value "0-Day", label "Audit
+                  Trail Latency", sub "Immutable WORM activity logs". There is no
+                  audit store in this codebase — no table, no writes, no
+                  retention, append-only or otherwise. "WORM" also carries a
+                  specific regulatory meaning, so it is the worst possible word
+                  to print next to a claim that has not shipped. This tile
+                  rendered on every product detail page and was invisible to the
+                  AI-disclosure gate, because this file is not in
+                  SECURITY_SURFACES. Replaced with a control that is real. */}
+              <p className="text-[0.72rem] text-slate-500">
+                Verified server-side on every CRM route
+              </p>
             </div>
             <div className="text-center">
               <div className="font-mono text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -984,14 +996,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.2em] text-blue-600">
-              Live Workspace Console
+              Illustrative Preview Console
             </span>
             <h2 className="text-h2 mt-3 font-bold text-slate-900">
               Experience {product.name} in Action
             </h2>
             <p className="text-lede mt-4 text-slate-600">
               Engineered with clean light-mode surfaces, real-time status cues, and zero clutter.
-              Explore the live interactive module below.
+              Explore an illustrative interface preview below.
             </p>
           </div>
 
@@ -1264,7 +1276,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 href="/products"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-bold text-slate-800 shadow-xs transition-colors hover:bg-slate-50 active:scale-[0.98]"
               >
-                Explore All 18 Products
+                Explore All {PRODUCT_COUNT} Products
               </Link>
             </div>
           </div>

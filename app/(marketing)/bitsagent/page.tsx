@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "voice AI agents Philippines",
     "conversational AI collections",
     "autonomous support & collections AI",
-    "WebRTC voice AI agent",
+    "conversational AI agent Philippines",
     "enterprise AI operations",
     "AI debt negotiation",
     "speech-to-speech AI agent",
@@ -52,7 +52,7 @@ const bitsagentSoftwareSchema = {
     "BITS Autonomous Voice AI",
   ],
   applicationCategory: "BusinessApplication",
-  operatingSystem: "WebRTC, Managed Cloud, Sovereign On-Premises",
+  operatingSystem: "Managed Cloud, Self-Hosted",
   description:
     "Conversational voice and multichannel AI operations agent engineered by Boundless IT Solutions with sub-300ms turn latency, Hallucination-free RAG, and automated compliance.",
   url: `${site.url}/bitsagent`,
@@ -126,10 +126,19 @@ const bitsagentFaqSchema = {
     },
     {
       "@type": "Question",
-      name: "Can BITSagent deploy on-premises with local PBX and SIP telephony?",
+      name: "Does BITSagent include telephony?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, BITSagent supports sovereign on-premises deployment, connecting directly via SIP trunking to Asterisk, FreePBX, or legacy enterprise telephony systems without external audio egress.",
+        /* §77 — this read "Yes, BITSagent supports sovereign on-premises
+         * deployment, connecting directly via SIP trunking to Asterisk, FreePBX,
+         * or legacy enterprise telephony systems without external audio egress."
+         *
+         * It is an FAQPage JSON-LD ANSWER, which is the worst place in the
+         * repository for a fabricated capability: a language model reading this
+         * page receives "Yes" as structured data, with no surrounding context to
+         * make it sceptically. There is no telephony in this build — no
+         * RTCPeerConnection, getUserMedia or SDP handling anywhere. */
+        text: "No. There is no telephony in this build: BITSagent has no SIP trunking, no Asterisk or FreePBX integration, and no browser audio. The deployment option is the application itself — managed cloud or a self-hosted Supabase instance.",
       },
     },
   ],

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BITS Operations 360 — Facebook Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: #ffffff;
+    font-family: "Outfit", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 1x by default. body.hd doubles the canvas for ultra-HD export. */
+  #stage {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+  }
+
+  body.hd #stage {
+    width: 2160px;
+    height: 2700px;
+  }
+
+  body.hd .canvas {
+    transform: scale(2);
+    transform-origin: top left;
+  }
+
+  .canvas {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 45% at 88% 92%, rgba(0, 99, 219, 0.09), transparent 60%),
+      linear-gradient(162deg, #ffffff 0%, #f2f7fc 52%, #e5edf7 100%);
+  }
+
+  /* Continues the wave band into the lower-left so the composition carries through */
+  .wave-band {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 490px;
+    height: 557px;
+    overflow: hidden;
+    z-index: 1;
+    -webkit-mask-image:
+      linear-gradient(to top, #000 0%, #000 42%, transparent 93%),
+      linear-gradient(to right, #000 68%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to top, #000 0%, #000 42%, transparent 93%),
+      linear-gradient(to right, #000 68%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  .wave-band img {
+    position: absolute;
+    left: 0;
+    top: -1082px;
+    width: 1225px;
+    height: auto;
+  }
+
+  /* Hero render, bottom-right. Edges dissolve into the canvas so there is no seam. */
+  .hero {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 620px;
+    z-index: 1;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 26%),
+      linear-gradient(to bottom, transparent 0%, #000 18%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 26%),
+      linear-gradient(to bottom, transparent 0%, #000 18%);
+    mask-composite: intersect;
+  }
+
+  .hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 64px 84px 0 84px;
+    z-index: 3;
+  }
+
+  /* White chip gives the silver infinity mark enough contrast to read */
+  .logo-chip {
+    display: inline-block;
+    padding: 18px 28px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow:
+      0 2px 4px rgba(13, 27, 42, 0.05),
+      0 18px 44px -22px rgba(13, 27, 42, 0.3);
+  }
+
+  .logo-chip img {
+    display: block;
+    height: 62px;
+    width: auto;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 42px;
+    padding: 11px 22px 11px 18px;
+    border: 1px solid rgba(0, 99, 219, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  .eyebrow .dot {
+    width: 9px; height: 9px;
+    border-radius: 999px;
+    background: #0063db;
+  }
+
+  .eyebrow span {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #0057bd;
+  }
+
+  h1 {
+    margin-top: 26px;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: #0d1b2a;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: #0063db;
+  }
+
+  .sub {
+    margin-top: 24px;
+    max-width: 540px;
+    font-size: 29px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: #40536d;
+  }
+
+  .cta {
+    margin-top: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 19px 20px 19px 34px;
+    border-radius: 999px;
+    background: #0063db;
+    box-shadow: 0 20px 44px -16px rgba(0, 99, 219, 0.7);
+  }
+
+  .cta span {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+  }
+
+  .cta i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .cta svg { width: 20px; height: 20px; }
+
+  .url {
+    margin-top: 24px;
+    font-size: 27px;
+    font-weight: 500;
+    color: #40536d;
+  }
+</style>
+</head>
+<body>
+  <div id="stage">
+  <div class="canvas">
+    <div class="wave-band">
+      <img src="oms-phone-waves-a.jpg" alt="" />
+    </div>
+
+    <div class="hero">
+      <img src="oms-phone-waves-a.jpg" alt="Operations 360 dashboard on mobile" />
+    </div>
+
+    <div class="top">
+      <div class="logo-chip">
+        <img src="../../public/brand/logo-horizontal.png" alt="BITS — Boundless IT Solutions" />
+      </div>
+
+      <div class="eyebrow">
+        <span class="dot"></span>
+        <span>Operations 360 · OMS</span>
+      </div>
+
+      <h1>
+        Still Chasing Payments<br />
+        Across Spreadsheets<br />
+        <em>&amp; SMS?</em>
+      </h1>
+
+      <p class="sub">
+        CRM, predictive dialer, QA scorecards, supervisor HUD, PTP tracking,
+        and a GPS-tagged mobile field app.
+      </p>
+
+      <div class="cta">
+        <span>EXPLORE OPERATIONS 360</span>
+        <i>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </i>
+      </div>
+
+      <p class="url">www.boundlessits.com</p>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

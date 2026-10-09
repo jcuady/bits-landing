@@ -4,6 +4,34 @@
 > *Last Updated: September 2026*  
 > *Main Platform URL: [https://www.boundlessits.com](https://www.boundlessits.com)*
 
+> ## ⚠️ Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §48) — READ BEFORE QUOTING
+>
+> This is a **confidential internal playbook**, which makes an error here worse
+> than one on a public page: these are sentences a salesperson may say out loud
+> in a deal. It was carrying several claims that are false of this codebase, and
+> it had **no** warning banner — unlike `FULL_SYSTEM_DOCUMENTATION.md`, which got
+> one in an earlier pass.
+>
+> **Removed outright:**
+>
+> | This playbook said | Reality |
+> |---|---|
+> | *"Compliance Lock: Hard-locks outgoing calls and SMS outside legal contact hours (6:00 AM – 10:00 PM) with **100% immutable WORM audio logs**"* | All three parts false. Contact-hour enforcement is *"not part of this build"* (`lib/security-data.ts:120`); there is no audit store of any kind; there is no audio pipeline |
+> | *"built-in browser **WebRTC SIP predictive auto-dialing**"* | **Zero WebRTC in this repository.** No `RTCPeerConnection`, no `getUserMedia`, no SDP handling anywhere |
+> | *"a supervisor QA HUD with **live call listen, whisper coaching, and call barging**"* | No telephony exists. ~~145 mentions of "WebRTC" across 25 files are all marketing copy and demo strings~~ **§71 — remeasured: 38 mentions across 20 code files, 105 across 34 including docs. The count fell because the false claims were deleted, not because the number was always lower.** |
+>
+> **Two things this playbook gets right and should keep doing:** it is explicit
+> that the ROI figures are quantified-outcome claims needing substantiation, and
+> it separates in-repo BITScrm products from the out-of-repo product lines.
+>
+> The out-of-repo lines (ERP, HRMS, Payroll, Inventory, Logistics, Pickleball,
+> Construction) are described throughout and are **left as written** — whether
+> they are real deployments is an owner decision (`SYSTEM_AUDIT.md` §8), and
+> deleting their descriptions here would assert they do not exist.
+>
+> Numeric claims (+38% liquidation, 46% FCR, 68% TCO, sub-300ms) are **not
+> gated** and were not evaluated. Substantiating them is an owner decision (§28).
+
 ---
 
 ## 1. Executive Positioning & Value Proposition
@@ -88,7 +116,20 @@ A client does not "buy the White-Label software"—they purchase **BITS Accounti
 *Target Industry: **Strictly Collections Agencies, Debt Recovery Law Firms, BPOs & Consumer Lenders***
 
 #### What It Does
-BITScrm Collections is our specialized flagship platform engineered exclusively for debt recovery operations. It unifies delinquent debtor portfolio staging (Current, 1-30 DPD, 31-60 DPD, 61-90 DPD, and 90+ DPD write-offs), built-in browser WebRTC SIP predictive auto-dialing, automated Promise-to-Pay (PTP) scheduling, and a supervisor QA HUD with live call listen, whisper coaching, and call barging.
+BITScrm Collections is our specialized flagship platform engineered exclusively for debt recovery operations. It unifies delinquent debtor portfolio staging (Current, 1-30 DPD, 31-60 DPD, 61-90 DPD, and 90+ DPD write-offs), automated Promise-to-Pay (PTP) scheduling, and a supervisor QA view over the floor.
+
+> **Corrected §48.** This previously read *"…built-in browser WebRTC SIP
+> predictive auto-dialing… and a supervisor QA HUD with live call listen,
+> whisper coaching, and call barging."* There is no telephony in this
+> repository: no `RTCPeerConnection`, no `getUserMedia`, no SDP handling.
+> Every one of those terms appears across the codebase as **marketing copy and
+> demo UI only**. Do not demo them as working features.
+
+> **§71 — a fourth false claim survived the §48 banner, in the very section the
+> banner describes.** The banner above removed *"built-in browser WebRTC SIP
+> predictive auto-dialing"* from one place while the same capability was left
+> selling, with an ROI number attached, 114 lines later. A banner that lists
+> what was removed reads as a guarantee that the rest was checked. It was not.
 
 #### Real Operational Pain Points Solved
 - **Spreadsheet Chaos & Lost PTPs**: Delinquency portfolios managed in Excel sheets result in broken payment commitments being forgotten and unrecovered.
@@ -96,10 +137,10 @@ BITScrm Collections is our specialized flagship platform engineered exclusively 
 - **Legal Compliance Fines**: Harassment lawsuits and fines from the Bangko Sentral ng Pilipinas (BSP Circulars 454/857) or NPC resulting from collectors calling outside permitted contact hours.
 
 #### Tangible Business Solution & Quantified ROI
-- **WebRTC Auto-Dialer**: Triples collector right-party connects from 12 to 38 contacts per hour.
+- ~~**WebRTC Auto-Dialer**: Triples collector right-party connects from 12 to 38 contacts per hour.~~ **REMOVED §71 — there is no dialer and no telephony in this build.** The banner 114 lines above already declared this capability absent; it was still selling here with a 3x figure attached. **Do not offer this in a deal.**
 - **Automated PTP Tracker**: Locks payment commitments, recalculates penalty interest, and automatically sends SMS payment links with QR payment codes.
-- **Compliance Lock**: Hard-locks outgoing calls and SMS outside legal contact hours (6:00 AM – 10:00 PM) with 100% immutable WORM audio logs.
-- **Outcome**: **+38% Delinquent Portfolio Liquidation** within 90 days.
+- **Compliance Lock**: ~~Hard-locks outgoing calls and SMS outside legal contact hours (6:00 AM – 10:00 PM) with 100% immutable WORM audio logs.~~ **REMOVED §48 — do not say this.** Contact-hour enforcement is not built (`lib/security-data.ts:120`), there is no audit store, and there is no audio pipeline. If a prospect asks about call recording or contact-hour enforcement, say it is on the roadmap; do not imply it ships.
+- **Outcome**: **+38% Delinquent Portfolio Liquidation** within 90 days. *(Quantified-outcome claim requiring substantiation — owner decision, §28.)*
 
 ---
 
@@ -265,7 +306,7 @@ BITSagent AI Operations is an autonomous conversational AI agent suite capable o
 
 ## 8. Multi-Product Commercial Bundles & Cross-Selling
 
-BITS software engines natively share a unified API, single sign-on (SSO), and relational schema layer. Marketers should position these 5 recommended commercial bundles:
+~~BITS software engines natively share a unified API, single sign-on (SSO), and relational schema layer.~~ **§71 — there is no SSO.** No SAML, no OIDC, no identity-provider integration exists anywhere in this repository; the only authentication is a Supabase email/password session checked by `requireCrmUser()`. A shared relational schema across engines is also not true: the CRM is its own Supabase project. **Do not tell a buyer that BITS federates identity across products.** Marketers should position these 5 recommended commercial bundles:
 
 1. **Collections & Contact Center BPO Suite**:
    - Products: `collections` + `ai-agent` + `rag-engine`
@@ -302,4 +343,4 @@ BITS software engines natively share a unified API, single sign-on (SSO), and re
 - **Marketer's Response**: *"That is exactly what our Universal White-Label Option is built for. You can license any of our 18 software products, host them on your own custom domain (e.g. app.youragency.com), display your own company logo and corporate styling, and package client pricing however you choose. BITS remains 100% invisible under strict NDA."*
 
 ### Objection 4: "Is BITScrm a general CRM like HubSpot?"
-- **Marketer's Response**: *"We offer both! BITScrm Sales, Support, Marketing, and Commerce are built for general commercial enterprise use across any business. In contrast, BITScrm Collections is specialized exclusively for debt recovery operations, consumer lending desks, and recovery BPOs, featuring delinquent aging staging, WebRTC auto-dialers, and BSP compliance locks."*
+- **Marketer's Response**: *"We offer both! BITScrm Sales, Support, Marketing, and Commerce are built for general commercial enterprise use across any business. In contrast, BITScrm Collections is specialized exclusively for debt recovery operations, consumer lending desks, and recovery BPOs, featuring delinquent aging staging, ~~WebRTC auto-dialers, and BSP compliance locks.~~ **§71 — there are no auto-dialers and no BSP compliance locks. Do not deliver this line; the second half of the sentence is false.**"*

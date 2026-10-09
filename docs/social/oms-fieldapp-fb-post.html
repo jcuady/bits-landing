@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BITS Operations 360 — Field App Facebook Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: #0d1b2a;
+    font-family: "Outfit", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout grid ───────────────────────────────────────────────────────
+     One left margin (--m) governs logo, card, CTA and contact strip.
+     One optical centre governs headline, subhead and chips.
+     All fixed, so nothing drifts.                                        */
+  #stage { width: 1080px; height: 1350px; overflow: hidden; }
+  body.hd #stage { width: 2160px; height: 2700px; }
+  body.hd .canvas { transform: scale(2); transform-origin: top left; }
+
+  .canvas {
+    --m: 76px;
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    background: linear-gradient(100deg, #1362df 0%, #2377f3 42%, #3c8bf6 76%, #5ea2f9 100%);
+  }
+
+  /* ── BITS hero cloud plate + hero atmosphere ── */
+  .sky { position: absolute; inset: 0; background: url("../../public/images/hero-sky-bg.jpg") center / 220% auto no-repeat; }
+  .sky-tint {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(19,98,223,.30) 0%, rgba(35,119,243,.16) 42%, rgba(60,139,246,.06) 72%, rgba(94,162,249,.02) 100%);
+  }
+  .scrim {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 74% 46% at 50% 26%, rgba(8,44,120,.34) 0%, transparent 76%);
+  }
+  .bloom {
+    position: absolute;
+    left: 50%; top: 6%;
+    width: 900px; height: 620px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(150,205,255,.30) 0%, transparent 68%);
+    pointer-events: none;
+  }
+
+  /* ── Masthead ── */
+  /* Logo and CTA share one optical centreline (y = 88) in the masthead row */
+  .logo {
+    position: absolute;
+    left: var(--m); top: 67px;
+    height: 42px;
+    width: auto;
+    z-index: 6;
+  }
+
+  .head {
+    position: absolute;
+    left: 0; right: 0; top: 176px;
+    z-index: 5;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 76px;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    color: #ffffff;
+    text-shadow: 0 10px 34px rgba(2,16,52,.30);
+  }
+
+  .sub {
+    margin: 24px auto 0;
+    max-width: 880px;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.42;
+    color: rgba(255,255,255,.94);
+    text-shadow: 0 4px 18px rgba(2,16,52,.22);
+  }
+
+  /* ── Feature chips: one row, even gaps, optically centred ── */
+  .chips {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    height: 58px;
+    padding: 0 30px;
+    border-radius: 999px;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    white-space: nowrap;
+    box-shadow: 0 14px 30px -12px rgba(2,16,52,.42);
+  }
+
+  .chip .dia {
+    width: 11px; height: 11px;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .chip.light { background: #ffffff; color: #0d1b2a; transform: rotate(-2.2deg); }
+  .chip.light .dia { background: #0063db; }
+
+  .chip.light2 { background: #ffffff; color: #0d1b2a; transform: rotate(1.6deg); }
+  .chip.light2 .dia { background: #0063db; }
+
+  .chip.dark {
+    background: rgba(9,20,42,.94);
+    color: #ffffff;
+    transform: rotate(-1deg);
+    box-shadow: 0 16px 34px -12px rgba(2,16,52,.7);
+  }
+  .chip.dark .dia { background: #4cc9f0; }
+
+  /* ── Device ─────────────────────────────────────────────────────────────
+     Phone box is 700 x 1254, matching the 1536x2752 render exactly.
+     Logo slot measured off the render: centre 33.56% / 27.12%,
+     rotated rect 22.82% x 2.11%, screen rotated -10.5deg.            */
+  .phone {
+    position: absolute;
+    left: 380px; top: 440px;
+    width: 760px; height: 1361px;
+    z-index: 3;
+  }
+
+  .phone > img#phone {
+    width: 100%; height: 100%;
+    display: block;
+  }
+
+  /* Real BITS lockup dropped into the app-bar slot */
+  .phone-logo {
+    position: absolute;
+    left: 33.56%;
+    top: 27.12%;
+    height: 1.72%;
+    width: auto;
+    transform: translate(-50%, -50%) rotate(-10.5deg);
+    transform-origin: center;
+  }
+
+  /* ── Visit card ── */
+  .visit-card {
+    position: absolute;
+    left: var(--m); top: 880px;
+    width: 540px;
+    padding: 34px 38px 36px;
+    border-radius: 32px;
+    background: #ffffff;
+    z-index: 4;
+    transform: rotate(-1.4deg);
+    box-shadow: 0 34px 66px -22px rgba(2,16,52,.55), 0 2px 6px rgba(2,16,52,.12);
+  }
+
+  .visit-card .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0063db;
+  }
+
+  .visit-card .label .dot {
+    width: 10px; height: 10px;
+    border-radius: 999px;
+    background: #22c55e;
+  }
+
+  .visit-card h3 {
+    margin-top: 13px;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #0d1b2a;
+  }
+
+  .visit-card ul { margin-top: 18px; list-style: none; }
+
+  .visit-card li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 23px;
+    font-weight: 500;
+    color: #40536d;
+    line-height: 1.3;
+  }
+
+  .visit-card li + li { margin-top: 13px; }
+
+  .visit-card li .tick {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 999px;
+    background: #eaf2ff;
+    flex-shrink: 0;
+  }
+
+  .visit-card li .tick svg { width: 12px; height: 12px; color: #0063db; }
+
+  /* ── CTA: masthead right, centred on the logo's line ── */
+  .cta {
+    position: absolute;
+    right: var(--m); top: 50px;
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 15px 17px 15px 32px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 24px 48px -18px rgba(2,16,52,.6);
+  }
+
+  .cta span { font-size: 25px; font-weight: 700; color: #0d1b2a; letter-spacing: -0.01em; }
+
+  .cta i {
+    display: flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px;
+    border-radius: 999px;
+    background: #0063db;
+  }
+
+  .cta svg { width: 20px; height: 20px; }
+
+  /* ── Contact strip: inked, so it stays legible over the cloud plate ── */
+  .contact {
+    position: absolute;
+    left: var(--m); top: 1230px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 999px;
+    background: rgba(9,20,42,.88);
+    border: 1px solid rgba(255,255,255,.22);
+    box-shadow: 0 18px 34px -14px rgba(2,16,52,.55);
+  }
+
+  .contact .c-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.005em;
+  }
+
+  .contact .c-item svg { width: 17px; height: 17px; color: #ffffff; opacity: .92; flex-shrink: 0; }
+
+  .contact .sep { width: 4px; height: 4px; border-radius: 999px; background: rgba(255,255,255,.6); }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div class="canvas">
+      <div class="sky"></div>
+      <div class="sky-tint"></div>
+      <div class="bloom"></div>
+      <div class="scrim"></div>
+
+      <img class="logo" src="../../public/brand/logo-reverse.png" alt="BITS — Boundless IT Solutions" />
+
+      <div class="head">
+        <h1>Run Your Field Team<br />From One Mobile App</h1>
+        <p class="sub">Log visits in the field. Keep the office and the call floor on the same account.</p>
+        <div class="chips">
+          <div class="chip light"><span class="dia"></span>GPS tagged</div>
+          <div class="chip light2"><span class="dia"></span>Photo proof</div>
+          <div class="chip dark"><span class="dia"></span>Works offline</div>
+        </div>
+      </div>
+
+      <div class="phone">
+        <img id="phone" src="fieldapp-phone-v2-a.jpg" alt="Operations 360 field app" />
+        <img class="phone-logo" src="../../public/brand/logo-reverse.png" alt="" />
+      </div>
+
+      <div class="visit-card">
+        <span class="label"><span class="dot"></span>Visit logged</span>
+        <h3>Back office updated</h3>
+        <ul>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>Location and time stamped</li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>Photos attached to the account</li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>Promise to pay set on the spot</li>
+        </ul>
+      </div>
+
+      <div class="cta">
+        <span>Book a Consultation</span>
+        <i>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </i>
+      </div>
+
+      <div class="contact">
+        <span class="c-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+            <polyline points="3 7 12 13.5 21 7" />
+          </svg>
+          bits_inquiries@boundlessits.com
+        </span>
+        <span class="sep"></span>
+        <span class="c-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" />
+          </svg>
+          boundlessits.com
+        </span>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Knock the studio-white backdrop out of the device render with an edge flood fill,
+  // so interior white UI cards survive untouched.
+  window.__keyed = false;
+  const src = new Image();
+  src.onload = () => {
+    const c = document.createElement("canvas");
+    c.width = src.naturalWidth;
+    c.height = src.naturalHeight;
+    const ctx = c.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(src, 0, 0);
+
+    const d = ctx.getImageData(0, 0, c.width, c.height);
+    const px = d.data;
+    const W = c.width, H = c.height;
+    const seen = new Uint8Array(W * H);
+    const stack = [];
+
+    function seed(x, y) {
+      const i = y * W + x;
+      if (!seen[i]) { seen[i] = 1; stack.push(i); }
+    }
+    for (let x = 0; x < W; x++) { seed(x, 0); seed(x, H - 1); }
+    for (let y = 0; y < H; y++) { seed(0, y); seed(W - 1, y); }
+
+    function isBg(i) {
+      const r = px[i], g = px[i + 1], b = px[i + 2];
+      const mn = Math.min(r, g, b), mx = Math.max(r, g, b);
+      return mn > 224 && (mx - mn) < 28;
+    }
+
+    while (stack.length) {
+      const i = stack.pop();
+      if (!isBg(i * 4)) continue;
+      px[i * 4 + 3] = 0;
+      const x = i % W, y = (i / W) | 0;
+      if (x > 0)     { const j = i - 1; if (!seen[j]) { seen[j] = 1; stack.push(j); } }
+      if (x < W - 1) { const j = i + 1; if (!seen[j]) { seen[j] = 1; stack.push(j); } }
+      if (y > 0)     { const j = i - W; if (!seen[j]) { seen[j] = 1; stack.push(j); } }
+      if (y < H - 1) { const j = i + W; if (!seen[j]) { seen[j] = 1; stack.push(j); } }
+    }
+
+    ctx.putImageData(d, 0, 0);
+    document.getElementById("phone").src = c.toDataURL("image/png");
+    window.__keyed = true;
+  };
+  src.src = "fieldapp-phone-v2-a.jpg";
+</script>
+</body>
+</html>

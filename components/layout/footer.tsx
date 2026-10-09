@@ -67,8 +67,8 @@ const footerNavigation: FooterSection[] = [
       { label: "Floor Powerhouse & Dialer", href: "/#floor-showcase" },
       { label: "Collections Command Center", href: "/#features" },
       { label: "Productivity Bento", href: "/#features-bento" },
-      { label: "BITSagent Voice AI", href: "/bitsagent" },
-      { label: "BITS OMS Collections", href: "/bitscrm" },
+      { label: "BITSagent Voice AI", href: "/operations-360/ai" },
+      { label: "BITS OMS Collections", href: "/operations-360/crm" },
     ],
   },
   {

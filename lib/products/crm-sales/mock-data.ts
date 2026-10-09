@@ -20,7 +20,7 @@ export const INITIAL_DEALS: Deal[] = [
   },
   {
     id: "deal-002",
-    title: "Proprietary Voice AI Collections & Telephony Core",
+    title: "Collections Operations &amp; QA Core",
     company: "BDO Unibank Enterprise",
     industry: "Banking & Financial Services",
     location: "Makati CBD, Metro Manila",
@@ -221,8 +221,15 @@ export const CPQ_CATALOG: CPQProductItem[] = [
   },
   {
     id: "cpq-voice-ai",
-    name: "BITSagent Sub-300ms Voice AI Dialer Add-on",
-    description: "BSP-compliant debt recovery & lead qualification voice assistant with zero hallucinations.",
+    /* §79 — this SKU was sold as "BITSagent Sub-300ms Voice AI Dialer Add-on"
+     * with "BSP-compliant … zero hallucinations". There is no telephony and
+     * no voice model in this build, and "zero hallucinations" is an absolute
+     * claim about a probabilistic system that no vendor can make. It is
+     * synthetic demo catalogue data, so it is kept as a catalogue entry and
+     * relabelled rather than deleted — but it no longer advertises a
+     * capability that does not exist. */
+    name: "BITSagent Voice AI Add-on (not available in this build)",
+    description: "Placeholder catalogue entry for future voice qualification. No telephony or voice model ships in this build, and no BSP certification is claimed.",
     monthlyPerSeat: 2400,
     selected: false,
     quantity: 10,

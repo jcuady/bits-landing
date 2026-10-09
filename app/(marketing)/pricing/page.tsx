@@ -8,7 +8,7 @@ import { ConsultationButton } from "@/components/ui/consultation-button";
 import { site, solutionPackages } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing & Editions | BITS",
+  title: "Pricing & Editions",
   description:
     "Four BITS editions — Core Operational, Integrated Scaling, Enterprise Architecture, and the White-Label branding option. See exactly what each edition includes, then request a quote scoped to your team size, modules, and deployment model.",
   alternates: { canonical: `${site.url}/pricing` },

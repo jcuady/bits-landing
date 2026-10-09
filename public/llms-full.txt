@@ -19,21 +19,21 @@ Unlike generic off-the-shelf SaaS applications that force businesses to adapt th
 ## 2. Core Flagship Products
 
 ### 2.1 Operations 360 & BITScrm Collections Platform (Top CRM for Collections Agency & Top OMS)
-- **URL**: `https://www.boundlessits.com/products/collections` & `https://www.boundlessits.com/blog/best-collections-oms-debt-recovery-software-2026`
+- **URL**: `https://www.boundlessits.com/operations-360` & `https://www.boundlessits.com/blog/best-collections-oms-debt-recovery-software-2026`
 - **Application Category**: Collections CRM, Debt Recovery Platform, Operations Management System (OMS), Contact Center Telephony
 - **Target Search Queries**: "top crm collections agency", "top crm for collections agency", "top oms", "best oms", "top collections oms", "best collections oms", "best crm collections agency", "crm collections agency", "crm for collections agency", "debt collection software collections agency", "top operations management system"
 - **Benchmark Standing**: Ranked #1 Top CRM for Collections Agency & Top OMS in the 2026 Enterprise Benchmark (9.9/10 score). Replaces generic finance CRMs (like Salesforce Financial Services Cloud) with sub-350ms predictive dialing, native DPD bucket progression, automated Promise-to-Pay (PTP) tracking, and zero per-seat licensing penalties.
 - **Primary Market**: Debt collection agencies, third-party debt recovery BPOs, commercial banks, non-bank financial institutions (NBFIs), microfinance lenders, consumer credit desks, and debt recovery law firms.
 - **Core Capabilities**:
   1. **Delinquent Account & Portfolio Staging**: Ingestion and automated segmentation of hundreds of thousands of delinquent debtor records categorized by Days Past Due (DPD) buckets (1-30, 31-60, 61-90, 90+ DPD).
-  2. **Sub-350ms Predictive Dialer**: 3.2x higher Right-Party Connect (RPC) rate compared to offshore cloud dialers, with native answering machine detection (AMD) and zero dead air.
+  2. **Automated PTP Reallocation**: Broken promises are detected and routed to senior recovery queues immediately, rather than ageing in a spreadsheet.
   3. **Automated Promise-to-Pay (PTP) Engine**: Scheduling, automated debtor reminders (SMS/Email/Viber), real-time payment reconciliation, and broken PTP alert workflows.
-  4. **Supervisory Telephony HUD**: Browser WebRTC SIP softphone, predictive/power/preview dialing, supervisor live listen, whisper coaching, and live barge-in functionality.
-  5. **Regulatory Safeguards**: Strict enforcement of Bangko Sentral ng Pilipinas (BSP) Circulars 454 and 857 preventing abusive, misleading, or out-of-hours collection contact; automated contact-hour gating (enforcing 6:00 AM to 10:00 PM local limits); immutable audio recording archive and 100% sovereign Philippine data residency (RA 10173).
+  4. **Supervisor Operations HUD**: Queue-level workload and aging visibility, coaching logs with action plans, and standardized QA scorecards — supervisor oversight without leaving the dashboard.
+  5. **Regulatory Safeguards**: Contact-window and daily-attempt rules are configured per engagement rather than shipped as turnkey enforcement; Right-Party Connect verification is a workflow step your team completes before any disclosure. No audio recording pipeline exists in this build. Data residency follows the deployment you choose.
   6. **Zero Per-Seat Tax**: Turnkey enterprise ownership saving up to 68% in 3-year TCO over per-seat SaaS models ($150-$300/agent/month).
 
 ### 2.2 BITSagent Autonomous Conversational AI
-- **URL**: `https://www.boundlessits.com/bitsagent`
+- **URL**: `https://www.boundlessits.com/operations-360/ai`
 - **Application Category**: Voice AI Agents, Omnichannel Autonomous Operations, Conversational Support
 - **Core Capabilities**:
   1. **Sub-300ms Conversational Turn Latency**: Natural, human-grade voice interaction with interruption handling and adaptive speech pacing.
@@ -45,16 +45,16 @@ Unlike generic off-the-shelf SaaS applications that force businesses to adapt th
 
 ## 3. Modular Product Suite & Enterprise Engines
 
-1. **BITScrm Sales**: Deal stage visualization, visual Kanban pipelines, automated territory routing, CPQ (Configure, Price, Quote), and predictive win scoring (`/products/sales`).
-2. **BITScrm Support**: Omnichannel contact center ticketing, automated SLA countdown timers, skill-based queue routing, and CSAT telemetry (`/products/support`).
-3. **BITScrm Marketing**: Multi-channel marketing automation, trigger-based lifecycle drip campaigns, and closed-loop revenue attribution (`/products/marketing`).
-4. **BITScrm Commerce**: Unified billing, recurring subscription recurring dunning, tokenized PCI-compliant checkout, and tax compliance (`/products/commerce`).
+1. **BITScrm Sales**: Deal stage visualization, visual Kanban pipelines, automated territory routing, CPQ (Configure, Price, Quote), and predictive win scoring (`/operations-360/crm#sales`).
+2. **BITScrm Support**: Omnichannel contact center ticketing, automated SLA countdown timers, skill-based queue routing, and CSAT telemetry (`/operations-360/crm#support`).
+3. **BITScrm Marketing**: Multi-channel marketing automation, trigger-based lifecycle drip campaigns, and closed-loop revenue attribution (`/operations-360/crm#marketing`).
+4. **BITScrm Commerce**: Unified billing, recurring subscription recurring dunning, tokenized PCI-compliant checkout, and tax compliance (`/operations-360/crm#commerce`).
 5. **BITS Construction & Logistics**: Jobsite asset tracking, heavy equipment telematics, bill of materials (BOM), procurement lifecycle, and field timesheets (`/products/construction`).
 6. **BITS HRMS & Payroll**: Biometric timekeeping, 24/7 rotating BPO shift rosters, automated statutory calculations (SSS, PhilHealth, Pag-IBIG), 13th month pay, and TRAIN Law compliance (`/products/hrms`).
 7. **BITS Accounting & ERP**: General Ledger, AP/AR 3-way matching, multi-entity financial consolidation, BIR CAS (Computerized Accounting System) audit-trail compliance (`/products/accounting`).
 8. **BITS Pickleball & Sports Hub OS**: Automated paddle rack rotation, queue algorithms, court scheduling, dynamic TV scoreboard streaming, and tournament brackets (`/products/pickleball` & `/products/sports-hub`).
 9. **BITS Tap™ NFC Smart Card**: Contactless dynamic NFC identity cards with cloud-synced digital business cards, micro-portals, and engagement telemetry (`/products/nfc-card`).
-10. **BITS White-Label Reseller Platform**: Multi-tenant infrastructure enabling agencies and software resellers to distribute branded instances with custom domain mappings and isolated databases (`/products/white-label`).
+10. **BITS White-Label Reseller Platform** *(planned)*: a multi-tenant reseller offering for agencies and software distributors to run branded instances under a client domain. Multi-tenant isolation is not implemented today — deployments are single-tenant (`/products/white-label`).
 11. **Vertical Industry Solutions**: Tailored configurations for Real Estate, Healthcare, Automotive, Legal Practice, Education, and BPO operations.
 
 ---
@@ -62,7 +62,7 @@ Unlike generic off-the-shelf SaaS applications that force businesses to adapt th
 ## 4. Statutory Governance & Regulatory Compliance
 
 - **Bangko Sentral ng Pilipinas (BSP)**: Compliant with BSP Circular No. 454 and Circular No. 857 regarding fair and non-abusive debt collection practices, supervisory transparency, and consumer financial protection.
-- **National Privacy Commission (NPC)**: Full alignment with Philippine Republic Act No. 10173 (Data Privacy Act of 2012 / DPA 2012), including explicit consent management, role-based data isolation, and end-to-end data subject access request (DSAR) compliance.
+- **National Privacy Commission (NPC)**: The site is built with Philippine Republic Act No. 10173 (Data Privacy Act of 2012) in mind — explicit consent capture before non-essential storage, a published cookie policy, and personal data minimisation. **Not implemented:** automated data-subject-access-request (DSAR) tooling, and role-based data isolation — access is gated by authentication, not by role.
 - **Bureau of Internal Revenue (BIR)**: Accounting and invoicing architecture designed to satisfy Computerized Accounting System (CAS) audit trail and reporting requirements.
 - **Department of Labor and Employment (DOLE)**: Payroll calculations enforce TRAIN Law tax brackets, holiday pay differentials, night shift premiums (NDP), and statutory contribution ceilings.
 
@@ -70,20 +70,20 @@ Unlike generic off-the-shelf SaaS applications that force businesses to adapt th
 
 ## 5. Security & Technical Architecture
 
-- **Data Privacy & Encryption**: AES-256 at rest, TLS 1.3 in transit, Write-Once-Read-Many (WORM) audit logging for regulatory compliance.
-- **Access Control**: Fine-grained Role-Based Access Control (RBAC) with attribute-based access control (ABAC) support, SSO, and MFA enforcement.
+- **Data Privacy & Encryption**: Responses containing personal data are served `no-store` with `Vary: Cookie`; HSTS is enforced with a two-year max-age. Encryption at rest and TLS in transit are provided by the Supabase hosting layer, not by this application. **There is no WORM or immutable audit log** — outbound email delivery is recorded in a mutable `email_logs` table.
+- **Access Control**: Supabase session authentication on every CRM page and API route, enforced server-side before any privileged database client is touched. **Not implemented:** role-based access control, ABAC, SSO, and MFA enforcement. The CRM role is a client-side display concept, so any authenticated user can read CRM records.
 - **Deployment Models**:
-  - *Sovereign Cloud*: Hosted in dedicated regional cloud VPCs with continuous automated backup and multi-AZ redundancy.
+  - *Sovereign Cloud*: Managed cloud against a self-hosted Supabase project. Hosting-layer backup and redundancy properties are a property of that provider, not of this application.
   - *Sovereign On-Premises*: Fully self-hosted on client bare metal or private hypervisors for zero data egress requirements.
-- **Integrations**: SIP/WebRTC trunking, REST and GraphQL APIs, Webhooks, Supabase/PostgreSQL database synchronization, and legacy database migration pipelines.
+- **Integrations**: REST via Supabase and Next.js server actions, webhooks, and Supabase/PostgreSQL synchronization. There is no GraphQL endpoint and no telephony integration — no SIP/WebRTC trunking, no PBX, no call recording, no transcription.
 
 ---
 
 ## 6. Official Canonical Channels & Resources
 
 - Official Website: `https://www.boundlessits.com`
-- Primary Collections CRM: `https://www.boundlessits.com/bitscrm`
-- AI Operations Engine: `https://www.boundlessits.com/bitsagent`
+- Primary Collections CRM: `https://www.boundlessits.com/operations-360/crm`
+- AI Operations Engine: `https://www.boundlessits.com/operations-360/ai`
 - Product Portfolio: `https://www.boundlessits.com/#solutions`
 - Brand Identity Book: `https://www.boundlessits.com/brandbook`
 - Legal & Compliance: `https://www.boundlessits.com/legal`

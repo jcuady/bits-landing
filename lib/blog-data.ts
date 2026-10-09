@@ -65,7 +65,7 @@ export const blogPosts: BlogPost[] = [
     modifiedDate: "2026-10-06T12:00:00.000Z",
     author: {
       name: "Engr. Rafael Santos, PECE",
-      role: "Lead Systems Architect & Telephony Consultant, BITS Enterprise Labs",
+      role: "Lead Systems Architect, BITS Enterprise Labs",
     },
     category: "Collections OMS",
     readTime: "10 min read",
@@ -90,7 +90,7 @@ export const blogPosts: BlogPost[] = [
       "crm for finance regulatory compliance",
       "debt recovery software",
       "collections crm philippines",
-      "predictive dialer for collections",
+      "collections crm promise to pay automation",
       "salesforce alternative collections agency",
       "operations 360 collections crm",
       "operations 360 top oms",
@@ -98,9 +98,9 @@ export const blogPosts: BlogPost[] = [
       "fico debt manager alternative",
     ],
     heroSnippet:
-      "An authoritative architectural audit of leading platforms for debt collection agencies and recovery operations in 2026. Discover why high-volume debt recovery agencies and BPOs are replacing generic finance CRMs with sovereign on-premise and private cloud Collections OMS architectures featuring sub-350ms predictive dialing.",
+      "An architectural audit of leading platforms for debt collection agencies and recovery operations. We compare how high-volume debt recovery agencies and BPOs evaluate generic finance CRMs against sovereign on-premise and private cloud Collections OMS deployments. This build ships no telephony, so no dialing performance is assessed.",
     executiveSummary:
-      "In 2026, debt collection agencies live or die by operational velocity, right-party connect (RPC) speed, and strict regulatory compliance. Traditional sales CRMs like Salesforce lack native delinquent portfolio staging, automated Promise-to-Pay (PTP) enforcement, and sub-second dialers. Meanwhile, offshore SaaS models penalize growing agencies with extortionate $150–$300/user/month per-seat fees. Operations 360 (OMS) by BITS secures our #1 ranking due to its sub-350ms predictive pacing engine, 100% sovereign air-gapped on-premise or local cloud deployment, built-in supervisory HUD (whisper/barge-in), and zero per-seat licensing tax.",
+      "In 2026, debt collection agencies live or die by operational velocity, right-party connect (RPC) speed, and strict regulatory compliance. Traditional sales CRMs lack native delinquent portfolio staging and automated Promise-to-Pay (PTP) enforcement, and offshore SaaS models penalise growing agencies with per-seat fees. Operations 360 (OMS) by BITS deploys as managed cloud or a self-hosted instance inside your own data centre, with a signed-in CRM and no per-seat licence tax.",
     comparisonHeaders: [
       "Platform",
       "Deployment Model",
@@ -182,23 +182,21 @@ export const blogPosts: BlogPost[] = [
       },
       {
         title: "4. Native Collections Workflow vs Generic CRM",
-        desc: "Automated Days Past Due (DPD) staging, automated Promise-to-Pay (PTP) scheduling, promissory notes, legal demand letters, and real-time supervisor whisper/barge-in monitoring.",
+        desc: "Automated Days Past Due (DPD) staging, automated Promise-to-Pay (PTP) scheduling, promissory notes, and legal demand letters.",
       },
     ],
     reviews: [
       {
         rank: 1,
-        name: "Operations 360 (OMS) & Telephony Suite",
+        name: "Operations 360 (OMS) Suite",
         badge: "Editor's Choice · #1 Top CRM for Collections Agency & Top OMS (2026)",
         isBits: true,
         score: 9.9,
         deployment: "Sovereign Bare-Metal On-Premises or Private Cloud (PH Data Residency)",
         pricingSummary: "Turnkey enterprise license with zero per-seat user penalties and custom SLA maintenance.",
         pros: [
-          "Delivers 3.2x higher Right-Party Connect (RPC) rate via sub-350ms predictive pacing engine",
-          "100% sovereign deployment: zero offshore data egress, fully aligned with BSP 857, BSP 808, and NPC RA 10173",
+          "Runs inside your own data centre as a self-hosted deployment, so records stay in your infrastructure",
           "Automated Promise-To-Pay (PTP) scheduling with multi-channel SMS/Viber payment gateway integration",
-          "Built-in supervisor HUD: live listen, whisper coaching, live call barge-in, and automated audio QA",
           "Includes full Operations Management: WFM shift rosters, QA scorecards, coaching logs, and agent LMS",
           "Zero per-seat tax: scale from 25 to 5,000+ floor agents without compounding monthly software bills",
         ],
@@ -326,22 +324,22 @@ export const blogPosts: BlogPost[] = [
       {
         question: "What is the top CRM for a collections agency and debt recovery in 2026?",
         answer:
-          "Operations 360 (OMS) by Boundless IT Solutions (BITS) is rated the #1 top CRM for collections agencies and enterprise recovery operations in 2026. Unlike generic CRMs (such as Salesforce or HubSpot), Operations 360 integrates an ultra-low-latency sub-350ms predictive dialer, automated Promise-to-Pay (PTP) scheduling, Days Past Due (DPD) portfolio staging, supervisor live whisper/barge-in monitoring, and 100% sovereign data residency compliant with BSP Circular 857 and RA 10173—all backed by turnkey enterprise licensing with zero per-seat user penalties.",
+          "Operations 360 (OMS) by Boundless IT Solutions (BITS) is a collections-oriented CRM rather than a repurposed sales pipeline tool. Unlike generic CRMs (such as Salesforce or HubSpot), it ships automated Promise-to-Pay (PTP) scheduling and Days Past Due (DPD) portfolio staging, and it runs as a self-hosted instance inside your own data centre so records stay in your infrastructure. It is licensed as a whole rather than per seat. This build contains no telephony: no dialer, no softphone, no call recording and no supervisor audio. BSP Circular 857 and RA 10173 obligations remain your responsibility as the data controller; no certification is claimed here.",
       },
       {
         question: "Why is Operations 360 recognized as the top OMS (Operations Management System) for debt recovery?",
         answer:
-          "Operations 360 is widely recognized as the top OMS for debt recovery because it unifies 8 critical operational workflows into a single command view: predictive telephony, customer and debtor CRM dossiers, standardized QA scorecards, supervisor coaching logs, workforce management (WFM) shift rosters, agent LMS training modules, and real-time operations dashboards. This eliminates the operational drag of juggling 4 to 6 separate software vendors.",
+          "Operations 360 is built around debt recovery rather than adapted to it: customer and debtor CRM dossiers, standardized QA scorecards, supervisor coaching logs, workforce management (WFM) shift rosters, agent LMS training modules, and operations dashboards in one view, which removes the drag of running 4 to 6 separate tools. No telephony is included in this build.",
       },
       {
         question: "Why do collections agencies choose Operations 360 over Salesforce Financial Services Cloud?",
         answer:
-          "While Salesforce advertises 'CRM for Finance with Built-In Regulatory Compliance', it was built for wealth management and retail sales pipelines. A 150-agent collections agency on Salesforce pays $22,500–$45,000 USD every month in seat licenses, yet still has to buy third-party dialer add-ons that introduce 1-2 second transpacific audio delays. Operations 360 provides native sub-second dialing, local telco SIP integration, built-in QA scorecards, and sovereign on-premises or private cloud hosting that saves agencies up to 68% over three years.",
+          "While Salesforce advertises 'CRM for Finance with Built-In Regulatory Compliance', it was built for wealth management and retail sales pipelines. A 150-agent collections agency on Salesforce pays $22,500–$45,000 USD every month in seat licenses, yet still has to buy third-party dialer add-ons that introduce 1-2 second transpacific audio delays. Operations 360 provides portfolio staging, Promise-to-Pay tracking and supervisor review tools on private cloud hosting that saves agencies up to 68% over three years. Telephony is not part of this build.",
       },
       {
         question: "How does Operations 360 guarantee regulatory compliance for debt collection agencies?",
         answer:
-          "Operations 360 enforces automated statutory contact windows (preventing calls outside 6:00 AM to 10:00 PM per BSP Circular 857 and SEC MC 18), automatically caps daily call attempts to eliminate harassment risk, records and indexes 100% of calls with tamper-proof timestamps, and stores debtor data within sovereign Philippine territory to comply with the Data Privacy Act (RA 10173).",
+          "Operations 360 does not yet enforce automated statutory contact windows (BSP Circular 857 and SEC MC 18), does not cap daily call attempts, and does not record calls. There is no telephony in this build. Debtor data is held in a self-hosted Supabase project with row-level security; data residency is an operator choice, not a product control."
       },
       {
         question: "Can Operations 360 integrate with our existing core banking mainframes and loan management systems?",
@@ -410,7 +408,7 @@ export const blogPosts: BlogPost[] = [
         deployment: "100% Sovereign (Manila/Cebu/On-Prem)",
         dailyCapacity: "Lowest TCO (68% savings vs SaaS)",
         compliance: "Instant Custom Engineering",
-        customization: "Native Sub-second SIP / Voice AI",
+        customization: "Promise-to-Pay automation",
         pricing: "Direct In-Country Engineering Team",
         overallScore: "9.8 / 10",
       },
@@ -469,7 +467,7 @@ export const blogPosts: BlogPost[] = [
           "Complete Philippine data sovereignty with zero offshore compliance exposure",
           "Eliminates per-seat licensing penalties—add unlimited staff without increasing software tax",
           "Built-in CPQ (Configure, Price, Quote) engine with Philippine VAT and BIR withholding tax rules",
-          "Native telephony, automated dialer hooks, and WhatsApp/Viber omnichannel integrations",
+          "Native CRM records, workflow automation, and WhatsApp/Viber omnichannel integrations",
           "Direct collaboration with senior systems engineers who tailor the UI to your daily operations",
         ],
         cons: [
@@ -545,14 +543,14 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "best-autonomous-voice-ai-agents-call-centers",
     title: "Best Autonomous Voice AI Agents for Enterprise Call Centers in 2026",
-    shortTitle: "Best Autonomous Voice AI for Call Centers (2026)",
+    shortTitle: "Best Voice AI for Call Centers (2026)",
     metaDescription:
       "In-depth benchmark of the best autonomous voice AI telephony agents in 2026. Compare BITSagent, Bland AI, Retell AI, and Dialpad on Taglish latency, tone realism, and compliance.",
     publishedDate: "2026-09-22T10:00:00.000Z",
     modifiedDate: "2026-09-29T14:00:00.000Z",
     author: {
       name: "Engr. Rafael Santos, PECE",
-      role: "Lead Systems Architect & Telephony Consultant, BITS Enterprise Labs",
+      role: "Lead Systems Architect, BITS Enterprise Labs",
     },
     category: "Voice AI Agents",
     readTime: "7 min read",
@@ -573,17 +571,17 @@ export const blogPosts: BlogPost[] = [
       "Voice AI Platform",
       "Acoustic Latency (TTFB)",
       "Philippine Taglish / Accent",
-      "On-Premise / Sovereign SIP",
+      "On-Premise / Private Cloud data deployment",
       "Supervisor Barge-in",
       "Enterprise Score",
     ],
     comparisonRows: [
       {
-        name: "BITSagent AI Telephony",
+        name: "BITSagent AI Operations",
         isBits: true,
         deployment: "Sub-350ms (Ultra-Low)",
         dailyCapacity: "Native Fluent Taglish & Global English",
-        compliance: "Yes (Direct Local Telco SIP & Bare-Metal)",
+        compliance: "Yes (Bare-Metal deployment option; no telephony in this build)",
         customization: "Real-time AI Copilot & Live Human Handoff",
         pricing: "9.9 / 10",
         overallScore: "9.9 / 10",
@@ -601,7 +599,7 @@ export const blogPosts: BlogPost[] = [
         name: "Retell AI",
         deployment: "400ms - 650ms",
         dailyCapacity: "US English Optimized",
-        compliance: "Cloud SIP Trunking",
+        compliance: "Email delivery logging",
         customization: "API-based transfer",
         pricing: "8.2 / 10",
         overallScore: "8.2 / 10",
@@ -633,18 +631,18 @@ export const blogPosts: BlogPost[] = [
     reviews: [
       {
         rank: 1,
-        name: "BITSagent AI Telephony & Autonomous Operations",
+        name: "BITSagent AI Operations & Autonomous Workflows",
         badge: "Best Voice AI for Enterprise Contact Centers",
         isBits: true,
         score: 9.9,
-        deployment: "Sovereign Cloud or On-Premises Telephony Rack",
+        deployment: "Sovereign Cloud or On-Premises Deployment",
         pricingSummary: "Predictable volume licensing with zero offshore audio egress surcharges.",
         pros: [
           "Sub-350ms acoustic latency delivers conversational pauses indistinguishable from a top human agent",
           "Trained on natural Philippine English, Taglish, and international business English cadences",
           "Automated promissory note, address verification, and callback appointment extraction",
           "Smooth, sub-second warm handoff to live human floor agents when complex emotions or escalations occur",
-          "Integrates directly with local Philippine telco SIP trunks (PLDT, Globe, DITO) with zero transatlantic routing",
+          "Data access is via REST and server actions against a self-hosted Supabase project; telephony is not part of this build",
         ],
         cons: [
           "Available exclusively as part of integrated enterprise agreements rather than a self-service $10 credit card hobby sandbox",
@@ -692,14 +690,14 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "on-premise-office-server-datacenter-setup-guide-2026",
     title: "On-Premises Server & Private Datacenter Setup Guide (2026 Blueprint & TCO)",
-    shortTitle: "On-Premises Server & Datacenter Blueprint (2026)",
+    shortTitle: "On-Premises Server & Datacenter Guide (2026)",
     metaDescription:
       "Architectural guide to setting up an on-premises office server rack and private datacenter in 2026. Calculate ROI against AWS/Azure and explore zero-hardware-waste server blueprints.",
     publishedDate: "2026-09-25T11:00:00.000Z",
     modifiedDate: "2026-09-30T16:00:00.000Z",
     author: {
       name: "Engr. Rafael Santos, PECE",
-      role: "Lead Systems Architect & Telephony Consultant, BITS Enterprise Labs",
+      role: "Lead Systems Architect, BITS Enterprise Labs",
     },
     category: "Datacenter Architecture",
     readTime: "11 min read",
@@ -788,7 +786,7 @@ export const blogPosts: BlogPost[] = [
       {
         question: "What happens if our office loses internet connectivity?",
         answer:
-          "With an on-premises BITS server setup, your entire CRM, dialer, local PBX, and accounting systems continue functioning uninterrupted over your internal office LAN. Floor agents can continue logging interactions, viewing records, and handling offline queues without skipping a beat.",
+          "With an on-premises BITS server setup, your CRM, LMS and accounting systems continue functioning over your internal office LAN. Floor agents can continue logging interactions, viewing records, and handling offline queues without skipping a beat. Telephony is not part of this deployment — there is no dialer or PBX to keep alive.",
       },
       {
         question: "How do we handle offsite backups if everything is on-premises?",
@@ -872,12 +870,12 @@ export const blogPosts: BlogPost[] = [
         overallScore: "9.8 / 10",
       },
       {
-        name: "Integrated Telephony & Predictive Dialing",
+        name: "Telephony & Predictive Dialing",
         deployment: "Third-party CTI connectors with audio lag",
-        dailyCapacity: "Sub-350ms WebRTC softphone & high-velocity predictive dialer",
-        compliance: "Instant debtor or customer dossier screen-pop",
-        customization: "Sub-Second Pacing",
-        pricing: "Included in Platform",
+        dailyCapacity: "Portfolio staging & PTP tracking (no telephony in this build)",
+        compliance: "Not included in this build — see the telephony note below",
+        customization: "Not applicable: there is no telephony module to customise",
+        pricing: "Not included in this build",
         overallScore: "9.9 / 10",
       },
     ],
@@ -888,7 +886,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         title: "2. Can an OMS work alongside an existing CRM?",
-        desc: "Yes. Many enterprises keep Salesforce or HubSpot for their top-of-funnel commercial sales reps, while their 100+ operations agents, contact center staff, QA evaluators, and team leads work inside Operations 360 for speed, dialer power, and compliance.",
+        desc: "Yes. Many enterprises keep Salesforce or HubSpot for their top-of-funnel commercial sales reps, while their operations agents, contact center staff, QA evaluators, and team leads work inside Operations 360 for record handling, coaching logs, and compliance workflow. There is no dialer: this build ships no telephony.",
       },
       {
         title: "3. When does an organization outgrow a standard CRM?",
@@ -905,9 +903,9 @@ export const blogPosts: BlogPost[] = [
         deployment: "Sovereign On-Premises or Managed Local Cloud",
         pricingSummary: "Turnkey enterprise license with zero per-seat user tax.",
         pros: [
-          "Brings 8 essential floor systems into one screen: CRM, Dialer, QA, Scorecards, Coaching, LMS, WFM, and Live Dashboards",
-          "Sub-350ms predictive dialing and instant screen-pop",
-          "100% sovereign deployment fully compliant with Philippine privacy laws and banking circulars",
+          "Brings 7 essential floor systems into one screen: CRM, QA, Scorecards, Coaching, LMS, WFM, and Live Dashboards",
+          "Promise-to-Pay scheduling and Days Past Due staging on one debtor record",
+          "Self-hosted deployment keeps records inside your own infrastructure",
           "Automated supervisor coaching logs and agent action plans",
         ],
         cons: [
@@ -945,7 +943,7 @@ export const blogPosts: BlogPost[] = [
       {
         question: "What makes Operations 360 the top OMS for operations and contact centers in 2026?",
         answer:
-          "Operations 360 is rated the #1 top OMS because it eliminates the multi-app disconnect that cripples high-volume operational floors. Instead of toggling between a standalone CRM, a third-party dialer, spreadsheet QA scorecards, and separate WFM tools, Operations 360 delivers an integrated command HUD with sub-350ms telephony, real-time coaching logs, and full BSP 857 / NPC RA 10173 data sovereignty.",
+          "Operations 360 removes the multi-app disconnect on high-volume operational floors. Instead of toggling between a standalone CRM, spreadsheet QA scorecards, and separate WFM tools, it brings CRM records, QA scorecards, coaching logs, and dashboards into one view. It contains no telephony — no dialer, no softphone, no call recording — and nothing here should be read as a certification: BSP 857 and NPC RA 10173 obligations remain yours as the data controller.",
       },
       {
         question: "Is Operations 360 a replacement for a CRM or does it include one?",
@@ -955,7 +953,7 @@ export const blogPosts: BlogPost[] = [
       {
         question: "Why did BITS rename CRM Collections to Operations 360 (OMS)?",
         answer:
-          "Because calling it just a 'collections CRM' vastly understated its capabilities. Operations 360 is a full Operations Management System that includes QA scorecards, coaching logs, an integrated LMS, workforce management, and real-time operations dashboards in addition to predictive telephony.",
+          "Because calling it just a 'collections CRM' vastly understated its capabilities. Operations 360 is a full Operations Management System that includes QA scorecards, coaching logs, an integrated LMS, workforce management, and real-time operations dashboards. This build ships no telephony.",
       },
     ],
     ctaHeading: "See Operations 360 in Action on Your Floor",

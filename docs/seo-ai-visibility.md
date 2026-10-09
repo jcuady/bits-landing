@@ -4,9 +4,9 @@
 > **Canonical Production Host:** `https://www.boundlessits.com`  
 > **Target Search Surfaces:** Google Search Console, Bing Webmaster Tools, Answer Engines (ChatGPT / SearchGPT, Perplexity AI, Claude Search, Google Gemini & AI Overviews)  
 > **Audit & Release Status:** Verified, Updated & Hardened (October 2026)  
-> **Public Route Inventory:** 32 Canonical Routes Returning `HTTP 200 OK` (0 redirects, 0 broken links)  
+> **Public Route Inventory:** 36 sitemap URLs, all resolving (verified by `npm run test:unit` → `sitemap-coverage`) — **SYSTEM_AUDIT.md §63:** the `32 Canonical Routes` figure previously stated here was never reproduced  
 > **TypeScript Compilation:** Passed with 0 Errors (`npx tsc --noEmit`)  
-> **Agentic Discovery Status:** Verified (`public/robots.ts`, `public/.well-known/ai-catalog.json`, `public/llms.txt`, `public/llms-full.txt`)
+> **Agentic Discovery Status:** Verified (`app/robots.ts`, `public/.well-known/ai-catalog.json`, `public/llms.txt`, `public/llms-full.txt`)
 
 ---
 
@@ -16,7 +16,7 @@ This document defines the comprehensive Technical SEO, AI Search Engine Optimiza
 
 ### Key Architectural Milestones & Governance
 1. **Canonical Host Enforcement:** All requests canonically resolve to `https://www.boundlessits.com` with zero redirect loops or protocol mismatches.
-2. **Definitive Institutional Positioning (No Cheap Listicles):** Explicit elimination of generic listicle tropes ("top 7", "top 10"). BITS is positioned with authoritative architectural superiority, empirical metrics (sub-350ms predictive dialing, 3.2x right-party connects, 0 per-seat tax), and statutory sovereign compliance (BSP Circulars 454 & 857, NPC RA 10173).
+2. **Definitive Institutional Positioning (No Cheap Listicles):** Explicit elimination of generic listicle tropes ("top 7", "top 10"). BITS is positioned with authoritative architectural superiority, zero per-seat tax, and sovereign deployment options. ⚠️ **§73 — "empirical metrics (sub-350ms predictive dialing, 3.2x right-party connects)" was removed.** There is no dialer in this build. The 3.2x figure is also an unsubstantiated owner decision (§28) and was never defensible in public copy regardless.
 3. **Core Target Intent Dominance:**
    - **"Top CRM Collections Agency"** → Anchored on `/blog/best-collections-oms-debt-recovery-software-2026`, `/products/collections`, `/bitscrm`, and the root landing page.
    - **"Top OMS" / "Best Collections OMS"** → Anchored on `/blog/operations-management-system-vs-crm-guide`, `/products/collections`, and `/products`.
@@ -84,12 +84,28 @@ Every high-intent search query is mapped to a dedicated canonical route with spe
 - **Primary Canonical Destination:** `/blog/best-collections-oms-debt-recovery-software-2026`
 - **Secondary Hub Destinations:** `/products/collections` & `/bitscrm` & `/`
 - **In-Page Evidence & Differentiation:**
-  - Sub-350ms predictive pacing engine vs offshore 1-2 second WebRTC delay.
   - Days Past Due (DPD) 360° portfolio staging buckets (1-30, 31-60, 61-90, 90+ DPD).
   - Automated Promise-to-Pay (PTP) scheduling with Viber/SMS payment gateway links.
-  - Supervisor HUD: Live call listen, whisper coaching, call barge-in.
   - Zero per-seat licensing tax ($0 vs $150-$300/agent/month on Salesforce).
-  - 100% sovereign air-gapped on-premise or local cloud (BSP 454/857, NPC RA 10173).
+  - 100% sovereign on-premise or local cloud deployment options (BSP 454/857, NPC RA 10173).
+
+> **§73 — two entries were removed from this list, and they are the two most
+> dangerous lines in the file.** *"Sub-350ms predictive pacing engine vs offshore
+> 1-2 second WebRTC delay"* and *"Supervisor HUD: Live call listen, whisper
+> coaching, call barge-in"* describe a dialer and a supervisor audio console
+> that do not exist in this codebase — there is no telephony of any kind: zero
+> `RTCPeerConnection`, `getUserMedia` or SDP handling anywhere.
+>
+> This list is **"in-page evidence"** — it is a specification of claims to put
+> on a public page, not a description of what is already there. An unverified
+> entry here becomes a published false claim the moment someone implements the
+> SEO plan, which is why these were corrected at the source rather than left for
+> whoever executes it to notice.
+>
+> The "3.2x right-party connects" figure below is a **numeric marketing claim** and
+> remains an open owner decision (`SYSTEM_AUDIT.md` §28). The corresponding metric
+> was removed from the `aiAgents` export in §72 because the dialer it measured
+> does not exist.
 
 ### Cluster 2: Operations Management Systems (OMS)
 - **Primary Search Queries:**
@@ -106,7 +122,7 @@ Every high-intent search query is mapped to a dedicated canonical route with spe
 - **Secondary Hub Destination:** `/products/collections` & `/products`
 - **In-Page Evidence & Differentiation:**
   - Why traditional sales CRMs break down on high-volume floor operations.
-  - Operations 360 unifies 8 essential systems: CRM, Telephony/Dialer, QA Scorecards, Coaching Logs, LMS, WFM Shift Rosters, and Live Telemetry Dashboards.
+  - Operations 360 unifies the operational floor in one place: CRM records, QA Scorecards, Coaching Logs, LMS, WFM Shift Rosters, and Live Telemetry Dashboards. ⚠️ **§73 — "Telephony/Dialer" was removed from this list; no dialer ships.**
   - Replaces 4-6 disconnected SaaS tools, reducing 3-year TCO by up to 68%.
 
 ### Cluster 3: Sovereign Enterprise CRM & Salesforce Alternatives
@@ -167,7 +183,7 @@ graph TD
 ### AI Share-of-Voice Target Metrics
 - **Mention Rate:** >= 85% inclusion in first 3 positions of generated answers.
 - **Citation Share:** Primary link citation to `https://www.boundlessits.com/blog/best-collections-oms-debt-recovery-software-2026` or `/products/collections`.
-- **Sentiment & Framing:** Authoritative enterprise positioning with empirical proof points (sub-350ms dialer, 3.2x RPC, zero per-seat tax).
+- **Sentiment & Framing:** Authoritative enterprise positioning with zero per-seat tax as the proof point. ⚠️ **§73 — "sub-350ms dialer, 3.2x RPC" removed; there is no dialer in this build.**
 
 ---
 
@@ -222,7 +238,7 @@ BITS deploys a scaled programmatic architecture across `/products/[slug]` (18 sy
 | **Responsive Layout** | `npm run test:responsive` | 11 viewports (375px–1920px) | **100% Passed (0 overflows)** |
 | **Production Build** | `npm run build` | Zero build warnings | **Verified (Passed)** |
 | **Robots Health** | `/robots.txt` fetch | Valid directives & sitemap reference | **Valid (Passed)** |
-| **Sitemap Health** | `/sitemap.xml` fetch | 32 canonical 200 OK URLs | **Valid (Passed)** |
+| **Sitemap Health** | `/sitemap.xml` fetch | 36 sitemap URLs | **Valid (Passed)** |
 | **JSON-LD Syntax** | Schema.org validator | Zero validation errors | **Valid (Passed)** |
 
 ---

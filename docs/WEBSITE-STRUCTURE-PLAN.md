@@ -186,7 +186,7 @@ Every section must pass all four. If not, cut or merge.
 ```
 
 Rules:
-- **Outcome before capability.** "Recover 38% more debt" beats "Predictive WebRTC dialer with 4 in-browser modes."
+- **Outcome before capability.** "Recover 38% more debt" beats ~~"Predictive WebRTC dialer with 4 in-browser modes."~~ **struck (§58 — this document proposed WebRTC dialer copy as the exemplar, and no telephony exists in this build.** The rule stands; the bad example was the problem. Use a capability that ships, e.g. "broken promises reallocated before they age" over "automated Promise-to-Pay scheduling.")
 - **Every product page cross-links to at least 2 siblings.** This is what turns 18 pages from 18 dead ends into a 6-family cluster that Google reads as topical authority.
 - **No product page invents numbers.** If a metric isn't verified, the section ships without it.
 

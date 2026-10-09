@@ -6,8 +6,16 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
+import { PRODUCT_COUNT } from "@/lib/site";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { cn } from "@/lib/utils";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface ProductModule {
   name: string;
@@ -15,7 +23,7 @@ interface ProductModule {
   href: string;
 }
 
-interface ProductFamily {
+interface ProductCategory {
   id: string;
   code: string;
   title: string;
@@ -32,318 +40,247 @@ interface ProductFamily {
   products: ProductModule[];
 }
 
-const productFamilies: ProductFamily[] = [
+const productCategories: ProductCategory[] = [
   {
-    id: "customer-operations",
-    code: "FAMILY 01 // RECOVERY & VOICE",
-    title: "Customer Operations",
-    problem: "Collect debt faster, automate calls, and track field reps on the ground",
+    id: "oms-360",
+    code: "CATEGORY 01",
+    title: "OPERATIONS 360",
+    problem: "Unify collections, PTP tracking, and field operations",
     summary:
-      "All-in-one operations system: call center CRM, automatic dialer, live mobile GPS app for field agents with visit timestamps, and sub-300ms voice AI.",
-    visual: "/brand/families/family-customer-operations.webp",
-    alt: "BITS Customer Operations 3D telemetry and voice AI core",
-    capabilityTag: "Collections CRM · Field App · Dialer · Voice AI",
-    benchmark: "99.98% Telephony Uptime · Live GPS & Timestamps",
+      "The top OMS and collections CRM. 360° account dossiers, PTP watchdog, mobile field agent GPS app, QA scorecards, and live supervisor dashboards.",
+    visual: "/brand/families/family-customer-operations.jpg",
+    alt: "BITS OPERATIONS 360 3D collections telemetry and operations core",
+    capabilityTag: "Collections CRM · Field App · QA HUD · Dashboards",
+    benchmark: "GPS Tagged Visits · Session-Gated Security",
     pulseColor: "bg-blue-500",
     glowColor: "from-blue-500/15 via-sky-400/10 to-transparent",
     accentBorder: "hover:border-blue-400/50",
     href: "/#operations-360",
     products: [
-      { name: "Operations 360", badge: "Flagship CRM & Dialer", href: "/#operations-360" },
-      { name: "Field Agents App", badge: "Live GPS & Timestamps", href: "/#operations-360" },
-      { name: "BITScrm Suite", badge: "Sales & Support", href: "/products/crm" },
-      { name: "BITSagent AI", badge: "Autonomous Voice & Email", href: "/bitsagent" },
+      { name: "Collections CRM", badge: "360° Account Dossiers", href: "/#operations-360" },
+      { name: "PTP Watchdog", badge: "Automated Alerts", href: "/#operations-360" },
+      { name: "Field Agent App", badge: "GPS-Tagged Visits", href: "/#operations-360" },
+      { name: "QA & Scorecards", badge: "Supervisor HUD", href: "/#operations-360" },
     ],
   },
   {
-    id: "business-operations",
-    code: "FAMILY 02 // FINANCIAL & WORKFORCE",
-    title: "Business Operations",
-    problem: "Connect company accounting, staff payroll, and fleet inventory",
+    id: "ai-agents",
+    code: "CATEGORY 02",
+    title: "BITSagent AI",
+    problem: "Automate calls, emails, and handoffs with human-like AI",
     summary:
-      "Complete business back-office: BIR CAS-aligned General Ledger, 24/7 biometric shift tracking, Philippine TRAIN law payroll, and warehouse fleet delivery routing.",
-    visual: "/brand/families/family-business-operations.webp",
-    alt: "BITS Business Operations 3D financial prism and ledger matrix",
-    capabilityTag: "ERP Ledger · TRAIN Payroll · Logistics",
-    benchmark: "BIR CAS Aligned · 100% Tax & Labor Compliant",
-    pulseColor: "bg-emerald-500",
-    glowColor: "from-emerald-500/15 via-teal-400/10 to-transparent",
-    accentBorder: "hover:border-emerald-400/50",
-    href: "/products/accounting",
-    products: [
-      { name: "Accounting & ERP", badge: "GL · AP/AR · Multi-Entity", href: "/products/accounting" },
-      { name: "HRMS & Payroll", badge: "TRAIN Law · Biometrics", href: "/products/hrms" },
-      { name: "Inventory & Logistics", badge: "Fleet Routing · Warehousing", href: "/products/logistics" },
-    ],
-  },
-  {
-    id: "customer-experience",
-    code: "FAMILY 03 // VENUE & SMART IDENTITY",
-    title: "Customer Experience",
-    problem: "Manage bookings, customer queues, venues, and smart cards",
-    summary:
-      "Customer-facing tools: live calendar booking, SMS queuing screens, sports club court schedules, and encrypted contactless smart tap NFC business cards.",
-    visual: "/brand/families/family-customer-experience.webp",
-    alt: "BITS Customer Experience 3D smart NFC card and venue telemetry",
-    capabilityTag: "Dynamic Booking · Queue · Smart NFC",
-    benchmark: "Sub-Second NFC Tap · Real-Time Venue Sync",
-    pulseColor: "bg-amber-500",
-    glowColor: "from-amber-500/15 via-orange-400/10 to-transparent",
-    accentBorder: "hover:border-amber-400/50",
-    href: "/products/booking",
-    products: [
-      { name: "Booking System", badge: "Dynamic Capacity & Deposits", href: "/products/booking" },
-      { name: "Smart Queuing", badge: "SMS Alert & Display Flow", href: "/products/queuing" },
-      { name: "Sports & Venue Hub", badge: "Pickleball OS & Courts", href: "/products/sports-venue" },
-      { name: "Smart NFC Card", badge: "BITS Tap Digital ID", href: "/products/nfc-card" },
-    ],
-  },
-  {
-    id: "platform-ai",
-    code: "FAMILY 04 // PRIVATE SOVEREIGN FABRIC",
-    title: "Platform & AI",
-    problem: "Connect AI to your company data, deploy on your own servers",
-    summary:
-      "Enterprise AI knowledge engine that answers customer questions using your exact company manuals, plus private server deployment and custom software builds.",
-    visual: "/brand/families/family-platform-ai.webp",
-    alt: "BITS Platform & AI 3D sovereign neural polyhedron core",
-    capabilityTag: "RAG Engine · Sovereign Cloud · Custom Stack",
-    benchmark: "Private On-Prem Inference · Zero Data Leaks",
+      "Human-like voice and email agents that work 24/7. Multi-agent teams with shared customer context. Self-healing, with seamless human handoff when escalation is needed.",
+    visual: "/brand/families/family-platform-ai.jpg",
+    alt: "BITSagent AI autonomous voice and email neural engine",
+    capabilityTag: "Voice Agents · Email Outreach · Multi-Agent · Handoff",
+    benchmark: "Autonomous Resolution · Zero Wait Times",
     pulseColor: "bg-violet-500",
     glowColor: "from-violet-500/15 via-purple-400/10 to-transparent",
     accentBorder: "hover:border-violet-400/50",
-    href: "/products/rag-engine",
+    href: "/bitsagent",
     products: [
-      { name: "RAG Knowledge Engine", badge: "Vector SOP Grounding", href: "/products/rag-engine" },
-      { name: "White-Label Deployment", badge: "Multi-Tenant Sovereign", href: "/products/white-label" },
-      { name: "Custom Engineering", badge: "Bespoke System Architecture", href: "/products/custom-engineering" },
+      { name: "Voice Agent", badge: "Human-Like Calls", href: "/bitsagent" },
+      { name: "Email Agent", badge: "Autonomous Outreach", href: "/bitsagent" },
+      { name: "Multi-Agent Teams", badge: "Shared Context", href: "/bitsagent" },
+      { name: "Human Handoff", badge: "Seamless Escalation", href: "/bitsagent" },
+    ],
+  },
+  {
+    id: "crm-suite",
+    code: "CATEGORY 03",
+    title: "BITScrm Suite",
+    problem: "Sales, support, and marketing in one connected platform",
+    summary:
+      "Three connected modules: Sales CRM with visual pipelines, Customer Support with omnichannel ticket queue and SLA tracking, and Marketing Automation with journey builders.",
+    visual: "/brand/families/family-crm-suite.jpg",
+    alt: "BITScrm Suite sales pipelines and omnichannel support desk",
+    capabilityTag: "Sales Pipeline · Support Tickets · Marketing Journeys",
+    benchmark: "Unified CRM Schema · Zero Replatforming",
+    pulseColor: "bg-emerald-500",
+    glowColor: "from-emerald-500/15 via-teal-400/10 to-transparent",
+    accentBorder: "hover:border-emerald-400/50",
+    href: "/products/crm",
+    products: [
+      { name: "Sales CRM", badge: "Pipeline & CPQ", href: "/products/sales" },
+      { name: "Customer Support", badge: "SLA & Ticketing", href: "/products/support" },
+      { name: "Marketing Automation", badge: "Journey Builder", href: "/products/marketing" },
+    ],
+  },
+  {
+    id: "enterprise",
+    code: "CATEGORY 04",
+    title: "BITS Enterprise",
+    problem: "Automate payroll compliance and workforce at scale",
+    summary:
+      "BITS Payroll with 100% statutory compliance (SSS, PhilHealth, Pag-IBIG, BIR TRAIN Law) and direct bank disbursement. BITS HRMS with biometric shift rostering and automated leave management.",
+    visual: "/brand/families/family-business-operations.jpg",
+    alt: "BITS Enterprise payroll engine and workforce HRMS",
+    capabilityTag: "Statutory Payroll · TRAIN Law · Biometrics · HRMS",
+    benchmark: "100% Statutory Compliance · Direct Bank Feeds",
+    pulseColor: "bg-amber-500",
+    glowColor: "from-amber-500/15 via-orange-400/10 to-transparent",
+    accentBorder: "hover:border-amber-400/50",
+    href: "/products/payroll",
+    products: [
+      { name: "BITS Payroll", badge: "TRAIN Law · Bank Feeds", href: "/products/payroll" },
+      { name: "BITS HRMS", badge: "Biometric · Rostering", href: "/products/hrms" },
+    ],
+  },
+  {
+    id: "custom-solutions",
+    code: "CATEGORY 05",
+    title: "BITS Custom Solutions",
+    problem: "Software built exactly around how your business works",
+    summary:
+      "When off-the-shelf doesn't fit, we build it. Discovery, design, and delivery of bespoke operational software on the BITS sovereign stack — from concept to production.",
+    visual: "/brand/families/family-customer-experience.jpg",
+    alt: "BITS Custom bespoke software engineering",
+    capabilityTag: "Discovery Workshop · Bespoke Architecture · SLAs",
+    benchmark: "Dedicated Stack · Sovereign Code Ownership",
+    pulseColor: "bg-sky-500",
+    glowColor: "from-sky-500/15 via-blue-400/10 to-transparent",
+    accentBorder: "hover:border-sky-400/50",
+    href: "/#contact",
+    products: [
+      { name: "Discovery Workshop", badge: "Requirements Mapping", href: "/#contact" },
+      { name: "Custom Architecture", badge: "Sovereign Stack", href: "/#contact" },
+      { name: "Bespoke Modules", badge: "Tailored Workflows", href: "/#contact" },
+      { name: "Enterprise Support", badge: "Dedicated SLA", href: "/#contact" },
     ],
   },
 ];
 
 export function ProductFamilies() {
-  const { openModal } = useConsultationModal();
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const cardsRef = React.useRef<(HTMLDivElement | null)[]>([]);
+
+  useGSAP(
+    () => {
+      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+      if (cards.length === 0) return;
+
+      // Pin the container and animate cards
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: `+=${cards.length * 100}%`,
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        },
+      });
+
+      cards.forEach((card, index) => {
+        if (index === 0) return; // Skip the first card as it's already in place
+
+        // Animate the current card up
+        tl.fromTo(
+          card,
+          { y: "100vh", opacity: 0.5, scale: 0.95 },
+          { y: 0, opacity: 1, scale: 1, duration: 1, ease: "none" }
+        );
+
+        // Animate all previous cards to scale down and dim slightly
+        const previousCards = cards.slice(0, index);
+        tl.to(
+          previousCards,
+          {
+            scale: (i) => 1 - (index - i) * 0.04,
+            y: (i) => -(index - i) * 20,
+            opacity: (i) => 1 - (index - i) * 0.15,
+            duration: 1,
+            ease: "none",
+          },
+          "<"
+        );
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <Section
-      id="product-families"
-      className="relative overflow-hidden py-20 sm:py-24 lg:py-28 bg-gradient-to-b from-sky-50/60 via-slate-50/80 to-white"
-    >
-      {/* High-Altitude Cloud Sky Atmospheric Layer */}
+    <Section id="product-families" className="relative bg-slate-50 overflow-hidden">
+      {/* Background styling for premium look */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <Image
           src="/images/hero-sky-bg.jpg"
           alt=""
           fill
           priority={false}
-          className="object-cover object-top opacity-25 mix-blend-multiply"
+          className="object-cover object-top opacity-20 mix-blend-multiply"
         />
-        {/* Soft Cloud Mist Fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/85 to-white" />
-        <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:28px_28px] opacity-25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/80 to-slate-50" />
+        <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05]" />
       </div>
 
-      <Container className="relative">
-        {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18 lg:mb-20">
-          <Reveal>
-            <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1 shadow-2xs backdrop-blur-xs">
-              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-blue-900 font-mono">
-                18 Connected Products · 4 Purpose-Built Families
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.04}>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-black tracking-tight text-slate-900 leading-[1.12] text-balance">
-              One Unified Platform. Every Operation.{" "}
-              <span className="bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
-                Your Starting Point.
-              </span>
-            </h2>
-          </Reveal>
-
-          <Reveal delay={0.06}>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto text-pretty font-normal">
-              BITS products are engineered as four deeply connected operational engines. Solve your organization&apos;s most pressing workflow bottleneck first, then expand cross-department with zero data fragmentation.
-            </p>
-          </Reveal>
+      <div
+        ref={containerRef}
+        className="relative h-screen w-full flex flex-col items-center justify-center pt-16 pb-8 px-4 sm:px-6"
+      >
+        <div className="text-center mb-8 max-w-3xl">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight drop-shadow-sm">
+            Product Categories
+          </h2>
+          <p className="mt-4 text-lg text-slate-600">
+            Explore our {PRODUCT_COUNT} purpose-built categories. Scroll to uncover the ecosystem.
+          </p>
         </div>
 
-        {/* 4 Product Family Cards — Double-Bezel Architecture */}
-        <div className="grid gap-6 sm:gap-7 lg:gap-8 lg:grid-cols-2">
-          {productFamilies.map((family, idx) => (
-            <Reveal key={family.id} delay={0.06 + idx * 0.05}>
-              <div
-                className={cn(
-                  "group relative rounded-[2.25rem] sm:rounded-[2.5rem] p-3 sm:p-3.5",
-                  "bg-white/75 backdrop-blur-xl border border-white/85",
-                  "shadow-xl shadow-blue-950/5 transition-all duration-300",
-                  "hover:shadow-2xl hover:shadow-blue-600/15 hover:-translate-y-1",
-                  family.accentBorder
-                )}
-              >
-                {/* Inner Core Container (Concentric Doppelrand) */}
-                <div className="relative flex h-full flex-col justify-between rounded-[1.75rem] sm:rounded-[2rem] bg-white/90 backdrop-blur-2xl p-6 sm:p-8 overflow-hidden border border-white/90 shadow-sm">
-                  {/* Subtle Inner Highlight Refraction */}
-                  <div className="absolute inset-0 rounded-[1.75rem] sm:rounded-[2rem] ring-1 ring-inset ring-white/95 shadow-[inset_0_1px_2px_rgba(255,255,255,0.95)] pointer-events-none" />
+        <div className="relative w-full max-w-5xl h-[65vh] sm:h-[70vh]">
+          {productCategories.map((category, idx) => (
+            <div
+              key={category.id}
+              ref={(el) => {
+                cardsRef.current[idx] = el;
+              }}
+              className="absolute inset-0 w-full h-full p-6 sm:p-10 rounded-[2.5rem] bg-white/70 backdrop-blur-xl border border-white/80 shadow-xl shadow-blue-900/5 flex flex-col justify-between"
+              style={{ zIndex: idx, transformOrigin: "top center" }}
+            >
+              <div className="flex flex-col md:flex-row gap-8 h-full">
+                <div className="flex-1 flex flex-col justify-center">
+                  <span className="text-blue-600 font-mono text-sm uppercase tracking-[0.2em] mb-4 font-bold">
+                    {category.code}
+                  </span>
+                  <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+                    {category.title}
+                  </h3>
+                  <p className="text-lg text-slate-600 mb-6 font-medium max-w-md">
+                    {category.summary}
+                  </p>
 
-                  {/* Atmospheric Brand Glow */}
-                  <div
-                    className={cn(
-                      "pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-gradient-to-br blur-3xl opacity-60 transition-opacity duration-500 group-hover:opacity-100",
-                      family.glowColor
-                    )}
-                  />
-
-                  {/* Top Bar: Bespoke Visual Emblem + Title Block */}
-                  <div>
-                    <div className="flex items-start gap-4 sm:gap-5">
-                      {/* Bespoke Ultra-HD 3D Cloud Logo Emblem */}
-                      <div className="relative size-18 sm:size-22 rounded-2xl p-2 shrink-0 bg-gradient-to-br from-white/95 via-sky-50/70 to-white/90 border border-white/95 shadow-md shadow-blue-950/5 ring-1 ring-slate-900/5 backdrop-blur-xl transition-all duration-300 group-hover:scale-[1.08] group-hover:shadow-lg group-hover:shadow-blue-500/15 flex items-center justify-center">
-                        <div className="relative size-full">
-                          <Image
-                            src={family.visual}
-                            alt={family.alt}
-                            fill
-                            sizes="(max-width: 640px) 72px, 88px"
-                            className="object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
-                            priority={idx < 2}
-                          />
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    {category.products.map((prod) => (
+                      <Link
+                        href={prod.href}
+                        key={prod.name}
+                        className="group bg-slate-50/80 border border-slate-200/60 rounded-xl p-3 hover:bg-white hover:border-blue-200 hover:shadow-md transition-all backdrop-blur-md"
+                      >
+                        <div className="text-slate-900 font-bold text-sm group-hover:text-blue-600 transition-colors">
+                          {prod.name}
                         </div>
-                      </div>
-
-                      {/* Header Meta & Title */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="font-mono text-[0.66rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.18em] text-blue-700">
-                            {family.code}
-                          </span>
-                        </div>
-
-                        <h3 className="mt-1 text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug">
-                          {family.title}
-                        </h3>
-
-                        <p className="mt-1 text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
-                          {family.problem}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Operational Telemetry Benchmark Strip */}
-                    <div className="mt-4 sm:mt-5 flex items-center gap-2 rounded-xl bg-slate-50/90 border border-slate-200/80 px-3 py-2 text-[0.72rem] font-semibold text-slate-700">
-                      <span className={cn("size-2 rounded-full shrink-0 animate-pulse", family.pulseColor)} />
-                      <span className="font-mono uppercase tracking-wider">{family.benchmark}</span>
-                    </div>
-
-                    {/* Architectural Narrative Description */}
-                    <p className="mt-3.5 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      {family.summary}
-                    </p>
+                        <div className="text-slate-500 text-xs mt-1 font-medium">{prod.badge}</div>
+                      </Link>
+                    ))}
                   </div>
 
-                  {/* Product Ecosystem Section */}
-                  <div className="mt-6 pt-5 border-t border-slate-100">
-                    <div className="mb-2.5 flex items-center justify-between">
-                      <span className="font-mono text-[0.65rem] font-bold uppercase tracking-[0.16em] text-slate-400">
-                        Connected Modules
-                      </span>
-                      <span className="text-[0.65rem] font-semibold text-blue-700">
-                        {family.products.length} Products Included
-                      </span>
-                    </div>
-
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {family.products.map((prod) => (
-                        <Link
-                          key={prod.name}
-                          href={prod.href}
-                          onClick={(e) => {
-                            if (prod.href.startsWith("/#") || prod.href.startsWith("#")) {
-                              const targetId = prod.href.replace(/^\/?#/, "");
-                              const el = document.getElementById(targetId);
-                              if (el) {
-                                e.preventDefault();
-                                el.scrollIntoView({ behavior: "smooth" });
-                              }
-                            }
-                          }}
-                          className="group/pill flex flex-col justify-between rounded-xl border border-slate-200/90 bg-slate-50/70 hover:bg-white hover:border-blue-500/40 hover:shadow-xs p-2.5 transition-all duration-150"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-bold text-slate-900 group-hover/pill:text-blue-700 transition-colors">
-                              {prod.name}
-                            </span>
-                            <span className="text-slate-400 text-xs font-bold group-hover/pill:text-blue-600 transition-transform group-hover/pill:translate-x-0.5">
-                              ↗
-                            </span>
-                          </div>
-                          <span className="mt-1 text-[0.68rem] font-medium text-slate-500">
-                            {prod.badge}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-
-                    {/* Primary Family Deep-Dive Button */}
-                    <Link
-                      href={family.href}
-                      onClick={(e) => {
-                        if (family.href.startsWith("/#") || family.href.startsWith("#")) {
-                          const targetId = family.href.replace(/^\/?#/, "");
-                          const el = document.getElementById(targetId);
-                          if (el) {
-                            e.preventDefault();
-                            el.scrollIntoView({ behavior: "smooth" });
-                          }
-                        }
-                      }}
-                      className="mt-4 flex w-full items-center justify-between rounded-xl bg-blue-600 hover:bg-blue-500 px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:shadow-lg active:scale-[0.99]"
-                    >
-                      <span>Explore {family.title} Ecosystem</span>
-                      <span className="font-mono text-base transition-transform duration-200 group-hover:translate-x-1">
-                        →
-                      </span>
-                    </Link>
-                  </div>
+                  <Link
+                    href={category.href}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-500 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 self-start"
+                  >
+                    <span>Explore {category.title}</span>
+                    <span>→</span>
+                  </Link>
+                </div>
+                <div className="flex-1 relative h-full min-h-[250px] md:min-h-0 rounded-3xl overflow-hidden border border-slate-200/50 shadow-inner hidden sm:block bg-gradient-to-br from-blue-50/50 to-slate-50/50">
+                  <Image src={category.visual} alt={category.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/5 to-transparent" />
                 </div>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
-
-        {/* Global Portfolio Navigation Strip */}
-        <Reveal delay={0.28}>
-          <div className="mt-14 sm:mt-16 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-3xl border border-white/80 bg-white/80 backdrop-blur-xl p-6 sm:p-7 shadow-xl shadow-blue-950/5">
-            <div>
-              <p className="text-base font-bold text-slate-900">
-                Looking for the complete architecture breakdown?
-              </p>
-              <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                Explore all 18 enterprise products, sovereign on-prem deployment, or white-label options.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
-              <Link
-                href="/products"
-                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 text-xs sm:text-sm font-bold text-white shadow-md shadow-blue-600/20 transition-all duration-200 hover:bg-blue-500 hover:shadow-lg"
-              >
-                <span>Browse All 18 Products</span>
-                <span>→</span>
-              </Link>
-              <button
-                type="button"
-                onClick={() => openModal("Product Portfolio Scoping — All 18 Products")}
-                className="inline-flex h-11 flex-1 sm:flex-none items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 px-4 text-xs sm:text-sm font-bold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 cursor-pointer"
-              >
-                <span>Book Scoping</span>
-              </button>
-            </div>
-          </div>
-        </Reveal>
-      </Container>
+      </div>
     </Section>
   );
 }

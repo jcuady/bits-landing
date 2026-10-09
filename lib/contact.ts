@@ -1,36 +1,43 @@
 import { z } from "zod";
-import { contactInterests } from "@/lib/site";
+import { contactInterests, site } from "@/lib/site";
+import {
+  contactSchema,
+  isHoneypotTripped,
+  type ContactFields,
+} from "@/lib/contact-schema";
+/* §96 — the escaper now lives in a dependency-free module so a gate can import
+ * the REAL implementation. See lib/html-escape.ts for why there were three. */
+import { escapeHtml as escapeHtmlImpl } from "@/lib/html-escape.ts";
 
-export const INQUIRY_INBOX = "boundlessitsolutions@gmail.com";
+/*
+ * The validation rules live in lib/contact-schema.ts so the selfcheck can import
+ * the real schema rather than a frozen copy of it. Re-exported here so every
+ * existing `@/lib/contact` consumer keeps working unchanged.
+ *
+ * SYSTEM_AUDIT.md §31: the previous selfcheck re-declared both the schema and
+ * isHoneypotTripped inline, so it asserted against itself and could not fail for
+ * any edit to this file.
+ */
+export { contactSchema, isHoneypotTripped };
+export type { ContactFields };
 
-export const contactSchema = z.object({
-  name: z.string().trim().min(2, "Enter your full name."),
-  email: z.string().trim().email("Enter a valid work email."),
-  company: z.string().trim().min(2, "Enter your company name."),
-  companySize: z.string().optional(),
-  industry: z.string().optional(),
-  currentSystem: z.string().optional(),
-  primaryChallenge: z.string().optional(),
-  preferredMethod: z.string().optional(),
-  interest: z.string().optional(),
-  termsConsent: z.string().optional(),
-  message: z
-    .string()
-    .trim()
-    .min(10, "Please describe your operational requirements or challenges.")
-    .max(2000, "Keep the message under 2000 characters."),
-  website: z.string().max(0).optional().or(z.literal("")),
-});
+/**
+ * Internal notification inbox for inbound lead alerts. This is where the
+ * system e-mails the sales team — it is NOT the address published to visitors.
+ *
+ * Visitor-facing copy must use `site.inquiryEmail`
+ * (`bits_inquiries@boundlessits.com`), which is the only address shown on the
+ * footer, legal, cookies and llms.txt pages. Telling a visitor who just hit a
+ * submission error to email a different address than the one the rest of the
+ * site advertises splits the brand and loses the lead.
+ */
+export const INQUIRY_INBOX = process.env.CONTACT_INBOX ?? "boundlessitsolutions@gmail.com";
 
-export type ContactFields = z.infer<typeof contactSchema>;
+/** The address visitors are told to contact. Single source of truth. */
+export const VISITOR_CONTACT_EMAIL = site.inquiryEmail;
 
 export function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+  return escapeHtmlImpl(value);
 }
 
 export function buildInquiryEmail(data: Omit<ContactFields, "website">) {

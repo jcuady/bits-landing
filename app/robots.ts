@@ -2,7 +2,26 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
-  const disallowedPaths = ["/app/", "/api/", "/login", "/forgot-password"];
+  /**
+   * Private / non-content surfaces. Crawlers must not index them:
+   *  - /app        authenticated CRM workspace
+   *  - /api        JSON API surface
+   *  - /login, /forgot-password   auth screens
+   *  - /demo + the /crm-* sandboxes  interactive demo shells. These render
+   *    seeded synthetic data and are not marketing content, so indexing them
+   *    would put demo fixtures in search results.
+   */
+  const disallowedPaths = [
+    "/app/",
+    "/api/",
+    "/login",
+    "/forgot-password",
+    "/demo",
+    "/crm-sales",
+    "/crm-support",
+    "/crm-marketing",
+    "/crm-commerce",
+  ];
 
   return {
     rules: [

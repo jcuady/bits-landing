@@ -57,8 +57,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 export function useToast() {
   const ctx = React.useContext(ToastContext);
   if (!ctx) {
-    // Graceful fallback if used outside provider
-    return { showToast: (text: string) => console.log("Toast:", text) };
+    // Graceful fallback if used outside provider.
+    // No-op rather than logging: toast text can contain record data, and
+    // console output persists in browser logs and devtools.
+    return { showToast: (_text: string) => {} };
   }
   return ctx;
 }

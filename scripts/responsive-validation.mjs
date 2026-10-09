@@ -1,6 +1,18 @@
 import { chromium } from "playwright";
+import { startServer } from "./lib/serve.mjs";
 
-const BASE = "http://localhost:3847";
+/*
+ * Starts its own `next start` on a free port, like scripts/crm-e2e.mjs and
+ * scripts/keyboard-validation.mjs. Previously this hard-coded localhost:3847 and
+ * assumed a server was already running, so a bare `npm run test:responsive`
+ * failed with a Playwright ERR_CONNECTION_REFUSED stack trace that read as a
+ * broken test rather than a missing prerequisite. RESPONSIVE_BASE_URL still
+ * overrides it.
+ */
+const { base: BASE, stop } = await startServer({
+  explicitBase: process.env.RESPONSIVE_BASE_URL,
+  label: "responsive",
+});
 const viewports = [
   { name: "iphone-se", width: 375, height: 667, touch: true },
   { name: "iphone-15", width: 393, height: 852, touch: true },
@@ -168,6 +180,7 @@ const failures = results.filter(
 );
 
 await browser.close();
+await stop();
 
 if (failures.length) {
   console.error(`Responsive validation failed for ${failures.length} viewport(s).`);

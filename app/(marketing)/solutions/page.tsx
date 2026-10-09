@@ -6,10 +6,10 @@ import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { ConsultationButton } from "@/components/ui/consultation-button";
 import { solutionTracks, sectorTrackMap } from "@/lib/solutions-data";
-import { site, targetIndustrySectors } from "@/lib/site";
+import { site, targetIndustrySectors, PRODUCT_COUNT } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Solutions — What Are You Trying to Fix? | BITS",
+  title: "Solutions — What Are You Trying to Fix?",
   description:
     "Six operational problems BITS solves: collections and field recovery, automated voice AI, sales pipelines and support, accounting and payroll, inventory and dispatch, and bookings and queuing. Find the track that matches your bottleneck.",
   alternates: { canonical: `${site.url}/solutions` },
@@ -99,7 +99,7 @@ export default function SolutionsPage() {
                   href="/products"
                   className="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full border border-linelight bg-white px-7 text-sm font-bold text-ink shadow-xs transition-all duration-200 hover:border-electric-400 hover:bg-skywash"
                 >
-                  Browse all 18 products
+                  Browse all {PRODUCT_COUNT} products
                   <ArrowRight className="size-4" />
                 </Link>
               </div>

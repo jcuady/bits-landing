@@ -110,9 +110,16 @@ Per [llmstxt.org](https://llmstxt.org) standard for answer engines:
 - **`public/llms.txt`**: Clean markdown summary containing core brand proposition, product hyperlinks, compliance facts, and contact coordinates.
 - **`public/llms-full.txt`**: Deep architectural and statutory dossier detailing:
   - Full product breakdown (Collections CRM, Voice AI, ERP, HRMS, Construction, Sports Hub)
-  - Statutory compliance (BSP Circulars 454/857, BIR CAS, NPC RA 10173 DPA 2012, DOLE/TRAIN Law)
-  - Enterprise security architecture (RBAC, WORM logging, TLS 1.3, HIPAA audio compliance)
-  - Deployment patterns (Sovereign Cloud vs On-Premises Air-Gapped)
+  - Statutory alignment claimed per product (BSP Circulars 454/857, BIR CAS, NPC RA 10173, DOLE/TRAIN Law)
+  - **Verified security posture, stated as denials** — §28 rewrote this section, and §52 corrected its integrations and deployment lines. It says explicitly that there is **no WORM or immutable audit log**, and that **RBAC, ABAC, SSO and MFA are not implemented**; encryption is attributed to the hosting layer, not the application. There is no telephony and no GraphQL endpoint.
+  - Deployment models, described as options rather than configurations of the live deployment
+
+> **Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §52).** This line previously read
+> *"Enterprise security architecture (RBAC, WORM logging, TLS 1.3, HIPAA audio
+> compliance)"* — describing content §28 had already **removed** from that file,
+> describing claims the file now explicitly denies. A document describing a
+> public artefact is as capable of going stale as any other, and this one had
+> nobody reading the file it described.
 
 ### 3.4 Agentic Resource Discovery (`public/.well-known/ai-catalog.json`)
 Conforms to Agentic Resource Discovery 1.0 specifications for agentic web browsing and tool invocation.
@@ -138,7 +145,7 @@ Conforms to Agentic Resource Discovery 1.0 specifications for agentic web browsi
 |:---|:---|:---|:---:|
 | **Claude SEO Doctor** | Runtime, Python 3.14, Chromium | `npm run seo:doctor` | **PASS (Ready)** |
 | **TypeScript Integrity** | Strict type-checking, zero any bugs | `npx tsc --noEmit` | **PASS (0 errors)** |
-| **Static Build Generation** | 57 pre-rendered static routes | `npm run build` | **PASS (57/57 routes)** |
+| **Static Build Generation** | Route output is verified from the build manifests, not a remembered total (currently **53 generated paths = 45 route definitions + 8 dynamic**). A previous `57/57 routes` figure did not reproduce. | `npm run build` | **Verified against `.next/` manifests, 8 Oct 2026** |
 | **AI Ingestion Dossier** | Standard llms.txt & llms-full.txt | `public/llms.txt` | **VERIFIED** |
 | **Agentic Discovery** | Agentic 1.0 JSON Catalog | `public/.well-known/ai-catalog.json` | **VERIFIED** |
 | **Crawler Guardrails** | App boundary isolation & AI crawlers | `app/robots.ts` | **VERIFIED** |

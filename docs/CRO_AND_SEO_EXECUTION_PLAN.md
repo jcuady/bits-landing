@@ -4,7 +4,7 @@
 > **Target Entity:** Boundless IT Solutions (BITS)  
 > **Production Host:** `https://www.boundlessits.com`  
 > **Date:** October 2, 2026  
-> **Status:** Fully Executed & Verified
+> **Status:** Partially executed — see SYSTEM_AUDIT.md §58. Four capability claims in this plan (the live voice agent, sub-350ms dialing, sub-350ms turn-taking, and documented BSP/NPC compliance) describe software that does not exist in this build and have been struck. The "Fully Executed & Verified" status this document previously carried was contradicted by its own §5.
 
 ---
 
@@ -45,7 +45,7 @@ Every product has a dedicated route, structured metadata, and clear CTA funnel:
 | Product Name | Category | Route | Plain-Language Value Proposition | Primary CTA |
 |:---|:---:|:---:|:---|:---:|
 | **Operations 360 (OMS)** | Flagship | `/products/collections` | All-in-one contact center operations: customer files, dialer, QA scorecards, coaching, LMS, and live reports in one screen. | Request Live Demo (`/#contact`) |
-| **BITSagent AI** | Flagship | `/bitsagent` | Human-sounding AI voice agent that answers calls, books appointments, and resolves inquiries autonomously. | Listen to Demos (`/bitsagent`) |
+| **BITSagent AI** | Flagship | `/bitsagent` | ~~Human-sounding AI voice agent that answers calls, books appointments, and resolves inquiries autonomously.~~ **No telephony exists in this build** — zero `RTCPeerConnection` / `getUserMedia` / SDP. This product line is not adjudicable from this repository (§8). | Request Consultation (`/#contact`) |
 | **BITScrm Sales** | CRM | `/products/sales` | Visual deal pipelines, sales activity tracking, and instant quotation generator. | Explore CRM Sales (`/products/sales`) |
 | **BITScrm Support** | CRM | `/products/support` | Omnichannel ticket inbox, customer helpdesk, and real-time SLA countdown timers. | Explore CRM Support (`/products/support`) |
 | **BITScrm Marketing** | CRM | `/products/marketing` | Automated customer email & SMS promotional sequences with conversion analytics. | Explore Marketing (`/products/marketing`) |
@@ -80,7 +80,7 @@ Top SaaS websites generate up to 70% of their organic qualified pipeline through
    - **Target Query: "crm for collections" / "best collections crm"**
      - *URL:* `/blog/best-collections-oms-debt-recovery-software-2026`
      - *Title:* Top CRM for Collections Agency & Enterprise Debt Recovery OMS in 2026 (Ranked & Reviewed)
-     - *In-Page CRO:* Explains why generic sales CRMs fail on collections floors and highlights Operations 360 with sub-350ms predictive dialing.
+     - *In-Page CRO:* Explains why generic sales CRMs fail on collections floors and highlights Operations 360's automated PTP handling, dynamic work queues and 360° dossiers. ~~sub-350ms predictive dialing~~ struck (§58 — no telephony).
    - **Target Query: "best crm" / "best crm software" / "best crm philippines"**
      - *URL:* `/blog/best-sovereign-enterprise-crm-platforms-philippines`
      - *Title:* Best CRM Software in 2026: Enterprise & Mid-Market Comparison (Ranked & Reviewed)
@@ -92,7 +92,7 @@ Top SaaS websites generate up to 70% of their organic qualified pipeline through
    - **Target Query: "voice ai call center" / "autonomous voice agents"**
      - *URL:* `/blog/best-autonomous-voice-ai-agents-call-centers`
      - *Title:* Best Autonomous Voice AI Agents for Enterprise Call Centers in 2026
-     - *In-Page CRO:* Sub-350ms turn-taking latency benchmark with Taglish language cadence.
+     - *In-Page CRO:* ~~Sub-350ms turn-taking latency benchmark~~ struck (§58 — no telephony, no call pipeline, nothing to benchmark). Substitute a real, measurable claim or drop the post.
    - **Target Query: "on premise server setup" / "office datacenter blueprint"**
      - *URL:* `/blog/on-premise-office-server-datacenter-setup-guide-2026`
      - *Title:* On-Premises Server & Private Datacenter Setup Guide (2026 Blueprint & TCO)
@@ -174,5 +174,5 @@ With these changes executed:
 2. **Comprehensive Visibility:** All 18 products are visible, discoverable, and cross-linked.
 3. **High-Converting Intake:** Lead forms are friendly, fast, accessible to non-technical buyers, and offer an instant 20-minute calendar booking fast-track.
 4. **Organic Acquisition:** Searchers looking for *"best crm"*, *"crm for collections"*, or *"best oms"* find authoritative, peer-reviewed BITS benchmark guides with direct conversion funnels into our software.
-5. **Bank-Grade Trust:** Verified 20-year operational history, sovereign local hosting, and statutory compliance (BSP Circulars, NPC RA 10173) are clearly documented on every page.
+5. **Bank-Grade Trust:** ~~statutory compliance (BSP Circulars, NPC RA 10173) are clearly documented on every page~~ **struck (§58).** No automated BSP 454/857 or NPC RA 10173 enforcement exists in this build; there is no contact-rule subsystem and no audit store. What can honestly be documented on every page is the real control set: server-side session checks, database row-level security, rate-limited and schema-validated public write paths, and no-store personal-data responses. "20-year operational history" remains an owner claim (§8).
 

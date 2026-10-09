@@ -185,10 +185,14 @@ export default function ContactsPage() {
         <form onSubmit={handleCreateContact} className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="contact-name"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Full Name *
               </label>
               <input
+                id="contact-name"
                 required
                 type="text"
                 placeholder="e.g. Patricia Reyes"
@@ -199,10 +203,14 @@ export default function ContactsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="contact-title"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Corporate Designation / Title
               </label>
               <input
+                id="contact-title"
                 type="text"
                 placeholder="e.g. Head of Merchant Risk"
                 value={contactForm.title}
@@ -214,10 +222,14 @@ export default function ContactsPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="contact-email"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Email Address *
               </label>
               <input
+                id="contact-email"
                 required
                 type="email"
                 placeholder="e.g. patricia.reyes@voyager.ph"
@@ -228,10 +240,14 @@ export default function ContactsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="contact-phone"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Mobile Number
               </label>
               <input
+                id="contact-phone"
                 type="tel"
                 placeholder="+63 917 552 1190"
                 value={contactForm.phone}
@@ -243,10 +259,14 @@ export default function ContactsPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="contact-company"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Company Account *
               </label>
               <select
+                id="contact-company"
                 value={contactForm.companyId}
                 onChange={(e) => setContactForm({ ...contactForm, companyId: e.target.value })}
                 className="h-9 w-full rounded-xl border border-border bg-card px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900 cursor-pointer"
@@ -260,10 +280,14 @@ export default function ContactsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="account-manager"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Account Manager
               </label>
               <select
+                id="account-manager"
                 value={contactForm.owner}
                 onChange={(e) => setContactForm({ ...contactForm, owner: e.target.value })}
                 className="h-9 w-full rounded-xl border border-border bg-card px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900 cursor-pointer"

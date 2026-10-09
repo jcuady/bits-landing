@@ -60,7 +60,7 @@ Sub:      From predictive dialing and GPS field agents to real-time QA scoring a
           sovereign system so your team recovers more debt in less time.
 CTA 1:    Book a Consultation          (opens modal)
 CTA 2:    Explore OPERATIONS 360       (scrolls to #cockpit)
-CTA 3:    Explore All 18 Engines       (→ /demo)
+CTA 3:    Explore All 19 Engines       (→ /demo)
 Pills:    Collections & PTP Engine · Predictive WebRTC Dialer · Field Agents GPS App
 ```
 
@@ -159,10 +159,60 @@ H1:       Recover More Debt.
 Sub:      Operations 360 runs predictive dialing, QA scoring and GPS-tagged
           field visits in one cockpit. Quiet hours, cease-and-desist enforcement
           and an immutable audit log are built in, not bolted on.
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ DO NOT SHIP — see below
 
 CTA 1:    See the Field App Live
 CTA 2:    See All 18 Products        → /products
 ```
+
+> **Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §44).** The original sub-line
+> claimed three things are *"built in, not bolted on"*. **None of the three is
+> true of this build**, and all three are already banned attestations:
+>
+> | Claimed in the copy | Reality | Gate attestation |
+> |---|---|---|
+> | "an immutable audit log" | No audit-log subsystem — no table, no writes, no retention | `auditlog` |
+> | "Quiet hours" | Not implemented | `contact-rules` |
+> | "cease-and-desist enforcement" | Not implemented | `contact-rules` |
+>
+> The authoritative statement of why the last two are false is
+> `lib/security-data.ts:120` — *"Call-frequency and cease-and-desist handling
+> is not part of this build."*
+>
+> ### CORRECTION — an earlier version of this note was wrong
+>
+> The first draft of this correction said the copy **"would have failed the
+> build"**, because all three features are banned attestations. That was
+> written from the gate's *rule list* rather than from its *output*, and running
+> the detector proved it false:
+>
+> ```
+> Quiet hours, cease-and-desist enforcement and an immutable audit log
+> are built in, not bolted on.        →  0 hits. PASSES.
+> ```
+>
+> `SCOPED_OUT` exempts a whole sentence containing any denial marker, and the
+> word "not" here negates the *build style*, not the three controls named
+> earlier in the same sentence. Three tightenings were built and measured; all
+> three broke honest copy this repository ships. The gap is documented, not
+> closed — see `lib/site/security-claims.mjs` (SCOPED_OUT) and
+> `scripts/probe-proposed-copy.mjs`.
+>
+> **This document is therefore the only thing standing between this copy and a
+> published false claim.** It is not gated; nothing scans it. Do not lift the
+> line from here without re-deriving it.
+>
+> Usable replacement, built only from controls verified in §29:
+>
+> ```
+> Sub:      Operations 360 runs predictive dialing, QA scoring and GPS-tagged
+>          field visits in one cockpit. Every CRM record is behind a
+>          verified session, and outbound email is logged with its delivery
+>          outcome.
+> ```
+>
+> The other two options (A and B) contain no banned attestation and are
+> unaffected.
 
 **Why:** This is the paid-traffic landing page for the flagship. It's the version to point Meta/TikTok traffic at — one audience, one message, one ask.
 

@@ -52,27 +52,27 @@ const CRM_VARIANTS: CrmVariantData[] = [
     name: "Operations 360",
     badge: "Primary Flagship Platform",
     isFlagship: true,
-    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisory Telephony",
+    tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisor Oversight",
     description:
-      "Our core flagship platform built for debt recovery agencies, BPO contact centers, banks, and consumer lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in HUD.",
+      "Our core flagship platform built for debt recovery agencies, BPO contact centers, banks, and consumer lenders. Centralizes delinquent portfolio staging, automated Promise-to-Pay (PTP) tracking, and supervisor floor review. No telephony in this build.",
     metric: {
       label: "Right-Party Connect",
       value: "3.2x Boost",
       detail: "vs. spreadsheet calling",
     },
     compliance: [
-      "HIPAA Security Rule Aligned",
-      "SOC 2 Type II Controls",
+      "Server-Side Session Checks",
+      "Database Row-Level Security",
       "BSP Circulars 454/857",
       "NPC RA 10173 DPA",
     ],
     capabilities: [
       "Dynamic Debtor & Account Staging Queues",
-      "WebRTC In-Browser SIP Softphone & Auto-Dialer",
+      "Specimen — Portfolio Staging & PTP (no telephony)",
       "Automated Promise-to-Pay (PTP) Scheduling Engine",
-      "Live Supervisor Listen, Whisper & Barge-in HUD",
+      "Supervisor Operations HUD: aging visibility, coaching logs & scorecards",
       "Dual-Channel Call Audio Archiving & Scorecards",
-      "Immutable Audit Trails & Strict Contact Hour Enforcing",
+      "Consent Capture & Contact Rules Configured Per Deployment",
     ],
     ctaLabel: "Schedule Collections Demo",
   },
@@ -90,8 +90,8 @@ const CRM_VARIANTS: CrmVariantData[] = [
       detail: "faster time-to-resolution",
     },
     compliance: [
-      "SOC 2 Type II Controls",
-      "Granular RBAC Permissions",
+      "Database Row-Level Security",
+      "Per-Role Authorization — Roadmap",
       "NPC RA 10173 DPA",
       "End-to-End TLS Encryption",
     ],
@@ -119,8 +119,8 @@ const CRM_VARIANTS: CrmVariantData[] = [
       detail: "accelerated deal cycles",
     },
     compliance: [
-      "SOC 2 Type II Controls",
-      "Granular RBAC Permissions",
+      "Database Row-Level Security",
+      "Per-Role Authorization — Roadmap",
       "Encrypted Quote Documents",
       "NPC RA 10173 DPA",
     ],
@@ -177,10 +177,10 @@ const CRM_VARIANTS: CrmVariantData[] = [
       detail: "zero calculation variance",
     },
     compliance: [
-      "PCI-DSS Level 1 Ready",
-      "SOC 2 Type II Controls",
+      "No payment processing — PCI DSS not assessed",
+      "Database Row-Level Security",
       "256-Bit TLS Financial Encryption",
-      "Tamper-Evident Ledger Logs",
+      "Contract-Set Ledger Retention",
     ],
     capabilities: [
       "Recurring Subscription & Usage-Based Metering",
@@ -383,9 +383,9 @@ export function CrmVariantsExplorer() {
               </div>
             </div>
 
-            {/* Right Column: Bionis Dashboard Hardware Frame & Live Board Preview */}
+            {/* Right Column: CRM Dashboard Hardware Frame & Live Board Preview */}
             <div className="lg:col-span-7">
-              <div className="bionis-dashboard relative overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-2 shadow-2xl shadow-blue-950/10 dark:border-[#222] dark:bg-[#141414]">
+              <div className="crm-dashboard relative overflow-hidden rounded-3xl border border-[#e5e7eb] bg-white p-2 shadow-2xl shadow-blue-950/10 dark:border-[#222] dark:bg-[#141414]">
                 {/* BITS Control Bar Header */}
                 <div className="flex items-center justify-between border-b border-[#eeefe9] bg-[#fafafa] px-4 py-3 dark:border-[#222] dark:bg-[#18181b] rounded-t-2xl">
                   <div className="flex items-center gap-2.5">
@@ -430,7 +430,7 @@ export function CrmVariantsExplorer() {
             </h3>
             <p className="mt-3 text-sm text-slate-600">
               Zero vendor lock-in. BITSagent autonomous voice/email agents and BITS RAG knowledge grounding integrate
-              natively across Collections, Support, Sales, Marketing, Commerce, or your legacy databases and telephony backbones.
+              natively across Collections, Support, Sales, Marketing, Commerce, or your legacy databases and existing systems.
             </p>
           </div>
 
@@ -443,7 +443,7 @@ export function CrmVariantsExplorer() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-slate-900">Universal BITSagent AI Connector</h4>
-                  <p className="text-xs text-blue-600 font-mono">Autonomous Voice, SMS, Email & Telephony</p>
+                  <p className="text-xs text-blue-600 font-mono">Autonomous Voice, SMS & Email</p>
                 </div>
               </div>
 
@@ -455,7 +455,7 @@ export function CrmVariantsExplorer() {
               <div className="mt-5 space-y-2 text-xs text-slate-700">
                 <div className="flex items-center gap-2 rounded-xl bg-slate-50 p-2.5 border border-slate-200">
                   <CheckCircle2 className="size-4 text-blue-600 shrink-0" />
-                  <span>Connects to WebRTC softphones, SIP PBX trunks & VoIP providers</span>
+                  <span>Specimen row — telephony not part of this build</span>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl bg-slate-50 p-2.5 border border-slate-200">
                   <CheckCircle2 className="size-4 text-blue-600 shrink-0" />
@@ -469,7 +469,7 @@ export function CrmVariantsExplorer() {
 
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <Link
-                  href="/bitsagent"
+                  href="/operations-360/ai"
                   className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
                 >
                   <span>Explore BITSagent AI Capabilities</span>
@@ -542,11 +542,22 @@ function CollectionsMockupLight() {
 
   return (
     <div className="space-y-3 font-sans">
+      {/* SYSTEM_AUDIT.md §70 — these mockup boards had NO synthetic label, unlike the
+       * neighbouring boards labelled further down this file. §62's telephony
+       * vocabulary missed "Supervisor Audio Barge HUD", "Barge Ready",
+       * "Dual-Channel SRTP" and the coaching-toast copy, so the gate reported
+       * this file CLEAN while it rendered a supervisor audio-barge console for
+       * a build with no audio pipeline at all. Labelled at each function root so
+       * the whole board is covered, not just the rows that happened to match. */}
+      <p className="text-[0.65rem] font-mono text-slate-400">
+        Illustrative specimen — no telephony, audio or live supervisor session exists in this build.
+      </p>
+
       {/* Customer Benefit Callout */}
       <div className="rounded-xl border border-blue-200 bg-blue-50/70 p-2.5 text-xs">
         <p className="text-[0.72rem] text-blue-950 font-medium">
           <strong className="font-bold text-blue-700">How this helps you: </strong>
-          Prioritizes active PTP collections, reduces repeat calls by 45%, and enforces BSP compliance quiet hours automatically.
+          Prioritizes active PTP collections so teams spend their time on the accounts most likely to pay.
         </p>
       </div>
 
@@ -562,10 +573,10 @@ function CollectionsMockupLight() {
         </div>
         <button
           type="button"
-          onClick={() => handleAction("Coach whisper sent to agent: 'Offer 2-month split terms for Carlos Mendoza.'")}
+          onClick={() => handleAction("Specimen: coaching note queued. No supervisor audio session, whisper or call exists in this build.")}
           className="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 active:scale-95 cursor-pointer shadow-xs min-h-[44px] inline-flex items-center justify-center"
         >
-          Whisper Coaching
+          Coaching Note
         </button>
       </div>
 
@@ -601,15 +612,17 @@ function CollectionsMockupLight() {
             <tr
               onClick={() => {
                 setActiveItem("HUD");
-                handleAction("Supervisor Audio Barge HUD enabled on SRTP channel.");
+                handleAction("Specimen: supervisor HUD row. No telephony, audio pipeline or SRTP channel exists in this build.");
               }}
               className={cn("transition-colors cursor-pointer", activeItem === "HUD" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
             >
-              <td className="p-2 font-bold text-slate-900">Supervisor Audio Barge HUD</td>
+              <td className="p-2 font-bold text-slate-900">Supervisor HUD (specimen)</td>
               <td className="p-2">
-                <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">Barge Ready</span>
+                <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">
+                  Illustrative — no telephony
+                </span>
               </td>
-              <td className="p-2 text-slate-600">Dual-Channel SRTP</td>
+              <td className="p-2 text-slate-600">Dual-Channel SRTP (specimen)</td>
             </tr>
           </tbody>
         </table>
@@ -629,6 +642,17 @@ function SupportMockupLight() {
 
   return (
     <div className="space-y-3 font-sans">
+      {/* SYSTEM_AUDIT.md §70 — these mockup boards had NO synthetic label, unlike the
+       * neighbouring boards labelled further down this file. §62's telephony
+       * vocabulary missed "Supervisor Audio Barge HUD", "Barge Ready",
+       * "Dual-Channel SRTP" and the coaching-toast copy, so the gate reported
+       * this file CLEAN while it rendered a supervisor audio-barge console for
+       * a build with no audio pipeline at all. Labelled at each function root so
+       * the whole board is covered, not just the rows that happened to match. */}
+      <p className="text-[0.65rem] font-mono text-slate-400">
+        Illustrative specimen — no telephony, audio or live supervisor session exists in this build.
+      </p>
+
       {/* Customer Benefit Callout */}
       <div className="rounded-xl border border-blue-200 bg-blue-50/70 p-2.5 text-xs">
         <p className="text-[0.72rem] text-blue-950 font-medium">
@@ -693,7 +717,7 @@ function SupportMockupLight() {
               }}
               className={cn("transition-colors cursor-pointer", activeTicket === "TICK-8842" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
             >
-              <td className="p-2 font-bold text-slate-900">TICK-8842 BDO FinTech SAML Rotation</td>
+              <td className="p-2 font-bold text-slate-900">TICK-8842 BDO FinTech Cert Rotation</td>
               <td className="p-2">
                 <span className="rounded bg-amber-500 px-2 py-0.5 text-[0.62rem] font-bold text-white">P2 High</span>
               </td>
@@ -858,7 +882,7 @@ function MarketingMockupLight() {
               <td className="p-2 font-mono text-blue-600">42% Open Rate</td>
             </tr>
             <tr
-              onClick={() => handleAction("AI Voice Escalation queued: 48-hour quiet hour window strictly enforced.")}
+              onClick={() => handleAction("AI Voice Escalation queued — demo simulation. No dialler is contacted and no contact window is enforced.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
               <td className="p-2 font-bold text-slate-900">2. AI Voice Escalation</td>
@@ -887,14 +911,14 @@ function CommerceMockupLight() {
       <div className="rounded-xl border border-cyan-200 bg-cyan-50/70 p-2.5 text-xs">
         <p className="text-[0.72rem] text-cyan-950 font-medium">
           <strong className="font-bold text-cyan-700">How this helps you: </strong>
-          PCI-DSS Level 1 compliant tokenized billing. Automatically charges monthly retainers via credit card or Maya without manual invoicing.
+          Illustrative: invoicing and recurring subscription modelling. No payment processor is integrated and no PCI DSS assessment has been performed.
         </p>
       </div>
 
       <div className="flex items-center justify-between rounded-xl border border-cyan-200 bg-white p-3 shadow-2xs">
         <div>
           <p className="text-xs font-bold text-slate-900">Invoicing &amp; Recurring Subscriptions</p>
-          <p className="text-[0.68rem] text-slate-500">PCI-DSS Level 1 Ready · Tokenized Gateways</p>
+          <p className="text-[0.68rem] text-slate-500">Specimen · no payment processor or PCI DSS assessment</p>
         </div>
         <button
           type="button"
@@ -932,10 +956,10 @@ function CommerceMockupLight() {
               </td>
             </tr>
             <tr
-              onClick={() => handleAction("Metered SIP Telephony: 64,000 mins reconciled with Philippine carrier invoice.")}
+              onClick={() => handleAction("Specimen: metered telephony line. No telephony is part of this build.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
-              <td className="p-2 font-bold text-slate-900">Metered SIP Telephony</td>
+              <td className="p-2 font-bold text-slate-900">Metered Telephony (specimen)</td>
               <td className="p-2">64,000 Mins</td>
               <td className="p-2">
                 <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">Reconciled</span>

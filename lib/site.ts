@@ -40,7 +40,7 @@ export const navigationSections = [
           title: "BITSagent AI Operations",
           badge: "Autonomous AI",
           description: "Human-sounding voice negotiation, real-time agent copilot & compliance QA.",
-          href: "/bitsagent",
+          href: "/operations-360/ai",
           icon: "ai" as const,
         },
         {
@@ -101,7 +101,7 @@ export const navigationSections = [
           title: "BITSagent AI Operations",
           badge: "Autonomous AI",
           description: "Human-sounding voice negotiation, real-time agent copilot & compliance QA.",
-          href: "/bitsagent",
+          href: "/operations-360/ai",
           icon: "ai" as const,
         },
         {
@@ -342,7 +342,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Autonomous Resolution", value: "68% Rate" },
     ctaText: "Explore BITSagent AI",
-    ctaHref: "/bitsagent",
+    ctaHref: "/operations-360/ai",
   },
   {
     id: "sales",
@@ -866,7 +866,7 @@ export const ecosystemPillars = [
       "Multi-campaign tenant isolation",
     ],
     badge: "Flagship CRM",
-    link: "/bitscrm",
+    link: "/operations-360/crm",
   },
   {
     id: "automation",
@@ -900,7 +900,7 @@ export const ecosystemPillars = [
       "Seamless live-agent escalation",
     ],
     badge: "AI Layer",
-    link: "/bitsagent",
+    link: "/operations-360/ai",
   },
   {
     id: "analytics",
@@ -2014,13 +2014,13 @@ export const footerColumns = [
     title: "Platform",
     links: [
       { label: "OPERATIONS 360 (Flagship)", href: "/#operations-360" },
-      { label: "BITScrm Collections", href: "/bitscrm" },
+      { label: "BITScrm Collections", href: "/operations-360/crm" },
       { label: "BITScrm Support Desk", href: "/products/support" },
       { label: "BITScrm Sales Engine", href: "/products/sales" },
       { label: "BITScrm Marketing", href: "/products/marketing" },
       { label: "BITScrm Commerce", href: "/products/commerce" },
       { label: "CRM Architecture Hub", href: "/products/crm" },
-      { label: "BITSagent AI Suite", href: "/bitsagent" },
+      { label: "BITSagent AI Suite", href: "/operations-360/ai" },
       { label: "Enterprise Software (18)", href: "/#products-suite" },
     ],
   },

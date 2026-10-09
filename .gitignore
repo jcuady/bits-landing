@@ -60,3 +60,7 @@ ms-playwright/
 __pycache__/
 *.pyc
 *.pyo
+
+# Transient verification screenshots written by the capture-*/verify-* scripts.
+# Output of a check, not an input to the build.
+.shots/

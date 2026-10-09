@@ -147,13 +147,13 @@ export default function OpportunitiesPage() {
                 <div className="flex items-center gap-1.5">
                   <StatusBadge status={r.stage} />
                   <select
+                    aria-label={`Change stage for ${r.name}`}
                     value={r.stage}
                     onChange={(e) => {
                       moveOpportunity(r.id, e.target.value as OpportunityStage);
                       showToast(`Deal moved to ${e.target.value.replace("_", " ")}.`);
                     }}
                     className="h-6 rounded border border-border bg-card px-1 text-[0.65rem] text-muted-foreground outline-none cursor-pointer"
-                    aria-label={`Change stage for ${r.name}`}
                   >
                     <option value="discovery">Discovery</option>
                     <option value="proposal">Proposal</option>
@@ -193,7 +193,8 @@ export default function OpportunitiesPage() {
                     showToast(`Deal "${r.name}" deleted.`, "info");
                   }}
                   className="p-1.5 text-muted-foreground hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
-                  title="Delete Opportunity"
+                  aria-label={`Delete ${r.name}`}
+                  title={`Delete ${r.name}`}
                 >
                   <Trash2 className="size-3.5" />
                 </button>
@@ -213,10 +214,14 @@ export default function OpportunitiesPage() {
       >
         <form onSubmit={handleCreateDeal} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-foreground mb-1">
+            <label
+              htmlFor="deal-title"
+              className="block text-xs font-semibold text-foreground mb-1"
+            >
               Deal / Project Title *
             </label>
             <input
+              id="deal-title"
               required
               type="text"
               placeholder="e.g. EastWest Credit — 150-Seat Collections CRM"
@@ -228,10 +233,14 @@ export default function OpportunitiesPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="deal-company"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Associated Company *
               </label>
               <select
+                id="deal-company"
                 value={dealForm.companyId}
                 onChange={(e) => setDealForm({ ...dealForm, companyId: e.target.value })}
                 className="h-9 w-full rounded-xl border border-border bg-card px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900 cursor-pointer"
@@ -245,10 +254,14 @@ export default function OpportunitiesPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="deal-amount-pesos"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Deal Amount in Pesos (₱) *
               </label>
               <input
+                id="deal-amount-pesos"
                 required
                 type="number"
                 min={10000}
@@ -263,10 +276,14 @@ export default function OpportunitiesPage() {
 
           <div className="grid gap-3 sm:grid-cols-3">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="pipeline-stage"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Pipeline Stage
               </label>
               <select
+                id="pipeline-stage"
                 value={dealForm.stage}
                 onChange={(e) =>
                   setDealForm({ ...dealForm, stage: e.target.value as OpportunityStage })
@@ -282,10 +299,14 @@ export default function OpportunitiesPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="deal-probability"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Probability (%)
               </label>
               <input
+                id="deal-probability"
                 type="number"
                 min={0}
                 max={100}
@@ -296,10 +317,14 @@ export default function OpportunitiesPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="target-close-date"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Target Close Date
               </label>
               <input
+                id="target-close-date"
                 type="date"
                 value={dealForm.closeDate}
                 onChange={(e) => setDealForm({ ...dealForm, closeDate: e.target.value })}

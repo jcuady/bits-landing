@@ -60,10 +60,14 @@ export default function SettingsPage() {
 
           <div className="mt-5 space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-foreground dark:text-neutral-200">
+              <label
+                htmlFor="corporate-email"
+                className="block text-xs font-semibold text-foreground dark:text-neutral-200"
+              >
                 Corporate Email (Fixed)
               </label>
               <input
+                id="corporate-email"
                 type="text"
                 disabled
                 value={userEmail}
@@ -144,8 +148,8 @@ export default function SettingsPage() {
               }}
             />
             <Toggle
-              label="Audio & WebRTC Haptics"
-              description="Play soft auditory cues on incoming calls and task completion."
+              label="Interface Audio Cues"
+              description="Play auditory cues for demo playback and task completion. No telephony in this build."
               checked={soundEffects}
               onChange={(v) => {
                 setSoundEffects(v);
@@ -189,7 +193,14 @@ export default function SettingsPage() {
             </div>
             <div className="flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
               <ShieldCheck className="size-4" />
-              <span>SOC2 Type II & DPA 2012 Compliant</span>
+              {/* SYSTEM_AUDIT.md §49. Previously: "SOC2 Type II & DPA 2012
+                  Compliant", behind the login, next to a green shield. No SOC 2
+                  Type II attestation exists — it is a third-party audit that has
+                  never been performed (§28) — and no DPA has been signed. The
+                  ai-disclosure gate could not see this file: it is inside the
+                  authenticated CRM, which is not in SECURITY_SURFACES. Replaced
+                  with the control that is actually enforced. */}
+              <span>Session-gated &middot; RLS protected &middot; no-store</span>
             </div>
           </div>
 
@@ -273,12 +284,15 @@ export default function SettingsPage() {
                 size="sm"
                 onClick={() => {
                   restoreDemoData();
-                  showToast("Demo dataset restored: 15 enterprise leads & 12 deals loaded.", "success");
+                  showToast(
+                    "Workspace reset to the default empty state.",
+                    "success"
+                  );
                 }}
                 className="gap-2 cursor-pointer"
               >
                 <RotateCcw className="size-3.5" />
-                <span>Reload Enterprise Demo Dataset</span>
+                <span>Reset Workspace to Default</span>
               </Button>
             </div>
 

@@ -74,8 +74,8 @@ flowchart TD
         CrmSurface --> SpeechAi[Real-Time Speech AI Compliance QA]
     end
     
-    subgraph Backend [Server Actions & Sovereign Services]
-        LeadAction[app/actions/lead.ts]
+    subgraph Backend [Server Actions & Supabase Services]
+        ContactAction[app/actions/contact.ts]
         ContactAction[app/actions/contact.ts]
         AuthMiddleware[lib/supabase/middleware.ts]
     end
@@ -116,7 +116,7 @@ flowchart TD
 
 | Layer | Framework / Library | Exact Version | Purpose & Architecture Role |
 |---|---|---|---|
-| **Framework** | Next.js (App Router) | `16.3.5` | Turbopack engine, React Server Components (RSC), SSR, and API endpoints. |
+| **Framework** | Next.js (App Router) | `16.3.8` | Turbopack engine, React Server Components (RSC), SSR, and API endpoints. |
 | **Runtime** | React | `19.3.0` | React 19 primitives, Server Actions, concurrent state transitions. |
 | **Language** | TypeScript | `7.0.2` | Strict type checking (`npx tsc --noEmit`), zero type-coercion bypasses. |
 | **Styling** | Tailwind CSS | `4.3.3` | Tailwind v4 engine using native `@theme` CSS tokens in `app/globals.css`. |
@@ -124,9 +124,13 @@ flowchart TD
 | **Scroll Engine** | GSAP & ScrollTrigger | `3.15.0` | High-precision interactive pinned timeline scrubbing in `HeroProduct`. |
 | **Database & Auth** | Supabase SSR & JS | `@supabase/ssr@0.12.7`<br>`@supabase/supabase-js@2.117.1` | PostgreSQL pooling, Row Level Security (RLS), and cookie session authentication. |
 | **Validation** | Zod | `4.6.2` | Runtime request body validation, schema sanitization for lead intake. |
-| **Charts & HUD** | Recharts & SVG | `3.10.1` | Operations recovery velocity charts, talk-time averages, and floor metrics. |
+| **Charts & HUD** | Hand-authored inline SVG | — | Operations recovery velocity, talk-time averages, and floor metrics are drawn directly as SVG with CSS-var-driven gradients (see `components/sections/product-showcase.tsx`). **No charting library is installed** — `recharts` was declared but never imported, and was removed on 10 Oct 2026 (`SYSTEM_AUDIT.md` §41) |
 | **Icons** | Lucide React | `1.45.0` | Clean, modern vector icons with consistent stroke weights. |
 | **Testing** | Playwright | `1.63.0` | Headless multi-device responsive validation across 11 viewports. |
+
+> Every package in this table is referenced by the source. `npm run` has no
+> unused-dependency gate; `node scripts/unused-deps.mjs` checks it, including
+> peer dependencies that are required without ever being imported.
 
 ---
 
@@ -197,7 +201,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # 2. Resend — Inbound Inquiries & Lead Notification Dispatch
-RESEND_API_KEY=re_your_resend_api_key_here
+RESEND_API_KEY=re_<your-resend-api-key>
 CONTACT_INBOX=boundlessitsolutions@gmail.com
 CONTACT_FROM=BITS Inquiries <onboarding@resend.dev>
 
@@ -247,7 +251,7 @@ BITS organizes enterprise capabilities into 4 connected suites housing 18 specia
 | **Field Recovery Officer** | Field Messenger, Investigator | Mobile Viewport, GPS Field App | Geofenced premise check-in, debtor signature capture, offline visit sync. |
 | **QA & Compliance Officer** | Internal Auditor, Legal Counsel | `/app/settings`, QA Speech HUD, `/security` | Automated audio transcription, BSP 454 infraction tags, audit exports. |
 | **Executive / C-Suite** | CEO, COO, Risk Officer | `/`, `/pricing`, Executive Cockpit | Portfolio recovery yield, license ROI, sovereign compliance reports. |
-| **System Administrator** | DevOps Engineer, IT Director | `/app/settings`, Supabase Dashboard | API key rotation, SSO/SAML, IP whitelisting, database backups, audit logs. |
+| **System Administrator** | DevOps Engineer, IT Director | `/app/settings`, Supabase Dashboard | Session-gated access, database row-level security, rate-limited and schema-validated write paths. ~~API key rotation, SSO/SAML, IP whitelisting, database backups, audit logs~~ — **none of these are implemented** (SYSTEM_AUDIT.md §29; `docs/FULL_SYSTEM_DOCUMENTATION.md` struck the same row). |
 
 ---
 

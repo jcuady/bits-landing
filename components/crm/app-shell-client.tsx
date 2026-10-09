@@ -55,7 +55,7 @@ export function AppShellClient({
         </div>
       </div>
 
-      <div className="bionis-dashboard flex h-[100dvh] overflow-hidden text-foreground antialiased bg-transparent">
+      <div className="crm-dashboard flex h-[100dvh] overflow-hidden text-foreground antialiased bg-transparent">
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-background focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-foreground focus:shadow-md focus:ring-2 focus:ring-[#1975f2]"

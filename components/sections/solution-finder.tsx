@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
+import { PRODUCT_COUNT } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { solutionTracks } from "@/lib/solutions-data";
 
@@ -42,7 +43,7 @@ export function SolutionFinder() {
 
           <Reveal delay={0.06}>
             <p className="mt-3.5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto text-pretty font-normal">
-              Select your organization&apos;s current operational priority. We will route you directly to the engineered architecture — no browsing 18 product specifications required.
+              Select your organization&apos;s current operational priority. We will route you directly to the engineered architecture — no browsing {PRODUCT_COUNT} product specifications required.
             </p>
           </Reveal>
         </div>

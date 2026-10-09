@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BITS Operations 360 — Facebook Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: #0d1b2a;
+    font-family: "Outfit", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #stage { width: 1080px; height: 1350px; overflow: hidden; }
+  body.hd #stage { width: 2160px; height: 2700px; }
+  body.hd .canvas { transform: scale(2); transform-origin: top left; }
+
+  /* ── BITS hero atmosphere: real brand cloud plate + hero gradient ── */
+  .canvas {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    background: linear-gradient(100deg, #1362df 0%, #2377f3 42%, #3c8bf6 76%, #5ea2f9 100%);
+  }
+
+  .sky {
+    position: absolute;
+    inset: 0;
+    background: url("../../public/images/hero-sky-bg.jpg") right center / 220% auto no-repeat;
+  }
+
+  .sky-tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(19, 98, 223, 0.30) 0%,
+      rgba(35, 119, 243, 0.16) 40%,
+      rgba(60, 139, 246, 0.06) 70%,
+      rgba(94, 162, 249, 0.02) 100%
+    );
+  }
+
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba(12, 72, 168, 0.70) 0%,
+      rgba(12, 72, 168, 0.54) 36%,
+      rgba(12, 72, 168, 0.20) 62%,
+      rgba(12, 72, 168, 0) 86%
+    );
+  }
+
+  .bloom {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 35% at 50% 0%, rgba(255, 255, 255, 0.20), transparent 65%);
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 55% at 42% 28%, rgba(8, 44, 120, 0.32) 0%, transparent 78%);
+  }
+
+  /* ── Copy ── */
+  .top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 66px 82px 0 82px;
+    z-index: 4;
+  }
+
+  .logo {
+    height: 54px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 10px rgba(2, 16, 52, 0.45));
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 38px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .eyebrow .dot {
+    width: 9px; height: 9px;
+    border-radius: 999px;
+    background: #67e8f9;
+    box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.25);
+  }
+
+  .eyebrow span {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  h1 {
+    margin-top: 26px;
+    font-size: 78px;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.032em;
+    color: #ffffff;
+    text-shadow: 0 3px 18px rgba(2, 16, 52, 0.55);
+  }
+
+  h1 em {
+    font-style: normal;
+    color: #c9f0ff;
+    text-shadow: 0 3px 22px rgba(0, 40, 100, 0.7);
+  }
+
+  .sub {
+    margin-top: 24px;
+    max-width: 790px;
+    font-size: 29px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.94);
+    text-shadow: 0 2px 10px rgba(2, 16, 52, 0.45);
+  }
+
+  .cta {
+    margin-top: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    min-width: 390px;
+    padding: 18px 20px 18px 34px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 24px 48px -18px rgba(2, 16, 52, 0.55);
+  }
+
+  .cta span {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #0d1b2a;
+  }
+
+  .cta i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; height: 48px;
+    border-radius: 999px;
+    background: #0063db;
+    flex-shrink: 0;
+  }
+
+  .cta svg { width: 20px; height: 20px; }
+
+  .url {
+    margin-top: 20px;
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 2px 8px rgba(2, 16, 52, 0.5);
+  }
+
+  /* ── Glass feature card ── */
+  .card {
+    position: absolute;
+    left: 62px;
+    right: 62px;
+    top: 892px;
+    height: 348px;
+    z-index: 3;
+    padding: 42px 46px;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 40px 80px -34px rgba(2, 16, 52, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  }
+
+  .card h2 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(2, 16, 52, 0.4);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 26px;
+    margin-top: 28px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .item .tick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(2, 16, 52, 0.18);
+  }
+
+  .item .tick svg { width: 13px; height: 13px; color: #0063db; }
+
+  .item p {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #ffffff;
+    text-shadow: 0 1px 8px rgba(2, 16, 52, 0.45);
+  }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div class="canvas">
+      <div class="sky"></div>
+      <div class="sky-tint"></div>
+      <div class="scrim"></div>
+      <div class="bloom"></div>
+      <div class="vignette"></div>
+
+      <div class="top">
+        <img class="logo" src="../../public/brand/logo-reverse.png" alt="BITS — Boundless IT Solutions" />
+
+        <div class="eyebrow">
+          <span class="dot"></span>
+          <span>Operations 360 · Field Operations</span>
+        </div>
+
+        <h1>
+          Your Field Team.<br />
+          Your Call Floor.<br />
+          <em>One System.</em>
+        </h1>
+
+        <p class="sub">
+          One platform for field visits, phone calls, and quality checks.
+        </p>
+
+        <div class="cta">
+          <span>Book a Consultation</span>
+          <i>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </i>
+        </div>
+
+        <p class="url">www.boundlessits.com</p>
+      </div>
+
+      <div class="card">
+        <h2>What is included</h2>
+
+        <div class="grid">
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Field app with GPS and photos</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Same account history everywhere</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Predictive and progressive dialer</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Browser softphone, no hardware</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Promise-to-pay tracking</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>QA scorecards with playback</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Supervisor listen and barge</p>
+          </div>
+          <div class="item">
+            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span>
+            <p>Role-based access and audit log</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

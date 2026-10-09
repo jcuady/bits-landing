@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PRODUCT_REGISTRY, ProductMvpConfig } from "@/lib/products/registry";
+import { PRODUCT_REGISTRY, getCanonicalProducts, ProductMvpConfig } from "@/lib/products/registry";
 import {
   Layers,
   Sparkles,
@@ -69,7 +69,9 @@ export default function DemoMatrixHub() {
     }
   };
 
-  const productsList = Object.values(PRODUCT_REGISTRY);
+  // Canonical products only — excludes subdomain aliases, which otherwise
+  // rendered "Operations 360" twice on this page.
+  const productsList = getCanonicalProducts();
 
   const filteredProducts = React.useMemo(() => {
     return productsList.filter((p) => {

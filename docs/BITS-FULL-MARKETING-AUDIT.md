@@ -146,7 +146,7 @@ The hero copy is good but a non-tech buyer landing cold will not parse "WebRTC a
 
 **Fix:**
 - Hero subtitle should include one plain-English sentence + one technical sentence — pick the audience you want most
-- E.g., "Recover 38% more debt. Built on a predictive WebRTC auto-dialer with BSP Circular 454/857 contact-hour enforcement."
+- ~~E.g., "Recover 38% more debt. Built on a predictive WebRTC auto-dialer with BSP Circular 454/857 contact-hour enforcement."~~ **§73 — DO NOT USE. All three claims are false of this build: there is no WebRTC auto-dialer, contact-hour enforcement is not implemented, and "38% more debt" is an unsubstantiated figure (owner decision, §28).** A real example: *"Every account, contact and opportunity in one place. Zero per-seat licensing."*
 
 #### Issue 4 — CTA hierarchy is duplicated, not differentiated
 
@@ -328,9 +328,9 @@ This is a backlink magnet and an AI citation magnet in one piece.
 | Markdown content negotiation | ✅ | `Content-Type: text/markdown; charset=utf-8`, `Vary: Accept` on `llms.txt`, `llms-full.txt`, `index.md`, `bitscrm.md`, `bitsagent.md` |
 | `/.well-known/` discovery | ✅ | `application/json; charset=utf-8` + `Access-Control-Allow-Origin: *` |
 | 11-viewport responsive | ✅ | `test:responsive` — iPhone SE, 15, 15 Pro Max, iPad Mini, iPad Pro, Laptop, Desktop, Wide 1080p, Phone Landscape, Tablet Landscape, 200% Zoom |
-| Core Web Vitals | ✅ | LCP optimized, CLS = 0 with bounded aspect ratios, INP optimized |
+| Core Web Vitals | ⚠ unverified | LCP/CLS/INP are claimed but **no measurement artifact exists in the repository**. `qa/` holds screenshots only. Treat as unverified until a Lighthouse or field run is stored. |
 | TypeScript | ✅ | 0 errors |
-| Build | ✅ | 62 routes, Turbopack, 2.6s |
+| Build | ✅ | **53 app-router paths (45 static + 8 dynamic)**, measured from `.next/app-path-routes-manifest.json` and `.next/routes-manifest.json` after a real `npm run build` on 8 Oct 2026. |
 
 ### 4.2 What's still missing
 
@@ -405,8 +405,8 @@ The 20 queries below are the test set. Run them in ChatGPT, Perplexity, Claude, 
 #### Operations 360 (Collections) queries (5)
 6. "Best CRM for collections agency"
 7. "CRM for debt recovery Philippines"
-8. "Debt collection software with BSP 454 compliance"
-9. "Collections CRM with WebRTC auto-dialer"
+8. "Debt collection software with BSP 454 compliance" ⚠️ **§73 — not a claim BITS can make; contact-hour enforcement is not built.**
+9. "Collections CRM with WebRTC auto-dialer" ⚠️ **§73 — retire this query. There is no dialer in this build.**
 10. "Operations 360 vs FICO Debt Manager"
 
 #### BITSagent (Voice AI) queries (5)

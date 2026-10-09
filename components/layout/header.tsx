@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { cn } from "@/lib/utils";
+import { PRODUCT_COUNT } from "@/lib/site";
 import { navigationSections } from "@/lib/site";
 import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
@@ -235,7 +236,7 @@ export function Header() {
                 const isOpen = activeDropdown === section.id;
                 const isPageActive =
                   section.id === "platform" &&
-                  (pathname.startsWith("/bitscrm") || pathname.startsWith("/bitsagent"));
+                  (pathname.startsWith("/operations-360/crm") || pathname.startsWith("/operations-360/ai"));
 
                 return (
                   <li
@@ -447,7 +448,7 @@ export function Header() {
                                     onClick={() => setActiveDropdown(null)}
                                     className="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition-colors"
                                   >
-                                    View All 18 Products →
+                                    View All {PRODUCT_COUNT} Products →
                                   </Link>
                                   <button
                                     type="button"

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ShieldCheck, Cookie, Settings2, Check, X, ChevronRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isPageErrored, subscribeToPageError } from "@/lib/page-error-state";
 
 export interface CookiePreferences {
   necessary: boolean; // Always true
@@ -25,6 +26,14 @@ export function CookieConsent() {
   const [mounted, setMounted] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  /**
+   * Suppressed while a route-level error boundary is showing. The banner is a
+   * fixed overlay at `bottom-4 left-4`; on a short viewport it covers the error
+   * page's "Try again" / "Back to home" actions entirely, blocking recovery until
+   * the visitor deals with consent. It is also simply wrong to ask for consent
+   * on a page that failed to render.
+   */
+  const [suppressed, setSuppressed] = React.useState(() => isPageErrored());
   const [preferences, setPreferences] = React.useState<CookiePreferences>({
     necessary: true,
     analytics: true,
@@ -54,8 +63,19 @@ export function CookieConsent() {
     const handleOpenModal = () => {
       setIsModalOpen(true);
     };
+    const hideForError = () => setSuppressed(true);
+    const restoreAfterRecovery = () => setSuppressed(false);
     window.addEventListener("bits_open_cookie_preferences", handleOpenModal);
-    return () => window.removeEventListener("bits_open_cookie_preferences", handleOpenModal);
+    // Late subscribers must still see the current value, so sync once on mount
+    // in addition to listening for changes.
+    const unsubscribe = subscribeToPageError(() => {
+      setSuppressed(isPageErrored());
+    });
+    setSuppressed(isPageErrored());
+    return () => {
+      window.removeEventListener("bits_open_cookie_preferences", handleOpenModal);
+      unsubscribe();
+    };
   }, []);
 
   const saveConsent = (prefs: CookiePreferences) => {
@@ -102,7 +122,59 @@ export function CookieConsent() {
     saveConsent(preferences);
   };
 
-  if (!mounted) return null;
+  // The preferences drawer is an aria-modal dialog: move focus into it on open,
+  // cycle Tab inside it, and restore focus to the trigger on close. Without this
+  // a keyboard user can tab straight through into the page behind the overlay.
+  const dialogRef = React.useRef<HTMLDivElement>(null);
+  const lastFocusedRef = React.useRef<HTMLElement | null>(null);
+
+  React.useEffect(() => {
+    if (!isModalOpen) return;
+    lastFocusedRef.current = document.activeElement as HTMLElement | null;
+
+    const node = dialogRef.current;
+    const selector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const focusables = () =>
+      Array.from(node?.querySelectorAll<HTMLElement>(selector) ?? []).filter(
+        (el) => el.offsetParent !== null || el === document.activeElement
+      );
+
+    // Prefer the close button, which is the conventional first stop.
+    (node?.querySelector<HTMLElement>('[data-autofocus="true"]') ?? focusables()[0])?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setIsModalOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || !node?.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      lastFocusedRef.current?.focus?.();
+    };
+  }, [isModalOpen]);
+
+  // Both guards sit AFTER every hook. An early return above the focus-trap
+  // effect would make React see a different hook count between renders.
+  if (!mounted || suppressed) return null;
 
   return (
     <>
@@ -133,6 +205,7 @@ export function CookieConsent() {
             className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-xl z-50 rounded-2xl border border-sky-400/35 bg-[#071f49]/95 p-5 text-white shadow-2xl shadow-blue-950/40 backdrop-blur-2xl ring-1 ring-white/10"
             role="region"
             aria-label="Cookie consent banner"
+            aria-live="polite"
           >
             <div className="flex items-start gap-3.5">
               <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/20 border border-sky-400/30 text-sky-300">
@@ -140,7 +213,14 @@ export function CookieConsent() {
               </div>
               <div className="flex-1 space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-white tracking-tight">Sovereign Privacy &amp; Cookies</h3>
+                  {/*
+                    Not a heading. This banner is a `role="region"` landmark that
+                    floats over the page; an <h3> here would enter the document
+                    outline as the next heading after the page <h1> on any page
+                    that has no intervening <h2>. The region already carries
+                    aria-label="Cookie consent banner".
+                  */}
+                  <p className="text-sm font-bold text-white tracking-tight">Sovereign Privacy &amp; Cookies</p>
                   <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 px-2 py-0.5 text-[10px] font-bold text-emerald-300">
                     <ShieldCheck className="size-3" />
                     DPA 2012 Aligned
@@ -152,7 +232,7 @@ export function CookieConsent() {
                 <div className="pt-0.5">
                   <Link
                     href="/cookies"
-                    className="inline-flex items-center gap-1 text-[11px] font-medium text-sky-300 hover:text-white underline decoration-sky-400/40 transition-colors"
+                    className="inline-flex min-h-11 items-center gap-1 py-2 text-[11px] font-medium text-sky-300 hover:text-white underline decoration-sky-400/40 transition-colors"
                   >
                     Read our sovereign Cookie Policy
                     <ChevronRight className="size-3" />
@@ -166,14 +246,14 @@ export function CookieConsent() {
               <button
                 type="button"
                 onClick={handleAcceptAll}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-xs font-bold text-blue-950 shadow-sm hover:bg-sky-50 active:scale-[0.98] transition-all cursor-pointer"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center min-h-11 rounded-xl bg-white px-4 py-2 text-xs font-bold text-blue-950 shadow-sm hover:bg-sky-50 active:scale-[0.98] transition-all cursor-pointer"
               >
                 Accept All
               </button>
               <button
                 type="button"
                 onClick={handleEssentialOnly}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold text-white hover:bg-white/20 active:scale-[0.98] transition-all cursor-pointer"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center min-h-11 rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold text-white hover:bg-white/20 active:scale-[0.98] transition-all cursor-pointer"
               >
                 Essential Only
               </button>
@@ -204,6 +284,7 @@ export function CookieConsent() {
             />
 
             <motion.div
+              ref={dialogRef}
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -230,6 +311,7 @@ export function CookieConsent() {
                 </div>
                 <button
                   type="button"
+                  data-autofocus="true"
                   onClick={() => setIsModalOpen(false)}
                   className="rounded-lg p-1.5 text-white/70 hover:bg-white/15 hover:text-white transition-colors cursor-pointer"
                   aria-label="Close preferences"
@@ -245,68 +327,76 @@ export function CookieConsent() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Lock className="size-4 text-emerald-300" />
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-white">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-white">
                         Strictly Necessary Cookies
-                      </h4>
+                      </h3>
                     </div>
                     <span className="rounded-full bg-emerald-500/20 border border-emerald-400/30 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300">
                       Always Active
                     </span>
                   </div>
                   <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                    Essential for secure authentication (<code className="text-sky-200 font-mono text-[10px]">bits_crm_session</code>, Supabase tokens), load-balancer routing, and CSRF protection. Cannot be deactivated.
+                    Essential for secure authentication (Supabase session tokens), load-balancer routing, and CSRF protection. Cannot be deactivated.
                   </p>
                 </div>
 
-                {/* 2. Analytics */}
+                {/*
+                  The two optional toggles below were REPLACED on 8 Oct 2026.
+
+                  Both were dead controls. "Performance & Telemetry" claimed to
+                  measure page load times, edge latency and dialer websocket
+                  stability — but there is no analytics script, telemetry beacon
+                  or third-party tracker anywhere in this application: no GA,
+                  PostHog, Plausible, Clarity, Hotjar, trackEvent or sendBeacon.
+                  "Attribution & Preferences" claimed to record a referral
+                  source and hardware-calculator preferences — but no UTM or
+                  referrer capture exists, and no calculator writes any such key.
+
+                  Offering an opt-in switch for collection that does not happen
+                  is worse than offering none: it implies a live data flow and
+                  invites a user to rely on a control that does nothing.
+
+                  The `analytics` / `marketing` keys REMAIN in the stored
+                  preference shape so existing consent records stay valid and
+                  nobody is re-prompted; they are simply no longer editable here.
+                */}
+                {/* 2. Performance & Telemetry — nothing is collected */}
                 <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-3">
                     <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-white">
+                      <h3 id="cookie-cat-analytics" className="text-xs font-bold uppercase tracking-wider text-white">
                         Performance &amp; Telemetry
-                      </h4>
-                      <p className="text-[11px] text-sky-200">Anonymous operational telemetry</p>
+                      </h3>
+                      <p className="text-[11px] text-sky-200">Nothing is collected</p>
                     </div>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={preferences.analytics}
-                        onChange={(e) =>
-                          setPreferences((prev) => ({ ...prev, analytics: e.target.checked }))
-                        }
-                        className="sr-only peer"
-                      />
-                      <div className="w-11 h-6 bg-white/20 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500" />
-                    </label>
+                    <span className="shrink-0 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-sky-200">
+                      Not active
+                    </span>
                   </div>
                   <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                    Helps our engineering team measure edge latency, catch UI rendering bugs, and benchmark call center dialer load times without identifying your personal identity.
+                    There is no analytics script, telemetry beacon or third-party tracker on this
+                    site, and no dialer or latency measurement of any kind. If that ever changes it
+                    will be disclosed here — with provider and retention — before it ships.
                   </p>
                 </div>
 
-                {/* 3. Marketing & Attribution */}
+                {/* 3. Attribution & Preferences — nothing is tracked */}
                 <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-3">
                     <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-white">
+                      <h3 id="cookie-cat-marketing" className="text-xs font-bold uppercase tracking-wider text-white">
                         Attribution &amp; Preferences
-                      </h4>
-                      <p className="text-[11px] text-sky-200">Consultation source &amp; demo settings</p>
+                      </h3>
+                      <p className="text-[11px] text-sky-200">No cross-site tracking</p>
                     </div>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={preferences.marketing}
-                        onChange={(e) =>
-                          setPreferences((prev) => ({ ...prev, marketing: e.target.checked }))
-                        }
-                        className="sr-only peer"
-                      />
-                      <div className="w-11 h-6 bg-white/20 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500" />
-                    </label>
+                    <span className="shrink-0 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-sky-200">
+                      Not tracked
+                    </span>
                   </div>
                   <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                    Remembers your enterprise demo configuration, hardware calculator scale preferences, and referral source when you request an architecture audit.
+                    We do not record where you came from, and we set no marketing cookies. Your demo
+                    configuration and workspace edits are stored locally in your own browser and are
+                    never uploaded.
                   </p>
                 </div>
               </div>
@@ -324,14 +414,14 @@ export function CookieConsent() {
                   <button
                     type="button"
                     onClick={handleAcceptAll}
-                    className="rounded-xl border border-white/20 bg-white/10 px-3.5 py-2 text-xs font-semibold text-white hover:bg-white/20 transition-all cursor-pointer"
+                    className="min-h-11 rounded-xl border border-white/20 bg-white/10 px-3.5 py-2 text-xs font-semibold text-white hover:bg-white/20 transition-all cursor-pointer"
                   >
                     Accept All
                   </button>
                   <button
                     type="button"
                     onClick={handleSaveCustom}
-                    className="inline-flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-xs font-bold text-blue-950 shadow-md hover:bg-sky-50 active:scale-[0.98] transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 min-h-11 rounded-xl bg-white px-4 py-2 text-xs font-bold text-blue-950 shadow-md hover:bg-sky-50 active:scale-[0.98] transition-all cursor-pointer"
                   >
                     <Check className="size-3.5 text-blue-900" />
                     Save Choices

@@ -19,10 +19,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "Article Not Found | BITS Intelligence Labs" };
+  // `absolute` opts out of the root layout's "%s | BITS" title template.
+  // Without it every article rendered as
+  //   "<post> | BITS Intelligence Labs | BITS"
+  // — a redundant second "| BITS", since "BITS Intelligence Labs" is already
+  // the brand. See docs/SYSTEM_AUDIT.md §27.
+  if (!post) return { title: { absolute: "Article Not Found | BITS Intelligence Labs" } };
 
   return {
-    title: `${post.title} | BITS Intelligence Labs`,
+    // Use `shortTitle` for the SERP title: the full `post.title` plus the brand
+    // suffix ran 92–106 characters and truncated mid-word in search results.
+    // `shortTitle` exists in the data model for exactly this. The full title is
+    // still the page's <h1> and its og:title.
+    title: { absolute: `${post.shortTitle} | BITS Intelligence Labs` },
     description: post.metaDescription,
     keywords: post.keywords,
     alternates: {
@@ -64,11 +73,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const productLink =
     post.category === "Collections OMS" || post.slug === "operations-management-system-vs-crm-guide"
-      ? { href: "/products/collections", label: "Explore Operations 360 (OMS)", shortLabel: "Operations 360" }
+      ? { href: "/operations-360", label: "Explore Operations 360 (OMS)", shortLabel: "Operations 360" }
       : post.category === "Enterprise CRM"
       ? { href: "/products/crm", label: "Explore BITScrm Suite", shortLabel: "BITScrm" }
       : post.category === "Voice AI Agents"
-      ? { href: "/bitsagent", label: "Explore BITSagent Voice AI", shortLabel: "BITSagent" }
+      ? { href: "/operations-360/ai", label: "Explore BITSagent Voice AI", shortLabel: "BITSagent" }
       : { href: "/products", label: "Explore All Products", shortLabel: "BITS Products" };
 
   // Structured Data Schemas
@@ -136,12 +145,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 priceCurrency: "USD",
                 description: "Turnkey enterprise license with zero per-seat user tax",
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "9.9",
-                reviewCount: "48",
-                bestRating: "10.0",
-              },
+              // aggregateRating removed — see SYSTEM_AUDIT.md §30.3. No review
+              // exists on this site; re-add only with real, on-page reviews.
             },
           ]
         : []),

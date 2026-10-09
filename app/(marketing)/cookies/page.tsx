@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     url: `${site.url}/cookies`,
     siteName: site.legalName,
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Cookie Policy & Data Governance" }],
   },
 };
 
@@ -45,48 +46,124 @@ const cookieSchema = {
   ],
 };
 
+/**
+ * Client-storage disclosure table.
+ *
+ * **Every entry below was verified against the code on 8 Oct 2026.** Three
+ * entries that were previously disclosed do not exist and were removed, and
+ * nine real keys that were never disclosed were added. See
+ * `lib/site/cookie-disclosure.selfcheck.mjs`, which fails if this table and the
+ * code ever drift apart again.
+ *
+ * Previously disclosed but REMOVED because nothing sets or reads them:
+ *   - `bits_crm_session` — the only definition was `lib/crm/auth.ts`, which had
+ *     zero importers and was deleted. It was also described as "encrypted"
+ *     while implementing plain base64url, so the claim was false twice over.
+ *   - `bits_hardware_scale` — zero references anywhere in the repository.
+ *   - `bits_telemetry_perf` — zero references anywhere in the repository.
+ *
+ * Corrected entry:
+ *   - `bits_demo_role` — real, but it is a demo-persona hint that NO code reads.
+ *     It is never consulted for access control. The old entry claimed it
+ *     "maintains the selected interactive demo perspective", which it does not.
+ */
 const cookieAuditList = [
-  {
-    name: "bits_crm_session",
-    category: "Strictly Necessary",
-    provider: "Boundless IT Solutions (First-party)",
-    expiry: "Session / 7 Days",
-    purpose: "Encrypted authentication cookie holding the active tenant session token for secure CRM access.",
-  },
   {
     name: "sb-*-auth-token",
     category: "Strictly Necessary",
-    provider: "Boundless IT Solutions (First-party)",
+    provider: "Supabase (first-party auth)",
     expiry: "14 Days",
-    purpose: "Cryptographic JWT authentication and role-based access control (RBAC) token.",
+    purpose:
+      "Supabase session token. This is the only credential that grants CRM access — every /app/* route and API route verifies it server-side.",
   },
   {
     name: "bits_demo_role",
     category: "Strictly Necessary",
     provider: "Boundless IT Solutions (First-party)",
     expiry: "24 Hours",
-    purpose: "Maintains selected interactive demo perspective (Agent, Supervisor, Admin) across the platform.",
+    purpose:
+      "Records which demo persona you signed in as. It is httpOnly and is never used to grant or deny access — authentication always comes from the Supabase session above.",
   },
   {
     name: "bits_cookie_consent_v1",
     category: "Strictly Necessary",
     provider: "LocalStorage",
     expiry: "1 Year",
-    purpose: "Stores visitor preference selections for essential, telemetry, and personalization cookies.",
+    purpose:
+      "Stores your consent choices and preference selections. This is the only record we keep of what you chose, and it never leaves your browser.",
   },
   {
-    name: "bits_hardware_scale",
+    name: "bits_theme",
     category: "Functional",
     provider: "LocalStorage",
-    expiry: "30 Days",
-    purpose: "Persists your selected agent floor seat tier (25, 75, 200, 500+ seats) in the Datacenter Blueprint calculator.",
+    expiry: "Persistent until cleared",
+    purpose:
+      "Remembers your light/dark theme choice so it is applied before first paint. A legacy key, bionis-theme, is read once and migrated into this key.",
   },
   {
-    name: "bits_telemetry_perf",
-    category: "Analytics & Telemetry",
-    provider: "Boundless IT Solutions (First-party)",
-    expiry: "30 Days",
-    purpose: "Collects aggregated, non-personally identifiable metrics on page load times and dialer socket latency.",
+    name: "bionis-theme",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Deleted on first visit after upgrade",
+    purpose:
+      "Legacy theme key from an earlier brand. It is read once, copied into bits_theme, and then deleted. Nothing is written to it now.",
+  },
+  {
+    name: "bits_demo_settings_v1",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Persists your interactive settings on the /demo engine showcase. Synthetic demo data only.",
+  },
+  {
+    name: "bits_crm_state_v2",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose:
+      "Stores CRM records in your browser so the workspace survives a refresh. This is local to your device and is never uploaded.",
+  },
+  {
+    name: "bits_crm_notifs_v2",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Stores CRM notification read/unread state on your device.",
+  },
+  {
+    name: "bits_crm_sales_deals_v1",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Persists your edits to the /crm-sales demo pipeline board. Synthetic demo data only.",
+  },
+  {
+    name: "bits_crm_sales_leads_v1",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Persists your edits to the /crm-sales demo inbound-lead list. Synthetic demo data only.",
+  },
+  {
+    name: "bits_support_desk_v1",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Persists your edits to the /crm-support demo ticket desk. Synthetic demo data only.",
+  },
+  {
+    name: "bits_marketing_journeys_v1",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Persists your edits to the /crm-marketing demo journeys. Synthetic demo data only.",
+  },
+  {
+    name: "bits_commerce_billing_v1",
+    category: "Functional",
+    provider: "LocalStorage",
+    expiry: "Persistent until cleared",
+    purpose: "Persists your edits to the /crm-commerce demo billing and subscription views. Synthetic demo data only.",
   },
 ];
 
@@ -196,7 +273,7 @@ export default function CookiesPage() {
               </div>
               <h3 className="text-sm font-bold text-white">Strictly Necessary</h3>
               <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                Mandatory for web application security, CSRF protection, tenant isolation, and authenticated CRM session tokens. Cannot be turned off.
+                Mandatory for web application security, CSRF protection, and authenticated CRM session tokens. This deployment is single-tenant — there is no tenant isolation for a cookie to provide — so this category exists to hold the session, nothing more. Cannot be turned off.
               </p>
             </div>
 
@@ -207,7 +284,34 @@ export default function CookiesPage() {
               </div>
               <h3 className="text-sm font-bold text-white">Performance &amp; Telemetry</h3>
               <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                Measures API response times, sub-second dialer websocket stability, and page render speeds without associating data with personal profiles.
+                <strong className="text-white">Nothing is collected today.</strong> There is
+                no analytics script, no telemetry beacon and no third-party tracker running on
+                this site — no Google Analytics, PostHog, Plausible, Clarity or Hotjar, and no
+                <code className="mx-1 text-sky-200">sendBeacon</code> call anywhere in the
+                application. No dialing, dialing-queue or websocket-stability metric is collected,
+                because no such measurement exists in this codebase; the earlier claim naming one
+                has been removed. If telemetry is ever introduced it will be disclosed
+                here, with its provider and retention, before it ships.
+              </p>
+              {/* §97 — the ONE third party this site does talk to. Measured, not assumed:
+                  every route loads five font stylesheets from cdn.jsdelivr.net via
+                  `app/globals.css`, and it was the only external host observed on any page.
+                  A font CDN is not a tracker, so the statements above stay true — but the
+                  request still discloses the visitor's IP address and User-Agent to a third
+                  party on every page load, and the consent checkbox on the contact form
+                  cites Philippine RA 10173. An omission is not a false claim, so no gate
+                  caught it: `cookie-disclosure` reads cookies and localStorage,
+                  `asset-integrity` reads `public/`, and nothing inspected outbound hosts.
+                  The correct fix is to self-host the fonts; that is blocked on access to
+                  fetch them, so it is recorded for the owner rather than half-done here. */}
+              <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
+                <strong className="text-white">One third-party request exists, and it is not
+                a tracker.</strong> This site loads its typeface (Geist, Geist Mono and
+                Instrument Serif) from <code className="mx-1 text-sky-200">cdn.jsdelivr.net</code>,
+                so that provider sees your IP address and browser details on each page load. No
+                form data, analytics identifier or advertising identifier is sent with it, and
+                nothing is stored on your device by it. We are moving the fonts to our own
+                server; until then this is disclosed here rather than left implicit.
               </p>
             </div>
 
@@ -218,7 +322,11 @@ export default function CookiesPage() {
               </div>
               <h3 className="text-sm font-bold text-white">Functional &amp; Preferences</h3>
               <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                Remembers user selections such as hardware sizing preferences, dark/light contrast modes, and enterprise demo configuration settings.
+                Remembers your selections — dark/light theme, interactive demo configuration,
+                and edits you make to the synthetic demo workspaces. All of this stays in your
+                own browser under <code className="text-sky-200">localStorage</code> and is
+                never uploaded. (A previously listed "hardware sizing preference" key was
+                removed: it had no implementation.)
               </p>
             </div>
           </div>
