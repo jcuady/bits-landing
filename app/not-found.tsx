@@ -43,7 +43,7 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/bitscrm"
+            href="/operations-360/crm"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-700 hover:border-slate-600 bg-slate-900/80 hover:bg-slate-800 text-slate-200 px-5 py-3 font-semibold text-sm transition-colors"
           >
             <Compass className="size-4" />
@@ -55,8 +55,8 @@ export default function NotFound() {
           <div>
             <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block mb-2">Flagships</span>
             <ul className="space-y-1.5 text-sm text-slate-400">
-              <li><Link href="/bitscrm" className="hover:text-blue-400 transition-colors">BITScrm</Link></li>
-              <li><Link href="/bitsagent" className="hover:text-blue-400 transition-colors">BITSagent</Link></li>
+              <li><Link href="/operations-360/crm" className="hover:text-blue-400 transition-colors">BITScrm</Link></li>
+              <li><Link href="/operations-360/ai" className="hover:text-blue-400 transition-colors">BITSagent</Link></li>
             </ul>
           </div>
           <div>

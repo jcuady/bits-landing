@@ -217,7 +217,7 @@ const trackTiers: Record<PricingTrack, PricingTier[]> = {
 };
 
 const otherProducts = [
-  { name: "BITSagent Voice AI", category: "Autonomous Calling", href: "/bitsagent" },
+  { name: "BITSagent Voice AI", category: "Autonomous Calling", href: "/operations-360/ai" },
   { name: "BITScrm Suite", category: "Sales & Support", href: "/products/crm" },
   { name: "BITS Accounting & ERP", category: "BIR CAS Core", href: "/products/accounting" },
   { name: "BITS HRMS & 24/7 Rostering", category: "Workforce", href: "/products/hrms" },

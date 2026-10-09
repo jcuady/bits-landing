@@ -36,7 +36,6 @@ export async function proxy(request: NextRequest) {
     pathname === "/robots.txt" ||
     pathname === "/manifest.webmanifest" ||
     pathname === "/brandbook" ||
-    pathname === "/brandbook.html" ||
     pathname.startsWith("/.well-known") ||
     pathname.endsWith(".xml") ||
     pathname.endsWith(".txt") ||
@@ -45,14 +44,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 1. Strip RSC query param from brandbook (static HTML file)
-  if (pathname === "/brandbook.html" && request.nextUrl.searchParams.has("_rsc")) {
-    const url = request.nextUrl.clone();
-    url.searchParams.delete("_rsc");
-    return NextResponse.redirect(url, 308);
-  }
-
-  // 2. Detect Subdomain (e.g. "sales.boundlessits.com", "sales.localhost:3000")
+  // 1. Detect Subdomain (e.g. "sales.boundlessits.com", "sales.localhost:3000")
   let subdomain: string | null = null;
   const cleanHost = host.split(":")[0]; // remove port
   const parts = cleanHost.split(".");
@@ -181,7 +173,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|llms\\.txt|llms-full\\.txt|index\\.md|bitscrm\\.md|bitsagent\\.md|brandbook\\.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|xml|txt|md|webmanifest)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap\\.xml|robots\\.txt|manifest\\.webmanifest|llms\\.txt|llms-full\\.txt|index\\.md|bitscrm\\.md|bitsagent\\.md|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|xml|txt|md|webmanifest)$).*)",
   ],
 };
 

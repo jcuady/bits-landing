@@ -47,12 +47,12 @@ const productFamilies: ProductFamily[] = [
     pulseColor: "bg-blue-500",
     glowColor: "from-blue-500/15 via-sky-400/10 to-transparent",
     accentBorder: "hover:border-blue-400/50",
-    href: "/#operations-360",
+    href: "/operations-360",
     products: [
-      { name: "Operations 360", badge: "Flagship CRM & Dialer", href: "/#operations-360" },
-      { name: "Field Agents App", badge: "Live GPS & Timestamps", href: "/#operations-360" },
-      { name: "BITScrm Suite", badge: "Sales & Support", href: "/products/crm" },
-      { name: "BITSagent AI", badge: "Autonomous Voice & Email", href: "/bitsagent" },
+      { name: "Operations 360", badge: "Flagship CRM & Dialer", href: "/operations-360" },
+      { name: "Field Agents App", badge: "Live GPS & Timestamps", href: "/operations-360" },
+      { name: "BITScrm Suite", badge: "Sales & Support", href: "/operations-360/crm" },
+      { name: "BITSagent AI", badge: "Autonomous Voice & Email", href: "/operations-360/ai" },
     ],
   },
   {

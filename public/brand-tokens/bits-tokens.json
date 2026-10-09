@@ -1,0 +1,70 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "brand": {
+    "name": "BITS — Boundless IT Solutions",
+    "version": "3.4",
+    "year": 2026
+  },
+  "color": {
+    "navy": {
+      "950": { "$value": "#030B18", "$type": "color", "name": "Bedrock Foundation" },
+      "900": { "$value": "#06162F", "$type": "color", "name": "Space Navy", "contrastOnWhite": "17.5:1" },
+      "800": { "$value": "#081F4D", "$type": "color" },
+      "700": { "$value": "#0A2B6F", "$type": "color" },
+      "500": { "$value": "#1450C4", "$type": "color", "name": "Saturated Brand Sapphire" }
+    },
+    "electric": {
+      "600": { "$value": "#0063DB", "$type": "color" },
+      "500": { "$value": "#2563EB", "$type": "color", "name": "Electric Action Blue", "contrastOnWhite": "4.6:1" },
+      "400": { "$value": "#2F93FF", "$type": "color" }
+    },
+    "signal": {
+      "500": { "$value": "#00A6FF", "$type": "color" },
+      "300": { "$value": "#38BDF8", "$type": "color", "name": "Cloud Sky Cyan", "contrastOnNavy": "10.4:1" }
+    },
+    "horizon": {
+      "top":   { "$value": "#0284C7", "$type": "color", "name": "Boundless Horizon", "contrastOnWhite": "7.2:1" },
+      "mid":   { "$value": "#2377F3", "$type": "color" },
+      "lower": { "$value": "#5EA2F9", "$type": "color" }
+    },
+    "neutral": {
+      "cloud":   { "$value": "#F8FAFC", "$type": "color", "name": "Cirrus Cloud White", "contrastOnNavy": "16.1:1" },
+      "skywash": { "$value": "#E0F2FE", "$type": "color", "name": "Stratosphere Vapor" },
+      "ink":     { "$value": "#0D1B2A", "$type": "color" }
+    },
+    "amber": {
+      "500": { "$value": "#F59E0B", "$type": "color", "name": "Sunrise Amber", "contrastOnNavy": "8.9:1" }
+    },
+    "emerald": {
+      "500": { "$value": "#10B981", "$type": "color" }
+    }
+  },
+  "typography": {
+    "families": {
+      "sans":      { "$value": "var(--font-jakarta), ui-sans-serif, system-ui", "$type": "fontFamily" },
+      "serif":     { "$value": "\"Instrument Serif\", Georgia, Cambria, serif", "$type": "fontFamily" },
+      "mono":      { "$value": "\"Geist Mono\", ui-monospace, monospace", "$type": "fontFamily" }
+    },
+    "weights": {
+      "regular": 400,
+      "medium":  500,
+      "semibold": 600,
+      "bold":    700,
+      "extrabold": 800
+    }
+  },
+  "spacing": {
+    "rounded": {
+      "card":  "1.5rem",
+      "cockpit": "2rem",
+      "cockpitInner": "1.75rem"
+    }
+  },
+  "gradient": {
+    "emblem": {
+      "$value": "linear-gradient(135deg, #F8FAFC 0%, #38BDF8 55%, #1450C4 100%)",
+      "$type": "gradient",
+      "$description": "Cloud White → Signal Cyan → Sapphire. Fixed 0,0 → 1,1 angle. Do not alter."
+    }
+  }
+}

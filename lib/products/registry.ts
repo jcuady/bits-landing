@@ -1,7 +1,30 @@
 /**
- * Centralized 18-Product Registry for Subdomain Routing, MVPs, and Role Testing
+ * Product Registry for Subdomain Routing, MVPs, Role Testing, and Homepage Placement
  * Boundless IT Solutions (BITS)
+ *
+ * NOTE ON COUNTS: the marketing surface claims "16 products". That is the count of
+ * CANONICAL entries below, once subdomain aliases are excluded. See
+ * `getCanonicalProducts()`.
  */
+
+export interface ProductHomepageConfig {
+  /**
+   * Promote to a hero slot on the homepage. Reserved for the flagship and any
+   * product marketing actively wants a headline moment for. Everything else
+   * appears in the catalogue grid only.
+   */
+  featured?: boolean;
+  /** Four-to-eight word descriptor used in the homepage Platform Index grid. */
+  summary?: string;
+  /**
+   * Set when this product is a MODULE of the Operations 360 platform rather than
+   * a standalone product. Modules share the platform database and are not
+   * separately deployable.
+   */
+  platform?: string;
+  /** Ordering within the homepage grid. Lower sorts first. */
+  order?: number;
+}
 
 export interface ProductMvpConfig {
   id: string;
@@ -20,6 +43,17 @@ export interface ProductMvpConfig {
     description: string;
     persona: "rep" | "manager" | "executive" | "admin";
   }[];
+  /**
+   * Marks this entry as a subdomain alias of another product (e.g. the
+   * `collections.*` subdomain pointing at Operations 360).
+   *
+   * Aliases exist ONLY so a domain can resolve. They must never appear in any
+   * customer-facing listing — doing so caused "Operations 360" to render twice
+   * on /demo. Filter them with `getCanonicalProducts()`.
+   */
+  aliasOf?: string;
+  /** Homepage placement. Absent = catalogue-only. */
+  homepage?: ProductHomepageConfig;
 }
 
 export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
@@ -33,7 +67,12 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
     categoryLabel: "CRM & Revenue",
     tagline: "Visual Kanban deal pipeline, predictive win scoring, and 1-click CPQ quoting.",
     demoPath: "/(products)/crm-sales",
-    marketingUrl: "/products/sales",
+    marketingUrl: "/operations-360/crm",
+    homepage: {
+      summary: "Recover the accounts",
+      platform: "operations-360",
+      order: 1,
+    },
     defaultRole: "sales_rep",
     testRoles: [
       {
@@ -65,7 +104,12 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
     categoryLabel: "Flagship Integrated Operations Suite",
     tagline: "One System. One View. One Source of Truth. Integrated CRM, QA, Scorecards, Coaching Logs, Dialer, LMS, WFM & Real-Time Dashboards.",
     demoPath: "/app",
-    marketingUrl: "/#operations-360",
+    marketingUrl: "/operations-360",
+    homepage: {
+      featured: true,
+      summary: "The recovery floor, on one system",
+      order: 0,
+    },
     defaultRole: "business_owner",
     testRoles: [
       {
@@ -105,11 +149,12 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
     name: "OPERATIONS 360 (Collections & Recovery Module)",
     shortName: "Operations 360",
     subdomain: "collections",
+    aliasOf: "operations-360",
     category: "operations",
     categoryLabel: "Flagship Integrated Operations Suite",
     tagline: "Integrated operations platform with WebRTC dialer, QA coaching, WFM, and BSP 454/857 compliance.",
     demoPath: "/app",
-    marketingUrl: "/#operations-360",
+    marketingUrl: "/operations-360",
     defaultRole: "business_owner",
     testRoles: [
       {
@@ -427,7 +472,12 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
     categoryLabel: "Conversational AI",
     tagline: "Sub-300ms ultra-realistic conversational voice agent with zero hallucinations.",
     demoPath: "/(products)/bitsagent",
-    marketingUrl: "/bitsagent",
+    marketingUrl: "/operations-360/ai",
+    homepage: {
+      summary: "Automate the floor",
+      platform: "operations-360",
+      order: 2,
+    },
     defaultRole: "ai_architect",
     testRoles: [
       {
@@ -479,6 +529,34 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
     ],
   },
 };
+
+/**
+ * Every real product, with subdomain aliases excluded.
+ *
+ * Use this for ANY customer-facing listing. `Object.values(PRODUCT_REGISTRY)`
+ * includes alias entries (e.g. `crm-collections` → Operations 360), which
+ * caused "Operations 360" to render twice on /demo.
+ */
+export function getCanonicalProducts(): ProductMvpConfig[] {
+  return Object.values(PRODUCT_REGISTRY).filter((p) => !p.aliasOf);
+}
+
+/** Products that should occupy a homepage slot (excludes aliases). */
+export function getHomepageProducts(): ProductMvpConfig[] {
+  return getCanonicalProducts()
+    .filter((p) => p.homepage)
+    .sort((a, b) => (a.homepage?.order ?? 99) - (b.homepage?.order ?? 99));
+}
+
+/** The featured product — the flagship. At most one. */
+export function getFeaturedProduct(): ProductMvpConfig | undefined {
+  return getHomepageProducts().find((p) => p.homepage?.featured);
+}
+
+/** Products belonging to a platform (modules, e.g. BITScrm under Operations 360). */
+export function getModulesOf(platformId: string): ProductMvpConfig[] {
+  return getHomepageProducts().filter((p) => p.homepage?.platform === platformId);
+}
 
 /**
  * Helper to resolve a product by its subdomain key (e.g. 'sales' -> config)

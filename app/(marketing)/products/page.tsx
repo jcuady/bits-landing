@@ -213,9 +213,9 @@ export default function ProductsIndexPage() {
                   {products.map((product, idx) => {
                     const productHref =
                       product.id === "ai-agent"
-                        ? "/bitsagent"
+                        ? "/operations-360/ai"
                         : product.id === "collections"
-                        ? "/products/collections"
+                        ? "/operations-360"
                         : `/products/${product.id}`;
 
                     return (

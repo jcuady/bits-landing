@@ -78,8 +78,8 @@ const CRM_VARIANTS_OVERVIEW = [
     description:
       "Engineered for debt recovery agencies, BPO contact centers, and financial lenders. Centralizes delinquent portfolio staging, WebRTC predictive softphone dialing, automated Promise-to-Pay (PTP) tracking, and live supervisor barge-in HUD.",
     metric: { value: "3.2x Boost", label: "Right-Party Connect" },
-    href: "/bitscrm",
-    productHref: "/bitscrm",
+    href: "/operations-360/crm",
+    productHref: "/operations-360/crm",
     keyFeatures: [
       "Dynamic Debtor & Account Staging Queues",
       "WebRTC In-Browser SIP Softphone & Auto-Dialer",
@@ -346,7 +346,7 @@ export default function CrmMasterPage() {
                   Variants:
                 </span>
                 <Link
-                  href="/bitscrm"
+                  href="/operations-360/crm"
                   className="inline-flex min-h-[36px] items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-white hover:text-slate-900 transition-all"
                 >
                   Collections (Flagship)

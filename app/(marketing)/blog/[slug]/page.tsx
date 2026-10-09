@@ -64,11 +64,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const productLink =
     post.category === "Collections OMS" || post.slug === "operations-management-system-vs-crm-guide"
-      ? { href: "/products/collections", label: "Explore Operations 360 (OMS)", shortLabel: "Operations 360" }
+      ? { href: "/operations-360", label: "Explore Operations 360 (OMS)", shortLabel: "Operations 360" }
       : post.category === "Enterprise CRM"
       ? { href: "/products/crm", label: "Explore BITScrm Suite", shortLabel: "BITScrm" }
       : post.category === "Voice AI Agents"
-      ? { href: "/bitsagent", label: "Explore BITSagent Voice AI", shortLabel: "BITSagent" }
+      ? { href: "/operations-360/ai", label: "Explore BITSagent Voice AI", shortLabel: "BITSagent" }
       : { href: "/products", label: "Explore All Products", shortLabel: "BITS Products" };
 
   // Structured Data Schemas

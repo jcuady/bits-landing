@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { agents, site } from "@/lib/site";
 import { CookieConsent } from "@/components/ui/cookie-consent";
@@ -271,6 +272,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="min-h-screen bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-clip">
         {children}
         <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );

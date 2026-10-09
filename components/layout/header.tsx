@@ -235,7 +235,7 @@ export function Header() {
                 const isOpen = activeDropdown === section.id;
                 const isPageActive =
                   section.id === "platform" &&
-                  (pathname.startsWith("/bitscrm") || pathname.startsWith("/bitsagent"));
+                  (pathname.startsWith("/operations-360/crm") || pathname.startsWith("/operations-360/ai"));
 
                 return (
                   <li

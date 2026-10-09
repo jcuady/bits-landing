@@ -12,6 +12,9 @@ Welcome to the internal engineering and product documentation repository for **B
 | **[MARKETING_PRODUCT_GUIDE.md](./MARKETING_PRODUCT_GUIDE.md)** | Deep-dive product specification, commercial positioning, enterprise ROI models, and feature matrices. | Product Managers, Sales Engineers, Executives |
 | **[BRANDING_CLOUDS_INFINITY.md](./BRANDING_CLOUDS_INFINITY.md)** | Design standards for the azure sky horizon, static cumulus clouds, and the infinity emblem geometry. | UI/UX Designers, Frontend Engineers |
 | **[SEO-STRATEGIC-PLAN-AND-AI-VISIBILITY.md](./SEO-STRATEGIC-PLAN-AND-AI-VISIBILITY.md)** | Technical SEO audit, structured Schema.org data, and agentic AI search visibility engine (`llms.txt`). | Growth Engineers, Marketing, SEO Leads |
+| **[CPO_Landing_Page_Documentation_Plan.md](./CPO_Landing_Page_Documentation_Plan.md)** | CPO review of the homepage: structural audit (canonical URLs, CRM cannibalisation, 22-vs-18 catalog, no analytics), OMS 360 platform positioning, routing/redirect plan, Platform Index + `/deployment` specs, word budget, action register. | Product, Marketing, Frontend Engineers |
+| **[CPO_Landing_Page_Revamp_Planning.md](./CPO_Landing_Page_Revamp_Planning.md)** | Execution plan for the homepage revamp: 5 numbered steps, OMS 360 four-pillar spine, CRM collapse scope, analytics gate, success criteria. | Product, Frontend Engineers |
+| **[CPO_Operations360_SEO_and_Collapse_Plan.md](./CPO_Operations360_SEO_and_Collapse_Plan.md)** | SEO architecture and CRM collapse plan: sitemap defect fix, keyword ownership map, structured data, `llms.txt`, five-workspace module design (Option 2), OMS 360 marketing spine. | Marketing, SEO, Product |
 
 ---
 

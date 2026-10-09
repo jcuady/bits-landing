@@ -1,0 +1,101 @@
+/* ============================================================
+   BITS Brandbook · Tailwind v4 Preset
+   Drop into your Tailwind v4 entry point:
+
+     @import "tailwindcss";
+     @import "/brandbook/bits-tailwind-preset.css";
+
+   Every brandbook token becomes a Tailwind utility:
+     bg-navy-900 · text-signal-300 · border-cloud · etc.
+   ============================================================ */
+
+@theme {
+  /* Brand fonts */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, Cambria, serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Brandbook color ramp */
+  --color-navy-950: #030B18;
+  --color-navy-900: #06162F;
+  --color-navy-850: #071A36;
+  --color-navy-800: #081F4D;
+  --color-navy-700: #0A2B6F;
+  --color-navy-600: #0E3A8F;
+  --color-navy-500: #1450C4;
+
+  --color-electric-600: #0063DB;
+  --color-electric-500: #2563EB;
+  --color-electric-400: #2F93FF;
+  --color-signal-500: #00A6FF;
+  --color-signal-300: #38BDF8;
+
+  /* Boundless Horizon (sky) */
+  --color-horizon-top: #0284C7;
+  --color-horizon-mid: #2377F3;
+  --color-horizon-lower: #5EA2F9;
+
+  /* Neutrals */
+  --color-cloud: #F8FAFC;
+  --color-skywash: #E0F2FE;
+  --color-ink: #0D1B2A;
+  --color-slateblue: #40536D;
+  --color-mist: #93A9C4;
+  --color-linelight: #DCE8F6;
+
+  /* Semantic */
+  --color-emerald-500: #10B981;
+  --color-amber-500: #F59E0B;
+
+  /* Brandbook shadows */
+  --shadow-glass-card: 0 8px 32px -8px rgba(6, 22, 47, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --shadow-glass-lift: 0 2px 6px rgba(6, 22, 47, 0.06), 0 28px 56px -20px rgba(6, 22, 47, 0.28);
+  --shadow-cockpit: 0 30px 80px rgba(3, 13, 28, 0.5);
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Brandbook component primitives — opt-in via @apply.
+   Not all surfaces need these; copy what's relevant. */
+@layer components {
+  .bits-cockpit {
+    border-radius: 2rem;
+    padding: 0.625rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 30px 80px rgba(3, 13, 28, 0.5);
+  }
+  .bits-cockpit__core {
+    border-radius: 1.75rem;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur(16px);
+  }
+  .bits-glass-card {
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1.75rem;
+    backdrop-filter: blur(24px);
+    box-shadow: 0 8px 32px -8px rgba(6, 22, 47, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .bits-sapphire-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.375rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #fff;
+    backdrop-filter: blur(12px);
+  }
+}

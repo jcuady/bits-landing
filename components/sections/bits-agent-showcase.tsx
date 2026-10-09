@@ -80,7 +80,7 @@ export function BitsAgentShowcase() {
             <Reveal delay={0.28} y={8}>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link
-                  href="/bitsagent"
+                  href="/operations-360/ai"
                   className="inline-flex h-11 items-center justify-center rounded-full bg-violet-600 px-6 text-xs font-bold text-white shadow-md shadow-violet-600/20 transition-all hover:bg-violet-700 hover:shadow-violet-600/30 active:scale-[0.98]"
                 >
                   Explore AI Operations (BITSagent) →

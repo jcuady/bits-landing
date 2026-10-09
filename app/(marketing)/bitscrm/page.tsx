@@ -347,7 +347,7 @@ export default function BitsCrmPage() {
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link
-                href="/bitsagent"
+                href="/operations-360/ai"
                 className="inline-flex min-h-11 items-center rounded-full bg-electric-600 px-6 text-[0.88rem] font-semibold text-white transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-electric-500"
               >
                 Explore BITSagent
@@ -618,7 +618,7 @@ export default function BitsCrmPage() {
                 Book a Consultation
               </Link>
               <Link
-                href="/bitsagent"
+                href="/operations-360/ai"
                 className="inline-flex h-14 items-center justify-center rounded-full border border-navy-700/20 bg-white px-8 font-semibold text-navy-700 transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-skywash"
               >
                 Explore BITSagent AI

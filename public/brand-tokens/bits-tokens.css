@@ -1,0 +1,47 @@
+/* ============================================================
+   BITS Brandbook · Color Tokens · CSS
+   Boundless IT Solutions · v3.4 · Public / Brand Guidelines
+   ============================================================ */
+
+:root {
+  /* Sapphire & Navy Surfaces */
+  --color-navy-950: #030B18; /* Bedrock Foundation */
+  --color-navy-900: #06162F; /* Space Navy · 17.5:1 AAA */
+  --color-navy-800: #081F4D; /* Section surface */
+  --color-navy-700: #0A2B6F; /* Deep sapphire */
+  --color-navy-500: #1450C4; /* Saturated brand sapphire */
+
+  /* Electric Action Blue */
+  --color-electric-600: #0063DB;
+  --color-electric-500: #2563EB; /* Primary action · 4.6:1 AA */
+  --color-electric-400: #2F93FF;
+
+  /* Signal Cyan */
+  --color-signal-500: #00A6FF;
+  --color-signal-300: #38BDF8; /* Pulse & glow · 10.4:1 AAA */
+
+  /* Boundless Horizon (Sky) */
+  --sky-top:    #0284C7; /* Vibrant azure · 7.2:1 AAA */
+  --sky-mid:    #2377F3;
+  --sky-lower:  #5EA2F9;
+
+  /* Cloud & Frosted Glass Neutrals */
+  --color-cloud:     #F8FAFC; /* Cirrus Cloud White · 16.1:1 AAA */
+  --color-skywash:   #E0F2FE; /* Stratosphere Vapor */
+  --color-ink:       #0D1B2A;
+
+  /* Sunrise Amber (Focal Metric) */
+  --color-amber-500: #F59E0B; /* 8.9:1 AAA */
+
+  /* Success */
+  --color-emerald-500: #10B981;
+}
+
+/* Optional dark-mode override — keep brand colors stable across themes.
+   The brand's atmosphere is the navy/horizon pair regardless of OS preference. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-navy-950: #030B18;
+    --color-navy-900: #06162F;
+  }
+}

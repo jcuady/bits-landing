@@ -611,7 +611,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       p.id !== product.id
   );
   const crmVariantsList = [
-    { id: "collections", label: "Collections (Flagship)", href: "/bitscrm" },
+    { id: "collections", label: "Collections (Flagship)", href: "/operations-360/crm" },
     { id: "support", label: "Support Desk", href: "/products/support" },
     { id: "sales", label: "Sales Pipeline", href: "/products/sales" },
     { id: "marketing", label: "Marketing Journeys", href: "/products/marketing" },

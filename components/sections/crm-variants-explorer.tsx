@@ -469,7 +469,7 @@ export function CrmVariantsExplorer() {
 
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <Link
-                  href="/bitsagent"
+                  href="/operations-360/ai"
                   className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
                 >
                   <span>Explore BITSagent AI Capabilities</span>

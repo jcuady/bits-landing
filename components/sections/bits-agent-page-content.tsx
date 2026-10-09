@@ -379,7 +379,7 @@ export function BitsAgentPageContent() {
                 Request a Demo
               </Link>
               <Link
-                href="/bitscrm"
+                href="/operations-360/crm"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-navy-700/20 bg-white px-7 text-[0.95rem] font-semibold text-navy-700 transition-[transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:bg-skywash"
               >
                 View BITScrm
