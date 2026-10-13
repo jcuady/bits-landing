@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check, ShieldCheck, Zap, Radio, MapPin, BrainCircuit } from "lucide-react";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
+import { ArrowRight, Check, Zap, Radio, MapPin, BrainCircuit } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { PlatformHero, PlatformSection } from "@/components/sections/platform-hero";
 import { site } from "@/lib/site";
 
 /**
@@ -146,205 +145,154 @@ const jsonLd = {
 
 export default function Operations360Page() {
   return (
-    <main id="content" className="bg-navy-950 text-white">
+    <main id="content" className="bg-slate-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* ── Hero ── */}
-      <Section className="bg-navy-950">
-        <Container>
-          <Reveal>
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-electric-500/30 bg-electric-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-signal-300">
-              <ShieldCheck className="size-3.5" aria-hidden />
-              The BITS Platform
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <h1 className="max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Operations 360
-            </h1>
-          </Reveal>
-
-          <Reveal>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-skywash/80 sm:text-xl">
-              The recovery floor, on one system. Collections, telephony, field
-              enforcement and compliance — sharing a single database instead of
-              four vendors.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 rounded-xl bg-electric-500 px-7 py-3.5 font-semibold text-white transition hover:bg-electric-600"
-              >
-                See pricing
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href="/demo"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10"
-              >
-                Book a live floor demo
-              </Link>
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      {/* ── Hero: shared azure-sky treatment, matching the landing page ── */}
+      <PlatformHero
+        eyebrow="The BITS Platform"
+        title="Operations 360"
+        lede="The recovery floor, on one system. Collections, telephony, field enforcement and compliance — sharing a single database instead of four vendors."
+        primaryCta={{ href: "/pricing", label: "Request a quote" }}
+        secondaryCta={{ href: "/demo", label: "Book a live floor demo" }}
+      />
 
       {/* ── Three pillars ── */}
-      <Section className="bg-navy-900">
-        <Container>
-          <Reveal>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Three capabilities. One deployment.
-            </h2>
-          </Reveal>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {PILLARS.map((pillar) => (
-              <Reveal key={pillar.title}>
-                <article className="h-full rounded-2xl border border-white/10 bg-navy-800/60 p-7">
-                  <pillar.icon className="size-7 text-signal-300" aria-hidden />
-                  <h3 className="mt-5 text-lg font-semibold text-white">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mist">
-                    {pillar.line}
-                  </p>
-                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-electric-400">
-                    {pillar.stat}
-                  </p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <PlatformSection
+        eyebrow="Four pillars"
+        title="Three capabilities. One deployment."
+        lede="Everything a recovery floor needs, running on one database instead of four vendors."
+      >
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {PILLARS.map((pillar) => (
+            <Reveal key={pillar.title}>
+              <article className="group h-full rounded-2xl border border-sky-100 bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-sky-950/5">
+                <span className="inline-flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-sky-50 to-white shadow-sm ring-1 ring-slate-900/5 transition-transform duration-300 group-hover:scale-105">
+                  <pillar.icon className="size-6 text-blue-600" aria-hidden />
+                </span>
+                <h3 className="mt-5 text-lg font-bold tracking-tight text-slate-900">
+                  {pillar.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {pillar.line}
+                </p>
+                <p className="mt-5 border-t border-sky-100 pt-3 font-mono text-xs font-bold uppercase tracking-[0.14em] text-blue-700">
+                  {pillar.stat}
+                </p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </PlatformSection>
 
       {/* ── Modules: CRM + BITSagent ── */}
-      <Section className="bg-navy-950">
-        <Container>
-          <Reveal>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Two modules ship with it.
-            </h2>
-          </Reveal>
-          <Reveal>
-            <p className="mt-5 max-w-2xl text-skywash/70">
-              They are not separate products you have to integrate. They run on
-              the Operations 360 database from day one.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {MODULES.map((module) => (
-              <Reveal key={module.name}>
-                <article className="flex h-full flex-col rounded-2xl border border-white/10 bg-navy-800/60 p-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-300">
-                    Module
-                  </p>
-                  <h3 className="mt-3 text-2xl font-semibold text-white">
-                    {module.name}
-                  </h3>
-                  <p className="mt-2 font-medium text-electric-400">
-                    {module.line}
-                  </p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-mist">
-                    {module.detail}
-                  </p>
-                  <Link
-                    href={module.href}
-                    className="mt-7 inline-flex items-center gap-2 font-semibold text-white transition hover:text-signal-300"
-                  >
-                    Explore {module.name}
-                    <ArrowRight className="size-4" aria-hidden />
-                  </Link>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <PlatformSection
+        tint
+        eyebrow="Included modules"
+        title="Two modules ship with it."
+        lede="They are not separate products you have to integrate. They run on the Operations 360 database from day one."
+      >
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {MODULES.map((module) => (
+            <Reveal key={module.name}>
+              <article className="group flex h-full flex-col rounded-[1.75rem] border border-white/90 bg-white/90 p-8 shadow-sm backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-600/10">
+                <p className="w-fit rounded-full border border-blue-200/80 bg-blue-50/90 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-blue-700">
+                  Module
+                </p>
+                <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">
+                  {module.name}
+                </h3>
+                <p className="mt-1.5 font-semibold text-blue-700">{module.line}</p>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">
+                  {module.detail}
+                </p>
+                <Link
+                  href={module.href}
+                  className="mt-7 inline-flex min-h-[44px] items-center gap-2 font-bold text-slate-900 transition-colors hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                >
+                  Explore {module.name}
+                  <ArrowRight
+                    className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                    aria-hidden
+                  />
+                </Link>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </PlatformSection>
 
       {/* ── The rest of the catalogue ── */}
-      <Section className="bg-navy-900" tight>
-        <Container>
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                  And 19 more on the same database
-                </h2>
-                <p className="mt-3 max-w-xl text-skywash/70">
-                  Accounting, HRMS, logistics, booking, queuing and more — all
-                  connected to the platform you already run.
-                </p>
-              </div>
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-              >
-                Browse the full catalog
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </div>
-          </Reveal>
+      <PlatformSection>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+              And 19 more on the same database
+            </h2>
+            <p className="mt-3 max-w-xl text-slate-600">
+              Accounting, HRMS, logistics, booking, queuing and more — all
+              connected to the platform you already run.
+            </p>
+          </div>
+          <Link
+            href="/products"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-sky-200 bg-white px-6 font-semibold text-slate-900 shadow-xs transition-all duration-300 hover:border-blue-400 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          >
+            Browse the full catalog
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
 
-          <Reveal>
-            <ul className="mt-10 grid gap-x-8 gap-y-3 text-sm text-mist sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                "Accounting & ERP",
-                "HRMS & Payroll",
-                "Inventory & Logistics",
-                "Field Agents App",
-                "Booking System",
-                "Smart Queuing",
-                "Sports & Venue Hub",
-                "Smart NFC Card",
-                "RAG Knowledge Engine",
-                "White-Label",
-                "Custom Engineering",
-                "Plus 8 more",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <Check className="size-3.5 shrink-0 text-signal-300" aria-hidden />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </Container>
-      </Section>
+        <ul className="mt-10 grid gap-x-8 gap-y-3 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            "Accounting & ERP",
+            "HRMS & Payroll",
+            "Inventory & Logistics",
+            "Field Agents App",
+            "Booking System",
+            "Smart Queuing",
+            "Sports & Venue Hub",
+            "Smart NFC Card",
+            "RAG Knowledge Engine",
+            "White-Label",
+            "Custom Engineering",
+            "Plus 8 more",
+          ].map((item) => (
+            <li key={item} className="flex items-center gap-2">
+              <Check className="size-3.5 shrink-0 text-blue-600" aria-hidden />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </PlatformSection>
 
       {/* ── CTA ── */}
-      <Section className="bg-navy-950" tight>
-        <Container>
-          <Reveal>
-            <div className="rounded-3xl border border-white/10 bg-navy-800/60 px-8 py-14 text-center">
-              <BrainCircuit className="mx-auto size-8 text-signal-300" aria-hidden />
-              <h2 className="mt-5 text-3xl font-bold tracking-tight text-white">
-                Audit your floor benchmarks
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-skywash/75">
-                We will benchmark your current talk-time, PTP fulfilment and
-                dialer pacing against floors already running Operations 360.
-              </p>
-              <Link
-                href="/pricing"
-                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-electric-500 px-7 py-3.5 font-semibold text-white transition hover:bg-electric-600"
-              >
-                Request a consultation
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      <PlatformSection tint>
+        <Reveal>
+          <div className="rounded-[1.75rem] border border-white/90 bg-white/90 px-8 py-14 text-center shadow-sm backdrop-blur-2xl">
+            <span className="mx-auto inline-flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-50 to-white shadow-sm ring-1 ring-slate-900/5">
+              <BrainCircuit className="size-7 text-blue-600" aria-hidden />
+            </span>
+              <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
+              Audit your floor benchmarks
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-slate-600">
+              We will benchmark your current talk-time, PTP fulfilment and
+              dialer pacing against floors already running Operations 360.
+            </p>
+            <Link
+              href="/pricing"
+              className="mt-8 inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >
+              Request a consultation
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </div>
+        </Reveal>
+      </PlatformSection>
     </main>
   );
 }

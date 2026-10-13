@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
+import { ArrowRight, Check } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { PlatformHero, PlatformSection } from "@/components/sections/platform-hero";
 import { site } from "@/lib/site";
 
 /**
@@ -109,90 +108,50 @@ const jsonLd = {
 
 export default function BitsAgentModulePage() {
   return (
-    <main id="content" className="bg-navy-950 text-white">
+    <main id="content" className="bg-slate-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Section className="bg-navy-950">
-        <Container>
-          <Reveal>
-            <Link
-              href="/operations-360"
-              className="inline-flex items-center gap-2 text-sm font-medium text-mist transition hover:text-white"
-            >
-              <ArrowLeft className="size-4" aria-hidden />
-              Back to Operations 360
-            </Link>
-          </Reveal>
+      {/* ── Hero: shared azure-sky treatment, matching the landing page ── */}
+      <PlatformHero
+        eyebrow="Module of Operations 360"
+        title="Automate the floor."
+        lede="BITSagent AI is not a separate product bolted on the side. It operates on the Operations 360 record, so the agent, the agent floor, and the compliance trail are the same system."
+        backHref="/operations-360"
+        backLabel="Back to Operations 360"
+        primaryCta={{ href: "/pricing", label: "Request a quote" }}
+        secondaryCta={{ href: "/demo", label: "Book a live floor demo" }}
+      />
 
-          <Reveal>
-            <p className="mt-10 inline-flex items-center gap-2 rounded-full border border-electric-500/30 bg-electric-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-signal-300">
-              Module of Operations 360
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Automate the floor.
-            </h1>
-          </Reveal>
-
-          <Reveal>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-skywash/80">
-              BITSagent AI is not a separate product bolted on the side. It
-              operates on the Operations 360 record, so the agent, the agent
-              floor, and the compliance trail are the same system.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 rounded-xl bg-electric-500 px-7 py-3.5 font-semibold text-white transition hover:bg-electric-600"
-              >
-                See pricing
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href="/demo"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10"
-              >
-                Book a live floor demo
-              </Link>
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
-
-      <Section className="bg-navy-900" tight>
-        <Container>
-          <div className="grid gap-6 md:grid-cols-2">
+      <PlatformSection
+        eyebrow="Capabilities"
+        title="Built on the platform record"
+        lede="Every capability reads and writes the Operations 360 record — nothing is re-keyed and nothing lives in a separate vendor's database."
+      >
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
             {CAPABILITIES.map((capability) => (
               <Reveal key={capability.title}>
-                <article className="h-full rounded-2xl border border-white/10 bg-navy-800/60 p-7">
-                  <h2 className="text-lg font-semibold text-white">
+                <article className="h-full rounded-2xl border border-sky-100 bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-sky-950/5">
+                  <h2 className="text-lg font-bold tracking-tight text-slate-900">
                     {capability.title}
                   </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-mist">
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
                     {capability.body}
                   </p>
                 </article>
               </Reveal>
             ))}
           </div>
-        </Container>
-      </Section>
+      </PlatformSection>
 
-      <Section className="bg-navy-950" tight>
-        <Container>
+      <PlatformSection tint>
           <Reveal>
-            <div className="rounded-3xl border border-white/10 bg-navy-800/60 px-8 py-14 text-center">
-              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <div className="rounded-[1.75rem] border border-white/90 bg-white/90 px-8 py-14 text-center shadow-sm backdrop-blur-2xl">
+              <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
                 Runs on Operations 360
               </h2>
-              <ul className="mx-auto mt-7 grid max-w-2xl gap-3 text-left text-sm text-mist sm:grid-cols-2">
+              <ul className="mx-auto mt-7 grid max-w-2xl gap-3 text-left text-sm text-slate-600 sm:grid-cols-2">
                 {[
                   "Same account record",
                   "No re-keying",
@@ -207,15 +166,14 @@ export default function BitsAgentModulePage() {
               </ul>
               <Link
                 href="/operations-360"
-                className="mt-9 inline-flex items-center gap-2 font-semibold text-white transition hover:text-signal-300"
+                className="mt-9 inline-flex min-h-[44px] items-center gap-2 font-bold text-slate-900 transition-colors hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 See the platform
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
             </div>
           </Reveal>
-        </Container>
-      </Section>
+      </PlatformSection>
     </main>
   );
 }

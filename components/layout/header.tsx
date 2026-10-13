@@ -153,7 +153,12 @@ export function Header() {
   };
 
   const isHome = pathname === "/";
-  const solid = scrolled || mobileOpen || !isHome;
+  // The Operations 360 platform pages open with the same azure-sky hero as the
+  // landing page, so the header must sit transparent over that sky rather than
+  // switching to the solid treatment.
+  const isPlatform = pathname.startsWith("/operations-360");
+  const overSky = isHome || isPlatform;
+  const solid = scrolled || mobileOpen || !overSky;
 
   return (
     <>

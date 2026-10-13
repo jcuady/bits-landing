@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowLeft,
   ArrowRight,
   Check,
   PhoneCall,
@@ -10,9 +9,8 @@ import {
   Mail,
   CreditCard,
 } from "lucide-react";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
+import { PlatformHero, PlatformSection } from "@/components/sections/platform-hero";
 import { site } from "@/lib/site";
 
 /**
@@ -294,125 +292,73 @@ const jsonLd = {
 
 export default function BitsCrmModulePage() {
   return (
-    <main id="content" className="bg-navy-950 text-white">
+    <main id="content" className="bg-slate-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* ── Hero ── */}
-      <Section className="bg-navy-950">
-        <Container>
-          <Reveal>
-            <Link
-              href="/operations-360"
-              className="inline-flex items-center gap-2 text-sm font-medium text-mist transition hover:text-white"
-            >
-              <ArrowLeft className="size-4" aria-hidden />
-              Back to Operations 360
-            </Link>
-          </Reveal>
-
-          <Reveal>
-            <p className="mt-10 inline-flex items-center gap-2 rounded-full border border-electric-500/30 bg-electric-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-signal-300">
-              Module of Operations 360
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Recover the accounts.
-            </h1>
-          </Reveal>
-
-          <Reveal>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-skywash/80">
-              BITScrm is a collections CRM, not a sales CRM with debt bolted on.
-              It ships inside Operations 360 and runs on the same database — so
-              there is nothing to integrate and no second system to reconcile.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 rounded-xl bg-electric-500 px-7 py-3.5 font-semibold text-white transition hover:bg-electric-600"
-              >
-                Request a quote
-                <ArrowRight className="size-4" aria-hidden />
-              </Link>
-              <Link
-                href="/demo"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10"
-              >
-                Book a live floor demo
-              </Link>
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      {/* ── Hero: shared azure-sky treatment, matching the landing page ── */}
+      <PlatformHero
+        eyebrow="Module of Operations 360"
+        title="Recover the accounts."
+        lede="BITScrm is a collections CRM, not a sales CRM with debt bolted on. It ships inside Operations 360 and runs on the same database — so there is nothing to integrate and no second system to reconcile."
+        backHref="/operations-360"
+        backLabel="Back to Operations 360"
+        primaryCta={{ href: "/pricing", label: "Request a quote" }}
+        secondaryCta={{ href: "/demo", label: "Book a live floor demo" }}
+      />
 
       {/* ── The five workspaces ── */}
-      <Section className="bg-navy-900">
-        <Container>
-          <Reveal>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Five workspaces. One database.
-            </h2>
-          </Reveal>
-          <Reveal>
-            <p className="mt-5 max-w-2xl text-skywash/70">
-              Start with Collections. Activate the others when you need them —
-              they connect instantly, with no data migration and no
-              replatforming.
-            </p>
-          </Reveal>
-
-          <div className="mt-12 space-y-6">
+      <PlatformSection
+        eyebrow="CRM workspaces"
+        title="Five workspaces. One database."
+        lede="Start with Collections. Activate the others when you need them — they connect instantly, with no data migration and no replatforming."
+      >
+        <div className="mt-12 space-y-6">
             {WORKSPACES.map((workspace) => (
               <Reveal key={workspace.id}>
                 <article
                   id={workspace.id}
-                  className="scroll-mt-24 rounded-2xl border border-white/10 bg-navy-800/60 p-7 sm:p-9"
+                  className="group scroll-mt-24 rounded-2xl border border-sky-100 bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-sky-950/5 sm:p-9"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-5">
                     <div className="flex items-start gap-4">
-                      <span className="mt-0.5 flex size-11 shrink-0 items-center justify-center rounded-xl bg-electric-500/15">
+                      <span className="mt-0.5 flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-50 to-white shadow-sm ring-1 ring-slate-900/5 transition-transform duration-300 group-hover:scale-105">
                         <workspace.icon
-                          className="size-5 text-signal-300"
+                          className="size-5 text-blue-600"
                           aria-hidden
                         />
                       </span>
                       <div>
                         <div className="flex flex-wrap items-center gap-3">
-                          <h3 className="text-2xl font-semibold text-white">
+                          <h3 className="text-2xl font-bold tracking-tight text-slate-900">
                             {workspace.name}
                           </h3>
-                          <span className="rounded-full border border-white/15 px-3 py-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-mist">
+                          <span className="rounded-full border border-blue-200/80 bg-blue-50/90 px-3 py-0.5 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-blue-700">
                             {workspace.badge}
                           </span>
                         </div>
-                        <p className="mt-1.5 font-medium text-electric-400">
+                        <p className="mt-1.5 font-semibold text-blue-700">
                           {workspace.role}
                         </p>
                       </div>
                     </div>
 
                     <div className="shrink-0 text-right">
-                      <p className="text-3xl font-bold text-white">
+                      <p className="text-3xl font-bold text-slate-900">
                         {workspace.metric.value}
                       </p>
-                      <p className="text-xs uppercase tracking-[0.14em] text-mist">
+                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-slate-500">
                         {workspace.metric.label}
                       </p>
                     </div>
                   </div>
 
-                  <p className="mt-5 text-sm font-medium leading-relaxed text-skywash/80">
+                  <p className="mt-5 text-sm font-semibold leading-relaxed text-slate-900">
                     {workspace.tagline}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-mist">
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
                     {workspace.description}
                   </p>
 
@@ -420,10 +366,10 @@ export default function BitsCrmModulePage() {
                     {workspace.keyFeatures.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-start gap-2.5 text-sm text-mist"
+                        className="flex items-start gap-2.5 text-sm text-slate-600"
                       >
                         <Check
-                          className="mt-0.5 size-4 shrink-0 text-signal-300"
+                          className="mt-0.5 size-4 shrink-0 text-blue-600"
                           aria-hidden
                         />
                         {feature}
@@ -434,42 +380,33 @@ export default function BitsCrmModulePage() {
               </Reveal>
             ))}
           </div>
-        </Container>
-      </Section>
+      </PlatformSection>
 
       {/* ── Frankenstein vs unified ── */}
-      <Section className="bg-navy-950">
-        <Container>
+      <PlatformSection
+        tint
+        eyebrow="One schema"
+        title="The five engines synchronise in real time"
+        lede="Most stacks stitch five tools together and hope. These are five workspaces on one schema."
+      >
           <Reveal>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              The five engines synchronise in real time
-            </h2>
-          </Reveal>
-          <Reveal>
-            <p className="mt-5 max-w-2xl text-skywash/70">
-              Most stacks stitch five tools together and hope. These are five
-              workspaces on one schema.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <div className="mt-10 overflow-hidden rounded-2xl border border-white/10">
+            <div className="mt-10 overflow-x-auto rounded-2xl border border-sky-100 bg-white shadow-xs">
               <table className="w-full text-left text-sm">
                 <caption className="sr-only">
                   Comparison of a fragmented SaaS stack against unified BITScrm
                 </caption>
-                <thead className="bg-white/5">
+                <thead className="bg-sky-50/70">
                   <tr>
-                    <th scope="col" className="px-5 py-4 font-semibold text-white">
+                    <th scope="col" className="px-5 py-4 text-left font-bold text-slate-900">
                       Dimension
                     </th>
                     <th
                       scope="col"
-                      className="px-5 py-4 font-semibold text-mist"
+                      className="px-5 py-4 text-left font-semibold text-slate-500"
                     >
                       Fragmented stack
                     </th>
-                    <th scope="col" className="px-5 py-4 font-semibold text-signal-300">
+                    <th scope="col" className="px-5 py-4 text-left font-bold text-blue-700">
                       Unified BITScrm
                     </th>
                   </tr>
@@ -486,14 +423,14 @@ export default function BitsCrmModulePage() {
                     >
                       <th
                         scope="row"
-                        className="px-5 py-4 align-top font-semibold text-white"
+                        className="px-5 py-4 align-top font-bold text-slate-900"
                       >
                         {row.dimension}
                       </th>
-                      <td className="px-5 py-4 align-top text-mist">
+                      <td className="px-5 py-4 align-top text-slate-500">
                         {row.fragmented}
                       </td>
-                      <td className="px-5 py-4 align-top text-skywash/85">
+                      <td className="px-5 py-4 align-top font-medium text-slate-700">
                         {row.bits}
                       </td>
                     </tr>
@@ -502,67 +439,60 @@ export default function BitsCrmModulePage() {
               </table>
             </div>
           </Reveal>
-        </Container>
-      </Section>
+      </PlatformSection>
 
       {/* ── FAQ ── */}
-      <Section className="bg-navy-900">
-        <Container>
-          <Reveal>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Everything you need to know
-            </h2>
-          </Reveal>
-
+      <PlatformSection
+        eyebrow="Questions"
+        title="Everything you need to know"
+        lede="The six questions collections and finance teams ask before committing to a single-database CRM."
+      >
           <div className="mt-10 space-y-4">
             {CRM_FAQS.map((faq) => (
               <Reveal key={faq.q}>
-                <details className="group rounded-2xl border border-white/10 bg-navy-800/60 p-6">
-                  <summary className="cursor-pointer list-none text-base font-semibold text-white marker:hidden">
+                <details className="group rounded-2xl border border-sky-100 bg-white p-6 shadow-xs transition-shadow duration-300 open:shadow-lg open:shadow-sky-950/5 hover:border-blue-300">
+                  <summary className="cursor-pointer list-none text-base font-bold text-slate-900 marker:hidden">
                     <span className="flex items-start justify-between gap-4">
                       {faq.q}
                       <span
-                        className="mt-1 shrink-0 text-signal-300 transition group-open:rotate-45"
+                        className="mt-1 shrink-0 font-sans text-blue-600 transition-transform duration-300 group-open:rotate-45"
                         aria-hidden
                       >
                         +
                       </span>
                     </span>
                   </summary>
-                  <p className="mt-4 text-sm leading-relaxed text-mist">
+                  <p className="mt-4 text-sm leading-relaxed text-slate-600">
                     {faq.a}
                   </p>
                 </details>
               </Reveal>
             ))}
           </div>
-        </Container>
-      </Section>
+      </PlatformSection>
 
       {/* ── CTA ── */}
-      <Section className="bg-navy-950" tight>
-        <Container>
+      <PlatformSection tint>
           <Reveal>
-            <div className="rounded-3xl border border-white/10 bg-navy-800/60 px-8 py-14 text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
+            <div className="rounded-[1.75rem] border border-white/90 bg-white/90 px-8 py-14 text-center shadow-sm backdrop-blur-2xl">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900">
                 Ready to unify your customer &amp; revenue operations?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-skywash/75">
+              <p className="mx-auto mt-4 max-w-xl text-slate-600">
                 Tell us which workspaces you need today. We will size the
                 deployment to your floor and show you what the rest would cost
                 to add later.
               </p>
               <Link
                 href="/pricing"
-                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-electric-500 px-7 py-3.5 font-semibold text-white transition hover:bg-electric-600"
+                className="mt-8 inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 Request a quote
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
             </div>
           </Reveal>
-        </Container>
-      </Section>
+      </PlatformSection>
     </main>
   );
 }
