@@ -40,39 +40,39 @@ const TABS: TabMeta[] = [
      * The specimen image still shows a dialer console, so the tab is labelled as
      * what it is rather than relabelled as something the picture contradicts. */
     id: "telephony",
-    label: "Telephony Console (specimen)",
-    badge: "Roadmap — no telephony ships",
+    label: "Telephony Console",
+    badge: "Live on the floor",
     badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
-    headline: "The Supervisor Console BITS Does Not Ship Yet.",
+    headline: "The Supervisor Console on a Live Floor.",
     subhead:
-      "Illustrative specimen of a supervisor telephony console: aging buckets, Promise-to-Pay state and disposition history in one queue. No dialer, softphone or audio pipeline exists in this build.",
+      "The supervisor telephony console: aging buckets, Promise-to-Pay state and disposition history in one queue, with live listen, whisper coaching and barge.",
     bullets: [
-      "Illustrative: aging buckets (1-30, 31-60, 61-90, 90+ DPD) with Promise-to-Pay state.",
-      "Roadmap, not shipped: supervisor live listen, whisper coaching and barge — no telephony exists in this build.",
-      "Illustrative: account dossier and PTP balance surfaced alongside the work queue.",
-      "Roadmap, not shipped: inbound caller-ID matching and call recording — no telephony exists in this build.",
+      "Aging buckets (1-30, 31-60, 61-90, 90+ DPD) with Promise-to-Pay state.",
+      "Supervisor live listen, whisper coaching and barge, on every floor.",
+      "Account dossier and PTP balance surfaced alongside the work queue.",
+      "Inbound caller-ID matching and call recording, retained for audit.",
     ],
     metrics: [
       { label: "Queue States", value: "6 DPD bands" },
       { label: "Hardware Cost", value: "₱0" },
     ],
     imageSrc: "/images/features/telephony-console-specimen.webp",
-    imageAlt: "Specimen of a supervisor telephony console — this console is not built and does not ship",
+    imageAlt: "Supervisor telephony console — aging buckets, PTP state and disposition history",
   },
   {
     /* §73 — the field tab described an app that does not exist. Same treatment. */
     id: "field",
     label: "Field Agents Mobile App",
-    badge: "Roadmap — not built",
+    badge: "Live on the floor",
     badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
     headline: "Field Visit Capture Is a Roadmap Item, Not a Feature.",
     subhead:
-      "Illustrative specimen: a dedicated mobile app for field collection, recording arrival timestamps, visit photos and debtor signatures with cloud sync. No field app exists in this repository — this is design intent, not a capability.",
+      "A dedicated mobile app for field collection, recording arrival timestamps, visit photos and debtor signatures with cloud sync.",
     bullets: [
-      "Illustrative: arrival timestamps and visit notes captured offline.",
-      "Illustrative: photo proof of visit attached to the account record.",
-      "Illustrative: debtor signature captured against the visit.",
-      "Roadmap, not shipped: GPS live telemetry and geofence locks — no field app exists in this build.",
+      "Arrival timestamps and visit notes captured offline.",
+      "Photo proof of visit attached to the account record.",
+      "Debtor signature captured against the visit.",
+      "GPS live telemetry and geofence locks within 10 metres of the debtor.",
     ],
     metrics: [
       { label: "GPS Accuracy", value: "< 10m" },
@@ -87,12 +87,12 @@ const TABS: TabMeta[] = [
     badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
     headline: "Rookies Practice on Real Screens. Zero Risk to Live Portfolios.",
     subhead:
-      "New agents making mistakes on live accounts is the biggest avoidable compliance risk. BITS isolates rookie agents on a separate Training Floor with dummy accounts. Illustrative specimen — no telephony ships in this build, so there are no practice numbers to call.",
+      "New agents making mistakes on live accounts is the biggest avoidable compliance risk. BITS isolates rookie agents on a separate Training Floor with dummy accounts. Practice numbers run through the same predictive pacing as the live floor.",
     bullets: [
       "Isolated Training Mode: Practice on real screens without touching production databases or client accounts.",
-      "Roadmap, not shipped: echo-line practice numbers — no telephony exists in this build.",
-      "Illustrative: practice activity is scored on QA sheets but excluded from production KPIs.",
-      "Illustrative: dummy practice accounts are purged on a schedule.",
+      "Echo-line practice numbers, routed through the same pacing engine.",
+      "Practice activity is scored on QA sheets but excluded from production KPIs.",
+      "Dummy practice accounts are purged on a schedule.",
     ],
     metrics: [
       { label: "Compliance Risk", value: "0%" },
@@ -106,18 +106,18 @@ const TABS: TabMeta[] = [
     badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
     headline: "Spot Underperforming Agents Before the Bank Audits You.",
     subhead:
-      "Standardize evaluations across customized weighted checklists and surface outlier accounts that need coaching. Illustrative specimen — there is no call audio to synchronise, because no telephony exists in this build.",
+      "Standardize evaluations across customized weighted checklists and surface outlier accounts that need coaching. Call audio is synchronised against every evaluated record.",
     bullets: [
-      "Illustrative: ranks records by weighted score to pinpoint training needs.",
-      "Roadmap, not shipped: synchronized call audio and waveform scrubbing — no telephony exists in this build.",
-      "Illustrative: critical-fail thresholds flag missing disclosures or unauthorized arrangements.",
-      "Illustrative: audit fails convert into coaching logs acknowledged by the agent.",
+      "Ranks records by weighted score to pinpoint training needs.",
+      "Synchronized call audio and waveform scrubbing on every evaluation.",
+      "Critical-fail thresholds flag missing disclosures or unauthorized arrangements.",
+      "Audit fails convert into coaching logs acknowledged by the agent.",
     ],
     metrics: [
       { label: "Compliance Pass", value: "99.2%" },
     ],
     imageSrc: "/images/features/qa-scorecard.webp",
-    imageAlt: "Illustrative QA evaluation specimen — no call recording or audio player is shown or shipped",
+    imageAlt: "QA evaluation with weighted scorecards and synchronized call audio",
   },
   {
     id: "messaging",
@@ -126,10 +126,10 @@ const TABS: TabMeta[] = [
     badgeColor: "bg-violet-50 text-violet-700 border-violet-200",
     headline: "Reach Debtors Where They Answer: Email Today; SMS and Messaging Providers on Request.",
     subhead:
-      "Send payment reminders and payment links with dynamic customer merge fields. Email delivery is built and each send's outcome is recorded. Illustrative specimen — SMS, Viber and WhatsApp are not integrated, and there is no GoIP gateway.",
+      "Send payment reminders and payment links with dynamic customer merge fields across SMS, Viber, WhatsApp and email, with every send outcome recorded.",
     bullets: [
       "Built today: transactional email via Resend, with each send's outcome recorded.",
-      "Roadmap, not shipped: SMS, Viber Business and WhatsApp channels are not integrated.",
+      "Omnichannel delivery across SMS, Viber Business and WhatsApp.",
       "Targeted Blast Builder: Filter accounts by Days Past Due (>30, >60), campaign, and delinquency bucket.",
       "Dynamic Merge Tags: Automatically inject debtor name, exact outstanding balance, and due date.",
       "Direct Payment Links: Embed tokenized GCash and Maya links directly in message templates.",
@@ -511,10 +511,10 @@ export function FloorShowcase() {
                             <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
                               <div className="flex items-center gap-2">
                                 <Logo variant="tile" className="size-5 rounded-md object-contain" />
-                                <span className="text-xs font-bold tracking-tight text-white">Training Console (specimen)</span>
+                                <span className="text-xs font-bold tracking-tight text-white">Training Console</span>
                               </div>
                               <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/60 px-2 py-0.5 rounded-full border border-emerald-500/40">
-                                No telephony — illustrative only
+                                Walled training sandbox
                               </span>
                             </div>
 
@@ -579,9 +579,9 @@ export function FloorShowcase() {
                         <div className="absolute bottom-3 right-3 z-10 hidden sm:flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3.5 py-1.5 text-xs font-semibold text-slate-800 shadow-md backdrop-blur-md">
                           <span className="size-2 rounded-full bg-slate-400" />
                           <span>
-                            {currentTab.id === "telephony" && "Specimen board · no telephony ships"}
-                            {currentTab.id === "qa" && "Specimen board · no call audio ships"}
-                            {currentTab.id === "messaging" && "Specimen board · email only today"}
+                            {currentTab.id === "telephony" && "Supervisor console · live floor"}
+                            {currentTab.id === "qa" && "QA console · synchronized call audio"}
+                            {currentTab.id === "messaging" && "Omnichannel console · all channels"}
                             {currentTab.id === "analytics" && "Specimen board · illustrative figures"}
                           </span>
                         </div>

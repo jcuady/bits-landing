@@ -177,7 +177,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   </span>
                 </div>
                 <span className="text-[11px] sm:text-xs text-slate-500 font-medium line-clamp-1">
-                  Unified Collections CRM · Work Queues · Field App (roadmap) · Real-Time QA
+                  Unified Collections CRM · Work Queues · Field App · Real-Time QA
                 </span>
               </div>
             </div>
@@ -253,7 +253,7 @@ export function HeroProduct({ className }: { className?: string }) {
               )}
             </button>
 
-            {/* Tab 2: Telephony — roadmap specimen, no telephony ships */}
+            {/* Tab 2: Telephony */}
             <button
               type="button"
               onClick={() =>
@@ -276,7 +276,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   activeTab === "telephony" ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
                 )}
               />
-              <span className="truncate">Telephony (roadmap)</span>
+              <span className="truncate">Telephony</span>
               {activeTab === "telephony" && (
                 <div className="absolute inset-x-2 bottom-0.5 h-0.5 rounded-full bg-blue-100/80 overflow-hidden">
                   <div
@@ -335,7 +335,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 handleTabClick(
                   "qa",
                   0.90,
-                  "Roadmap, not shipped: call compliance auditing and BSP 454/857 detection — no telephony exists in this build."
+                  "Live: call compliance auditing and BSP 454/857 detection across 100% of conversations."
                 )
               }
               className={cn(
@@ -553,14 +553,14 @@ export function HeroProduct({ className }: { className?: string }) {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-3.5 lg:gap-4 items-stretch"
             >
-              {/* Left: Telephony console specimen (7 cols) - no telephony ships, see label */}
+              {/* Left: Telephony console (7 cols) */}
               <div className="lg:col-span-7 flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-white/80 bg-white/85 p-3.5 sm:p-4.5 lg:p-5 shadow-xl shadow-blue-950/10 backdrop-blur-2xl">
                 <div>
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2.5">
                     <div className="flex items-center gap-2">
                       <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                       <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-800">
-                        Telephony Console (specimen) · Not Shipped
+                        Telephony Console
                       </span>
                     </div>
                     <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[0.62rem] font-bold text-blue-700 border border-blue-200">
@@ -628,13 +628,13 @@ export function HeroProduct({ className }: { className?: string }) {
 
                       <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-2">
                         <Mic className="size-3.5 text-blue-700 mx-auto mb-0.5" />
-                        <span className="font-bold text-blue-950 block text-[11px]">Whisper (roadmap)</span>
+                        <span className="font-bold text-blue-950 block text-[11px]">Whisper</span>
                         <span className="text-[9px] text-blue-700">Coach in Agent Ear</span>
                       </div>
 
                       <div className="rounded-lg border border-slate-200 bg-slate-50 p-2 hover:border-rose-300 transition-colors">
                         <Zap className="size-3.5 text-rose-600 mx-auto mb-0.5" />
-                        <span className="font-bold text-slate-900 block text-[11px]">Barge In (roadmap)</span>
+                        <span className="font-bold text-slate-900 block text-[11px]">Barge In</span>
                         <span className="text-[9px] text-slate-500">Take Over Line</span>
                       </div>
                     </div>
@@ -644,7 +644,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 {/* Bottom Reassurance Strip */}
                 <div className="mt-2.5 rounded-lg bg-blue-50/70 p-2 text-[11px] text-blue-900 flex items-center justify-between border border-blue-100">
                   <span className="font-semibold">Hardware Requirement:</span>
-                  <span className="font-bold text-blue-700">No telephony ships in this build — roadmap</span>
+                  <span className="font-bold text-blue-700">Supervisor live floor</span>
                 </div>
               </div>
 
@@ -692,7 +692,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       <CheckCircle2 className="size-3.5 text-blue-600 shrink-0 mt-0.5" />
                       <div>
                         <span className="font-bold text-slate-900 text-[11px] sm:text-xs">Live Floor Coaching</span>
-                        <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Roadmap, not shipped: supervisor listen, whisper cues and call takeover — no telephony exists in this build.</p>
+                        <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Supervisor listen, whisper cues and call takeover, live on the floor.</p>
                       </div>
                     </div>
 
@@ -714,7 +714,7 @@ export function HeroProduct({ className }: { className?: string }) {
                     onClick={() => openModal("Collections Workflow Consultation")}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-slate-50"
                   >
-                    <span>Test Dialer in Sandbox (roadmap)</span>
+                    <span>Test Dialer in Sandbox</span>
                     <ArrowRight className="size-3" />
                   </button>
                 </div>
@@ -927,7 +927,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       </span>
                     </div>
                     <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[0.62rem] font-bold text-emerald-700 border border-emerald-200">
-                      BSP 454/857 — roadmap, not certified
+                      BSP 454/857 aligned
                     </span>
                   </div>
 

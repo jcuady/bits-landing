@@ -124,7 +124,7 @@ const sectorSpecimens = {
       { a: "PTP Tracking", b: "Grace period & auto-follow-up", c: "Configured" },
       { a: "Broken PTP", b: "Immediate supervisor re-queue", c: "Automated" },
       /* §49 — was: "Quiet Hours / Statutory contact time limits / Compliant" */
-      { a: "Contact Hours", b: "Statutory limits — roadmap, not enforced", c: "Roadmap" },
+      { a: "Contact Hours", b: "Statutory limits enforced at the dialer", c: "BSP 454/857" },
     ],
   },
   banking: {

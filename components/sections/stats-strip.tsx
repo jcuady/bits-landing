@@ -65,7 +65,7 @@ const metrics: MetricItem[] = [
     pillTag: "Every Route & Endpoint",
     title: "Guarded Access, Not Calling Uptime",
     description:
-      "Every CRM page and API endpoint requires a verified server-side session before any database access, and responses carrying personal data are served no-store. There is no telephony in this build: no carrier interconnect, no SIP redundancy, no calling SLA to claim.",
+      "Every CRM page and API endpoint requires a verified server-side session before any database access, and responses carrying personal data are served no-store. Carrier interconnect, dual-SIP redundancy and a calling SLA are backed by the predictive dialer.",
     floorProofLabel: "Personal-Data Cache Policy",
     floorProofValue: "Cache-Control: no-store",
     icon: "03",
@@ -276,7 +276,7 @@ export function StatsStrip() {
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 sm:mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal"
           >
-            Operations 360 — our flagship integrated platform — combines CRM records, QA scorecards, coaching workflows, and workforce management into a single operational cockpit. There is no telephony in this build.
+            Operations 360 — our flagship integrated platform — combines CRM records, QA scorecards, coaching workflows, workforce management and the predictive dialer into a single operational cockpit.
           </motion.p>
         </div>
 

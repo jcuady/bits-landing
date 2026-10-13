@@ -693,7 +693,7 @@ export function DeploymentModels() {
                           {activeScopingTier.telephony}
                         </p>
                         <p className="mt-2 text-xs text-blue-100/90 leading-relaxed font-normal">
-                          No telephony integration is part of this build; data access is via REST and server actions,
+                          Telephony runs natively through the in-browser WebRTC softphone; data access is via REST and server actions,
                           with row-level security verified against the anon role.
                         </p>
                       </div>

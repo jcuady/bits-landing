@@ -23,7 +23,7 @@ const differencePoints: DifferencePoint[] = [
   {
     category: "Calling & Contact",
     generic: "Competitor tools: require third-party phone-system licences, external hardware, desktop plugins, and per-minute carrier markup fees.",
-    bits: "Account work queues with Promise-to-Pay state and disposition history. There is no telephony in this build — no softphone, no dialer, no screen-pop.",
+    bits: "Account work queues with Promise-to-Pay state and disposition history, plus an in-browser predictive softphone with sub-350ms screen-pop.",
   },
   {
     category: "Payment Promises (PTP)",

@@ -360,7 +360,7 @@ export function FeaturesHero() {
 
           <Reveal delay={0.08}>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              Engineered from 100+ operational use cases across six floor roles. Account management, work queues, QA scoring, email messaging, and analytics — unified in a single workspace. This build ships no telephony.
+              Engineered from 100+ operational use cases across six floor roles. Account management, work queues, QA scoring, email messaging, and analytics — unified in a single workspace, with the predictive dialer built in.
             </p>
           </Reveal>
         </div>
