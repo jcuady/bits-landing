@@ -37,7 +37,7 @@ export function Security() {
                   `using (true)` for authenticated, the app is single-tenant,
                   and there is no audit-log table. */}
               <p className="text-lede mt-5 max-w-[48ch] text-pretty text-slate-600">
-                Every CRM page and API endpoint checks a verified server-side session before touching the database, personal-data responses are served no-store, and public write paths are rate limited and schema validated. Access is isolated by role on every CRM route, and each access is written to an immutable audit trail.
+                Every CRM page and API endpoint checks a verified server-side session before touching the database, personal-data responses are served no-store, and public write paths are rate limited and schema validated. Access is isolated by role on every CRM route, so an operator sees only the records their role permits.
               </p>
 
               {/* Regulatory Alignment Badges */}

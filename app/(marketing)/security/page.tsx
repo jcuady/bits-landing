@@ -193,7 +193,7 @@ export default function SecurityPage() {
                   </strong>{" "}
                   authorization is enforced server-side. Roles are not a display concept:
                   a signed-in operator reads only the records their role permits,
-                  and every read and write is written to an immutable audit trail.
+                  
                   If your compliance requirements depend on record-level
                   isolation, ask for the enforcement evidence and we will walk
                   through it.
@@ -248,7 +248,7 @@ export default function SecurityPage() {
                   </div>
                 </div>
                 <figcaption className="mt-3 text-center text-xs text-slate-500">
-                  Enforced in the product. Operators read only the records their role permits, and every access is written to an immutable audit trail.
+                  Enforced in the product. Operators read only the records their role permits, 
                 </figcaption>
               </figure>
             </Reveal>
