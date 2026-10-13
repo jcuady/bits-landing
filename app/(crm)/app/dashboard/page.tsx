@@ -278,7 +278,11 @@ export default function DashboardPage() {
                 <span className="font-bold font-mono text-slate-900 dark:text-white">88.5% VP/Director</span>
               </div>
               <div className="flex items-center justify-between rounded-xl bg-blue-50/50 dark:bg-white/5 p-2.5 text-xs border border-blue-100/60 dark:border-white/10">
-                <span className="text-slate-600 dark:text-slate-400">Softphone Right-Party Connect</span>
+                <span className="text-slate-600 dark:text-slate-400">
+                  {/* §53 — was "Softphone Right-Party Connect". No telephony
+                      exists; this is a synthetic demo metric. */}
+                  Demo Dial Contact Rate (simulation)
+                </span>
                 <span className="font-bold font-mono text-[#00b153]">78.4% Live Voice</span>
               </div>
             </div>
@@ -286,10 +290,10 @@ export default function DashboardPage() {
 
           <div className="mt-4 pt-3 border-t border-blue-100/60 dark:border-white/10">
             <Link
-              href="/app/forms"
+              href="/app/leads"
               className="w-full flex items-center justify-center gap-1.5 rounded-xl border border-blue-200/80 dark:border-white/10 py-2.5 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-blue-50/50 dark:hover:bg-white/10 transition-colors shadow-xs"
             >
-              <span>Manage 3 Active Website Forms</span>
+              <span>View All Inbound Website Leads</span>
               <ArrowRight className="size-3.5" />
             </Link>
           </div>
@@ -402,7 +406,17 @@ export default function DashboardPage() {
                         type="button"
                         onClick={() => {
                           updateLeadStatus(lead.id, "working");
-                          showToast(`WebRTC Softphone connected: Dialing ${lead.name} (${lead.company}).`);
+                          /* SYSTEM_AUDIT.md §52. The toast said "WebRTC Softphone connected: Dialing
+                           X" to a signed-in user. Nothing dials: this
+                           repository contains no RTCPeerConnection, no
+                           getUserMedia and no SDP handling. The click handler
+                           is a demo interaction, and the standing constraint is
+                           that demo behaviour is SYNTHETIC AND LABELLED — an
+                           unlabelled simulation is the one thing that constraint
+                           exists to prevent. Kept as a demo, labelled as one. */
+                          showToast(
+                            `Demo dialer (simulation only — no telephony in this build): would dial ${lead.name} (${lead.company}).`
+                          );
                         }}
                         className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white hover:bg-blue-500 shadow-2xs active:scale-95 transition-all cursor-pointer"
                       >
@@ -415,6 +429,7 @@ export default function DashboardPage() {
                           updateLeadStatus(lead.id, "qualified");
                           showToast(`Fast-touch email template dispatched to ${lead.email}.`);
                         }}
+                        aria-label={`Send fast-touch email to ${lead.email}`}
                         className="inline-flex items-center gap-1 rounded-lg border border-blue-200/80 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-blue-50 active:scale-95 transition-all cursor-pointer dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10"
                       >
                         <Mail className="size-3" />
@@ -452,6 +467,7 @@ export default function DashboardPage() {
                 <span className="font-mono text-[0.68rem]">Score: 96</span>
               </div>
               <p className="mt-1 text-slate-700 dark:text-slate-300 leading-relaxed">
+                <span className="font-semibold">Sample data — </span>
                 Atty. Rafael Dizon (EastWest Credit) submitted requirements for 150 collections floor seats. Est. ARR: ₱1.45M. Auto-assigned to Malcolm Cuady.
               </p>
             </div>
@@ -462,17 +478,32 @@ export default function DashboardPage() {
                 <span className="font-mono text-[0.68rem]">Score: 98</span>
               </div>
               <p className="mt-1 text-slate-700 dark:text-slate-300 leading-relaxed">
-                Marcus Sterling (Sutherland Global BPO) interacted with softphone specimen and requested AI latency benchmarks for 40,000 delinquent accounts.
+                <span className="font-semibold">Sample data — </span>
+                Marcus Sterling (Sutherland Global BPO) viewed the demo contact specimen and requested AI latency benchmarks for 40,000 delinquent accounts.
               </p>
             </div>
 
             <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-3.5 text-xs dark:border-amber-900/50 dark:bg-amber-950/30">
               <div className="flex items-center justify-between font-bold text-amber-700 dark:text-amber-400">
-                <span>BSP 454 Quiet Hour Enforcement</span>
-                <span className="font-mono text-[0.68rem]">Automated</span>
+                <span>
+                  {/* §49/§50 — was "BSP 454 Quiet Hour Enforcement". The panel
+                      title and its "Automated" state badge were the remaining
+                      claim; both removed with the body text below. */}
+                  Contact-Hour Enforcement — Roadmap
+                </span>
+                <span className="font-mono text-[0.68rem]">Roadmap</span>
               </div>
               <p className="mt-1 text-slate-700 dark:text-slate-300 leading-relaxed">
-                Statutory quiet hours lock active. Outbound dialer auto-campaigns scheduled to resume tomorrow at 8:00 AM sharp.
+                {/* SYSTEM_AUDIT.md §49. Previously: "Statutory quiet hours lock
+                    active. Outbound dialer auto-campaigns scheduled to resume
+                    tomorrow at 8:00 AM sharp." Neither exists: contact-rule
+                    enforcement is "not part of this build"
+                    (lib/security-data.ts:120), and there is no dialer — no
+                    WebRTC, no RTCPeerConnection, no getUserMedia anywhere in the
+                    repository. This sits inside the authenticated CRM, so a
+                    signed-in customer was reading it. */}
+                Outbound dialling and statutory contact-hour enforcement are not
+                part of this build.
               </p>
             </div>
           </div>

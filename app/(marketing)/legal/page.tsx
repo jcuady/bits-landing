@@ -7,15 +7,16 @@ import { ShieldCheck, Cookie, Lock, Scale, CheckCircle2, ChevronRight, FileText 
 export const metadata: Metadata = {
   title: "Compliance, Privacy & Terms",
   description:
-    "Official Privacy Notice, Data Privacy Act (RA 10173) compliance, Bank-grade security standards, and Terms of Use for Boundless IT Solutions (BITS).",
+    "Official Privacy Notice, Data Privacy Act (RA 10173) handling, information security controls, and Terms of Use for Boundless IT Solutions (BITS).",
   alternates: { canonical: `${site.url}/legal` },
   openGraph: {
     title: "Compliance, Privacy & Terms | BITS",
     description:
-      "Official Privacy Notice, Data Privacy Act (RA 10173) compliance, Bank-grade security standards, and Terms of Use for Boundless IT Solutions (BITS).",
+      "Official Privacy Notice, Data Privacy Act (RA 10173) handling, information security controls, and Terms of Use for Boundless IT Solutions (BITS).",
     url: `${site.url}/legal`,
     siteName: site.legalName,
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Compliance, Privacy & Terms" }],
   },
 };
 
@@ -88,7 +89,7 @@ export default function LegalPage() {
             className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-md hover:bg-white/15 transition-all group"
           >
             <ShieldCheck className="size-5 text-emerald-400 mb-2 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white">1. Privacy Notice</h3>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-white">1. Privacy Notice</h2>
             <p className="mt-1 text-xs text-sky-200">DPA RA 10173 &amp; Data Rights</p>
           </a>
           <Link
@@ -96,7 +97,7 @@ export default function LegalPage() {
             className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-md hover:bg-white/15 transition-all group"
           >
             <Cookie className="size-5 text-sky-300 mb-2 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white">2. Cookie Policy</h3>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-white">2. Cookie Policy</h2>
             <p className="mt-1 text-xs text-sky-200">Tracking &amp; Storage Audit &rarr;</p>
           </Link>
           <a
@@ -104,7 +105,7 @@ export default function LegalPage() {
             className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-md hover:bg-white/15 transition-all group"
           >
             <Lock className="size-5 text-cyan-300 mb-2 group-hover:scale-110 transition-transform" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white">3. Security Standards</h3>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-white">3. Security Standards</h2>
             <p className="mt-1 text-xs text-sky-200">BSP 808 &amp; SEC MC 18</p>
           </a>
         </div>
@@ -192,7 +193,7 @@ export default function LegalPage() {
           <div className="flex items-center gap-2">
             <span className="size-2 rounded-full bg-cyan-400" />
             <h2 className="text-xl font-bold text-white tracking-tight">
-              3. Bank-Grade Security &amp; Financial Regulatory Alignment
+              3. Information Security &amp; Financial Regulatory Alignment
             </h2>
           </div>
           <div className="space-y-4 text-sm text-sky-100/90 leading-relaxed">
@@ -201,21 +202,43 @@ export default function LegalPage() {
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-sky-200 flex items-center gap-1.5">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-sky-200 flex items-center gap-1.5">
                   <ShieldCheck className="size-4 text-emerald-400" />
                   BSP Circular No. 808 &amp; 982
-                </h4>
+                </h3>
+                {/*
+                  Corrected 8 Oct 2026. This previously read "Information
+                  Technology Risk Management (ITRM) framework adherence,
+                  ensuring air-gapped encryption, immutable audit trails, and
+                  data residency within Philippine territory."
+
+                  "Adherence" asserts a regulatory position that has never been
+                  audited, and immutable audit trails do not exist — there is no
+                  audit subsystem in this codebase (SYSTEM_AUDIT.md §28, §29).
+                  Reframed as what is actually built, with the deployment
+                  options described as options rather than guarantees.
+                */}
                 <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                  Information Technology Risk Management (ITRM) framework adherence, ensuring air-gapped encryption, immutable audit trails, and data residency within Philippine territory.
+                  Our deployment blueprints are <em>designed with</em> BSP
+                  Information Technology Risk Management in mind, and we support
+                  air-gapped or on-premises installation for data-residency
+                  requirements. To be explicit: no BSP certification or audit has
+                  been performed, and this build does not yet produce immutable
+                  audit trails.
                 </p>
               </div>
               <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-sky-200 flex items-center gap-1.5">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-sky-200 flex items-center gap-1.5">
                   <CheckCircle2 className="size-4 text-sky-300" />
                   SEC MC No. 18 Series of 2019
-                </h4>
+                </h3>
                 <p className="mt-2 text-xs text-sky-100/80 leading-relaxed">
-                  Prohibiting unfair debt collection practices through automated supervisory monitoring, recorded call timestamps, and auditable promise-to-pay verification logs.
+                  This regulation requires supervised calling, recorded call
+                  timestamps and auditable promise-to-pay verification. It is
+                  quoted here as the regulatory requirement it is. Contact-window
+                  and call-frequency enforcement is an engagement-scoped
+                  deliverable in a BITS deployment, not a control this build
+                  ships on its own.
                 </p>
               </div>
             </div>
@@ -240,11 +263,41 @@ export default function LegalPage() {
           </div>
         </section>
 
-        {/* Section 5: Official Contact & Governance Inquiries */}
+        {/* Section 5: Form Submission Policy */}
+        <section id="form-terms" className="mt-14 scroll-mt-28 space-y-4 border-t border-white/15 pt-12">
+          <div className="flex items-center gap-2">
+            <span className="size-2 rounded-full bg-purple-300" />
+            <h2 className="text-xl font-bold text-white tracking-tight">
+              5. Form Submission &amp; Consultation Policy
+            </h2>
+          </div>
+          <div className="space-y-4 text-sm text-sky-100/90 leading-relaxed">
+            <p>
+              When you submit a consultation, blueprint request, or quotation request through any form on this site, we collect only the details you type into that form. Submission constitutes consent to the processing of those details for the sole purpose of responding to your enquiry and preparing any resulting scoping or quotation.
+            </p>
+            <p>
+              <strong className="text-white">Confidentiality.</strong> Operational metrics, seating capacity, and technology stack details disclosed during a consultation are treated as confidential. We do not publish client-submitted material or use it as a case study without prior written permission.
+            </p>
+            <p>
+              <strong className="text-white">No third-party resale.</strong> We do not rent, sell, trade, or broker your submitted contact information to external marketers, lead brokers, or data syndicates.
+            </p>
+            <p>
+              <strong className="text-white">Quotation validity.</strong> Where a quotation is issued in response to a submission, the scoping and pricing it contains are held for thirty (30) calendar days from the date of issue.
+            </p>
+            <p>
+              <strong className="text-white">Automated protections.</strong> Submissions are rate-limited and screened by automated controls intended to reject bot traffic. A rejected submission does not create an enquiry record.
+            </p>
+            <p>
+              <strong className="text-white">Your rights.</strong> Under RA 10173 you may request inspection, correction, or erasure of the data you submitted at any time by contacting the compliance desk below. Requests are actioned within the period prescribed by law.
+            </p>
+          </div>
+        </section>
+
+        {/* Section 6: Official Contact & Governance Inquiries */}
         <section className="mt-14 rounded-3xl border border-sky-400/30 bg-gradient-to-r from-blue-900/40 via-blue-800/30 to-sky-900/40 p-6 backdrop-blur-2xl">
           <h2 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
             <FileText className="size-5 text-sky-300" />
-            5. Legal Governance &amp; DPO Inquiries
+            6. Legal Governance &amp; DPO Inquiries
           </h2>
           <p className="mt-2 text-xs text-sky-100/85 leading-relaxed">
             To submit formal legal inquiries, request data erasure under RA 10173, or execute vendor compliance audits:

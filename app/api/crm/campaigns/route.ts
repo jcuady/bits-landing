@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
+import { requireCrmUser } from "@/lib/crm/api-auth";
+import {
+  campaignPayloadSchema,
+  noStoreHeaders,
+  isUnparseableBody,
+  fieldErrorsOf,
+} from "@/lib/crm/api-contract";
 
 export interface MarketingCampaignRecord {
   id: string;
@@ -17,8 +24,15 @@ export interface MarketingCampaignRecord {
   updated_at: string;
 }
 
+/** Campaign rows are commercially sensitive and session-scoped — never cached. */
+const json = (body: unknown, status = 200) =>
+  NextResponse.json(body, { status, headers: noStoreHeaders() });
+
 /** GET /api/crm/campaigns — returns all marketing campaigns */
 export async function GET() {
+  const auth = await requireCrmUser();
+  if (auth instanceof NextResponse) return auth;
+
   try {
     const supabase = await createServiceClient();
     const { data, error } = await supabase
@@ -28,45 +42,62 @@ export async function GET() {
 
     if (error) {
       console.error("[api/crm/campaigns] Supabase query error:", error.message);
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      return json({ ok: false, error: "Failed to load campaigns" }, 500);
     }
 
-    return NextResponse.json({ ok: true, campaigns: data ?? [] });
+    return json({ ok: true, campaigns: data ?? [] });
   } catch (err) {
     console.error("[api/crm/campaigns] Unexpected error:", err);
-    return NextResponse.json({ ok: false, error: "Internal server error" }, { status: 500 });
+    return json({ ok: false, error: "Internal server error" }, 500);
   }
 }
 
 /** POST /api/crm/campaigns — create marketing campaign */
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    if (!body.name) {
-      return NextResponse.json({ ok: false, error: "Missing required field: name" }, { status: 400 });
-    }
+  const auth = await requireCrmUser();
+  if (auth instanceof NextResponse) return auth;
 
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch (err) {
+    if (isUnparseableBody(err)) {
+      return json({ ok: false, error: "Request body must be valid JSON" }, 400);
+    }
+    throw err;
+  }
+
+  const parsed = campaignPayloadSchema.safeParse(body);
+  if (!parsed.success) {
+    return json(
+      { ok: false, error: "Invalid campaign payload", fields: fieldErrorsOf(parsed.error) },
+      400
+    );
+  }
+
+  try {
     const supabase = await createServiceClient();
     const { data, error } = await supabase
       .from("marketing_campaigns")
       .insert({
-        name: body.name,
-        channel: body.channel ?? "Email",
-        subject: body.subject ?? null,
-        status: body.status ?? "active",
-        owner: body.owner ?? "Malcolm Cuady",
-        target_audience: body.target_audience ?? "Inbound Leads",
+        name: parsed.data.name,
+        channel: parsed.data.channel ?? "Email",
+        subject: parsed.data.subject ?? null,
+        status: parsed.data.status ?? "active",
+        owner: parsed.data.owner ?? "Malcolm Cuady",
+        target_audience: parsed.data.target_audience ?? "Inbound Leads",
       })
       .select()
       .single();
 
     if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      console.error("[api/crm/campaigns] Insert error:", error.message);
+      return json({ ok: false, error: "Failed to create campaign" }, 500);
     }
 
-    return NextResponse.json({ ok: true, campaign: data });
+    return json({ ok: true, campaign: data }, 201);
   } catch (err) {
     console.error("[api/crm/campaigns] Post error:", err);
-    return NextResponse.json({ ok: false, error: "Internal server error" }, { status: 500 });
+    return json({ ok: false, error: "Internal server error" }, 500);
   }
 }

@@ -72,6 +72,7 @@ export function BlogExplorer({ posts, featuredPostSlug }: BlogExplorerProps) {
             </span>
             <input
               type="text"
+              aria-label="Search articles"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search e.g. 'top crm collections agency', 'top oms', 'salesforce'..."

@@ -74,8 +74,16 @@ function AgentIcon({ className }: { className?: string }) {
   );
 }
 
-/* ── The 9 Integrated Engines Configuration ── */
-const NINE_ENGINES = [
+/* ── The Core Operational Engines Configuration ──
+ *
+ * §85: this was `NINE_ENGINES` and the rendered label read "The 9 Core
+ * Operational Engines" — over a TEN-entry array. Both the constant's name
+ * and the copy agreed with each other and both were wrong, which is why no
+ * gate caught it: the label is not a claim about the product, it is a claim
+ * about this array, and nothing compared the two. Renamed to match the
+ * array; the visible label is derived from `.length` below so the two can
+ * never disagree again. */
+const CORE_ENGINES = [
   {
     name: "CRM & Customer Management",
     desc: "Unified 360° dossiers, customer history, account states & real-time updates.",
@@ -108,13 +116,29 @@ const NINE_ENGINES = [
   },
   {
     name: "Integrated Dialer",
-    desc: "WebRTC browser softphone, predictive pacing queues & supervisor whisper HUD.",
+    /* §85 — this desc sat in the engines grid, which renders ABOVE the §79
+     * simulation notice inside the chassis. The notice said "no telephony
+     * ships in this build" 90 lines below the sentence that claimed a WebRTC
+     * softphone with a supervisor whisper HUD. A disclaimer qualifies a
+     * subtree; a claim outside that subtree is not qualified by it.
+     * §84's rule is that a label must name the specific absence rather than
+     * gesture at a category, so this names the three things that do not
+     * exist. The simulated dialer UI itself is unchanged and stays inside the
+     * labelled chassis. */
+    desc: "Dialer and softphone screens appear in the simulated preview below. No dialer, softphone or audio pipeline ships in this build.",
     icon: PhoneCall,
     color: "text-amber-600 bg-amber-50 border-amber-200",
   },
   {
     name: "Field Agents Mobile App",
-    desc: "Live GPS geofencing, tamper-proof visit timestamps, photo proof, digital signatures & offline sync.",
+    /* SYSTEM_AUDIT.md §48. Previously: "Live GPS geofencing, tamper-proof visit
+       timestamps, photo proof, digital signatures & offline sync." No field app,
+       no geofencing and no tamper-evident store exist in this codebase —
+       FULL_SYSTEM_DOCUMENTATION.md lists "Live GPS field app: Not implemented"
+       and `lib/site/security-claims.mjs` bans `immutable`/`tamper-proof`
+       precisely because "tamper-proof" is a claim about a security property,
+       not a UI adjective. */
+    desc: "Field visit capture with photo proof, digital signatures & offline-first sync.",
     icon: MapPin,
     color: "text-cyan-600 bg-cyan-50 border-cyan-200",
   },
@@ -185,7 +209,7 @@ const tabs = [
     badgeColor: "bg-amber-50 text-amber-700 border-amber-200",
     useCase: "Operations Agents, Collectors, Telephony Reps & Care Staff",
     pain: "Forced to alt-tab between 5–8 slow screens—CRM, phone dialer, LMS training, and payment links—wasting hours every shift.",
-    solution: "Access the tools and information they need in one place. One unified interface with customer history, auto-dialer, instant payment links, and personal scorecards.",
+    solution: "Access the tools and information they need in one place. One unified interface with customer history, instant payment links, and personal scorecards. No dialer ships in this build.",
     metric: "3.2x More Connects · Zero Lag",
   },
 ] as const;
@@ -739,16 +763,16 @@ export function ProductShowcase() {
           </div>
         </Reveal>
 
-        {/* ── The 9 Integrated Engines Grid ── */}
+        {/* ── The Core Operational Engines Grid ── */}
         <Reveal delay={0.1}>
           <div className="mt-10 sm:mt-12">
             <div className="mb-4 text-center">
               <span className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.2em] text-slate-400">
-                The 9 Core Operational Engines In One System
+                The {CORE_ENGINES.length} Core Operational Engines In One System
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {NINE_ENGINES.map((engine) => {
+              {CORE_ENGINES.map((engine) => {
                 const Icon = engine.icon;
                 return (
                   <div
@@ -759,7 +783,7 @@ export function ProductShowcase() {
                       <Icon className="size-4.5" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900">{engine.name}</h4>
+                      <h3 className="text-xs font-bold text-slate-900">{engine.name}</h3>
                       <p className="mt-0.5 text-[0.72rem] text-slate-500 leading-relaxed">{engine.desc}</p>
                     </div>
                   </div>
@@ -851,11 +875,36 @@ export function ProductShowcase() {
 
                     <div className="flex items-center gap-3 text-[0.72rem]">
                       <span className="hidden sm:inline font-mono text-slate-400">Sync: 14ms · Zero MIS Wait</span>
-                      <span className="flex items-center gap-1.5 font-bold text-emerald-600">
-                        <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
-                        <span>LIVE ENGINE</span>
+                      {/* §79 — this read a pulsing "LIVE ENGINE" badge over a
+                          * simulated interface. §74 removed three of these from
+                          * the homepage for exactly this reason: a static panel
+                          * with a pulse on it is the same lie as one without,
+                          * and "LIVE" is an affirmative claim about a system
+                          * that is not running. No ping, no liveness claim. */}
+                      <span className="flex items-center gap-1.5 font-bold text-slate-500">
+                        <span className="size-1.5 rounded-full bg-slate-400" />
+                        <span>SIMULATED PREVIEW</span>
                       </span>
                     </div>
+                  </div>
+
+                  {/* §79 — the simulation label was a <figcaption> at the BOTTOM
+                      of the section, after a long scroll of simulated telemetry.
+                      A reader arriving at the softphone row had already been told
+                      six panels' worth of things that are not true. The label now
+                      sits inside the panel, above the content it qualifies, and
+                      names the specific absence rather than saying "simulation"
+                      and leaving the reader to work out what is simulated. */}
+                  <div className="flex items-start gap-2 border-b border-amber-200 bg-amber-50 px-4 py-2.5 sm:px-6">
+                    <span className="mt-0.5 shrink-0 text-[0.65rem] font-bold uppercase tracking-wider text-amber-700">
+                      Simulated
+                    </span>
+                    <p className="text-[0.72rem] leading-snug text-amber-900">
+                      This preview is a client-side illustration with synthetic data.
+                      <strong className="font-bold"> No telephony ships in this build</strong> — no
+                      dialer, softphone, whisper, barge-in, call recording or audio pipeline — and
+                      nothing here connects to a live system.
+                    </p>
                   </div>
 
                   {/* Toast Feedback Ribbon */}
@@ -892,7 +941,7 @@ export function ProductShowcase() {
               </div>
 
               <figcaption className="mt-4 text-center text-[0.75rem] font-medium text-slate-400">
-                Interactive preview of OPERATIONS 360 · Click buttons and tabs to test live operational simulations.
+                Interactive simulation of OPERATIONS 360, built for this page with synthetic data. No telephony, no live system, no customer data.
               </figcaption>
             </figure>
           </div>

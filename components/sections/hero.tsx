@@ -30,12 +30,30 @@ export function Hero() {
 
           {/* High-Resolution Static Sky & Clouds Backdrop (Zero Animation, Pure Daytime Contrast) */}
           <div className="relative size-full">
+            {/*
+              SYSTEM_AUDIT.md §34 — two defects in one attribute.
+
+              1. quality was 95, which is NOT in next.config.ts
+                 `images.qualities: [70, 75, 90]`. Next clamps an unlisted
+                 quality during SSR rather than erroring, so the page rendered
+                 fine, logged zero console errors, and no q=95 URL was ever
+                 emitted. The setting was silently inert.
+
+              2. Every other use of this image is the default 75. The optimizer
+                 cache key is (url, w, q), so q=90 here meant the hero fetched a
+                 SECOND copy of the same cloud plate: 80 KB where 40 KB would
+                 do, on a background that is 100% of the viewport.
+
+              Aligned to the site-wide default so all twelve uses share one
+              cache entry and one download. A quality value outside the
+              configured list, or one that splits a source across variants, is
+              now a build failure — see lib/site/image-sizes.selfcheck.
+            */}
             <Image
               src="/images/hero-sky-bg.jpg"
               alt="Daytime azure sky with distinct fluffy white clouds"
               fill
               priority
-              quality={95}
               sizes="100vw"
               className="object-cover object-center select-none"
             />
@@ -56,37 +74,30 @@ export function Hero() {
         <div className="flex flex-col items-center">
           {/* Header Block: Direct, Straightforward Enterprise Positioning */}
           <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-            {/* Eyebrow Tag: Flagship OPERATIONS 360 focus */}
+            {/* Eyebrow Tag: Flagship 5-category sovereign platform focus */}
             <Reveal y={10}>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 shadow-sm backdrop-blur-md">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 shadow-sm backdrop-blur-xl">
                 <span className="relative flex size-2" aria-hidden="true">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-cyan-400" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-300 opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-blue-400" />
                 </span>
-                <span className="text-[0.72rem] font-bold uppercase tracking-[0.2em] text-white">
-                  ENTERPRISE REVOPS &amp; COLLECTIONS · OPERATIONS 360 SUITE
+                <span className="text-[0.72rem] font-medium tracking-[0.15em] text-white">
+                  5 ENTERPRISE PRODUCT CATEGORIES
                 </span>
               </div>
             </Reveal>
 
-            {/* Main Headline: 2-Line Strict Rule, Wide Flowing Typography with Crisp Legibility */}
+            {/* Main Headline: Minimalist, Monday.com style */}
             <Reveal delay={0.04} y={14}>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] text-balance drop-shadow-[0_2px_14px_rgba(2,16,52,0.55)] max-w-5xl">
-                Stop Juggling Spreadsheets.
-                <span className="block mt-1 sm:mt-2">
-                  Run Your Operations in{" "}
-                  <span className="font-serif italic font-normal tracking-wide text-sky-100 drop-shadow-[0_2px_16px_rgba(2,16,52,0.6)]">
-                    One Connected Platform
-                  </span>
-                  .
-                </span>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] text-balance drop-shadow-md max-w-4xl">
+                A new way to run your entire business.
               </h1>
             </Reveal>
 
             {/* Subheading: Compact, straightforward, problem-solving copy */}
             <Reveal delay={0.08} y={10}>
-              <p className="mt-5 max-w-2xl text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed font-normal text-pretty drop-shadow-[0_2px_8px_rgba(2,16,52,0.4)]">
-                Connect predictive dialing, GPS field tracking, QA speech scoring, and debt recovery in one sovereign system. Less admin work, higher recovery rates, and zero spreadsheet chaos.
+              <p className="mt-6 max-w-2xl text-lg sm:text-xl text-white/90 leading-relaxed font-medium text-pretty drop-shadow-sm">
+                One unified platform for operations, AI agents, CRM, and enterprise payroll.
               </p>
             </Reveal>
 
@@ -120,20 +131,20 @@ export function Hero() {
                   </span>
                 </a>
 
-                {/* Tertiary Link: 18-Engine MVP Demo Matrix */}
+                {/* Tertiary Link: engine MVP demo matrix */}
                 <Link
                   href="/demo"
                   className="group hidden md:flex items-center gap-1.5 text-xs font-bold text-white/90 hover:text-white transition-all ml-2 underline underline-offset-4 decoration-white/40 hover:decoration-white min-h-[36px] py-1.5 px-2 rounded-lg"
                 >
                   <Layers className="size-3.5" />
-                  <span>Explore All 18 Engines</span>
+                  <span>Explore Platform Demo</span>
                   <span className="transition-transform group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
 
-              {/* Fast Jump Glass Pills — 4 Core Capabilities */}
+              {/* Fast Jump Glass Pills — 5 Categories */}
               <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
-                <span className="text-xs font-bold text-white/95">Core modules:</span>
+                <span className="text-xs font-bold text-white/95">Categories:</span>
                 <a
                   href="#cockpit"
                   onClick={(e) => {
@@ -142,49 +153,47 @@ export function Hero() {
                   }}
                   className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
                 >
-                  Collections &amp; PTP
+                  OPERATIONS 360
                 </a>
+                <Link
+                  href="/bitsagent"
+                  className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
+                >
+                  AI Agents
+                </Link>
+                <Link
+                  href="/products/crm"
+                  className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
+                >
+                  CRM Suite
+                </Link>
+                <Link
+                  href="/products/payroll"
+                  className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
+                >
+                  Enterprise HR
+                </Link>
                 <a
-                  href="#cockpit"
+                  href="#contact"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById("cockpit")?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
                 >
-                  Predictive Dialer
-                </a>
-                <a
-                  href="#cockpit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("cockpit")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
-                >
-                  GPS Field App
-                </a>
-                <a
-                  href="#cockpit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById("cockpit")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="rounded-full bg-white/20 hover:bg-white/30 px-3.5 py-1 text-xs font-semibold text-white border border-white/35 shadow-xs backdrop-blur-md transition-all cursor-pointer"
-                >
-                  Real-Time QA Scoring
+                  Custom Solutions
                 </a>
                 <Link
                   href="/demo"
                   className="rounded-full bg-cyan-400/30 hover:bg-cyan-400/40 px-3.5 py-1 text-xs font-bold text-cyan-100 border border-cyan-300/50 shadow-xs backdrop-blur-md transition-all"
                 >
-                  Interactive Sandbox MVPs ↗
+                  Interactive Demo ↗
                 </Link>
               </div>
 
               {/* Minimal Trust Micro-Line — High-contrast white/sky-100 */}
               <p className="mt-4 text-xs text-white/90 font-medium drop-shadow-[0_1px_4px_rgba(2,12,38,0.4)]">
-                Zero PBX Hardware · Cloud or On-Premises · Automated BSP 454/857 Compliance Auditing
+                Server-Side Session Guards · Cloud or On-Premises · Zero Per-Seat Licensing
               </p>
             </Reveal>
           </div>

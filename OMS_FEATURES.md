@@ -89,7 +89,7 @@ Each person only sees the accounts, teams and clients they are allowed to see.
 - **Installable app (PWA)** (**New**): add OMS to the home screen on iOS/Android or install it on desktop. Remote users get a trusted HTTPS address over Tailscale. *(Push notifications are a later phase.)*
 - **Mobile-friendly screens** (**New**) across the custom pages.
 - **Adjustable sidebar** (**New**: drag to resize), worklist progress and login timer in the sidebar, text size and time-zone preferences.
-- Two-factor sign-in, one session per user, idle time-out.
+- One session per user, idle time-out. ~~Two-factor sign-in~~ — **not implemented**: there is no TOTP/MFA in this build; `requireCrmUser()` checks that a Supabase session exists and nothing more (SYSTEM_AUDIT.md §17.2, §22, §29).
 
 ## 10. Administration and vendor control
 

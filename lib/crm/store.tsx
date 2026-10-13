@@ -50,7 +50,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     title: "RPC Lift Flagged",
     desc: "PTP installment cleared for Carlos Mendoza (₱20,000)",
     time: "3h ago",
-    href: "/app/pipelines",
+    href: "/app/opportunities",
     urgent: false,
     read: false,
   },
@@ -449,7 +449,7 @@ export function CrmProvider({
         addNotification({
           title: "🎉 Deal Closed Won!",
           desc: `Deal moved to Closed Won successfully.`,
-          href: "/app/pipelines",
+          href: "/app/opportunities",
           urgent: true,
         });
       }
@@ -482,7 +482,7 @@ export function CrmProvider({
       addNotification({
         title: "Task Created",
         desc: newTask.title,
-        href: "/app/tasks",
+        href: "/app/dashboard",
       });
       return newTask;
     },
@@ -772,7 +772,7 @@ export function CrmProvider({
       addNotification({
         title: "Team Member Added",
         desc: `${member.name} (${member.role}) invited to workspace.`,
-        href: "/app/team",
+        href: "/app/settings",
       });
       return newMember;
     },
@@ -880,9 +880,29 @@ export function CrmProvider({
       .catch(() => {});
   }, []);
 
+  /**
+   * Reset the workspace to the seed state.
+   *
+   * `seedCrmState()` returns an EMPTY record set (only the pipeline definition
+   * and the demo team member), so this clears the locally-held records — it
+   * does NOT restore a demo dataset. The settings label was corrected to
+   * "Reset Workspace to Default" to stop promising data that never comes back.
+   *
+   * IMPORTANT: this only clears local state. On the next mount the store
+   * re-fetches `/api/crm/leads` and merges any rows in the live `inbound_leads`
+   * table back in, so a page reload will repopulate the workspace with real
+   * inbound enquiries. Verified: 10 records → 0 after reset → 10 after reload.
+   * Clearing the server-side rows is deliberately NOT done here; that is
+   * destructive and is an owner decision (see docs/SYSTEM_AUDIT.md §16).
+   */
   const restoreDemoData = React.useCallback(() => {
     setState(cloneSeed());
-  }, []);
+    addNotification({
+      title: "Workspace cleared",
+      desc: "Local records reset. Inbound website enquiries stored on the server re-sync on the next page load.",
+      href: "/app/leads",
+    });
+  }, [addNotification]);
 
   const value = React.useMemo(
     () => ({
@@ -990,10 +1010,7 @@ export function useCrm() {
   return ctx;
 }
 
-export function roleForEmail(email: string, state: CrmState): CrmRole {
-  const norm = email.toLowerCase().trim();
-  const member = state.team.find((t) => t.email.toLowerCase() === norm);
-  if (member) return member.role;
-  if (norm.startsWith("malcolm@") || norm.startsWith("demo@") || norm.includes("admin")) return "Admin";
-  return "Admin";
-}
+// `roleForEmail` and `canGovern` now live in `lib/crm/roles.ts` so the logic can
+// be unit-tested directly (store.tsx contains JSX and cannot be imported by the
+// Node selfcheck runner). Re-exported here so existing imports keep working.
+export { roleForEmail, canGovern } from "./roles";

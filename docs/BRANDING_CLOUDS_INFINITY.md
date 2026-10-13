@@ -71,7 +71,7 @@ Our color system bridges high-altitude sky atmosphere with grounded sovereign be
 
 | Color Token | Hex Code | Visual Metaphor | Primary Usage | WCAG 2.2 Ratio |
 | :--- | :---: | :--- | :--- | :---: |
-| **Bedrock Navy** | `#030B18` | Deepest Void & Ground | Base background for dark mode, footers | — |
+| **Bedrock Navy** | `#030d1c` | Deepest Void & Ground | Base background for dark mode, footers | — |
 | **Space Navy** | `#06162F` | Stability & Authority | Primary headings, executive cards, cockpits | 17.5:1 (AAA) |
 | **Boundless Horizon** | `#0284C7` | The Open Sky | Atmospheric gradient anchors, section banners | 7.2:1 (AAA) |
 | **Cloud Sky Cyan** | `#38BDF8` | Infinity Glow | Accent rings, focus indicators, active waveforms | 10.4:1 (AAA) |
@@ -87,7 +87,7 @@ Our color system bridges high-altitude sky atmosphere with grounded sovereign be
 In alignment with `/high-end-visual-design`, BITS interfaces reject flat, lifeless digital surfaces in favor of haptic spatial depth:
 
 ### A. The 4-Layer Spatial Canvas
-1. **Layer 0 (Bedrock Foundation)**: Solid `#030B18` or `#06162F` backdrop.
+1. **Layer 0 (Bedrock Foundation)**: Solid `#030d1c` or `#06162F` backdrop.
 2. **Layer 1 (Database Dot Lattice)**: Subdued 20px dot lattice representing discrete SQL database records.
 3. **Layer 2 (Atmospheric Cloud Vapor)**: Soft radial sky gradients (`radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, transparent 70%)`) creating an ethereal sense of altitude.
 4. **Layer 3 (Double-Bezel Glass Cockpit)**: Nested floating cards with outer hairline ring (`border border-white/10`) and concentric inner core.

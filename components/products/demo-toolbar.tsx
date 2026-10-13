@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useDemo, type DemoPersona } from "@/lib/products/demo-store";
-import { getProductById } from "@/lib/products/registry";
+import { getProductById, ENGINE_COUNT } from "@/lib/products/registry";
 import {
   Sparkles,
   RotateCcw,
@@ -94,13 +94,24 @@ export function DemoToolbar({ productId }: DemoToolbarProps) {
       <div className="mx-auto flex flex-wrap items-center justify-between gap-3 max-w-7xl">
         {/* Left: Product & Environment Badge */}
         <div className="flex items-center gap-2.5">
+          {/* §80 — this read a pulsing emerald dot beside "Live MVP Sandbox".
+              Every demo here is client-side state in localStorage; nothing is
+              connected. §74 and §79 removed two other instances of exactly
+              this badge, so this is the third and last: a live indicator over a
+              sandbox asserts a connection that does not exist.
+              The badge now says what it is, and the row beneath it states the
+              standing demo constraint — synthetic data, no server — where
+              every demo module inherits it rather than each repeating it. */}
           <Badge
             variant="outline"
-            className="border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-semibold px-2 py-0.5 text-[10px] tracking-wide uppercase flex items-center gap-1.5"
+            className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-semibold px-2 py-0.5 text-[10px] tracking-wide uppercase flex items-center gap-1.5"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Live MVP Sandbox
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+            Demo Sandbox
           </Badge>
+          <span className="hidden sm:inline text-slate-500 text-[10px]">
+            Synthetic sample data · browser storage only · no server connection
+          </span>
           <span className="hidden sm:inline text-slate-400 font-mono text-[11px]">
             {product?.name || "BITS Enterprise Product"}
           </span>
@@ -112,7 +123,7 @@ export function DemoToolbar({ productId }: DemoToolbarProps) {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
-              className="flex items-center gap-1.5 rounded-lg border border-slate-700/80 bg-slate-900/90 px-2.5 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition cursor-pointer"
+              className="flex items-center gap-1.5 min-h-11 rounded-lg border border-slate-700/80 bg-slate-900/90 px-2.5 py-2 text-xs font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition cursor-pointer"
             >
               <ActiveIcon className="h-3.5 w-3.5 text-electric-400 shrink-0" />
               <span>Role: <strong className="text-white font-semibold">{activePersonaInfo.label}</strong></span>
@@ -161,7 +172,7 @@ export function DemoToolbar({ productId }: DemoToolbarProps) {
           {/* White-Label Rebranding Toggle */}
           <button
             onClick={toggleWhiteLabel}
-            className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition cursor-pointer ${
+            className={`flex items-center gap-1.5 min-h-11 rounded-lg border px-2.5 py-2 text-xs font-medium transition cursor-pointer ${
               isWhiteLabelPreview
                 ? "border-sky-500/50 bg-sky-500/20 text-sky-200"
                 : "border-slate-700/80 bg-slate-900/90 text-slate-300 hover:bg-slate-800 hover:text-white"
@@ -179,7 +190,7 @@ export function DemoToolbar({ productId }: DemoToolbarProps) {
           <button
             onClick={resetSandboxData}
             disabled={isSandboxResetting}
-            className="flex items-center gap-1 rounded-lg border border-slate-700/80 bg-slate-900/90 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:bg-red-950/40 hover:text-red-300 hover:border-red-800/60 transition cursor-pointer disabled:opacity-50"
+            className="flex items-center gap-1 min-h-11 rounded-lg border border-slate-700/80 bg-slate-900/90 px-2.5 py-2 text-xs font-medium text-slate-300 hover:bg-red-950/40 hover:text-red-300 hover:border-red-800/60 transition cursor-pointer disabled:opacity-50"
             title="Reset deals, leads, and quotes to clean initial seed state"
           >
             <RotateCcw className={`h-3 w-3 ${isSandboxResetting ? "animate-spin text-red-400" : ""}`} />
@@ -191,10 +202,15 @@ export function DemoToolbar({ productId }: DemoToolbarProps) {
         <div className="flex items-center gap-2">
           <Link
             href="/demo"
-            className="flex items-center gap-1 rounded-lg border border-slate-700/80 bg-slate-800/80 px-2.5 py-1.5 text-slate-200 hover:bg-slate-700 hover:text-white transition"
+            className="flex items-center gap-1 min-h-11 rounded-lg border border-slate-700/80 bg-slate-800/80 px-2.5 py-2 text-slate-200 hover:bg-slate-700 hover:text-white transition"
           >
             <Layers className="h-3 w-3 text-amber-400" />
-            <span>All 18 Engines</span>
+            {/* §80 corrected 18 -> 19 here, by hand, because this links to /demo which
+                renders PRODUCT_REGISTRY. §88 replaced the hand-typed number with
+                the derived count, so the same mistake cannot recur here or in
+                the three other components that link to /demo (hero,
+                product-shell, crm-sales), all of which still said 18. */}
+            <span>All {ENGINE_COUNT} Engines</span>
           </Link>
 
           {product?.marketingUrl && (
@@ -211,9 +227,9 @@ export function DemoToolbar({ productId }: DemoToolbarProps) {
           <Button
             asChild
             size="sm"
-            className="h-7 text-xs bg-electric-600 hover:bg-electric-500 font-semibold px-2.5 py-1"
+            className="min-h-11 text-xs bg-electric-600 hover:bg-electric-500 font-semibold px-2.5 py-2"
           >
-            <Link href="/contact">
+            <Link href="/#contact">
               <Calendar className="h-3 w-3 mr-1" />
               <span>Book Strategy Call</span>
             </Link>

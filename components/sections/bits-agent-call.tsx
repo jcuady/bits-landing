@@ -77,7 +77,11 @@ const SCENARIOS: Scenario[] = [
       },
     ],
     actionLabel: "Unlock International Roaming",
-    actionToast: "International transaction block lifted for Japan. Multi-factor confirmation logged to audit trail.",
+    /* SYSTEM_AUDIT.md §50 — was "Multi-factor confirmation logged to audit trail."
+       There is no audit store. This is a scripted demo transcript (the whole
+       file is hardcoded scenario data rendered as an animation), but the toast
+       still promises a control the product does not have. */
+    actionToast: "International transaction block lifted for Japan. Multi-factor confirmation recorded for this session.",
   },
   {
     id: "support",
@@ -237,7 +241,7 @@ export function BitsAgentCallSpecimen({ className }: { className?: string }) {
                 )}
               />
               <span className="font-mono text-[0.65rem] font-bold tracking-wider text-slate-600 uppercase">
-                {isPlaying ? "WebRTC Stream Active" : "Stream Paused"}
+                {isPlaying ? "Simulated Call (no telephony)" : "Playback Paused"}
               </span>
             </div>
 

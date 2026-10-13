@@ -3,6 +3,56 @@
 **Repository:** `jcuady/bits-landing` | **Organization:** Boundless IT Solutions (BITS)  
 **Last Updated:** October 2026 | **Target Version:** Production Release 2.0  
 
+> ## ⚠️ THIS IS A DESIGN SPEC, NOT A CAPABILITY LIST
+>
+> **Read this before trusting anything below.** This document describes the
+> *intended* Production Release 2.0 architecture. Several sections describe
+> capabilities that **are not built**. Verified current state lives in
+> `docs/SYSTEM_AUDIT.md`, `docs/TESTING.md`, `docs/PAGE_AUDIT.md` and
+> `PROJECT_STATUS.md` — those are the sources of truth for what exists.
+>
+> Known **not** implemented despite being described here:
+>
+> | Described | Reality |
+> |---|---|
+> | SSO / SAML authentication | Not implemented. Supabase email + OAuth only |
+> | IP whitelisting | Not implemented |
+> | Automated database backups | Not implemented |
+> | BSP 454 tagging compliance | Not implemented |
+> | Live GPS field app | Not implemented |
+> | Real-time event streaming | Not implemented — no Supabase realtime subscription exists |
+> | Supabase realtime / channel subscription | Not implemented |
+> | Per-role server-side authorization | Not implemented — `requireCrmUser()` authenticates and never reads a role |
+> | Audit logging | Not implemented — no audit table, no append-only store |
+> | 10 CRM routes (Pipelines, Tasks, Campaigns, Automations, Forms, Reports, Team, Conversations, Templates, Funnels) | **Do not exist.** |
+>
+> Each unbuilt item is tracked as a known limitation rather than silently
+> implied to exist. Added 8 Oct 2026 after an earlier audit pass found this file
+> readable as a capability list.
+
+> ### ⚠️ Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §46) — two rows of the
+> ### table above were themselves wrong, and the body contradicted them
+>
+> The banner was right about the entries it listed and **silent about most of
+> what §6 then described as shipped.** §6 listed SSO/SAML, IP whitelisting, API
+> key rotation, automated audit certificates and audit logging as capabilities —
+> four of which appear in the banner above as *not implemented*. The document
+> refuted itself 200 lines apart.
+>
+> Two banner rows were also **stale in the opposite direction** — they were true
+> when written and the code moved on:
+>
+> | Row said | Reality |
+> |---|---|
+> | "CRM server-side record persistence — Not implemented, localStorage only" | **Wrong since §16.** `lib/crm/store.tsx` fetches `/api/crm/leads` (lines 208 and 868) and merges rows from the live `inbound_leads` table — 10 of them. Only *edits* stay client-side. §43 corrected this exact half-truth in `docs/SECURITY.md`; this banner repeated it |
+> | "Only 6 `/app/*` routes are built" | **11**, measured from `app/`. Plus 14 `/crm-*` routes, for 41 total |
+>
+> §3 and §6 have been corrected in place. What remains uncorrected in §7 is
+> deliberate: those rows describe **product lines that live outside this
+> repository** (ERP, payroll, NFC, floor GPS). Whether they are real deployments
+> is an owner decision this audit cannot make, so they are left as written and
+> flagged rather than silently rewritten.
+
 ---
 
 ## Table of Contents
@@ -11,8 +61,8 @@
 3. [Supabase & Database Architecture](#3-supabase--database-architecture)
 4. [Environment Variables & API Keys](#4-environment-variables--api-keys)
 5. [System Functionality & End-to-End Capabilities](#5-system-functionality--end-to-end-capabilities)
-6. [User Personas & Role-Based Access Control](#6-user-personas--role-based-access-control)
-7. [Products & The 18 Enterprise Engines](#7-products--the-18-enterprise-engines)
+6. [User Personas & Target Access Model](#6-user-personas--target-access-model)
+7. [Products & The 18 Marketing Products](#7-products--the-18-marketing-products)
 8. [Brandbook & Design System (Glassmorphism & Clouds)](#8-brandbook--design-system-glassmorphism--clouds)
 9. [Component Architecture & Directory Map](#9-component-architecture--directory-map)
 10. [Developer Setup, Testing & Deployment Workflow](#10-developer-setup-testing--deployment-workflow)
@@ -48,7 +98,7 @@ The BITS codebase is built on the modern React and Next.js ecosystem, prioritizi
 ### 2.1 Core Frameworks & Runtime
 | Layer | Technology | Version | Purpose |
 |---|---|---|---|
-| **Framework** | Next.js (App Router) | `16.3.5` | Turbopack compilation, React Server Components (RSC), static route generation, API routes, streaming SSR. |
+| **Framework** | Next.js (App Router) | `16.3.8` | Turbopack compilation, React Server Components (RSC), static route generation, API routes, streaming SSR. |
 | **Runtime** | React | `19.3.0` | React 19 primitives, Server Actions, concurrent transitions, optimistic UI updates. |
 | **Language** | TypeScript | `7.0.2` | Strict compile-time validation (`npx tsc --noEmit`), zero type-coercion bypasses. |
 | **Styling** | Tailwind CSS | `4.3.3` | Tailwind v4 engine using native `@theme` CSS tokens in `app/globals.css`. |
@@ -64,12 +114,29 @@ The BITS codebase is built on the modern React and Next.js ecosystem, prioritizi
 
 ## 3. Supabase & Database Architecture
 
-BITS utilizes **Supabase (Managed PostgreSQL 15+)** for secure data persistence, role-based access control, and real-time event streaming.
+> **Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §46).** This section previously
+> read *"for secure data persistence, role-based access control, and real-time
+> event streaming."* Two of those three are false for this codebase:
+>
+> - **No role-based access control.** `requireCrmUser()` verifies a session and
+>   returns a user; it never reads a role. Every RLS policy in the schema is
+>   `using (true)` for `authenticated`. Any signed-in user can read every CRM
+>   record. The `/security` page says so on the site, badged **Roadmap**.
+> - **No real-time event streaming.** There is no Supabase realtime subscription
+>   anywhere — no `.channel()`, no `.subscribe()`. Data is read on request.
+
+BITS uses **Supabase (managed PostgreSQL)** for data persistence and Postgres
+row-level security. Four tables, all RLS-protected against the `anon` role —
+verified empirically, not read off the schema file (§40).
 
 ### 3.1 Connection Details
 - **Project URL**: `https://jvseyttzlobelrnzmfyf.supabase.co`
 - **Dashboard**: [https://supabase.com/dashboard/project/jvseyttzlobelrnzmfyf](https://supabase.com/dashboard/project/jvseyttzlobelrnzmfyf)
-- **Region**: Southeast Asia (Singapore / Sovereign low-latency cluster)
+- **Region**: Southeast Asia (Singapore / low-latency cluster)
+
+> The original text called this a *"Sovereign low-latency cluster"*. "Sovereign"
+> implies a regulatory residency guarantee; no such determination has been made
+> or claimed for this project.
 
 ### 3.2 Database Schema & Tables
 
@@ -106,7 +173,7 @@ create table if not exists public.inbound_leads (
 - `inbound_leads_new_triage_idx`: Partial index on `submitted_at where status = 'new'` for zero-latency triage HUD.
 
 #### Row Level Security (RLS) Policies
-1. **Public/Service Role Submission**: Web actions (`app/actions/lead.ts`) insert via `service_role` or controlled RPC; anonymous users cannot dump or query debtor PII.
+1. **Public/Service Role Submission**: Web actions (`app/actions/contact.ts`) insert via `service_role` or controlled RPC; anonymous users cannot dump or query debtor PII.
 2. **Authenticated CRM Operators**: CRM operators query and update pipeline stages through `auth.uid()` verified sessions.
 3. **Automated Timestamps**: Database trigger `inbound_leads_set_updated_at` fires before every row update to guarantee audit integrity.
 
@@ -115,7 +182,18 @@ create table if not exists public.inbound_leads (
 - `contacts`: Key executives, debtors, co-makers, phone numbers, verified emails.
 - `leads`: Early pipeline opportunities, deal size, discovery notes, stage tracking.
 - `opportunities`: Active contract negotiations, custom engine deployments.
-- `audit_logs`: Immutable BSP-compliant logs recording agent access, exports, and call recordings.
+- **There is no `audit_logs` table.** §73 removed this line: the repository has exactly four database tables — `inbound_leads`, `email_logs`, `marketing_automations`, `marketing_campaigns` — and none records agent access, exports or calls. Nothing anywhere is immutable or BSP-compliant-audited; there is no audit subsystem of any kind.
+
+### 3.3a The four tables that actually exist
+
+| Table | Holds | Written by |
+|---|---|---|
+| `inbound_leads` | Contact-form submissions | `app/actions/contact.ts` |
+| `email_logs` | Per-send delivery outcome, in a **mutable** table | `lib/email/` |
+| `marketing_automations` | Automation definitions | admin tooling |
+| `marketing_campaigns` | Campaign definitions | admin tooling |
+
+All four carry `using (true)` for the `authenticated` role — one privilege level, no per-role scoping.
 
 ---
 
@@ -135,7 +213,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # 2. Resend — Inbound Inquiries & Lead Notification Dispatch
-RESEND_API_KEY=re_your_resend_api_key_here
+RESEND_API_KEY=re_<your-resend-api-key>
 CONTACT_INBOX=boundlessitsolutions@gmail.com
 CONTACT_FROM=BITS Inquiries <onboarding@resend.dev>
 # Switch to custom domain when DNS records propagate:
@@ -182,11 +260,11 @@ BITS is architected as two interconnected surfaces: the **Public High-Converting
 2. **Interactive OPERATIONS 360 Cockpit**:
    - Pinned interactive showcase that smoothly scrubs through the 4 flagship recovery specimens:
      - **Specimen 1: Collections CRM & PTP Watchdog**: Countdown timers, broken promise triggers, instant QR Ph/e-wallet links.
-     - **Specimen 2: Sub-350ms Predictive Softphone**: WebRTC in-browser dialing, live audio waveforms, supervisor Listen/Whisper/Barge-in.
-     - **Specimen 3: Field Agents App**: GPS live telemetry, 10m geofence locks, atomic clock timestamping, watermarked camera proof.
-     - **Specimen 4: Real-Time QA Speech AI**: 100% call auditing, automatic BSP quiet-hour infraction flags, profanity scrubbers.
+     - **Specimen 2: Predictive Softphone** ⚠️ **§73 — the softphone specimen no longer exists.** `components/sections/bits-agent-call.tsx` was corrected in §50 and the remaining telephony copy removed in §62/§70. There is no telephony in this build: no WebRTC, no audio pipeline, no supervisor Listen/Whisper/Barge.
+     - **Specimen 3: Field Agents App**: ⚠️ **§73 — not built.** No GPS telemetry, no geofence, no camera proof; there is no field app in this repository.
+     - **Specimen 4: Real-Time QA Speech AI**: ⚠️ **§73 — not built.** No call auditing, no quiet-hour infraction flags, no profanity scrubbing.
 3. **Statutory Trust & Regulatory Governance (`TrustStrip`)**:
-   - Direct verification against **BSP Circulars 454 & 857**, **NPC RA 10173 (DPA)**, **SEC MC No. 18**, **CIC RA 9510**, **ISO/IEC 27001**, and **DICT Cloud Cybersecurity**.
+   - The shipped component publishes four **regulatory principles** badges (BSP Circulars 454 & 857, NPC RA 10173, SEC MC No. 18, ISO/IEC 27001 *aligned*). ⚠️ **§73 — §56 corrected this to say plainly what it is.** It is not a compliance attestation: no audit against ISO 27001, SEC MC 18 or any other standard has been performed.
 4. **Interactive Sandbox (`/demo`)**:
    - Allows prospective buyers to test the 18 engines in real time without creating an account.
 5. **SEO & Agentic AI Visibility**:
@@ -201,22 +279,57 @@ BITS is architected as two interconnected surfaces: the **Public High-Converting
 
 ---
 
-## 6. User Personas & Role-Based Access Control
+## 6. User Personas & Target Access Model
 
-| Role | Typical User | Primary Pages | Core Needs & Permissions |
+> **Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §46).** This section was titled
+> *"User Personas & Role-Based Access Control"* and its last column was headed
+> *"Core Needs & Permissions"*. **RBAC is not implemented.** The routes listed
+> below all exist and all work; what does not exist is any enforcement of a role.
+> `requireCrmUser()` authenticates and nothing more.
+>
+> The column is therefore a **target** model. Per-row verification of what is
+> fabricated and what is merely out of repo:
+
+| Role | Typical User | Primary Pages | Target needs (NOT enforced — see below) |
 |---|---|---|---|
-| **Floor Manager / Supervisor** | Operations Manager, Team Lead | `/app/dashboard`, `/app/leads`, `/demo` | Real-time agent monitoring, live call barge-in, PTP allocation, floor quotas, daily settlement targets. |
-| **Tele-Collection Agent** | Inbound/Outbound Phone Specialist | `/crm-sales`, `/app/leads`, Softphone HUD | One-click predictive dialing, quick account dispositioning, instant QR Ph link generation, call script guidance. |
-| **Field Recovery Officer** | Field Agent, Motorcycle Messenger | Mobile Viewport, GPS Field App | Geofenced premise check-in, debtor signature capture, offline receipt sync, route navigation. |
-| **QA & Compliance Officer** | Internal Auditor, Legal Counsel | `/app/settings`, QA Speech HUD, `/security` | Automated audio transcription, BSP 454 harassment violation tagging, exportable bank audit certificates. |
-| **Executive / C-Suite** | CEO, COO, Chief Risk Officer | `/`, `/pricing`, Executive Cockpit | Portfolio recovery yield, license ROI, sovereign compliance certification, cross-entity financial consolidation. |
-| **System Administrator** | DevOps Engineer, IT Director | `/app/settings`, Supabase Dashboard | API key rotation, SSO/SAML integration, IP whitelist enforcement, database backups, audit logging. |
+| **Floor Manager / Supervisor** | Operations Manager, Team Lead | `/app/dashboard`, `/app/leads`, `/demo` | Agent monitoring, PTP allocation, floor quotas, settlement targets. |
+| **Tele-Collection Agent** | Inbound/Outbound Phone Specialist | `/crm-sales`, `/app/leads` | Predictive dialing, account dispositioning, call script guidance. |
+| **Field Recovery Officer** | Field Agent, Motorcycle Messenger | Mobile Viewport, GPS Field App | Premise check-in, signature capture, offline receipt sync, route navigation. |
+| **QA & Compliance Officer** | Internal Auditor, Legal Counsel | `/app/settings`, `/security` | ~~Automated audio transcription~~, ~~BSP 454 harassment tagging~~, ~~exportable audit certificates~~ — **none of these exist**. There is no audio pipeline, no call recording, and no certificate export in this codebase. |
+| **Executive / C-Suite** | CEO, COO, Chief Risk Officer | `/`, `/pricing` | Portfolio reporting, license ROI. ~~Sovereign compliance certification~~ is **false** — no BSP certification or audit has been performed (§29). |
+| **System Administrator** | DevOps Engineer, IT Director | `/app/settings`, Supabase Dashboard | ~~API key rotation~~, ~~SSO/SAML integration~~, ~~IP whitelist enforcement~~, ~~audit logging~~ — **none of these are implemented**. SSO/SAML exists only as demo strings in a mock ticket table and a mock email subject; there is no IP whitelist code and no audit subsystem. |
+
+What authentication *does* guarantee, verified: every CRM page and API route
+checks a server-side session before touching the database, personal-data
+responses are `no-store`, and public write paths are rate-limited and schema
+validated. That is a session check, not an authorization model.
 
 ---
 
-## 7. Products & The 18 Enterprise Engines
+## 7. Products & The 18 Marketing Products
 
-BITS provides four unified product families housing 18 specialized operational engines.
+> **Corrected 8 October 2026 (§46).** This heading read *"The 18 Enterprise
+> Engines"*, conflating two different catalogues that answer two different
+> questions:
+>
+> - **`bitsProducts`** (`lib/site.ts`) — **18** marketing products. These generate
+>   the `/products/<slug>` routes and are what the site sells. `llms.txt`'s "18"
+>   is correct.
+> - **`PRODUCT_REGISTRY`** (`lib/products/registry.ts`) — **19** demo engines
+>   (6 live, 14 planned). These are what `/demo` offers.
+>
+> Neither number is wrong; using one label for both is. Verified by
+> `node scripts/product-count.mjs`.
+>
+> The per-item capability descriptions below are **not** verified by this audit.
+> Many describe product lines that live outside this repository — ERP and BIR
+> accounting, HRMS payroll, warehouse inventory, NFC cards, GPS field operations.
+> Absence of evidence here is not evidence of absence in a deployment this
+> repository cannot see. Whether those lines are real deployments is an **owner
+> decision** (`SYSTEM_AUDIT.md` §8), so these lines are left as written and
+> flagged rather than silently deleted.
+
+BITS provides four unified product families housing 18 specialized marketing products.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐

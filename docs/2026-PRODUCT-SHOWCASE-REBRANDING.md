@@ -111,6 +111,6 @@ All primary conversion CTAs follow the nested button-in-button design:
 ## 5. Verification & Test Evidence
 
 * **TypeScript Compilation**: `npx tsc --noEmit` — **Passed with 0 errors**.
-* **Turbopack Build**: `next build` — **56 static and dynamic routes compiled successfully in 9.2s**.
-* **Accessibility**: Fully keyboard-navigable tablists (`ArrowRight`, `ArrowLeft`), high-contrast text ratios exceeding WCAG AA requirements, minimum 44px tap targets.
-* **Deterministic Hydration**: Zero layout shift, zero server/client mismatch.
+* **Production Build**: `npm run build` — **PASS. 53 app-router paths (45 static + 8 dynamic)**, measured from `.next/app-path-routes-manifest.json` and `.next/routes-manifest.json` on 8 Oct 2026. **SYSTEM_AUDIT.md §61:** this line previously claimed `56 static and dynamic routes compiled successfully in 9.2s`, which contradicted `62 routes, Turbopack, 2.6s` in `BITS-FULL-MARKETING-AUDIT.md`. Both were stale — neither reproduced. **Build duration is not quoted at all**, because build time is not a stable property and quoting it is what let the figures drift apart in the first place.
+* **Accessibility**: Keyboard-navigable tablists (`ArrowRight`, `ArrowLeft`) and 44px tap targets are implemented and covered by `npm run test:keyboard` / `npm run test:responsive`. The stronger "high-contrast text ratios exceeding WCAG AA" claim is enforced by `lib/security/contrast-check.mjs` rather than asserted here.
+* **Deterministic Hydration**: ⚠ unverified. No measurement artifact is stored in the repository.

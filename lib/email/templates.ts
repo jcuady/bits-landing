@@ -59,14 +59,10 @@ export interface EmailOutput {
   html: string;
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
+/* §96 — was a private copy here. One implementation, shared; see
+ * lib/html-escape.ts. A second copy of a security primitive is one copy plus a
+ * copy nobody reads. */
+import { escapeHtml } from "../html-escape.ts";
 
 const BRAND = {
   name: "Boundless IT Solutions (BITS)",

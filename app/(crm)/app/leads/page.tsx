@@ -174,13 +174,13 @@ export default function LeadsPage() {
                 <div className="flex items-center gap-1.5">
                   <StatusBadge status={r.status} />
                   <select
+                    aria-label={`Change status for ${r.name}`}
                     value={r.status}
                     onChange={(e) => {
                       updateLeadStatus(r.id, e.target.value as LeadStatus);
                       showToast(`Status updated to ${e.target.value}.`);
                     }}
                     className="h-6 rounded border border-border bg-card px-1 text-[0.65rem] text-muted-foreground outline-none cursor-pointer"
-                    aria-label={`Change status for ${r.name}`}
                   >
                     <option value="new">New</option>
                     <option value="working">Working</option>
@@ -205,10 +205,22 @@ export default function LeadsPage() {
                     type="button"
                     onClick={() => {
                       updateLeadStatus(r.id, "working");
-                      showToast(`Dialing ${r.name} via WebRTC softphone.`);
+                      /* SYSTEM_AUDIT.md §77 — this read "Dialing ${r.name} via
+                       * WebRTC softphone." Nothing dials. The handler changes a
+                       * status field and there is no telephony in this build —
+                       * no RTCPeerConnection, getUserMedia or SDP handling
+                       * anywhere in 161 source files.
+                       *
+                       * This one matters more than a marketing claim: it is
+                       * BEHIND THE LOGIN, so it is the product reporting false
+                       * state about itself to a paying customer, and it is the
+                       * most convincing possible lie — a toast that fires the
+                       * instant a button with a phone icon is clicked. */
+                      showToast(`${r.name} set to Working. No call placed — this build ships no telephony.`);
                     }}
                     className="p-1.5 text-muted-foreground hover:text-[#1975f2] rounded-lg hover:bg-muted transition-colors cursor-pointer"
-                    title="Call Lead"
+                    aria-label={`Set ${r.name} to working`}
+                    title={`Set ${r.name} to working`}
                   >
                     <PhoneCall className="size-3.5" />
                   </button>
@@ -219,7 +231,8 @@ export default function LeadsPage() {
                       showToast(`Lead ${r.name} removed.`, "info");
                     }}
                     className="p-1.5 text-muted-foreground hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
-                    title="Delete Lead"
+                    aria-label={`Delete ${r.name}`}
+                    title={`Delete ${r.name}`}
                   >
                     <Trash2 className="size-3.5" />
                   </button>
@@ -241,10 +254,14 @@ export default function LeadsPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-name"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Full Name *
               </label>
               <Input
+                id="lead-name"
                 required
                 type="text"
                 placeholder="e.g. Atty. Rafael Dizon"
@@ -255,10 +272,14 @@ export default function LeadsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-email"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Email Address *
               </label>
               <Input
+                id="lead-email"
                 required
                 type="email"
                 placeholder="e.g. r.dizon@eastwestcredit.ph"
@@ -271,10 +292,14 @@ export default function LeadsPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-company"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Company / Institution *
               </label>
               <Input
+                id="lead-company"
                 required
                 type="text"
                 placeholder="e.g. EastWest Credit Corp"
@@ -285,10 +310,14 @@ export default function LeadsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-title"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Designation / Title
               </label>
               <Input
+                id="lead-title"
                 type="text"
                 placeholder="e.g. VP Legal & Collections"
                 value={formData.title}
@@ -300,10 +329,14 @@ export default function LeadsPage() {
 
           <div className="grid gap-3 sm:grid-cols-3">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-source"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Source Channel
               </label>
               <select
+                id="lead-source"
                 value={formData.source}
                 onChange={(e) => setFormData({ ...formData, source: e.target.value })}
                 className="h-9 w-full rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] cursor-pointer"
@@ -317,10 +350,14 @@ export default function LeadsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-score"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Lead Score (1-100)
               </label>
               <Input
+                id="lead-score"
                 type="number"
                 min={1}
                 max={100}
@@ -331,10 +368,14 @@ export default function LeadsPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="lead-status"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Initial Status
               </label>
               <select
+                id="lead-status"
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value as LeadStatus })}
                 className="h-9 w-full rounded-xl border border-border bg-card px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900 cursor-pointer"
@@ -348,12 +389,16 @@ export default function LeadsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-foreground mb-1">
+            <label
+              htmlFor="lead-notes"
+              className="block text-xs font-semibold text-foreground mb-1"
+            >
               Requirements &amp; Technical Notes
             </label>
             <Textarea
+              id="lead-notes"
               rows={3}
-              placeholder="e.g. 150 floor seats requirement, WebRTC softphone integration, BSP 454 compliance..."
+              placeholder="e.g. 150 floor seats, data residency constraints, integration requirements, target go-live date..."
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               className="w-full rounded-xl border border-white/40 bg-white/50 backdrop-blur-md shadow-[inset_0_1px_4px_rgba(255,255,255,0.6)] p-3 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-white/10 dark:bg-black/30 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"

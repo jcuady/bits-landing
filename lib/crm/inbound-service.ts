@@ -83,6 +83,10 @@ export async function getStoredInboundLeads(): Promise<InboundFormSubmission[]> 
 /**
  * Record a new inbound lead from a website form submission.
  * Inserts into `inbound_leads` via service role (no RLS bypass needed on server).
+ *
+ * THROWS on failure. This is a revenue path: a silent in-memory fallback would
+ * let the caller report "thank you" for a lead that was never stored and can
+ * never be followed up. Callers must handle the error and surface it.
  */
 export async function recordInboundLead(data: {
   name: string;
@@ -132,27 +136,10 @@ export async function recordInboundLead(data: {
     .single();
 
   if (error) {
+    // Rethrow so the caller can surface a real failure instead of silently
+    // dropping a qualified lead. See the doc comment above.
     console.error("[inbound-service] recordInboundLead error:", error.message);
-    // Return an in-memory fallback so the caller always gets a valid object
-    return {
-      id: `lead-local-${Date.now()}`,
-      name: data.name,
-      email: data.email,
-      company: data.company,
-      companySize: row.company_size,
-      industry: row.industry,
-      currentSystem: row.current_system,
-      primaryChallenge: row.primary_challenge,
-      preferredMethod: row.preferred_method,
-      interest: row.interest,
-      message: data.message,
-      source: row.source,
-      submittedAt: new Date().toISOString(),
-      leadScore: score,
-      status: "new",
-      assignedTo: row.assigned_to,
-      estimatedValue: estimatedValue,
-    };
+    throw new Error(`Failed to persist inbound lead: ${error.message}`);
   }
 
   return rowToSubmission(inserted);
@@ -181,6 +168,28 @@ function rowToSubmission(row: Record<string, unknown>): InboundFormSubmission {
   };
 }
 
+/**
+ * Stable, collision-resistant id derived from a submission's own identity.
+ *
+ * This MUST NOT be the array index. `mapInboundLeadsToCrm` is re-run on every
+ * `/api/crm/leads` fetch, and the store prepends newly-arrived leads to the
+ * front of the array. With index-derived ids (`co-inbound-${idx + 1}`), one
+ * new inbound lead shifted every existing company, contact and opportunity onto
+ * a different id, so the store's "merge anything whose id I don't have" logic
+ * duplicated the entire CRM on each new submission. Deriving the id from the
+ * entity itself makes the mapping idempotent.
+ */
+function stableId(prefix: string, ...parts: string[]): string {
+  const seed = parts.map((p) => p.trim().toLowerCase()).join("|");
+  // FNV-1a, 32-bit. Deterministic across runs and platforms.
+  let h = 0x811c9dc5;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return `${prefix}-${h.toString(36)}`;
+}
+
 /** Convert Supabase-backed submissions to standard CRM types */
 export function mapInboundLeadsToCrm(submissions: InboundFormSubmission[]): {
   leads: Lead[];
@@ -203,8 +212,8 @@ export function mapInboundLeadsToCrm(submissions: InboundFormSubmission[]): {
     notes: `Industry: ${sub.industry ?? "Enterprise"} · Challenge: ${sub.primaryChallenge ?? "N/A"}\nMessage: ${sub.message}`,
   }));
 
-  const companies: Company[] = submissions.map((sub, idx) => ({
-    id: `co-inbound-${idx + 1}`,
+  const companies: Company[] = submissions.map((sub) => ({
+    id: stableId("co", sub.company, sub.email.split("@")[1] ?? ""),
     name: sub.company,
     domain: sub.email.split("@")[1] ?? "client.ph",
     industry: sub.industry ?? "Enterprise",
@@ -215,19 +224,27 @@ export function mapInboundLeadsToCrm(submissions: InboundFormSubmission[]): {
     location: "Metro Manila, Philippines",
   }));
 
-  const contacts: Contact[] = submissions.map((sub, idx) => ({
-    id: `ct-inbound-${idx + 1}`,
+  const contacts: Contact[] = submissions.map((sub) => ({
+    id: stableId("ct", sub.email),
     name: sub.name,
     email: sub.email,
-    phone: `+63 9${Math.floor(10000000 + Math.random() * 90000000)}`,
+    /**
+     * The website contact form does not collect a phone number, so there is no
+     * honest value to derive. This used to be `+63 9${random()}`, which meant
+     * every inbound contact was given an invented Philippine mobile that
+     * CHANGED on every page load. An empty string is correct: the rep fills it
+     * in on first contact. Fabricating a number that mutates is worse than
+     * having none.
+     */
+    phone: "",
     title: sub.industry ? `${sub.industry} Lead` : "Executive Contact",
-    companyId: `co-inbound-${idx + 1}`,
+    companyId: stableId("co", sub.company, sub.email.split("@")[1] ?? ""),
     owner: sub.assignedTo,
     lastTouchAt: sub.submittedAt,
     tags: ["website-inbound", "high-intent"],
   }));
 
-  const opportunities: Opportunity[] = submissions.map((sub, idx) => {
+  const opportunities: Opportunity[] = submissions.map((sub) => {
     const stage =
       sub.status === "qualified"
         ? "proposal"
@@ -236,14 +253,23 @@ export function mapInboundLeadsToCrm(submissions: InboundFormSubmission[]): {
         : "discovery";
 
     return {
-      id: `op-inbound-${idx + 1}`,
+      id: stableId("op", sub.id || sub.email),
       name: `${sub.company} — ${sub.interest ?? "BITScrm Enterprise"}`,
-      companyId: `co-inbound-${idx + 1}`,
-      contactId: `ct-inbound-${idx + 1}`,
+      companyId: stableId("co", sub.company, sub.email.split("@")[1] ?? ""),
+      contactId: stableId("ct", sub.email),
       stage: stage as Opportunity["stage"],
       amount: sub.estimatedValue,
       probability: sub.leadScore >= 90 ? 70 : 45,
-      closeDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString().split("T")[0]!,
+      /**
+       * Anchored to the submission date, not `Date.now()`. Using the wall clock
+       * meant every re-fetch moved every close date forward, so a quoted close
+       * date could not stay still.
+       */
+      closeDate: new Date(
+        new Date(sub.submittedAt).getTime() + 1000 * 60 * 60 * 24 * 30
+      )
+        .toISOString()
+        .slice(0, 10),
       owner: sub.assignedTo,
       pipelineId: "pl-1",
     };

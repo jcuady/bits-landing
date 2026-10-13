@@ -1,7 +1,17 @@
 # BITS Landing Page Redesign — Documentation
 
+> **SYSTEM_AUDIT.md §61 — corrected against the code.**
+>
+> The section table below listed **seven components that have never existed in this
+> repository**: `problem.tsx`, `features-grid.tsx`, `solutions.tsx`,
+> `ai-agents-showcase.tsx`, `why-bits.tsx`, `process.tsx` and `cta-banner.tsx`.
+> `features-grid.tsx`, `ai-agents-showcase.tsx` and `cta-banner.tsx` were described
+> under a heading reading **"New Components Created"** — a past-tense claim of work
+> done. The table has been rewritten to the fourteen sections that actually render,
+> read from `app/(marketing)/page.tsx`.
+
 ## Date: 2026-09-16
-## Version: 2.0
+## Version: 2.1 (corrected)
 
 ---
 
@@ -11,46 +21,55 @@ Complete redesign of the BITS landing page from a functional B2B SaaS page to a 
 
 ---
 
-## Section Architecture (Conversion Funnel)
+## Section Architecture (Conversion Funnel) — as actually rendered
+
+Verified against the imports in `app/(marketing)/page.tsx`, in render order.
+`components/sections/` holds 21 files; 14 of them are used on this page.
 
 | # | Section | Component | Purpose |
 |---|---------|-----------|---------|
 | 1 | Hero | `hero.tsx` | Hook with social proof + dual CTA |
 | 2 | Trust Strip | `trust-strip.tsx` | Partner logos credibility |
-| 3 | Stats Strip | `stats-strip.tsx` | Quantified social proof (5K+, 120K+, 24/7) |
-| 4 | Problem | `problem.tsx` | Pain amplification (before/after) |
-| 5 | Features Grid | `features-grid.tsx` | 6-card capability overview |
-| 6 | Solutions | `solutions.tsx` | Detailed feature deep-dives |
-| 7 | Product Showcase | `product-showcase.tsx` | Interactive role-based tabs |
-| 8 | AI Agents | `ai-agents-showcase.tsx` | AI product showcase |
-| 9 | Pricing | `pricing.tsx` | 3-tier pricing cards |
-| 10 | Why BITS | `why-bits.tsx` | Modular differentiation |
-| 11 | Security | `security.tsx` | Operational controls |
-| 12 | Process | `process.tsx` | How it works (5 steps) |
-| 13 | CTA Banner | `cta-banner.tsx` | Free trial urgency |
+| 3 | Product Families | `product-families.tsx` | Route visitors to the right product line |
+| 4 | Solution Finder | `solution-finder.tsx` | Interactive "which product fits" path |
+| 5 | Stats Strip | `stats-strip.tsx` | Quantified social proof |
+| 6 | The Difference | `the-difference.tsx` | Modular differentiation |
+| 7 | Features Hero | `features-hero.tsx` | Capability overview |
+| 8 | Floor Showcase | `floor-showcase.tsx` | Operations-floor visualisation |
+| 9 | Industries | `industries.tsx` | Vertical segmentation |
+| 10 | Security | `security.tsx` | Operational controls |
+| 11 | Deployment Models | `deployment-models.tsx` | Cloud / on-prem comparison |
+| 12 | Pricing | `pricing.tsx` | 3-tier pricing cards |
+| 13 | FAQ | `faq.tsx` | Objection handling |
 | 14 | Contact | `contact.tsx` | Demo request form |
+
+**Never built, and removed from this table:** `problem.tsx`, `features-grid.tsx`,
+`solutions.tsx`, `ai-agents-showcase.tsx`, `why-bits.tsx`, `process.tsx`,
+`cta-banner.tsx`. If any of these is wanted, it has to be written — the copy above
+should not be read as a record that it was.
 
 ---
 
 ## New Components Created
 
-### `components/sections/stats-strip.tsx`
+### `components/sections/stats-strip.tsx` ✅ exists
 Social proof with animated counters. Shows 3 stat cards with icon backgrounds and counter animation on scroll.
 
-### `components/sections/pricing.tsx`
+### `components/sections/pricing.tsx` ✅ exists
 3-tier pricing layout (Starter / Professional / Enterprise). Professional has "Most Popular" badge. All use "Custom" pricing per business requirements (no public prices).
 
-### `components/sections/features-grid.tsx`
-6-card grid covering: Portfolio Management, Workflow Engine, Customer Engagement, Live Supervision, Quality Assurance, Reporting & Analytics.
-
-### `components/sections/ai-agents-showcase.tsx`
-Dark-themed section showcasing 4 AI agents with status badges (Active/Beta), performance metrics, and a live activity feed specimen.
-
-### `components/sections/cta-banner.tsx`
-Full-width CTA with dark gradient background, decorative grid/glow effects, and dual CTAs.
-
-### `components/layout/sticky-mobile-cta.tsx`
+### `components/layout/sticky-mobile-cta.tsx` ✅ exists
 Floating "Request a Demo" button on mobile devices that appears after scrolling past the hero (600px threshold).
+
+### `components/sections/features-grid.tsx` ❌ does not exist
+Never created. `features-hero.tsx` occupies that position on the live page.
+
+### `components/sections/ai-agents-showcase.tsx` ❌ does not exist
+Never created. The AI agent surface is served by `bits-agent-page-content.tsx` and
+`bits-agent-call.tsx` on the `/bitsagent` route, not by a homepage section.
+
+### `components/sections/cta-banner.tsx` ❌ does not exist
+Never created.
 
 ---
 

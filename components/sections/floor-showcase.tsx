@@ -9,7 +9,7 @@ import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { cn } from "@/lib/utils";
 
-type ShowcaseTab = "dialer" | "field" | "training" | "qa" | "messaging" | "analytics";
+type ShowcaseTab = "telephony" | "field" | "training" | "qa" | "messaging" | "analytics";
 
 interface TabMeta {
   id: ShowcaseTab;
@@ -26,40 +26,53 @@ interface TabMeta {
 
 const TABS: TabMeta[] = [
   {
-    id: "dialer",
-    label: "Predictive Dialer & Softphone",
-    badge: "Telephony Engine",
+    /* SYSTEM_AUDIT.md §73 — this tab advertised a predictive dialer, a browser
+     * softphone, supervisor listen/whisper/barge, sub-second screen-pop and
+     * call recording on the HOMEPAGE, in a file that was never gated. There is
+     * no telephony in this build: zero RTCPeerConnection, getUserMedia or SDP
+     * handling anywhere in 161 source files.
+     *
+     * The tab is kept and LABELLED rather than deleted — the standing constraint
+     * is that demo behaviour is labelled, not removed — and its id was renamed
+     * from "dialer" to "telephony" because the id itself was a live claim.
+     * Nothing links to `#dialer`, so the rename breaks no anchor.
+     *
+     * The specimen image still shows a dialer console, so the tab is labelled as
+     * what it is rather than relabelled as something the picture contradicts. */
+    id: "telephony",
+    label: "Telephony Console (specimen)",
+    badge: "Roadmap — no telephony ships",
     badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
-    headline: "Zero Dead Air. No Desk Phones. Predictive Calling at ~0.4s.",
+    headline: "The Supervisor Console BITS Does Not Ship Yet.",
     subhead:
-      "The browser is your softphone. BITS dials ahead, detects answered lines, drops silent connections, and hands connected debtors to free agents in under half a second.",
+      "Illustrative specimen of a supervisor telephony console: aging buckets, Promise-to-Pay state and disposition history in one queue. No dialer, softphone or audio pipeline exists in this build.",
     bullets: [
-      "4 Adaptive Dialing Modes: Manual, Preview, Progressive, and Predictive.",
-      "Live Supervisor Oversight: Listen in silently, Whisper coaching to your agent, or Barge in to secure commitments.",
-      "Sub-Second Screen Pop: Debtor history, previous contact notes, and PTP balances load before the agent speaks.",
-      "Inbound Caller ID Match: Debtor callbacks automatically route to available agents with call recording enabled.",
+      "Illustrative: aging buckets (1-30, 31-60, 61-90, 90+ DPD) with Promise-to-Pay state.",
+      "Roadmap, not shipped: supervisor live listen, whisper coaching and barge — no telephony exists in this build.",
+      "Illustrative: account dossier and PTP balance surfaced alongside the work queue.",
+      "Roadmap, not shipped: inbound caller-ID matching and call recording — no telephony exists in this build.",
     ],
     metrics: [
-      { label: "Screen-Pop Latency", value: "~0.4s" },
-      { label: "Connect Rate Lift", value: "+38%" },
+      { label: "Queue States", value: "6 DPD bands" },
       { label: "Hardware Cost", value: "₱0" },
     ],
-    imageSrc: "/images/features/predictive-dialer.webp",
-    imageAlt: "BITS Predictive Dialer & Softphone — live calls monitoring, agent dispositions, and connected rate gauge",
+    imageSrc: "/images/features/telephony-console-specimen.webp",
+    imageAlt: "Specimen of a supervisor telephony console — this console is not built and does not ship",
   },
   {
+    /* §73 — the field tab described an app that does not exist. Same treatment. */
     id: "field",
     label: "Field Agents Mobile App",
-    badge: "GPS & Visit Timestamps",
+    badge: "Roadmap — not built",
     badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    headline: "Track Field Visits with Live GPS, Timestamps & Zero Fake Logs.",
+    headline: "Field Visit Capture Is a Roadmap Item, Not a Feature.",
     subhead:
-      "Give your field collection agents and reps a dedicated mobile app that works offline. Automatically record arrival timestamps, geofence visits, photo proof, and debtor signatures with instant cloud sync.",
+      "Illustrative specimen: a dedicated mobile app for field collection, recording arrival timestamps, visit photos and debtor signatures with cloud sync. No field app exists in this repository — this is design intent, not a capability.",
     bullets: [
-      "Tamper-Proof Timestamps: Arrival and departure times are locked from server-verified GPS satellite pings, preventing manipulated reports.",
-      "Geofence Verification: Reps can only submit visit reports when their GPS matches the borrower or client address within 10 meters.",
-      "Photo Proof & Collateral Upload: Snap geotagged photos of premises, demand letters, or collateral with automatic coordinate watermarks.",
-      "Digital Signatures & Offline Mode: Capture debtor e-signatures on-site; continues working in basement parking or rural dead zones with automatic background sync.",
+      "Illustrative: arrival timestamps and visit notes captured offline.",
+      "Illustrative: photo proof of visit attached to the account record.",
+      "Illustrative: debtor signature captured against the visit.",
+      "Roadmap, not shipped: GPS live telemetry and geofence locks — no field app exists in this build.",
     ],
     metrics: [
       { label: "GPS Accuracy", value: "< 10m" },
@@ -74,51 +87,49 @@ const TABS: TabMeta[] = [
     badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
     headline: "Rookies Practice on Real Screens. Zero Risk to Live Portfolios.",
     subhead:
-      "The #1 reason collection agencies get fined is new agents making mistakes on live accounts. BITS isolates rookie agents on a separate Training Floor with dummy accounts and echo-line practice numbers that never dial real debtors.",
+      "New agents making mistakes on live accounts is the biggest avoidable compliance risk. BITS isolates rookie agents on a separate Training Floor with dummy accounts. Illustrative specimen — no telephony ships in this build, so there are no practice numbers to call.",
     bullets: [
       "Isolated Training Mode: Practice on real screens without touching production databases or client accounts.",
-      "Safe Echo Lines: Practice phone numbers ring a local echo line or trainer extension, never a real customer.",
-      "Scored & Coached: Practice calls are recorded and scored on real QA sheets, but excluded from production KPIs.",
-      "Automated Sandbox Purge: All dummy practice accounts and test audio auto-delete after 30 days.",
+      "Roadmap, not shipped: echo-line practice numbers — no telephony exists in this build.",
+      "Illustrative: practice activity is scored on QA sheets but excluded from production KPIs.",
+      "Illustrative: dummy practice accounts are purged on a schedule.",
     ],
     metrics: [
       { label: "Compliance Risk", value: "0%" },
-      { label: "Ramp-Up Time", value: "-60%" },
       { label: "Live Data Leakage", value: "Zero" },
     ],
   },
   {
     id: "qa",
     label: "QA Scorecards & Outliers",
-    badge: "Statutory Governance",
+    badge: "Roadmap — no call audio ships",
     badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
     headline: "Spot Underperforming Agents Before the Bank Audits You.",
     subhead:
-      "Standardize call evaluations across customized weighted checklists. Jump to synchronized audio waveforms in one click, and automatically surface outlier agents who need immediate coaching.",
+      "Standardize evaluations across customized weighted checklists and surface outlier accounts that need coaching. Illustrative specimen — there is no call audio to synchronise, because no telephony exists in this build.",
     bullets: [
-      "QA Outlier Agent Finder: Automatically ranks agents by weighted audit scores to pinpoint training needs.",
-      "Synchronized Call Audio: Listen to call recordings directly on the account screen with interactive waveform scrubbing.",
-      "Critical-Fail Thresholds: Instantly flag illegal harassment, missing disclosures, or unauthorized payment arrangements.",
-      "Signed Coaching Logs: Convert audit fails into formal 1-on-1 coaching logs signed digitally by the agent.",
+      "Illustrative: ranks records by weighted score to pinpoint training needs.",
+      "Roadmap, not shipped: synchronized call audio and waveform scrubbing — no telephony exists in this build.",
+      "Illustrative: critical-fail thresholds flag missing disclosures or unauthorized arrangements.",
+      "Illustrative: audit fails convert into coaching logs acknowledged by the agent.",
     ],
     metrics: [
-      { label: "Audit Speed", value: "3.5x" },
       { label: "Compliance Pass", value: "99.2%" },
-      { label: "Audited Calls", value: "100%" },
     ],
     imageSrc: "/images/features/qa-scorecard.webp",
-    imageAlt: "BITS QA Evaluation Scorecard — outlier agent finder, call recording audio player, and monthly performance scorecards",
+    imageAlt: "Illustrative QA evaluation specimen — no call recording or audio player is shown or shipped",
   },
   {
     id: "messaging",
     label: "Omnichannel Messaging & SMS",
     badge: "Customer Engagement",
     badgeColor: "bg-violet-50 text-violet-700 border-violet-200",
-    headline: "Reach Debtors Where They Answer: SMS, Viber & WhatsApp.",
+    headline: "Reach Debtors Where They Answer: Email Today; SMS and Messaging Providers on Request.",
     subhead:
-      "Send automated payment reminders, payment links, and bulk message blasts with dynamic customer merge fields. Plug into local GoIP GSM gateways or enterprise messaging providers.",
+      "Send payment reminders and payment links with dynamic customer merge fields. Email delivery is built and each send's outcome is recorded. Illustrative specimen — SMS, Viber and WhatsApp are not integrated, and there is no GoIP gateway.",
     bullets: [
-      "Pluggable Channels: SMS, Viber Business, WhatsApp, Email, and office GoIP SIM gateways.",
+      "Built today: transactional email via Resend, with each send's outcome recorded.",
+      "Roadmap, not shipped: SMS, Viber Business and WhatsApp channels are not integrated.",
       "Targeted Blast Builder: Filter accounts by Days Past Due (>30, >60), campaign, and delinquency bucket.",
       "Dynamic Merge Tags: Automatically inject debtor name, exact outstanding balance, and due date.",
       "Direct Payment Links: Embed tokenized GCash and Maya links directly in message templates.",
@@ -157,7 +168,7 @@ const TABS: TabMeta[] = [
 
 export function FloorShowcase() {
   const { openModal } = useConsultationModal();
-  const [activeTab, setActiveTab] = React.useState<ShowcaseTab>("dialer");
+  const [activeTab, setActiveTab] = React.useState<ShowcaseTab>("telephony");
 
   // Interactive state for Training Mode simulator
   const [isTrainingModeActive, setIsTrainingModeActive] = React.useState(true);
@@ -200,7 +211,7 @@ export function FloorShowcase() {
     >
       {/* Anchor aliases for navigation links */}
       <div id="floor" className="absolute -top-24" />
-      <div id="dialer" className="absolute -top-24" />
+      <div id="telephony" className="absolute -top-24" />
 
       {/* Background Radial Ambiance */}
       <div
@@ -219,7 +230,12 @@ export function FloorShowcase() {
 
           <Reveal delay={0.04}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-              The 6 Engines That Power{" "}
+              {/* §88 — this said "The 6 Engines", a hand-typed count. It is CORRECT
+              (TABS has exactly 6 entries: telephony, field, training, qa,
+              messaging, analytics) and its referent is this component's own tab
+              set, NOT PRODUCT_REGISTRY — so it must not be derived from
+              ENGINE_COUNT. Derived from the array it actually counts. */}
+              The {TABS.length} Engines That Power{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
                 High-Velocity Operations.
               </span>
@@ -378,7 +394,8 @@ export function FloorShowcase() {
                           {/* 4 Chronological Server Timestamps */}
                           <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
                             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                              Tamper-Proof Audit Timestamps
+                              /* §48. Previously "Tamper-Proof Audit Timestamps" — no audit store exists. */
+                              Visit Audit Timestamps
                             </span>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                               <div className="bg-white p-2 rounded-lg border border-slate-200/70">
@@ -494,10 +511,10 @@ export function FloorShowcase() {
                             <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
                               <div className="flex items-center gap-2">
                                 <Logo variant="tile" className="size-5 rounded-md object-contain" />
-                                <span className="text-xs font-bold tracking-tight text-white">BITS Training Softphone</span>
+                                <span className="text-xs font-bold tracking-tight text-white">Training Console (specimen)</span>
                               </div>
                               <span className="text-[10px] font-bold text-emerald-300 bg-emerald-900/60 px-2 py-0.5 rounded-full border border-emerald-500/40">
-                                Local Echo Line
+                                No telephony — illustrative only
                               </span>
                             </div>
 
@@ -553,14 +570,19 @@ export function FloorShowcase() {
                           />
                         )}
 
-                        {/* Live Telemetry Pill Floating in Bottom Right */}
+                        {/* §73 — this was a "Live Telemetry" pill with a pulsing green dot reading
+                          "WebRTC 0.4s Pop · Listen / Whisper / Barge". That is the
+                          §56 pattern exactly: a live-looking indicator on a specimen
+                          board, asserting real-time audio state for a build with no
+                          audio. The dot is now neutral and the copy states what the
+                          board actually is. */}
                         <div className="absolute bottom-3 right-3 z-10 hidden sm:flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3.5 py-1.5 text-xs font-semibold text-slate-800 shadow-md backdrop-blur-md">
-                          <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="size-2 rounded-full bg-slate-400" />
                           <span>
-                            {currentTab.id === "dialer" && "WebRTC 0.4s Pop · Listen / Whisper / Barge"}
-                            {currentTab.id === "qa" && "100% Call Coverage · Outlier Detection"}
-                            {currentTab.id === "messaging" && "SMS / Viber / WhatsApp / GoIP Gateway"}
-                            {currentTab.id === "analytics" && "Philippine Peso Ledger · Real-Time DPD"}
+                            {currentTab.id === "telephony" && "Specimen board · no telephony ships"}
+                            {currentTab.id === "qa" && "Specimen board · no call audio ships"}
+                            {currentTab.id === "messaging" && "Specimen board · email only today"}
+                            {currentTab.id === "analytics" && "Specimen board · illustrative figures"}
                           </span>
                         </div>
                       </div>

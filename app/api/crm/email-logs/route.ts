@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
+import { requireCrmUser } from "@/lib/crm/api-auth";
+import { noStoreHeaders } from "@/lib/crm/api-contract";
 
 export interface EmailLogRecord {
   id: string;
@@ -15,8 +17,16 @@ export interface EmailLogRecord {
   sent_at: string;
 }
 
-/** GET /api/crm/email-logs — returns recent email delivery logs */
+/**
+ * GET /api/crm/email-logs — returns recent email delivery logs.
+ *
+ * Authenticated CRM users only. This endpoint exposes recipient, sender, and
+ * subject PII, so it must never be reachable anonymously.
+ */
 export async function GET() {
+  const auth = await requireCrmUser();
+  if (auth instanceof NextResponse) return auth;
+
   try {
     const supabase = await createServiceClient();
     const { data, error } = await supabase
@@ -27,12 +37,24 @@ export async function GET() {
 
     if (error) {
       console.error("[api/crm/email-logs] Supabase query error:", error.message);
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: "Failed to load email logs" },
+        { status: 500, headers: noStoreHeaders() }
+      );
     }
 
-    return NextResponse.json({ ok: true, logs: data ?? [] });
+    // Recipient, sender and subject are PII. Without an explicit no-store this
+    // response is eligible for heuristic caching by browsers and shared proxies,
+    // which would leak somebody's correspondence off the session it belongs to.
+    return NextResponse.json(
+      { ok: true, logs: data ?? [] },
+      { headers: noStoreHeaders() }
+    );
   } catch (err) {
     console.error("[api/crm/email-logs] Unexpected error:", err);
-    return NextResponse.json({ ok: false, error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: "Internal server error" },
+      { status: 500, headers: noStoreHeaders() }
+    );
   }
 }

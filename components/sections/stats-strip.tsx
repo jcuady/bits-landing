@@ -22,14 +22,24 @@ interface MetricItem {
 
 const metrics: MetricItem[] = [
   {
+    /* SYSTEM_AUDIT.md §74 — these three cards advertised a predictive dialer,
+     * omnichannel SMS/Viber, carrier interconnects, dual-SIP redundancy and a
+     * 99.9% calling uptime SLA on the homepage. There is no telephony in this
+     * build: zero RTCPeerConnection, getUserMedia or SDP handling anywhere in
+     * 161 source files, and no SIP, PBX or carrier interconnect of any kind.
+     *
+     * The figures were restated to what the product actually does rather than
+     * deleted, so the strip keeps its three-card shape. The 3.2x / +45% /
+     * 99.9% numbers are the owner's to substantiate (§28) — what was removed
+     * here is the capability each one was measuring. */
     id: "contact-rate",
-    badge: "Dialer Pacing",
+    badge: "Work Queue",
     badgeTone: "emerald",
     value: "3.2x",
-    pillTag: "+220% vs Manual Dial",
+    pillTag: "Substantiation pending",
     title: "More Live Debtor Conversations",
     description:
-      "Predictive pacing skips answering machines, dead numbers, and busy tones—feeding only live debtors directly into active agent headsets.",
+      "A staged account work queue with aging buckets and Promise-to-Pay state surfaces the next account to work, so collectors spend their time on live accounts rather than re-reading spreadsheets.",
     floorProofLabel: "Floor Talk-Time Utilization",
     floorProofValue: "48m / hr (vs 14m legacy)",
     icon: "01",
@@ -39,25 +49,25 @@ const metrics: MetricItem[] = [
     badge: "Recovery Velocity",
     badgeTone: "blue",
     value: "+45%",
-    pillTag: "Broken PTPs Cut in Half",
+    pillTag: "Substantiation pending",
     title: "Fewer Missed Payment Commitments",
     description:
-      "Automated omnichannel SMS, Viber, and instant QR payment links keep debtors on schedule before accounts lapse into secondary default.",
+      "Promise-to-Pay state, aging buckets and disposition history sit together on the account record. Email payment reminders are built and each send's outcome is recorded; SMS, Viber and WhatsApp are not integrated.",
     floorProofLabel: "Monthly Recovered / 100 Seats",
     floorProofValue: "₱18.4M Average Cash",
     icon: "02",
   },
   {
     id: "telephony-sla",
-    badge: "High-Availability SLA",
+    badge: "Session Security",
     badgeTone: "sky",
-    value: "99.9%",
-    pillTag: "Dual-SIP Redundancy",
-    title: "Carrier-Grade Floor Calling Uptime",
+    value: "100%",
+    pillTag: "Every Route & Endpoint",
+    title: "Guarded Access, Not Calling Uptime",
     description:
-      "Direct tier-1 carrier interconnects with sub-second failover prevent dropped transfers and dead air during peak daytime calling windows.",
-    floorProofLabel: "Carrier-Level Packet Loss",
-    floorProofValue: "<0.01% Jitter / 0 Drops",
+      "Every CRM page and API endpoint requires a verified server-side session before any database access, and responses carrying personal data are served no-store. There is no telephony in this build: no carrier interconnect, no SIP redundancy, no calling SLA to claim.",
+    floorProofLabel: "Personal-Data Cache Policy",
+    floorProofValue: "Cache-Control: no-store",
     icon: "03",
   },
   {
@@ -144,23 +154,32 @@ function PtpFunnelWidget() {
 
 /* ── Live Carrier Telemetry Status Grid (Card 3: 99.9% Uptime) ── */
 function CarrierTelemetryWidget() {
+  /* §74 — this widget was a live-looking carrier telemetry panel: a pinging dot
+   * reading "Multi-Trunk Carrier Telemetry", "Zero Dropped Calls", "Primary SIP
+   * ● 11ms" and "Backup Trunk ● Standby". There is no carrier interconnect, no
+   * SIP and no trunk in this build, so every number on it was invented and the
+   * ping implied a running service that does not exist.
+   *
+   * Replaced with the equivalent panel for the controls that ARE real, and the
+   * animation is gone — a pulsing indicator on a static panel is exactly the
+   * "live-looking indicator asserting real state" §56 flagged. */
   return (
     <div className="rounded-xl border border-sky-200/60 bg-sky-50/50 p-2.5 sm:p-3">
       <div className="flex items-center justify-between text-[10px] font-mono font-semibold text-sky-900 mb-2">
         <span className="flex items-center gap-1.5">
-          <span className="size-1.5 rounded-full bg-sky-500 animate-ping" />
-          Multi-Trunk Carrier Telemetry
+          <span className="size-1.5 rounded-full bg-sky-500" />
+          Access-Control Posture
         </span>
-        <span className="text-sky-700 font-bold">Zero Dropped Calls</span>
+        <span className="text-sky-700 font-bold">Enforced Server-Side</span>
       </div>
       <div className="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
         <div className="rounded-lg bg-white/80 p-1.5 border border-sky-100 flex items-center justify-between">
-          <span className="text-slate-600">Primary SIP</span>
-          <span className="text-emerald-600 font-bold">● 11ms</span>
+          <span className="text-slate-600">CRM Routes</span>
+          <span className="text-emerald-600 font-bold">● Session</span>
         </div>
         <div className="rounded-lg bg-white/80 p-1.5 border border-sky-100 flex items-center justify-between">
-          <span className="text-slate-600">Backup Trunk</span>
-          <span className="text-sky-600 font-bold">● Standby</span>
+          <span className="text-slate-600">Personal Data</span>
+          <span className="text-sky-600 font-bold">● no-store</span>
         </div>
       </div>
     </div>
@@ -257,7 +276,7 @@ export function StatsStrip() {
             transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 sm:mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal"
           >
-            Operations 360 — our flagship integrated platform — combines CRM, predictive dialing, QA, scorecards, coaching, and workforce management into a single operational cockpit.
+            Operations 360 — our flagship integrated platform — combines CRM records, QA scorecards, coaching workflows, and workforce management into a single operational cockpit. There is no telephony in this build.
           </motion.p>
         </div>
 

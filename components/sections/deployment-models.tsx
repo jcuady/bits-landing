@@ -7,6 +7,7 @@ import {
   deploymentModels,
   hardwareScopingTiers,
   scopingProcessSteps,
+  PRODUCT_COUNT,
 } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -50,7 +51,7 @@ export function DeploymentModels() {
               </span>
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-3xl text-pretty text-slate-600 font-normal">
-              Every engine in our 18-product catalog can be run in our secure <strong className="text-slate-900 font-bold">Managed Cloud</strong> with zero hardware needed, or installed directly on <strong className="text-slate-900 font-bold">Your Own Office Servers</strong> for complete privacy and one-time setup ownership.
+              Every engine in our {PRODUCT_COUNT}-product catalog can be run in our secure <strong className="text-slate-900 font-bold">Managed Cloud</strong> with zero hardware needed, or installed directly on <strong className="text-slate-900 font-bold">Your Own Office Servers</strong> for complete privacy and one-time setup ownership.
             </p>
           </Reveal>
 
@@ -266,10 +267,10 @@ export function DeploymentModels() {
                     <span>Multi-Product Modular Architecture</span>
                   </div>
                   <h3 className="mt-2.5 text-xl font-bold tracking-tight text-white sm:text-2xl">
-                    Combine Any of Our 18 Products into a Unified Deployment
+                    Combine Any of Our {PRODUCT_COUNT} Products into a Unified Deployment
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-sky-100/90 leading-relaxed">
-                    Our modular engines share a single database layer, unified event streaming, and role-based permissions. Whether running our high-throughput predictive dialer alongside ERP payroll or deploying a full 18-product sovereign operational suite, there is zero duplicate server footprint and zero custom glue code required.
+                    Our modular engines share a single database layer and one operational record. Whether starting with the collections CRM alongside ERP payroll or deploying a full {PRODUCT_COUNT}-product sovereign operational suite, there is zero duplicate server footprint and zero custom glue code required. Access is gated by a server-side session check; there is no role-based permission matrix in this build.
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
                     <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
@@ -278,7 +279,15 @@ export function DeploymentModels() {
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
                       <span className="font-mono text-emerald-300 font-bold text-[10px]">✓</span>
-                      Centralized SSO &amp; RBAC
+                      {/* SYSTEM_AUDIT.md §50. Was "Centralized SSO & RBAC" behind
+                          a green tick. No SSO or SAML integration exists — the
+                          only occurrences in this codebase are a mock ticket cell
+                          and a mock email subject — and RBAC is not enforced:
+                          requireCrmUser() authenticates a session and never reads
+                          a role, so any signed-in user can read every CRM record.
+                          Both are banned attestations. Replaced with the control
+                          that is real and equally deployable. */}
+                      Session-Gated CRM &amp; RLS
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-2.5 py-1 text-[0.7rem] font-mono text-sky-100 border border-white/20 backdrop-blur-xs">
                       <span className="font-mono text-emerald-300 font-bold text-[10px]">✓</span>
@@ -408,7 +417,6 @@ export function DeploymentModels() {
                       alt=""
                       fill
                       sizes="(max-width: 1200px) 100vw, 1200px"
-                      quality={90}
                       className="object-cover object-center opacity-55 scale-105 select-none"
                     />
                   </div>
@@ -471,7 +479,10 @@ export function DeploymentModels() {
                       Select Contact Center Floor Scale:
                     </span>
                     <span className="font-mono text-[0.75rem] text-white/90 font-semibold bg-white/15 px-2.5 py-0.5 rounded-full border border-white/20 backdrop-blur-sm">
-                      3 Presets Available · Custom Sizing on Demand
+                      {/* §89 — "3 Presets Available" was TRUE (hardwareScopingTiers has exactly 3
+                      entries) but hand-typed, with its referent imported into this
+                      very file. §87 flagged it as "needs checking"; checked. */}
+                      {hardwareScopingTiers.length} Presets Available · Custom Sizing on Demand
                     </span>
                   </div>
 
@@ -561,7 +572,7 @@ export function DeploymentModels() {
                     </div>
                     <div className="flex items-center gap-1.5 font-mono text-[0.7rem] text-sky-200">
                       <span className="font-mono text-[11px] text-amber-300">⚡</span>
-                      <span>QoS &amp; SIP Sizing v4.2</span>
+                      <span>QoS &amp; Session Sizing v4.2</span>
                     </div>
                   </div>
 
@@ -587,7 +598,7 @@ export function DeploymentModels() {
                           {activeScopingTier.cpu}
                         </p>
                         <p className="mt-2 text-xs text-blue-100/90 leading-relaxed font-normal">
-                          Dimensioned for zero-throttle audio encoding, SIP transcoding, and real-time CRM queue routing.
+                          Dimensioned for zero-throttle request handling and real-time CRM queue routing.
                         </p>
                       </div>
 
@@ -660,26 +671,30 @@ export function DeploymentModels() {
                         </p>
                       </div>
 
-                      {/* Telephony Interconnect */}
+                      {/* SYSTEM_AUDIT.md §53. This card was "SIP / Telephony Interconnect / Carrier
+                        Grade" with a `telephony` figure on each tier. There is no
+                        telephony in this build, so the whole card is replaced by
+                        the equivalent data-plane card. */}
                       <div className="group rounded-2xl border border-white/20 bg-white/[0.14] hover:bg-white/[0.22] hover:border-white/45 p-5 backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-amber-500/20 hover:-translate-y-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 text-white">
                             <div className="flex size-8 items-center justify-center rounded-xl bg-white/20 border border-white/30 shadow-xs font-mono text-[10px] font-black text-amber-300">
-                              SIP
+                              DB
                             </div>
                             <span className="text-[0.72rem] font-extrabold uppercase tracking-wider text-sky-100">
-                              Telephony Interconnect
+                              Data Interconnect
                             </span>
                           </div>
                           <span className="rounded-md bg-white/20 px-2 py-0.5 font-mono text-[0.65rem] font-bold text-white border border-white/25">
-                            Carrier Grade
+                            Row-Level Security
                           </span>
                         </div>
                         <p className="mt-3.5 font-mono text-base font-extrabold text-white tracking-tight">
                           {activeScopingTier.telephony}
                         </p>
                         <p className="mt-2 text-xs text-blue-100/90 leading-relaxed font-normal">
-                          Direct integration with local telco SIP providers, legacy E1/PRI gateways, or international SIP carriers.
+                          No telephony integration is part of this build; data access is via REST and server actions,
+                          with row-level security verified against the anon role.
                         </p>
                       </div>
 
@@ -782,7 +797,7 @@ export function DeploymentModels() {
                           <span className="text-[0.72rem] font-semibold text-white mt-0.5 block">
                             {idx === 0 && "Hardware BOM & Server Audit Report"}
                             {idx === 1 && "Capacity & QoS Dimensioning Blueprint"}
-                            {idx === 2 && "Hardened Cluster & SIP Interconnect"}
+                            {idx === 2 && "Hardened Cluster & Session Interconnect"}
                             {idx === 3 && "UAT Sign-off & 24/7 Operations Runbook"}
                           </span>
                         </div>

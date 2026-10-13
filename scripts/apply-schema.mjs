@@ -1,9 +1,33 @@
 #!/usr/bin/env node
 /**
  * scripts/apply-schema.mjs
- * 
+ *
  * Applies the inbound_leads schema to Supabase using the Management API.
- * Run: node scripts/apply-schema.mjs
+ *
+ * ── Safety model (SYSTEM_AUDIT.md §33) ──────────────────────────────────────
+ *
+ * This script runs DDL against a LIVE database. Three defects made that
+ * unguarded, and one of them explained how fabricated rows reached production:
+ *
+ *   1. IT SEEDED PRODUCTION. `await import("./seed-supabase.mjs")` imported a
+ *      module whose top level is an IIFE, so importing it EXECUTED the seed.
+ *      seed-supabase.mjs has no default export, so the very next line printed
+ *      "Run seed separately" — while ten fabricated leads and a demo auth user
+ *      had just been written. The guard was not merely useless, it inverted the
+ *      truth. Seeding is now a separate, explicit command.
+ *
+ *   2. THE PROJECT REF WAS HARDCODED. Pointing SUPABASE_URL at a staging
+ *      project did nothing: the Management API call still went to production.
+ *      The ref is now derived from SUPABASE_URL.
+ *
+ *   3. FAILURES DID NOT STOP THE CHAIN. runSQL returns false on error and every
+ *      call site discarded it, so a failed table creation fell straight through
+ *      to policies and then to the seed.
+ *
+ * Usage:
+ *   node scripts/apply-schema.mjs                 # dry run — prints SQL, writes nothing
+ *   node scripts/apply-schema.mjs --apply         # execute (requires --confirm-project)
+ *   node scripts/seed-supabase.mjs --apply        # seed, separately and explicitly
  */
 
 import { readFileSync } from "fs";
@@ -31,7 +55,47 @@ if (!PAT || !SERVICE_KEY || !SUPABASE_URL) {
   process.exit(1);
 }
 
-const PROJECT_REF = "jvseyttzlobelrnzmfyf";
+/**
+ * Derive the project ref from the configured URL instead of hardcoding it.
+ * https://<ref>.supabase.co -> <ref>
+ */
+const PROJECT_REF = (() => {
+  try {
+    const host = new URL(SUPABASE_URL).hostname;
+    const m = host.match(/^([a-z0-9]+)\.supabase\.(co|in)$/i);
+    if (!m) {
+      console.error(`❌ Cannot derive a project ref from NEXT_PUBLIC_SUPABASE_URL ("${SUPABASE_URL}").`);
+      console.error("   Refusing to guess — a wrong ref is how the wrong database gets written.");
+      process.exit(1);
+    }
+    return m[1];
+  } catch {
+    console.error(`❌ NEXT_PUBLIC_SUPABASE_URL is not a valid URL: "${SUPABASE_URL}"`);
+    process.exit(1);
+  }
+})();
+
+const argv = process.argv.slice(2);
+const APPLY = argv.includes("--apply");
+const confirmIdx = argv.indexOf("--confirm-project");
+const CONFIRMED_REF = confirmIdx === -1 ? null : argv[confirmIdx + 1];
+
+/*
+ * Dry run unless the operator asks otherwise AND names the target project.
+ * Two independent switches, because a destructive flag alone is one typo away
+ * from a production write.
+ */
+if (!APPLY) {
+  console.log(`🔎 DRY RUN — nothing will be written.\n`);
+  console.log(`   Target project : ${PROJECT_REF}   (derived from NEXT_PUBLIC_SUPABASE_URL)`);
+  console.log(`   Source         : scripts/supabase-schema.sql equivalent, inline below\n`);
+} else if (CONFIRMED_REF !== PROJECT_REF) {
+  console.error(`❌ Refusing to apply.`);
+  console.error(`   Target project : ${PROJECT_REF}`);
+  console.error(`   You confirmed  : ${CONFIRMED_REF ?? "(nothing)"}`);
+  console.error(`   Re-run with: --apply --confirm-project ${PROJECT_REF}`);
+  process.exit(1);
+}
 
 const schema = `
 create table if not exists public.inbound_leads (
@@ -108,6 +172,11 @@ end $$;
 `;
 
 async function runSQL(sql, label) {
+  if (!APPLY) {
+    console.log(`🔎 WOULD RUN: ${label}\n---8<---\n${sql.trim()}\n---8<---\n`);
+    return true;
+  }
+
   console.log(`\n⚡ Running: ${label}…`);
   const res = await fetch(`https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query`, {
     method: "POST",
@@ -123,7 +192,7 @@ async function runSQL(sql, label) {
     // If table already exists, that's fine
     if (text.includes("already exists")) {
       console.log(`ℹ️  ${label}: already exists — skipped.`);
-      return;
+      return true;
     }
     console.error(`❌ ${label} failed (${res.status}):`, text);
     return false;
@@ -134,21 +203,41 @@ async function runSQL(sql, label) {
 }
 
 (async () => {
-  console.log("🏗️  Applying BITS CRM schema to Supabase…");
-  
-  await runSQL(schema, "Create inbound_leads table + indexes + trigger");
-  await runSQL(policies, "Create RLS policies");
+  console.log(`🏗️  ${APPLY ? "Applying" : "Dry-running"} BITS CRM schema for project ${PROJECT_REF}…\n`);
 
-  // Apply marketing automations, email logs, and campaigns
-  await import("./apply-marketing-schema.mjs");
-
-  console.log("\n✅ Schema applied. Now seeding data…");
-  
-  // Run seed
-  const { default: seed } = await import("./seed-supabase.mjs").catch(() => ({ default: null }));
-  if (!seed) {
-    console.log("ℹ️  Run seed separately: node scripts/seed-supabase.mjs");
+  // Every result is checked. The old chain discarded them, so one failed
+  // statement let the rest proceed against a schema that was never created.
+  if (!(await runSQL(schema, "Create inbound_leads table + indexes + trigger"))) {
+    console.error("\n❌ Table creation failed. Aborting — no policies, no marketing schema.");
+    process.exit(1);
   }
 
-  console.log("\n🎉 Done! Schema is ready in Supabase.\n");
+  if (!(await runSQL(policies, "Create RLS policies"))) {
+    console.error("\n❌ RLS policy creation failed. Aborting.");
+    process.exit(1);
+  }
+
+  await import("./apply-marketing-schema.mjs");
+
+  console.log(
+    APPLY
+      ? "\n✅ Schema applied to " + PROJECT_REF + "."
+      : "\n✅ Dry run complete. Nothing was written."
+  );
+
+  /*
+   * Seeding is deliberately NOT chained here.
+   *
+   * Importing ./seed-supabase.mjs used to run it — that module's top level is an
+   * IIFE — while the very next line printed "Run seed separately", because the
+   * destructured `default` never existed. Ten fabricated leads and a demo auth
+   * account were written to production under a message saying they were not.
+   *
+   * To seed, run it deliberately and on its own:
+   *   node scripts/seed-supabase.mjs --apply
+   *
+   * Never on a database holding real enquiries.
+   */
+  console.log("ℹ️  Seeding is a separate, explicit step: node scripts/seed-supabase.mjs --apply");
+  console.log("    (it writes SYNTHETIC demo rows — never run it against real enquiries)\n");
 })();

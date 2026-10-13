@@ -154,6 +154,16 @@ export function formatDate(iso: string) {
 
 export function formatRelative(iso: string, now = MOCK_NOW) {
   const diff = now.getTime() - new Date(iso).getTime();
+
+  // A timestamp AFTER `now` is not "ago". The previous `Math.max(1, hours)`
+  // floored every negative delta to 1, so a record dated one day — or four
+  // hundred days — ahead of the reference clock all rendered as "1h ago".
+  if (diff < 0) {
+    const aheadHours = Math.round(Math.abs(diff) / 3_600_000);
+    if (aheadHours < 24) return `in ${Math.max(1, aheadHours)}h`;
+    return `in ${Math.round(aheadHours / 24)}d`;
+  }
+
   const hours = Math.round(diff / 3_600_000);
   if (hours < 24) return `${Math.max(1, hours)}h ago`;
   const days = Math.round(hours / 24);

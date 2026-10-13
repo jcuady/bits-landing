@@ -81,16 +81,36 @@ function SpecimenTable({
   );
 }
 
+/* SYSTEM_AUDIT.md §49. The five rows corrected below each asserted a control
+ * that does not exist in this codebase:
+ *   • "Quiet Hours … Compliant" — contact-rule enforcement is "not part of this
+ *     build" (lib/security-data.ts:120)
+ *   • "RBAC Matrix … Verified" — requireCrmUser() authenticates and never reads
+ *     a role; there is exactly one privilege level
+ *   • "Audit Trails — Cryptographic immutable log — Immutable" — there is no
+ *     audit store of any kind
+ *   • "Enforced" — the bare-badge rule §29 exists to catch; nothing enforces
+ *     per-role access or record isolation
+ *   • "Multi-Tenant Operations" — the deployment is single-tenant
+ * They survived because this file was not in SECURITY_SURFACES. The gate was
+ * clean on all eleven files it covered and blind on this one, which is the
+ * homepage. */
 const sectorSpecimens = {
   bpo: {
-    title: "Multi-Tenant Operations",
+    title: "Campaign Operations",
     kicker: "BPO & Contact Center Infrastructure",
     caption: "BPO Campaign Staging Specimen",
     columns: ["Operational Module", "Configuration Scope", "State"] as const,
     rows: [
-      { a: "Tenant Isolation", b: "Per-client database partitioning", c: "Enforced" },
+      /* §49 — was: "Tenant Isolation / Per-client database partitioning / Enforced".
+         No tenant isolation exists and the bare "Enforced" chip is exactly what
+         the §29 rule exists to catch. */
+      { a: "Data Scope", b: "Single deployment, one shared dataset", c: "Active" },
       { a: "Dynamic Routing", b: "Skill & language matching", c: "Active" },
-      { a: "Supervisor HUD", b: "Listen / whisper / barge", c: "Ready" },
+      /* §49 — was: "Supervisor HUD / Listen / whisper / barge / Ready". There is
+         no telephony in this repository: no RTCPeerConnection, no getUserMedia,
+         no SDP anywhere. */
+      { a: "Supervisor View", b: "Floor status & leaderboards", c: "Active" },
       { a: "SLA Reporting", b: "Automated client export feeds", c: "Scheduled" },
     ],
   },
@@ -101,9 +121,10 @@ const sectorSpecimens = {
     columns: ["Workflow Component", "Policy Rule", "State"] as const,
     rows: [
       { a: "DPD Bucketing", b: "Automated age-based staging", c: "Dynamic" },
-      { a: "PTP Tracking", b: "Grace period & auto-follow-up", c: "Enforced" },
+      { a: "PTP Tracking", b: "Grace period & auto-follow-up", c: "Configured" },
       { a: "Broken PTP", b: "Immediate supervisor re-queue", c: "Automated" },
-      { a: "Quiet Hours", b: "Statutory contact time limits", c: "Compliant" },
+      /* §49 — was: "Quiet Hours / Statutory contact time limits / Compliant" */
+      { a: "Contact Hours", b: "Statutory limits — roadmap, not enforced", c: "Roadmap" },
     ],
   },
   banking: {
@@ -112,8 +133,10 @@ const sectorSpecimens = {
     caption: "Banking & Financial Services Specimen",
     columns: ["Governance Control", "Architecture Standard", "State"] as const,
     rows: [
-      { a: "RBAC Matrix", b: "Least-privilege operational roles", c: "Verified" },
-      { a: "Audit Trails", b: "Cryptographic immutable log", c: "Immutable" },
+      /* §49 — was: RBAC Matrix / Audit Trails / Cryptographic immutable log /
+         Immutable / Verified, none of which exist. */
+      { a: "Access Model", b: "Session-gated, single privilege level", c: "Active" },
+      { a: "Record Logging", b: "Outbound email outcomes in a mutable table", c: "Partial" },
       { a: "Data Ingestion", b: "Encrypted core banking ETL", c: "TLS 1.3" },
       { a: "Hosting Model", b: "Private VPC or On-Premises", c: "Supported" },
     ],

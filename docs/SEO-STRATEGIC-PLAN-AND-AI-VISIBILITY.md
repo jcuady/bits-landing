@@ -1,5 +1,22 @@
 # BITS Enterprise SEO Strategic Master Plan & AI Visibility (GEO/AEO) Blueprint
 
+> **SYSTEM_AUDIT.md §63 — the two passages quoted below are STALE.**
+>
+> Lines 47 and 50 reproduce `llms.txt` **verbatim** as an "Extracted AI Passage".
+> That text described a sub-350ms predictive dialer and supervisor live whisper /
+> barge-in monitoring. **Neither exists.** `llms.txt` was corrected in §52–§53 and
+> again in §60–§62; the current file states plainly that there is no telephony, no
+> softphone, no call recording and no transcription.
+>
+> Quoting the old file as evidence of what an AI system will say is worse than the
+> original claim: it manufactures a citation. The passages are left in place and
+> marked, because deleting them would hide what was actually being told to search
+> engines. **Do not reuse either passage as approved copy.**
+>
+> The `sub-350ms` and `Sub-300ms` latency figures elsewhere in this document share
+> that status — with no telephony and no voice pipeline in this build, there is
+> nothing to have measured.
+
 > **Prepared for:** Executive Leadership & Systems Architecture, Boundless IT Solutions (BITS)  
 > **Domain:** `https://www.boundlessits.com`  
 > **Horizon:** 2026 Enterprise Growth  
@@ -28,8 +45,8 @@ BITS has officially eliminated all generic listicle numbering ("top 7") in favor
 
 | Search Intent | Target Queries | Primary URL Destination | Key In-Page Conversion Hook |
 |:---|:---|:---|:---|
-| **High-Intent Commercial (Collections)** | `top crm collections agency`<br>`top crm for collections agency`<br>`best crm collections agency`<br>`crm collections agency`<br>`debt collection software collections agency` | `/blog/best-collections-oms-debt-recovery-software-2026`<br>& `/products/collections`<br>& `/bitscrm` | 3.2x higher RPC rate, sub-350ms predictive dialer, zero per-seat licensing tax, 100% sovereign data residency. |
-| **High-Intent Commercial (OMS)** | `top oms`<br>`best oms`<br>`top collections oms`<br>`best collections oms`<br>`top operations management system`<br>`operations management system` | `/blog/operations-management-system-vs-crm-guide`<br>& `/products/collections`<br>& `/products` | Unifies 8 essential floor systems (CRM, dialer, QA scorecards, coaching logs, LMS, WFM, live dashboards), replacing 4-6 SaaS tools. |
+| **High-Intent Commercial (Collections)** | `top crm collections agency`<br>`top crm for collections agency`<br>`best crm collections agency`<br>`crm collections agency`<br>`debt collection software collections agency` | `/blog/best-collections-oms-debt-recovery-software-2026`<br>& `/products/collections`<br>& `/bitscrm` | Zero per-seat licensing tax, 100% sovereign data residency. ⚠️ **§73 — "3.2x higher RPC rate, sub-350ms predictive dialer" removed: there is no dialer in this build.** |
+| **High-Intent Commercial (OMS)** | `top oms`<br>`best oms`<br>`top collections oms`<br>`best collections oms`<br>`top operations management system`<br>`operations management system` | `/blog/operations-management-system-vs-crm-guide`<br>& `/products/collections`<br>& `/products` | Unifies the operational floor (CRM, QA scorecards, coaching logs, LMS, WFM, live dashboards), replacing 4-6 SaaS tools. ⚠️ **§73 — "dialer" removed from this list; no dialer ships.** |
 | **High-Volume Commercial (Enterprise CRM)** | `best crm`<br>`best crm software`<br>`best crm philippines`<br>`salesforce alternative collections agency`<br>`sovereign enterprise crm` | `/blog/best-sovereign-enterprise-crm-platforms-philippines`<br>& `/products/crm` | 68% 3-year TCO savings vs Salesforce, in-country sovereign data storage, built-in CPQ with BIR CAS compliance. |
 | **Emerging Tech (Voice AI)** | `best voice ai call centers`<br>`autonomous voice agents philippines`<br>`taglish voice ai latency`<br>`conversational ai for debt collections` | `/bitsagent`<br>& `/blog/best-autonomous-voice-ai-agents-call-centers` | Sub-300ms neural acoustic latency, native Taglish cadence, grounded enterprise RAG knowledge. |
 | **Infrastructure Repatriation** | `on premise server setup 2026`<br>`office datacenter blueprint`<br>`cloud repatriation roi` | `/blog/on-premise-office-server-datacenter-setup-guide-2026` | 70% savings vs public AWS/Azure rent, zero data egress fees, sub-millisecond local LAN latency. |

@@ -52,6 +52,12 @@ export interface ProductMvpConfig {
    * on /demo. Filter them with `getCanonicalProducts()`.
    */
   aliasOf?: string;
+  /**
+   * Whether this product's sandbox is reachable end to end. Consumed by
+   * app/(auth)/login to decide whether to offer the sandbox route.
+   * Optional: absent means "not live".
+   */
+  sandboxStatus?: "live" | "sandbox" | "coming-soon";
   /** Homepage placement. Absent = catalogue-only. */
   homepage?: ProductHomepageConfig;
 }
@@ -540,6 +546,12 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
 export function getCanonicalProducts(): ProductMvpConfig[] {
   return Object.values(PRODUCT_REGISTRY).filter((p) => !p.aliasOf);
 }
+
+/**
+ * Derived engine count. Never hardcode this — five UI surfaces render it and the
+ * registry changes as products are collapsed into Operations 360 modules.
+ */
+export const ENGINE_COUNT = getCanonicalProducts().length;
 
 /** Products that should occupy a homepage slot (excludes aliases). */
 export function getHomepageProducts(): ProductMvpConfig[] {

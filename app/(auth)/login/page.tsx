@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { loginAction, roleDemoLoginAction } from "@/app/actions/auth";
 import { safeAppNext } from "@/lib/crm/safe-next";
 import { getProductById } from "@/lib/products/registry";
+import { PRODUCT_COUNT } from "@/lib/site";
 import { ShieldCheck, UserCheck, Sparkles, Terminal, ArrowRight, Layers } from "lucide-react";
 
 export const metadata = {
@@ -26,7 +27,14 @@ export default async function LoginPage({
 }) {
   const params = await searchParams;
   const productConfig = params.product ? getProductById(params.product) : null;
-  const defaultNext = productConfig ? productConfig.demoPath.replace("/(products)", "") : "/app/dashboard";
+
+  // Only route to a product sandbox when one is actually implemented.
+  // Planned engines have no route, so redirecting to demoPath would 404 —
+  // send the operator to the CRM workspace instead.
+  const sandboxAvailable = productConfig?.sandboxStatus === "live";
+  const defaultNext = sandboxAvailable
+    ? productConfig.demoPath.replace("/(products)", "")
+    : "/app/dashboard";
   const next = safeAppNext(params.next || defaultNext);
   const alert = alertMessage(params.error);
   const emailInvalid = params.error === "email" || params.error === "invalid";
@@ -44,7 +52,8 @@ export default async function LoginPage({
           {productConfig ? (
             <div className="flex flex-col items-center">
               <Badge variant="outline" className="mb-2.5 bg-electric-500/10 text-electric-600 border-electric-500/30 font-semibold px-3 py-1">
-                {productConfig.categoryLabel} • Live MVP Sandbox
+                {productConfig.categoryLabel} •{" "}
+                {sandboxAvailable ? "Live MVP Sandbox" : "Sandbox In Development"}
               </Badge>
               <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
                 Sign in to {productConfig.name}
@@ -56,7 +65,16 @@ export default async function LoginPage({
           ) : (
             <div className="flex flex-col items-center">
               <Badge variant="outline" className="mb-2.5 bg-navy-50 text-navy-800 border-navy-200 font-semibold px-3 py-1">
-                Universal Enterprise SSO
+                {/*
+                 SYSTEM_AUDIT.md §32 — this badge read "Universal Enterprise
+                 SSO" and was served to every visitor on the live login page.
+                 SSO is not implemented: authentication is Supabase Auth with
+                 email + password, and lib/site/security-claims.mjs lists SSO as
+                 a banned attestation for exactly that reason. A login page that
+                 advertises a capability it does not have is the worst possible
+                 place for the claim.
+               */}
+                Supabase Auth · Email &amp; Password
               </Badge>
               <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
                 Sign in to BITS Platform
@@ -253,7 +271,7 @@ export default async function LoginPage({
             className="inline-flex items-center gap-1.5 font-medium text-electric-600 hover:text-navy-800 transition"
           >
             <Layers className="h-3.5 w-3.5" />
-            <span>Looking for another engine? View all 18 BITS product MVPs</span>
+            <span>Looking for another engine? View all {PRODUCT_COUNT} BITS product MVPs</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <Link href="/" className="cursor-pointer font-medium text-slateblue hover:text-ink transition">

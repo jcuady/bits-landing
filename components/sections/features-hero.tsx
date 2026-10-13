@@ -118,10 +118,13 @@ function CollectionsCommandCenterMockup() {
           <span className="font-semibold text-slate-800">Collections Command Center</span>
         </div>
 
-        {/* Operational Pulse Pill */}
+        {/* Operational Pulse Pill — §74: this read "0.4s Screen-Pop" behind a
+            pulsing dot. Screen-pop is a telephony feature: it surfaces an
+            account on an agent's screen as a call connects. There is no
+            telephony in this build. The pill now describes a real control. */}
         <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-mono font-bold text-emerald-700 border border-emerald-200/80">
-          <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span>0.4s Screen-Pop</span>
+          <span className="size-1.5 rounded-full bg-emerald-500" />
+          <span>Session Guard Active</span>
         </div>
       </div>
 
@@ -168,9 +171,8 @@ function CollectionsCommandCenterMockup() {
             <div className="p-1.5 rounded-lg bg-blue-600 text-white shadow-xs cursor-pointer" title="Accounts">
               <FolderOpen className="size-4" />
             </div>
-            <div className="relative p-1.5 rounded-lg text-slate-400 hover:text-slate-800 transition-colors cursor-pointer" title="Dialer Queue">
+            <div className="relative p-1.5 rounded-lg text-slate-400 hover:text-slate-800 transition-colors cursor-pointer" title="Work Queue">
               <PhoneCall className="size-4" />
-              <span className="absolute top-1 right-1 size-1.5 rounded-full bg-emerald-500 ring-2 ring-white" />
             </div>
             <div className="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 transition-colors cursor-pointer" title="PTP Ledger">
               <CalendarCheck className="size-4" />
@@ -297,7 +299,7 @@ function CollectionsCommandCenterMockup() {
               </div>
               <div className="text-[11px]">
                 <div className="flex items-center gap-1.5 font-bold tracking-tight">
-                  <span className="text-sky-300 font-mono">LIVE SCREEN-POP:</span>
+                  <span className="text-sky-300 font-mono">ACCOUNT OPENED:</span>
                   <span>Eduardo Tan (PH-240101)</span>
                 </div>
                 <div className="text-slate-400 text-[10px]">
@@ -358,7 +360,7 @@ export function FeaturesHero() {
 
           <Reveal delay={0.08}>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              Engineered from 100+ real operational use cases across six floor roles. Account management, predictive dialing, QA scoring, omnichannel messaging, and analytics — unified in a single high-velocity workspace.
+              Engineered from 100+ operational use cases across six floor roles. Account management, work queues, QA scoring, email messaging, and analytics — unified in a single workspace. This build ships no telephony.
             </p>
           </Reveal>
         </div>

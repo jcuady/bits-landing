@@ -32,6 +32,91 @@ const RESEND_API_KEY = env["RESEND_API_KEY"];
 const CONTACT_FROM = env["CONTACT_FROM"] || "BITS Inquiries <inquiries@boundlessits.com>";
 const CONTACT_INBOX = env["CONTACT_INBOX"] || "boundlessitsolutions@gmail.com";
 
+/* ── Guard (SYSTEM_AUDIT.md §36) ─────────────────────────────────────────────
+ *
+ * This script sends TWO REAL EMAILS through Resend and writes THREE rows into
+ * the live database (one inbound_leads, two email_logs) with no confirmation of
+ * any kind. Running it to "see if it still works" puts test rows in production.
+ *
+ * It also had two ways to report success while failing:
+ *   - `runTest().catch(console.error)` - an unhandled rejection printed the error
+ *     and the process still exited 0, so `npm run` reported a pass.
+ *   - the closing line printed "FULL MARKETING AUTOMATION & EMAIL DELIVERY
+ *     PIPELINE VERIFIED!" unconditionally, even when steps 1-4 had each logged
+ *     a failure. Nothing set a failure flag.
+ *
+ * Now: dry run by default; --apply plus a matching --confirm-project; failures
+ * set a flag; the summary reflects what actually happened.
+ *
+ * The lead it writes is SYNTHETIC and labelled as such. Never run it against a
+ * database holding real enquiries.
+ */
+for (const [k, v] of Object.entries({
+  NEXT_PUBLIC_SUPABASE_URL: SUPABASE_URL,
+  SUPABASE_SERVICE_ROLE_KEY: SERVICE_KEY,
+  RESEND_API_KEY: RESEND_API_KEY,
+})) {
+  if (!v) {
+    console.error(`Missing ${k} in .env.local`);
+    process.exit(1);
+  }
+}
+
+const PROJECT_REF = (() => {
+  try {
+    const host = new URL(SUPABASE_URL).hostname;
+    const m = host.match(/^([a-z0-9]+)\.supabase\.(co|in)$/i);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+})();
+
+const APPLY = process.argv.includes("--apply");
+const confirmIdx = process.argv.indexOf("--confirm-project");
+const CONFIRMED_REF = confirmIdx === -1 ? null : process.argv[confirmIdx + 1];
+
+const ACTIONS = [
+  "POST 1 synthetic row to inbound_leads",
+  "POST 2 rows to email_logs",
+  `Send 2 real emails via Resend to ${CONTACT_INBOX}`,
+];
+
+if (!APPLY) {
+  console.log("DRY RUN - nothing written, no email sent.\n");
+  console.log("   Target project :", PROJECT_REF ?? "(could not derive from NEXT_PUBLIC_SUPABASE_URL)");
+  console.log("   Sender         :", CONTACT_FROM);
+  console.log("   Recipient      :", CONTACT_INBOX);
+  console.log("\n   This script would:");
+  for (const a of ACTIONS) console.log(`     - ${a}`);
+  console.log(
+    `\n   To run it: node scripts/test-marketing-automation.mjs --apply --confirm-project ${PROJECT_REF ?? "<ref>"}`
+  );
+  console.log("   NEVER run it against a database holding real enquiries.\n");
+  process.exit(0);
+}
+
+if (!PROJECT_REF) {
+  console.error("Cannot derive the project ref from NEXT_PUBLIC_SUPABASE_URL. Refusing to guess.");
+  process.exit(1);
+}
+if (CONFIRMED_REF !== PROJECT_REF) {
+  console.error("Refusing to run.");
+  console.error(`   Target project : ${PROJECT_REF}`);
+  console.error(`   You confirmed  : ${CONFIRMED_REF ?? "(nothing)"}`);
+  console.error(`   Re-run with: --apply --confirm-project ${PROJECT_REF}`);
+  process.exit(1);
+}
+
+/** Failures are tracked, not merely printed. */
+let failures = 0;
+const fail = (step, detail) => {
+  failures++;
+  console.error(`STEP FAILED - ${step}:`, detail ?? "(no detail returned)");
+};
+
+console.log("\nLIVE RUN - real emails will be sent and rows written.");
+
 console.log("=== BITS MARKETING AUTOMATION VERIFICATION ===");
 console.log("Supabase URL:", SUPABASE_URL);
 console.log("Verified Sender:", CONTACT_FROM);
@@ -49,7 +134,7 @@ async function runTest() {
     preferred_method: "Principal Architecture Call",
     interest: "OPERATIONS 360 Integrated Operations Platform",
     message: "Our operational wish list: We need CRM, 100% QA call scorecards, supervisor coaching logs, and live WFM schedule adherence in one system with zero MIS report delay.",
-    source: "Automated E2E Verification Suite",
+    source: "Automated E2E Verification Suite (SYNTHETIC - not a real enquiry)",
     lead_score: 95,
     status: "new",
     assigned_to: "Malcolm Cuady",
@@ -72,9 +157,10 @@ async function runTest() {
   const dbData = await dbRes.json();
   if (!dbRes.ok) {
     // If unique constraint triggers on duplicate email, fetch existing
-    console.log("ℹ️ Inbound lead notice:", dbData?.message || dbData);
+    console.log("Inbound lead notice:", dbData?.message || dbData);
+    fail("persist lead to inbound_leads", dbData?.message || JSON.stringify(dbData));
   } else {
-    console.log("✅ Lead saved to Supabase with ID:", dbData[0]?.id);
+    console.log("Lead saved to Supabase with ID:", dbData[0]?.id);
   }
 
   // Step 2: Send Team Notification Email via Resend with verified domain
@@ -109,9 +195,9 @@ async function runTest() {
 
   const teamEmailData = await teamEmailRes.json();
   if (!teamEmailRes.ok) {
-    console.error("❌ Team email failed:", teamEmailData);
+    fail("team notification email", JSON.stringify(teamEmailData));
   } else {
-    console.log("✅ Team Notification Email sent successfully! Resend ID:", teamEmailData.id);
+    console.log("Team Notification Email sent. Resend ID:", teamEmailData.id);
   }
 
   // Step 3: Send Client Welcome & Wish List Confirmation Email
@@ -144,9 +230,9 @@ async function runTest() {
 
   const clientEmailData = await clientEmailRes.json();
   if (!clientEmailRes.ok) {
-    console.error("❌ Client welcome email failed:", clientEmailData);
+    fail("client welcome email", JSON.stringify(clientEmailData));
   } else {
-    console.log("✅ Client Confirmation Email sent successfully! Resend ID:", clientEmailData.id);
+    console.log("Client Confirmation Email sent. Resend ID:", clientEmailData.id);
   }
 
   // Step 4: Log to Supabase email_logs
@@ -187,12 +273,31 @@ async function runTest() {
 
   const logData = await logRes.json();
   if (!logRes.ok) {
-    console.error("❌ email_logs insert failed:", logData);
+    fail("email_logs insert", JSON.stringify(logData));
   } else {
-    console.log(`✅ Logged ${logData.length} email records into Supabase email_logs successfully!`);
+    console.log(`Logged ${logData.length} email records into Supabase email_logs.`);
   }
 
-  console.log("\n🎉 FULL MARKETING AUTOMATION & EMAIL DELIVERY PIPELINE VERIFIED!\n");
+  /*
+   * The summary reflects what happened. This line used to print
+   * "FULL MARKETING AUTOMATION & EMAIL DELIVERY PIPELINE VERIFIED!" on every
+   * run, including runs where all four steps had just logged a failure.
+   */
+  if (failures === 0) {
+    console.log("\nMARKETING AUTOMATION & EMAIL DELIVERY PIPELINE VERIFIED.\n");
+  } else {
+    console.error(`\nPIPELINE VERIFICATION FAILED - ${failures} step(s) did not complete.`);
+    console.error("The pipeline is NOT verified. See the errors above.\n");
+    process.exitCode = 1;
+  }
 }
 
-runTest().catch(console.error);
+runTest().catch((err) => {
+  /*
+   * Used to be `.catch(console.error)`, which printed the error and exited 0 —
+   * so an unhandled rejection reported success to `npm run`.
+   */
+  console.error("\nPIPELINE VERIFICATION FAILED - unhandled error:");
+  console.error(err);
+  process.exitCode = 1;
+});

@@ -137,6 +137,7 @@ export function ConsultationModal({
                 className="hidden"
                 tabIndex={-1}
                 autoComplete="off"
+                aria-hidden="true"
               />
 
               {/* Area of Interest (Interactive Pills) */}

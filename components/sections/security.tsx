@@ -27,10 +27,17 @@ export function Security() {
                 </span>
               </div>
               <h2 className="text-h2 text-balance font-bold leading-[1.08] text-slate-900">
-                Bank-Grade Security for Sensitive Business Data.
+                Security Controls We Can Actually Show You.
               </h2>
+              {/* SYSTEM_AUDIT.md §29. This paragraph previously read: "Your
+                  customer records, financial transactions, and phone calls are
+                  protected with strict user permissions, private data
+                  separation, and tamper-proof activity logs." All three claims
+                  were false for this deployment — every RLS policy is
+                  `using (true)` for authenticated, the app is single-tenant,
+                  and there is no audit-log table. */}
               <p className="text-lede mt-5 max-w-[48ch] text-pretty text-slate-600">
-                Your customer records, financial transactions, and phone calls are protected with strict user permissions, private data separation, and tamper-proof activity logs.
+                Every CRM page and API endpoint checks a verified server-side session before touching the database, personal-data responses are served no-store, and public write paths are rate limited and schema validated. Where a control is still on the roadmap, we label it — see below.
               </p>
 
               {/* Regulatory Alignment Badges */}
@@ -79,24 +86,24 @@ export function Security() {
                     </div>
                     <div className="h-4 w-px bg-slate-200" />
                     <div>
-                      <p className="text-xs font-bold text-slate-800">RBAC Governance Matrix</p>
-                      <p className="text-[0.68rem] text-slate-500">Cryptographically Enforced Role Boundaries</p>
+                      <p className="text-xs font-bold text-slate-800">Target Role Model</p>
+                      <p className="text-[0.68rem] text-slate-500">Per-role boundaries are roadmap, not shipped</p>
                     </div>
                   </div>
-                  <span className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-emerald-600 shadow-2xs">
-                    Enforced
+                  <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-amber-700 shadow-2xs">
+                    Roadmap
                   </span>
                 </div>
 
                 <div className="overflow-x-auto overscroll-x-contain p-2">
                   <table className="w-full min-w-[24rem] text-left text-xs">
-                    <caption className="sr-only">Role-based access control matrix</caption>
+                    <caption className="sr-only">Target role model for a configured deployment</caption>
                     <thead>
                       <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
                         <th scope="col" className="px-4 py-3">Role</th>
-                        <th scope="col" className="px-4 py-3">Queue Boundary</th>
-                        <th scope="col" className="px-4 py-3">PII Exposure</th>
-                        <th scope="col" className="px-4 py-3">Supervisor Action</th>
+                        <th scope="col" className="px-4 py-3">Target queue scope</th>
+                        <th scope="col" className="px-4 py-3">Target PII handling</th>
+                        <th scope="col" className="px-4 py-3">Target supervisor action</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
@@ -116,8 +123,8 @@ export function Security() {
                   </table>
                 </div>
               </div>
-              <figcaption className="mt-3 text-center text-[0.75rem] text-slate-400">
-                Sample role-based scoping table. Concrete permissions are customized during deployment.
+              <figcaption className="mt-3 text-center text-[0.75rem] text-slate-500">
+                Target model only. This build does not enforce per-role access — any authenticated operator can read every CRM record today.
               </figcaption>
             </figure>
           </Reveal>

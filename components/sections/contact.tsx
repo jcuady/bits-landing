@@ -22,8 +22,8 @@ const ROLE_DATA: Record<FloorRole, RoleDetails> = {
     title: "For Floor Operations Directors",
     badge: "Floor Velocity & WFM",
     bullets: [
-      "Eliminate auxiliary idle time with automated progressive/predictive dialer pacing.",
-      "Live supervisor dashboard with silent listen, whisper, and barge-in capabilities.",
+      "Eliminate auxiliary idle time with automated promise-to-pay reallocation.",
+      "Live supervisor dashboard with aging visibility, coaching logs, and QA scorecards.",
       "Workforce leaderboards, automated KPI scoring, and zero spreadsheet reconciliations.",
     ],
   },
@@ -32,7 +32,7 @@ const ROLE_DATA: Record<FloorRole, RoleDetails> = {
     badge: "Sovereign Architecture",
     bullets: [
       "100% on-premise air-gapped or private cloud deployment with zero foreign data egress.",
-      "Native WebRTC browser softphone — eliminates external PBX licenses and desktop DLLs.",
+      "Session-gated CRM with rate-limited, schema-validated intake (no telephony in this build).",
       "Zero per-seat licensing penalties — scale from 50 to 5,000 agents with predictable cost.",
     ],
   },
@@ -49,9 +49,9 @@ const ROLE_DATA: Record<FloorRole, RoleDetails> = {
     title: "For Risk & Compliance Officers",
     badge: "Statutory Governance",
     bullets: [
-      "Full alignment with BSP Circular 808 and NPC Data Privacy Act standards.",
-      "100% call audio recording, permanent cryptographic timestamping, and immutable audit trails.",
-      "Automated quiet-hour safeguards and frequency caps prevent statutory collection penalties.",
+      "Engineered with BSP Circular 808 and NPC Data Privacy Act principles in mind.",
+      "Explicit consent capture on every form, published privacy notice and cookie disclosure.",
+      "Contact-window and frequency rules configured per engagement — not a control this build ships on its own.",
     ],
   },
 };

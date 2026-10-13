@@ -19,10 +19,19 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "Article Not Found | BITS Intelligence Labs" };
+  // `absolute` opts out of the root layout's "%s | BITS" title template.
+  // Without it every article rendered as
+  //   "<post> | BITS Intelligence Labs | BITS"
+  // — a redundant second "| BITS", since "BITS Intelligence Labs" is already
+  // the brand. See docs/SYSTEM_AUDIT.md §27.
+  if (!post) return { title: { absolute: "Article Not Found | BITS Intelligence Labs" } };
 
   return {
-    title: `${post.title} | BITS Intelligence Labs`,
+    // Use `shortTitle` for the SERP title: the full `post.title` plus the brand
+    // suffix ran 92–106 characters and truncated mid-word in search results.
+    // `shortTitle` exists in the data model for exactly this. The full title is
+    // still the page's <h1> and its og:title.
+    title: { absolute: `${post.shortTitle} | BITS Intelligence Labs` },
     description: post.metaDescription,
     keywords: post.keywords,
     alternates: {
@@ -132,14 +141,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               operatingSystem: "Sovereign Bare-Metal On-Premises, Private Cloud, Linux, Web",
               offers: {
                 "@type": "Offer",
-                description:
+description:
                   "Pricing is not published. Provided on request through a consultation with a BITS representative.",
               },
-              // aggregateRating removed: it was a self-serving 9.9/48 rating with
-              // no verifiable third-party source. Google ignores self-serving
-              // review markup and may issue a manual action for abusing it.
-              // Reintroduce only with real, verifiable reviews and a sameAs
-              // pointer to where they are published.
+              // No `price`/`priceCurrency`: BITS publishes no monetary values.
+              // An earlier version declared price 0 USD, which contradicted
+              // that policy and could be quoted verbatim by AI answer engines.
+              //
+              // aggregateRating removed — see SYSTEM_AUDIT.md §30.3. No review
+              // exists on this site; re-add only with real, on-page reviews.
             },
           ]
         : []),

@@ -7,7 +7,10 @@ import { blogPosts } from "@/lib/blog-data";
 import { BlogExplorer } from "@/components/blog/blog-explorer";
 
 export const metadata: Metadata = {
-  title: "Top CRM, Collections Agency Software & Top OMS Guides | BITS Intelligence Labs",
+  // `absolute` opts out of the root layout's "%s | BITS" title template, which
+  // would otherwise render "… | BITS Intelligence Labs | BITS".
+  // See docs/SYSTEM_AUDIT.md §27.
+  title: { absolute: "Top CRM, Collections & OMS Guides | BITS Intelligence Labs" },
   description:
     "Authoritative benchmarks, architecture comparisons, and buyer guides for the top CRM for collections agency operations, top OMS operations management systems, sovereign enterprise CRM, autonomous voice AI, and private datacenters.",
   alternates: { canonical: `${site.url}/blog` },
@@ -217,9 +220,15 @@ export default function BlogIndexPage() {
                     <span className="block font-mono text-base sm:text-lg font-black text-emerald-300">3.2x</span>
                     <span className="text-[11px] text-sky-200 uppercase font-mono tracking-wider">Higher Connects</span>
                   </div>
+                  {/* §77 — this strip published "<350ms · Dialer Latency" as a headline metric.
+                      There is no dialer. The number is not merely unproven, it is
+                      incoherent once the label is corrected, so it was replaced
+                      with a figure that is both true and verifiable: the anon
+                      access probe returns 401 on every CRM API route and every
+                      CRM page. */}
                   <div className="rounded-xl border border-white/15 bg-white/[0.08] p-3 text-center">
-                    <span className="block font-mono text-base sm:text-lg font-black text-sky-200">&lt;350ms</span>
-                    <span className="text-[11px] text-sky-200 uppercase font-mono tracking-wider">Dialer Latency</span>
+                    <span className="block font-mono text-base sm:text-lg font-black text-sky-200">0</span>
+                    <span className="text-[11px] text-sky-200 uppercase font-mono tracking-wider">Anon CRM Reads</span>
                   </div>
                   <div className="col-span-2 sm:col-span-1 rounded-xl border border-white/15 bg-white/[0.08] p-3 text-center">
                     <span className="block font-mono text-base sm:text-lg font-black text-amber-300">₱0</span>
@@ -251,7 +260,7 @@ export default function BlogIndexPage() {
                   </div>
                   <div>
                     <h3 className="text-base font-extrabold text-white">Operations 360 (OMS)</h3>
-                    <p className="text-xs text-sky-200">Sub-350ms predictive dialer · Sovereign air-gapped on-premise</p>
+                    <p className="text-xs text-sky-200">Account work queues · Sovereign self-hosted deployment</p>
                   </div>
                 </div>
                 <p className="text-xs text-sky-100/80 leading-relaxed">
@@ -285,7 +294,7 @@ export default function BlogIndexPage() {
               Need a Custom Benchmark for Your Floor?
             </h3>
             <p className="text-sm text-sky-100/90 leading-relaxed sm:text-base">
-              Our principal systems architects analyze your call volumes, CRM database schemas, and telco trunk layouts to provide an objective, zero-obligation ROI blueprint tailored to your agency.
+              Our principal systems architects analyze your record volumes, CRM database schemas, and deployment constraints to provide an objective, zero-obligation blueprint tailored to your agency. This build ships no telephony, so no dialing architecture is assessed.
             </p>
             <div className="pt-2">
               <Link

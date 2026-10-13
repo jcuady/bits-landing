@@ -14,14 +14,14 @@ const securityStandards = [
     logo: BspLogo,
     name: "BSP Regulatory Alignment",
     standard: "Circulars 454 & 857",
-    description: "Fair debt collection rules & supervisory audit trails",
+    description: "Contact-rule scoping configured per deployment",
     badge: "Banking Standard",
   },
   {
     logo: NpcLogo,
     name: "NPC Privacy Principles",
     standard: "RA 10173 (DPA 2012)",
-    description: "Role-based PII masking & explicit consent controls",
+    description: "Explicit consent controls & published data disclosures",
     badge: "Data Privacy",
   },
   {
@@ -49,7 +49,7 @@ const securityStandards = [
     logo: DictLogo,
     name: "DICT Cybersecurity",
     standard: "Cloud Security Framework",
-    description: "Secure data isolation & encrypted communication channels",
+    description: "Encrypted transport & hardened response headers",
     badge: "Cybersecurity",
   },
 ];
@@ -74,7 +74,7 @@ export function TrustStrip() {
               Built to Meet Strict Business &amp; Privacy Laws
             </h2>
             <p className="mt-2 text-[0.88rem] text-slate-600">
-              BITS protects your customer data with bank-grade encryption, privacy controls, and automatic quiet-hour call rules.
+              BITS protects customer data with server-side session checks, database row-level security, no-store personal-data responses, and explicit consent controls. We engineer to these frameworks; we do not claim certifications we have not earned.
             </p>
           </div>
 

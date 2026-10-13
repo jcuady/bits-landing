@@ -1,5 +1,32 @@
 # Workflows (mock simulation)
 
+> **SYSTEM_AUDIT.md §63 — largely describes routes that no longer exist.**
+>
+> This document records the mock CRM as it stood at commit `76576d8`. The mock has
+> since been replaced by the real, Supabase-backed application, and **six of the
+> routes it walks through were never carried across**:
+>
+> | Walked here | Reality |
+> |---|---|
+> | `/app/pipelines` | no such route |
+> | `/app/tasks` | no such route |
+> | `/app/conversations` | no such route |
+> | `/app/campaigns` | no such route |
+> | `/app/automations` | no such route |
+> | `/app/forms`, `/app/templates`, `/app/team` | no such routes |
+>
+> **What exists** is six list/detail routes, matching `lib/crm/nav.ts` exactly:
+> `dashboard`, `leads`, `contacts`, `companies`, `opportunities`, `settings`
+> (verified against `app/(crm)/app/**/page.tsx`, 8 Oct 2026).
+>
+> One claim below is not merely stale but **false of this build**: *"Admin/Manager
+> can click Invite member"*. There is no role model. `requireCrmUser()`
+> (`lib/crm/api-auth.ts`) authenticates and **never authorizes** — the Rep/Manager/Admin
+> distinction is a client-side display concept only.
+>
+> The Auth section below is still accurate except for line 10, which is correct as
+> written: the forgot-password flow is a **simulated** screen and sends no mail.
+
 ## Auth
 
 1. Open `/login` (or marketing **CRM Sign in**).

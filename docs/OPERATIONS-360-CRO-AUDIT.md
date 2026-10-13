@@ -7,9 +7,45 @@
 
 ---
 
+> ## ⚠ CORRECTION — 8 October 2026 (`SYSTEM_AUDIT.md` §71) — READ THIS BEFORE USING ANY LINE BELOW
+>
+> **This document describes a PRODUCT SPECIFICATION, not shipped software.**
+> It was generated from `BITS_CRM_UseCases_v2.0.xlsx`, a spreadsheet. The vast
+> majority of what it describes — the Field Agent App, the dialer, the softphone,
+> supervisor live-listen, the audit log, RBAC by role — **is not present in this
+> repository and never has been.**
+>
+> Measured against this codebase:
+>
+> | This document says | This repository contains |
+> |---|---|
+> | GPS-tagged field-visit logging, mobile field app | No field app. 4 database tables total (`inbound_leads`, `email_logs`, `marketing_automations`, `marketing_campaigns`) |
+> | Softphone, dialer, live calls, call recordings, inbound calls | **No telephony of any kind** — zero `RTCPeerConnection`, `getUserMedia` or SDP handling anywhere in 161 source files |
+> | "One audit log" / "hold the audit log" / "same audit log" | No audit store of any kind — no table, no writes, no append-only store |
+> | Six roles with scoped authority | **No RBAC.** `requireCrmUser()` authenticates a session and never reads a role. Every authenticated operator can read every CRM record |
+> | Quiet hours, C&D enforcement, abandon-rate caps | Not implemented — `lib/security-data.ts:120` states it plainly |
+> | 33 surface modules, 159 use cases | 6 CRM routes (`lib/crm/nav.ts`), 19 registry engines of which 5 have live sandboxes |
+>
+> **Nothing in this document may be published as a claim about what BITS ships.**
+> It is a positioning and messaging plan for a product that does not yet exist in
+> this codebase. Copying a line from it onto a live page is the exact failure that
+> `SYSTEM_AUDIT.md` §28–§57 exists to prevent.
+>
+> `SYSTEM_AUDIT.md` §52 corrected §2.3 of this file and left the same claims live
+> in §1.2, §3.2, §4.2, §4.4, §5.1, §5.2 and §9.1. Those are struck through inline
+> below. **A correction applied to one section is not a correction applied to the
+> fact.**
+>
+> The out-of-repo product lines this audit cannot adjudicate — ERP, HRMS,
+> Payroll, Inventory, Logistics, GPS field app — remain an owner decision (§8).
+
+---
+
 ## 0. TL;DR — The Bottom Line
 
 **Operations 360** is a serious, deeply-engineered Philippine-market **debt collections CRM** built by Boundless IT Solutions. v2.0 ships **80 new use cases** and now covers the full collections operation — desk, dialer, mobile, QA — including a mobile app with **GPS-tagged field-visit logging**.
+
+> **§71.** The paragraph above describes the v2.0 **specification**. The field app, the dialer and the audit log it refers to are **not in this repository**. The CRM that exists here is six routes: Leads, Contacts, Companies, Opportunities, Dashboard, Settings.
 
 **But.** Right now there is **no marketing surface to audit.** No public site copy, no landing page, no ad creative, no pricing on the wire. The product is in spec/PRD state. So this audit is split into two phases:
 
@@ -21,6 +57,14 @@
 1. **The Field Agent App is the differentiator — and almost nobody outside Operations 360 has it done right.** Most Philippine debt-collection CRMs (and most "field collections" tools globally) treat the mobile app as an afterthought or as a separate bolt-on. Ops 360 bakes it into the same data model, the same disposition locks, the same audit log. **This is the campaign hook.** Period.
 2. **The product is regulator-aware in a way competitors are not.** Quiet Hours, mandatory-notation, cease-and-desist enforcement per channel, abandon-rate tracking on predictive dialing, immutable Purge Log, fail-closed license gating (SYS-19), per-debtor daily cap on message blasts. **For Philippine banks and licensed collection agencies this is the trust signal that wins the deal.**
 3. **The product is a six-actor operation, not a one-tool sale.** Selling Ops 360 is selling into Admin + Manager + Supervisor + Agent + QA + Vendor workflows. **One ad cannot do that.** We need ICP-segmented creative plus one Flagship Ad that explains the system in 15 seconds.
+
+> **§71 — findings 1 and 2 describe capabilities that do not exist in this codebase.**
+> Finding 1: there is no field app, no GPS capture, and no audit log (§71 banner).
+> Finding 2: quiet hours, C&D enforcement, abandon-rate caps, the immutable Purge Log
+> and fail-closed licence gating are all unimplemented. Calling this "the trust
+> signal that wins the deal" would be the single most damaging claim in the set —
+> it is a compliance assurance made to a financial buyer, and none of it is built.
+> Finding 3 is a sales-organisation observation and survives.
 
 **Recommended next 3 moves:**
 
@@ -50,6 +94,15 @@
 | **Agent** | The collector — **only role with the mobile app and the auto-dialer** |
 | **QA** | Score calls and accounts, audit the work, never collect themselves |
 | **Vendor** | Boundless IT Solutions' own staff — license edition, modules, support tickets (provisioned only from server CLI) |
+
+> **§71 — this table is the spec's six-role model, and none of it is enforced.**
+> There is no RBAC in this codebase: `requireCrmUser()` authenticates a session
+> and never reads a role, and all four database tables use `using (true)` for
+> `authenticated`. "Admin", "Manager" and "Supervisor" have **no server-side
+> authority difference** — every authenticated operator reads every record.
+> "hold the audit log" refers to a store that does not exist. The mobile app and
+> auto-dialer do not exist. The table is retained as the target model, not as a
+> description of current behaviour.
 
 ### 1.3 Surface modules (33)
 
@@ -125,9 +178,28 @@ Pick based on what the buyer in your first 100 deals looks like.
 
 ### 2.3 Three positioning pillars (the rest of the marketing derives from these)
 
-1. **Your field agents are no longer invisible.** Every field visit is GPS-tagged, photo-attached, and locked into the same disposition workflow your desk agents use.
-2. **Regulator-defensible by default.** Quiet hours, cease-and-desist per channel, abandon-rate reporting, immutable audit trail, fail-closed licence gating.
-3. **One platform for the whole collections operation.** Desk, dialer (Preview/Progressive/Predictive), mobile, QA, skip trace, field visit, messaging, scrubbing, chat, support — six roles, one data model, one audit log.
+> **Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §52) — READ BEFORE LIFTING ANY
+> OF THIS COPY.** These are *proposed positioning*, and pillars 1 and 2 describe
+> controls this codebase does not have. Adopting them verbatim would republish
+> exactly the class of claim §28, §29, §48 and §49 removed.
+>
+> | Proposed | Reality |
+> |---|---|
+> | *"Every field visit is GPS-tagged, photo-attached…"* | No field app. `FULL_SYSTEM_DOCUMENTATION.md` lists *"Live GPS field app: Not implemented"* |
+> | *"Quiet hours, cease-and-desist per channel, abandon-rate reporting"* | *"Call-frequency and cease-and-desist handling is not part of this build"* (`lib/security-data.ts:120`) |
+> | *"immutable audit trail"* / *"one audit log"* | No audit store of any kind — no table, no writes, no append-only store |
+> | *"fail-closed licence gating"* | Not implemented |
+> | *"desk, dialer (Preview/Progressive/Predictive), mobile, QA…"* | No telephony exists: zero `RTCPeerConnection`, `getUserMedia` or SDP handling across 122 source files |
+>
+> Angle **B. "Regulator-ready"** (line 121) rests on pillars 1–2 and inherits
+> every row above. **Do not run angle B** until these are either built or restated.
+>
+> The out-of-repo product lines this audit cannot adjudicate — ERP, HRMS,
+> Payroll, Inventory, Logistics, GPS field app — remain an owner decision (§8).
+
+1. **Your field agents are no longer invisible.** ~~Every field visit is GPS-tagged, photo-attached, and locked into the same disposition workflow your desk agents use.~~ *(field app not built — §52)*
+2. **Regulator-defensible by default.** ~~Quiet hours, cease-and-desist per channel, abandon-rate reporting, immutable audit trail, fail-closed licence gating.~~ *(none implemented — §52)*
+3. **One platform for the whole collections operation.** ~~Desk, dialer (Preview/Progressive/Predictive), mobile, QA, skip trace, field visit, messaging, scrubbing, chat, support — six roles, one data model, one audit log.~~ *(no dialer, no audit log — §52)*
 
 ---
 
@@ -149,7 +221,7 @@ Pick based on what the buyer in your first 100 deals looks like.
 | **CFO / VP Finance** (financial buyer) | CAC, ROI, time-to-value, audit findings | Replace 3–5 separate tools; pass the next BSP audit without re-engineering | TCO deck + audit sample claim |
 | **Head of Collections** (champion + user) | Recoveries %, PTP kept %, agent utilisation, regulator findings | One pipeline from skip trace to PTP-kept; field agent recoveries now show in the same report | Recovery-rate demo + mobile demo |
 | **Compliance Officer** (technical influencer) | Cease-and-desist, DNC, abandon-rate, immutable audit | Regulator-defensible by default; immutable Purge Log; per-channel compliance | Compliance one-pager + audit-log demo |
-| **IT Lead** (technical buyer) | WebRTC softphone, telephony provider, GoIP, deployment | WebRTC + multi-provider PBX + Asterisk WebSocket + 16-SIM GoIP out of the box | Architecture one-pager + tech FAQ |
+| **IT Lead** (technical buyer) | WebRTC softphone, telephony provider, GoIP, deployment | ~~WebRTC + multi-provider PBX + Asterisk WebSocket + 16-SIM GoIP out of the box~~ **§71 — there is no telephony, no PBX integration and no GoIP in this codebase.** Do not answer this persona with a capability list; the honest answer is the deployment and data-handling story on `/security` | Architecture one-pager + tech FAQ |
 | **Field Supervisor / Manager** (tertiary user) | Field-agent utilisation, GPS verification, photo proof of visit | Every visit is auditable, every photo shown, every GPS tick timestamped | Field agent live-tracker demo |
 | **Agent** (primary user) | Less typing, no laptop, same workflow | Phone-based field logging with photo, GPS, and the same disposition shortcuts they use at their desk | Mobile app demo |
 
@@ -189,10 +261,17 @@ Pick based on what the buyer in your first 100 deals looks like.
 ### 4.4 Where Ops 360 wins against each tier
 
 - **vs. global debt-collection CRMs:** Philippine-specific (timezone, carrier detection, multi-channel incl. Viber/WhatsApp), **Mobile Field App** included
-- **vs. generic CRMs:** purpose-built collections (disposition state machine, PTP hold, scrub streak, abandon-rate), built-in WebRTC softphone, built-in dialer
-- **vs. generic dialers:** regulator-aware (abandon-rate cap, agent one-by-one, ring limits), disposition-aware, audit-aware
+- **vs. generic CRMs:** purpose-built collections (disposition state machine, PTP hold, scrub streak, abandon-rate), ~~built-in WebRTC softphone, built-in dialer~~ **§71 — no softphone, no dialer. Neither ships. Viber and WhatsApp are not integrated.**
+- **vs. generic dialers:** ~~regulator-aware (abandon-rate cap, agent one-by-one, ring limits), disposition-aware, audit-aware~~ **§71 — no abandon-rate cap, no ring limits, no audit store. The disposition model is real; the regulator-awareness is not built.**
 - **vs. generic field apps:** same data model + same disposition locks + same audit log + GPS coordinates on every field-visit activity
 - **vs. paper/spreadsheet:** whole game, no contest
+
+> **§71 — the last two rows are also unbuilt.** There is no field app, so no GPS
+> coordinates on any activity; and no audit log of any kind. The first row's
+> "Mobile Field App included" is the same absent product. **What genuinely
+> differentiates BITS against a generic CRM is narrower than this section
+> claims**: a Philippine-market collections data model, and a real server-side
+> session guard on every CRM route and API endpoint.
 
 ---
 
@@ -201,11 +280,11 @@ Pick based on what the buyer in your first 100 deals looks like.
 ### 5.1 Hard differentiators
 
 1. **Mobile Field App with GPS-tagged field-visit logging.** Most Philippine debt-collection CRMs have no real mobile app. Most global field apps are bolt-ons.
-3. **All roles in one data model.** Six roles, 33 modules, one audit log. No "the field app uses a separate database that syncs nightly."
-5. **Regulator-defensible by default.** Quiet hours, per-channel C&D enforcement, immutable Purge Log, fail-closed licence gate.
-7. **Philippine-specific.** Philippine timezone, Globe/Smart/DITO labelling, multi-PBX support (3CX, Zoiper, Asterisk WebSocket).
-9. **WebRTC softphone built-in.** No separate dialer to license.
-11. **Predictive dialer with abandon-rate reporting.** Regulator-aware dialing in a category where most "predictive" is just aggressive parallel sequencing.
+3. **All roles in one data model.** ~~Six roles, 33 modules, one audit log.~~ **§71 — six roles are specified, not enforced: no role-based authorization exists. 33 modules and the audit log are not built; 6 CRM routes exist. "No separate database that syncs nightly" is the one part that holds — the deployment is single-tenant.** No "the field app uses a separate database that syncs nightly."
+5. ~~**Regulator-defensible by default.** Quiet hours, per-channel C&D enforcement, immutable Purge Log, fail-closed licence gate.~~ **§71 — none of the four is implemented. "Regulator-defensible" is a compliance assurance to a bank compliance officer and must not be said.**
+7. **Philippine-specific.** ~~Philippine timezone, Globe/Smart/DITO labelling, multi-PBX support (3CX, Zoiper, Asterisk WebSocket).~~ **§71 — no PBX integration of any kind. Philippine timezone and market context are real positioning; the multi-PBX list is not.**
+9. ~~**WebRTC softphone built-in.** No separate dialer to license.~~ **§71 — there is no telephony in this build.**
+11. ~~**Predictive dialer with abandon-rate reporting.**~~ **§71 — no dialer and no abandon-rate reporting.**
 
 ### 5.2 Soft differentiators (worth saying, but verify before claiming in ads)
 
@@ -351,9 +430,9 @@ A simple plucked acoustic-guitar pattern at a moderate tempo in the first shot, 
 
 | Objection | Response | Where to address |
 |---|---|---|
-| **"We already have a CRM and a separate dialer. Why replace?"** | Replace 3–5 tools with one. Same data model across desk, dialer, mobile, QA. One audit log. Lower TCO. | Replace-Ad creative + IT Lead one-pager |
-| **"Will it pass the next BSP / BSP-equivalent audit?"** | Regulator-defensible by default: quiet hours, C&D enforcement, immutable Purge Log, abandon-rate, GPS-tagged field visits. | Compliance Officer one-pager + Regulator creative |
-| **"How do I know my field agents will actually use the app?"** | Server-side enforcement: agents can only see their own accounts, can only log their own visits, can't bypass the disposition workflow. | Field Supervisor one-pager + Field Agent App demo |
+| **"We already have a CRM and a separate dialer. Why replace?"** | Replace 3–5 tools with one. Same data model across desk, dialer, mobile, QA. ~~One audit log.~~ **§71 — no audit log exists.** Lower TCO. | Replace-Ad creative + IT Lead one-pager |
+| **"Will it pass the next BSP / BSP-equivalent audit?"** | ~~Regulator-defensible by default: quiet hours, C&D enforcement, immutable Purge Log, abandon-rate, GPS-tagged field visits.~~ **§71 — §5.1 item 5. Do not answer this objection with a compliance assurance; none of it is built.** | Compliance Officer one-pager + Regulator creative |
+| **"How do I know my field agents will actually use the app?"** | Server-side enforcement: agents can only see their own accounts, can only log their own visits, can't bypass the disposition workflow. **§71 — this is FALSE and is the most dangerous claim in the file: there is no per-agent scoping at all. Every authenticated operator reads every record, and there is no field app.** | Field Supervisor one-pager + Field Agent App demo |
 
 ### 9.2 Anti-personas (who we will lose, and that's fine)
 

@@ -166,7 +166,8 @@ export default function CompaniesPage() {
                     showToast(`Company "${r.name}" deleted.`, "info");
                   }}
                   className="p-1.5 text-muted-foreground hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
-                  title="Delete Company"
+                  aria-label={`Delete ${r.name}`}
+                  title={`Delete ${r.name}`}
                 >
                   <Trash2 className="size-3.5" />
                 </button>
@@ -187,10 +188,14 @@ export default function CompaniesPage() {
         <form onSubmit={handleCreateCompany} className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="company-name"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Company Name *
               </label>
               <input
+                id="company-name"
                 required
                 type="text"
                 placeholder="e.g. Maya Bank / Voyager Innovations"
@@ -201,10 +206,14 @@ export default function CompaniesPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="website-domain"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Website Domain *
               </label>
               <input
+                id="website-domain"
                 required
                 type="text"
                 placeholder="e.g. voyager.ph"
@@ -217,10 +226,14 @@ export default function CompaniesPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="industry"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Industry Sector
               </label>
               <select
+                id="industry"
                 value={companyForm.industry}
                 onChange={(e) => setCompanyForm({ ...companyForm, industry: e.target.value })}
                 className="h-9 w-full rounded-xl border border-border bg-card px-2.5 text-xs text-foreground outline-none focus:border-[#1975f2] dark:border-neutral-800 dark:bg-neutral-900 cursor-pointer"
@@ -235,10 +248,14 @@ export default function CompaniesPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="arr-estimate-pesos"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Estimated ARR in Pesos (₱) *
               </label>
               <input
+                id="arr-estimate-pesos"
                 required
                 type="number"
                 min={100000}
@@ -254,10 +271,14 @@ export default function CompaniesPage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="employee-headcount"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Employee Headcount
               </label>
               <input
+                id="employee-headcount"
                 type="number"
                 min={1}
                 value={companyForm.employees}
@@ -269,10 +290,14 @@ export default function CompaniesPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-foreground mb-1">
+              <label
+                htmlFor="office-location"
+                className="block text-xs font-semibold text-foreground mb-1"
+              >
                 Office / Hub Location
               </label>
               <input
+                id="office-location"
                 type="text"
                 placeholder="e.g. BGC, Taguig City"
                 value={companyForm.location}

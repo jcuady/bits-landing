@@ -816,6 +816,12 @@ export const bitsProducts = [
   },
 ] as const;
 
+/**
+ * Derived catalogue size. Never hardcode this — eight pages render it and the
+ * catalogue changes as products are collapsed into Operations 360 modules.
+ */
+export const PRODUCT_COUNT = bitsProducts.length;
+
 /* ── Universal White-Label & Custom Branding Option (Available Across All 18 Products) ── */
 export const whiteLabelBrandingOption = {
   id: "white-label",

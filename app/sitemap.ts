@@ -120,6 +120,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },
+    {
+      // Public NPC/GDPR compliance disclosure — indexable, not a private page.
+      url: `${site.url}/cookies`,
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    },
   ];
 }
 

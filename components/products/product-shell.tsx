@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDemo } from "@/lib/products/demo-store";
-import { getProductById } from "@/lib/products/registry";
+import { getProductById, ENGINE_COUNT } from "@/lib/products/registry";
 import { DemoToolbar } from "@/components/products/demo-toolbar";
 import {
   LayoutDashboard,
@@ -22,6 +22,7 @@ import {
   Sparkles,
   Layers,
   ShieldAlert,
+  Inbox,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,20 @@ const DEFAULT_PRODUCT_NAV: Record<string, NavItem[]> = {
       badge: "1-Click",
     },
   ],
+  "crm-support": [
+    { label: "Service Desk Overview", href: "/crm-support", icon: LayoutDashboard },
+    { label: "Ticket Queue", href: "/crm-support/tickets", icon: Inbox, badge: "SLA" },
+  ],
+  "crm-marketing": [
+    { label: "Journey Command Center", href: "/crm-marketing", icon: LayoutDashboard },
+    { label: "Audience Segments", href: "/crm-marketing/audiences", icon: Users, badge: "Targeting" },
+  ],
+  "crm-commerce": [
+    { label: "Revenue Operations", href: "/crm-commerce", icon: LayoutDashboard },
+    { label: "Invoices", href: "/crm-commerce/invoices", icon: FileSpreadsheet, badge: "12% VAT" },
+    { label: "Subscriptions", href: "/crm-commerce/subscriptions", icon: Users },
+    { label: "Reconciliation", href: "/crm-commerce/reconciliation", icon: Building2, badge: "Ledger" },
+  ],
 };
 
 interface ProductShellProps {
@@ -89,6 +104,14 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
 
   return (
     <div className="flex min-h-[100dvh] flex-col bg-[#0a2046] text-slate-100 antialiased font-sans">
+      {/* Skip link — keyboard users can jump past the sidebar to the workspace. */}
+      <a
+        href="#content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[#0a2046]"
+      >
+        Skip to main content
+      </a>
+
       {/* 1. Global Sticky Testing Toolbar */}
       <DemoToolbar productId={productId} />
 
@@ -135,16 +158,17 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
             </div>
             {effectiveNavItems.map((item) => {
               const Icon = item.icon;
-              // Check if active (handle base path and subpaths)
+              // Active when this item is the exact route, or (for non-root
+              // items) when the current path sits underneath it.
+              const isRootItem = item.href === `/${productId}`;
               const isActive =
-                pathname === item.href ||
-                (item.href !== "/crm-sales" && pathname.startsWith(item.href));
+                pathname === item.href || (!isRootItem && pathname.startsWith(`${item.href}/`));
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`group flex items-center justify-between rounded-xl px-3 py-2.5 text-xs font-medium transition cursor-pointer ${
+                  className={`group flex min-h-11 items-center justify-between rounded-xl px-3 py-2.5 text-xs font-medium transition cursor-pointer ${
                     isActive
                       ? "bg-blue-600 text-white shadow-sm shadow-blue-600/30 font-semibold"
                       : "text-sky-100/90 hover:bg-white/10 hover:text-white"
@@ -194,7 +218,7 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
             <form action={logoutAction} className="mt-2">
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-1.5 rounded-lg border border-sky-400/25 py-1.5 text-xs font-medium text-sky-200 hover:bg-red-900/30 hover:text-red-200 hover:border-red-400/30 transition cursor-pointer"
+                className="w-full flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-400/25 py-1.5 text-xs font-medium text-sky-200 hover:bg-red-900/30 hover:text-red-200 hover:border-red-400/30 transition cursor-pointer"
               >
                 <LogOut className="h-3 w-3" />
                 <span>Exit Sandbox</span>
@@ -212,7 +236,8 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
                   <div className="font-bold text-white">{product?.name || "BITS"}</div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-1 rounded-lg hover:bg-white/10 text-sky-200 hover:text-white"
+                    aria-label="Close navigation menu"
+                    className="p-1 rounded-lg hover:bg-white/10 text-sky-200 hover:text-white cursor-pointer"
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -225,7 +250,7 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium ${
+                        className={`flex min-h-11 items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium ${
                           isActive ? "bg-blue-600 text-white" : "text-sky-100 hover:bg-white/10 hover:text-white"
                         }`}
                       >
@@ -252,7 +277,9 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-1.5 rounded-lg border border-sky-400/30 text-sky-200 hover:text-white hover:bg-white/10"
+                aria-label="Open navigation menu"
+                aria-expanded={mobileMenuOpen}
+                className="lg:hidden flex size-11 items-center justify-center rounded-lg border border-sky-400/30 text-sky-200 hover:text-white hover:bg-white/10 cursor-pointer"
               >
                 <Menu className="h-4 w-4" />
               </button>
@@ -279,16 +306,18 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
               {/* View Matrix link */}
               <Link
                 href="/demo"
-                className="hidden sm:flex items-center gap-1 text-xs text-sky-300 hover:text-white font-medium transition"
+                className="hidden sm:flex items-center gap-1 min-h-11 px-2 text-xs text-sky-300 hover:text-white font-medium transition"
               >
                 <Layers className="h-3.5 w-3.5" />
-                <span>All 18 Engines</span>
+                {/* §88 — typed "18 Engines" for a link to /demo, which renders
+                    PRODUCT_REGISTRY (19). Derived now. */}
+                <span>All {ENGINE_COUNT} Engines</span>
               </Link>
             </div>
           </header>
 
           {/* Scrollable Content Body */}
-          <main className="flex-1 overflow-y-auto bg-[#0a2046] p-4 sm:p-6 lg:p-8">
+          <main id="content" className="flex-1 overflow-y-auto bg-[#0a2046] p-4 sm:p-6 lg:p-8">
             <div className="mx-auto max-w-7xl">{children}</div>
           </main>
         </div>

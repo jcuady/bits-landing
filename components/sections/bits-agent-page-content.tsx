@@ -19,7 +19,10 @@ const AGENT_SPECIFICATIONS = [
   { label: "Response latency", value: "< 300ms", detail: "Conversational turn-taking" },
   { label: "Concurrency", value: "Configured", detail: "Simultaneous active calls" },
   { label: "Language", value: "English & Taglish", detail: "Accent and cadence options" },
-  { label: "Controls", value: "Policy-bound", detail: "Quiet hours, DNC, consent, audit" },
+  /* SYSTEM_AUDIT.md §50. Was: value "Policy-bound", detail "Quiet hours, DNC,
+       consent, audit". Contact-rule enforcement is "not part of this build"
+       (lib/security-data.ts:120) and there is no audit store. */
+  { label: "Controls", value: "Policy-bound", detail: "Consent & opt-out honoured" },
 ] as const;
 
 export function BitsAgentPageContent() {
@@ -41,7 +44,8 @@ export function BitsAgentPageContent() {
                 </h1>
                 <p className="text-lede mt-5 max-w-[46ch] text-pretty text-slateblue">
                   Deploy configured voice and messaging agents for follow-up, PTP handling,
-                  and confirmations—with campaign rules, quiet hours, and an audit trail.
+                  and confirmations—with campaign rules, consent capture, and a
+                  logged delivery outcome per message.
                 </p>
               </Reveal>
 
@@ -94,8 +98,8 @@ export function BitsAgentPageContent() {
             </h2>
             <p className="text-lede mt-4 max-w-[46ch] text-pretty text-slateblue">
               BITSagent works from campaign rules and account context. Messaging depends on
-              configured communication providers. Predictive dialing depends on telephony
-              infrastructure.
+              configured communication providers. Voice telephony is not included in this
+              build — predictive dialing would require telephony infrastructure.
             </p>
           </Reveal>
 

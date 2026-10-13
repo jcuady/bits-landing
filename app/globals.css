@@ -4,7 +4,7 @@
 @import url("https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5/400.css");
 @import url("https://cdn.jsdelivr.net/npm/@fontsource/geist-mono@5/500.css");
 @import "tailwindcss";
-@import "../components/bionis/dashboard.css";
+@import "../components/ui/crm-dashboard.css";
 
 @variant dark (&:where(.dark, .dark *));
 

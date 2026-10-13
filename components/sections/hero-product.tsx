@@ -4,8 +4,6 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import {
@@ -27,11 +25,15 @@ import {
   Headphones,
 } from "lucide-react";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-type ActiveTab = "cockpit" | "softphone" | "field" | "qa";
+type ActiveTab = "cockpit" | "telephony" | "field" | "qa";
 
 export function HeroProduct({ className }: { className?: string }) {
   const { openModal } = useConsultationModal();
@@ -48,64 +50,64 @@ export function HeroProduct({ className }: { className?: string }) {
   };
 
   // ── GSAP SCROLLTRIGGER PINNING: LOCK SECTION & SCRUB 4 SPECIMENS ──
-  React.useEffect(() => {
-    if (typeof window === "undefined" || !deckRef.current) return;
+  useGSAP(
+    () => {
+      if (typeof window === "undefined" || !deckRef.current) return;
 
-    const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // Desktop & Large Viewports (>= 1024px and min-height >= 600px): Smooth Interactive Scrub
-      mm.add("(min-width: 1024px) and (min-height: 600px)", () => {
-        if (!containerRef.current || !deckRef.current) return;
+      mm.add(
+        "(min-width: 1024px) and (min-height: 600px)",
+        () => {
+          if (!containerRef.current || !deckRef.current) return;
 
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: "top 72px",
-          end: "bottom bottom",
-          scrub: 0.35,
-          refreshPriority: 10,
-          onUpdate: (self) => {
-            if (isManualClickingRef.current) return;
-            const p = self.progress;
+          ScrollTrigger.create({
+            trigger: containerRef.current,
+            start: "top 72px",
+            end: "bottom bottom",
+            scrub: 0.35,
+            refreshPriority: 10,
+            onUpdate: (self) => {
+              if (isManualClickingRef.current) return;
+              const p = self.progress;
 
-            let nextTab: ActiveTab = "cockpit";
-            let subP = 0;
-            if (p < 0.25) {
-              nextTab = "cockpit";
-              subP = p / 0.25;
-            } else if (p < 0.5) {
-              nextTab = "softphone";
-              subP = (p - 0.25) / 0.25;
-            } else if (p < 0.75) {
-              nextTab = "field";
-              subP = (p - 0.5) / 0.25;
-            } else {
-              nextTab = "qa";
-              subP = (p - 0.75) / 0.25;
-            }
+              let nextTab: ActiveTab = "cockpit";
+              let subP = 0;
+              if (p < 0.25) {
+                nextTab = "cockpit";
+                subP = p / 0.25;
+              } else if (p < 0.5) {
+                nextTab = "telephony";
+                subP = (p - 0.25) / 0.25;
+              } else if (p < 0.75) {
+                nextTab = "field";
+                subP = (p - 0.5) / 0.25;
+              } else {
+                nextTab = "qa";
+                subP = (p - 0.75) / 0.25;
+              }
 
-            if (deckRef.current) {
-              deckRef.current.style.setProperty(
-                "--tab-progress",
-                `${Math.min(100, Math.max(14, subP * 100))}%`
-              );
-            }
+              if (deckRef.current) {
+                deckRef.current.style.setProperty(
+                  "--tab-progress",
+                  `${Math.min(100, Math.max(14, subP * 100))}%`
+                );
+              }
 
-            setActiveTab((prev) => (prev !== nextTab ? nextTab : prev));
-          },
-        });
-      });
-    }, containerRef);
+              setActiveTab((prev) => (prev !== nextTab ? nextTab : prev));
+            },
+          });
+        }
+      );
 
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
 
-    return () => {
-      clearTimeout(timer);
-      ctx.revert();
-    };
-  }, []);
+      return () => clearTimeout(timer);
+    },
+    { scope: containerRef }
+  );
 
   const handleTabClick = (tab: ActiveTab, targetRatio: number, message: string) => {
     isManualClickingRef.current = true;
@@ -116,10 +118,8 @@ export function HeroProduct({ className }: { className?: string }) {
       deckRef.current.style.setProperty("--tab-progress", "80%");
     }
 
-    // Scroll smoothly to corresponding progress point in the container
-    const st = ScrollTrigger.getAll().find(
-      (s) => s.trigger === containerRef.current
-    );
+    // Scroll smoothly to corresponding progress point in the container.
+    const st = ScrollTrigger.getAll().find((s) => s.trigger === containerRef.current);
     if (st) {
       const targetScroll = st.start + (st.end - st.start) * targetRatio;
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
@@ -177,7 +177,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   </span>
                 </div>
                 <span className="text-[11px] sm:text-xs text-slate-500 font-medium line-clamp-1">
-                  Unified Collections CRM · Predictive Softphone · GPS Field App · Real-Time QA
+                  Unified Collections CRM · Work Queues · Field App (roadmap) · Real-Time QA
                 </span>
               </div>
             </div>
@@ -190,7 +190,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   <span className="relative inline-flex size-2 rounded-full bg-blue-600" />
                 </span>
                 <span className="text-[11px] font-bold text-slate-600">
-                  Cycle ({activeTab === "cockpit" ? "1" : activeTab === "softphone" ? "2" : activeTab === "field" ? "3" : "4"}/4)
+                  Cycle ({activeTab === "cockpit" ? "1" : activeTab === "telephony" ? "2" : activeTab === "field" ? "3" : "4"}/4)
                 </span>
               </div>
 
@@ -202,7 +202,7 @@ export function HeroProduct({ className }: { className?: string }) {
               <button
                 type="button"
                 onClick={() => openModal("OPERATIONS 360 Feature Walkthrough")}
-                className="group relative inline-flex min-h-[38px] sm:min-h-[40px] items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 pl-4 pr-1.5 py-1 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all duration-200 active:scale-[0.98] cursor-pointer"
+                className="group relative inline-flex min-h-11 items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 pl-4 pr-1.5 py-1 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all duration-200 active:scale-[0.98] cursor-pointer"
               >
                 <span>Book a Consultation</span>
                 <span className="size-6 sm:size-6.5 rounded-full bg-white/20 flex items-center justify-center text-xs transition-transform duration-200 group-hover:translate-x-0.5 font-bold">
@@ -253,19 +253,19 @@ export function HeroProduct({ className }: { className?: string }) {
               )}
             </button>
 
-            {/* Tab 2: Predictive Dialer */}
+            {/* Tab 2: Telephony — roadmap specimen, no telephony ships */}
             <button
               type="button"
               onClick={() =>
                 handleTabClick(
-                  "softphone",
+                  "telephony",
                   0.35,
-                  "Predictive Dialer: ~0.4s screen pop, zero desk phones, 3.2x live talk time."
+                  "Roadmap, not shipped: predictive dialing. No telephony exists in this build."
                 )
               }
               className={cn(
                 "group relative flex min-h-[38px] sm:min-h-[40px] items-center justify-center gap-1.5 rounded-lg sm:rounded-xl px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer text-center overflow-hidden",
-                activeTab === "softphone"
+                activeTab === "telephony"
                   ? "bg-white text-blue-700 shadow-sm shadow-slate-900/5 ring-1 ring-slate-900/5"
                   : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
               )}
@@ -273,11 +273,11 @@ export function HeroProduct({ className }: { className?: string }) {
               <PhoneCall
                 className={cn(
                   "size-3.5 shrink-0 transition-colors",
-                  activeTab === "softphone" ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
+                  activeTab === "telephony" ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
                 )}
               />
-              <span className="truncate">Predictive Dialer</span>
-              {activeTab === "softphone" && (
+              <span className="truncate">Telephony (roadmap)</span>
+              {activeTab === "telephony" && (
                 <div className="absolute inset-x-2 bottom-0.5 h-0.5 rounded-full bg-blue-100/80 overflow-hidden">
                   <div
                     className="h-full bg-blue-600 rounded-full transition-all duration-75"
@@ -335,7 +335,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 handleTabClick(
                   "qa",
                   0.90,
-                  "QA Scoring: 100% call compliance auditing and BSP 454/857 infraction detection."
+                  "Roadmap, not shipped: call compliance auditing and BSP 454/857 detection — no telephony exists in this build."
                 )
               }
               className={cn(
@@ -400,7 +400,7 @@ export function HeroProduct({ className }: { className?: string }) {
                         <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
                           Active Delinquent Account #PH-230908
                         </span>
-                        <h4 className="text-base sm:text-lg font-black text-slate-900 mt-0.5">Danilo Bautista</h4>
+                        <p className="text-base sm:text-lg font-black text-slate-900 mt-0.5">Danilo Bautista</p>
                         <p className="text-[11px] text-slate-600">Commercial Term Loan · 102 Days Past Due (DPD)</p>
                       </div>
                       <div className="text-right">
@@ -479,9 +479,9 @@ export function HeroProduct({ className }: { className?: string }) {
                     Collections Core · PTP Velocity
                   </div>
 
-                  <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
+                  <p className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
                     Never Lose Track of a Promised Payment Again.
-                  </h3>
+                  </p>
 
                   {/* Problem vs Solution Callout */}
                   <div className="mt-2 rounded-xl border border-rose-200/80 bg-rose-50/60 p-2.5 space-y-0.5">
@@ -544,23 +544,23 @@ export function HeroProduct({ className }: { className?: string }) {
                 </div>
               </div>
             </motion.div>
-          ) : activeTab === "softphone" ? (
+          ) : activeTab === "telephony" ? (
             <motion.div
-              key="tab-softphone"
+              key="tab-telephony"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-3.5 lg:gap-4 items-stretch"
             >
-              {/* Left: Interactive WebRTC Softphone Screen Pop Simulator (7 cols) */}
+              {/* Left: Telephony console specimen (7 cols) - no telephony ships, see label */}
               <div className="lg:col-span-7 flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-white/80 bg-white/85 p-3.5 sm:p-4.5 lg:p-5 shadow-xl shadow-blue-950/10 backdrop-blur-2xl">
                 <div>
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2.5">
                     <div className="flex items-center gap-2">
                       <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                       <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-800">
-                        BITS WebRTC Softphone · Live Pacing Active
+                        Telephony Console (specimen) · Not Shipped
                       </span>
                     </div>
                     <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[0.62rem] font-bold text-blue-700 border border-blue-200">
@@ -581,7 +581,7 @@ export function HeroProduct({ className }: { className?: string }) {
                     <div className="grid sm:grid-cols-2 gap-2 pt-0.5">
                       <div>
                         <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Borrower Record</span>
-                        <h4 className="text-base font-black text-slate-900 mt-0.5">Camille Mendoza</h4>
+                        <p className="text-base font-black text-slate-900 mt-0.5">Camille Mendoza</p>
                         <p className="text-[11px] text-slate-600">+63 917 842 1904 · Makati City</p>
                       </div>
 
@@ -592,11 +592,13 @@ export function HeroProduct({ className }: { className?: string }) {
                       </div>
                     </div>
 
-                    {/* Simulated Live Audio Waveform */}
+                    {/* Simulated waveform. §75: removed the "WebRTC Opus Audio HD" label and the
+                         pulse on the volume icon — there is no audio pipeline and no codec
+                         in this build, so an animated waveform asserts a running call. */}
                     <div className="rounded-lg bg-slate-900 p-2 text-white flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <Volume2 className="size-3.5 text-emerald-400 animate-pulse" />
-                        <span className="text-[11px] font-mono font-bold">WebRTC Opus Audio HD</span>
+                        <Volume2 className="size-3.5 text-slate-400" />
+                        <span className="text-[11px] font-mono font-bold">Specimen waveform · no audio pipeline</span>
                       </div>
 
                       <div className="flex items-center gap-1 h-3.5">
@@ -626,13 +628,13 @@ export function HeroProduct({ className }: { className?: string }) {
 
                       <div className="rounded-lg border border-blue-200 bg-blue-50/70 p-2">
                         <Mic className="size-3.5 text-blue-700 mx-auto mb-0.5" />
-                        <span className="font-bold text-blue-950 block text-[11px]">Whisper</span>
+                        <span className="font-bold text-blue-950 block text-[11px]">Whisper (roadmap)</span>
                         <span className="text-[9px] text-blue-700">Coach in Agent Ear</span>
                       </div>
 
                       <div className="rounded-lg border border-slate-200 bg-slate-50 p-2 hover:border-rose-300 transition-colors">
                         <Zap className="size-3.5 text-rose-600 mx-auto mb-0.5" />
-                        <span className="font-bold text-slate-900 block text-[11px]">Barge In</span>
+                        <span className="font-bold text-slate-900 block text-[11px]">Barge In (roadmap)</span>
                         <span className="text-[9px] text-slate-500">Take Over Line</span>
                       </div>
                     </div>
@@ -642,7 +644,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 {/* Bottom Reassurance Strip */}
                 <div className="mt-2.5 rounded-lg bg-blue-50/70 p-2 text-[11px] text-blue-900 flex items-center justify-between border border-blue-100">
                   <span className="font-semibold">Hardware Requirement:</span>
-                  <span className="font-bold text-blue-700">₱0 PBX Hardware · 100% In-Browser WebRTC</span>
+                  <span className="font-bold text-blue-700">No telephony ships in this build — roadmap</span>
                 </div>
               </div>
 
@@ -650,12 +652,12 @@ export function HeroProduct({ className }: { className?: string }) {
               <div className="lg:col-span-5 flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-white/80 bg-white/85 p-3.5 sm:p-4.5 lg:p-5 shadow-xl shadow-blue-950/10 backdrop-blur-2xl">
                 <div>
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-700 mb-2">
-                    Telephony Engine · Zero Dead-Air
+                    Roadmap · No Telephony Ships
                   </div>
 
-                  <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
-                    Triple Live Agent Talk Time. Eliminate PBX Hardware Fines.
-                  </h3>
+                  <p className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
+                    Roadmap, not shipped. No telephony exists in this build — this panel illustrates a design that has not been implemented.
+                  </p>
 
                   {/* Problem vs Solution Callout */}
                   <div className="mt-2 rounded-xl border border-rose-200/80 bg-rose-50/60 p-2.5 space-y-0.5">
@@ -664,7 +666,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       <span>The Floor Pain Point:</span>
                     </div>
                     <p className="text-[11px] text-rose-950/80 leading-relaxed">
-                      Agents waste 45 minutes of every hour dialing numbers manually and listening to busy tones, leaving only 15 minutes of live negotiation.
+                      Floor pain point: agents in this industry waste 45 minutes of every hour dialing numbers manually and listening to busy tones, leaving only 15 minutes of live negotiation.
                     </p>
                   </div>
 
@@ -690,14 +692,14 @@ export function HeroProduct({ className }: { className?: string }) {
                       <CheckCircle2 className="size-3.5 text-blue-600 shrink-0 mt-0.5" />
                       <div>
                         <span className="font-bold text-slate-900 text-[11px] sm:text-xs">Live Floor Coaching</span>
-                        <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Supervisors listen silently, whisper cues, or take over difficult calls.</p>
+                        <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Roadmap, not shipped: supervisor listen, whisper cues and call takeover — no telephony exists in this build.</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2 text-xs">
                       <CheckCircle2 className="size-3.5 text-blue-600 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-bold text-slate-900 text-[11px] sm:text-xs">Zero PBX Hardware</span>
+                        <span className="font-bold text-slate-900 text-[11px] sm:text-xs">No telephony in this build</span>
                         <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Operates 100% in-browser on laptops and headsets. No desk phones.</p>
                       </div>
                     </div>
@@ -709,10 +711,10 @@ export function HeroProduct({ className }: { className?: string }) {
                   <span className="text-xs font-bold text-blue-700">51.2% Connect Rate Average</span>
                   <button
                     type="button"
-                    onClick={() => openModal("Predictive Dialer Consultation")}
+                    onClick={() => openModal("Collections Workflow Consultation")}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-slate-50"
                   >
-                    <span>Test Dialer in Sandbox</span>
+                    <span>Test Dialer in Sandbox (roadmap)</span>
                     <ArrowRight className="size-3" />
                   </button>
                 </div>
@@ -840,9 +842,9 @@ export function HeroProduct({ className }: { className?: string }) {
                     Field Recovery Assurance · Zero Ghost Visits
                   </div>
 
-                  <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
+                  <p className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
                     Eliminate Fake Visit Sheets and Unverified Fuel Claims.
-                  </h3>
+                  </p>
 
                   {/* Problem vs Solution Callout */}
                   <div className="mt-2 rounded-xl border border-rose-200/80 bg-rose-50/60 p-2.5 space-y-0.5">
@@ -925,7 +927,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       </span>
                     </div>
                     <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[0.62rem] font-bold text-emerald-700 border border-emerald-200">
-                      BSP Circular 454 &amp; 857 Aligned
+                      BSP 454/857 — roadmap, not certified
                     </span>
                   </div>
 
@@ -998,8 +1000,16 @@ export function HeroProduct({ className }: { className?: string }) {
                       <div className="flex items-center gap-2 rounded-lg border border-slate-100 bg-emerald-50/60 p-2 text-emerald-900">
                         <Check className="size-3.5 text-emerald-600 shrink-0" />
                         <div>
-                          <span className="font-bold block text-[11px]">Immutable Audit Log</span>
-                          <span className="text-[9.5px] text-emerald-700">Encrypted call audio locked</span>
+                          <span className="font-bold block text-[11px]">
+                            {/* §49. Previously "Immutable Audit Log" with the
+                                sub-label "Encrypted call audio locked". Both false:
+                                there is no audit store, and there is no call
+                                recording — no audio pipeline exists at all. */}
+                            Outbound Email Log
+                          </span>
+                          <span className="text-[9.5px] text-emerald-700">
+                            Delivery outcome recorded per send
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1020,9 +1030,9 @@ export function HeroProduct({ className }: { className?: string }) {
                     Statutory Governance · Speech AI Auditing
                   </div>
 
-                  <h3 className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
+                  <p className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
                     Catch Rogue Agents Before the Bank Audits or Fines You.
-                  </h3>
+                  </p>
 
                   {/* Problem vs Solution Callout */}
                   <div className="mt-2 rounded-xl border border-rose-200/80 bg-rose-50/60 p-2.5 space-y-0.5">
@@ -1031,7 +1041,7 @@ export function HeroProduct({ className }: { className?: string }) {
                       <span>The Floor Pain Point:</span>
                     </div>
                     <p className="text-[11px] text-rose-950/80 leading-relaxed">
-                      Manual QA audits only 2% of calls. One rogue agent using profane threats or calling in quiet hours can lose your bank contract.
+                      Floor pain point: manual QA audits only 2% of calls — one rogue agent using profane threats or calling in quiet hours can lose your bank contract.
                     </p>
                   </div>
 
@@ -1064,8 +1074,16 @@ export function HeroProduct({ className }: { className?: string }) {
                     <div className="flex items-start gap-2 text-xs">
                       <CheckCircle2 className="size-3.5 text-blue-600 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-bold text-slate-900 text-[11px] sm:text-xs">Bank Audit Certificates</span>
-                        <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Export tamper-proof compliance logs for partner banks and regulators.</p>
+                        <span className="font-bold text-slate-900 text-[11px] sm:text-xs">
+                          {/* §49. Previously "Bank Audit Certificates" — "Export
+                              tamper-proof compliance logs for partner banks and
+                              regulators." No audit store, no certificate export,
+                              no tamper-evident store. */}
+                          Record Access Basis
+                        </span>
+                        <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">
+                          Every CRM route verifies a server-side session before touching data.
+                        </p>
                       </div>
                     </div>
                   </div>

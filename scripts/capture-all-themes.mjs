@@ -73,9 +73,7 @@ async function run() {
   console.log("Setting CRM to Light Mode...");
   await page.emulateMedia({ colorScheme: "light" });
   await page.evaluate(() => {
-    localStorage.setItem("bits_theme", "light");
-    localStorage.setItem("bionis-theme", "light");
-    document.documentElement.classList.remove("dark");
+    localStorage.setItem("bits_theme", "light");    document.documentElement.classList.remove("dark");
   });
   await page.waitForTimeout(1000);
 
@@ -93,7 +91,7 @@ async function run() {
     const sidebarColor = sidebarLink ? window.getComputedStyle(sidebarLink).color : "rgb(9, 19, 34)";
     const heading = document.querySelector("h1, h2");
     const headingColor = heading ? window.getComputedStyle(heading).color : "rgb(9, 19, 34)";
-    const statCard = document.querySelector(".bionis-card");
+    const statCard = document.querySelector(".crm-dashboard");
     const cardBg = statCard ? window.getComputedStyle(statCard).backgroundColor : "rgba(255,255,255,0.85)";
     return { sidebarBg, sidebarColor, headingColor, cardBg };
   });
@@ -102,9 +100,7 @@ async function run() {
   console.log("Setting CRM to Dark Mode...");
   await page.emulateMedia({ colorScheme: "dark" });
   await page.evaluate(() => {
-    localStorage.setItem("bits_theme", "dark");
-    localStorage.setItem("bionis-theme", "dark");
-    document.documentElement.classList.add("dark");
+    localStorage.setItem("bits_theme", "dark");    document.documentElement.classList.add("dark");
   });
   // Also click the topbar theme toggle if present to synchronize React state
   const themeToggle = page.getByRole("button", { name: /toggle theme/i }).first();
@@ -129,7 +125,7 @@ async function run() {
     const sidebarColor = sidebarLink ? window.getComputedStyle(sidebarLink).color : "rgb(255, 255, 255)";
     const heading = document.querySelector("h1, h2");
     const headingColor = heading ? window.getComputedStyle(heading).color : "rgb(255, 255, 255)";
-    const statCard = document.querySelector(".bionis-card");
+    const statCard = document.querySelector(".crm-dashboard");
     const cardBg = statCard ? window.getComputedStyle(statCard).backgroundColor : "rgb(7, 14, 28)";
     return { sidebarBg, sidebarColor, headingColor, cardBg };
   });
@@ -142,9 +138,7 @@ async function run() {
   console.log("Setting /demo to Light Mode...");
   await page.emulateMedia({ colorScheme: "light" });
   await page.evaluate(() => {
-    localStorage.setItem("bits_theme", "light");
-    localStorage.setItem("bionis-theme", "light");
-    document.documentElement.classList.remove("dark");
+    localStorage.setItem("bits_theme", "light");    document.documentElement.classList.remove("dark");
   });
   await page.waitForTimeout(1000);
 
@@ -158,9 +152,7 @@ async function run() {
   console.log("Setting /demo to Dark Mode...");
   await page.emulateMedia({ colorScheme: "dark" });
   await page.evaluate(() => {
-    localStorage.setItem("bits_theme", "dark");
-    localStorage.setItem("bionis-theme", "dark");
-    document.documentElement.classList.add("dark");
+    localStorage.setItem("bits_theme", "dark");    document.documentElement.classList.add("dark");
   });
   const demoToggle = page.getByRole("button", { name: /toggle theme/i }).first();
   if (await demoToggle.count()) {

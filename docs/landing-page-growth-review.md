@@ -4,7 +4,28 @@
 > **Evaluator Perspective**: Principal CRO Landing Web Designer & Technical Growth Architect  
 > **Audited Surface**: Boundless IT Solutions (BITS) — Public Marketing Website & Product Ecosystem (`https://www.boundlessits.com`)  
 > **Standards Applied**: `landing-page-growth-reviewer`, `compact-landing`, `ui-ux-pro-max`, `impeccable`  
-> **Status**: Verified & Production Ready (October 2026)  
+> **Status**: Point-in-time review. Scored findings are preserved as written, not re-scored.
+
+> **Corrected 8 October 2026 (`SYSTEM_AUDIT.md` §44).** This review describes the
+> homepage as it stood before the security-claims pass. Three things changed and
+> are now wrong here:
+>
+> 1. **"Status: Verified & Production Ready" was not true of production.**
+>    `https://www.boundlessits.com/` still serves a **pre-audit build**
+>    carrying the false security claims and fabricated `aggregateRating` markup
+>    that were removed from the working tree in §29 and §30. It is unreviewed,
+>    not production-ready.
+> 2. **Row 10 described a section that no longer exists.** It cited a
+>    "granular RBAC matrix, immutable audit logs, air-gapped encryption, and
+>    BSP data sovereignty". The shipped component now carries none of those.
+>    Corrected in place.
+> 3. **The scores were not re-run.** They remain the original reviewer's
+>    judgements. Re-scoring against the current build is work nobody has done,
+>    and editing a score to look current would fabricate a review.
+>
+> Numeric marketing claims in this document ("68% TCO", "Sub-400ms WebRTC",
+> "99.9% SLA", "3.2x contact rate") are **not** gated and were not evaluated.
+> Substantiating them is an owner decision (§28).  
 
 ---
 
@@ -54,7 +75,7 @@ To avoid cognitive overload while maximizing lead capture, the landing page depl
 
 ## 2. Public Page Inventory & Purpose (32 Canonical Routes)
 
-The BITS web application compiles cleanly to **72 routes** (including internal CRM tools and dynamic static-site generation). The 32 public indexable marketing routes serve clear, non-competing business functions:
+The BITS web application compiles cleanly. Route output is verified against the build manifests rather than a remembered total: **53 generated paths (45 route definitions + 8 dynamic)** as of 8 Oct 2026. An earlier figure of `72 routes` did not reproduce and was removed. The 32 public indexable marketing routes serve clear, non-competing business functions:
 
 | Canonical Route | Page Class | Architectural & Commercial Purpose | Primary CTA Destination |
 |:---|:---|:---|:---|
@@ -102,7 +123,7 @@ The BITS web application compiles cleanly to **72 routes** (including internal C
 | 7 | **Features Hero** | `features-hero.tsx` | High | **9.0/10** | Operations 360 Command Center: interactive mock window with realistic debt accounts, PTP automation, bulk operations, and 0.4s screen-pop. | ✅ Optimal |
 | 8 | **Floor Showcase** | `floor-showcase.tsx` | High | **9.5/10** | Deep dive into 5 floor operational tools: WebRTC Dialer, Walled Training Mode, QA Outlier Scorecards, Omnichannel Messaging, and Analytics. | ✅ Optimal |
 | 9 | **Industries** | `industries.tsx` | Medium | **8.5/10** | Focuses on 4 target sectors: BPO/Contact Centers, Debt Collection Agencies, Banks/Financial Institutions, and Growing Businesses. | ✅ Optimal |
-| 10 | **Security** | `security.tsx` | High | **9.0/10** | Granular RBAC matrix, immutable audit logs, air-gapped encryption, and BSP data sovereignty. Crucial for financial CIO sign-off. | ✅ Optimal |
+| 10 | **Security** | `security.tsx` | High | **9.0/10** | ~~Granular RBAC matrix, immutable audit logs, air-gapped encryption, and BSP data sovereignty. Crucial for financial CIO sign-off.~~ **Corrected §44:** none of the four is true of this build. What ships is a server-side session check on every CRM page and endpoint, `no-store` on personal-data responses, rate limiting and schema validation on public writes, four regulatory **principles** badges (BSP 454 & 857, NPC RA 10173, SEC MC 18, ISO 27001 *aligned*), and a role matrix explicitly badged **Roadmap** whose caption states any authenticated operator can read every CRM record. There is no audit log, no air-gapped build, and no per-role enforcement. | ⚠️ Was inaccurate; corrected |
 | 11 | **Deployment Models**| `deployment-models.tsx` | High | **9.0/10** | Cloud vs On-Premises architecture breakdown. Explains the financial and legal benefits of running software on office servers. | ✅ Optimal |
 | 12 | **Pricing** | `pricing.tsx` | Critical | **9.8/10** | Completely redesigned with 3 interactive product tracks (Operations 360, BITScrm, Custom Bundles), unclipped header scroll offset (`scroll-mt-36`), sleek modern glassmorphic cards, and zero per-seat penalty messaging. | ✅ Optimal |
 | 13 | **FAQ** | `faq.tsx` | Medium | **9.0/10** | 10 concrete, objection-handling FAQs addressing data migration, hardware requirements, pricing, and custom integrations. | ✅ Optimal |
@@ -185,7 +206,7 @@ To advance from current high-fidelity staging to maximum institutional authority
 | Evaluation Pillar | Measured Status | Verification Command / Evidence | Result |
 |:---|:---|:---|:---:|
 | **TypeScript Type Safety** | **0 Errors** | `npx tsc --noEmit` | ✅ 100% Pass |
-| **Next.js Turbopack Build** | **72/72 Routes Built** | `npm run build` | ✅ 100% Pass |
+| **Next.js Build** | **Passes** — 53 generated paths (45 route definitions + 8 dynamic), read from `.next/app-path-routes-manifest.json` | `npm run build` | ✅ verified 8 Oct 2026 |
 | **Static SSG Compilation** | **21 Products + 5 Articles** | Pre-rendered HTML (`generateStaticParams`) | ✅ 100% Pass |
 | **Mobile Touch Targets** | **$\ge 44$px for all controls** | Computed CSS height on buttons & inputs | ✅ 100% Pass |
 | **WCAG 2.1 AA Contrast** | **4.5:1 Minimum Contrast** | Text on backgrounds audited across light/dark surfaces | ✅ 100% Pass |

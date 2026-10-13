@@ -57,6 +57,7 @@ import {
   Building2,
   ShieldAlert,
   X,
+  Info,
 } from "lucide-react";
 
 const categoryFilters = [
@@ -79,7 +80,7 @@ function getProductPainPoint(id: string): { pain: string; solution: string } {
     case "service":
       return {
         pain: "Fragmented tools, disconnected telephony, separate QA spreadsheets, lost coaching logs, and delayed MIS reports.",
-        solution: "OPERATIONS 360 brings CRM, QA, Scorecards, Coaching, Dialer, LMS, WFM & Real-Time Dashboards into one source of truth.",
+        solution: "OPERATIONS 360 brings CRM, QA, Scorecards, Coaching, LMS, WFM & Real-Time Dashboards into one source of truth. No telephony ships in this build.",
       };
     case "ai-agent":
       return {
@@ -192,7 +193,7 @@ function getProductDeepSolution(id: string): ProductDeepSolution {
         idealFor: "BPOs, Contact Centers, Debt Recovery Agencies, Lending Desks & High-Throughput Operations",
         whoUses: "Business Owners, Operations Managers, Floor Supervisors & Frontline Agents",
         coreImpact: "Zero MIS Wait Time, 96.8% Schedule Adherence & +42% Operations Output",
-        workflowStep: "Replaces 5-8 fragmented software tools with one integrated operations suite: customer 360 management, 100% QA audits, 1-click coaching logs, auto-dialing, LMS modules, and live WFM floor adherence.",
+        workflowStep: "Replaces 5-8 fragmented software tools with one integrated operations suite: customer 360 management, native QA scorecards, 1-click coaching logs, LMS modules, and WFM floor adherence. No telephony ships in this build.",
       };
     case "ai-agent":
       return {
@@ -896,7 +897,7 @@ export function ProductsSuite() {
                       <Palette className="size-3.5" />
                       <span>White-Label Brand (Client Option)</span>
                       <span className="rounded-full bg-white/20 px-1.5 py-0.2 text-[0.6rem] font-extrabold uppercase">
-                        Live Preview
+                        Illustrative
                       </span>
                     </button>
                   </div>
@@ -932,7 +933,7 @@ export function ProductsSuite() {
                           : "bg-slate-200/70 text-slate-600"
                       )}
                     >
-                      {brandMode === "whitelabel" ? "100% White-Labeled" : "Live Workspace"}
+                      {brandMode === "whitelabel" ? "100% White-Labeled" : "Illustrative Preview"}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -947,7 +948,11 @@ export function ProductsSuite() {
                 {brandMode === "whitelabel" && (
                   <div className="border-b border-orange-200 bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 px-4 py-2 text-xs flex items-center justify-between">
                     <span className="text-[0.72rem] text-orange-950 font-medium">
-                      <strong>White-Label Option Active:</strong> Deployed with your company logo, custom domain (app.yourcompany.com), and corporate styling. Zero BITS branding or attribution under strict NDA.
+                      /* SYSTEM_AUDIT.md §56. This asserted a deployment ("White-Label Option
+       Active: Deployed with your company logo…") for a brand switcher that
+       only restyles a static mockup. It now states what the control actually
+       does — applies branding to this preview. */
+                      <strong>White-Label Option:</strong> Applies your company logo, custom domain (app.yourcompany.com), and corporate styling to this preview. Zero BITS branding or attribution under strict NDA.
                     </span>
                     <button
                       type="button"
@@ -984,6 +989,46 @@ export function ProductMockupBoard({ productId }: { productId: string }) {
 
   return (
     <div className="relative font-sans">
+      {/* SYSTEM_AUDIT.md §56 — synthetic-data label.
+       *
+       * These boards are hand-written interface mockups with invented accounts,
+       * balances and activity. Until now they carried NO label saying so, and the
+       * chrome wrapped around them asserted the opposite: a "Live Preview" badge,
+       * a "Live Workspace" badge, a pulsing green status dot and a real-looking
+       * app URL. A visitor reading the Collections board had every reason to think
+       * they were looking at a running system that enforces BSP 454 quiet hours
+       * and has a softphone call up. Neither exists.
+       *
+       * The label lives HERE, inside the component, not at the call sites. Two
+       * consumers render this function — the homepage #products-suite section and
+       * app/(marketing)/products/[slug] — and a label repeated per call site is a
+       * label that eventually drifts away from the thing it describes. */}
+      <p className="mb-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[0.7rem] leading-snug font-medium text-amber-900">
+        <Info className="mt-px size-3.5 shrink-0 text-amber-600" />
+        <span>
+          <strong>Illustrative interface preview.</strong> Synthetic sample data throughout — this
+          is not a live workspace, and every record shown is invented.
+          {/* SYSTEM_AUDIT.md §84 — §56's label said "not a live workspace" without
+              naming WHAT does not exist. This board then asserts, in nineteen
+              places, a softphone call up, supervisor whisper coaching, 42,500 SIP
+              minutes reconciled against a billing ledger, a WORM ledger hash, a
+              SHA-256 tamper-proof audit trail, PCI-DSS Level 1 readiness, SSO via
+              Okta, multi-tenant isolation, and "100% Compliant".
+              None of those exist here. A generic disclaimer is a disclaimer a
+              reader has to interpret against every panel; naming the absences
+              lets them check any single claim without reading the whole note —
+              the same reasoning §79 applied to the /bitscrm softphone panel. */}
+          <span className="mt-1 block">
+            Specifically, none of the following exists in this build: telephony of any kind
+            (no dialer, softphone, whisper, barge-in, SIP, or call recording), a WORM or
+            immutable audit store, PCI-DSS certification, SSO/SCIM, per-tenant isolation, or
+            automated BSP 454/857 quiet-hour enforcement. Labels such as
+            &ldquo;Compliant&rdquo; and &ldquo;Level 1 Ready&rdquo; illustrate a possible
+            configuration, not a shipped one.
+          </span>
+        </span>
+      </p>
+
       {/* Real-Time Floating Notification Toast */}
       {toastMessage && (
         <div
@@ -3309,7 +3354,7 @@ function PickleballBoard({
               <span className="text-[0.65rem] font-mono font-bold uppercase tracking-wider text-emerald-700">
                 Selected Court Telemetry
               </span>
-              <h4 className="text-xs font-bold text-slate-900">{activeCourt.name} · {activeCourt.type}</h4>
+              <p className="text-xs font-bold text-slate-900">{activeCourt.name} · {activeCourt.type}</p>
             </div>
             <span className={cn("rounded-md px-2 py-0.5 text-xs font-bold", activeCourt.statusClass)}>
               {activeCourt.status}
@@ -4107,9 +4152,9 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
 
               {/* Cardholder Information */}
               <div className="mt-6">
-                <h4 className="text-base font-bold tracking-tight text-white">
+                <p className="text-base font-bold tracking-tight text-white">
                   Alexander Vance
-                </h4>
+                </p>
                 <p className="text-[0.72rem] font-medium text-cyan-300">
                   VP of Enterprise Architecture &amp; Partnerships
                 </p>
@@ -4243,9 +4288,9 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
       {activeTab === "multipurpose" && (
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
           <div className="border-b border-slate-100 pb-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
               One Smart Card Embeds Your Entire Digital Footprint
-            </h4>
+            </h3>
             <p className="mt-0.5 text-[0.7rem] text-slate-600">
               Businesses and individuals can embed any link, media, payment method, or operational workflow with instant zero-reprint dynamic updates.
             </p>
@@ -4352,9 +4397,9 @@ function NfcCardBoard({ onAction }: { onAction?: (msg: string) => void }) {
             <div>
               <div className="flex items-center gap-2">
                 <Lock className="size-4 text-blue-600" />
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wide">
                   Enterprise Security &amp; Instant Remote Lock
-                </h4>
+                </h3>
               </div>
               <p className="mt-0.5 text-[0.7rem] text-slate-600">
                 Unlike paper business cards that anyone can exploit or lose, BITS Smart NFC Cards give you total cloud control over your identity.

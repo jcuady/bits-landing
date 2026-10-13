@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useSales } from "@/lib/products/crm-sales/store";
 import { useDemo } from "@/lib/products/demo-store";
+import { ENGINE_COUNT } from "@/lib/products/registry";
 import {
   TrendingUp,
   KanbanSquare,
@@ -116,8 +117,11 @@ export default function CrmSalesDashboard() {
 
             <form onSubmit={handleCreateDeal} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Deal Title</label>
+                <label htmlFor="deal-title" className="block text-xs font-medium text-slate-300 mb-1">
+                  Deal Title
+                </label>
                 <input
+                  id="deal-title"
                   type="text"
                   required
                   value={newTitle}
@@ -128,8 +132,11 @@ export default function CrmSalesDashboard() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Enterprise Client / Company</label>
+                <label htmlFor="deal-company" className="block text-xs font-medium text-slate-300 mb-1">
+                  Enterprise Client / Company
+                </label>
                 <input
+                  id="deal-company"
                   type="text"
                   required
                   value={newCompany}
@@ -140,8 +147,11 @@ export default function CrmSalesDashboard() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">Contract Amount (₱ PHP)</label>
+                <label htmlFor="deal-amount" className="block text-xs font-medium text-slate-300 mb-1">
+                  Contract Amount (₱ PHP)
+                </label>
                 <input
+                  id="deal-amount"
                   type="number"
                   required
                   step={50000}
@@ -372,6 +382,7 @@ export default function CrmSalesDashboard() {
 
                   {/* Stage Switcher */}
                   <select
+                    aria-label={`Pipeline stage for ${deal.company}`}
                     value={deal.stage}
                     onChange={(e) => moveDealStage(deal.id, e.target.value as any)}
                     className="h-7 rounded-lg border border-slate-700 bg-slate-800 px-2 text-[10px] font-medium text-slate-300 outline-none hover:border-electric-500 cursor-pointer"
@@ -432,10 +443,11 @@ export default function CrmSalesDashboard() {
             </Button>
           </div>
 
-          {/* Direct link to all 18 products */}
+          {/* §88 — both of these typed "18 Engines" for a link to /demo, which renders
+              PRODUCT_REGISTRY (19). Derived now. */}
           <div className="rounded-2xl border border-slate-800/80 bg-slate-900/40 p-4">
             <div className="text-xs font-semibold text-slate-300 mb-1">
-              Explore All 18 BITS Engines
+              Explore All {ENGINE_COUNT} BITS Engines
             </div>
             <p className="text-[11px] text-slate-400 mb-3">
               Switch between Collections, Payroll, Accounting ERP, Logistics Fleet, and Sports Court OS.
@@ -444,7 +456,7 @@ export default function CrmSalesDashboard() {
               href="/demo"
               className="inline-flex items-center gap-1 text-xs text-electric-400 hover:text-electric-300 font-medium"
             >
-              <span>Open 18-Engine Showcase Matrix</span>
+              <span>Open {ENGINE_COUNT}-Engine Showcase Matrix</span>
               <ArrowUpRight className="h-3 w-3" />
             </Link>
           </div>
