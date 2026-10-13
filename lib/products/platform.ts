@@ -21,6 +21,8 @@ export interface PlatformPillar {
   line: string;
   /** The proof point shown in small caps beneath the card. */
   stat: string;
+  /** Short capability chips rendered inside the homepage card. */
+  features: string[];
 }
 
 export interface PlatformModel {
@@ -45,24 +47,48 @@ export const OPERATIONS_360: PlatformModel = {
       title: "Collections CRM & PTP",
       line: "360° dossiers, DPD aging, promise-to-pay automation.",
       stat: "0.4s screen-pop",
+      features: [
+        "Dynamic debtor staging queues",
+        "Automated PTP scheduling",
+        "Co-maker and interest ledger",
+        "Broken-promise alerting",
+      ],
     },
     {
       id: "dialer",
       title: "Predictive Dialer",
       line: "Sub-350ms pacing. No desk phones, no PBX.",
       stat: "98.4% live voice",
+      features: [
+        "In-browser WebRTC softphone",
+        "Zero-dead-air pacing",
+        "Supervisor listen & barge-in",
+        "Dual-SIP redundancy",
+      ],
     },
     {
       id: "field",
       title: "Field Agents App",
       line: "GPS-geofenced proof-of-visit with debtor e-signature.",
       stat: "10m geofence",
+      features: [
+        "Satellite-clock timestamping",
+        "Watermarked photo proof",
+        "On-device e-signature",
+        "Works fully offline",
+      ],
     },
     {
       id: "qa",
       title: "Real-time QA Scoring",
       line: "Every call audited. Prohibited phrases flagged live.",
       stat: "100% call audit",
+      features: [
+        "Acoustic & semantic scoring",
+        "Sentiment analysis",
+        "BSP 454/857 quiet-hour flags",
+        "Exportable audit certificates",
+      ],
     },
   ],
   modules: [],
@@ -90,9 +116,16 @@ export const PLATFORM_MODULES: ProductMvpConfig[] = getHomepageProducts().filter
   (p) => p.homepage?.platform === OPERATIONS_360.id
 );
 
-/** Portfolio — canonical products that are not the platform or its modules. */
-export const PORTFOLIO_PRODUCTS: ProductMvpConfig[] = getHomepageProducts().filter(
-  (p) => p.id !== OPERATIONS_360.id && !p.homepage?.platform
+/**
+ * Portfolio — every canonical product that is neither the platform nor one of
+ * its modules.
+ *
+ * Sourced from `getCanonicalProducts()`, NOT `getHomepageProducts()`: only the
+ * platform and its modules carry a `homepage` block, so filtering on that would
+ * return an empty portfolio.
+ */
+export const PORTFOLIO_PRODUCTS: ProductMvpConfig[] = getCanonicalProducts().filter(
+  (p) => p.id !== OPERATIONS_360.id && p.homepage?.platform !== OPERATIONS_360.id,
 );
 
 /** Portfolio that appears on /products but has no homepage placement. */
