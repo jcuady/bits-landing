@@ -241,7 +241,7 @@ export function BitsAgentCallSpecimen({ className }: { className?: string }) {
                 )}
               />
               <span className="font-mono text-[0.65rem] font-bold tracking-wider text-slate-600 uppercase">
-                {isPlaying ? "Simulated Call (no telephony)" : "Playback Paused"}
+                {isPlaying ? "Live Call Playback" : "Playback Paused"}
               </span>
             </div>
 

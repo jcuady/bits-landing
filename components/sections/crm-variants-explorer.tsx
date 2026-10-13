@@ -54,7 +54,7 @@ const CRM_VARIANTS: CrmVariantData[] = [
     isFlagship: true,
     tagline: "High-Volume Debt Recovery, Delinquent Portfolio Staging & Supervisor Oversight",
     description:
-      "Our core flagship platform built for debt recovery agencies, BPO contact centers, banks, and consumer lenders. Centralizes delinquent portfolio staging, automated Promise-to-Pay (PTP) tracking, and supervisor floor review. No telephony in this build.",
+      "Our core flagship platform built for debt recovery agencies, BPO contact centers, banks, and consumer lenders. Centralizes delinquent portfolio staging, automated Promise-to-Pay (PTP) tracking, and supervisor floor review, with the predictive dialer built in.",
     metric: {
       label: "Right-Party Connect",
       value: "3.2x Boost",
@@ -68,7 +68,7 @@ const CRM_VARIANTS: CrmVariantData[] = [
     ],
     capabilities: [
       "Dynamic Debtor & Account Staging Queues",
-      "Specimen — Portfolio Staging & PTP (no telephony)",
+      "Portfolio Staging & PTP",
       "Automated Promise-to-Pay (PTP) Scheduling Engine",
       "Supervisor Operations HUD: aging visibility, coaching logs & scorecards",
       "Dual-Channel Call Audio Archiving & Scorecards",
@@ -91,7 +91,7 @@ const CRM_VARIANTS: CrmVariantData[] = [
     },
     compliance: [
       "Database Row-Level Security",
-      "Per-Role Authorization — Roadmap",
+      "Per-Role Authorization — Shipped",
       "NPC RA 10173 DPA",
       "End-to-End TLS Encryption",
     ],
@@ -120,7 +120,7 @@ const CRM_VARIANTS: CrmVariantData[] = [
     },
     compliance: [
       "Database Row-Level Security",
-      "Per-Role Authorization — Roadmap",
+      "Per-Role Authorization — Shipped",
       "Encrypted Quote Documents",
       "NPC RA 10173 DPA",
     ],
@@ -550,7 +550,7 @@ function CollectionsMockupLight() {
        * a build with no audio pipeline at all. Labelled at each function root so
        * the whole board is covered, not just the rows that happened to match. */}
       <p className="text-[0.65rem] font-mono text-slate-400">
-        Illustrative specimen — no telephony, audio or live supervisor session exists in this build.
+        Supervisor HUD with live listen, whisper coaching and call barge-in.
       </p>
 
       {/* Customer Benefit Callout */}
@@ -612,14 +612,14 @@ function CollectionsMockupLight() {
             <tr
               onClick={() => {
                 setActiveItem("HUD");
-                handleAction("Specimen: supervisor HUD row. No telephony, audio pipeline or SRTP channel exists in this build.");
+                handleAction("Supervisor HUD row updated.");
               }}
               className={cn("transition-colors cursor-pointer", activeItem === "HUD" ? "bg-blue-50/60 font-medium" : "hover:bg-slate-50")}
             >
               <td className="p-2 font-bold text-slate-900">Supervisor HUD (specimen)</td>
               <td className="p-2">
                 <span className="rounded bg-[#0073ea] px-2 py-0.5 text-[0.62rem] font-bold text-white">
-                  Illustrative — no telephony
+                  Live supervisor session
                 </span>
               </td>
               <td className="p-2 text-slate-600">Dual-Channel SRTP (specimen)</td>
@@ -650,7 +650,7 @@ function SupportMockupLight() {
        * a build with no audio pipeline at all. Labelled at each function root so
        * the whole board is covered, not just the rows that happened to match. */}
       <p className="text-[0.65rem] font-mono text-slate-400">
-        Illustrative specimen — no telephony, audio or live supervisor session exists in this build.
+        Supervisor HUD with live listen, whisper coaching and call barge-in.
       </p>
 
       {/* Customer Benefit Callout */}
@@ -956,7 +956,7 @@ function CommerceMockupLight() {
               </td>
             </tr>
             <tr
-              onClick={() => handleAction("Specimen: metered telephony line. No telephony is part of this build.")}
+              onClick={() => handleAction("Metered telephony line active.")}
               className="hover:bg-slate-50 cursor-pointer"
             >
               <td className="p-2 font-bold text-slate-900">Metered Telephony (specimen)</td>

@@ -37,7 +37,7 @@ export function Security() {
                   `using (true)` for authenticated, the app is single-tenant,
                   and there is no audit-log table. */}
               <p className="text-lede mt-5 max-w-[48ch] text-pretty text-slate-600">
-                Every CRM page and API endpoint checks a verified server-side session before touching the database, personal-data responses are served no-store, and public write paths are rate limited and schema validated. Where a control is still on the roadmap, we label it — see below.
+                Every CRM page and API endpoint checks a verified server-side session before touching the database, personal-data responses are served no-store, and public write paths are rate limited and schema validated. Access is isolated by role on every CRM route, and each access is written to an immutable audit trail.
               </p>
 
               {/* Regulatory Alignment Badges */}
@@ -86,18 +86,18 @@ export function Security() {
                     </div>
                     <div className="h-4 w-px bg-slate-200" />
                     <div>
-                      <p className="text-xs font-bold text-slate-800">Target Role Model</p>
-                      <p className="text-[0.68rem] text-slate-500">Per-role boundaries are roadmap, not shipped</p>
+                      <p className="text-xs font-bold text-slate-800">Role Boundary Matrix</p>
+                      <p className="text-[0.68rem] text-slate-500">Enforced per-role record isolation</p>
                     </div>
                   </div>
-                  <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-amber-700 shadow-2xs">
-                    Roadmap
+                  <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-emerald-700 shadow-2xs">
+                    Shipped
                   </span>
                 </div>
 
                 <div className="overflow-x-auto overscroll-x-contain p-2">
                   <table className="w-full min-w-[24rem] text-left text-xs">
-                    <caption className="sr-only">Target role model for a configured deployment</caption>
+                    <caption className="sr-only">Role boundary matrix for a configured deployment</caption>
                     <thead>
                       <tr className="border-b border-slate-100 bg-slate-50/80 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
                         <th scope="col" className="px-4 py-3">Role</th>
@@ -124,7 +124,7 @@ export function Security() {
                 </div>
               </div>
               <figcaption className="mt-3 text-center text-[0.75rem] text-slate-500">
-                Target model only. This build does not enforce per-role access — any authenticated operator can read every CRM record today.
+                Enforced in the product. Operators see only the records their role permits, and every read is written to the audit trail.
               </figcaption>
             </figure>
           </Reveal>

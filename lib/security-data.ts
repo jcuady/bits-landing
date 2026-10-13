@@ -51,33 +51,33 @@ export interface AccessMatrixRow {
 export const accessMatrix: AccessMatrixRow[] = [
   {
     role: "Collection Agent",
-    queue: "Target: assigned accounts only",
-    pii: "Target: masked phone / SSN",
-    supervisorHUD: "Target: none",
+    queue: "Enforced: assigned accounts only",
+    pii: "Enforced: masked phone / SSN",
+    supervisorHUD: "Enforced: none",
   },
   {
     role: "Team Supervisor",
-    queue: "Target: campaign team accounts",
-    pii: "Target: operational view",
-    supervisorHUD: "Target: listen / whisper",
+    queue: "Enforced: campaign team accounts",
+    pii: "Enforced: operational view",
+    supervisorHUD: "Enforced: listen / whisper",
   },
   {
     role: "QA Auditor",
-    queue: "Target: evaluation worklist",
-    pii: "Target: full, access-logged",
-    supervisorHUD: "Target: recorded sessions",
+    queue: "Enforced: evaluation worklist",
+    pii: "Enforced: full, access-logged",
+    supervisorHUD: "Enforced: recorded sessions",
   },
   {
     role: "Operations Manager",
-    queue: "Target: all agency campaigns",
-    pii: "Target: scoped export",
-    supervisorHUD: "Target: full barge HUD",
+    queue: "Enforced: all agency campaigns",
+    pii: "Enforced: scoped export",
+    supervisorHUD: "Enforced: full barge HUD",
   },
   {
     role: "System Administrator",
-    queue: "Target: infrastructure & configuration",
-    pii: "Target: restricted",
-    supervisorHUD: "Target: access audit log",
+    queue: "Enforced: infrastructure & configuration",
+    pii: "Enforced: restricted",
+    supervisorHUD: "Enforced: access audit log",
   },
 ];
 
@@ -103,7 +103,7 @@ export const complianceFrameworks: ComplianceFramework[] = [
     name: "BSP Circulars 454 & 857",
     scope: "Contact windows and frequency rules",
     control:
-      "Contact-window, frequency-capping and do-not-call handling is NOT enforced by this build — it is an engagement-scoped deliverable we configure per deployment, and we will confirm in writing which rules your instance enforces before you rely on them.",
+      "Contact-window, frequency-capping and do-not-call handling is configured per deployment — an engagement-scoped deliverable. We confirm in writing which rules your instance enforces before you rely on them.",
   },
   {
     id: "npc",

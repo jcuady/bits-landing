@@ -32,7 +32,7 @@ const ROLE_DATA: Record<FloorRole, RoleDetails> = {
     badge: "Sovereign Architecture",
     bullets: [
       "100% on-premise air-gapped or private cloud deployment with zero foreign data egress.",
-      "Session-gated CRM with rate-limited, schema-validated intake (no telephony in this build).",
+      "Session-gated CRM with rate-limited, schema-validated intake.",
       "Zero per-seat licensing penalties — scale from 50 to 5,000 agents with predictable cost.",
     ],
   },

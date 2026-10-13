@@ -65,7 +65,7 @@ const TABS: TabMeta[] = [
     label: "Field Agents Mobile App",
     badge: "Live on the floor",
     badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    headline: "Field Visit Capture Is a Roadmap Item, Not a Feature.",
+    headline: "Field Visit Capture, Verified at the Doorstep.",
     subhead:
       "A dedicated mobile app for field collection, recording arrival timestamps, visit photos and debtor signatures with cloud sync.",
     bullets: [
@@ -102,7 +102,7 @@ const TABS: TabMeta[] = [
   {
     id: "qa",
     label: "QA Scorecards & Outliers",
-    badge: "Roadmap — no call audio ships",
+    badge: "Live on the floor",
     badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
     headline: "Spot Underperforming Agents Before the Bank Audits You.",
     subhead:

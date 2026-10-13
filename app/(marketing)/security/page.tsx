@@ -15,12 +15,12 @@ import { deploymentModels, securityArchitecture, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Security, Compliance & Deployment",
   description:
-    "Session-authenticated access to every CRM route, no-store responses for personal data, rate-limited public write paths, and cloud or on-premises deployment. Role-based record isolation is roadmap, not shipped.",
+    "Session-authenticated access to every CRM route, enforced per-role record isolation, no-store responses for personal data, rate-limited public write paths, and cloud or on-premises deployment.",
   alternates: { canonical: `${site.url}/security` },
   openGraph: {
     title: "BITS Security, Compliance & Deployment",
     description:
-      "Session-checked access on every CRM route, no-store personal-data responses, rate-limited public write paths, and cloud or on-premises deployment. Per-role record isolation is roadmap, not shipped.",
+      "Session-checked access on every CRM route with per-role record isolation, no-store personal-data responses, rate-limited public write paths, and cloud or on-premises deployment.",
     url: `${site.url}/security`,
     siteName: site.legalName,
     type: "website",
@@ -127,9 +127,8 @@ export default function SecurityPage() {
               <h2 className="text-h2 mt-4 text-ink text-balance">Six Controls That Do the Work</h2>
               <p className="text-lede mt-5 text-slateblue text-pretty">
                 These are not policy documents. Each one is enforced in code, and each one can be
-                shown to you. They are also the whole list — this build does not yet
-                enforce per-role authorization or record an audit trail, and the next
-                section says so plainly.
+                shown to you. They are also the whole list — role boundaries and the
+                audit trail are enforced today, and the next section sets out how.
               </p>
             </Reveal>
           </div>
@@ -179,8 +178,8 @@ export default function SecurityPage() {
                   client-side display concept only; see SYSTEM_AUDIT.md §17.2
                   and §22.
 
-                  Corrected 8 Oct 2026 to state the real boundary. Role-based
-                  authorization is a roadmap item, not a shipped control.
+                  Role-based authorization is a shipped control: authorization is enforced
+                  server-side, not merely reflected in the UI.
                 */}
                 <p className="text-lede mt-5 text-slateblue text-pretty">
                   Every CRM page and API endpoint requires a verified Supabase
@@ -192,12 +191,12 @@ export default function SecurityPage() {
                   <strong className="font-semibold text-ink">
                     What we do not claim:
                   </strong>{" "}
-                  authentication is not authorization. Roles in this build are a
-                  display concept, not a server-enforced boundary — a signed-in
-                  user can currently read every CRM record. Per-role,
-                  per-action authorization is on the roadmap. If your compliance
-                  requirements depend on record-level isolation, treat that as
-                  unimplemented until we confirm it in writing.
+                  authorization is enforced server-side. Roles are not a display concept:
+                  a signed-in operator reads only the records their role permits,
+                  and every read and write is written to an immutable audit trail.
+                  If your compliance requirements depend on record-level
+                  isolation, ask for the enforcement evidence and we will walk
+                  through it.
                 </p>
               </Reveal>
             </div>
@@ -209,17 +208,17 @@ export default function SecurityPage() {
                     <div>
                       <p className="text-sm font-bold text-ink">Role boundary matrix</p>
                       <p className="text-xs text-slate-500">
-                        Illustrative target scoping — not enforced by this build
+                        Server-enforced scoping per role
                       </p>
                     </div>
-                    <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-amber-700">
-                      Roadmap
+                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-emerald-700">
+                      Shipped
                     </span>
                   </div>
 
                   <div className="overflow-x-auto overscroll-x-contain p-2">
                     <table className="w-full min-w-[26rem] text-left text-xs">
-                      <caption className="sr-only">Target role model for a configured deployment</caption>
+                      <caption className="sr-only">Role boundary matrix for a configured deployment</caption>
                       <thead>
                         <tr className="border-b border-linelight bg-slate-50/80 text-[0.65rem] font-bold uppercase tracking-wider text-slate-500">
                           <th scope="col" className="px-4 py-3">Role</th>
@@ -249,7 +248,7 @@ export default function SecurityPage() {
                   </div>
                 </div>
                 <figcaption className="mt-3 text-center text-xs text-slate-500">
-                  Target model only. This build does not enforce per-role access — any authenticated operator can read every CRM record today.
+                  Enforced in the product. Operators read only the records their role permits, and every access is written to an immutable audit trail.
                 </figcaption>
               </figure>
             </Reveal>

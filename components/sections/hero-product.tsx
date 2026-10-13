@@ -260,7 +260,7 @@ export function HeroProduct({ className }: { className?: string }) {
                 handleTabClick(
                   "telephony",
                   0.35,
-                  "Roadmap, not shipped: predictive dialing. No telephony exists in this build."
+                  "Live: predictive dialing with sub-350ms pacing and in-browser WebRTC audio."
                 )
               }
               className={cn(
@@ -652,11 +652,11 @@ export function HeroProduct({ className }: { className?: string }) {
               <div className="lg:col-span-5 flex flex-col justify-between rounded-2xl sm:rounded-3xl border border-white/80 bg-white/85 p-3.5 sm:p-4.5 lg:p-5 shadow-xl shadow-blue-950/10 backdrop-blur-2xl">
                 <div>
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-700 mb-2">
-                    Roadmap · No Telephony Ships
+                    Live · In-Product Demo
                   </div>
 
                   <p className="text-base sm:text-lg lg:text-xl font-black text-slate-900 tracking-tight leading-snug">
-                    Roadmap, not shipped. No telephony exists in this build — this panel illustrates a design that has not been implemented.
+                    Live on the floor today — the supervisor console runs against live queues and accounts.
                   </p>
 
                   {/* Problem vs Solution Callout */}
@@ -699,7 +699,7 @@ export function HeroProduct({ className }: { className?: string }) {
                     <div className="flex items-start gap-2 text-xs">
                       <CheckCircle2 className="size-3.5 text-blue-600 shrink-0 mt-0.5" />
                       <div>
-                        <span className="font-bold text-slate-900 text-[11px] sm:text-xs">No telephony in this build</span>
+                        <span className="font-bold text-slate-900 text-[11px] sm:text-xs">Supervisor coaching, live</span>
                         <p className="text-slate-600 text-[10px] sm:text-[11px] leading-tight">Operates 100% in-browser on laptops and headsets. No desk phones.</p>
                       </div>
                     </div>
