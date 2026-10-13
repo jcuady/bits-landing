@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check, Zap, Radio, MapPin, BrainCircuit } from "lucide-react";
+import { ArrowRight, Check, Zap, Radio, MapPin, BrainCircuit, Gauge } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { PlatformHero, PlatformSection } from "@/components/sections/platform-hero";
+import { getPlatform } from "@/lib/products/platform";
 import { site } from "@/lib/site";
 
 /**
@@ -17,26 +18,23 @@ import { site } from "@/lib/site";
  * unreachable under a non-obvious slug and unlinked from its own homepage row.
  */
 
-const PILLARS = [
-  {
-    icon: Radio,
-    title: "Collections Command Center",
-    line: "360° dossiers, DPD aging, co-maker tracking. 0.4s screen-pop.",
-    stat: "0.4s screen-pop",
-  },
-  {
-    icon: Zap,
-    title: "Predictive Softphone",
-    line: "Sub-350ms pacing, 98.4% live voice. No desk phones, no PBX.",
-    stat: "98.4% live voice",
-  },
-  {
-    icon: MapPin,
-    title: "Field Agents + Speech AI QA",
-    line: "GPS proof-of-visit inside a 10m geofence. 100% of calls audited.",
-    stat: "100% call audit",
-  },
-] as const;
+/**
+ * Pillar icons, keyed by pillar id from lib/products/platform.ts.
+ * The pillar copy itself lives in that model — this page and the homepage
+ * PlatformIndex both read it, so a pillar is defined in exactly one place.
+ */
+const PILLAR_ICONS: Record<string, typeof Radio> = {
+  collections: Radio,
+  dialer: Zap,
+  field: MapPin,
+  qa: Gauge,
+};
+
+const PLATFORM = getPlatform();
+const PILLARS = PLATFORM.pillars.map((pillar) => ({
+  ...pillar,
+  icon: PILLAR_ICONS[pillar.id] ?? BrainCircuit,
+}));
 
 const MODULES = [
   {
@@ -163,10 +161,10 @@ export default function Operations360Page() {
       {/* ── Three pillars ── */}
       <PlatformSection
         eyebrow="Four pillars"
-        title="Three capabilities. One deployment."
-        lede="Everything a recovery floor needs, running on one database instead of four vendors."
+        title="Four capabilities. One deployment."
+        lede="Everything a recovery floor needs, running on one database instead of four vendors. Same four pillars the homepage runs on."
       >
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {PILLARS.map((pillar) => (
             <Reveal key={pillar.title}>
               <article className="group h-full rounded-2xl border border-sky-100 bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-xl hover:shadow-sky-950/5">
@@ -179,6 +177,17 @@ export default function Operations360Page() {
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   {pillar.line}
                 </p>
+                <ul className="mt-5 space-y-2">
+                  {pillar.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 text-sm text-slate-700"
+                    >
+                      <Check className="mt-0.5 size-3.5 shrink-0 text-blue-600" aria-hidden />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
                 <p className="mt-5 border-t border-sky-100 pt-3 font-mono text-xs font-bold uppercase tracking-[0.14em] text-blue-700">
                   {pillar.stat}
                 </p>
