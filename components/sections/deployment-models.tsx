@@ -282,7 +282,7 @@ export function DeploymentModels() {
                       {/* SYSTEM_AUDIT.md §50. Was "Centralized SSO & RBAC" behind
                           a green tick. No SSO or SAML integration exists — the
                           only occurrences in this codebase are a mock ticket cell
-                          with RBAC enforced server-side:
+                          and an audit-log entry on every access — with RBAC enforced server-side:
                           requireCrmUser() authenticates a session and never reads
                           a role, so any signed-in user can read every CRM record.
                           Both are banned attestations. Replaced with the control
