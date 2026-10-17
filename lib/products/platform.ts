@@ -105,7 +105,27 @@ export const OPERATIONS_360: PlatformModel = {
  * Modules (BITScrm, BITSagent AI) count as products in the total — they are
  * separately sellable entry points into the platform.
  */
-export const CATALOG_COUNT = getCanonicalProducts().length;
+/**
+ * Registry entries whose public product pages now live inside Operations 360.
+ *
+ * They stay in PRODUCT_REGISTRY on purpose: the legacy `support.*`,
+ * `marketing.*` and `commerce.*` subdomains still resolve through proxy.ts
+ * and must keep working. They are excluded only from the customer-facing
+ * count and the homepage portfolio.
+ *
+ * Keep in sync with the CRM collapse redirects in next.config.ts.
+ */
+export const COLLAPSED_INTO_PLATFORM = new Set([
+  "crm-support",
+  "crm-marketing",
+  "crm-commerce",
+]);
+
+/** Products a customer can actually buy — excludes aliases and collapsed ones. */
+export const CATALOG_COUNT = getCanonicalProducts().filter(
+  (p) => !COLLAPSED_INTO_PLATFORM.has(p.id),
+).length;
+
 export const CATALOG_CLAIM = `${CATALOG_COUNT} products, ${OPERATIONS_360.pillars.length} of them in Operations 360`;
 
 /**
@@ -125,7 +145,10 @@ export const PLATFORM_MODULES: ProductMvpConfig[] = getHomepageProducts().filter
  * return an empty portfolio.
  */
 export const PORTFOLIO_PRODUCTS: ProductMvpConfig[] = getCanonicalProducts().filter(
-  (p) => p.id !== OPERATIONS_360.id && p.homepage?.platform !== OPERATIONS_360.id,
+  (p) =>
+    p.id !== OPERATIONS_360.id &&
+    p.homepage?.platform !== OPERATIONS_360.id &&
+    !COLLAPSED_INTO_PLATFORM.has(p.id),
 );
 
 /** Portfolio that appears on /products but has no homepage placement. */

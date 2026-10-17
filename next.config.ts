@@ -28,6 +28,14 @@ const nextConfig: NextConfig = {
       // Modules: CRM and AI are no longer rival products
       { source: "/bitscrm", destination: "/operations-360/crm", permanent: true },
       { source: "/bitsagent", destination: "/operations-360/ai", permanent: true },
+      // CRM collapse: the five BITScrm workspaces become named sections on
+      // one canonical URL. Anchors exist on /operations-360/crm.
+      { source: "/products/crm", destination: "/operations-360/crm", permanent: true },
+      { source: "/products/sales", destination: "/operations-360/crm#sales", permanent: true },
+      { source: "/products/support", destination: "/operations-360/crm#support", permanent: true },
+      { source: "/products/marketing", destination: "/operations-360/crm#marketing", permanent: true },
+      { source: "/products/commerce", destination: "/operations-360/crm#commerce", permanent: true },
+      { source: "/products/ai-agent", destination: "/operations-360/ai", permanent: true },
     ];
   },
   async headers() {
