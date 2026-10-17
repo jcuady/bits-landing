@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import * as React from "react";
 import { site } from "@/lib/site";
 import { Container } from "@/components/ui/container";
@@ -93,7 +95,14 @@ export function Contact() {
 
           <Reveal delay={0.08}>
             <p className="mt-2.5 text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
-              Get an honest 25-minute audit of your collection contact rates, broken PTP ratios, and compliance workflows. We deliver a custom OPERATIONS 360 rollout blueprint tailored to your agency.
+              Get an honest 25-minute audit of your collection contact rates, broken PTP ratios, and compliance workflows. We deliver a custom OPERATIONS 360 rollout blueprint tailored to your agency — see what that covers on{" "}
+              <Link
+                href="/operations-360"
+                className="font-semibold text-blue-700 underline underline-offset-2 transition-colors hover:text-blue-800"
+              >
+                the platform page
+              </Link>
+              .
             </p>
           </Reveal>
         </div>

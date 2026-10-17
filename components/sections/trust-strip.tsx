@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import {
@@ -74,7 +75,14 @@ export function TrustStrip() {
               Built to Meet Strict Business &amp; Privacy Laws
             </h2>
             <p className="mt-2 text-[0.88rem] text-slate-600">
-              BITS protects customer data with server-side session checks, database row-level security, no-store personal-data responses, and explicit consent controls. We engineer to these frameworks; we do not claim certifications we have not earned.
+              Operations 360 protects customer data with server-side session checks, database row-level security, no-store personal-data responses, and explicit consent controls. We engineer to these frameworks; we do not claim certifications we have not earned.{" "}
+                <Link
+                  href="/operations-360"
+                  className="font-semibold text-blue-700 underline underline-offset-2 transition-colors hover:text-blue-800"
+                >
+                  See how Operations 360 enforces them
+                </Link>
+                .
             </p>
           </div>
 

@@ -60,7 +60,14 @@ export function FAQ() {
               </span>
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-pretty text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
-              Direct, factual answers regarding Philippine regulatory compliance, deployment choices, and integration timelines.
+              Direct, factual answers about Operations 360, Philippine regulatory compliance, deployment choices, and integration timelines. Questions about the platform itself?{" "}
+              <Link
+                href="/operations-360"
+                className="font-semibold text-blue-700 underline underline-offset-2 transition-colors hover:text-blue-800"
+              >
+                Read the platform overview
+              </Link>
+              .
             </p>
           </Reveal>
         </div>

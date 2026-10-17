@@ -43,7 +43,7 @@ export function SolutionFinder() {
 
           <Reveal delay={0.06}>
             <p className="mt-3.5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto text-pretty font-normal">
-              Select your organization&apos;s current operational priority. We will route you directly to the engineered architecture — no browsing {PRODUCT_COUNT} product specifications required.
+              Select your organization&apos;s current operational priority. We will route you directly to the engineered architecture — most teams land on Operations 360, and none of them need to browse {PRODUCT_COUNT} product specifications first.
             </p>
           </Reveal>
         </div>

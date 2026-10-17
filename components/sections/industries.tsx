@@ -174,7 +174,7 @@ export function Industries() {
               Built for Fast-Paced Teams and Demanding Industries
             </h2>
             <p className="text-lede mx-auto mt-4 max-w-[50ch] text-slate-600">
-              See how BITS adapts to the legal rules, phone systems, and daily worklists of real businesses.
+              See how Operations 360 adapts to the legal rules, phone systems, and daily worklists of real businesses.
             </p>
           </div>
         </Reveal>

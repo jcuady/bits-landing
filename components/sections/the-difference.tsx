@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import * as React from "react";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
@@ -86,7 +88,7 @@ export function TheDifference() {
         <div className="mx-auto max-w-3xl text-center mb-14 sm:mb-18">
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-sky-50/90 px-4 py-1.5 text-xs font-semibold text-sky-800 shadow-2xs mb-4">
-              <span>THE 20-YEAR OPERATIONAL ADVANTAGE</span>
+              <span>THE 20-YEAR OPERATIONAL ADVANTAGE · OPERATIONS 360</span>
             </div>
           </Reveal>
 
