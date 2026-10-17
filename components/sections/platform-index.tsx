@@ -10,6 +10,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { track } from "@vercel/analytics";
 import { getPlatform, CATALOG_CLAIM } from "@/lib/products/platform";
 
 /**
@@ -158,6 +159,7 @@ export function PlatformIndex() {
 
               <Link
                 href={platform.href}
+                onClick={() => track("cta_click", { section: "platform-index", label: "Explore Operations 360" })}
                 className="mt-6 inline-flex items-center justify-center gap-2 self-start rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-500 hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
               >
                 <span>Explore Operations 360</span>
@@ -193,6 +195,7 @@ export function PlatformIndex() {
                 <Reveal key={module.id}>
                   <Link
                     href={module.marketingUrl}
+                    onClick={() => track("cta_click", { section: "platform-index", label: module.id })}
                     className="group flex h-full flex-col rounded-2xl border border-slate-200/70 bg-white/80 p-8 backdrop-blur-md transition-all hover:border-blue-300 hover:shadow-lg hover:shadow-blue-900/5"
                   >
                     <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
@@ -235,6 +238,7 @@ export function PlatformIndex() {
               </div>
               <Link
                 href="/products"
+                onClick={() => track("cta_click", { section: "platform-index", label: "Browse catalogue" })}
                 className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:border-blue-300 hover:shadow-md"
               >
                 Browse the full catalogue

@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { agents, site } from "@/lib/site";
 import { CookieConsent } from "@/components/ui/cookie-consent";
+import { EngagementTracker } from "@/components/ui/engagement-tracker";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -281,6 +282,7 @@ export default function RootLayout({
         {children}
         <CookieConsent />
         <Analytics />
+        <EngagementTracker />
       </body>
     </html>
   );

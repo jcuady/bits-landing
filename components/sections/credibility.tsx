@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { track } from "@vercel/analytics";
 import { blogPosts } from "@/lib/blog-data";
 
 /**
@@ -40,6 +41,7 @@ export function Credibility() {
             </div>
             <Link
               href="/blog"
+              onClick={() => track("cta_click", { section: "credibility", label: "All research" })}
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:border-blue-300 hover:shadow-md"
             >
               <BookOpen className="size-4" aria-hidden />
@@ -54,6 +56,7 @@ export function Credibility() {
             <Reveal key={post.slug}>
               <Link
                 href={`/blog/${post.slug}`}
+                onClick={() => track("cta_click", { section: "credibility", label: post.slug })}
                 className="group flex h-full flex-col rounded-2xl border border-slate-200/70 bg-white/80 p-8 backdrop-blur-md transition-all hover:border-blue-300 hover:shadow-lg hover:shadow-blue-900/5"
               >
                 <div className="flex flex-wrap items-center gap-3">
