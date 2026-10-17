@@ -16,7 +16,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "BITS — Top CRM for Collections Agency, Operations OMS & Enterprise Software",
   description:
-    "Boundless IT Solutions (BITS) powers top collections agency floors and enterprise operations with Operations 360 (OMS), sub-350ms predictive dialing, sovereign data residency, and 18 connected business engines with zero per-seat licensing fees.",
+    "Boundless IT Solutions (BITS) powers top collections agency floors and enterprise operations with Operations 360 (OMS), sub-350ms predictive dialing, sovereign data residency, and 15 connected business engines with zero per-seat licensing fees.",
   keywords: [
     "top crm collections agency",
     "top crm for collections agency",

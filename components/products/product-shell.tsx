@@ -309,7 +309,7 @@ export function ProductShell({ productId, navItems, children }: ProductShellProp
                 className="hidden sm:flex items-center gap-1 min-h-11 px-2 text-xs text-sky-300 hover:text-white font-medium transition"
               >
                 <Layers className="h-3.5 w-3.5" />
-                {/* §88 — typed "18 Engines" for a link to /demo, which renders
+                {/* §88 — typed "15 Engines" for a link to /demo, which renders
                     PRODUCT_REGISTRY (19). Derived now. */}
                 <span>All {ENGINE_COUNT} Engines</span>
               </Link>

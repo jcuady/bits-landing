@@ -734,7 +734,7 @@ export function Header() {
                                   onClick={() => setMobileOpen(false)}
                                   className="flex items-center justify-between rounded-xl bg-blue-50/90 p-2.5 text-xs font-bold text-blue-700 hover:bg-blue-100 transition-colors"
                                 >
-                                  <span>View All 18 Software Products</span>
+                                  <span>View All 15 Software Products</span>
                                   <span>→</span>
                                 </Link>
                               </div>

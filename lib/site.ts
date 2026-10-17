@@ -822,7 +822,7 @@ export const bitsProducts = [
  */
 export const PRODUCT_COUNT = bitsProducts.length;
 
-/* ── Universal White-Label & Custom Branding Option (Available Across All 18 Products) ── */
+/* ── Universal White-Label & Custom Branding Option (Available Across All 15 Products) ── */
 export const whiteLabelBrandingOption = {
   id: "white-label",
   name: "BITS White-Label & Custom Branding Program",
@@ -831,7 +831,7 @@ export const whiteLabelBrandingOption = {
   categoryLabel: "Universal Branding Option",
   badge: "Universal Branding Option",
   isFlagship: false,
-  tagline: "Deploy Any of Our 18 Software Products Under Your Own Brand Identity",
+  tagline: "Deploy Any of Our 15 Software Products Under Your Own Brand Identity",
   description:
     "Deploy any BITS enterprise software product—Collections CRM, Sales CRM, Support CRM, Marketing CRM, Commerce, Accounting ERP, HRMS, Payroll, Construction ERP, Inventory, Logistics Fleet, Pickleball OS, Sports Arena, Booking, Queuing, NFC, or Knowledge RAG—completely rebranded under your company's own name, logo, custom domain, and color palette. Maintain 100% brand equity and direct client ownership while BITS runs silently behind the scenes.",
   complianceBadges: [
@@ -842,7 +842,7 @@ export const whiteLabelBrandingOption = {
   ],
   capabilities: [
     "Full Brand Replacement: Logo, Favicon, Domain (app.yourcompany.com) & Color Palette",
-    "Universal Availability: White-Label Any of Our 18 Software Products (Solo or Bundled)",
+    "Universal Availability: White-Label Any of Our 15 Software Products (Solo or Bundled)",
     "Custom Client-Facing Login Portal with Your Corporate Brand Identity",
     "NDA-Protected: Zero BITS Branding, Attribution, or Watermarks Required",
     "Reseller Licensing: Sell to Your Own Clients at Your Own Custom Pricing & Retainers",
@@ -1405,7 +1405,7 @@ export const solutionPackages = [
     pricingSubtext: "Assisted data migration & team onboarding included",
     roiBenchmark: "Replaces 3–4 disconnected SaaS subscriptions & manual Excel sheets",
     highlights: [
-      "Modular Procurement: Any 1 of our 18 Engines or Custom Pair",
+      "Modular Procurement: Any 1 of our 15 Engines or Custom Pair",
       "Tailored Database Schemas & Operational Workflows",
       "Dynamic Task Queues & Department Kanban Stages",
       "Standard Real-Time Operations & Performance Dashboards",
@@ -1462,7 +1462,7 @@ export const solutionPackages = [
     roiBenchmark: "Zero per-seat inflation penalties; complete private VPC & data residency",
     highlights: [
       "Everything in Growth Tier",
-      "Full Multi-Product Operational Cockpit (All 18 Engines Supported)",
+      "Full Multi-Product Operational Cockpit (All 15 Engines Supported)",
       "Fully Bespoke Database Schemas, Logic & Legacy Feeds",
       "Autonomous BITSagent Voice & Email AI Operations",
       "Private RAG Knowledge Grounding on Corporate SOPs",
@@ -1480,7 +1480,7 @@ export const solutionPackages = [
     tier: "BRANDING OPTION",
     badge: "Master Add-On · Not a Standalone Product",
     title: "Universal White-Label Branding Option",
-    tagline: "Deploy any of our 18 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
+    tagline: "Deploy any of our 15 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
     teamScope: "Applicable to Any Plan",
     deployment: "Managed Cloud or Private VPC",
     investmentModel: "Turnkey Reseller / Corporate Branding License",
@@ -1495,7 +1495,7 @@ export const solutionPackages = [
       "Complete NDA Protection — Zero BITS Attribution",
       "Full Reseller Margin Retention — Set Your Own Client Pricing",
       "Multi-Tenant Client Partitioning & Dedicated Databases",
-      "Works with Any of the 18 BITS Software Engines",
+      "Works with Any of the 15 BITS Software Engines",
     ],
     primaryCta: "Inquire About White-Label Reselling",
     ctaHref: "/#contact?package=whitelabel",
@@ -1540,7 +1540,7 @@ export const suiteBundlePresets = [
   {
     id: "reseller-agency",
     name: "White-Label Partner & Reseller Suite",
-    tagline: "Deploy any combination of our 18 software products under your own agency brand.",
+    tagline: "Deploy any combination of our 15 software products under your own agency brand.",
     productIds: ["collections", "sales", "accounting", "nfc-card"],
     recommendedFor: "Agencies, IT MSPs, software resellers & enterprise conglomerates",
     highlight: "100% client margin retention with zero BITS attribution and custom domains",
@@ -2027,7 +2027,7 @@ export const footerColumns = [
       { label: "BITScrm Commerce", href: "/products/commerce" },
       { label: "CRM Architecture Hub", href: "/products/crm" },
       { label: "BITSagent AI Suite", href: "/operations-360/ai" },
-      { label: "Enterprise Software (18)", href: "/#products-suite" },
+      { label: "Enterprise Software (15)", href: "/products" },
     ],
   },
   {

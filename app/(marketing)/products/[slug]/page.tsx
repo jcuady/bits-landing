@@ -126,7 +126,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-/* ── Domain-Specific Problem Statements for All 18 Products + White-Label Option ── */
+/* ── Domain-Specific Problem Statements for All 15 Products + White-Label Option ── */
 type ProductItem = (typeof bitsProducts)[number] | typeof whiteLabelBrandingOption;
 
 function getProductProblems(product: ProductItem) {
@@ -851,7 +851,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 ) : product.id === "white-label" ? (
                   <div className="inline-flex items-center gap-2 rounded-full border border-orange-300 bg-orange-50 px-4 py-1.5 text-xs font-bold text-orange-950 shadow-2xs">
                     <Sparkles className="size-4 text-orange-600" />
-                    <span>Universal Commercial Option: Available Across All 18 BITS Software Products</span>
+                    <span>Universal Commercial Option: Available Across All 15 BITS Software Products</span>
                   </div>
                 ) : (
                   <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-4 py-1.5 text-xs font-bold text-blue-950 shadow-2xs">

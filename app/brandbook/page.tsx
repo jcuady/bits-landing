@@ -254,7 +254,7 @@ export default function BrandbookHubPage() {
             Authoritative Brand Identity & Design System Dossier
           </p>
           <p className="mt-4 text-lg font-medium text-white sm:text-xl">
-            BITS is sovereign software for high-velocity Philippine operations — 18 connected engines, one
+            BITS is sovereign software for high-velocity Philippine operations — 15 connected engines, one
             flat platform fee, 100% data residency. The brand is the system. The system is the brand.
           </p>
           <p className="mt-2 text-sm text-white/70">

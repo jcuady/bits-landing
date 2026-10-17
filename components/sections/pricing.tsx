@@ -199,14 +199,14 @@ const trackTiers: Record<PricingTrack, PricingTier[]> = {
       badge: "100% Brand Ownership",
       scaleBadge: "Resellers & Enterprise Holdings",
       description:
-        "Deploy any or all of our 18 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
+        "Deploy any or all of our 15 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
       indicativeModel: "Wholesale Partner Agreement",
       modelDetail: "Retain 100% client margin · Custom domain & branded apps",
       features: [
         "Your logo, corporate domain (app.yourcompany.com) & custom CSS palette",
         "Zero BITS watermarks or attribution across user interface and emails",
         "Branded client onboarding documentation and white-labeled mobile apps",
-        "Choose any of our 18 core software engines to resell or deploy internally",
+        "Choose any of our 15 core software engines to resell or deploy internally",
         "Dedicated partner support engineering and sandbox demo tenant",
         "Strict Non-Disclosure Agreement (NDA) protecting your brand equity",
       ],
@@ -480,7 +480,7 @@ export function Pricing() {
               {/* Left: Headline & Engine Pills */}
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700 mb-3">
-                  18 Connected Software Products
+                  15 Connected Software Products
                 </div>
                 <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-snug">
                   Need Pricing on a Standalone Software Engine?

@@ -28,7 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/ui/logo";
 
 const CATEGORIES = [
-  { id: "all", label: "All 18 Engines", icon: Layers },
+  { id: "all", label: "All 15 Engines", icon: Layers },
   { id: "crm", label: "CRM & Revenue", icon: Users2 },
   { id: "operations", label: "ERP & Financials", icon: Building2 },
   { id: "workforce", label: "Workforce & HR", icon: Users2 },
@@ -136,7 +136,7 @@ export default function DemoMatrixHub() {
             </Link>
             <div className="hidden md:flex items-center gap-2 border-l border-blue-100 dark:border-white/10 pl-4 text-xs">
               <Badge variant="outline" className="border-blue-200 bg-blue-50/80 text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/50 dark:text-cyan-400 font-bold text-[10px]">
-                18-Engine MVP Matrix
+                15-Engine MVP Matrix
               </Badge>
               <span className="text-slate-500 dark:text-slate-400 font-medium">Subdomain Routing Architecture</span>
             </div>
@@ -196,7 +196,7 @@ export default function DemoMatrixHub() {
 
               {/* Main Headline */}
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
-                All 18 BITS Software Engines. <br />
+                All 15 BITS Software Engines. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 dark:from-blue-400 dark:via-cyan-400 dark:to-teal-300">
                   Live Interactive MVPs.
                 </span>
@@ -280,12 +280,12 @@ export default function DemoMatrixHub() {
         </div>
       </section>
 
-      {/* 18-Product Grid */}
+      {/* 15-Product Grid */}
       <main className="flex-1 px-4 sm:px-8 py-12">
         <div className="mx-auto max-w-7xl">
           <div className="flex items-center justify-between mb-8">
             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-              Showing <span className="text-slate-900 dark:text-white font-bold">{filteredProducts.length}</span> of 18 Engines
+              Showing <span className="text-slate-900 dark:text-white font-bold">{filteredProducts.length}</span> of 15 Engines
             </div>
             <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
               <Zap className="h-3 w-3 text-amber-500" />
@@ -431,7 +431,7 @@ export default function DemoMatrixHub() {
       <footer className="border-t border-blue-100/80 bg-white/70 backdrop-blur-xl py-8 px-4 text-center text-xs text-slate-500 dark:border-white/10 dark:bg-[#070e1c]/80 dark:text-slate-400">
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="font-medium">
-            Boundless IT Solutions (BITS) • 18-Engine Modular Micro-Frontend Architecture
+            Boundless IT Solutions (BITS) • 15-Engine Modular Micro-Frontend Architecture
           </div>
           <div className="flex items-center gap-5">
             <Link href="/" className="hover:text-blue-600 dark:hover:text-white transition">Main Website</Link>

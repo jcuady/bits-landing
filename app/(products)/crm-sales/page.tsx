@@ -443,7 +443,7 @@ export default function CrmSalesDashboard() {
             </Button>
           </div>
 
-          {/* §88 — both of these typed "18 Engines" for a link to /demo, which renders
+          {/* §88 — both of these typed "15 Engines" for a link to /demo, which renders
               PRODUCT_REGISTRY (19). Derived now. */}
           <div className="rounded-2xl border border-slate-800/80 bg-slate-900/40 p-4">
             <div className="text-xs font-semibold text-slate-300 mb-1">

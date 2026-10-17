@@ -199,7 +199,7 @@ If generating a raster image (Flux / Recraft / Ideogram / Gemini):
 [USER INPUT:]
 BITS vs. Salesforce Service Cloud + Five9 for a 100-seat BPO collection floor.
 Salesforce + Five9: ~₱11M/yr in per-seat licensing.
-BITS OPERATIONS 360: 1 platform fee. 18 connected engines. 5,000 agents. Zero per-seat tax.
+BITS OPERATIONS 360: 1 platform fee. 15 connected engines. 5,000 agents. Zero per-seat tax.
 Use Pattern A headline: 5,000 agents. / ₱0 in per-seat tax. / One system.
 LinkedIn post (1200 × 627, 1.91:1).
 ```

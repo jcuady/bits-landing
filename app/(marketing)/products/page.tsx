@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Building2, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Products Catalog — 18 Enterprise Software Products",
+  title: "Products Catalog — 15 Enterprise Software Products",
   description:
     "Explore the full BITS enterprise software portfolio: Operations 360 (OMS), BITSagent AI, Sales CRM, Support CRM, Accounting ERP, HRMS, Payroll, Logistics, Booking, Queuing, and more. Start with one product, expand as you grow.",
   keywords: [
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${site.url}/products` },
   openGraph: {
-    title: "BITS Products — 18 Enterprise Software Products",
+    title: "BITS Products — 15 Enterprise Software Products",
     description:
       "Explore the full BITS enterprise software portfolio: Operations 360, BITSagent AI, CRM, ERP, HRMS, Payroll, Logistics, and more.",
     url: `${site.url}/products`,
     siteName: site.legalName,
     type: "website",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS 18 Enterprise Software Products" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS 15 Enterprise Software Products" }],
   },
 };
 
@@ -107,7 +107,7 @@ export default function ProductsIndexPage() {
         "@type": "CollectionPage",
         "@id": `${site.url}/products#webpage`,
         url: `${site.url}/products`,
-        name: "BITS Enterprise Software Products Catalog (18 Connected Products)",
+        name: "BITS Enterprise Software Products Catalog (15 Connected Products)",
         description:
           "Complete catalog of all 18 enterprise software systems engineered by Boundless IT Solutions (BITS).",
         publisher: {
@@ -125,7 +125,7 @@ export default function ProductsIndexPage() {
       },
       {
         "@type": "ItemList",
-        name: "BITS 18 Enterprise Software Products",
+        name: "BITS 15 Enterprise Software Products",
         itemListElement: bitsProducts.map((p, idx) => ({
           "@type": "ListItem",
           position: idx + 1,
@@ -157,7 +157,7 @@ export default function ProductsIndexPage() {
             </Reveal>
             <Reveal delay={0.04}>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-                18 Connected Products.{" "}
+                15 Connected Products.{" "}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
                   One Unified Platform.
                 </span>
