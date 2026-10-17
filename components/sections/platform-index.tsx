@@ -236,6 +236,15 @@ export function PlatformIndex() {
                   Connected to the platform you already run.
                 </p>
               </div>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/deployment"
+                    onClick={() => track("cta_click", { section: "platform-index", label: "Deployment options" })}
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-900 transition-all hover:border-blue-300 hover:shadow-md"
+                  >
+                    Cloud or your own servers
+                    <ArrowRight className="size-4" aria-hidden />
+                  </Link>
               <Link
                 href="/products"
                 onClick={() => track("cta_click", { section: "platform-index", label: "Browse catalogue" })}
@@ -244,6 +253,7 @@ export function PlatformIndex() {
                 Browse the full catalogue
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
+                </div>
             </div>
           </Reveal>
 

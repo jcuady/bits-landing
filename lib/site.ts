@@ -1624,8 +1624,7 @@ export const faqItems = [
   },
   {
     question: "What is Operations 360 (OMS) and the BITS CRM?",
-    answer:
-      "Operations 360 (OMS) is our flagship integrated operations management system and top CRM for collections agency recovery floors. It unifies delinquent debtor dossiers, automated Promise-to-Pay (PTP) scheduling, browser WebRTC predictive dialer calling, multi-channel messaging, supervisor HUD call monitoring (listen/whisper/barge), standardized QA scorecards, coaching action plans, agent LMS, workforce management (WFM), and real-time executive operations dashboards in one sovereign system.",
+    answer: "Operations 360 is our flagship OMS and collections CRM, unifying collection workflows, predictive dialing, PTP automation and QA. The BITScrm modules add customer management, ticketing and omnichannel engagement on the same database.",
   },
   {
     question: "What AI capabilities does BITS provide?",
@@ -1644,8 +1643,7 @@ export const faqItems = [
   },
   {
     question: "How does BITS approach security, data privacy, and compliance?",
-    answer:
-      "Security is foundational to our architecture. We implement granular role-based access control (RBAC), campaign tenant scoping, immutable activity and supervisory audit trails, and configurable quiet-hour and contact-frequency rules aligned with the principles of Bangko Sentral ng Pilipinas (BSP) Circulars 454/857 and Republic Act 10173 (Philippine Data Privacy Act). We also support private cloud and on-premises deployments for organizations with strict data residency mandates.",
+    answer: "Security is foundational. Granular role-based access controls, encrypted transmission and strict data residency. For Philippine institutions we comply with BSP Circulars 454 & 857 and NPC RA 10173.",
   },
   {
     question: "How does the implementation process and onboarding work?",
@@ -1654,23 +1652,19 @@ export const faqItems = [
   },
   {
     question: "Can BITS be deployed On-Premises or on Cloud, and what do you recommend?",
-    answer:
-      "All BITS systems can be deployed both in the cloud and on your own office servers. We recommend our Managed Cloud deployment for fast turnkey setup, automatic scaling, high reliability, and continuous security with zero IT hardware overhead. For organizations with strict internal data policies, banking compliance, or existing server infrastructure, we provide complete on-site setup and private server deployment.",
+    answer: "All BITS systems run in our sovereign managed cloud or on your own office servers, for institutions requiring absolute physical control of their data.",
   },
   {
     question: "Do BITS systems receive continuous updates, and how are new technology and security improvements handled?",
-    answer:
-      "Yes. All BITS systems receive continuous architectural, compliance, and security improvements as part of our standard lifecycle. When newer security standards (such as BSP Circulars, NPC Data Privacy guidelines, ISO 27001, and OWASP CVE mitigations) and advancing technologies (such as faster LLM inference, lower-latency voice synthesis, or updated framework libraries) become available, they are proactively integrated into the platform. Clients may also request bespoke custom operational features or specialized third-party integrations at any time (scoping and development costs vary based on requirement complexity).",
+    answer: "Yes. Every BITS system receives continuous architectural, compliance and security improvements, embedded at no additional license cost and without disruptive migrations.",
   },
   {
     question: "What is the BITS Smart NFC Business Card and how does it work?",
-    answer:
-      "The BITS Smart NFC Business & Identity Card is an all-in-one digital identity replacement for traditional paper business cards. Utilizing an encrypted contactless chip, a single tap against any modern smartphone (iOS or Android) instantly displays your digital identity profile—including your contact information (with one-click .vCard saving), company website, social media profiles, portfolio, meeting schedulers, and payment links—with zero recipient app installation required. You only ever need 1 card: all information can be updated dynamically in real-time through our web portal without reprinting, and the card can be remotely frozen instantly if misplaced or stolen.",
+    answer: "The BITS Smart NFC Card unifies your identity, secure access, payment credentials and marketing touchpoints into one tap-to-share encrypted card, replacing plastic IDs and paper business cards.",
   },
   {
     question: "Can we white-label BITS software under our own brand?",
-    answer:
-      "Yes. With the BITS White Label Platform, you can deploy any BITS product—including CRM, ERP, HRMS, Payroll, Booking, Queuing, Accounting, AI Agents, or NFC Cards—completely rebranded under your own company's logo, custom domain (yourbrand.com), and brand color palette with zero mention of BITS. You maintain 100% ownership of your customer relationships while BITS powers the infrastructure quietly behind the scenes.",
+    answer: "Yes. The BITS White Label Platform deploys any BITS product under your own brand. Your clients see only your identity; BITS runs the infrastructure, updates and compliance maintenance behind it.",
   },
   {
     question: "How are BITS solutions packaged and how do we get started?",

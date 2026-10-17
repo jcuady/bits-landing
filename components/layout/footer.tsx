@@ -68,6 +68,7 @@ const footerNavigation: FooterSection[] = [
       { label: "Collections Command Center", href: "/#features" },
       { label: "Productivity Bento", href: "/#features-bento" },
       { label: "BITSagent Voice AI", href: "/operations-360/ai" },
+      { label: "Deployment Options", href: "/deployment" },
       { label: "BITS OMS Collections", href: "/operations-360/crm" },
     ],
   },
