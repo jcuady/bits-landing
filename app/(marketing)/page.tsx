@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
-import { ProductFamilies } from "@/components/sections/product-families";
+import { PlatformIndex } from "@/components/sections/platform-index";
 import { SolutionFinder } from "@/components/sections/solution-finder";
 import { StatsStrip } from "@/components/sections/stats-strip";
 import { TheDifference } from "@/components/sections/the-difference";
 import { FeaturesHero } from "@/components/sections/features-hero";
 import { FloorShowcase } from "@/components/sections/floor-showcase";
-import { Industries } from "@/components/sections/industries";
 import { Security } from "@/components/sections/security";
-import { DeploymentModels } from "@/components/sections/deployment-models";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
@@ -126,10 +124,12 @@ export default function Home() {
       {/* 2. Trust & Statutory Governance — Social proof and credibility */}
       <TrustStrip />
 
-      {/* ═══ PHASE 2: SHOW THE PORTFOLIO (What we offer) ═══ */}
+      {/* ═══ PHASE 2: THE PLATFORM (Operations 360 + the catalogue) ═══ */}
 
-      {/* 3. Product Families: 4 connected product families overview (CPO Rec #3) */}
-      <ProductFamilies />
+      {/* 3. PlatformIndex: the Operations 360 hub - four pillars, two modules,
+            and the rest of the catalogue. Replaces ProductFamilies, Industries
+            and DeploymentModels. Registry-driven: lib/products/platform.ts */}
+        <PlatformIndex />
 
       {/* 4. Solution Finder: Problem-based discovery — "What are you trying to improve?" (CPO Rec #8) */}
       <SolutionFinder />
@@ -151,13 +151,11 @@ export default function Home() {
       {/* ═══ PHASE 4: TRUST & FIT (Can it work for me?) ═══ */}
 
       {/* 9. Target Industries */}
-      <Industries />
 
       {/* 10. Security: BSP/NPC-aligned enterprise security */}
       <Security />
 
       {/* 11. Deployment Architecture */}
-      <DeploymentModels />
 
       {/* ═══ PHASE 5: CONVERT (How do I get started?) ═══ */}
 
