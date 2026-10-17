@@ -813,7 +813,7 @@ export const blogPosts: BlogPost[] = [
     },
     category: "Operations Strategy",
     readTime: "8 min read",
-    featured: false,
+    featured: true,
     keywords: [
       "top oms",
       "best oms",

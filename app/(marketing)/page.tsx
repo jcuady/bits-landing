@@ -5,6 +5,7 @@ import { PlatformIndex } from "@/components/sections/platform-index";
 import { SolutionFinder } from "@/components/sections/solution-finder";
 import { StatsStrip } from "@/components/sections/stats-strip";
 import { TheDifference } from "@/components/sections/the-difference";
+import { Credibility } from "@/components/sections/credibility";
 import { FeaturesHero } from "@/components/sections/features-hero";
 import { FloorShowcase } from "@/components/sections/floor-showcase";
 import { Security } from "@/components/sections/security";
@@ -138,6 +139,11 @@ export default function Home() {
 
       {/* 5. The Operational Advantage: Why BITS over generic software */}
       <TheDifference />
+
+      {/* Evidence: two research posts, framed as checks a buyer can run --
+          not as a content hub. Picks the two posts flagged `featured`
+          in lib/blog-data.ts. */}
+      <Credibility />
 
       {/* 6. Operations 360 Benchmarks: Flagship platform metrics */}
       <StatsStrip />
