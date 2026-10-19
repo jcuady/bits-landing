@@ -33,8 +33,8 @@ Operations 360 is the BITS platform. It comprises four capabilities, plus the BI
 
 - **Collections CRM & PTP**: 360° delinquent dossiers, DPD aging buckets, co-maker tracking, and promise-to-pay automation that flags broken commitments the minute they expire. Screen-pop in 0.4s.
 - **Predictive Dialer**: Sub-350ms pacing with ~98.4% live voice. WebRTC softphone runs entirely in-browser — no desk phones, no PBX hardware.
-- **Field Agents App**: GPS-geofenced proof-of-visit within a 10m radius, satellite-clock timestamping, watermarked photo proof and on-device debtor e-signature. Works offline.
-- **Real-time QA Scoring**: 100% of calls audited. Acoustic and semantic scoring, sentiment analysis, prohibited-phrase detection and BSP quiet-hour (6AM–10PM) breach flagging.
+- **BITS FILO**: GPS-geofenced proof-of-visit within a 10m radius, satellite-clock timestamping, watermarked photo proof and on-device debtor e-signature. Works offline.
+- **BITS AIQA**: 100% of calls audited. Acoustic and semantic scoring, sentiment analysis, prohibited-phrase detection and BSP quiet-hour (6AM–10PM) breach flagging.
 
 Full detail: [Operations 360](https://www.boundlessits.com/operations-360)
 

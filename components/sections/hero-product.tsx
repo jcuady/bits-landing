@@ -177,7 +177,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   </span>
                 </div>
                 <span className="text-[11px] sm:text-xs text-slate-500 font-medium line-clamp-1">
-                  Unified Collections CRM · Work Queues · Field App · Real-Time QA
+                  Unified Collections CRM · Work Queues · BITS FILO · BITS AIQA
                 </span>
               </div>
             </div>
@@ -289,14 +289,14 @@ export function HeroProduct({ className }: { className?: string }) {
               )}
             </button>
 
-            {/* Tab 3: Field Agents App */}
+            {/* Tab 3: BITS FILO */}
             <button
               type="button"
               onClick={() =>
                 handleTabClick(
                   "field",
                   0.62,
-                  "Field Agents App: Real-time GPS timestamps, photo proof & offline sync."
+                  "BITS FILO: Real-time GPS timestamps, photo proof & offline sync."
                 )
               }
               className={cn(
@@ -312,7 +312,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   activeTab === "field" ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
                 )}
               />
-              <span className="truncate">Field Agents App</span>
+              <span className="truncate">BITS FILO</span>
               <span className="hidden sm:inline-flex rounded-full bg-blue-100 text-blue-700 px-1.5 py-0.2 text-[0.58rem] font-bold">
                 GPS
               </span>
@@ -328,7 +328,7 @@ export function HeroProduct({ className }: { className?: string }) {
               )}
             </button>
 
-            {/* Tab 4: Real-Time QA Scoring */}
+            {/* Tab 4: BITS AIQA */}
             <button
               type="button"
               onClick={() =>
@@ -351,7 +351,7 @@ export function HeroProduct({ className }: { className?: string }) {
                   activeTab === "qa" ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
                 )}
               />
-              <span className="truncate">Real-Time QA Scoring</span>
+              <span className="truncate">BITS AIQA</span>
               {activeTab === "qa" && (
                 <div className="absolute inset-x-2 bottom-0.5 h-0.5 rounded-full bg-blue-100/80 overflow-hidden">
                   <div

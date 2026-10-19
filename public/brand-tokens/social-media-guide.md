@@ -272,7 +272,7 @@ The official BITS monogram is `B above ∞` — a capital B above a horizontal i
 │                                 │
 │  Sub-350ms predictive pacing     │
 │  10-second PTP watchdog          │
-│  100% Speech AI QA               │
+│  100% BITS AIQA               │
 │                                 │
 │                          [logo] │
 └─────────────────────────────────┘

@@ -130,7 +130,7 @@ const CORE_ENGINES = [
     color: "text-amber-600 bg-amber-50 border-amber-200",
   },
   {
-    name: "Field Agents Mobile App",
+    name: "BITS FILO",
     /* SYSTEM_AUDIT.md §48. Previously: "Live GPS geofencing, tamper-proof visit
        timestamps, photo proof, digital signatures & offline sync." No field app,
        no geofencing and no tamper-evident store exist in this codebase —

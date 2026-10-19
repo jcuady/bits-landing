@@ -68,8 +68,8 @@ export const OPERATIONS_360: PlatformModel = {
     },
     {
       id: "field",
-      title: "Field Agents App",
-      line: "GPS-geofenced proof-of-visit with debtor e-signature.",
+      title: "BITS FILO",
+      line: "Field Intelligence Location Optimization. GPS-geofenced proof-of-visit with debtor e-signature.",
       stat: "10m geofence",
       features: [
         "Satellite-clock timestamping",
@@ -80,8 +80,8 @@ export const OPERATIONS_360: PlatformModel = {
     },
     {
       id: "qa",
-      title: "Real-time QA Scoring",
-      line: "Every call audited. Prohibited phrases flagged live.",
+      title: "BITS AIQA",
+      line: "Real-time AI QA scoring. Every call audited. Prohibited phrases flagged live.",
       stat: "100% call audit",
       features: [
         "Acoustic & semantic scoring",

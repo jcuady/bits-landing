@@ -30,14 +30,14 @@
 
   /* Electric blue + signal cyan */
   --color-electric-600: #0063db;
-  --color-electric-500: #007bff;
+  --color-electric-500: #2563eb;
   --color-electric-400: #2f93ff;
   --color-signal-500: #00a6ff;
-  --color-signal-300: #5cc8ff;
+  --color-signal-300: #38bdf8;
 
   /* Neutrals */
-  --color-cloud: #f6f9fc;
-  --color-skywash: #eaf4ff;
+  --color-cloud: #f8fafc;
+  --color-skywash: #e0f2fe;
   --color-ink: #0d1b2a;
   --color-slateblue: #40536d;
   --color-mist: #93a9c4;
@@ -83,10 +83,10 @@
   --shadow-glass-lift: 0 2px 6px rgb(6 22 47 / 0.06), 0 28px 56px -20px rgb(6 22 47 / 0.28);
   --shadow-cockpit: 0 30px 80px rgb(3 13 28 / 0.5);
 
-  /* Daytime azure horizon ramp (/brandbook) */
-  --color-horizon-top: #0284c7;
-  --color-horizon-mid: #2377f3;
-  --color-horizon-lower: #5ea2f9;
+  /* Daytime azure horizon ramp — brandbook sky ramp (public/brand-tokens) */
+  --sky-top: #0284c7;
+  --sky-mid: #2377f3;
+  --sky-lower: #5ea2f9;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 

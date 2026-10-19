@@ -62,7 +62,7 @@ const TABS: TabMeta[] = [
   {
     /* §73 — the field tab described an app that does not exist. Same treatment. */
     id: "field",
-    label: "Field Agents Mobile App",
+    label: "BITS FILO",
     badge: "Live on the floor",
     badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200",
     headline: "Field Visit Capture, Verified at the Doorstep.",
@@ -244,7 +244,7 @@ export function FloorShowcase() {
 
           <Reveal delay={0.08}>
             <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty">
-              Every tool your supervisors, call center collectors, field agents, and QA auditors need—integrated into a unified workspace built from 20 years of hands-on operations experience.
+              Every tool your supervisors, call center collectors, BITS FILO agents, and AIQA auditors need—integrated into a unified workspace built from 20 years of hands-on operations experience.
             </p>
           </Reveal>
         </div>

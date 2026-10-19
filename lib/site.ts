@@ -1572,7 +1572,7 @@ export const pricingComparisonMatrix = [
       { name: "Promise-to-Pay (PTP) Tracking", starter: "Manual Dispositions", growth: "Automated Breach Alerts", enterprise: "Closed-Loop Clearing Feeds" },
       { name: "BITSagent Conversational Voice AI", starter: "Optional Add-on", growth: "Assisted Call Workflows", enterprise: "Autonomous Outbound & Inbound" },
       { name: "BITSagent Email & SMS Negotiation", starter: "—", growth: "Automated Follow-up", enterprise: "Custom Multi-Turn RAG Grounding" },
-      { name: "Real-Time QA & Sentiment Analysis", starter: "—", growth: "Post-Call Transcription", enterprise: "Real-Time Floor Live Stream" },
+      { name: "BITS AIQA & Sentiment Analysis", starter: "—", growth: "Post-Call Transcription", enterprise: "Real-Time Floor Live Stream" },
     ],
   },
   {

@@ -56,7 +56,7 @@ const MODULES = [
 export const metadata: Metadata = {
   title: "Operations 360 (OMS) — Top CRM & OMS for Collections Agencies | BITS",
   description:
-    "Operations 360 is the BITS platform for collections agencies: CRM & PTP automation, sub-350ms predictive softphone, GPS field telemetry, and 100% Speech AI QA — on one sovereign database. Includes BITScrm and BITSagent AI modules.",
+    "Operations 360 is the BITS platform for collections agencies: CRM & PTP automation, sub-350ms predictive softphone, GPS field telemetry, and 100% BITS AIQA — on one sovereign database. Includes BITScrm and BITSagent AI modules.",
   keywords: [
     "operations 360",
     "operations 360 oms",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Operations 360 (OMS) — The BITS Platform for Collections Agencies",
     description:
-      "One platform for the entire recovery floor: CRM & PTP automation, predictive softphone, GPS field telemetry, and 100% Speech AI QA.",
+      "One platform for the entire recovery floor: CRM & PTP automation, predictive softphone, GPS field telemetry, and 100% BITS AIQA.",
     url: `${site.url}/operations-360`,
     siteName: site.legalName,
     type: "website",
@@ -103,8 +103,8 @@ const jsonLd = {
       featureList: [
         "Collections CRM & Promise-to-Pay (PTP) — 360° delinquent dossiers, DPD aging buckets, co-maker tracking, and automated broken-promise flagging",
         "Predictive Dialer — sub-350ms call pacing at approximately 98.4% live voice, WebRTC softphone in-browser with no desk phones or PBX hardware",
-        "Field Agents App — GPS proof-of-visit within a 10-metre geofence, satellite-clock timestamping, watermarked photo evidence and debtor e-signature",
-        "Real-time QA Scoring — 100% of calls audited for acoustic and semantic quality, prohibited-phrase detection and BSP Circulars 454/857 quiet-hour compliance",
+        "BITS FILO — GPS proof-of-visit within a 10-metre geofence, satellite-clock timestamping, watermarked photo evidence and debtor e-signature",
+        "BITS AIQA — 100% of calls audited for acoustic and semantic quality, prohibited-phrase detection and BSP Circulars 454/857 quiet-hour compliance",
       ],
       isPartOf: { "@type": "WebSite", url: site.url },
       provider: {
@@ -260,7 +260,7 @@ export default function Operations360Page() {
             "Accounting & ERP",
             "HRMS & Payroll",
             "Inventory & Logistics",
-            "Field Agents App",
+            "BITS FILO",
             "Booking System",
             "Smart Queuing",
             "Sports & Venue Hub",

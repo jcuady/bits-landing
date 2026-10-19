@@ -245,8 +245,8 @@ const jsonLd = {
       featureList: [
         "Collections CRM & Promise-to-Pay (PTP) — 360° delinquent dossiers, DPD aging buckets, co-maker tracking, and automated broken-promise flagging",
         "Predictive Dialer — sub-350ms call pacing at approximately 98.4% live voice, WebRTC softphone in-browser with no desk phones or PBX hardware",
-        "Field Agents App — GPS proof-of-visit within a 10-metre geofence, satellite-clock timestamping, watermarked photo evidence and debtor e-signature",
-        "Real-time QA Scoring — 100% of calls audited for acoustic and semantic quality, prohibited-phrase detection and BSP Circulars 454/857 quiet-hour compliance",
+        "BITS FILO — GPS proof-of-visit within a 10-metre geofence, satellite-clock timestamping, watermarked photo evidence and debtor e-signature",
+        "BITS AIQA — 100% of calls audited for acoustic and semantic quality, prohibited-phrase detection and BSP Circulars 454/857 quiet-hour compliance",
       ],
       publisher: {
         "@id": `${site.url}/#organization`,
