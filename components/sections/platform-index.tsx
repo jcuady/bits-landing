@@ -2,12 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { track } from "@vercel/analytics";
-import { ArrowRight, Check } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { getPlatform, CATALOG_CLAIM } from "@/lib/products/platform";
@@ -17,27 +14,23 @@ import { getPlatform, CATALOG_CLAIM } from "@/lib/products/platform";
  *
  * STRUCTURE (CPO decision, Rev 5):
  *   Static   Collections CRM & PTP · Predictive Dialer
- *            Establishes the operational baseline.
+ *            The operational baseline every recovery floor runs on.
  *   Pinned   BITS FILO · BITS AIQA
- *            The two differentiators. Scroll is spent on these because
- *            these are what separates Operations 360 from any other CRM.
+ *            The two differentiators. Scroll is spent only here,
+ *            because this is what separates Operations 360 from any
+ *            other collections CRM.
  *
  * The pinned cards are deliberately minimal — title, one line, stat. No
- * feature lists. A pin that costs two screenfuls of scroll only reads as
- * confidence if the card is confident enough to carry one claim.
+ * feature lists. A pin that costs two screenfuls only reads as
+ * confidence if the card carries a single claim.
  *
- * Everything is driven by lib/products/platform.ts. Adding a pillar is a
- * data change; moving one between static and pinned is a data change too.
+ * Which pillars are pinned is data, not layout: PINNED_IDS below,
+ * matched against pillar ids in lib/products/platform.ts.
  */
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-const MODULE_COPY: Record<string, { line: string }> = {
-  "crm-sales": { line: "Recover the accounts" },
-  bitsagent: { line: "Automate the floor" },
-};
 
 /** Pillar ids that earn the pinned treatment. */
 const PINNED_IDS = ["field", "qa"] as const;
@@ -47,15 +40,9 @@ export function PlatformIndex() {
   const cardsRef = React.useRef<(HTMLDivElement | null)[]>([]);
 
   const platform = getPlatform();
-  const modules = platform.modules;
-  const portfolio = platform.portfolio;
-
-  const pinned = platform.pillars.filter((p) =>
-    (PINNED_IDS as readonly string[]).includes(p.id),
-  );
-  const baseline = platform.pillars.filter(
-    (p) => !(PINNED_IDS as readonly string[]).includes(p.id),
-  );
+  const isPinned = (id: string) => (PINNED_IDS as readonly string[]).includes(id);
+  const pinned = platform.pillars.filter((p) => isPinned(p.id));
+  const baseline = platform.pillars.filter((p) => !isPinned(p.id));
 
   useGSAP(
     () => {
@@ -115,13 +102,13 @@ export function PlatformIndex() {
       </div>
 
       {/* ── Baseline: the operational core ── */}
-      <Container className="relative pt-20 md:pt-28 pb-16 md:pb-20">
+      <Container className="relative pt-20 pb-14 md:pt-28 md:pb-16">
         <Reveal>
           <h2 className="text-balance text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Operations 360
           </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-slate-600">
-            {CATALOG_CLAIM}. The operational core every recovery floor runs on.
+            {CATALOG_CLAIM}
           </p>
         </Reveal>
 
@@ -162,7 +149,7 @@ export function PlatformIndex() {
             </h2>
           </div>
 
-          <div className="relative w-full max-w-4xl h-[52vh] sm:h-[56vh]">
+          <div className="relative w-full max-w-4xl h-[50vh] sm:h-[54vh]">
             {pinned.map((pillar, idx) => (
               <div
                 key={pillar.id}
@@ -185,115 +172,6 @@ export function PlatformIndex() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* ── Modules ── */}
-      {modules.length > 0 ? (
-        <div className="relative bg-white py-16 md:py-20">
-          <Container>
-            <Reveal>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-                Two modules ship with it
-              </h2>
-              <p className="mt-3 max-w-2xl leading-relaxed text-slate-600">
-                Capabilities inside the platform, on the same database — not
-                separate products to integrate.
-              </p>
-            </Reveal>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {modules.map((module) => (
-                <Reveal key={module.id}>
-                  <Link
-                    href={module.marketingUrl}
-                    onClick={() =>
-                      track("cta_click", {
-                        section: "platform-index",
-                        label: module.id,
-                      })
-                    }
-                    className="group flex h-full flex-col rounded-2xl border border-slate-200/70 bg-white/80 p-6 backdrop-blur-md transition-all hover:border-blue-300 hover:shadow-md"
-                  >
-                    <h3 className="text-xl font-bold text-slate-900 transition-colors group-hover:text-blue-600">
-                      {module.id === "bitsagent" ? "BITSagent AI" : "BITScrm"}
-                    </h3>
-                    <p className="mt-1 font-medium text-blue-600">
-                      {MODULE_COPY[module.id]?.line ?? module.tagline}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-slate-900 transition-colors group-hover:text-blue-600">
-                      Explore
-                      <ArrowRight
-                        className="size-4 transition-transform group-hover:translate-x-1"
-                        aria-hidden
-                      />
-                    </span>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
-          </Container>
-        </div>
-      ) : null}
-
-      {/* ── Portfolio ── */}
-      <div className="relative border-t border-slate-200/60 bg-slate-50/80 py-16 md:py-20">
-        <Container>
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <h2 className="text-xl font-bold tracking-tight text-slate-900">
-                  And {portfolio.length} more on the same database
-                </h2>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/deployment"
-                  onClick={() =>
-                    track("cta_click", {
-                      section: "platform-index",
-                      label: "Deployment options",
-                    })
-                  }
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-900 transition-all hover:border-blue-300 hover:shadow-md"
-                >
-                  Cloud or your own servers
-                </Link>
-                <Link
-                  href="/products"
-                  onClick={() =>
-                    track("cta_click", {
-                      section: "platform-index",
-                      label: "Browse catalogue",
-                    })
-                  }
-                  className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-blue-500"
-                >
-                  Browse all products
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <ul className="mt-8 grid gap-x-8 gap-y-2 text-sm text-slate-700 sm:grid-cols-2 lg:grid-cols-4">
-              {portfolio.map((product) => (
-                <li key={product.id}>
-                  <Link
-                    href={product.marketingUrl}
-                    className="group flex items-center gap-2"
-                  >
-                    <Check
-                      className="size-3.5 shrink-0 text-blue-600"
-                      aria-hidden
-                    />
-                    <span className="group-hover:text-blue-600 transition-colors">
-                      {product.shortName}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </Container>
       </div>
     </section>
   );

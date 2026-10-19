@@ -7,7 +7,7 @@ import { Security } from "@/components/sections/security";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
-import { site } from "@/lib/site";
+import { HOME_FAQ, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "BITS — Top CRM for Collections Agency, Operations OMS & Enterprise Software",

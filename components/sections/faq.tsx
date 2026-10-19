@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { faqItems } from "@/lib/site";
+import { HOME_FAQ } from "@/lib/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
@@ -22,7 +22,7 @@ export function FAQ() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
+    mainEntity: HOME_FAQ.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -133,7 +133,7 @@ export function FAQ() {
           {/* RIGHT: Expandable Accordion (lg:col-span-7) */}
           <div className="lg:col-span-7">
             <div className="overflow-hidden rounded-2xl lg:rounded-3xl border border-sky-200/80 bg-white p-4 sm:p-6 shadow-lg shadow-sky-950/5 divide-y divide-sky-100">
-              {faqItems.map((item, idx) => {
+              {HOME_FAQ.map((item, idx) => {
                 const isOpen = openIndex === idx;
                 const contentId = `faq-content-${idx}`;
                 const headerId = `faq-header-${idx}`;

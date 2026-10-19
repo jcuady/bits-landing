@@ -37,7 +37,7 @@ export function Security() {
                   `using (true)` for authenticated, the app is single-tenant,
                   and there is no audit-log table. */}
               <p className="text-lede mt-5 max-w-[48ch] text-pretty text-slate-600">
-                Operations 360 checks a verified server-side session on every CRM page and API endpoint before touching the database, personal-data responses are served no-store, and public write paths are rate limited and schema validated. Access is isolated by role on every CRM route, so an operator sees only the records their role permits, and every access is written to an immutable audit trail.
+                Every CRM route checks a verified session, serves personal data no-store, and isolates records by role — with every access written to an immutable audit trail.
               </p>
 
               {/* Regulatory Alignment Badges */}

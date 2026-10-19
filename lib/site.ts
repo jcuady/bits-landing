@@ -2077,3 +2077,15 @@ export const footerColumns = [
   },
 ] as const;
 
+
+
+/**
+ * The homepage shows a curated subset of faqItems.
+ *
+ * The full set of 14 stays available for /blog and future pages; only the
+ * commercial-intent questions earn homepage space. Filtering by index keeps
+ * this a pure projection of faqItems, so the two can never drift.
+ */
+export const HOME_FAQ = faqItems.filter((_, i) =>
+  [0, 1, 3, 7, 8, 9, 13].includes(i),
+);
