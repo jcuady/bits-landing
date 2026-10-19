@@ -235,7 +235,7 @@ export function Pricing() {
   return (
     <Section
       id="pricing"
-      className="relative scroll-mt-28 sm:scroll-mt-36 overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white py-20 sm:py-28 lg:py-32 border-b border-slate-200/80"
+      className="relative scroll-mt-28 sm:scroll-mt-36 overflow-hidden bg-gradient-to-b from-slate-50/70 via-white to-slate-50/70 from-white via-slate-50/50 to-white py-20 sm:py-28 lg:py-32 border-b border-slate-200/80"
     >
       {/* Anchor alias for solutions navigation with negative offset to avoid floating header clipping */}
       <div id="solutions" className="absolute -top-28 sm:-top-36 pointer-events-none" />
@@ -273,47 +273,47 @@ export function Pricing() {
 
           {/* ── INTERACTIVE PRODUCT TRACK SWITCHER (Tabs) ── */}
           <Reveal delay={0.08} className="mt-8">
-            <div className="grid w-full max-w-xl grid-cols-3 items-center justify-items-stretch gap-1.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-1.5 shadow-inner">
+            <div className="mx-auto grid w-fit min-w-[22rem] grid-cols-3 items-stretch gap-1 rounded-full border border-slate-200/90 bg-slate-50/80 p-1 backdrop-blur-xlslate-100/80 p-1.5 shadow-inner">
               <button
                 type="button"
                 onClick={() => setActiveTrack("oms")}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
+                  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-20000 cursor-pointer",
                   activeTrack === "oms"
                     ? "bg-white text-blue-700 shadow-sm shadow-slate-900/5 ring-1 ring-slate-200/80"
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
                 <span className="size-1.5 rounded-full bg-blue-600" />
-                <span>Operations 360 (OMS Flagship)</span>
+                <span>Operations 360</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTrack("crm")}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
+                  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-20000 cursor-pointer",
                   activeTrack === "crm"
                     ? "bg-white text-blue-700 shadow-sm shadow-slate-900/5 ring-1 ring-slate-200/80"
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
                 <span className="size-1.5 rounded-full bg-blue-600" />
-                <span>BITScrm &amp; Revenue Cloud</span>
+                <span>BITScrm</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTrack("bundle")}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
+                  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-20000 cursor-pointer",
                   activeTrack === "bundle"
                     ? "bg-white text-blue-700 shadow-sm shadow-slate-900/5 ring-1 ring-slate-200/80"
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
                 <span className="size-1.5 rounded-full bg-sky-400" />
-                <span>Multi-Product &amp; Custom Bundles</span>
+                <span>Bundles</span>
               </button>
             </div>
           </Reveal>

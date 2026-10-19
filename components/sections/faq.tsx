@@ -33,7 +33,7 @@ export function FAQ() {
   };
 
   return (
-    <Section id="faq" className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/25 to-white py-20 sm:py-24 lg:py-28 border-b border-sky-100">
+    <Section id="faq" className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28 border-b border-sky-100">
       {/* Schema.org FAQ structured data */}
       <script
         type="application/ld+json"

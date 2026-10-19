@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { PlatformIndex } from "@/components/sections/platform-index";
+import { FloorShowcase } from "@/components/sections/floor-showcase";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
@@ -143,6 +144,8 @@ export default function Home() {
       {/* ═══ PHASE 5: CONVERT (How do I get started?) ═══ */}
 
       {/* 12. Solution Packages & Pricing */}
+      <FloorShowcase />
+
       <Pricing />
 
       {/* 13. FAQ */}
