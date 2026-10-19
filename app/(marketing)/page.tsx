@@ -2,11 +2,6 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { PlatformIndex } from "@/components/sections/platform-index";
-import { SolutionFinder } from "@/components/sections/solution-finder";
-import { StatsStrip } from "@/components/sections/stats-strip";
-import { TheDifference } from "@/components/sections/the-difference";
-import { Credibility } from "@/components/sections/credibility";
-import { FeaturesHero } from "@/components/sections/features-hero";
 import { FloorShowcase } from "@/components/sections/floor-showcase";
 import { Security } from "@/components/sections/security";
 import { Pricing } from "@/components/sections/pricing";
@@ -132,24 +127,12 @@ export default function Home() {
             and DeploymentModels. Registry-driven: lib/products/platform.ts */}
         <PlatformIndex />
 
-      {/* 4. Solution Finder: Problem-based discovery — "What are you trying to improve?" (CPO Rec #8) */}
-      <SolutionFinder />
 
       {/* ═══ PHASE 3: FLAGSHIP DEEP DIVE (Operations 360) ═══ */}
 
-      {/* 5. The Operational Advantage: Why BITS over generic software */}
-      <TheDifference />
 
-      {/* Evidence: two research posts, framed as checks a buyer can run --
-          not as a content hub. Picks the two posts flagged `featured`
-          in lib/blog-data.ts. */}
-      <Credibility />
 
-      {/* 6. Operations 360 Benchmarks: Flagship platform metrics */}
-      <StatsStrip />
 
-      {/* 7. Collections Command Center: Hero feature with account management */}
-      <FeaturesHero />
 
       {/* 8. The Recovery Floor Powerhouse: Predictive Dialer, QA, Omnichannel */}
       <FloorShowcase />
