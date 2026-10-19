@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { HeroProduct } from "@/components/sections/hero-product";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { ArrowRight, ChevronDown, Layers } from "lucide-react";
 
@@ -198,10 +197,29 @@ export function Hero() {
             </Reveal>
           </div>
 
-          {/* Interactive Cockpit Mockup: OPERATIONS 360 Feature Showcase */}
-          <div id="cockpit" className="mt-12 sm:mt-16 w-full scroll-mt-24">
-            <HeroProduct />
-          </div>
+          {/* Operations 360 in situ — the real interface, not a mockup.
+              Replaces the HeroProduct pinned deck, which duplicated the
+              pillar sequence PlatformIndex already carries and cost a second
+              pinned scroll on the page. */}
+          <Reveal y={16}>
+            <figure className="mt-12 sm:mt-16 w-full scroll-mt-24">
+              <div className="overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/70 p-2 shadow-2xl shadow-blue-950/25 backdrop-blur-xl sm:p-3">
+                <Image
+                  src="/images/ops360-ui-interface.webp"
+                  alt="Operations 360 — the collections command centre: PTP ledger, dialer queue and supervisory HUD on one screen"
+                  width={1672}
+                  height={941}
+                  priority
+                  quality={82}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1140px"
+                  className="w-full rounded-[1.4rem] object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 text-center text-xs font-medium text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.35)]">
+                Operations 360 — collections command centre
+              </figcaption>
+            </figure>
+          </Reveal>
 
           {/* Vertical Scroll Chevron Pill */}
           <div className="mt-10 sm:mt-14 flex justify-center z-20">
