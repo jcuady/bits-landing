@@ -184,7 +184,7 @@ export function Hero() {
                 </a>
                 <Link
                   href="/demo"
-                  className="rounded-full bg-cyan-400/30 hover:bg-cyan-400/40 px-3.5 py-1 text-xs font-bold text-cyan-100 border border-cyan-300/50 shadow-xs backdrop-blur-md transition-all"
+                  className="rounded-full bg-sky-400/30 hover:bg-sky-400/40 px-3.5 py-1 text-xs font-bold text-sky-100 border border-sky-300/50 shadow-xs backdrop-blur-md transition-all"
                 >
                   Interactive Demo ↗
                 </Link>

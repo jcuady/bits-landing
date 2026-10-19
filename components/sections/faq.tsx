@@ -55,7 +55,7 @@ export function FAQ() {
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-[2.25rem] font-extrabold tracking-tight text-slate-900 leading-[1.18] text-balance">
               Your Questions Answered.{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">
                 Clear &amp; Factual.
               </span>
             </h2>
@@ -78,10 +78,10 @@ export function FAQ() {
           {/* LEFT: Vibrant Royal Blue Consultation Card (lg:col-span-5) */}
           <div className="lg:col-span-5">
             <Reveal amount={0.2}>
-              <div className="group relative overflow-hidden rounded-2xl lg:rounded-3xl border border-blue-400/40 bg-gradient-to-br from-blue-600 via-blue-600 to-indigo-700 p-5 sm:p-6 text-white shadow-xl shadow-blue-500/20">
+              <div className="group relative overflow-hidden rounded-2xl lg:rounded-3xl border border-blue-400/40 bg-gradient-to-br from-blue-600 via-blue-600 to-blue-700 p-5 sm:p-6 text-white shadow-xl shadow-blue-500/20">
                 {/* Ambient glow decoration */}
                 <div className="pointer-events-none absolute -right-16 -top-16 size-44 rounded-full bg-white/15 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-16 -left-16 size-44 rounded-full bg-indigo-900/30 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-16 -left-16 size-44 rounded-full bg-slate-900/30 blur-3xl" />
 
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <div>
@@ -101,11 +101,11 @@ export function FAQ() {
                     {/* Quick highlights */}
                     <div className="mt-4 space-y-2 border-t border-white/20 pt-4 text-xs text-blue-50">
                       <div className="flex items-center gap-2">
-                        <span className="size-1.5 rounded-full bg-cyan-300 shrink-0" />
+                        <span className="size-1.5 rounded-full bg-sky-300 shrink-0" />
                         <span>BSP Circulars 454 &amp; 857 compliance review</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="size-1.5 rounded-full bg-cyan-300 shrink-0" />
+                        <span className="size-1.5 rounded-full bg-sky-300 shrink-0" />
                         <span>Direct talk with senior solution architects</span>
                       </div>
                     </div>

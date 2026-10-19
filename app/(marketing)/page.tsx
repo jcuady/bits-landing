@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { PlatformIndex } from "@/components/sections/platform-index";
-import { FloorShowcase } from "@/components/sections/floor-showcase";
-import { Security } from "@/components/sections/security";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
@@ -134,15 +132,11 @@ export default function Home() {
 
 
 
-      {/* 8. The Recovery Floor Powerhouse: Predictive Dialer, QA, Omnichannel */}
-      <FloorShowcase />
 
       {/* ═══ PHASE 4: TRUST & FIT (Can it work for me?) ═══ */}
 
       {/* 9. Target Industries */}
 
-      {/* 10. Security: BSP/NPC-aligned enterprise security */}
-      <Security />
 
       {/* 11. Deployment Architecture */}
 

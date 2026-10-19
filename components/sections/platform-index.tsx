@@ -112,20 +112,35 @@ export function PlatformIndex() {
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {baseline.map((pillar) => (
-            <Reveal key={pillar.id}>
-              <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 backdrop-blur-md">
-                <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.18em] text-slate-400">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {baseline.map((pillar, i) => (
+            <Reveal key={pillar.id} delay={0.06 * i}>
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/60 p-8 shadow-[0_1px_2px_rgba(6,22,47,0.04),0_18px_44px_-24px_rgba(6,22,47,0.28)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/70 hover:shadow-[0_1px_2px_rgba(6,22,47,0.05),0_28px_60px_-28px_rgba(6,22,47,0.34)]">
+                {/* accent hairline across the top edge */}
+                <span
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal-300/70 to-transparent"
+                  aria-hidden
+                />
+                <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-600">
                   {pillar.stat}
                 </p>
-                <h3 className="mt-3 text-xl font-bold tracking-tight text-slate-900">
+                <h3 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">
                   {pillar.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
                   {pillar.line}
                 </p>
-              </div>
+                <ul className="mt-6 flex flex-wrap gap-2 border-t border-white/60 pt-5">
+                  {pillar.features.slice(0, 3).map((feature) => (
+                    <li
+                      key={feature}
+                      className="rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-slate-700"
+                    >
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </article>
             </Reveal>
           ))}
         </div>

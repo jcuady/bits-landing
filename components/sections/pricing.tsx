@@ -259,7 +259,7 @@ export function Pricing() {
           <Reveal delay={0.04}>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight text-slate-900 leading-[1.14] text-balance">
               Predictable Investment.{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-sky-400 bg-clip-text text-transparent">
                 Sized for Your True Scale.
               </span>
             </h2>
@@ -298,7 +298,7 @@ export function Pricing() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <span className="size-1.5 rounded-full bg-indigo-600" />
+                <span className="size-1.5 rounded-full bg-blue-600" />
                 <span>BITScrm &amp; Revenue Cloud</span>
               </button>
 
@@ -312,7 +312,7 @@ export function Pricing() {
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
                 )}
               >
-                <span className="size-1.5 rounded-full bg-cyan-600" />
+                <span className="size-1.5 rounded-full bg-sky-400" />
                 <span>Multi-Product &amp; Custom Bundles</span>
               </button>
             </div>
@@ -333,7 +333,7 @@ export function Pricing() {
               >
                 {/* Highlight Top Luminous Accent Line */}
                 {tier.highlight && (
-                  <div className="absolute top-0 inset-x-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-400" />
+                  <div className="absolute top-0 inset-x-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-blue-600 via-blue-600 to-sky-400" />
                 )}
 
                 {/* Card Body */}
@@ -341,7 +341,7 @@ export function Pricing() {
                   {/* Eyebrow Badge & Scale */}
                   <div className="flex items-center justify-between gap-2 mb-4">
                     {tier.badge ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-xs">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-xs">
                         <span className="size-1 rounded-full bg-white/80" />
                         <span>{tier.badge}</span>
                       </span>
@@ -459,7 +459,7 @@ export function Pricing() {
               </div>
 
               <div className="flex items-start gap-3.5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 shadow-2xs">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-blue-600 shadow-2xs">
                   <span className="font-bold font-mono">04</span>
                 </span>
                 <div>
