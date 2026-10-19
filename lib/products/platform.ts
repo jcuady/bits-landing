@@ -23,6 +23,13 @@ export interface PlatformPillar {
   stat: string;
   /** Short capability chips rendered inside the homepage card. */
   features: string[];
+  /** Optional UI capture. Rendered on the pinned card, not the baseline one. */
+  image?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
 }
 
 export interface PlatformModel {
@@ -71,6 +78,12 @@ export const OPERATIONS_360: PlatformModel = {
       title: "BITS FILO",
       line: "Field Intelligence Location Optimization. GPS-geofenced proof-of-visit with debtor e-signature.",
       stat: "10m geofence",
+      image: {
+        src: "/images/ops360-filo-ui.webp",
+        alt: "BITS FILO field intelligence interface — live geofence, visit log and debtor proof of visit",
+        width: 1671,
+        height: 941,
+      },
       features: [
         "Satellite-clock timestamping",
         "Watermarked photo proof",
@@ -83,6 +96,12 @@ export const OPERATIONS_360: PlatformModel = {
       title: "BITS AIQA",
       line: "Real-time AI QA scoring. Every call audited. Prohibited phrases flagged live.",
       stat: "100% call audit",
+      image: {
+        src: "/images/ops360-aiqa-ui.webp",
+        alt: "BITS AIQA interface — call scoring, sentiment and compliance flags",
+        width: 1536,
+        height: 1024,
+      },
       features: [
         "Acoustic & semantic scoring",
         "Sentiment analysis",

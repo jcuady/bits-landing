@@ -149,25 +149,54 @@ export function PlatformIndex() {
             </h2>
           </div>
 
-          <div className="relative w-full max-w-4xl h-[50vh] sm:h-[54vh]">
+          <div className="relative w-full max-w-6xl h-[50vh] sm:h-[56vh]">
             {pinned.map((pillar, idx) => (
               <div
                 key={pillar.id}
                 ref={(el) => {
                   cardsRef.current[idx] = el;
                 }}
-                className="absolute inset-0 flex w-full flex-col items-center justify-center rounded-[2rem] border border-white/80 bg-white/75 p-8 text-center shadow-xl shadow-blue-900/5 backdrop-blur-xl sm:p-12"
+                className="absolute inset-0 flex w-full flex-col items-center justify-center rounded-[2rem] border border-white/80 bg-white/75 p-6 text-center shadow-xl shadow-blue-900/5 backdrop-blur-xl sm:p-9"
                 style={{ zIndex: idx, transformOrigin: "top center" }}
               >
-                <span className="font-mono text-sm uppercase tracking-[0.2em] text-blue-600">
-                  {pillar.stat}
-                </span>
-                <h3 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-                  {pillar.title}
-                </h3>
-                <p className="mt-4 max-w-lg text-lg leading-relaxed text-slate-600">
-                  {pillar.line}
-                </p>
+                {pillar.image ? (
+                  <div className="grid w-full items-center gap-6 text-left sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] sm:gap-8">
+                    <div className="order-2 sm:order-1">
+                      <span className="font-mono text-sm uppercase tracking-[0.2em] text-blue-600">
+                        {pillar.stat}
+                      </span>
+                      <h3 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                        {pillar.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                        {pillar.line}
+                      </p>
+                    </div>
+                    <div className="order-1 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg shadow-blue-900/10 sm:order-2">
+                      <Image
+                        src={pillar.image.src}
+                        alt={pillar.image.alt}
+                        width={pillar.image.width}
+                        height={pillar.image.height}
+                        quality={82}
+                        sizes="(max-width: 640px) 92vw, 46vw"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <span className="font-mono text-sm uppercase tracking-[0.2em] text-blue-600">
+                      {pillar.stat}
+                    </span>
+                    <h3 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-4 max-w-lg text-lg leading-relaxed text-slate-600">
+                      {pillar.line}
+                    </p>
+                  </>
+                )}
               </div>
             ))}
           </div>
