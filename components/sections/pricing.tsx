@@ -273,7 +273,7 @@ export function Pricing() {
 
           {/* ── INTERACTIVE PRODUCT TRACK SWITCHER (Tabs) ── */}
           <Reveal delay={0.08} className="mt-8">
-            <div className="inline-flex flex-wrap items-center justify-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-1.5 shadow-inner">
+            <div className="grid w-full max-w-xl grid-cols-3 items-center justify-items-stretch gap-1.5 rounded-2xl border border-slate-200 bg-slate-100/80 p-1.5 shadow-inner">
               <button
                 type="button"
                 onClick={() => setActiveTrack("oms")}
@@ -320,7 +320,7 @@ export function Pricing() {
         </div>
 
         {/* ── 3 MODERN TIERS (Sleek Glassmorphic Cards) ── */}
-        <div className="grid grid-cols-1 items-stretch gap-6 lg:gap-8 lg:grid-cols-3 mb-16 sm:mb-20">
+        <div className="grid grid-cols-1 items-stretch gap-6 sm:gap-7 md:grid-cols-3 lg:gap-8 mb-16 sm:mb-20">
           {currentTiers.map((tier, index) => (
             <Reveal key={tier.id} delay={index * 0.05} className="h-full">
               <div
@@ -386,8 +386,8 @@ export function Pricing() {
                   <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 mb-8">
                     {tier.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-2.5">
-                        <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black">
-                          <span className="size-1.5 rounded-full bg-emerald-500" />
+                        <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-sky-100 text-blue-700 text-[10px] font-black">
+                          <span className="size-1.5 rounded-full bg-blue-500" />
                         </span>
                         <span className="leading-relaxed">{feature}</span>
                       </li>
@@ -435,7 +435,7 @@ export function Pricing() {
               </div>
 
               <div className="flex items-start gap-3.5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-2xs">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-blue-600 shadow-2xs">
                   <span className="font-bold font-mono">02</span>
                 </span>
                 <div>

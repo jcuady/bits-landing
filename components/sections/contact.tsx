@@ -67,7 +67,7 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white py-12 sm:py-16 lg:py-20 border-t border-slate-100"
+      className="relative overflow-hidden bg-gradient-to-b from-white via-sky-50/20 to-white py-20 sm:py-24 lg:py-28 lg:py-20 border-t border-slate-100"
     >
       {/* Background Architectural Glow */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
