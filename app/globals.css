@@ -31,6 +31,12 @@
   /* Electric blue + signal cyan */
   --color-electric-600: #0063db;
   --color-electric-500: #2563eb;
+
+  /* Brandbook §3 — Electric Action Blue #2563EB is the primary interactive
+     colour: CTA pills, links, active states. Remapped onto Tailwind's blue-600
+     so every surface that reaches for stock blue renders the brand value
+     instead of Tailwind's #155dfc. */
+  --color-blue-600: #2563eb;
   --color-electric-400: #2f93ff;
   --color-signal-500: #00a6ff;
   --color-signal-300: #38bdf8;
