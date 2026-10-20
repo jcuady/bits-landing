@@ -172,6 +172,43 @@
   }
 }
 
+/* A2 — proof band marquee. One track is duplicated in markup, so the
+   loop is seamless. The global prefers-reduced-motion rule below stops it
+   dead for anyone who has asked for less motion. */
+@keyframes bits-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* A3 — slow hue drift on the azure sky. Three stops breathing out of
+   phase, so the gradient never fully settles. */
+@keyframes bits-sky-drift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* A4 — the orb behind the platform section. */
+@keyframes bits-orb-swoosh {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.12);
+    opacity: 0.8;
+  }
+}
+
 @keyframes stripe-slide {
   0% { background-position: 0 0; }
   100% { background-position: 40px 0; }

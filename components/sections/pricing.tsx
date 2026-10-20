@@ -384,7 +384,7 @@ export function Pricing() {
                     Included Capabilities:
                   </div>
                   <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700 mb-8">
-                    {tier.features.map((feature, fIndex) => (
+                    {tier.features.slice(0, 4).map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-2.5">
                         <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full bg-sky-100 text-blue-700 text-[10px] font-black">
                           <span className="size-1.5 rounded-full bg-blue-500" />
@@ -420,7 +420,20 @@ export function Pricing() {
 
         {/* ── 4 UNIVERSAL VALUE PILLARS (Modern Clean Grid) ── */}
         <Reveal delay={0.1}>
-          <div className="rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-9 shadow-lg shadow-slate-900/5 mb-14">
+            <div className="mt-4 mb-6 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1">
+                  <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+                    Why BITS
+                  </span>
+                </p>
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                  Four reasons the floor runs on one platform
+                </h3>
+              </div>
+            </div>
+            <div className="rounded-[1.75rem] border border-white/70 bg-white/60 p-6 shadow-[0_1px_2px_rgba(6,22,47,0.04),0_18px_44px_-24px_rgba(6,22,47,0.28)] backdrop-blur-xl sm:p-9">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="flex items-start gap-3.5">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 shadow-2xs">

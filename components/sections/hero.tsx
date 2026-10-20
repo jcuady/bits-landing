@@ -25,7 +25,14 @@ export function Hero() {
         {/* Sticky Viewport Canvas: Keeps the sky & clouds perfectly framed during the pinned glassmorphism cockpit scroll */}
         <div className="sticky top-0 h-screen w-full overflow-hidden">
           {/* Base Layer: Radiant Daytime Azure Sky Gradient matching reference */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1362df] via-[#2377f3] 45% via-[#3c8bf6] 75% to-[#5ea2f9]" />
+          <div
+            className="absolute inset-0 animate-[bits-sky-drift_18s_ease-in-out_infinite]"
+            style={{
+              backgroundImage:
+                "linear-gradient(160deg, #0284c7 0%, #1362df 22%, #2377f3 48%, #3c8bf6 72%, #5ea2f9 100%)",
+              backgroundSize: "180% 180%",
+            }}
+          />
 
           {/* High-Resolution Static Sky & Clouds Backdrop (Zero Animation, Pure Daytime Contrast) */}
           <div className="relative size-full">

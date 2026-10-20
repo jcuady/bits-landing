@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { PlatformIndex } from "@/components/sections/platform-index";
 import { FloorShowcase } from "@/components/sections/floor-showcase";
+import { ProofBand } from "@/components/sections/proof-band";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQ } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
@@ -145,6 +146,8 @@ export default function Home() {
 
       {/* 12. Solution Packages & Pricing */}
       <FloorShowcase />
+
+      <ProofBand />
 
       <Pricing />
 

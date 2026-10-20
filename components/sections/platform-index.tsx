@@ -2,9 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { track } from "@vercel/analytics";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { getPlatform, CATALOG_CLAIM } from "@/lib/products/platform";
@@ -49,37 +52,45 @@ export function PlatformIndex() {
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
       if (cards.length === 0) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: `+=${cards.length * 100}%`,
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-        },
+      // Respect prefers-reduced-motion: the stack degrades to a plain
+      // stacked list, with no pinning and no scroll hijacking.
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: `+=${cards.length * 100}%`,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+          },
+        });
+
+        cards.forEach((card, index) => {
+          if (index === 0) return;
+          tl.fromTo(
+            card,
+            { y: "100vh", opacity: 0.5, scale: 0.95 },
+            { y: 0, opacity: 1, scale: 1, duration: 1, ease: "none" },
+          );
+          const previous = cards.slice(0, index);
+          tl.to(
+            previous,
+            {
+              scale: (i) => 1 - (index - i) * 0.04,
+              y: (i) => -(index - i) * 20,
+              opacity: (i) => 1 - (index - i) * 0.15,
+              duration: 1,
+              ease: "none",
+            },
+            "<",
+          );
+        });
       });
 
-      cards.forEach((card, index) => {
-        if (index === 0) return;
-        tl.fromTo(
-          card,
-          { y: "100vh", opacity: 0.5, scale: 0.95 },
-          { y: 0, opacity: 1, scale: 1, duration: 1, ease: "none" },
-        );
-        const previous = cards.slice(0, index);
-        tl.to(
-          previous,
-          {
-            scale: (i) => 1 - (index - i) * 0.04,
-            y: (i) => -(index - i) * 20,
-            opacity: (i) => 1 - (index - i) * 0.15,
-            duration: 1,
-            ease: "none",
-          },
-          "<",
-        );
-      });
+      return () => mm.revert();
     },
     { scope: containerRef },
   );
@@ -99,10 +110,16 @@ export function PlatformIndex() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/80 to-slate-50" />
         <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05]" />
+        {/* A4 — a slow drifting light form. Kept low-contrast so it reads
+            as atmosphere behind the glass, never as content. */}
+        <div
+          className="pointer-events-none absolute -left-24 top-1/3 size-[38rem] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.28),transparent_65%)] blur-3xl animate-[bits-orb-swoosh_9s_ease-in-out_infinite]"
+          aria-hidden
+        />
       </div>
 
-      {/* ── Baseline: the operational core ── */}
-      <Container className="relative pt-20 pb-14 md:pt-28 md:pb-16">
+      {/* ── Beat 1: the operational core ── */}
+      <Container className="relative pt-24 pb-20 md:pt-32 md:pb-28">
         <Reveal>
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1">
             <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
@@ -150,10 +167,28 @@ export function PlatformIndex() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.12}>
+          <div className="mt-12 flex flex-wrap items-center gap-5 border-t border-slate-200/70 pt-8">
+            <p className="text-sm text-slate-600">
+              See what it costs to run your floor on one platform.
+            </p>
+            <Link
+              href="/pricing"
+              onClick={() =>
+                track("cta_click", { section: "platform-index", label: "Request a quote" })
+              }
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-blue-600 px-6 font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-500 hover:shadow-xl hover:-translate-y-0.5"
+            >
+              Request a quote
+              <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </div>
+        </Reveal>
       </Container>
 
-      {/* ── Differentiators: pinned ── */}
-      <div className="relative border-y border-slate-200/60 bg-white">
+      {/* ── Beat 2: the differentiators, pinned ── */}
+      <div className="relative border-t border-slate-200/60 bg-white">
         <div
           ref={containerRef}
           className="relative h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6"
@@ -181,7 +216,7 @@ export function PlatformIndex() {
                 style={{ zIndex: idx, transformOrigin: "top center" }}
               >
                 {pillar.image ? (
-                  <div className="grid w-full items-center gap-6 text-left sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] sm:gap-8">
+                  <div className="grid w-full items-center gap-6 text-left sm:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] sm:gap-8">
                     <div className="order-2 sm:order-1">
                       <span className="font-mono text-sm uppercase tracking-[0.2em] text-blue-600">
                         {pillar.stat}
@@ -193,14 +228,15 @@ export function PlatformIndex() {
                         {pillar.line}
                       </p>
                     </div>
-                    <div className="order-1 overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg shadow-blue-900/10 sm:order-2">
+                    <div className="order-1 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg shadow-blue-900/10 sm:order-2">
                       <Image
                         src={pillar.image.src}
                         alt={pillar.image.alt}
                         width={pillar.image.width}
                         height={pillar.image.height}
                         quality={82}
-                        sizes="(max-width: 640px) 92vw, 46vw"
+                        priority
+                        sizes="(max-width: 640px) 92vw, 42vw"
                         className="h-full w-full object-cover"
                       />
                     </div>
