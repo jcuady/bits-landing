@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, Check, Server, Cloud, Building2 } from "lucide-r
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { PlatformHero, PlatformSection } from "@/components/sections/platform-hero";
-import { CATALOG_CLAIM } from "@/lib/products/platform";
+import { CATALOG_DEPLOY_CLAIM } from "@/lib/products/platform";
 import { site } from "@/lib/site";
 
 /**
@@ -189,7 +189,7 @@ export default function DeploymentPage() {
         tint
         eyebrow="Shared either way"
         title="One schema, whichever host it runs on."
-        lede={`${CATALOG_CLAIM} deploy together, on the same architecture, with no integration work between them.`}
+        lede={CATALOG_DEPLOY_CLAIM}
       >
         <Reveal>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

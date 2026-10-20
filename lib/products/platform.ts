@@ -145,7 +145,18 @@ export const CATALOG_COUNT = getCanonicalProducts().filter(
   (p) => !COLLAPSED_INTO_PLATFORM.has(p.id),
 ).length;
 
-export const CATALOG_CLAIM = `${CATALOG_COUNT} products, ${OPERATIONS_360.pillars.length} of them in Operations 360`;
+/**
+ * Catalogue line.
+ *
+ * The four pillars are CORE CAPABILITIES inside Operations 360, not four
+ * separate products. Operations 360 counts once, as one product of the
+ * catalogue. The earlier wording — "N products, 4 of them in Operations
+ * 360" — counted capabilities as products and was wrong.
+ */
+export const CATALOG_CLAIM = `${CATALOG_COUNT} products. Operations 360 is one of them — ${OPERATIONS_360.pillars.length} core capabilities, one platform.`;
+
+/** For the deployment page, where the point is that everything deploys together. */
+export const CATALOG_DEPLOY_CLAIM = `All ${CATALOG_COUNT} products deploy together, on the same architecture, with no integration work between them.`;
 
 /**
  * Modules — anything flagged `homepage.platform` in the registry.

@@ -257,11 +257,13 @@ After Step 2 collapse:
  = 15 canonical products          ← POST-COLLAPSE TRUE COUNT
 ```
 
-> **Correction: the claim is "15 products, 4 of them in Operations 360" — not 16.**
+> **Correction: the claim is "15 products. Operations 360 is one of them — 4 core
+> capabilities, one platform."** Not "4 of them in Operations 360" — the four
+> pillars are core capabilities inside one product, not four products.
 > It also drops to **18 until Step 2 lands**, so **do not run the 55-location copy sweep until the collapse is complete.**
 
 ### Copy rule
-> **15 products, 4 of them in Operations 360.**
+> **15 products. Operations 360 is one of them — 4 core capabilities, one platform.**
 
 Apply identically everywhere. This phrasing is chosen because it does marketing work — it tells a prospect the bundle exists before the sales call.
 

@@ -640,7 +640,11 @@ After Step 2 collapse
  = 15 canonical products          ← POST-COLLAPSE TRUE COUNT
 ```
 
-**The claim is "15 products, 4 of them in Operations 360" — not 16.**
+**The claim is "15 products. Operations 360 is one of them — 4 core capabilities, one platform."**
+>
+> **Correction (Rev 5):** an earlier draft said "4 of them in Operations 360". That
+> counted *core capabilities* as if they were separate products. The four pillars
+> are capabilities inside one product, and Operations 360 counts once.
 
 It reads **18 until Step 2 lands**, so the 55-location copy sweep must wait until the collapse is complete.
 

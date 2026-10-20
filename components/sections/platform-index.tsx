@@ -104,6 +104,12 @@ export function PlatformIndex() {
       {/* ── Baseline: the operational core ── */}
       <Container className="relative pt-20 pb-14 md:pt-28 md:pb-16">
         <Reveal>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1">
+            <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
+            <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
+              The platform
+            </span>
+          </div>
           <h2 className="text-balance text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Operations 360
           </h2>
