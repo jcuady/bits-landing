@@ -295,40 +295,165 @@ Pageview tracking is already live via `@vercel/analytics`. This step adds the ev
 
 ---
 
-## Phase 2 — Deferred, pending data
+## Rev 6 — Benchmark-Driven Revamp
 
-| Task | Notes |
+Added after measuring monday.com live (rendered DOM, not impression). Full
+analysis: [CPO_Monday_Structure_Benchmark.md](./CPO_Monday_Structure_Benchmark.md).
+
+### The finding that reframed the brief
+
+| | monday.com | BITS |
+|---|---|---|
+| Scroll length | 12.7 screenfuls | 14.2 |
+| Visible words | 2,343 | **1,722** (already leaner) |
+| H2 sections | **14** | 8 |
+| Words per section | 167 | 215 |
+
+**BITS is not wordier than monday.com — it is fewer and heavier.** The transferable
+principle is not "use less copy" (already true) but:
+
+> **Release a new idea per screen.**
+
+Two sections hold 6 of the 14.2 screens:
+
+| Section | Screens |
 |---|---|
-| Homepage 14 → 8 sections | 5,493 → ~2,800 words |
-| Build `/deployment` | Prose → table; 1,659 → ~120 words |
-| Compress Pricing in place | ~400 words; do **not** demote |
-| Halve TheDifference | Table beats prose |
+| platform-index | 3.64 |
+| pricing | 2.44 |
 
----
+### Change 1 — Split the platform index into two beats
 
-## Phase 3 — Review
-
-Pricing structure **B → A** (three named price points, one enquiry path), once the collapse has settled.
-
----
-
-## Sequencing
+The static pair (Collections CRM & PTP, Predictive Dialer) and the pinned pair
+(BITS FILO, BITS AIQA) run as one continuous hold. Make the break a full screen
+transition so the pinned sequence lands as a payoff rather than a continuation.
 
 ```
-STEP 1  Registry-driven data model  ⏳ executing
-   ↓
-STEP 2  Collapse CRM family         (blocked on Task 1 inventory — needs product owner)
-   ↓
-STEP 3  Platform Index + OMS spine
-   ↓
-STEP 4  Catalogue count + pricing hygiene
-   ↓
-STEP 5  Custom analytics events     ← GATE
-   ═══════════════════════════════════════════════
-PHASE 2  Word-count reduction       (blocked on Step 5 baseline)
+SCREEN 1   THE PLATFORM          Collections CRM & PTP · Predictive Dialer
+           ↓ scroll
+SCREEN 2   WHAT SETS US APART    BITS FILO  →  BITS AIQA   (pinned)
 ```
 
+**No new copy.** Pure re-sequencing.
+
+### Change 2 — Pricing: cut feature lists in half, split tiers from proof
+
+Currently tier 1 has 6 features (~47 words), tiers 2 and 3 have 7 each (~57-59).
+
+```
+PRICING TIERS   3 cards side by side, 4 bullets each     ~1.0 screen
+WHY BITS        4 value pillars, icon + title + one line  ~0.6 screen
+```
+
+The four value pillars (Zero Per-Seat, BSP & NPC Sovereignty, Zero PBX Markup,
+Turnkey Migration) are already a 4-up grid — they only need to come out from
+under the tiers. Saves ~0.8 screens, no loss of substance.
+
+### Change 3 — Trust as a marquee proof band
+
+The trust strip currently sits at position 2 of 7, so trust is stated then
+forgotten for the next ten screens. There is **no logo bar, no customer proof
+and no case-study metric anywhere on the homepage.**
+
+monday proves enterprise trust in ~0.4 screens of badges. The six standards
+already render today in the trust strip — this promotes them into a closing
+proof band.
+
+```
+TRUSTED BY RECOVERY FLOORS   ← scrolling row, ~0.3 screens
+BSP 454/857 · NPC RA 10173 · SEC MC 18 · ISO/IEC 27001 · CIC RA 9510 · DICT
+```
+
+Placed after FloorShowcase, before Pricing — where a buyer asks "can I trust
+this with my data?"
+
+### Change 4 — One CTA after the platform index
+
+`platform-index.tsx` has **zero** CTA references. A buyer sold by the platform
+section must scroll three more sections to act. One quiet "Request a quote"
+at the foot of the section, ~0.1 screen.
+
+### Change 5 — Check FloorShowcase earns its 1.62 screens
+
+Six tabs, close to monday's own six-tab pattern. If thin per tab, the fix is
+the same as pricing: four tabs, more content each. **Look before touching** — it
+is the only interactive demo on the page.
+
 ---
+
+## Animation Plan
+
+monday.com's animation vocabulary, measured from its compiled CSS and live DOM:
+14 `@keyframes`, 4 autoplaying `<video>`, zero canvas or Lottie, sticky nav, and
+a `scroll-parent` wrapper for scroll-linked behaviour.
+
+BITS today: `float`, `pulse-glow`, `count-up`, `shimmer`, `cloud-drift`,
+`stripe-slide`, GSAP in two live sections, `Reveal.tsx` on IntersectionObserver,
+zero video.
+
+### Adopt
+
+| # | Animation | Finding | Where | Cost |
+|---|---|---|---|---|
+| A1 | **Scroll-reveal** | monday's `subtleFade` / `subtleSlideFade` | Same mechanism as BITS `Reveal.tsx` — applied per element as it scrolls | Free — already built, needs wider application |
+| A2 | **Infinite marquee** | `scrollMarquee`, 21.25s infinite | The trust/proof band (Change 3) | ~0.3 screens |
+| A3 | **Animated gradient mesh** | `wf-stop1-A`/`wf-stop2-A`, 3s infinite | Hero and platform sky — the hue shifts slowly | CSS only |
+| A4 | **Orb swoosh** | `orbSwoosh`, 6s infinite | Behind the platform section | Cheap, but keep restrained — it competes with the glass treatment |
+
+### Do not adopt
+
+| # | Animation | Why |
+|---|---|---|
+| X1 | `magic-bounce-scale`, `shakeAnimation`, `tagAnimation` | Playful attention-grabbing. Wrong register for a regulated collections platform. Keep BITS restrained. |
+| X2 | 4 autoplaying `<video>` | Autoplay is a performance and accessibility cost, and there is no real product video. Static UI captures are stronger for a demo-led page, and cheaper. |
+| X3 | `spin`, `splide-loading`, `swiper-preloader-spin` | Loader states for carousel libraries. BITS uses no carousel; loading spinners are not a premium signal. |
+
+### Animation constraints
+
+- Honour `prefers-reduced-motion` — every marquee, mesh and orb must have a
+  static fallback. BITS already gates its GSAP work; extend that to the new
+  animations.
+- No animation may add scroll length. Marquee and mesh are in-place.
+- Motion conveys meaning, not decoration. A3 and A4 may only run where the
+  content beneath them is not the thing being read.
+
+---
+
+## Expected Result
+
+| | Before | After |
+|---|---|---|
+| Sections | 7 | 9 |
+| Screenfuls | 14.2 | ~12.6 |
+| Words | 1,722 | ~1,640 |
+| Trust before Contact | ✗ | ✓ marquee band |
+| CTA after platform | ✗ | ✓ |
+| Animation vocabulary | 6 keyframes, static sky | 9 keyframes, animated sky, marquee |
+
+---
+
+## Ordering
+
+```
+CHANGE 1  Platform index split        pure re-sequencing, lowest risk
+CHANGE 2  Pricing split               re-sequencing + copy trim
+CHANGE 4  CTA after platform          one link
+CHANGE 3  Trust marquee band          adds a section — needs data to validate
+A1–A4     Motion pass                 after layout settles, with reduced-motion fallbacks
+```
+
+Changes 1, 2 and 4 rearrange how content is sequenced, not what it says.
+Change 3 and the animation pass are the ones that add, and they should land
+last — and ideally after the analytics gate has a baseline.
+
+---
+
+## The Caveat That Applies To All Of It
+
+**None of this is validated against real behaviour.** The analytics events were
+only recently added and nothing has been live long enough to have data. The
+animation vocabulary is objective — it was measured from compiled CSS and the
+live DOM. The judgement that BITS should carry more of it is a taste call, not
+a finding.
 
 ## Success Criteria
 
