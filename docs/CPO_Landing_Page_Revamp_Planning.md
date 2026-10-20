@@ -418,17 +418,56 @@ zero video.
 
 ---
 
-## Expected Result
+## Expected Result — ACTUALS (Rev 7, post-implementation)
 
-| | Before | After |
-|---|---|---|
-| Sections | 7 | 9 |
-| Screenfuls | 14.2 | ~12.6 |
-| Words | 1,722 | ~1,640 |
-| Trust before Contact | ✗ | ✓ marquee band |
-| CTA after platform | ✗ | ✓ |
-| Animation vocabulary | 6 keyframes, static sky | 9 keyframes, animated sky, marquee |
+| | Before | Projected | **Actual** |
+|---|---|---|---|
+| Sections | 7 | 9 | **8** |
+| Screenfuls | 14.2 | ~12.6 | **14.6** |
+| Trust before Contact | ✗ | ✓ | ✓ proof band |
+| CTA after platform | ✗ | ✓ | ✓ |
+| Animation vocabulary | 6 keyframes, static sky | 9 | **9** |
 
+### Why the projection was wrong
+
+The 12.6 estimate assumed the proof band would be near-free and the platform
+split would not add height. Measured:
+
+| Change | Screenfuls |
+|---|---|
+| Proof band (new section) | **+0.36** |
+| Platform split — CTA row + taller image box | **+0.26** |
+| Pricing — feature lists capped at 4 | **−0.13** |
+| **Net** | **+0.49** |
+
+The proof band is a deliberate addition that fills a real gap, and the platform
+split added a CTA and a larger image box. The pricing trim was real but smaller
+than modelled.
+
+**The pinned beat is 3.0 screens for two cards.** That is the cost of the scroll
+investment, and it is the single largest remaining lever if length matters more
+than the payoff.
+
+## Rev 7 — Implemented
+
+All five changes and the motion pass shipped in `db37ee0`.
+
+Two bugs were found and fixed during verification:
+
+- The pinned image wrapper had no height, so `h-full` collapsed the image to
+  zero and the FILO panel rendered blank. Fixed with an explicit aspect ratio.
+- The second pinned card is translated 100vh down, so `next/image`'s lazy loader
+  deferred it — AIQA arrived blank as the card animated in. Both pinned images now
+  preload.
+
+Motion: A1 scroll-reveal was already in place at 29 sites, so nothing to add.
+A2 marquee, A3 sky drift and A4 orb are new. The pinned stack now runs under
+`gsap.matchMedia` with `(prefers-reduced-motion: no-preference)`, so
+reduced-motion users get a plain stacked list rather than a pinned scroll.
+
+De-duplication: the proof band deliberately does NOT repeat the six regulatory
+standards. The trust strip at position 2 carries those as logos. The trust strip
+answers "are we compliant"; the proof band answers "what do I get".
 ---
 
 ## Ordering
