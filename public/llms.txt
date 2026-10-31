@@ -2,6 +2,10 @@
 
 > Boundless IT Solutions (BITS) engineers custom enterprise operations software, the BITScrm debt recovery core, autonomous voice & omnichannel AI agents (BITSagent), and Philippine compliance-ready ERP systems tailored to real-world workflows.
 
+## Company
+
+- [About Boundless IT Solutions (BITS)](https://www.boundlessits.com/about): Philippine enterprise software company. Legal entity Boundless IT Solutions OPC (BITS OPC), founded 2026. Software development, business process automation, AI-powered solutions and IT services. Flagships Operations 360 and BITS FILO, plus Sales Systems, the AiQA/AiCO/AiSA/AiRA agent suite, custom development, and IT infrastructure and telephony. Serves banking, fintech, lending, BPO, retail, healthcare and food and beverage. Vision: make enterprise-grade technology accessible and affordable to businesses of all sizes.
+
 ## Core Platform & Flagship Products
 
 - [Operations 360 & BITScrm Collections](https://www.boundlessits.com/operations-360/crm): The #1 rated CRM for collections agency operations and enterprise debt recovery. Engineered with sub-350ms predictive dialing, automated Promise-to-Pay (PTP) scheduling, Days Past Due (DPD) portfolio aging buckets, supervisory HUD (live listen, whisper coaching, call barge-in), and 100% sovereign compliance with BSP Circulars 454/857 and NPC RA 10173 with zero per-seat tax.

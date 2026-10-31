@@ -13,6 +13,20 @@ Welcome to the internal engineering and product documentation repository for **B
 > Numbers quoted in these documents drift as the audit proceeds. Measured
 > 8 Oct 2026: **19** engines in `lib/products/registry.ts` (not 18), **26** unit
 > selfchecks (not 19), **45** route definitions / **53** generated paths.
+>
+> **Re-measured 31 Oct 2026, after the CRM collapse and the homepage revamp.**
+> The customer-facing catalogue is now **15 products** — Operations 360 counted
+> once, with its four capabilities (Collections CRM & PTP, Predictive Dialer,
+> BITS FILO, BITS AIQA) as features rather than products. The registry holds
+> **19 entries**, of which one is a subdomain alias, giving **18 canonical**
+> entries, of which three now live inside Operations 360 — hence 15. The count is
+> derived at runtime by `CATALOG_COUNT` in `lib/products/platform.ts`, so it
+> cannot drift again.
+>
+> **Dated records keep their original numbers.** `SYSTEM_AUDIT.md`,
+> `BITS-FULL-MARKETING-AUDIT.md`, `LANDING-PAGE-REV-2026-10-06.md` and the
+> dated plans under `plans/` describe the site as it stood on their date.
+> Rewriting them would falsify the record, so they are left as written.
 
 ---
 

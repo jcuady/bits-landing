@@ -47,7 +47,7 @@ Every marketing campaign, landing page, sales deck, and ad creative must emphasi
    - They can purchase a **single standalone engine** (e.g., just BITS Payroll, or just Pickleball OS, or just Sales CRM) or bundle multiple systems into a **unified cross-department operational suite**.
 2. **100% Fully Customizable upon Request**:
    - Unlike rigid global SaaS vendors (Salesforce, HubSpot, monday.com) where companies are forced to change their operational processes to fit the software, BITS customizes database schemas, custom fields, approval hierarchies, and legacy database connections to match the client's exact operations.
-3. **Universal White-Label Option (Branding Freedom Across All 18 Products)**:
+3. **Universal White-Label Option (Branding Freedom Across All 15 Products)**:
    - White-label is **NOT a product**—it is an **overarching deployment and branding option** available for any software we build.
    - Clients can choose between **Native BITS Deployment** or deploy **100% White-Labeled under their own company name, logo, custom domain (app.yourcompany.com), and brand colors**.
    - Complete NDA protection with zero mention of BITS, allowing digital agencies, IT MSPs, and holding groups to resell to their own clients at their own pricing.
@@ -87,7 +87,7 @@ To preserve credibility and maximize conversion velocity, marketing and sales co
 ## 3. Master Commercial Licensing: The Universal White-Label Option
 
 ### Why White-Label is an Option, NOT a Product
-A common mistake in SaaS marketing is treating White-Label as an isolated software product. At BITS, **White-Label is an overarching deployment and branding license** that applies to **ANY or ALL of our 18 software products**.
+A common mistake in SaaS marketing is treating White-Label as an isolated software product. At BITS, **White-Label is an overarching deployment and branding license** that applies to **ANY or ALL of our 15 software products**.
 
 A client does not "buy the White-Label software"—they purchase **BITS Accounting**, **BITScrm Sales**, or **Pickleball OS**, and choose their deployment branding:
 1. **Option A — BITS Standard Branding**: Deployed under native BITS enterprise styling, domain (`boundlessits.com/app/...`), and official security badges.
@@ -325,7 +325,7 @@ BITSagent AI Operations is an autonomous conversational AI agent suite capable o
    - Target: Racket sports centers, country clubs, athletic arenas, and recreation facilities.
    - Core Pitch: *"Automate open-play paddle rotations after every play, broadcast live overhead TV scoreboards, and accept 24/7 online court bookings."*
 5. **White-Label Partner & Reseller Engine**:
-   - Deployment: **Universal White-Label Option** applied to any selected combination of our 18 products.
+   - Deployment: **Universal White-Label Option** applied to any selected combination of our 15 products.
    - Target: Digital agencies, IT MSPs, software resellers, and enterprise holding companies.
    - Core Pitch: *"Deploy enterprise-grade CRM, ERP, and booking software completely rebranded under your own company logo, custom domain, and corporate colors with 100% client margin retention."*
 
@@ -340,7 +340,7 @@ BITSagent AI Operations is an autonomous conversational AI agent suite capable o
 - **Marketer's Response**: *"Yes! BITS supports modular procurement. You can purchase a single standalone engine—like just our Pickleball Court Queuing System or just BITS Payroll—and expand into other modules whenever your organization is ready. Every engine is pre-wired to connect seamlessly."*
 
 ### Objection 3: "We want to sell this software to our own clients under our own brand."
-- **Marketer's Response**: *"That is exactly what our Universal White-Label Option is built for. You can license any of our 18 software products, host them on your own custom domain (e.g. app.youragency.com), display your own company logo and corporate styling, and package client pricing however you choose. BITS remains 100% invisible under strict NDA."*
+- **Marketer's Response**: *"That is exactly what our Universal White-Label Option is built for. You can license any of our 15 software products, host them on your own custom domain (e.g. app.youragency.com), display your own company logo and corporate styling, and package client pricing however you choose. BITS remains 100% invisible under strict NDA."*
 
 ### Objection 4: "Is BITScrm a general CRM like HubSpot?"
 - **Marketer's Response**: *"We offer both! BITScrm Sales, Support, Marketing, and Commerce are built for general commercial enterprise use across any business. In contrast, BITScrm Collections is specialized exclusively for debt recovery operations, consumer lending desks, and recovery BPOs, featuring delinquent aging staging, ~~WebRTC auto-dialers, and BSP compliance locks.~~ **§71 — there are no auto-dialers and no BSP compliance locks. Do not deliver this line; the second half of the sentence is false.**"*

@@ -39,7 +39,7 @@ The BITS landing page addresses three distinct buyer segments, each with specifi
 |:---|:---|:---|:---|:---|
 | **Collections Agencies & Consumer Lenders** | Managing Directors, Operations Heads, Recovery Directors, Agency Owners | Delinquency liquidation, high broken-PTP rates, disconnected dialers & QA scorecards | **Operations 360 (OMS)** (Flagship) | "Will this force us to change our entire floor workflow?" → No, custom fields & call scripts are configured to your floor. |
 | **Multi-Industry Commercial Enterprises & SMEs** | CEOs, COOs, CFOs, HR Directors, IT Leads | Spreadsheets chaos, expensive per-seat US SaaS ($150+/seat/mo), lack of local tax/labor compliance | **BITScrm Suite**, **Accounting & ERP**, **HRMS & Payroll** | "Are these generic templates?" → No, full database schemas and API integrations are engineered to order. |
-| **Resellers, Agencies & Enterprise Holdings** | Digital Agency Founders, MSP Executives, Enterprise Group CTOs | Need proprietary branded software without hiring a 20-person in-house engineering team | **Universal White-Label Option** (all 18 engines) | "Can our clients tell this is BITS?" → Zero BITS branding; custom domain, CSS theme, and mobile apps. |
+| **Resellers, Agencies & Enterprise Holdings** | Digital Agency Founders, MSP Executives, Enterprise Group CTOs | Need proprietary branded software without hiring a 20-person in-house engineering team | **Universal White-Label Option** (all 15 engines) | "Can our clients tell this is BITS?" → Zero BITS branding; custom domain, CSS theme, and mobile apps. |
 
 ### 1.2 The Master Offer Architecture
 
@@ -100,7 +100,7 @@ The BITS web application compiles cleanly. Route output is verified against the 
 | `/products/rag-engine` | Product Deep-Dive | BITS RAG Knowledge Engine: company rulebook, policy PDF, and ERP database grounding for AI workflows. | Request Architecture Demo |
 | `/products/nfc-card` | Product Deep-Dive | BITS Smart NFC Card: tap-to-share dynamic digital business cards, encrypted chip security, and CRM contact syncing. | Order Custom Metal Card |
 | `/products/white-label`| Universal Specs | Full specifications of the White-Label Reseller Option: custom domain, white-label mobile app, and 100% margin retention. | Apply for White-Label Reseller |
-| `/products/crm` | Hub Overview | Master architectural overview of the 5 CRM engines (Sales, Support, Marketing, Commerce, Operations). | Explore All 18 Products |
+| `/products/crm` | Hub Overview | Master architectural overview of the 5 CRM engines (Sales, Support, Marketing, Commerce, Operations). | Explore All 15 Products |
 | `/bitsagent` | Specialized Landing | Sub-300ms conversational AI voice agents, autonomous customer support, and telephony integration. | Request Live Audio Demo |
 | `/bitscrm` | Specialized Landing | Historical dedicated collections portal mapping to canonical Operations 360 specifications. | Book Collections Consultation |
 | `/blog` | Resource Hub | Real-time searchable blog explorer with category filter pills and search-intent target articles. | Read Guides / Search Topics |
@@ -116,7 +116,7 @@ The BITS web application compiles cleanly. Route output is verified against the 
 |:---:|:---|:---|:---:|:---:|:---|:---:|
 | 1 | **Hero** | `hero.tsx` | High | **9.5/10** | Company-level positioning established. Answers WHO BITS is and WHAT it builds within 3 seconds. Progressive dual CTAs (Explore Products vs Book Architecture). Zero layout shift. | ✅ Optimal |
 | 2 | **Trust Strip** | `trust-strip.tsx` | Medium | **9.0/10** | Bank-grade compliance badges (BSP Circulars 454/857, NPC RA 10173, WebRTC Sub-400ms, 99.9% SLA). Reassures institutional buyers. | ✅ Optimal |
-| 3 | **Product Families** | `product-families.tsx` | High | **9.5/10** | Breaks 18 products into 4 manageable, color-coded families. Anchors Customer Operations directly to `#operations-360`. | ✅ Optimal |
+| 3 | **Product Families** | `product-families.tsx` | High | **9.5/10** | Breaks 15 products into 4 manageable, color-coded families. Anchors Customer Operations directly to `#operations-360`. | ✅ Optimal |
 | 4 | **Solution Finder** | `solution-finder.tsx` | High | **9.5/10** | Problem-oriented discovery ("What are you trying to improve?"). 6 goal-based routes allow non-technical buyers to self-qualify instantly. | ✅ Optimal |
 | 5 | **The Difference** | `the-difference.tsx` | High | **9.5/10** | Side-by-side comparison table (Generic US SaaS vs BITS). Embedded interactive floor ROI calculator allows buyers to calculate savings in PHP/USD. | ✅ Optimal |
 | 6 | **Stats Strip** | `stats-strip.tsx` | Medium | **9.0/10** | Verified platform benchmarks: 3.2x Higher Right-Party Contact Rate, 45% Broken-PTP Reduction, 99.9% Telephony SLA. | ✅ Optimal |
@@ -219,7 +219,7 @@ To advance from current high-fidelity staging to maximum institutional authority
 ## 8. Prioritized Post-Launch Experiments & Optimization Roadmap
 
 ### Experiment 1: Hero Dual-Action Button Copy Split Test
-- **Hypothesis:** Testing a more urgent primary CTA (*"See 18 Products in Action"* vs *"Explore BITS Products"*) will increase scroll depth into the Product Families section by 18%.
+- **Hypothesis:** Testing a more urgent primary CTA (*"See 15 Products in Action"* vs *"Explore BITS Products"*) will increase scroll depth into the Product Families section by 18%.
 - **Implementation:** 50/50 A/B test via edge middleware rewrite.
 
 ### Experiment 2: Currency Toggle in the Floor ROI Calculator
@@ -240,6 +240,6 @@ To advance from current high-fidelity staging to maximum institutional authority
 
 The BITS landing page has been elevated into an **elite, compact, high-converting enterprise portal**:
 - **Clarity over Complexity:** Non-technical business owners immediately understand what BITS does and which product solves their challenge.
-- **Comprehensive Depth:** All 18 products are organized into 4 clear families, discoverable through a dedicated catalog and goal-based finder.
+- **Comprehensive Depth:** All 15 products are organized into 4 clear families, discoverable through a dedicated catalog and goal-based finder.
 - **Frictionless Conversion:** Lead forms are approachable, fast, straightforward, and backed by an immediate calendar fast-track.
 - **Rock-Solid Engineering:** Zero TypeScript errors, zero broken links, zero layout shifts, and full compliance with bank-grade security standards.

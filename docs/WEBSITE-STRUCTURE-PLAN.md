@@ -90,7 +90,7 @@ Two sentences of abstraction. You told me your branding is **straightforward wor
 
 Worth stating plainly, because the plan below is mostly subtraction, not invention:
 
-- 18 products in a single typed `bitsProducts` array with clean slugs
+- 15 products in a single typed `bitsProducts` array with clean slugs
 - 4 product families with per-family problem statements
 - 6-solution finder, written in buyer language
 - 5 pricing editions with per-edition CTAs
@@ -108,7 +108,7 @@ Worth stating plainly, because the plan below is mostly subtraction, not inventi
 BITS
 │
 ├── /                      Homepage — the 7-section argument
-├── /products              All 18 products, grouped in 4 families
+├── /products              All 15 products, grouped in 4 families
 │   └── /products/[slug]   18 individual product pages
 │
 ├── /solutions             Who it's for — 6 problem tracks  ← NEW

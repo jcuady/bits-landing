@@ -222,7 +222,7 @@ Rev 1 said "explain two." The platform decision makes it three: OMS 360, CRM, BI
 
 ### 🔴 C3 — The catalog is 22 products; every page says 18
 
-All marketing copy, the brandbook, `llms.txt`, and the docs claim **"18 connected engines."** The build produces 22.
+All marketing copy, the brandbook, `llms.txt`, and the docs claim **"15 connected engines."** The build produces 22.
 
 **Impact:** This buyer is technical — collections ops and bank IT evaluate vendors adversarially. A countable, checkable inconsistency in the primary proof asset costs credibility precisely where you can least afford it.
 
@@ -286,7 +286,7 @@ The other 19 products have **different buyers** — finance, HR, warehouse, cons
 
 ### The strategic warning
 
-Going from "18 products on one page" to "3 heroes + 19 parked" **concentrates risk**. You win decisively with the collections/BPO buyer and lose the incidental enterprise-buyer who was going to find Accounting & ERP on your homepage.
+Going from "15 products on one page" to "3 heroes + 19 parked" **concentrates risk**. You win decisively with the collections/BPO buyer and lose the incidental enterprise-buyer who was going to find Accounting & ERP on your homepage.
 
 **Mitigation:** the parked-catalogue strip must stay visually substantial and keep the full 22 visible with one click. It is the only element that tells a CFO you are a platform, not a vendor. Do not let it become greyed-out footnotes.
 
@@ -503,7 +503,7 @@ This section is the Rev 2 centrepiece and the highest-value work.
 | [`next.config.ts`](../next.config.ts) | Add the redirect table above |
 | [`proxy.ts:6-7`](../proxy.ts#L6-L7) | Subdomain map already targets `operations-360` — now correct |
 | [`page.tsx`](../app/(marketing)/page.tsx) metadata | Narrow keywords to platform terms; move CRM keywords to module pages |
-| Copy across site | "18 engines" → 22, or rationalise |
+| Copy across site | "15 engines" → 22, or rationalise |
 
 > ⚠️ **`/crm-sales/*` is deliberately excluded from redirects.** Those are the live product demo routes and must keep working. Redirect them only after a redirect map is proven in staging.
 
@@ -532,7 +532,7 @@ This section is the Rev 2 centrepiece and the highest-value work.
 | OpenGraph / Twitter cards | Unchanged |
 | WebPage JSON-LD | Unchanged |
 | FAQPage JSON-LD | Unchanged |
-| `llms.txt` / `llms-full.txt` | **Change** — "18 engines" → 22 |
+| `llms.txt` / `llms-full.txt` | **Change** — "15 engines" → 22 |
 | Indexable routes | **−10** (consolidation) |
 
 **Net assessment: strongly positive.** Consolidating ~11 self-competing pages into one canonical owner concentrates authority rather than fragmenting it — the textbook remedy for cannibalisation. Combined with lower homepage bounce, expected net gain despite fewer URLs.
@@ -553,7 +553,7 @@ This section is the Rev 2 centrepiece and the highest-value work.
 | 6 | 301 the 5 `/products/{crm,sales,support,marketing,service,commerce}` pages | C2 | Critical | 3 hrs |
 | 7 | Build `/deployment` (prose → table) | Deliverable B | High | 3 hrs |
 | 8 | Build Platform Index; rewire homepage 14 → 8 sections | Deliverable A | High | 2 days |
-| 9 | Reconcile "18 engines" → 22 across copy, brandbook, `llms.txt` | C3 | Medium | 2 hrs |
+| 9 | Reconcile "15 engines" → 22 across copy, brandbook, `llms.txt` | C3 | Medium | 2 hrs |
 | 10 | Compress Pricing in place (do **not** demote) | M2 | Medium | 3 hrs |
 | 11 | Mobile audit of 3 hero sections at 375px | M3, R4 | Medium | 2 hrs |
 | 12 | `npm audit fix` + rebuild + visual regression | Security | Medium | 1 day |
@@ -769,7 +769,7 @@ Autonomous voice AI · conversational AI collections · speech-to-speech · WebR
 - **Platform packages:** Starter Floor · Growth Floor · Enterprise & Sovereign
 - **Adjacent:** Commercial CRM Core · Revenue & Support Cloud · Enterprise Commerce & Custom · Autonomous AI + Operations · Enterprise Business Engine · Universal White-Label Partner
 - **Framing:** "TRANSPARENT COMMERCIAL LICENSING · ZERO PER-SEAT TRAPS"
-- **Included:** Zero Per-Seat Penalty · Zero PBX Markup · Turnkey Migration · 18 Connected Products
+- **Included:** Zero Per-Seat Penalty · Zero PBX Markup · Turnkey Migration · 15 Connected Products
 
 ### Deployment — `deployment-models.tsx`
 "Flexible Hosting Options — Run BITS Your Way" · Cloud (Recommended) / On-Prem toggle · Multi-Product Modular Architecture (shared PostgreSQL & Redis bus, centralised SSO & RBAC) · Continuous Evolution Guarantee · Zero Hardware Waste Guarantee · Mutual NDA + technical blueprint

@@ -14,7 +14,7 @@
 BITS has substantial product depth across 18 specialized applications, but previously suffered from **"The Collections Positioning Trap"**:
 - The homepage was 90% dedicated to collections call center operations, alienating prospects seeking Sales CRM, Support Helpdesks, Financial ERP, HR/Payroll, or Voice AI.
 - Technical acronyms (OMS, RAG, CPQ, WFM, PTP) were presented without plain-language translations for non-technical executive buyers (Founders, Managing Directors, Heads of Finance & HR).
-- Navigation lacked an authentic "All Products" catalog, directing visitors who clicked "View All 18 Products" to a 5-product CRM sub-page.
+- Navigation lacked an authentic "All Products" catalog, directing visitors who clicked "View All 15 Products" to a 5-product CRM sub-page.
 - High-intent commercial search queries (e.g. *"crm for collections"*, *"best crm"*, *"operations management system"*) lacked targeted landing pages and interactive resources.
 
 ### The Conversion Rate Optimization (CRO) Solution
@@ -63,7 +63,7 @@ Every product has a dedicated route, structured metadata, and clear CTA funnel:
 | **BITS Smart Queuing** | Sports | `/products/queuing` | Mobile QR virtual tickets and overhead TV calling chimes for waiting areas. | Explore Queuing (`/products/queuing`) |
 | **BITS RAG Knowledge Engine**| AI | `/products/rag-engine` | Connects company policy manuals and SOPs to AI so answers are 100% factual. | Explore RAG (`/products/rag-engine`) |
 | **BITS Smart NFC Card** | Identity | `/products/nfc-card` | Tap-against-phone digital business card with dynamic cloud-updated profile. | Explore NFC Card (`/products/nfc-card`) |
-| **BITS White-Label Platform**| Universal | `/products/white-label` | Rebrand any of the 18 products with your company logo, colors, and domain. | Explore White-Label (`/products/white-label`) |
+| **BITS White-Label Platform**| Universal | `/products/white-label` | Rebrand any of the 15 products with your company logo, colors, and domain. | Explore White-Label (`/products/white-label`) |
 
 ---
 
@@ -117,7 +117,7 @@ Top SaaS websites generate up to 70% of their organic qualified pipeline through
 - [x] Desktop & mobile navigation links updated to point to `/products` catalog.
 - [x] Central `/products` index created displaying all 18 systems with category jump pills.
 - [x] Product detail pages (`/products/[slug]`) updated so breadcrumbs point to `/products`.
-- [x] Bottom buttons on product pages link to `/products` ("Explore All 18 Products").
+- [x] Bottom buttons on product pages link to `/products` ("Explore All 15 Products").
 - [x] Canonical product naming applied (`Operations 360` with "formerly CRM Collections").
 
 ### Phase 3: Blog System & Search-Intent Dominance
@@ -171,7 +171,7 @@ To complete the release and scale inbound qualified leads, execute the following
 
 With these changes executed:
 1. **Zero Confusion:** Non-technical business owners immediately understand what BITS does and which product solves their problem.
-2. **Comprehensive Visibility:** All 18 products are visible, discoverable, and cross-linked.
+2. **Comprehensive Visibility:** All 15 products are visible, discoverable, and cross-linked.
 3. **High-Converting Intake:** Lead forms are friendly, fast, accessible to non-technical buyers, and offer an instant 20-minute calendar booking fast-track.
 4. **Organic Acquisition:** Searchers looking for *"best crm"*, *"crm for collections"*, or *"best oms"* find authoritative, peer-reviewed BITS benchmark guides with direct conversion funnels into our software.
 5. **Bank-Grade Trust:** ~~statutory compliance (BSP Circulars, NPC RA 10173) are clearly documented on every page~~ **struck (§58).** No automated BSP 454/857 or NPC RA 10173 enforcement exists in this build; there is no contact-rule subsystem and no audit store. What can honestly be documented on every page is the real control set: server-side session checks, database row-level security, rate-limited and schema-validated public write paths, and no-store personal-data responses. "20-year operational history" remains an owner claim (§8).

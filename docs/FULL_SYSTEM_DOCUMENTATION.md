@@ -244,7 +244,7 @@ BITS is architected as two interconnected surfaces: the **Public High-Converting
      [ Public Marketing Surface ]                                  [ Operational OMS / CRM ]
   - Hero with Azure Cloud Canvas                                - Supervisor Dashboard (/app/dashboard)
   - Interactive OPERATIONS 360 Pinned Deck                      - Lead Funnel & Pipeline (/app/leads)
-  - 18 Connected Engines Catalog                                - Collections PTP Watchdog Console
+  - 15 Connected Engines Catalog                                - Collections PTP Watchdog Console
   - Regulatory Trust Strip (BSP/NPC)                            - WebRTC Telephony Softphone HUD
   - Solution Packages & Pricing (/pricing)                      - Field Agent GPS Telemetry Map
   - Security & Compliance Portal (/security)                    - Speech AI Real-Time QA Inspector
@@ -266,7 +266,7 @@ BITS is architected as two interconnected surfaces: the **Public High-Converting
 3. **Statutory Trust & Regulatory Governance (`TrustStrip`)**:
    - The shipped component publishes four **regulatory principles** badges (BSP Circulars 454 & 857, NPC RA 10173, SEC MC No. 18, ISO/IEC 27001 *aligned*). ⚠️ **§73 — §56 corrected this to say plainly what it is.** It is not a compliance attestation: no audit against ISO 27001, SEC MC 18 or any other standard has been performed.
 4. **Interactive Sandbox (`/demo`)**:
-   - Allows prospective buyers to test the 18 engines in real time without creating an account.
+   - Allows prospective buyers to test the 15 engines in real time without creating an account.
 5. **SEO & Agentic AI Visibility**:
    - Built-in `llms.txt`, `llms-full.txt`, and Schema.org JSON-LD structured data for Google AI Overviews, Perplexity, and Claude citability.
 
