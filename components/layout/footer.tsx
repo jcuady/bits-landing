@@ -213,6 +213,12 @@ export function Footer() {
               >
                 Research
               </Link>
+              <Link
+                href="/about"
+                className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
+              >
+                About
+              </Link>
 
 
               {/* Verified Official Social Media Pills (44x44px touch targets) */}

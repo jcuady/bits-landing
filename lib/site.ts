@@ -234,6 +234,11 @@ export const navigationSections = [
     label: "Research",
     href: "/blog",
   },
+  {
+    id: "about",
+    label: "About",
+    href: "/about",
+  },
 ] as const;
 
 

@@ -115,6 +115,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productEntries,
     ...blogEntries,
     {
+      url: `${site.url}/about`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
       url: `${site.url}/brandbook`,
       lastModified,
       changeFrequency: "monthly" as const,
