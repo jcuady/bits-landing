@@ -136,7 +136,7 @@ const jsonLd = {
       "@type": "Organization",
       "@id": `${site.url}/#organization`,
       name: "Boundless IT Solutions OPC",
-      alternateName: ["BITS", "Boundless Information Technology Solutions"],
+      alternateName: ["BITS"],
       legalName: "Boundless IT Solutions OPC",
       url: site.url,
       description:
