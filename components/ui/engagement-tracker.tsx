@@ -24,7 +24,6 @@ const SCROLL_THRESHOLDS = [25, 50, 75, 100] as const;
 const TRACKED_SECTIONS = [
   "trust-strip",
   "platform-index",
-  "credibility",
   "the-difference",
   "security",
   "pricing",
