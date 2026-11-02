@@ -107,12 +107,17 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       "white label enterprise platform",
     ],
     alternates: {
-      canonical: `${site.url}/products/${product.id}`,
+      // The canonical destination is the product's ctaHref, not its own id.
+      // Six catalogue entries have been folded into Operations 360 and their
+      // /products/<id> URLs permanently redirect, so declaring those as
+      // canonical would point at a redirecting URL. ctaHref already resolves
+      // to the canonical page in every case.
+      canonical: `${site.url}${product.ctaHref}`,
     },
     openGraph: {
       title,
       description,
-      url: `${site.url}/products/${product.id}`,
+      url: `${site.url}${product.ctaHref}`,
       type: "website",
       siteName: site.legalName,
       images: [{ url: "/og.png", width: 1200, height: 630, alt: product.name }],
@@ -610,13 +615,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       (p.category === "crm" || p.id === "collections") &&
       p.id !== product.id
   );
+  // The CRM suite bar. Hrefs come from each product's ctaHref so there is one
+  // source of truth — several of these are folded into Operations 360 and
+  // their own /products/<id> URLs permanently redirect.
   const crmVariantsList = [
-    { id: "collections", label: "Collections (Flagship)", href: "/operations-360/crm" },
-    { id: "support", label: "Support Desk", href: "/products/support" },
-    { id: "sales", label: "Sales Pipeline", href: "/products/sales" },
-    { id: "marketing", label: "Marketing Journeys", href: "/products/marketing" },
-    { id: "commerce", label: "Commerce & Billing", href: "/products/commerce" },
-  ];
+    { id: "collections", label: "Collections (Flagship)" },
+    { id: "support", label: "Support Desk" },
+    { id: "sales", label: "Sales Pipeline" },
+    { id: "marketing", label: "Marketing Journeys" },
+    { id: "commerce", label: "Commerce & Billing" },
+    { id: "crmpbx", label: "CRMPBX Service Desk" },
+  ].map((v) => ({
+    ...v,
+    href:
+      bitsProducts.find((p) => p.id === v.id)?.ctaHref ?? `/products/${v.id}`,
+  }));
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -815,7 +828,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                     );
                   })}
                   <Link
-                    href="/products/crm"
+                    href="/operations-360/crm"
                     className="inline-flex min-h-[36px] items-center gap-1 rounded-xl bg-blue-100/70 px-3 py-1.5 text-xs font-bold text-blue-800 hover:bg-blue-100 transition-colors"
                   >
                     <span>Architecture Hub</span>
@@ -851,12 +864,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 ) : product.id === "white-label" ? (
                   <div className="inline-flex items-center gap-2 rounded-full border border-orange-300 bg-orange-50 px-4 py-1.5 text-xs font-bold text-orange-950 shadow-2xs">
                     <Sparkles className="size-4 text-orange-600" />
-                    <span>Universal Commercial Option: Available Across All 15 BITS Software Products</span>
+                    <span>Universal Commercial Option: Available Across All {PRODUCT_COUNT} BITS Software Products</span>
                   </div>
                 ) : (
                   <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-4 py-1.5 text-xs font-bold text-blue-950 shadow-2xs">
                     <Building2 className="size-4 text-blue-600" />
-                    <span>General Commercial Software: Engineered for Any Business &amp; Multi-Industry Use</span>
+                    <span>{product.badge}: Engineered for Any Business &amp; Multi-Industry Use</span>
                   </div>
                 )}
               </div>

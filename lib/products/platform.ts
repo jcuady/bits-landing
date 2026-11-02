@@ -11,6 +11,7 @@
  * listed and linked, never explained.
  */
 
+import { bitsProducts } from "../site";
 import { PRODUCT_REGISTRY, getCanonicalProducts, getHomepageProducts, type ProductMvpConfig } from "./registry";
 
 /** The four capabilities of Operations 360, confirmed by product owner. */
@@ -140,10 +141,19 @@ export const COLLAPSED_INTO_PLATFORM = new Set([
   "crm-commerce",
 ]);
 
-/** Products a customer can actually buy — excludes aliases and collapsed ones. */
-export const CATALOG_COUNT = getCanonicalProducts().filter(
-  (p) => !COLLAPSED_INTO_PLATFORM.has(p.id),
-).length;
+/**
+ * Products a customer can actually buy.
+ *
+ * Derived from `bitsProducts` — the array the /products catalogue renders.
+ * Deriving from the registry instead produced a different number (the two
+ * structures are parallel, not identical), which meant the public claim and
+ * the page a buyer was looking at disagreed. One source: the catalogue.
+ *
+ * Every entry here has a live destination. The six products folded into
+ * Operations 360 keep their catalogue entry and their ctaHref now resolves
+ * to the canonical page rather than to a redirect.
+ */
+export const CATALOG_COUNT = bitsProducts.length;
 
 /**
  * Catalogue line.

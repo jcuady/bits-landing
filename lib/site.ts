@@ -111,6 +111,14 @@ export const navigationSections = [
           href: "/products/crm",
           icon: "pipeline" as const,
         },
+      {
+        title: "BITS CRMPBX",
+        badge: "Service Desk & PBX",
+        description:
+          "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support for internet service providers.",
+        href: "/products/crmpbx",
+        icon: "headset" as const,
+      },
         {
           title: "BITS RAG Knowledge Engine",
           badge: "Universal AI Layer",
@@ -318,7 +326,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Operations Productivity", value: "+42% Boost" },
     ctaText: "Explore OPERATIONS 360",
-    ctaHref: "/#operations-360",
+    ctaHref: "/operations-360",
   },
   {
     id: "ai-agent",
@@ -349,6 +357,36 @@ export const bitsProducts = [
     ctaText: "Explore BITSagent AI",
     ctaHref: "/operations-360/ai",
   },
+    {
+      id: "crmpbx",
+      name: "BITS CRMPBX",
+      shortName: "CRMPBX",
+      category: "crm",
+      categoryLabel: "CRM & Revenue Cloud",
+      badge: "Service Desk & Telephony",
+      isFlagship: false,
+      tagline:
+        "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support.",
+      description:
+        "A service desk for internet service providers that brings three things into one console: the subscriber directory of customers, their services and their history; the ticket workflow of problems, ownership and resolution; and the telephony — the Asterisk PBX with softphone, call log, recordings and live monitor. Two access layers never share a screen: the client tier for the ISP's own staff, and the vendor tier for BITS, which sees client accounts, licences, feature sets and the support queue. A client administrator has no vendor permission at all.",
+      complianceBadges: [
+        "Two-Tier Access Separation",
+        "Immutable Audit Trail",
+        "Role-Based Permissions",
+        "Zero Per-Seat Tax",
+      ],
+      capabilities: [
+        "Subscriber Directory with Services & History",
+        "Ticket Workflow with Ownership & Resolution",
+        "Asterisk PBX Console with Live Monitor",
+        "Call Recordings with Per-Client Access Switch",
+        "GoIP GSM Gateway Management",
+        "Reports, QA Review & Client Licence Administration",
+      ],
+      metrics: { label: "First Contact Resolution", value: "+46% Lift" },
+      ctaText: "Explore CRMPBX",
+      ctaHref: "/products/crmpbx",
+    },
   {
     id: "sales",
     name: "BITScrm Sales",
@@ -376,7 +414,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Pipeline Velocity", value: "+38% Faster" },
     ctaText: "Explore CRM Sales",
-    ctaHref: "/products/sales",
+    ctaHref: "/operations-360/crm#sales",
   },
   {
     id: "support",
@@ -405,7 +443,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "First Contact Resolution", value: "+46% FCR" },
     ctaText: "Explore CRM Support",
-    ctaHref: "/products/support",
+    ctaHref: "/operations-360/crm#support",
   },
   {
     id: "marketing",
@@ -434,7 +472,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Engagement Lift", value: "4.5x Higher" },
     ctaText: "Explore CRM Marketing",
-    ctaHref: "/products/marketing",
+    ctaHref: "/operations-360/crm#marketing",
   },
   {
     id: "commerce",
@@ -463,7 +501,7 @@ export const bitsProducts = [
     ],
     metrics: { label: "Billing Accuracy", value: "99.99% Precision" },
     ctaText: "Explore CRM Commerce",
-    ctaHref: "/products/commerce",
+    ctaHref: "/operations-360/crm#commerce",
   },
   {
     id: "accounting",

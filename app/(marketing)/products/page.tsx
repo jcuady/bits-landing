@@ -211,16 +211,16 @@ export default function ProductsIndexPage() {
 
                 <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   {products.map((product, idx) => {
-                    const productHref =
-                      product.id === "ai-agent"
-                        ? "/operations-360/ai"
-                        : product.id === "collections"
-                        ? "/operations-360"
-                        : `/products/${product.id}`;
+                    // ctaHref is the canonical destination for every product.
+                    // Six entries were folded into Operations 360, so their own
+                    // /products/<id> URLs permanently redirect — linking to those
+                    // would send a buyer through a hop for no reason.
+                    const productHref = product.ctaHref;
 
                     return (
                       <Reveal key={product.id} delay={0.04 + idx * 0.03}>
                         <Link
+                          data-product-card={product.id}
                           href={productHref}
                           className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 h-full"
                         >

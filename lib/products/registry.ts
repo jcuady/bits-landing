@@ -64,6 +64,42 @@ export interface ProductMvpConfig {
 
 export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
   // ── CRM & REVENUE CLOUD ──
+  "crmpbx": {
+    id: "crmpbx",
+    name: "BITS CRMPBX",
+    shortName: "CRMPBX",
+    subdomain: "crmpbx",
+    category: "crm",
+    categoryLabel: "Customer Service Desk & Telephony",
+    tagline:
+      "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support.",
+    demoPath: "/crm-sales",
+    marketingUrl: "/products/crmpbx",
+    defaultRole: "agent",
+    testRoles: [
+      {
+        id: "agent",
+        label: "Agent",
+        description:
+          "The customer on the phone: their tickets, their calls, the customer directory.",
+        persona: "rep",
+      },
+      {
+        id: "supervisor",
+        label: "Supervisor",
+        description:
+          "A team lead: the team's tickets and calls, the live monitor, the reports.",
+        persona: "manager",
+      },
+      {
+        id: "admin",
+        label: "Client Administrator",
+        description:
+          "Everything inside the organisation: users, roles, settings, branding, the Asterisk endpoint, the GoIP gateways, the recordings.",
+        persona: "admin",
+      },
+    ],
+  },
   "crm-sales": {
     id: "crm-sales",
     name: "BITScrm Sales Suite",

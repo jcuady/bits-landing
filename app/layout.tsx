@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { agents, site } from "@/lib/site";
@@ -283,6 +284,34 @@ export default function RootLayout({
         <CookieConsent />
         <Analytics />
         <EngagementTracker />
+
+        {/*
+          AiRA — the BITS AI call assistant.
+
+          The widget adds three things: a chat bubble (bottom right) with a
+          call button, a top bar carrying the phone number, and a footer
+          strip with the same number.
+
+          The top bar and the footer strip are switched OFF. This site
+          already ships its own header and a full footer, so a second bar
+          above the header and a second strip below the footer would read as
+          a stacking fault rather than as a feature — and the site has no
+          raw phone number of its own, so keeping the bubble preserves the
+          only new thing the widget contributes.
+
+          To show the number as well, flip data-topbar to "1" and
+          data-footer to "1" and re-check the header and footer on mobile.
+
+          The script is loaded with strategy="afterInteractive" so it never
+          blocks first paint, and no CSP change is required — the site
+          ships no Content-Security-Policy header.
+        */}
+        <Script
+          src="https://aira.boundlessits.com/widget.js"
+          strategy="afterInteractive"
+          data-topbar="0"
+          data-footer="0"
+        />
       </body>
     </html>
   );
