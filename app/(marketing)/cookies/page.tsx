@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Official Cookie Policy and Sovereign Tracking Disclosure for Boundless IT Solutions (BITS). Compliant with National Privacy Commission (NPC) RA 10173 and GDPR.",
   alternates: { canonical: `${site.url}/cookies` },
   openGraph: {
-    title: "Cookie Policy & Data Governance | BITS",
+    title: "Cookie Policy & Data Governance",
     description:
       "Official Cookie Policy and Sovereign Tracking Disclosure for Boundless IT Solutions (BITS). Compliant with National Privacy Commission (NPC) RA 10173 and GDPR.",
     url: `${site.url}/cookies`,

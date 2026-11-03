@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${site.url}/bitsagent`,
   },
   openGraph: {
-    title: "BITSagent — Autonomous Voice AI & Collections | BITS",
+    title: "BITSagent — Autonomous Voice AI & Collections",
     description:
       "Deploy BITSagent by Boundless IT Solutions: Sub-300ms latency conversational AI voice agents for debt collections, customer support, and automated payment negotiations 24/7.",
     url: `${site.url}/bitsagent`,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITSagent — Autonomous Voice AI & Collections | BITS",
+    title: "BITSagent — Autonomous Voice AI & Collections",
     description:
       "Deploy BITSagent by Boundless IT Solutions: Sub-300ms latency conversational AI voice agents for debt collections, customer support, and automated payment negotiations 24/7.",
     images: ["/og.png"],

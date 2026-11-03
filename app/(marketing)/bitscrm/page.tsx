@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     canonical: `${site.url}/bitscrm`,
   },
   openGraph: {
-    title: "BITScrm — Enterprise Collections CRM | BITS",
+    title: "BITScrm — Enterprise Collections CRM",
     description:
       "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with automated Promise-to-Pay (PTP) tracking, dynamic work queues, and supervisor review tools.",
     url: `${site.url}/bitscrm`,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITScrm — Enterprise Collections CRM | BITS",
+    title: "BITScrm — Enterprise Collections CRM",
     description:
       "Deploy BITScrm by Boundless IT Solutions: High-velocity collections CRM with automated Promise-to-Pay (PTP) tracking, dynamic work queues, and supervisor review tools.",
     images: ["/og.png"],

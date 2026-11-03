@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     canonical: `${site.url}/products/crm`,
   },
   openGraph: {
-    title: "BITScrm Suite — Enterprise CRM Platform & Variants | BITS",
+    title: "BITScrm Suite — Enterprise CRM Platform & Variants",
     description:
       "Five purpose-built CRM variants on one sovereign data schema: Collections (Flagship), Support, Sales, Marketing, and Commerce. Zero vendor lock-in, zero data replatforming.",
     url: `${site.url}/products/crm`,
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITScrm Suite — Enterprise CRM Platform & Variants | BITS",
+    title: "BITScrm Suite — Enterprise CRM Platform & Variants",
     description:
       "Five purpose-built CRM variants on one sovereign data schema: Collections (Flagship), Support, Sales, Marketing, and Commerce. Zero vendor lock-in, zero data replatforming.",
     images: ["/og.png"],

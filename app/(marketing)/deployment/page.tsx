@@ -67,7 +67,7 @@ const INCLUDED = [
 ];
 
 export const metadata: Metadata = {
-  title: "Deployment — Cloud, On-Premises or Hybrid | BITS",
+  title: "Deployment — Cloud, On-Premises or Hybrid",
   description:
     "Run Operations 360 in BITS' sovereign managed cloud, on your own office servers, or hybrid. Compare setup, cost, updates, data residency and hardware across all three. BSP Circulars 454/857 and NPC RA 10173 aligned.",
   keywords: [
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${site.url}/deployment` },
   openGraph: {
-    title: "Deployment — Cloud, On-Premises or Hybrid | BITS",
+    title: "Deployment — Cloud, On-Premises or Hybrid",
     description:
       "Every engine in the BITS platform runs in our sovereign cloud, on your own servers, or hybrid.",
     url: `${site.url}/deployment`,

@@ -32,7 +32,7 @@ const CAPABILITIES = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "BITSagent AI — Automation Module of Operations 360 | BITS",
+  title: "BITSagent AI — Automation Module of Operations 360",
   description:
     "BITSagent AI automates outreach, negotiation and QA inside Operations 360. Autonomous voice agents, 100% call auditing, and no separate data silo.",
   keywords: [

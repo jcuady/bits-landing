@@ -54,7 +54,7 @@ const MODULES = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Operations 360 (OMS) — Top CRM & OMS for Collections Agencies | BITS",
+  title: "Operations 360 (OMS) — Top CRM & OMS for Collections Agencies",
   description:
     "Operations 360 is the BITS platform for collections agencies: CRM & PTP automation, sub-350ms predictive softphone, GPS field telemetry, and 100% BITS AIQA — on one sovereign database. Includes BITScrm and BITSagent AI modules.",
   keywords: [

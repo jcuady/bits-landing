@@ -11,7 +11,7 @@ import { Contact } from "@/components/sections/contact";
 import { HOME_FAQ, site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "BITS — Enterprise Operations CRM & OMS Platform | BITS",
+  title: "BITS — Enterprise Operations CRM & OMS Platform",
   description:
     "Boundless IT Solutions (BITS) builds enterprise software for running your entire operation — Operations 360 CRM and OMS, predictive dialing, field intelligence and real-time QA — with 19 connected products, sovereign data residency and zero per-seat licensing fees.",
   keywords: [

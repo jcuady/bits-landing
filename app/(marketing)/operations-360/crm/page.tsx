@@ -184,7 +184,7 @@ const CRM_FAQS = [
 
 export const metadata: Metadata = {
   title:
-    "BITScrm — Collections CRM Module of Operations 360 | BITS",
+    "BITScrm — Collections CRM Module of Operations 360",
   description:
     "BITScrm is the CRM module of Operations 360: five purpose-built workspaces for collections, support, sales, marketing and commerce on one zero-replatforming database. Predictive dialing built in, no per-seat licensing.",
   keywords: [

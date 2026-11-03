@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Official Privacy Notice, Data Privacy Act (RA 10173) handling, information security controls, and Terms of Use for Boundless IT Solutions (BITS).",
   alternates: { canonical: `${site.url}/legal` },
   openGraph: {
-    title: "Compliance, Privacy & Terms | BITS",
+    title: "Compliance, Privacy & Terms",
     description:
       "Official Privacy Notice, Data Privacy Act (RA 10173) handling, information security controls, and Terms of Use for Boundless IT Solutions (BITS).",
     url: `${site.url}/legal`,
