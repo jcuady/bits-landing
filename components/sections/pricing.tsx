@@ -199,7 +199,7 @@ const trackTiers: Record<PricingTrack, PricingTier[]> = {
       badge: "100% Brand Ownership",
       scaleBadge: "Resellers & Enterprise Holdings",
       description:
-        "Deploy any or all of our 15 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
+        "Deploy any or all of our 19 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
       indicativeModel: "Wholesale Partner Agreement",
       modelDetail: "Retain 100% client margin · Custom domain & branded apps",
       features: [
@@ -492,31 +492,13 @@ export function Pricing() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
               {/* Left: Headline & Engine Pills */}
               <div className="max-w-2xl">
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700 mb-3">
-                  15 Connected Software Products
-                </div>
                 <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-snug">
                   Need Pricing on a Standalone Software Engine?
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                   BITS also scopes and deploys modular systems across Autonomous Voice AI, Financial ERP, BPO Rostering, and Smart Venue Operating Systems.
                 </p>
-
-                {/* Available Product Badges */}
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {otherProducts.map((p) => (
-                    <a
-                      key={p.name}
-                      href={p.href}
-                      className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200/80 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:border-blue-300 hover:text-blue-600 transition-colors shadow-2xs"
-                    >
-                      <span className="size-1.5 rounded-full bg-blue-600" />
-                      <span>{p.name}</span>
-                      <span className="text-[10px] text-slate-400 font-normal">({p.category})</span>
-                    </a>
-                  ))}
                 </div>
-              </div>
 
               {/* Right: CTA Button */}
               <div className="shrink-0 flex flex-col sm:flex-row items-center gap-3">

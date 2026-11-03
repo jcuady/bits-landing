@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { track } from "@vercel/analytics";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
 import { getPlatform, CATALOG_CLAIM } from "@/lib/products/platform";
 
@@ -138,7 +139,11 @@ export function PlatformIndex() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {baseline.map((pillar, i) => (
             <Reveal key={pillar.id} delay={0.06 * i}>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/60 p-8 shadow-[0_1px_2px_rgba(6,22,47,0.04),0_18px_44px_-24px_rgba(6,22,47,0.28)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/70 hover:shadow-[0_1px_2px_rgba(6,22,47,0.05),0_28px_60px_-28px_rgba(6,22,47,0.34)]">
+              <GlassCard
+                as="article"
+                className="group relative flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                innerClassName="relative flex h-full flex-col p-8"
+              >
                 {/* accent hairline across the top edge */}
                 <span
                   className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal-300/70 to-transparent"
@@ -163,7 +168,7 @@ export function PlatformIndex() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </GlassCard>
             </Reveal>
           ))}
         </div>

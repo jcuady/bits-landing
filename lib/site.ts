@@ -865,7 +865,7 @@ export const bitsProducts = [
  */
 export const PRODUCT_COUNT = bitsProducts.length;
 
-/* ── Universal White-Label & Custom Branding Option (Available Across All 15 Products) ── */
+/* ── Universal White-Label & Custom Branding Option (Available Across All 19 Products) ── */
 export const whiteLabelBrandingOption = {
   id: "white-label",
   name: "BITS White-Label & Custom Branding Program",
@@ -1523,7 +1523,7 @@ export const solutionPackages = [
     tier: "BRANDING OPTION",
     badge: "Master Add-On · Not a Standalone Product",
     title: "Universal White-Label Branding Option",
-    tagline: "Deploy any of our 15 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
+    tagline: "Deploy any of our 19 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
     teamScope: "Applicable to Any Plan",
     deployment: "Managed Cloud or Private VPC",
     investmentModel: "Turnkey Reseller / Corporate Branding License",
@@ -1583,7 +1583,7 @@ export const suiteBundlePresets = [
   {
     id: "reseller-agency",
     name: "White-Label Partner & Reseller Suite",
-    tagline: "Deploy any combination of our 15 software products under your own agency brand.",
+    tagline: "Deploy any combination of our 19 software products under your own agency brand.",
     productIds: ["collections", "sales", "accounting", "nfc-card"],
     recommendedFor: "Agencies, IT MSPs, software resellers & enterprise conglomerates",
     highlight: "100% client margin retention with zero BITS attribution and custom domains",

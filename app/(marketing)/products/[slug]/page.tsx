@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-/* ── Domain-Specific Problem Statements for All 15 Products + White-Label Option ── */
+/* ── Domain-Specific Problem Statements for All 19 Products + White-Label Option ── */
 type ProductItem = (typeof bitsProducts)[number] | typeof whiteLabelBrandingOption;
 
 function getProductProblems(product: ProductItem) {

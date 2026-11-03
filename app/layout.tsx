@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | BITS",
   },
   description:
-    "Boundless IT Solutions (BITS) builds 18 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, logistics, and sports venue management — customized to how your organization actually works. Philippines-based.",
+    "Boundless IT Solutions (BITS) builds 19 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, logistics, and sports venue management — customized to how your organization actually works. Philippines-based.",
   keywords: [
     "Boundless IT Solutions",
     "Boundless IT Solutions Philippines",
@@ -104,14 +104,14 @@ export const metadata: Metadata = {
     siteName: site.legalName,
     title: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
     description:
-      "Boundless IT Solutions (BITS) builds 18 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
+      "Boundless IT Solutions (BITS) builds 19 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Boundless IT Solutions (BITS) Enterprise Platform" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
     description:
-      "Boundless IT Solutions (BITS) builds 18 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
+      "Boundless IT Solutions (BITS) builds 19 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
     images: ["/og.png"],
   },
 };

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { PlatformIndex } from "@/components/sections/platform-index";
+import { PortfolioBand } from "@/components/sections/portfolio-band";
 import { FloorShowcase } from "@/components/sections/floor-showcase";
 import { ProofBand } from "@/components/sections/proof-band";
 import { Pricing } from "@/components/sections/pricing";
@@ -10,9 +11,9 @@ import { Contact } from "@/components/sections/contact";
 import { HOME_FAQ, site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "BITS — Top CRM for Collections Agency, Operations OMS & Enterprise Software",
+  title: "BITS — Enterprise Operations CRM & OMS Platform | BITS",
   description:
-    "Boundless IT Solutions (BITS) powers top collections agency floors and enterprise operations with Operations 360 (OMS), sub-350ms predictive dialing, sovereign data residency, and 15 connected business engines with zero per-seat licensing fees.",
+    "Boundless IT Solutions (BITS) builds enterprise software for running your entire operation — Operations 360 CRM and OMS, predictive dialing, field intelligence and real-time QA — with 19 connected products, sovereign data residency and zero per-seat licensing fees.",
   keywords: [
     "top crm collections agency",
     "top crm for collections agency",
@@ -36,17 +37,17 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: site.url },
   openGraph: {
-    title: "BITS — Top CRM for Collections Agency, Operations OMS & Enterprise Software",
+    title: "Operations 360 — the CRM and OMS for running your entire operation",
     description:
-      "Empower your agency floor with Operations 360: the top CRM for collections agencies, featuring sub-350ms predictive dialing, automated PTP scheduling, supervisory HUD, and sovereign compliance.",
+      "Operations 360 is the CRM and OMS for running your entire operation: collections and customer service, predictive dialing, field intelligence and real-time QA on one database. Nineteen products, zero per-seat tax.",
     url: site.url,
     siteName: site.legalName,
     type: "website",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS Enterprise Platform & Top Collections OMS" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS — Enterprise Operations CRM & OMS Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITS — Top CRM for Collections Agency & Operations OMS",
+    title: "Operations 360 — the CRM and OMS for running your entire operation",
     description:
       "Sub-350ms predictive dialing, automated PTP workflows, and sovereign enterprise infrastructure. Zero per-seat tax.",
     images: ["/og.png"],
@@ -145,6 +146,8 @@ export default function Home() {
       {/* ═══ PHASE 5: CONVERT (How do I get started?) ═══ */}
 
       {/* 12. Solution Packages & Pricing */}
+      <PortfolioBand />
+
       <FloorShowcase />
 
       <ProofBand />
