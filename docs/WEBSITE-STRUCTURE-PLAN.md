@@ -82,7 +82,7 @@ This splits link equity across four URLs for what a buyer experiences as one pro
 
 `lib/site.ts`:
 
-> `tagline: "Boundless operational velocity. The infinity in the 'B'—sovereign software built with the limitless scale of the cloud horizon."`
+> `tagline: "Stay Grounded, Be boundless"`
 
 Two sentences of abstraction. You told me your branding is **straightforward words**. This tagline describes a feeling, not a product. It should be one plain sentence.
 

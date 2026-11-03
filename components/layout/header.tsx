@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { cn } from "@/lib/utils";
 import { PRODUCT_COUNT } from "@/lib/site";
-import { navigationSections } from "@/lib/site";
+import { navigationSections, site } from "@/lib/site";
 import { Logo } from "@/components/ui/logo";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 
@@ -225,6 +225,9 @@ export function Header() {
           >
             <span className="hidden min-[400px]:inline-block">
               <Logo variant="reverse" priority className="h-8.5 md:h-9.5" />
+              <span className="mt-0.5 block font-serif text-[0.62rem] italic leading-none tracking-wide text-white/70">
+                {site.tagline}
+              </span>
             </span>
             <span className="inline-block min-[400px]:hidden">
               <Logo variant="reverse" priority className="h-8" />

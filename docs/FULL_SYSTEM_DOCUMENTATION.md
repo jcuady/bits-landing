@@ -374,7 +374,7 @@ BITS provides four unified product families housing 18 specialized marketing pro
 ## 8. Brandbook & Design System (Glassmorphism & Clouds)
 
 ### 8.1 Visual Identity & Logo System
-The BITS brand identity represents **boundless operational velocity** merged with **bank-grade stability**. The infinity symbol forms the counter-space of the capital letter "B".
+The BITS brand tagline is **"Stay Grounded, Be boundless"** — the brand identity represents **boundless operational velocity** merged with **bank-grade stability**. The infinity symbol forms the counter-space of the capital letter "B".
 
 ```
      ┌────────────────────────────────────────────────────────┐

@@ -1,3 +1,4 @@
+import { site } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -93,6 +94,9 @@ export default function BrandbookManifestoPage() {
         <div className="mx-auto max-w-5xl">
           <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-signal-300">
             Chapter 01 · Manifesto
+          </p>
+          <p className="mt-6 font-serif text-2xl italic tracking-wide text-sky-100 sm:text-3xl">
+            {site.tagline}
           </p>
           <h1 className="mt-3 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
             The brand trinity.

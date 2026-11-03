@@ -1,7 +1,7 @@
 export const site = {
   name: "BITS",
   legalName: "BITS - Boundless IT Solutions",
-  tagline: "Boundless operational velocity. The infinity in the 'B'—sovereign software built with the limitless scale of the cloud horizon.",
+  tagline: "Stay Grounded, Be boundless",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.boundlessits.com",
   inquiryEmail: "bits_inquiries@boundlessits.com",
   description:

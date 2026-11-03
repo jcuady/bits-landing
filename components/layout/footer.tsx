@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
+import { site } from "@/lib/site";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
 import { Mail, ArrowRight, ShieldCheck, CheckCircle2, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -330,7 +331,10 @@ export function Footer() {
                 <Logo variant="reverse" className="h-9 sm:h-10 w-auto relative z-10 drop-shadow-md" />
               </div>
 
-              <p className="max-w-sm text-xs leading-relaxed text-sky-100 font-normal">
+              <p className="max-w-sm font-serif text-lg italic leading-snug text-white/95">
+                {site.tagline}
+              </p>
+              <p className="mt-3 max-w-sm text-xs leading-relaxed text-sky-100 font-normal">
                 Sovereign enterprise operations technology, collections OMS (Operations Management System), and intelligent automation built from 20 years of floor leadership.
               </p>
 
