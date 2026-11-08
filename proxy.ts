@@ -30,6 +30,7 @@ const SUBDOMAIN_PRODUCT_MAP: Record<string, string> = {
   agent: "bitsagent",
   rag: "rag-engine",
   nfc: "nfc-card",
+  ulap: "ulap",
 };
 
 /**

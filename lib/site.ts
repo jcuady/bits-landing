@@ -61,6 +61,22 @@ export const navigationSections = [
       operationsHeading: "Enterprise Business Engines",
       operations: [
         {
+          title: "BITS ULAP",
+          badge: "Messaging & Community",
+          description:
+            "Uniting Lives Across Places — chats, channels, drop-in voice & video rooms, Maritess Hub local radar, and marketplace.",
+          href: "/products/ulap",
+          icon: "cloud" as const,
+        },
+        {
+          title: "BITS CRMPBX",
+          badge: "Service Desk & PBX",
+          description:
+            "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support for internet service providers.",
+          href: "/products/crmpbx",
+          icon: "headset" as const,
+        },
+        {
           title: "BITS Accounting & ERP",
           badge: "BIR CAS · SAP-Grade",
           description: "General Ledger, AP/AR 3-way match & multi-entity financial consolidation.",
@@ -118,6 +134,14 @@ export const navigationSections = [
           "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support for internet service providers.",
         href: "/products/crmpbx",
         icon: "headset" as const,
+      },
+      {
+        title: "BITS ULAP",
+        badge: "Messaging & Community",
+        description:
+          "Uniting Lives Across Places — direct and group chats, channels, drop-in voice and video rooms, Maritess Hub local radar, and community marketplace.",
+        href: "/products/ulap",
+        icon: "cloud" as const,
       },
         {
           title: "BITS RAG Knowledge Engine",
@@ -386,6 +410,36 @@ export const bitsProducts = [
       metrics: { label: "First Contact Resolution", value: "+46% Lift" },
       ctaText: "Explore CRMPBX",
       ctaHref: "/products/crmpbx",
+    },
+    {
+      id: "ulap",
+      name: "BITS ULAP",
+      shortName: "BITS ULAP",
+      category: "operations",
+      categoryLabel: "Messaging & Community Cloud",
+      badge: "Messaging & Community",
+      isFlagship: false,
+      tagline:
+        "Uniting Lives Across Places. One Cloud. Endless Connections.",
+      description:
+        "A Filipino-developed messaging and community platform by Boundless IT Solutions (BITS OPC) that brings direct and group chats, public and private channels, drop-in voice and video call rooms, Cloud 9 24-hour stories, Passing Clouds serendipitous discovery, the Maritess Hub local community radar, and a neighbourhood Marketplace into one cloud application at chat.boundlessits.com.",
+      complianceBadges: [
+        "HTTPS Encrypted in Transit",
+        "Two-Step Verification (TOTP)",
+        "Approximate-Only Location (~1km)",
+        "PIN-Protected Hidden Chats",
+      ],
+      capabilities: [
+        "Direct Chats, Group Conversations, Channels & 37 Animated Ulap Barkada Stickers",
+        "1-to-1 & Drop-In Group Voice and Video Call Rooms with Screen Sharing",
+        "Cloud 9 24-Hour Stories & Passing Clouds Serendipitous Messaging",
+        "Maritess Hub Local Community Radar with Totoo / Hindi Totoo Verification",
+        "Local Community Marketplace & Approximate-Location Nearby Discovery",
+        "Installable PWA for Android, iOS & Desktop with TOTP Authenticator & QR Invites",
+      ],
+      metrics: { label: "Ulap Barkada Stickers", value: "37 Animated" },
+      ctaText: "Explore BITS ULAP",
+      ctaHref: "/products/ulap",
     },
   {
     id: "sales",
@@ -865,7 +919,7 @@ export const bitsProducts = [
  */
 export const PRODUCT_COUNT = bitsProducts.length;
 
-/* ── Universal White-Label & Custom Branding Option (Available Across All 19 Products) ── */
+/* ── Universal White-Label & Custom Branding Option (Available Across All 20 Products) ── */
 export const whiteLabelBrandingOption = {
   id: "white-label",
   name: "BITS White-Label & Custom Branding Program",
@@ -1523,7 +1577,7 @@ export const solutionPackages = [
     tier: "BRANDING OPTION",
     badge: "Master Add-On · Not a Standalone Product",
     title: "Universal White-Label Branding Option",
-    tagline: "Deploy any of our 19 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
+    tagline: "Deploy any of our 20 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
     teamScope: "Applicable to Any Plan",
     deployment: "Managed Cloud or Private VPC",
     investmentModel: "Turnkey Reseller / Corporate Branding License",
@@ -1583,7 +1637,7 @@ export const suiteBundlePresets = [
   {
     id: "reseller-agency",
     name: "White-Label Partner & Reseller Suite",
-    tagline: "Deploy any combination of our 19 software products under your own agency brand.",
+    tagline: "Deploy any combination of our 20 software products under your own agency brand.",
     productIds: ["collections", "sales", "accounting", "nfc-card"],
     recommendedFor: "Agencies, IT MSPs, software resellers & enterprise conglomerates",
     highlight: "100% client margin retention with zero BITS attribution and custom domains",
@@ -2043,6 +2097,7 @@ export const contactInterests = [
   "BITSagent — Conversational Voice AI",
   "BITSagent — Autonomous Email & SMS",
   "BITS Suite (CRM + AI Operations)",
+  "BITS ULAP — Messaging & Community Cloud",
   "Secure Managed Cloud Deployment",
   "Sovereign On-Premises Deployment & Hardware Scoping",
   "White Label SaaS Platform",
@@ -2082,6 +2137,7 @@ export const footerColumns = [
       { label: "Smart Virtual Queuing", href: "/products/queuing" },
       { label: "RAG Enterprise Knowledge", href: "/products/rag-engine" },
       { label: "Dynamic NFC Smart Card", href: "/products/nfc-card" },
+      { label: "BITS ULAP Messaging Cloud", href: "/products/ulap" },
       { label: "White-Label Reseller Option", href: "/products/white-label" },
     ],
   },

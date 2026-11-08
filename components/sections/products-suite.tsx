@@ -168,6 +168,11 @@ function getProductPainPoint(id: string): { pain: string; solution: string } {
         pain: "Agencies and enterprise groups wanting to offer SaaS software to clients under their own brand without building from scratch.",
         solution: "Full brand transformation: your logo, your custom domain, your color palette, and your corporate identity with zero BITS attribution.",
       };
+    case "ulap":
+      return {
+        pain: "Switching between separate apps for direct chat, channels, voice/video rooms, neighbourhood news, and local marketplace listings.",
+        solution: "One cloud platform (chat.boundlessits.com) uniting chats, channels, 37 Ulap Barkada stickers, drop-in voice & video rooms, Cloud 9 stories, Passing Clouds, Maritess Hub local radar, and a local Marketplace.",
+      };
     default:
       return {
         pain: "Fragmented spreadsheets and disconnected off-the-shelf software tools that slow down your team.",
@@ -314,6 +319,13 @@ function getProductDeepSolution(id: string): ProductDeepSolution {
         whoUses: "Business Development Teams, Managing Directors & Enterprise Staff",
         coreImpact: "100% Paper Card Waste Eliminated & Instant Contact Downloads",
         workflowStep: "Tap any modern smartphone to instantly save your full contact vCard, portfolio, booking link, and socials with zero apps required; update card info remotely anytime.",
+      };
+    case "ulap":
+      return {
+        idealFor: "Communities, Organizations, Neighbourhoods, Teams & Everyday Messaging Across the Philippines and Beyond",
+        whoUses: "Community Members, Local Contributors, Group Organizers & Marketplace Sellers",
+        coreImpact: "One Unified Cloud for Chats, Voice/Video Rooms, Local Updates & Marketplace",
+        workflowStep: "Connects people through direct and group chats, channels, drop-in voice and video rooms, 24-hour Cloud 9 stories, Passing Clouds, Maritess Hub community-verified local updates, and a local Marketplace.",
       };
     default:
       return {

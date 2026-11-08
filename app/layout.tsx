@@ -5,6 +5,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { agents, site } from "@/lib/site";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { EngagementTracker } from "@/components/ui/engagement-tracker";
+import { TrunklineCloud } from "@/components/ui/trunkline-cloud";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | BITS",
   },
   description:
-    "Boundless IT Solutions (BITS) builds 19 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, logistics, and sports venue management — customized to how your organization actually works. Philippines-based.",
+    "Boundless IT Solutions (BITS) builds 20 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, logistics, and sports venue management — customized to how your organization actually works. Philippines-based.",
   keywords: [
     "Boundless IT Solutions",
     "Boundless IT Solutions Philippines",
@@ -104,14 +105,14 @@ export const metadata: Metadata = {
     siteName: site.legalName,
     title: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
     description:
-      "Boundless IT Solutions (BITS) builds 19 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
+      "Boundless IT Solutions (BITS) builds 20 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Boundless IT Solutions (BITS) Enterprise Platform" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
     description:
-      "Boundless IT Solutions (BITS) builds 19 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
+      "Boundless IT Solutions (BITS) builds 20 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
     images: ["/og.png"],
   },
 };
@@ -306,11 +307,13 @@ export default function RootLayout({
           blocks first paint, and no CSP change is required — the site
           ships no Content-Security-Policy header.
         */}
+        <TrunklineCloud />
         <Script
           src="https://aira.boundlessits.com/widget.js"
           strategy="afterInteractive"
           data-topbar="0"
           data-footer="0"
+          data-callbutton="0"
         />
       </body>
     </html>

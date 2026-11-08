@@ -570,6 +570,42 @@ export const PRODUCT_REGISTRY: Record<string, ProductMvpConfig> = {
       },
     ],
   },
+  "ulap": {
+    id: "ulap",
+    name: "BITS ULAP",
+    shortName: "BITS ULAP",
+    subdomain: "ulap",
+    category: "operations",
+    categoryLabel: "Messaging & Community Cloud",
+    tagline:
+      "Uniting Lives Across Places. One Cloud. Endless Connections.",
+    demoPath: "/(products)/ulap",
+    marketingUrl: "/products/ulap",
+    defaultRole: "member",
+    testRoles: [
+      {
+        id: "member",
+        label: "Community Member",
+        description:
+          "Direct and group chats, channels, drop-in voice and video rooms, Cloud 9 stories, and Passing Clouds.",
+        persona: "rep",
+      },
+      {
+        id: "maritess",
+        label: "Top Maritess Contributor",
+        description:
+          "Local community updates on Maritess Hub, Totoo / Hindi Totoo verification, and neighbourhood marketplace listings.",
+        persona: "manager",
+      },
+      {
+        id: "admin",
+        label: "Platform Administrator",
+        description:
+          "User activity monitoring, reported message moderation, and platform administration.",
+        persona: "admin",
+      },
+    ],
+  },
 };
 
 /**

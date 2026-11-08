@@ -13,7 +13,7 @@ import { HOME_FAQ, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "BITS — Enterprise Operations CRM & OMS Platform",
   description:
-    "Boundless IT Solutions (BITS) builds enterprise software for running your entire operation — Operations 360 CRM and OMS, predictive dialing, field intelligence and real-time QA — with 19 connected products, sovereign data residency and zero per-seat licensing fees.",
+    "Boundless IT Solutions (BITS) builds enterprise software for running your entire operation — Operations 360 CRM and OMS, predictive dialing, field intelligence and real-time QA — with 20 connected products, sovereign data residency and zero per-seat licensing fees.",
   keywords: [
     "top crm collections agency",
     "top crm for collections agency",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Operations 360 — the CRM and OMS for running your entire operation",
     description:
-      "Operations 360 is the CRM and OMS for running your entire operation: collections and customer service, predictive dialing, field intelligence and real-time QA on one database. Nineteen products, zero per-seat tax.",
+      "Operations 360 is the CRM and OMS for running your entire operation: collections and customer service, predictive dialing, field intelligence and real-time QA on one database. Twenty products, zero per-seat tax.",
     url: site.url,
     siteName: site.legalName,
     type: "website",

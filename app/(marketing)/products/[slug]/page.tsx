@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-/* ── Domain-Specific Problem Statements for All 19 Products + White-Label Option ── */
+/* ── Domain-Specific Problem Statements for All 20 Products + White-Label Option ── */
 type ProductItem = (typeof bitsProducts)[number] | typeof whiteLabelBrandingOption;
 
 function getProductProblems(product: ProductItem) {
@@ -460,6 +460,24 @@ function getProductProblems(product: ProductItem) {
             "Rigid per-seat retail pricing from global vendors limits your profit margins and prevents you from packaging software into your own high-ticket retainer contracts.",
         },
       ];
+    case "ulap":
+      return [
+        {
+          title: "Fragmented Messaging, Voice Rooms & Community Apps",
+          description:
+            "Switching between separate apps for direct chat, group channels, drop-in voice and video calls, local neighbourhood news, and buy-and-sell listings scatters conversations and communities.",
+        },
+        {
+          title: "Unverified Local Rumours & Neighbourhood Updates",
+          description:
+            "Without a dedicated local community radar like Maritess Hub and community-driven Totoo / Hindi Totoo verification votes, local traffic, weather, safety, and event updates get lost in noisy global feeds.",
+        },
+        {
+          title: "Invasive Exact-GPS Location Tracking",
+          description:
+            "Conventional social discovery apps expose exact coordinates; ULAP uses opt-in approximate location (~1km privacy zone) and PIN-protected hidden chats on infrastructure controlled by Boundless IT Solutions.",
+        },
+      ];
     default:
       return [
         {
@@ -565,6 +583,11 @@ function getBespokeFaqQuestion(id: string, name: string) {
       return {
         q: "Can the BITS Pickleball system handle open-play paddle rotations and private court bookings at the same time?",
         a: "Yes! You can designate specific courts for open-play rotations with digital paddle rack queuing while reserving other courts for private online time-block reservations. Everything syncs live to your front-desk TV screens and player mobile passes.",
+      };
+    case "ulap":
+      return {
+        q: "Where can I access BITS ULAP and what platforms does it support?",
+        a: "BITS ULAP is live at chat.boundlessits.com and works across Web, Android (direct APK or browser install), iPhone/iPad (Add to Home Screen PWA), and Desktop. It includes direct and group chats, channels, 37 animated Ulap Barkada stickers, drop-in voice and video rooms, Cloud 9 24-hour updates, Passing Clouds, the Maritess Hub local community radar, and a local Marketplace.",
       };
     default:
       return {
@@ -878,15 +901,36 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {/* Action CTAs */}
             <Reveal delay={0.18} y={12}>
               <div className="mt-8 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
+                {product.id === "ulap" && (
+                  <Magnetic className="w-full sm:w-auto">
+                    <a
+                      href="https://chat.boundlessits.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-900/20 transition-all hover:bg-blue-700 active:scale-[0.98] sm:w-auto"
+                    >
+                      <span>Launch ULAP Web App</span>
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">
+                        ↗
+                      </span>
+                    </a>
+                  </Magnetic>
+                )}
                 <Magnetic className="w-full sm:w-auto">
                   <Link
                     href="/#contact"
-                    className="group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-900/20 transition-all hover:bg-blue-700 active:scale-[0.98] sm:w-auto"
+                    className={
+                      product.id === "ulap"
+                        ? "flex h-14 w-full items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-bold text-slate-800 shadow-xs transition-colors hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] sm:w-auto"
+                        : "group flex h-14 w-full items-center justify-center gap-3 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-900/20 transition-all hover:bg-blue-700 active:scale-[0.98] sm:w-auto"
+                    }
                   >
                     <span>Request Architecture Scoping</span>
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
+                    {product.id !== "ulap" && (
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    )}
                   </Link>
                 </Magnetic>
                 <Magnetic className="w-full sm:w-auto">

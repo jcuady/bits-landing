@@ -199,7 +199,7 @@ const trackTiers: Record<PricingTrack, PricingTier[]> = {
       badge: "100% Brand Ownership",
       scaleBadge: "Resellers & Enterprise Holdings",
       description:
-        "Deploy any or all of our 19 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
+        "Deploy any or all of our 20 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
       indicativeModel: "Wholesale Partner Agreement",
       modelDetail: "Retain 100% client margin · Custom domain & branded apps",
       features: [
