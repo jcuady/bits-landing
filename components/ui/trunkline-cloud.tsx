@@ -122,8 +122,9 @@ export function TrunklineCloud() {
         if (!fab) continue;
 
         if (el instanceof HTMLElement) {
-          el.style.bottom = "15px";
-          el.style.right = "16px";
+          const isMobile = window.innerWidth < 640;
+          el.style.bottom = isMobile ? "12px" : "15px";
+          el.style.right = isMobile ? "12px" : "16px";
           el.style.display = "flex";
           el.style.alignItems = "center";
         }
@@ -159,6 +160,22 @@ export function TrunklineCloud() {
               overflow: visible;
               filter: drop-shadow(0 10px 22px rgba(2, 132, 199, 0.38));
               transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            @media (max-width: 639px) {
+              .fab {
+                width: 62px !important;
+                height: 48px !important;
+              }
+              .aira-cloud-svg {
+                width: 62px !important;
+                height: 48px !important;
+              }
+              .aira-cloud-pill {
+                bottom: 54px !important;
+              }
+              .panel {
+                bottom: 60px !important;
+              }
             }
             .fab:hover .aira-cloud-svg {
               transform: translateY(-4px) scale(1.05);
@@ -262,7 +279,11 @@ export function TrunklineCloud() {
     });
 
     observer.observe(document.body, { childList: true });
-    return () => observer.disconnect();
+    window.addEventListener("resize", harmonizeAiraShadowRoot);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", harmonizeAiraShadowRoot);
+    };
   }, []);
 
   return (
@@ -271,12 +292,12 @@ export function TrunklineCloud() {
       data-trunkline-cloud="true"
       aria-label={`Call BITS Trunkline ${TRUNKLINE_DISPLAY}`}
       title={`Call BITS Trunkline ${TRUNKLINE_DISPLAY} · 2nd line ${TRUNKLINE_SECONDARY}`}
-      className="group fixed right-[98px] bottom-[15px] z-[2147483000] inline-flex h-[58px] w-[76px] items-center justify-center select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
+      className="group fixed right-[80px] bottom-3 sm:right-[98px] sm:bottom-[15px] z-[2147483000] inline-flex h-[48px] w-[62px] sm:h-[58px] sm:w-[76px] items-center justify-center select-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
     >
       {/* Hover / Focus Frosted Glass Trunkline Pill */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 bottom-[64px] flex translate-y-1.5 flex-col items-end rounded-2xl border border-white/80 bg-white/92 px-3.5 py-2 text-right opacity-0 shadow-glass-card backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
+        className="pointer-events-none absolute right-0 bottom-[54px] sm:bottom-[64px] flex translate-y-1.5 flex-col items-end rounded-2xl border border-white/80 bg-white/92 px-3.5 py-2 text-right opacity-0 shadow-glass-card backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
       >
         <span className="flex items-center gap-1.5 font-mono text-[0.62rem] font-bold tracking-[0.16em] whitespace-nowrap text-blue-600 uppercase">
           <span className="size-1.5 rounded-full bg-emerald-500" />
@@ -294,7 +315,7 @@ export function TrunklineCloud() {
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
         data-trunkline-cloud-svg="true"
-        className="h-[58px] w-[76px] overflow-visible drop-shadow-[0_10px_22px_rgba(2,132,199,0.38)] transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.05] group-active:scale-95"
+        className="h-[48px] w-[62px] sm:h-[58px] sm:w-[76px] overflow-visible drop-shadow-[0_10px_22px_rgba(2,132,199,0.38)] transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.05] group-active:scale-95"
       >
         <defs>
           {/* Daytime Azure Sky -> Electric Royal Blue Cloud Fill */}

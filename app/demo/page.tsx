@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PRODUCT_REGISTRY, getCanonicalProducts, ProductMvpConfig } from "@/lib/products/registry";
+import { PRODUCT_REGISTRY, getCanonicalProducts, ProductMvpConfig, ENGINE_COUNT } from "@/lib/products/registry";
 import {
   Layers,
   Sparkles,
@@ -29,6 +30,7 @@ import { Logo } from "@/components/ui/logo";
 
 const CATEGORIES = [
   { id: "all", label: "All 15 Engines", icon: Layers },
+  { id: "all", label: `All ${ENGINE_COUNT} Engines`, icon: Layers },
   { id: "crm", label: "CRM & Revenue", icon: Users2 },
   { id: "operations", label: "ERP & Financials", icon: Building2 },
   { id: "workforce", label: "Workforce & HR", icon: Users2 },
@@ -137,6 +139,7 @@ export default function DemoMatrixHub() {
             <div className="hidden md:flex items-center gap-2 border-l border-blue-100 dark:border-white/10 pl-4 text-xs">
               <Badge variant="outline" className="border-blue-200 bg-blue-50/80 text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/50 dark:text-cyan-400 font-bold text-[10px]">
                 15-Engine MVP Matrix
+                {ENGINE_COUNT}-Engine MVP Matrix
               </Badge>
               <span className="text-slate-500 dark:text-slate-400 font-medium">Subdomain Routing Architecture</span>
             </div>
@@ -286,6 +289,7 @@ export default function DemoMatrixHub() {
           <div className="flex items-center justify-between mb-8">
             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
               Showing <span className="text-slate-900 dark:text-white font-bold">{filteredProducts.length}</span> of 15 Engines
+              Showing <span className="text-slate-900 dark:text-white font-bold">{filteredProducts.length}</span> of {productsList.length} Engines
             </div>
             <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
               <Zap className="h-3 w-3 text-amber-500" />
@@ -432,6 +436,7 @@ export default function DemoMatrixHub() {
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="font-medium">
             Boundless IT Solutions (BITS) • 15-Engine Modular Micro-Frontend Architecture
+            Boundless IT Solutions (BITS) • {ENGINE_COUNT}-Engine Modular Micro-Frontend Architecture
           </div>
           <div className="flex items-center gap-5">
             <Link href="/" className="hover:text-blue-600 dark:hover:text-white transition">Main Website</Link>

@@ -8,6 +8,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { bitsProducts, pricingTiers, site, whiteLabelBrandingOption, PRODUCT_COUNT } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { ProductMockupBoard } from "@/components/sections/products-suite";
+import { UlapPreviewShowcase } from "@/components/sections/ulap-preview-showcase";
 import {
   ShieldCheck,
   Check,
@@ -519,6 +520,7 @@ function getProductFaqs(product: ProductItem) {
     {
       q: `How does ${product.name} integrate with other BITS modules?`,
       a: `Every BITS engine shares a unified API contract and schema layer. For example, ${product.name} natively interconnects with BITS Accounting & ERP, BITS Payroll, BITScrm, and BITSagent AI, eliminating manual duplicate data entry across departments.`,
+      a: `Every BITS system shares a unified API contract and schema layer. For example, ${product.name} natively interconnects with Operations 360, BITScrm, BITSagent AI, BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP, eliminating manual duplicate data entry across departments.`,
     },
     {
       q: `Can ${product.name} be white-labeled under our own corporate branding?`,
@@ -547,6 +549,8 @@ function getBespokeFaqQuestion(id: string, name: string) {
       return {
         q: "Can BITS HRMS connect with our existing biometric timekeeping hardware?",
         a: "Yes. BITS HRMS integrates with industry-standard ZKTeco, Hikvision, and IP-based biometric facial recognition and fingerprint terminals, automatically pulling clock-in logs into agent timesheets in real time.",
+        q: "Can BITS HRMS & Payroll connect with biometric timekeeping hardware and export Philippine bank batch files?",
+        a: "Yes. BITS HRMS & Payroll integrates with industry-standard ZKTeco, Hikvision, and IP-based biometric facial recognition and fingerprint terminals, automatically pulling clock-in logs into timesheets, computing SSS, PhilHealth, Pag-IBIG, and TRAIN Law tax brackets, and exporting encrypted batch disbursement files for Philippine commercial banks.",
       };
     case "nfc-card":
       return {
@@ -1008,6 +1012,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
         </Container>
       </section>
+
+      {/* 2.5. Interactive ULAP Visual UI Showcase (ULAP Only) */}
+      {product.id === "ulap" && <UlapPreviewShowcase />}
 
       {/* 3. The Operational Problem Section */}
       <section className="py-20 sm:py-28 bg-white border-b border-slate-200/60">

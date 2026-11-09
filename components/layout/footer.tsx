@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/ui/logo";
 import { site } from "@/lib/site";
@@ -65,32 +66,33 @@ const footerNavigation: FooterSection[] = [
   {
     title: "Platform",
     links: [
-      { label: "Floor Powerhouse & Dialer", href: "/#floor-showcase" },
-      { label: "Collections Command Center", href: "/#features" },
-      { label: "Productivity Bento", href: "/#features-bento" },
+      { label: "Operations 360 Overview", href: "/#platform-index" },
+      { label: "Floor Powerhouse Console", href: "/#floor-showcase" },
+      { label: "BITS OMS Collections", href: "/operations-360/crm" },
       { label: "BITSagent Voice AI", href: "/operations-360/ai" },
       { label: "BITS ULAP Messaging Cloud", href: "/products/ulap" },
+      { label: "All Products Catalog", href: "/products" },
       { label: "Deployment Options", href: "/deployment" },
-      { label: "BITS OMS Collections", href: "/operations-360/crm" },
     ],
   },
   {
     title: "Solutions",
     links: [
-      { label: "BPO & Collections", href: "/#industries" },
-      { label: "Banking & Financial", href: "/#industries" },
-      { label: "Sovereign Deployment", href: "/#deployment" },
-      { label: "Solution Packages", href: "/#pricing" },
-      { label: "Interactive Floor ROI", href: "/#the-difference" },
+      { label: "BPO & Collections", href: "/operations-360" },
+      { label: "Enterprise Portfolio Band", href: "/#portfolio-band" },
+      { label: "Sovereign Deployment", href: "/deployment" },
+      { label: "Solution Packages & Pricing", href: "/#pricing" },
+      { label: "Industry Solutions", href: "/solutions" },
+      { label: "Request Scoping Consultation", href: "/#contact" },
     ],
   },
   {
     title: "Trust & Governance",
     links: [
       { label: "Industry Research & Blog", href: "/blog" },
-      { label: "Cookie Policy & Audit", href: "/cookies" },
-      { label: "Security Architecture", href: "/#security" },
-      { label: "BSP & NPC Alignment", href: "/#security" },
+      { label: "Security Architecture", href: "/security" },
+      { label: "Privacy & Legal Terms", href: "/legal" },
+      { label: "Cookie Policy & Preferences", href: "/cookies" },
       { label: "Brand Guidelines (Brandbook)", href: "/brandbook" },
       { label: "AI Grounding (llms.txt)", href: "/llms.txt" },
       { label: "Enterprise FAQ", href: "/#faq" },
@@ -100,6 +102,8 @@ const footerNavigation: FooterSection[] = [
 
 export function Footer() {
   const { openModal } = useConsultationModal();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [quickEmail, setQuickEmail] = React.useState("");
 
   const handleQuickSubmit = (e?: React.FormEvent | React.SyntheticEvent) => {
@@ -122,93 +126,109 @@ export function Footer() {
         </div>
 
         {/* Call-to-Action Content Zone */}
-        <Container className="relative z-10 pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-20 lg:pb-24">
+        <Container
+          className={cn(
+            "relative z-10",
+            isHomePage
+              ? "py-8 sm:py-10"
+              : "pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-20 lg:pb-24"
+          )}
+        >
           <div className="mx-auto max-w-4xl text-center">
-            {/* Frosted Capsule Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
-              <span className="flex size-4 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 text-white text-[9px] shadow-xs">
-                ⚡
-              </span>
-              <span className="text-[0.78rem] font-bold text-blue-950 tracking-tight">
-                Let&apos;s Connect
-              </span>
-            </div>
+            {!isHomePage && (
+              <>
+                {/* Frosted Capsule Eyebrow Badge */}
+                <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/80 bg-white/95 px-4 py-1.5 shadow-xs backdrop-blur-md mb-5 sm:mb-6">
+                  <span className="flex size-4 items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 text-white text-[9px] shadow-xs">
+                    ⚡
+                  </span>
+                  <span className="text-[0.78rem] font-bold text-blue-950 tracking-tight">
+                    Let&apos;s Connect
+                  </span>
+                </div>
 
-            {/* Main Headline Tailored to BITS Operations & Relationships */}
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-              Ready to Build Stronger Customer Operations?
-            </h2>
+                {/* Main Headline Tailored to BITS Operations & Relationships */}
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
+                  Ready to Build Stronger Customer Operations?
+                </h2>
 
-            {/* Subtitle Tailored to BITS Queue Management & Debt Recovery (Explicitly OMS, NOT CRM) */}
-            <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
-              A smarter way to manage account queues, coordinate agent outreach, and accelerate collections with sovereign BITS OMS tools.
-            </p>
+                {/* Subtitle Tailored to BITS Queue Management & Debt Recovery (Explicitly OMS, NOT CRM) */}
+                <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed text-pretty font-normal">
+                  A smarter way to manage account queues, coordinate agent outreach, and accelerate collections with sovereign BITS OMS tools.
+                </p>
 
-            {/* Minimal High-End Capsule Email Form (Matching Reference Mockup) */}
-            <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-2xl sm:rounded-full border border-sky-200 bg-white p-2 shadow-xl shadow-blue-900/5 backdrop-blur-md">
-              <div className="flex flex-1 items-center gap-3 pl-3 sm:pl-4 w-full">
-                <Mail className="size-5 text-blue-500 shrink-0" aria-hidden="true" />
-                <label htmlFor="footer-quick-email-input" className="sr-only">
-                  Enter Your Email Address
-                </label>
-                <input
-                  id="footer-quick-email-input"
-                  type="email"
-                  value={quickEmail}
-                  onChange={(e) => setQuickEmail(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      handleQuickSubmit();
-                    }
-                  }}
-                  placeholder="Enter Your Email Address"
-                  className="w-full h-11 sm:h-12 bg-transparent text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
-                />
-              </div>
+                {/* Minimal High-End Capsule Email Form (Matching Reference Mockup) */}
+                <div className="mt-8 sm:mt-10 mx-auto flex max-w-xl flex-col sm:flex-row items-center gap-2 rounded-2xl sm:rounded-full border border-sky-200 bg-white p-2 shadow-xl shadow-blue-900/5 backdrop-blur-md">
+                  <div className="flex flex-1 items-center gap-3 pl-3 sm:pl-4 w-full">
+                    <Mail className="size-5 text-blue-500 shrink-0" aria-hidden="true" />
+                    <label htmlFor="footer-quick-email-input" className="sr-only">
+                      Enter Your Email Address
+                    </label>
+                    <input
+                      id="footer-quick-email-input"
+                      type="email"
+                      value={quickEmail}
+                      onChange={(e) => setQuickEmail(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleQuickSubmit();
+                        }
+                      }}
+                      placeholder="Enter Your Email Address"
+                      className="w-full h-11 sm:h-12 bg-transparent text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                    />
+                  </div>
 
-              <button
-                type="button"
-                onClick={handleQuickSubmit}
-                className="group flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3 font-bold text-white shadow-lg shadow-blue-600/30 transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
-              >
-                <span className="text-sm">Contact Us</span>
-                <ArrowRight className="size-4 text-white/80 group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
-              </button>
-            </div>
+                  <button
+                    type="button"
+                    onClick={handleQuickSubmit}
+                    className="group flex min-h-[48px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3 font-bold text-white shadow-lg shadow-blue-600/30 transition-all duration-200 active:scale-[0.98] cursor-pointer shrink-0"
+                  >
+                    <span className="text-sm">Contact Us</span>
+                    <ArrowRight className="size-4 text-white/80 group-hover:text-white transition-transform duration-200 group-hover:translate-x-1" />
+                  </button>
+                </div>
+              </>
+            )}
 
             {/* Navigation Pill Links & Official Social Media Row */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-700">
-              <a
-                href="#content"
+            <div
+              className={cn(
+                "flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-semibold text-slate-700",
+                !isHomePage && "mt-8 sm:mt-10"
+              )}
+            >
+              <Link
+                href="/#content"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Home
-              </a>
-              <a
-                href="#the-difference"
+              </Link>
+              <Link
+                href="/#platform-index"
                 className="min-h-[44px] inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 font-bold text-white shadow-sm shadow-blue-500/25 border border-blue-600 hover:bg-blue-700 transition-all"
               >
                 Solutions
-              </a>
-              <a
-                href="#floor-showcase"
+              </Link>
+              <Link
+                href="/#floor-showcase"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Features
-              </a>
-              <a
-                href="#features-bento"
+              </Link>
+              <Link
+                href="/products"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
-                Product
-              </a>
-              <a
-                href="#pricing"
+                Products
+              </Link>
+              <Link
+                href="/#pricing"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"
               >
                 Pricing
-              </a>
+              </Link>
               <Link
                 href="/blog"
                 className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-white hover:bg-sky-50 px-4.5 py-2 text-slate-800 border border-sky-200/90 shadow-2xs hover:shadow-xs transition-all"

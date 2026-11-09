@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Building2, Cpu, Users } from "lucide-react";
+import { ArrowRight, Building2, Cloud, Cpu, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { GlassCard, glassCardInteractive } from "@/components/ui/glass-card";
-import { bitsProducts } from "@/lib/site";
 import { PRODUCT_COUNT } from "@/lib/site";
 
 /**
@@ -52,20 +51,27 @@ const FEATURED = [
   },
   {
     id: "hrms",
-    name: "BITS HRMS",
-    family: "Workforce",
+    name: "BITS HRMS & Payroll",
+    family: "Workforce & Payroll",
     buyer: "BPO and enterprise workforce teams",
-    line: "Rostering, payroll and workforce management, built for 24/7 operations and TRAIN Law compliance.",
+    line: "24/7 shift rostering, biometric timekeeping and Philippine statutory payroll built for TRAIN Law compliance.",
     href: "/products/hrms",
     icon: Users,
+    flagship: false,
+  },
+  {
+    id: "ulap",
+    name: "BITS ULAP",
+    family: "Messaging & Community",
+    buyer: "Communities, teams and everyday messaging",
+    line: "Uniting Lives Across Places — direct and group chats, channels, drop-in voice and video rooms, Maritess Hub local radar and community marketplace.",
+    href: "/products/ulap",
+    icon: Cloud,
     flagship: false,
   },
 ] as const;
 
 export function PortfolioBand() {
-  const featuredIds = new Set<string>(FEATURED.map((f) => f.id));
-  const wider = bitsProducts.filter((p) => !featuredIds.has(p.id));
-
   return (
     <section
       id="portfolio-band"
@@ -77,7 +83,7 @@ export function PortfolioBand() {
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1">
               <span className="size-1.5 rounded-full bg-blue-600" aria-hidden />
               <span className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-blue-700">
-                The wider portfolio
+                The live portfolio
               </span>
             </p>
             <h2 className="text-balance text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
@@ -85,13 +91,13 @@ export function PortfolioBand() {
             </h2>
             <p className="mt-4 leading-relaxed text-slate-600">
               Operations 360 is where most customers start. These are the other
-              two we run today — different buyers, same platform underneath.
+              three we run today — different buyers, same platform underneath.
             </p>
           </div>
         </Reveal>
 
-        {/* ── The three current products ── */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        {/* ── The four current products ── */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURED.map((product, i) => (
             <Reveal key={product.id} delay={0.06 * i}>
               <GlassCard
@@ -136,13 +142,18 @@ export function PortfolioBand() {
           ))}
         </div>
 
-        {/* ── The wider catalogue, quietly ── */}
+        {/* ── Custom engineering & full catalogue bar ── */}
         <Reveal delay={0.12}>
           <div className="mt-14 rounded-[1.75rem] border border-white/70 bg-white/50 p-7 shadow-glass-card backdrop-blur-xl sm:p-9">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <h3 className="text-lg font-bold tracking-tight text-slate-900">
-                And {wider.length} more on the same platform
-              </h3>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h3 className="text-lg font-bold tracking-tight text-slate-900">
+                  Compare all {PRODUCT_COUNT} live products or scope a custom build
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  Every product runs on our managed cloud or your own office servers, and can be white-labeled under your brand.
+                </p>
+              </div>
               <Link
                 href="/products"
                 className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-slate-300 bg-white/80 px-5 text-sm font-bold text-slate-900 transition-all hover:border-blue-300 hover:shadow-md"
@@ -151,20 +162,6 @@ export function PortfolioBand() {
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
             </div>
-
-            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
-              {wider.map((product) => (
-                <li key={product.id}>
-                  <Link
-                    href={product.ctaHref}
-                    className="group inline-flex items-center gap-2 text-sm text-slate-600 transition-colors hover:text-blue-700"
-                  >
-                    <span className="size-1.5 rounded-full bg-blue-600/70 transition-colors group-hover:bg-blue-600" aria-hidden />
-                    {product.shortName}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </Reveal>
       </Container>

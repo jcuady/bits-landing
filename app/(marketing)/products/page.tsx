@@ -3,14 +3,14 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
-import { bitsProducts, whiteLabelBrandingOption, site, PRODUCT_COUNT } from "@/lib/site";
-import { cn } from "@/lib/utils";
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Building2, HelpCircle } from "lucide-react";
+import { activeProducts, whiteLabelBrandingOption, site, PRODUCT_COUNT } from "@/lib/site";
+import { ProductsCatalogBrowser } from "@/components/sections/products-catalog-browser";
+import { ArrowRight, ShieldCheck, Sparkles, Building2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Products Catalog — 20 Enterprise Software Products",
+  title: `Products Catalog — ${PRODUCT_COUNT} Enterprise Software Products`,
   description:
-    "Explore the full BITS enterprise software portfolio: Operations 360 (OMS), BITSagent AI, BITS ULAP, Sales CRM, Support CRM, Accounting ERP, HRMS, Payroll, Logistics, Booking, Queuing, and more. Start with one product, expand as you grow.",
+    "Explore the BITS enterprise software portfolio: Operations 360 (OMS), BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP. Start with one product, expand as you grow.",
   keywords: [
     "BITS products",
     "enterprise software portfolio",
@@ -21,86 +21,27 @@ export const metadata: Metadata = {
     "crm for collections",
     "BITSagent",
     "BITS ULAP",
+    "BITS CRMPBX",
+    "BITS HRMS Payroll",
     "enterprise software Philippines",
     "business operations software",
     "CRM software Philippines",
     "AI voice agents",
     "HRMS payroll Philippines",
-    "accounting ERP Philippines",
   ],
   alternates: { canonical: `${site.url}/products` },
   openGraph: {
-    title: "BITS Products — 20 Enterprise Software Products",
+    title: `BITS Products — ${PRODUCT_COUNT} Enterprise Software Products`,
     description:
-      "Explore the full BITS enterprise software portfolio: Operations 360, BITSagent AI, BITS ULAP, CRM, ERP, HRMS, Payroll, Logistics, and more.",
+      "Explore the BITS enterprise software portfolio: Operations 360, BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP.",
     url: `${site.url}/products`,
     siteName: site.legalName,
     type: "website",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BITS 20 Enterprise Software Products" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `BITS ${PRODUCT_COUNT} Enterprise Software Products` }],
   },
 };
-
-/* ── Category groupings for organized display ── */
-const categoryMeta: Record<string, { label: string; description: string; accent: string; id: string }> = {
-  flagship: {
-    id: "flagship",
-    label: "Flagship Platforms",
-    description: "Our core enterprise systems — start here.",
-    accent: "from-blue-600 to-indigo-600",
-  },
-  crm: {
-    id: "crm",
-    label: "CRM & Revenue Cloud",
-    description: "Sales pipelines, customer support, marketing journeys, and commerce billing.",
-    accent: "from-sky-600 to-blue-600",
-  },
-  operations: {
-    id: "operations",
-    label: "Business Operations & ERP",
-    description: "Financial accounting, job costing, warehouse inventory, and fleet dispatch.",
-    accent: "from-emerald-600 to-teal-600",
-  },
-  workforce: {
-    id: "workforce",
-    label: "Workforce & HR Cloud",
-    description: "24/7 biometric shift rostering, statutory TRAIN payroll, and bank disbursements.",
-    accent: "from-violet-600 to-purple-600",
-  },
-  sports: {
-    id: "sports",
-    label: "Customer Experience & Venues",
-    description: "Digital appointments, TV queue boards, court rotations, and smart booking.",
-    accent: "from-amber-500 to-orange-500",
-  },
-  ai: {
-    id: "ai",
-    label: "AI & Knowledge Infrastructure",
-    description: "Enterprise knowledge grounding, policy synchronization, and AI engines.",
-    accent: "from-rose-600 to-pink-600",
-  },
-  identity: {
-    id: "identity",
-    label: "Digital Identity & Smart Hardware",
-    description: "Encrypted NFC business cards and digital identity passes.",
-    accent: "from-slate-700 to-slate-900",
-  },
-};
-
-/* ── Group products by category ── */
-function groupProducts() {
-  const groups: Record<string, (typeof bitsProducts)[number][]> = {};
-  for (const product of bitsProducts) {
-    const cat = product.category as string;
-    if (!groups[cat]) groups[cat] = [];
-    groups[cat].push(product);
-  }
-  return groups;
-}
 
 export default function ProductsIndexPage() {
-  const groups = groupProducts();
-  const categoryOrder = ["flagship", "crm", "operations", "workforce", "sports", "ai", "identity"];
-
   const productsJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -108,9 +49,9 @@ export default function ProductsIndexPage() {
         "@type": "CollectionPage",
         "@id": `${site.url}/products#webpage`,
         url: `${site.url}/products`,
-        name: "BITS Enterprise Software Products Catalog (20 Connected Products)",
+        name: `BITS Enterprise Software Products Catalog (${PRODUCT_COUNT} Connected Products)`,
         description:
-          "Complete catalog of all 20 enterprise software systems engineered by Boundless IT Solutions (BITS).",
+          `Complete catalog of all ${PRODUCT_COUNT} live enterprise software systems engineered by Boundless IT Solutions (BITS).`,
         publisher: {
           "@type": "Organization",
           name: site.legalName,
@@ -126,12 +67,12 @@ export default function ProductsIndexPage() {
       },
       {
         "@type": "ItemList",
-        name: "BITS 20 Enterprise Software Products",
-        itemListElement: bitsProducts.map((p, idx) => ({
+        name: `BITS ${PRODUCT_COUNT} Enterprise Software Products`,
+        itemListElement: activeProducts.map((p, idx) => ({
           "@type": "ListItem",
           position: idx + 1,
           name: p.name,
-          url: `${site.url}/products/${p.id}`,
+          url: `${site.url}${p.ctaHref}`,
         })),
       },
     ],
@@ -147,18 +88,18 @@ export default function ProductsIndexPage() {
       <Section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white pt-32 pb-16 sm:pt-40 sm:pb-20 lg:pt-44 lg:pb-24">
         <Container>
           {/* Page Header */}
-          <div className="mx-auto max-w-3xl text-center mb-10 sm:mb-14">
+          <div className="mx-auto max-w-3xl text-center mb-10 sm:mb-12">
             <Reveal>
               <div className="mx-auto mb-3 inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 shadow-2xs">
                 <Sparkles className="size-3 text-blue-600" />
                 <span className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-blue-700 font-mono">
-                  Full Product Portfolio · 18 Connected Systems
+                  Full Product Portfolio · {PRODUCT_COUNT} Connected Systems
                 </span>
               </div>
             </Reveal>
             <Reveal delay={0.04}>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12] text-balance">
-                15 Connected Products.{" "}
+                {PRODUCT_COUNT} Connected Products.{" "}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
                   One Unified Platform.
                 </span>
@@ -169,130 +110,10 @@ export default function ProductsIndexPage() {
                 Start with the product that solves your most immediate operational bottleneck. Expand across departments as your organization grows. Every product shares the same secure, sovereign data layer.
               </p>
             </Reveal>
-
-            {/* Quick Category Jump Bar */}
-            <Reveal delay={0.1}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-                {categoryOrder.map((catKey) => {
-                  const meta = categoryMeta[catKey];
-                  if (!meta) return null;
-                  return (
-                    <a
-                      key={catKey}
-                      href={`#cat-${meta.id}`}
-                      className="rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-2xs hover:border-blue-300 hover:bg-blue-50/80 hover:text-blue-700 transition-all"
-                    >
-                      {meta.label}
-                    </a>
-                  );
-                })}
-              </div>
-            </Reveal>
           </div>
 
-          {/* Product Categories */}
-          {categoryOrder.map((catKey) => {
-            const products = groups[catKey];
-            const meta = categoryMeta[catKey];
-            if (!products || !meta) return null;
-
-            return (
-              <div key={catKey} id={`cat-${meta.id}`} className="mb-14 sm:mb-18 last:mb-0 scroll-mt-28">
-                <Reveal>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className={cn("h-8 w-1.5 rounded-full bg-gradient-to-b", meta.accent)} />
-                    <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-                        {meta.label}
-                      </h2>
-                      <p className="text-sm text-slate-500">{meta.description}</p>
-                    </div>
-                  </div>
-                </Reveal>
-
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {products.map((product, idx) => {
-                    // ctaHref is the canonical destination for every product.
-                    // Six entries were folded into Operations 360, so their own
-                    // /products/<id> URLs permanently redirect — linking to those
-                    // would send a buyer through a hop for no reason.
-                    const productHref = product.ctaHref;
-
-                    return (
-                      <Reveal key={product.id} delay={0.04 + idx * 0.03}>
-                        <Link
-                          data-product-card={product.id}
-                          href={productHref}
-                          className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 h-full"
-                        >
-                          {/* Flagship Badge */}
-                          {product.isFlagship && (
-                            <div className="absolute -top-3 right-5">
-                              <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-0.5 text-[10px] font-black uppercase tracking-wider text-white shadow-md">
-                                ★ Flagship System
-                              </span>
-                            </div>
-                          )}
-
-                          {/* Product Name & Badge */}
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex-1 min-w-0">
-                              <h3 className="text-lg font-bold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
-                                {product.name}
-                              </h3>
-                              <span className="mt-1.5 inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
-                                {product.badge}
-                              </span>
-                            </div>
-                            {/* Metric */}
-                            <div className="shrink-0 text-right">
-                              <p className="text-lg sm:text-xl font-black text-blue-600 group-hover:text-blue-700 transition-colors font-mono">
-                                {product.metrics.value}
-                              </p>
-                              <p className="text-[10px] text-slate-500 font-medium">
-                                {product.metrics.label}
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Tagline */}
-                          <p className="mt-3.5 text-xs text-slate-600 leading-relaxed font-medium">
-                            {product.tagline}
-                          </p>
-
-                          {/* Plain-English summary */}
-                          <p className="mt-2 text-xs text-slate-500 leading-relaxed line-clamp-2">
-                            {product.description}
-                          </p>
-
-                          {/* Capabilities Snippet */}
-                          <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-1.5">
-                            {product.capabilities.slice(0, 2).map((cap, cIdx) => (
-                              <span
-                                key={cIdx}
-                                className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2 py-0.5 text-[10px] text-slate-600"
-                              >
-                                <CheckCircle2 className="size-2.5 text-emerald-600 shrink-0" />
-                                <span className="truncate max-w-[180px]">{cap}</span>
-                              </span>
-                            ))}
-                          </div>
-
-                          {/* CTA Button Link */}
-                          <div className="mt-auto pt-5 flex items-center justify-between text-xs font-bold text-blue-600 group-hover:text-blue-700 transition-colors">
-                            <span>Explore {product.shortName}</span>
-                            <span className="transition-transform duration-200 group-hover:translate-x-1.5 text-sm">
-                              →
-                            </span>
-                          </div>
-                        </Link>
-                      </Reveal>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+          {/* Interactive Sticky Category Filter Bar, Instant Search & Product Cards */}
+          <ProductsCatalogBrowser />
 
           {/* White-Label Option */}
           <Reveal>

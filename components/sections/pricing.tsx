@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { useConsultationModal } from "@/components/modals/consultation-modal-context";
+import { PRODUCT_COUNT } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type PricingTrack = "oms" | "crm" | "bundle";
@@ -174,24 +175,23 @@ const trackTiers: Record<PricingTrack, PricingTier[]> = {
     },
     {
       id: "bundle-erp-hrms",
-      name: "Enterprise Business Engine",
+      name: "Workforce & Service Cloud",
       badge: "Complete Operational Core",
       highlight: true,
-      scaleBadge: "Accounting + HRMS + Payroll + Fleet",
+      scaleBadge: "HRMS & Payroll + CRMPBX + ULAP",
       description:
-        "The end-to-end back-office operating system: double-entry bookkeeping, BIR CAS compliance, 24/7 biometric shift rostering, and fleet delivery dispatch.",
+        "Unify 24/7 biometric shift rostering and Philippine statutory payroll with ISP service-desk PBX telephony and team messaging.",
       indicativeModel: "Integrated Enterprise Suite",
-      modelDetail: "Consolidate 4 software stacks into one unified system",
+      modelDetail: `Consolidate all ${PRODUCT_COUNT} live systems into one unified platform`,
       features: [
-        "BITS Accounting & ERP: Double-entry GL, AP/AR 3-way matching & tax reports",
-        "BIR CAS (Computerized Accounting System) compliant data schemas",
-        "BITS HRMS: 24/7 multi-shift rostering, biometric attendance & leave filing",
-        "BITS Payroll: Automated TRAIN law statutory deductions & 1-click bank batch feeds",
-        "BITS Logistics Cloud: Real-time GPS fleet tracking, route optimization & ePOD",
-        "Unified cross-module ledger: Timesheets directly feed payroll & job costing",
+        "BITS HRMS & Payroll: 24/7 shift rostering, biometric attendance & TRAIN Law payroll",
+        "Automated SSS, PhilHealth & Pag-IBIG statutory deductions with 1-click bank batch feeds",
+        "BITS CRMPBX: Subscriber CRM, ticketing workflow & Asterisk PBX with GoIP GSM support",
+        "BITS ULAP: Team & community messaging, channels, voice/video rooms & local radar",
+        "Shared role-based permissions & single-vendor enterprise SLA",
       ],
-      ctaLabel: "Request Business Engine Suite Quote",
-      ctaSubject: "Pricing Inquiry: Complete ERP + HRMS + Logistics Suite",
+      ctaLabel: "Request Workforce & Service Quote",
+      ctaSubject: "Pricing Inquiry: Complete Workforce & Service Suite",
     },
     {
       id: "bundle-whitelabel",
@@ -199,14 +199,14 @@ const trackTiers: Record<PricingTrack, PricingTier[]> = {
       badge: "100% Brand Ownership",
       scaleBadge: "Resellers & Enterprise Holdings",
       description:
-        "Deploy any or all of our 20 software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.",
+        `Deploy any or all of our ${PRODUCT_COUNT} software products under your own corporate identity, custom domain, logo, and color system with zero BITS attribution.`,
       indicativeModel: "Wholesale Partner Agreement",
       modelDetail: "Retain 100% client margin · Custom domain & branded apps",
       features: [
         "Your logo, corporate domain (app.yourcompany.com) & custom CSS palette",
         "Zero BITS watermarks or attribution across user interface and emails",
         "Branded client onboarding documentation and white-labeled mobile apps",
-        "Choose any of our 15 core software engines to resell or deploy internally",
+        `Choose any of our ${PRODUCT_COUNT} core software products to resell or deploy internally`,
         "Dedicated partner support engineering and sandbox demo tenant",
         "Strict Non-Disclosure Agreement (NDA) protecting your brand equity",
       ],

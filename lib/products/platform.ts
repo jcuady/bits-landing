@@ -11,7 +11,7 @@
  * listed and linked, never explained.
  */
 
-import { bitsProducts } from "../site";
+import { PRODUCT_COUNT } from "../site";
 import { PRODUCT_REGISTRY, getCanonicalProducts, getHomepageProducts, type ProductMvpConfig } from "./registry";
 
 /** The four capabilities of Operations 360, confirmed by product owner. */
@@ -153,7 +153,7 @@ export const COLLAPSED_INTO_PLATFORM = new Set([
  * Operations 360 keep their catalogue entry and their ctaHref now resolves
  * to the canonical page rather than to a redirect.
  */
-export const CATALOG_COUNT = bitsProducts.length;
+export const CATALOG_COUNT = PRODUCT_COUNT;
 
 /**
  * Catalogue line.

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { agents, site } from "@/lib/site";
+import { agents, site, PRODUCT_COUNT } from "@/lib/site";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { EngagementTracker } from "@/components/ui/engagement-tracker";
 import { TrunklineCloud } from "@/components/ui/trunkline-cloud";
@@ -17,11 +17,11 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
+    default: "BITS — Enterprise Software for Operations, CRM, HR & AI | Boundless IT Solutions",
     template: "%s | BITS",
   },
   description:
-    "Boundless IT Solutions (BITS) builds 20 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, logistics, and sports venue management — customized to how your organization actually works. Philippines-based.",
+    `Boundless IT Solutions (BITS) builds ${PRODUCT_COUNT} connected enterprise software products — Operations 360 (OMS), BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP — customized to how your organization actually works. Philippines-based.`,
   keywords: [
     "Boundless IT Solutions",
     "Boundless IT Solutions Philippines",
@@ -103,16 +103,16 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.legalName,
-    title: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
+    title: "BITS — Enterprise Software for Operations, CRM, HR & AI | Boundless IT Solutions",
     description:
-      "Boundless IT Solutions (BITS) builds 20 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
+      `Boundless IT Solutions (BITS) builds ${PRODUCT_COUNT} connected enterprise software products — Operations 360 (OMS), BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP — customized to how your organization actually works.`,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Boundless IT Solutions (BITS) Enterprise Platform" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITS — Enterprise Software for Operations, CRM, Finance, HR & AI | Boundless IT Solutions",
+    title: "BITS — Enterprise Software for Operations, CRM, HR & AI | Boundless IT Solutions",
     description:
-      "Boundless IT Solutions (BITS) builds 20 connected enterprise software products — from collections CRM and AI voice agents to accounting, HRMS, payroll, and logistics — customized to how your organization actually works.",
+      `Boundless IT Solutions (BITS) builds ${PRODUCT_COUNT} connected enterprise software products — Operations 360 (OMS), BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP — customized to how your organization actually works.`,
     images: ["/og.png"],
   },
 };

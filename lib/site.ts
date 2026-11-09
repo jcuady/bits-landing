@@ -27,156 +27,100 @@ export const navigationSections = [
     label: "Platform",
     dropdown: {
       heading: "Enterprise Software Portfolio",
-      flagshipHeading: "Core Platforms & Autonomous AI",
+      flagshipHeading: "Operations 360 & Core Modules",
       flagships: [
         {
           title: "OPERATIONS 360",
           badge: "Primary Flagship",
-          description: "Integrated operations platform: CRM, QA, Scorecards, Coaching, Dialer, LMS, WFM & Live Dashboards.",
-          href: "/#operations-360",
+          description: "Integrated operations platform: CRM, QA scorecards, coaching logs, LMS, WFM & live dashboards.",
+          href: "/operations-360",
           icon: "crm" as const,
         },
         {
-          title: "BITSagent AI Operations",
-          badge: "Autonomous AI",
-          description: "Human-sounding voice negotiation, real-time agent copilot & compliance QA.",
-          href: "/operations-360/ai",
-          icon: "ai" as const,
-        },
-        {
           title: "BITScrm Suite",
-          badge: "Sales & Support",
-          description: "Deal pipelines, CPQ quotation, omnichannel ticketing & recurring commerce billing.",
-          href: "/products/crm",
+          badge: "CRM Module",
+          description: "Collections, support desk, deal pipelines, marketing journeys & recurring commerce billing.",
+          href: "/operations-360/crm",
           icon: "pipeline" as const,
         },
         {
-          title: "BITS RAG Knowledge Engine",
-          badge: "Universal AI Layer",
-          description: "Ground AI & operational workflows in proprietary SOPs, compliance laws & manuals.",
-          href: "/products/rag-engine",
-          icon: "layers" as const,
+          title: "BITSagent AI Operations",
+          badge: "Voice AI Module",
+          description: "Human-sounding voice negotiation, real-time agent copilot & automated QA scoring.",
+          href: "/operations-360/ai",
+          icon: "ai" as const,
         },
       ],
-      operationsHeading: "Enterprise Business Engines",
+      operationsHeading: "Live Product Suite",
       operations: [
         {
-          title: "BITS ULAP",
-          badge: "Messaging & Community",
-          description:
-            "Uniting Lives Across Places — chats, channels, drop-in voice & video rooms, Maritess Hub local radar, and marketplace.",
-          href: "/products/ulap",
-          icon: "cloud" as const,
-        },
-        {
           title: "BITS CRMPBX",
-          badge: "Service Desk & PBX",
+          badge: "ISP Service Desk",
           description:
-            "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support for internet service providers.",
+            "Customer service desk, subscriber directory, ticket workflows and two-tier access separation for ISPs.",
           href: "/products/crmpbx",
           icon: "headset" as const,
         },
         {
-          title: "BITS Accounting & ERP",
-          badge: "BIR CAS · SAP-Grade",
-          description: "General Ledger, AP/AR 3-way match & multi-entity financial consolidation.",
-          href: "/products/accounting",
-          icon: "accounting" as const,
-        },
-        {
-          title: "BITS HRMS & 24/7 Workforce",
-          badge: "BPO Rostering",
-          description: "24/7 shift rosters, biometric sync, automated payroll & direct bank feeds.",
+          title: "BITS HRMS & Payroll",
+          badge: "Workforce & Payroll",
+          description: "24/7 shift rosters, biometric timekeeping, automated TRAIN Law payroll & direct bank feeds.",
           href: "/products/hrms",
-          icon: "headset" as const,
+          icon: "briefcase" as const,
         },
         {
-          title: "BITS Logistics & Inventory",
-          badge: "Fleet & Warehouse",
-          description: "AI dispatch routing, live GPS tracking, warehouse lot tracking & ePOD signatures.",
-          href: "/products/logistics",
-          icon: "process" as const,
-        },
-        {
-          title: "Specialized Workflow Hub",
-          badge: "Queue · Booking · NFC",
-          description: "Virtual queuing displays, appointment capacity scheduling & dynamic smart cards.",
-          href: "/products/queuing",
-          icon: "card" as const,
+          title: "BITS ULAP",
+          badge: "Messaging & Community",
+          description:
+            "Uniting Lives Across Places — chats, channels, drop-in voice & video rooms, Maritess Hub radar, and marketplace.",
+          href: "/products/ulap",
+          icon: "cloud" as const,
         },
       ],
       items: [
         {
           title: "OPERATIONS 360",
           badge: "Primary Flagship",
-          description: "Integrated operations platform: CRM, QA, Scorecards, Coaching, Dialer, LMS, WFM & Live Dashboards.",
-          href: "/#operations-360",
+          description: "Integrated operations platform: CRM, QA scorecards, coaching logs, LMS, WFM & live dashboards.",
+          href: "/operations-360",
           icon: "crm" as const,
         },
         {
+          title: "BITScrm Suite",
+          badge: "CRM Module",
+          description: "Collections, support desk, deal pipelines, marketing journeys & recurring commerce billing.",
+          href: "/operations-360/crm",
+          icon: "pipeline" as const,
+        },
+        {
           title: "BITSagent AI Operations",
-          badge: "Autonomous AI",
-          description: "Human-sounding voice negotiation, real-time agent copilot & compliance QA.",
+          badge: "Voice AI Module",
+          description: "Human-sounding voice negotiation, real-time agent copilot & automated QA scoring.",
           href: "/operations-360/ai",
           icon: "ai" as const,
         },
         {
-          title: "BITScrm Suite",
-          badge: "Sales & Support",
-          description: "Deal pipelines, CPQ quotation, omnichannel ticketing & recurring commerce billing.",
-          href: "/products/crm",
-          icon: "pipeline" as const,
-        },
-      {
-        title: "BITS CRMPBX",
-        badge: "Service Desk & PBX",
-        description:
-          "Customer service CRM with Asterisk PBX, call recordings and GoIP GSM gateway support for internet service providers.",
-        href: "/products/crmpbx",
-        icon: "headset" as const,
-      },
-      {
-        title: "BITS ULAP",
-        badge: "Messaging & Community",
-        description:
-          "Uniting Lives Across Places — direct and group chats, channels, drop-in voice and video rooms, Maritess Hub local radar, and community marketplace.",
-        href: "/products/ulap",
-        icon: "cloud" as const,
-      },
-        {
-          title: "BITS RAG Knowledge Engine",
-          badge: "Universal AI Layer",
-          description: "Ground AI & operational workflows in proprietary SOPs, compliance laws & manuals.",
-          href: "/products/rag-engine",
-          icon: "layers" as const,
-        },
-        {
-          title: "BITS Accounting & ERP",
-          badge: "BIR CAS · SAP-Grade",
-          description: "General Ledger, AP/AR 3-way match & multi-entity financial consolidation.",
-          href: "/products/accounting",
-          icon: "accounting" as const,
-        },
-        {
-          title: "BITS HRMS & 24/7 Workforce",
-          badge: "BPO Rostering",
-          description: "24/7 shift rosters, biometric sync, automated payroll & direct bank feeds.",
-          href: "/products/hrms",
+          title: "BITS CRMPBX",
+          badge: "ISP Service Desk",
+          description:
+            "Customer service desk, subscriber directory, ticket workflows and two-tier access separation for ISPs.",
+          href: "/products/crmpbx",
           icon: "headset" as const,
         },
         {
-          title: "BITS Logistics & Inventory",
-          badge: "Fleet & Warehouse",
-          description: "AI dispatch routing, live GPS tracking, warehouse lot tracking & ePOD signatures.",
-          href: "/products/logistics",
-          icon: "process" as const,
+          title: "BITS HRMS & Payroll",
+          badge: "Workforce & Payroll",
+          description: "24/7 shift rosters, biometric timekeeping, automated TRAIN Law payroll & direct bank feeds.",
+          href: "/products/hrms",
+          icon: "briefcase" as const,
         },
         {
-          title: "Specialized Workflow Hub",
-          badge: "Queue · Booking · NFC",
-          description: "Virtual queuing displays, appointment capacity scheduling & dynamic smart cards.",
-          href: "/products/queuing",
-          icon: "card" as const,
+          title: "BITS ULAP",
+          badge: "Messaging & Community",
+          description:
+            "Uniting Lives Across Places — direct and group chats, channels, drop-in voice and video rooms, Maritess Hub radar, and marketplace.",
+          href: "/products/ulap",
+          icon: "cloud" as const,
         },
       ],
     },
@@ -592,31 +536,31 @@ export const bitsProducts = [
   },
   {
     id: "hrms",
-    name: "BITS HRMS",
-    shortName: "HRMS Cloud",
+    name: "BITS HRMS & Payroll",
+    shortName: "BITS HRMS & Payroll",
     category: "workforce",
-    categoryLabel: "Workforce & Operations Cloud",
-    badge: "Enterprise HR Core",
+    categoryLabel: "Workforce & Payroll Cloud",
+    badge: "HRMS & Statutory Payroll",
     isFlagship: false,
-    tagline: "Human Resource Management & Multi-Location Workforce Operations",
+    tagline: "24/7 Workforce Rostering, Biometric Timekeeping & Philippine Statutory Payroll",
     description:
-      "Comprehensive human resources management system engineered for mid-market and enterprise organizations across any industry—corporate offices, retail chains, healthcare, manufacturing, hospitality, and multi-branch teams. Unifies employee records, biometric attendance feeds, automated shift scheduling, leave approval matrices, and performance appraisal rubrics.",
+      "Unified human resources, 24/7 shift rostering, and automated Philippine statutory payroll engineered for BPOs and multi-branch enterprises. Combines employee 201 records, biometric attendance feeds, overtime and night-differential rules, automated SSS/PhilHealth/Pag-IBIG and BIR TRAIN Law withholding tax computations, and encrypted bank batch disbursement files.",
     complianceBadges: [
-      "NPC RA 10173 DPA",
+      "BIR TRAIN Law & Statutory Rules",
       "DOLE Labor Standards Aligned",
-      "Encrypted Employee Personnel Records",
-      "Immutable Timekeeping Logs",
+      "NPC RA 10173 DPA",
+      "Bank Batch Disbursement Ready",
     ],
     capabilities: [
-      "Dynamic Multi-Shift Roster & Scheduling for Any Workforce",
-      "Biometric Hardware & Facial Clock-In Sync",
-      "Automated Overtime, Night Diff & Holiday Rules",
-      "Multi-Tier Leave Approval & Filing Matrix",
-      "Digital Employee Lifecycle & Onboarding Portal",
-      "Performance Appraisals & Employee KPI Scoring",
+      "Dynamic 24/7 Multi-Shift Roster & Scheduling for BPO & Enterprise",
+      "Biometric Hardware & Facial Clock-In Timekeeping Sync",
+      "Automated SSS, PhilHealth, Pag-IBIG & BIR TRAIN Law Tax Computation",
+      "Overtime, Night Differential, Holiday & 13th-Month Pay Automation",
+      "Direct Bank Batch Disbursement Exports (BDO, BPI, Metrobank, UnionBank)",
+      "Digital Employee 201 Records, Leave Matrix & Self-Service Payslip Portal",
     ],
-    metrics: { label: "Shift Compliance", value: "100% Tracking" },
-    ctaText: "Explore BITS HRMS",
+    metrics: { label: "Payroll & Shift Accuracy", value: "100% Certified" },
+    ctaText: "Explore BITS HRMS & Payroll",
     ctaHref: "/products/hrms",
   },
   {
@@ -645,8 +589,8 @@ export const bitsProducts = [
       "Statutory Government Alphalist & Remittance Export",
     ],
     metrics: { label: "Tax Calculation Accuracy", value: "100% Certified" },
-    ctaText: "Explore BITS Payroll",
-    ctaHref: "/products/payroll",
+    ctaText: "Explore BITS HRMS & Payroll",
+    ctaHref: "/products/hrms",
   },
   {
     id: "construction",
@@ -914,10 +858,23 @@ export const bitsProducts = [
 ] as const;
 
 /**
- * Derived catalogue size. Never hardcode this — eight pages render it and the
- * catalogue changes as products are collapsed into Operations 360 modules.
+ * The 4 active, live products in the BITS portfolio:
+ *   1. Operations 360 (OMS 360, including BITScrm & BITSagent AI modules)
+ *   2. BITS CRMPBX (Customer Service Desk & Asterisk PBX)
+ *   3. BITS HRMS & Payroll (Workforce, Rostering & Statutory Payroll)
+ *   4. BITS ULAP (Messaging, Voice/Video Rooms & Community Cloud)
+ *
+ * Legacy/folded entries stay in `bitsProducts` so `/products/[slug]` routes
+ * and static self-checks never 404, while all visible customer-facing surfaces
+ * render `activeProducts` and `PRODUCT_COUNT` (4).
  */
-export const PRODUCT_COUNT = bitsProducts.length;
+export const ACTIVE_PRODUCT_IDS = ["collections", "crmpbx", "hrms", "ulap"] as const;
+
+export const activeProducts = bitsProducts.filter((p) =>
+  (ACTIVE_PRODUCT_IDS as readonly string[]).includes(p.id),
+);
+
+export const PRODUCT_COUNT = activeProducts.length;
 
 /* ── Universal White-Label & Custom Branding Option (Available Across All 20 Products) ── */
 export const whiteLabelBrandingOption = {
@@ -1502,7 +1459,7 @@ export const solutionPackages = [
     pricingSubtext: "Assisted data migration & team onboarding included",
     roiBenchmark: "Replaces 3–4 disconnected SaaS subscriptions & manual Excel sheets",
     highlights: [
-      "Modular Procurement: Any 1 of our 15 Engines or Custom Pair",
+      `Modular Procurement: Any 1 of our ${PRODUCT_COUNT} Products or Custom Pair`,
       "Tailored Database Schemas & Operational Workflows",
       "Dynamic Task Queues & Department Kanban Stages",
       "Standard Real-Time Operations & Performance Dashboards",
@@ -1559,7 +1516,7 @@ export const solutionPackages = [
     roiBenchmark: "Zero per-seat inflation penalties; complete private VPC & data residency",
     highlights: [
       "Everything in Growth Tier",
-      "Full Multi-Product Operational Cockpit (All 15 Engines Supported)",
+      `Full Multi-Product Operational Cockpit (All ${PRODUCT_COUNT} Products Supported)`,
       "Fully Bespoke Database Schemas, Logic & Legacy Feeds",
       "Autonomous BITSagent Voice & Email AI Operations",
       "Private RAG Knowledge Grounding on Corporate SOPs",
@@ -1577,7 +1534,7 @@ export const solutionPackages = [
     tier: "BRANDING OPTION",
     badge: "Master Add-On · Not a Standalone Product",
     title: "Universal White-Label Branding Option",
-    tagline: "Deploy any of our 20 software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).",
+    tagline: `Deploy any of our ${PRODUCT_COUNT} software products under your own corporate identity, company logo, and custom domain (app.yourbrand.com).`,
     teamScope: "Applicable to Any Plan",
     deployment: "Managed Cloud or Private VPC",
     investmentModel: "Turnkey Reseller / Corporate Branding License",
@@ -1592,7 +1549,7 @@ export const solutionPackages = [
       "Complete NDA Protection — Zero BITS Attribution",
       "Full Reseller Margin Retention — Set Your Own Client Pricing",
       "Multi-Tenant Client Partitioning & Dedicated Databases",
-      "Works with Any of the 15 BITS Software Engines",
+      `Works with Any of the ${PRODUCT_COUNT} BITS Software Products`,
     ],
     primaryCta: "Inquire About White-Label Reselling",
     ctaHref: "/#contact?package=whitelabel",
@@ -1637,8 +1594,8 @@ export const suiteBundlePresets = [
   {
     id: "reseller-agency",
     name: "White-Label Partner & Reseller Suite",
-    tagline: "Deploy any combination of our 20 software products under your own agency brand.",
-    productIds: ["collections", "sales", "accounting", "nfc-card"],
+    tagline: `Deploy any combination of our ${PRODUCT_COUNT} software products under your own agency brand.`,
+    productIds: ["collections", "crmpbx", "hrms", "ulap"],
     recommendedFor: "Agencies, IT MSPs, software resellers & enterprise conglomerates",
     highlight: "100% client margin retention with zero BITS attribution and custom domains",
   },
@@ -2091,19 +2048,14 @@ export const processSteps = [
 ] as const;
 
 export const contactInterests = [
-  "OPERATIONS 360 — Integrated Operations Platform (Flagship)",
-  "Custom Multi-Product Bundle (Combine Multiple Engines)",
-  "BITScrm — Collections & Operations Core",
-  "BITSagent — Conversational Voice AI",
-  "BITSagent — Autonomous Email & SMS",
-  "BITS Suite (CRM + AI Operations)",
+  "OPERATIONS 360 — Integrated Operations Platform (OMS, CRM & Voice AI)",
+  "BITS CRMPBX — ISP Service Desk & Asterisk PBX",
+  "BITS HRMS & Payroll — 24/7 Shift Rostering & Statutory Payroll",
   "BITS ULAP — Messaging & Community Cloud",
+  "Custom Multi-Product Bundle",
   "Secure Managed Cloud Deployment",
   "Sovereign On-Premises Deployment & Hardware Scoping",
-  "White Label SaaS Platform",
-  "Smart NFC & Identity Card Solutions",
-  "Workflow Automation & System Integrations",
-  "Custom Software & Digital Infrastructure",
+  "White Label & Custom Enterprise Software Build",
   "General Operational Consultation",
 ] as const;
 

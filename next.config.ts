@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
       { source: "/products/marketing", destination: "/operations-360/crm#marketing", permanent: true },
       { source: "/products/commerce", destination: "/operations-360/crm#commerce", permanent: true },
       { source: "/products/ai-agent", destination: "/operations-360/ai", permanent: true },
+      { source: "/products/payroll", destination: "/products/hrms", permanent: true },
     ];
   },
   async headers() {

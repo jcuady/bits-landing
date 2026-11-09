@@ -87,8 +87,29 @@ async function run() {
   else pass("BITS ULAP card rendered on /products");
 
   const totalCards = await page.locator("[data-product-card]").count();
-  if (totalCards !== 20) fail(`expected 20 product cards on /products, got ${totalCards}`);
-  else pass("catalogue lists all 20 products");
+  if (totalCards !== 4) fail(`expected 4 live product cards on /products, got ${totalCards}`);
+  else pass("catalogue lists all 4 live products (Operations 360, BITS CRMPBX, BITS HRMS & Payroll, BITS ULAP)");
+
+  // Interactive category filter & search bar on /products
+  const opsPill = page.locator('[data-category-filter="operations"]');
+  await opsPill.click();
+  const opsCount = await page.locator("[data-product-card]").count();
+  if (opsCount !== 1) fail(`expected 1 card under 'operations' category filter (BITS ULAP), got ${opsCount}`);
+  else pass("sticky category filter narrows catalogue to 1 Messaging & Community product (BITS ULAP)");
+
+  const searchInput = page.locator('[data-products-search-input="true"]');
+  await searchInput.fill("Maritess");
+  const searchCount = await page.locator("[data-product-card]").count();
+  if (searchCount !== 1) fail(`expected 1 card when searching 'Maritess', got ${searchCount}`);
+  else pass("instant search filters catalogue to BITS ULAP when querying 'Maritess'");
+
+  await searchInput.fill("");
+  await page.locator('[data-category-filter="all"]').click();
+  if ((await page.locator("[data-product-card]").count()) !== 4) {
+    fail("resetting category filter to 'all' did not restore all 4 live products");
+  } else {
+    pass("resetting filter restores all 4 live products");
+  }
 
   await page.goto(BASE + "/", { waitUntil: "domcontentloaded" });
   const bandText = await page.locator("#portfolio-band").innerText();
