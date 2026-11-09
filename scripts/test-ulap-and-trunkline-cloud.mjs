@@ -166,6 +166,39 @@ async function run() {
     fail("AiRA cloud SVG (svg[data-aira-cloud-svg=\"true\"]) not found");
   }
 
+  // ── SEAM 4: Top-Middle Floating ULAP Cloud & Registration CTA ─────────
+  console.log("\nSEAM 4 — Top-middle floating ULAP cloud & registration CTA");
+  const ulapFloatingLink = page.locator('a[data-ulap-floating-cloud="true"]');
+  if ((await ulapFloatingLink.count()) !== 1) {
+    fail("top-middle floating ULAP cloud link not found");
+  } else {
+    const href = await ulapFloatingLink.getAttribute("href");
+    if (href !== "https://chat.boundlessits.com/register") {
+      fail(`expected ULAP floating cloud href to be https://chat.boundlessits.com/register, got "${href}"`);
+    } else {
+      pass("floating ULAP cloud links to https://chat.boundlessits.com/register");
+    }
+
+    const text = await ulapFloatingLink.innerText();
+    if (!text.toLowerCase().includes("try our messaging app")) {
+      fail(`expected ULAP floating cloud to say 'Try our messaging app', got "${text}"`);
+    } else {
+      pass("floating ULAP cloud displays 'Try our messaging app' message");
+    }
+
+    const ulapBox = await ulapFloatingLink.boundingBox();
+    if (!ulapBox) {
+      fail("floating ULAP cloud has no bounding box");
+    } else {
+      const centerX = ulapBox.x + ulapBox.width / 2;
+      if (Math.abs(centerX - 720) > 60 || ulapBox.y > 160) {
+        fail(`expected ULAP floating cloud at top-middle of 1440px viewport, got x=${Math.round(ulapBox.x)}, y=${Math.round(ulapBox.y)}, centerX=${Math.round(centerX)}`);
+      } else {
+        pass(`floating ULAP cloud positioned at top-middle (centerX=${Math.round(centerX)}px, top=${Math.round(ulapBox.y)}px)`);
+      }
+    }
+  }
+
   await browser.close();
   await stop();
 

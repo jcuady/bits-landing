@@ -519,7 +519,6 @@ function getProductFaqs(product: ProductItem) {
     },
     {
       q: `How does ${product.name} integrate with other BITS modules?`,
-      a: `Every BITS engine shares a unified API contract and schema layer. For example, ${product.name} natively interconnects with BITS Accounting & ERP, BITS Payroll, BITScrm, and BITSagent AI, eliminating manual duplicate data entry across departments.`,
       a: `Every BITS system shares a unified API contract and schema layer. For example, ${product.name} natively interconnects with Operations 360, BITScrm, BITSagent AI, BITS CRMPBX, BITS HRMS & Payroll, and BITS ULAP, eliminating manual duplicate data entry across departments.`,
     },
     {
@@ -547,8 +546,6 @@ function getBespokeFaqQuestion(id: string, name: string) {
       };
     case "hrms":
       return {
-        q: "Can BITS HRMS connect with our existing biometric timekeeping hardware?",
-        a: "Yes. BITS HRMS integrates with industry-standard ZKTeco, Hikvision, and IP-based biometric facial recognition and fingerprint terminals, automatically pulling clock-in logs into agent timesheets in real time.",
         q: "Can BITS HRMS & Payroll connect with biometric timekeeping hardware and export Philippine bank batch files?",
         a: "Yes. BITS HRMS & Payroll integrates with industry-standard ZKTeco, Hikvision, and IP-based biometric facial recognition and fingerprint terminals, automatically pulling clock-in logs into timesheets, computing SSS, PhilHealth, Pag-IBIG, and TRAIN Law tax brackets, and exporting encrypted batch disbursement files for Philippine commercial banks.",
       };

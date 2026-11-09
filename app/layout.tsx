@@ -6,6 +6,7 @@ import { agents, site, PRODUCT_COUNT } from "@/lib/site";
 import { CookieConsent } from "@/components/ui/cookie-consent";
 import { EngagementTracker } from "@/components/ui/engagement-tracker";
 import { TrunklineCloud } from "@/components/ui/trunkline-cloud";
+import { UlapFloatingCloud } from "@/components/ui/ulap-floating-cloud";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -307,6 +308,7 @@ export default function RootLayout({
           blocks first paint, and no CSP change is required — the site
           ships no Content-Security-Policy header.
         */}
+        <UlapFloatingCloud />
         <TrunklineCloud />
         <Script
           src="https://aira.boundlessits.com/widget.js"

@@ -11,13 +11,11 @@ import { site, targetIndustrySectors, PRODUCT_COUNT } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Solutions — What Are You Trying to Fix?",
   description:
-    "Six operational problems BITS solves: collections and field recovery, automated voice AI, sales pipelines and support, accounting and payroll, inventory and dispatch, and bookings and queuing. Find the track that matches your bottleneck.",
     "Six operational problems BITS solves across our 4 live products: collections and field recovery, autonomous voice AI, sales pipelines and support, ISP service desk and PBX telephony, 24/7 shift rostering and Philippine payroll, and team/community messaging.",
   alternates: { canonical: `${site.url}/solutions` },
   openGraph: {
     title: "BITS Solutions — Six Operational Problems, Six Answers",
     description:
-      "Pick the problem you are trying to fix and we route you to the BITS product that solves it — collections, voice AI, sales, payroll, logistics, or bookings.",
       "Pick the problem you are trying to fix and we route you to the BITS product that solves it — Operations 360, BITSagent AI, BITScrm, BITS CRMPBX, BITS HRMS & Payroll, or BITS ULAP.",
     url: `${site.url}/solutions`,
     siteName: site.legalName,

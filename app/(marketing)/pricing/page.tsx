@@ -33,7 +33,6 @@ const quoteInputs = [
   {
     title: "Which modules you switch on",
     detail:
-      "Operations 360, the CRM suite, accounting, HRMS, payroll, logistics, booking, or queuing — you start with what solves the immediate problem and add modules later.",
       "Operations 360, the BITScrm suite, BITSagent AI, BITS CRMPBX, BITS HRMS & Payroll, or BITS ULAP — you start with what solves the immediate problem and add modules later.",
   },
   {

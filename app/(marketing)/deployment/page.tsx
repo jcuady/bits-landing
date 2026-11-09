@@ -5,7 +5,6 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { PlatformHero, PlatformSection } from "@/components/sections/platform-hero";
 import { CATALOG_DEPLOY_CLAIM } from "@/lib/products/platform";
-import { site } from "@/lib/site";
 import { site, PRODUCT_COUNT } from "@/lib/site";
 
 /**
@@ -126,7 +125,6 @@ export default function DeploymentPage() {
       <PlatformHero
         eyebrow="Deployment"
         title="Run BITS your way."
-        lede="Every engine in our 15-product platform runs in our sovereign managed cloud with zero hardware needed — or installed directly on your own office servers, for complete privacy and one-time setup ownership."
         lede={`Every system in our ${PRODUCT_COUNT}-product platform runs in our sovereign managed cloud with zero hardware needed — or installed directly on your own office servers, for complete privacy and one-time setup ownership.`}
         primaryCta={{ href: "/pricing", label: "Request a quote" }}
         secondaryCta={{ href: "/operations-360", label: "See the platform" }}
@@ -240,7 +238,6 @@ export default function DeploymentPage() {
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/contact"
                   href="/#contact"
                   className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-blue-600 px-8 font-bold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-500 hover:shadow-xl hover:-translate-y-0.5"
                 >
